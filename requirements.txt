@@ -1,3 +1,4 @@
 django-toolbelt==0.0.1
 Django>=1.8,<1.9
 wagtail==1.2
+whitenoise==2.0.6
