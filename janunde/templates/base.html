@@ -12,28 +12,18 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        {# Global stylesheets #}
-	{% compress css %}
-          <link rel="stylesheet" type="text/x-scss" href="{% static 'sass/janunde.scss' %}" />
-          {% block css %}{% endblock %}
-	{% endcompress %}
-        <!--<link rel="stylesheet" type="text/css" href="{% static 'css/janunde.css' %}">-->
-
-        {% block extra_css %}
-            {# Override this in templates to add extra stylesheets #}
-        {% endblock %}
+        {% compress css %}
+            <link rel="stylesheet" type="text/x-scss" href="{% static 'sass/janunde.scss' %}" />
+            {% block css %}{% endblock %}
+	    {% endcompress %}
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {# wagtailuserbar #}
 
         {% block content %}{% endblock %}
 
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/janunde.js' %}"></script>
-
-        {% block extra_js %}
-            {# Override this in templates to add extra javascript #}
-        {% endblock %}
+        {% compress js %}
+            <script type="text/javascript" src="{% static 'js/janunde.js' %}"></script>
+        {% endcompress %}
     </body>
 </html>

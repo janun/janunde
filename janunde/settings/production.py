@@ -59,3 +59,4 @@ COMPRESS_CSS_FILTERS = [
     'compressor.filters.cssmin.CSSMinFilter',
 ]
 COMPRESS_CSS_HASHING_METHOD = 'content'
+COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
