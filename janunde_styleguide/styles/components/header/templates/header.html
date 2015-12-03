@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+<header class="header">
+
+  {% if video %}
+  <div class="video-wrapper">
+    <video autoplay loop muted poster="{% static 'components/header/header_video_poster.jpg' %}">
+      <source src="{% static 'components/header/header_video.mp4' %}" type="video/mp4" />
+      <!--<source src="{% static 'components/header/header_video.webm' %}" type="video/webm" />
+      <source src="{% static 'components/header/header_video.ogv' %}" type="video/ogv" />-->
+    </video>
+  </div>
+  {% endif %}
+
+  <div class="content">
+    {{ content }}
+
+    {% if scroll_down_id %}
+    <br><a data-slow-scroll class="scroll-down-button {{scroll_down_extra_class}}" href="#{{scroll_down_id}}"></a>
+    {% endif %}
+
+  </div>
+</header>

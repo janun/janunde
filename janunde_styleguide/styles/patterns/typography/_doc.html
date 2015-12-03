@@ -1,0 +1,59 @@
+{% extends "janunde_styleguide/base.html" %}
+{% load janun_styles %}
+{% block content %}
+
+{% panel heading="Schriftarten" %}
+  <p>Für die meisten Dinge benutzen wir die <span class="sans">Sans-Serif-Schriftart Cabin.</span></p>
+  <p>Aber für Fließtext wird die Serif-Schriftart Crimson benutzt.</p>
+  <span class="sans" style="font-size: 5rem">Cabin, Sans-Serif</span><br>
+  <span class="serif" style="font-size: 5rem">Crimson, Serif</span>
+{% endpanel %}
+
+{% panel heading="Überschriften" %}
+  <h1>Größte Überschrift</h1>
+  <h2>Zweitgrößte Überschrift</h2>
+  <h3>Drittgrößte Überschrift</h3>
+  <h4>Viertgrößte Überschrift</h4>
+  <p>
+    Sie haben eine „responsive modulare Skalierung“.
+    Versuch’ es aus, indem Du Dein Fenster kleiner/größer machst.
+  </p>
+{% endpanel %}
+
+{% panel %}
+  <p>Dies sind unsere Links:</p>
+  <a href="#">some link</a>
+{% endpanel %}
+
+{% panel heading="Fließtext" %}
+  <p class="intro"><b>Introduction:</b> <a href="#">Lorem</a> <em>ipsum</em> dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et.</p>
+  <p><a href="#">Lorem</a> <em>ipsum</em> dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <p>
+  <h3>Überschrift in der Mitte</h3>
+  <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+  <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+  <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+{% endpanel %}
+
+{% panel heading="Listen" %}
+<p><code>ul</code>-Listen sind normalerweise wie Text gesetzt:</p>
+<ul>
+  <li>Eins</li>
+  <li>Zwei</li>
+  <li>Drei</li>
+</ul>
+<p>… und <code>ol</code>-Listen:</p>
+<ol>
+  <li>Eins</li>
+  <li>Zwei</li>
+  <li>Drei</li>
+</ol>
+{% endpanel %}
+
+{% panel heading="Area-Title" %}
+<p>So…</p>
+<h2 class="area-title">Abschnitt 1 – h2.area-title</h2>
+<p>…sehen Seiten-Abschnitte aus.</p>
+<p>Es macht wahrscheinlich oft Sinn, sie mit <code>h2</code> zu setzen.</p>
+{% endpanel %}
+
+{% endblock %}

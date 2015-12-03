@@ -1,0 +1,31 @@
+{% extends "janunde_styleguide/base.html" %}
+{% load janun_styles %}
+
+{% block content %}
+
+  <p>Das Meiste unserer Inhalte wird sich in den »Panels« wieder finden:</p>
+
+  {% panel %}
+    <p>Dies ist das einfachste Panel.</p>
+  {% endpanel %}
+
+  {% panel heading="Dieses Panel…" %}
+    <p>…hat auch eine Überschrift.</p>
+  {% endpanel %}
+
+  {% panel picture='<img src="http://s1.neon.de/images/generated/10/41/053/w_485_1373443007_41b4_egal.jpg">' %}
+    <p>Panel können auch Bilder haben. Diese werden dann mittig angezeigt.</p>
+  {% endpanel %}
+
+  {% panel heading="Dies ist eine Überschrift in einem Overlay im Bild" picture='<img src="http://s1.neon.de/images/generated/10/41/053/w_485_1373443007_41b4_egal.jpg">' %}
+    <p>Wenn es <code>heading</code> und <code>picture</code> gibt,
+      dann wird die Überschrift in einem Overlay über dem Bild angezeigt.</p>
+  {% endpanel %}
+
+  {% panel heading="Dies ist eine Überschrift in einem Overlay im Bild" ellipsize=True picture='<img src="http://s1.neon.de/images/generated/10/41/053/w_485_1373443007_41b4_egal.jpg">' %}
+    <p>Mit der Option <code>ellipsize</code> wird das heading einzeilig gesetzt
+      und wenn kein Platz ist mit … abgekürzt.</p>
+  {% endpanel %}
+
+
+{% endblock %}

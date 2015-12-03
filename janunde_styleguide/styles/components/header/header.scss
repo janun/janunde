@@ -1,0 +1,95 @@
+$header-height-large: 528px;
+$header-height: 480px;
+
+
+header.header {
+  position: relative;
+  width: 100%;
+  height: $header-height;
+  padding-top: rem-calc(82);
+  @include breakpoint($medium-breakpoint) {
+    height: $header-height-large;
+    padding-top: rem-calc(122);
+  }
+
+  background-color: get-color(green-overlay);
+
+
+  &:after {
+    content: "";
+    display: block;
+    height: $header-height;
+    @include breakpoint($medium-breakpoint) {
+      height: $header-height-large;
+    }
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -5;
+    background-color: get-color(green);
+  }
+
+
+  .content {
+    @include janun-text-shadow;
+    text-align: center;
+    z-index: 5;
+
+    * {
+      color: get-color(white);
+      font-family: $font-family-sans-serif;
+    }
+
+    h1 {
+      font-weight: 600;
+      @include ms-respond(font-size, 3);
+    }
+
+    .buttons {
+      margin-top: rem-calc(26);
+      @include breakpoint($medium-breakpoint) { margin-top: rem-calc(63); }
+      .line-button {
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(0, 0, 0, 0.25);
+        &:hover {
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+        }
+      }
+    }
+
+
+    // scroll down button, styled like an arrowhead
+    .scroll-down-button:before {
+      font-size: 3rem;
+      content: "⌄"; // "down arrowhead"
+      @include show-for-small-down;
+    }
+  }
+
+
+  .video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+
+    background: url(static('components/header/header_video_poster.jpg'));
+  }
+
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+
+    @include breakpoint($small-down) {
+      display: none;
+    }
+  }
+
+}

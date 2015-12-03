@@ -1,0 +1,28 @@
+{% extends "janunde_styleguide/base.html" %}
+{% load janun_styles %}
+
+{% block content %}
+    <div class="hide">always hidden</div>
+    <div class="hide-for-medium-only">hidden on medium only</div>
+    <div class="hide-for-large-only">hidden on large only</div>
+    <div class="hide-for-xlarge-only">hidden on xlarge only</div>
+
+    <div class="hide-for-medium-up">hidden on medium up</div>
+    <div class="hide-for-large-up">hidden on large up</div>
+    <div class="hide-for-xlarge-up">hidden on xlarge up</div>
+
+    <div class="hide-for-small-down">hidden on small down</div>
+    <div class="hide-for-medium-down">hidden on medium down</div>
+    <div class="hide-for-large-down">hidden on large down</div>
+    <div class="hide-for-xlarge-down">hidden on xlarge down</div>
+
+    <div class="show-for-small-up">shown on small up</div>
+    <div class="show-for-medium-up">shown on medium up</div>
+    <div class="show-for-large-up">shown on large up</div>
+    <div class="show-for-xlarge-up">shown on xlarge up</div>
+
+    <div class="show-for-small-down">shown on small down</div>
+    <div class="show-for-medium-down">shown on medium down</div>
+    <div class="show-for-large-down">shown on large down</div>
+    <div class="show-for-xlarge-down">shown on xlarge down</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "janunde_styleguide/base.html" %}
+{% load janun_styles %}
+
+{% block content %}
+
+{% panel css_class="green" heading="Line Buttons" %}
+  <a href="#" class="line-button">Line-Button (anchor)</a>
+  <button class="line-button">Line-Button (button)</button>
+  <input type="submit" class="line-button" value="Line Button (input)">
+{% endpanel %}
+
+{% endblock %}

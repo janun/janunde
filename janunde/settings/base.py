@@ -17,15 +17,12 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
-
 # Application definition
-
 INSTALLED_APPS = [
     'home',
     'search',
+
+    'janunde_styleguide',
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
@@ -74,8 +71,12 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(PROJECT_DIR, 'templates'),
         ],
-        'APP_DIRS': True,
         'OPTIONS': {
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+                'janunde_styleguide.finders.TemplateLoader'
+            ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -120,6 +121,7 @@ USE_TZ = True
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'janunde_styleguide.finders.StaticFilesFinder',
     'compressor.finders.CompressorFinder',
     'djangobower.finders.BowerFinder',
 )
@@ -144,7 +146,6 @@ COMPRESS_CSS_FILTERS = (
     'django_compressor_autoprefixer.AutoprefixerFilter',
     'compressor.filters.cssmin.CSSMinFilter'
 )
-COMPRESS_ENABLED = True # if unset will compress only if DEBUG = FALSE
 COMPRESS_AUTOPREFIXER_BINARY = os.path.join(BASE_DIR, 'node_modules', 'autoprefixer', 'autoprefixer')
 COMPRESS_AUTOPREFIXER_ARGS = '-b "> 2%"'
 
@@ -158,6 +159,8 @@ BOWER_INSTALLED_APPS = (
     'jquery',
 )
 
+from janunde_styleguide.settings import BOWER_INSTALLED_APPS as ADDITIONAL_BOWER_INSTALLED_APPS
+BOWER_INSTALLED_APPS += ADDITIONAL_BOWER_INSTALLED_APPS
 
 # Wagtail settings
 

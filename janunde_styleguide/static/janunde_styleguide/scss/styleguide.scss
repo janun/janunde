@@ -1,0 +1,25 @@
+@import "all_janunde_styles";
+
+body {
+  @include container;
+}
+
+.styleguide-menu {
+    @extend .panel;
+    background-color: get-color(green);
+    padding: 10px;
+    vertical-align: top;
+    ul {
+        list-style: none;
+        padding-left: 0;
+        li a{
+          @extend .sans;
+          color: get-color(white);
+        }
+    }
+    @include span(2);
+}
+
+body > .content {
+  @include span(10);
+}
