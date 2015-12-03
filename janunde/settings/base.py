@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'modelcluster',
     'compressor',
+    'djangobower',
     'taggit',
 
     'django.contrib.admin',
@@ -120,6 +121,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
+    'djangobower.finders.BowerFinder',
 )
 
 STATICFILES_DIRS = (
@@ -147,6 +149,14 @@ COMPRESS_AUTOPREFIXER_BINARY = os.path.join(BASE_DIR, 'node_modules', 'autoprefi
 COMPRESS_AUTOPREFIXER_ARGS = '-b "> 2%"'
 
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
+
+
+# django-bower settings
+BOWER_COMPONENTS_ROOT = BASE_DIR
+
+BOWER_INSTALLED_APPS = (
+    'jquery',
+)
 
 
 # Wagtail settings

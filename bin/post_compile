@@ -13,6 +13,19 @@ if [ -f bin/install_nodejs ]; then
     echo "-----> Running install_nodejs"
     chmod +x bin/install_nodejs
     bin/install_nodejs
+
+    if [ -f bin/install_bower ]; then
+        echo "-----> Running install_bower"
+        chmod +x bin/install_bower
+        bin/install_bower
+
+        if [ -f bin/run_bower_install ]; then
+            echo "-----> Running run_bower_install"
+            chmod +x bin/run_bower_install
+            bin/run_bower_install
+        fi
+    fi
+
 fi
 
 if [ -f bin/run_collectstatic ]; then
