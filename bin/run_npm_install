@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+
+echo "-----> Running npm install"
+python npm install 2>&1 | indent
+
+echo

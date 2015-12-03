@@ -14,6 +14,12 @@ if [ -f bin/install_nodejs ]; then
     chmod +x bin/install_nodejs
     bin/install_nodejs
 
+    if [ -f bin/run_npm_install ]; then
+        echo "-----> Running npm install"
+        chmod +x bin/run_npm_install
+        bin/run_npm_install
+    fi
+
     if [ -f bin/install_bower ]; then
         echo "-----> Running install_bower"
         chmod +x bin/install_bower
