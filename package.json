@@ -4,7 +4,4 @@
   "dependencies": {
     "autoprefixer": "~5.2.0"
   }
-  "engines": {
-    "node": "0.10.25"
-  }
 }
