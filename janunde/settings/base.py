@@ -102,9 +102,9 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'de-de'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Berlin'
 
 USE_I18N = True
 
@@ -131,6 +131,22 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+# django-compressor settings
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+COMPRESS_CSS_FILTERS = (
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'django_compressor_autoprefixer.AutoprefixerFilter',
+    'compressor.filters.cssmin.CSSMinFilter'
+)
+COMPRESS_ENABLED = True # if unset will compress only if DEBUG = FALSE
+COMPRESS_AUTOPREFIXER_BINARY = os.path.join(BASE_DIR, 'node_modules', 'autoprefixer', 'autoprefixer')
+COMPRESS_AUTOPREFIXER_ARGS = '-b "> 2%"'
+
+COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 
 
 # Wagtail settings

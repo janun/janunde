@@ -1,0 +1,7 @@
+{
+  "name": "janunde",
+  "version": "0.0.1",
+  "dependencies": {
+    "autoprefixer": "~5.2.0"
+  }
+}

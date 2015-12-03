@@ -1,5 +1,6 @@
 *.pyc
+.env
 /venv/
 /static/
 /media/
-.env
+/node_modules/
