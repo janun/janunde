@@ -10,6 +10,11 @@ except ImportError:
     pass
 
 
+# We could disable newer browsers not to use this site without ssl
+# for specified number of seconds
+# but only if we not wanted them to be able to use non-ssl!
+#SECURE_HSTS_SECONDS = 0
+
 # Send the header: x-content-type-options: nosniff
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
