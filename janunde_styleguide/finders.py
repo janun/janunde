@@ -10,8 +10,9 @@ class StaticFilesFinder(DjangoStaticFilesFinder):
     def __init__(self, *args, **kwargs):
         super(StaticFilesFinder, self).__init__(app_names=(this_app.name,) ,*args, **kwargs)
 
-    def list(self, ignore_patterns, *args, **kwargs):
-        super(StaticFilesFinder, self).list(ignore_patterns=('*.html',) ,*args, **kwargs)
+    def list(self, ignore_patterns=()):
+        ignore_patterns.append('*.html')
+        return super(StaticFilesFinder, self).list(ignore_patterns)
 
 
 from django.template.loaders.app_directories import Loader as DjangoTemplateLoader
