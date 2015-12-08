@@ -1,18 +1,6 @@
 {
   "name": "janunde",
-  "description": "JANUN Website",
-  "main": "",
-  "authors": [
-    "Henrik Kröger <hedwig@janun.de>"
-  ],
   "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
   "dependencies": {
     "compass-breakpoint": "~2.6.1",
     "hamburger-icon": "~1.0.3",

@@ -1,6 +1,12 @@
 {
   "name": "janunde",
   "version": "0.0.1",
+  "engines": {
+    "node": "0.10.25"
+  },
+  "scripts": {
+    "postinstall": "bower install"
+  },
   "dependencies": {
     "autoprefixer": "~5.2.0"
   }
