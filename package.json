@@ -8,6 +8,7 @@
     "postinstall": "bower install"
   },
   "dependencies": {
+    "bower": "~1.6.8",
     "autoprefixer": "~5.2.0"
   }
 }
