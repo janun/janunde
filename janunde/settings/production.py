@@ -38,7 +38,7 @@ ALLOWED_HOSTS = ['*']
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # Parse database configuration from $DATABASE_URL
-#import dj_database_url
+import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
 
 # save staticfiles using whitenoise
