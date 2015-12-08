@@ -12,7 +12,7 @@ header.header {
     padding-top: rem-calc(122);
   }
 
-  background-color: get-color(green-overlay);
+  background-color: $green-overlay;
 
 
   &:after {
@@ -27,7 +27,7 @@ header.header {
     left: 0;
     width: 100%;
     z-index: -5;
-    background-color: get-color(green);
+    background-color: $green;
   }
 
 
@@ -37,7 +37,7 @@ header.header {
     z-index: 5;
 
     * {
-      color: get-color(white);
+      color: $white;
       font-family: $font-family-sans-serif;
     }
 
@@ -76,7 +76,7 @@ header.header {
     overflow: hidden;
     z-index: -1;
 
-    background: url(static('components/header/header_video_poster.jpg'));
+    //background: url(static('janunde_styleguide/images/components/header/poster.jpg'));
   }
 
   video {

@@ -64,7 +64,7 @@ body.collapse-open:not(.dropdown-open):before { // ignore collpase-open on large
 // the navbar-container renders the green background
 // and is always in full-width
 .navbar-container {
-  background: get-color(green);
+  background: $green;
   position: absolute;
   top: 0px;
   width: 100%;
@@ -97,7 +97,7 @@ body.collapse-open:not(.dropdown-open):before { // ignore collpase-open on large
   @include container($medium-breakpoint);
 
   a {
-    color: get-color(white);
+    color: $white;
     @extend .sans;
     &:active {
       text-decoration: none;
@@ -213,10 +213,10 @@ body.collapse-open:not(.dropdown-open):before { // ignore collpase-open on large
   padding-top: rem-calc(25);
   padding-bottom: rem-calc(37);
   @include resp-scale('padding-left', rem-calc(20), rem-calc(180), $smallest-breakpoint, $medium-breakpoint);
-  border-bottom: 1px solid get-color(green);
+  border-bottom: 1px solid $green;
 
   a {
-    color: get-color(brown);
+    color: $brown;
   }
   li + li {
     margin-top: rem-calc(24);
@@ -288,7 +288,7 @@ body.collapse-open:not(.dropdown-open):before { // ignore collpase-open on large
         a {
           padding: rem-calc(4 0);
           margin: rem-calc(3 0);
-          color: get-color(brown);
+          color: $brown;
           @include ms-respond(font-size, 0);
         }
       }
