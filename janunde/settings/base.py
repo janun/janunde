@@ -22,8 +22,6 @@ INSTALLED_APPS = [
     'home',
     'search',
 
-    'janunde_styleguide',
-
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
     'wagtail.wagtailembeds',
@@ -38,7 +36,6 @@ INSTALLED_APPS = [
 
     'modelcluster',
     'compressor',
-    'djangobower',
     'taggit',
 
     'django.contrib.admin',
@@ -71,12 +68,8 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(PROJECT_DIR, 'templates'),
         ],
+        'APP_DIRS': True,
         'OPTIONS': {
-            'loaders': [
-                'django.template.loaders.filesystem.Loader',
-                'django.template.loaders.app_directories.Loader',
-                'janunde_styleguide.finders.TemplateLoader'
-            ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -121,9 +114,7 @@ USE_TZ = True
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'janunde_styleguide.finders.StaticFilesFinder',
     'compressor.finders.CompressorFinder',
-    'djangobower.finders.BowerFinder',
 )
 
 STATICFILES_DIRS = (
@@ -151,16 +142,6 @@ COMPRESS_AUTOPREFIXER_ARGS = '-b "> 2%"'
 
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 
-
-# django-bower settings
-BOWER_COMPONENTS_ROOT = BASE_DIR
-
-BOWER_INSTALLED_APPS = (
-    'jquery',
-)
-
-from janunde_styleguide.settings import BOWER_INSTALLED_APPS as ADDITIONAL_BOWER_INSTALLED_APPS
-BOWER_INSTALLED_APPS += ADDITIONAL_BOWER_INSTALLED_APPS
 
 # Wagtail settings
 

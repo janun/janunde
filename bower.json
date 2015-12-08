@@ -1,0 +1,23 @@
+{
+  "name": "janunde",
+  "description": "JANUN Website",
+  "main": "",
+  "authors": [
+    "Henrik Kröger <hedwig@janun.de>"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "compass-breakpoint": "~2.6.1",
+    "hamburger-icon": "~1.0.3",
+    "jquery": "~2.1.4",
+    "modular-scale": "~2.1.1",
+    "susy": "~2.2.7"
+  }
+}

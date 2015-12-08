@@ -6,5 +6,3 @@ whitenoise==2.0.6
 django-libsass>=0.6
 libsass>=0.9.2
 django-compressor-autoprefixer>=0.1.0
-
-django-bower>=5.0.4
