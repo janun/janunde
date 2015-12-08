@@ -1,0 +1,312 @@
+// navbar
+//
+// this is written mobile/tablet first
+// and styles for large-up are further down, overwriting the mobile styles
+//
+// opening of menus and dropdowns is done by js
+//
+// coding style: I try to limit nesting to make things simpler
+
+@import 'bower_components/hamburger-icon/hamburger-icon';
+
+// the height of the navbar if controlled with resp-scale('height', ...)
+$medium-navbar-height: rem-calc(65);
+$small-navbar-height: rem-calc(54);
+@mixin navbar-height($attr: 'height') {
+  #{$attr}: $small-navbar-height;
+  @include breakpoint($medium-up) {
+    #{$attr}: $medium-navbar-height;
+  }
+}
+
+// special shadow for the navbar
+// remember to remove it for transparent navbars
+@mixin navbar-shadow {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+// a white background in full screen width
+@mixin white-background ($margin-top: 0) {
+  &:before {
+    position: absolute;
+    width: 5000%;
+    background: white;
+    left: -2500%;
+    content: "";
+    height: 100%;
+    margin-top: $margin-top;
+    @include navbar-shadow;
+    display: block;
+    z-index: -10;
+  }
+}
+
+// used by js to make the background darker,
+// when menus are open
+body.dropdown-open, body.collapse-open {
+  &:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.33);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 5;
+  }
+}
+body.collapse-open:not(.dropdown-open):before { // ignore collpase-open on large-up
+  @include breakpoint($large-up) {
+    content: none;
+  }
+}
+
+// the navbar-container renders the green background
+// and is always in full-width
+.navbar-container {
+  background: get-color(green);
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 1000;
+  @include navbar-height;
+  @include navbar-shadow;
+
+  // the whole navbar can optionally be fixed
+  &.fixed {
+    position: fixed;
+  }
+
+  // the whole navbar can optionally be transparent
+  &.transparent:not(.dropdown-open):not(.collapse-open) {
+    background: transparent;
+    box-shadow: none;
+  }
+  &.transparent.collapse-open:not(.dropdown-open) {  // ignore collpase-open on large-up
+    @include breakpoint($large-up) {
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+}
+
+// the actual navbar
+.navbar {
+  position: relative;
+  // fit to the "grid" of $medium-breakpoint
+  @include container($medium-breakpoint);
+
+  a {
+    color: get-color(white);
+    @extend .sans;
+    &:active {
+      text-decoration: none;
+    }
+  }
+
+  li {
+    display: block;
+  }
+
+  &>* {
+    float: left;
+  }
+  .search, .login, .menu-toggle {
+    float: right;
+  }
+
+  .title {
+    padding: rem-calc(20 20);
+    @include breakpoint($small-down) {
+      padding: rem-calc(17 17);
+    }
+  }
+
+  .logo {
+    height: rem-calc(65);
+    padding: rem-calc(14 0);
+    img {
+      // bigger on bigger screens...
+      width: rem-calc(28);
+      height: rem-calc(27);
+      @include breakpoint($medium-up) {
+        width: rem-calc(37);
+        height: rem-calc(36);
+      }
+    }
+  }
+
+  // this is being collapsed
+  .collapse {
+    @include breakpoint($medium-down) {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.2s linear;
+    }
+    &.in { // someone pressed the menu button
+      display: block;
+      opacity: 1;
+      transition: opacity 0.2s linear;
+    }
+  }
+
+  // buttons
+  button {
+    &:hover {
+      background: rgba(white, 0.25);
+    }
+    width: rem-calc(30);
+    height: rem-calc(30);
+    margin: rem-calc(17 0);
+    @include breakpoint($small-down) {
+      margin: rem-calc(12 0);
+    }
+    padding: 0;
+    border-radius: rem-calc(2);
+  }
+
+  // the search button
+  .search-button {
+    @include breakpoint($small-down) {
+      padding: rem-calc(7 7);
+    }
+  }
+
+  // the login button
+  .login-button {
+    padding: rem-calc(4 4);
+  }
+
+  // the menu toggle button
+  .menu-toggle {
+    @include breakpoint($large-up) {
+      display: none;
+    }
+    padding: rem-calc(0 7);
+
+    // the hamburger menu icon
+    .hamburger {
+      @include hamburger-generator(
+        rem-calc(16), rem-calc(3), rem-calc(2), white,
+        $timing-function: linear, $duration: 0.2s
+      );
+    }
+    &:not(.collapsed) {
+      .hamburger {
+        @include hamburger-animation;
+      }
+    }
+
+  }
+}
+
+
+
+// the menu inside .navbar
+.navbar-menu {
+  position: absolute;
+  margin-top: 0px;
+  left: 0px;
+  width: 100vw;
+  @include navbar-height('top');
+  background: white;
+  padding-top: rem-calc(25);
+  padding-bottom: rem-calc(37);
+  @include resp-scale('padding-left', rem-calc(20), rem-calc(180), $smallest-breakpoint, $medium-breakpoint);
+  border-bottom: 1px solid get-color(green);
+
+  a {
+    color: get-color(brown);
+  }
+  li + li {
+    margin-top: rem-calc(24);
+  }
+
+  // now for large screens
+  @include breakpoint($large-up) {
+    background: transparent;
+    border-bottom: none;
+    padding-top: 0;
+    top: 0;
+    width: auto;
+
+    & > li + li {
+      margin-top: rem-calc(20);
+      margin-left: rem-calc(30);
+    }
+
+    & > li {
+      margin-top: rem-calc(20);
+      float: left;
+      & > a {
+        padding-top: rem-calc(20);
+        padding-bottom: rem-calc(20);
+        color: white;
+      }
+    }
+  }
+
+  @include breakpoint($large-up) {
+    .dropdown {
+      position: relative;
+    }
+  }
+
+  // dropdown menu (mobile first)
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    @include resp-scale('left', rem-calc(70), rem-calc(400), $smallest-breakpoint, $medium-breakpoint);
+    width: 100vw;
+    top: 0;
+    height: 100%;
+    background: white;
+    padding-top: rem-calc(25);
+    padding-left: rem-calc(20);
+    @include navbar-shadow;
+
+    li + li {
+      margin-top: rem-calc(12);
+    }
+
+    // now for larger screens
+    @include breakpoint($large-up) {
+      height: auto;
+      left: 0;
+      top: rem-calc(45);
+      width: 200%;
+      background: transparent;
+      box-shadow: none;
+      padding-bottom: rem-calc(32);
+      padding-left: 0;
+      margin-left: 0;
+      @include white-background(rem-calc(-25));
+
+      li {
+        clear: both;
+
+        a {
+          padding: rem-calc(4 0);
+          margin: rem-calc(3 0);
+          color: get-color(brown);
+          @include ms-respond(font-size, 0);
+        }
+      }
+    }
+  }
+
+  .open .dropdown-menu {
+    display: block;
+    z-index: 1000;
+  }
+}
+
+// grey out toplevel closed links
+.dropdown-open {
+  .navbar-menu > li > a {
+    opacity: 0.5;
+  }
+  li.open > a {
+    opacity: 1;
+  }
+}

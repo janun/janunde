@@ -1,7 +1,0 @@
-@import 'defaults';
-@import 'mixins/rem-calc';
-
-h1 {
-  background: red;
-  font-size: rem-calc(50);
-}

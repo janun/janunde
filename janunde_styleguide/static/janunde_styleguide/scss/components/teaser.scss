@@ -1,0 +1,11 @@
+.teaser {
+  color: $white;
+  @include ms-respond(font-size, 3);
+  @include janun-text-shadow;
+  text-align: center;
+  padding: 2.125rem 1.75rem;
+
+  background:
+    linear-gradient($green-overlay, $green-overlay),
+    url(static('janunde_styleguide/images/components/teaser/background.jpg')) repeat center/cover fixed;
+}

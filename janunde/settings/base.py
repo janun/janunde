@@ -22,6 +22,8 @@ INSTALLED_APPS = [
     'home',
     'search',
 
+    'janunde_styleguide',
+
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
     'wagtail.wagtailembeds',

@@ -1,9 +1,0 @@
-@import 'mixins';
-
-$fonts-base-path: 'patterns/typography/fonts/';
-
-@include font-face('Cabin', static($fonts-base-path + 'Cabin-Regular'), 400, normal, woff2 woff ttf);
-
-@include font-face('Crimson Text', static($fonts-base-path + 'CrimsonText-Roman'), 400, normal, woff2 woff ttf);
-@include font-face('Crimson Text', static($fonts-base-path + 'CrimsonText-Bold'), 700, normal, woff2 woff ttf);
-@include font-face('Crimson Text', static($fonts-base-path + 'CrimsonText-Italic'), 400, italic, woff2 woff ttf);

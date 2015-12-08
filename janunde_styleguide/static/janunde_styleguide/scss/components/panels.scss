@@ -1,0 +1,96 @@
+.panel {
+  background-color: $white;
+  @include janun-box-shadow;
+  padding: rem-calc(20);
+  margin-bottom: rem-calc(20);
+}
+
+/* picture with overlay often in panel
+ *
+ * img will be cropped left and right if viewport is too small
+ *
+ * example usage:
+ * <div class="picture">
+ *   <img src="../img/content/macht-wachstum-glueck.png">
+ *   <div class="overlay">
+ *     <h3><small>30. Oktober bis 02. November</small></h3>
+ *     <h3>Macht. Wachstum. Glück.</h3>
+ *   </div>
+ * </div>
+ */
+
+$picture-height: 205px;
+
+.picture {
+  position: relative;
+  height: $picture-height;
+  overflow: hidden;
+  text-align: center;   // center image if cropped
+
+  img {
+    position: relative;
+    top: 0;
+    left: 100%;         // center image if cropped
+    margin-left: -200%; // center image if cropped
+    min-width: 100%;
+    max-width: none;    // was set by foundation, argh
+    min-height: $picture-height;
+  }
+
+  // picture overlay
+  .overlay {
+    width: 100%;
+    position: absolute;
+    &:first-child { // shown at the top
+      top: 0;
+    }
+    &:last-child { // shown at the bottom
+      bottom: 0;
+    }
+    z-index: 20;
+    min-width: 100%;
+    background: rgba($white, 0.75);
+    text-align: left;
+
+    // full overlay
+    &.full {
+      height: 100%;
+    }
+
+    // colored overlay
+    &%color-overlay {
+    //@include color-all-text;
+      .button {
+        //@extend .button.line; // all buttons should be line buttons
+      }
+    }
+
+    &.blue {
+      @extend %color-overlay;
+      background-color: rgba($blue, 0.75);
+    }
+    &.green {
+      @extend %color-overlay;
+      background-color: rgba($green, 0.75);
+    }
+    &.red {
+      @extend %color-overlay;
+      background-color: rgba($red, 0.75);
+    }
+    &.brown {
+      @extend %color-overlay;
+      background-color: rgba($brown, 0.75);
+    }
+
+    small {
+      color: $lighterdark;
+    }
+    a {
+      color: inherit;
+    }
+  }
+}
+
+.ellipsize *, .ellipsize {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}

@@ -1,0 +1,25 @@
+@import "bower_components/susy/sass/susy";
+
+$susy: (
+  columns: 12,
+  gutters: 1/4,
+  math: fluid,
+  output: float,
+  gutter-position: split,
+  container-position: center,
+  //container: $medium-breakpoint,
+  global-box-sizing: border-box,
+);
+
+.container {
+  @include container($medium-breakpoint);
+}
+
+.resp-third {
+  @include breakpoint($medium-up) {
+    @include span(4 of 12);
+  }
+  //@include breakpoint($medium-range) {
+  //  @include span(6 of 12);
+  //}
+}

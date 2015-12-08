@@ -1,0 +1,27 @@
+$green: rgb(70, 187, 0);
+$blue: rgb(0, 118, 164);
+$darkblue: rgb(0, 58, 81);
+$red: rgb(196, 23, 55);
+$orange: rgb(233, 88, 34);
+$brown: rgb(55, 23, 26);
+$dark: rgb(20, 20, 20);
+$lighterdark: rgb(74, 74, 74);
+$baige: rgb(236, 235, 232);
+$white: rgb(255, 255, 255);
+$ghost: rgb(250, 250, 250);
+$silver: rgb(239, 239, 239);
+$aluminum: rgb(153, 153, 153);
+$steel: rgb(103, 103, 103);
+$black: rgb(0, 0, 0);
+
+$green-overlay: rgba($green, 0.65);
+
+
+// setting the background-color
+body {
+  background-color: $baige;
+}
+
+@mixin janun-box-shadow {
+  box-shadow: 0 0 5px rgba($black, 0.1);
+}
