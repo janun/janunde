@@ -1,0 +1,34 @@
+// darken the whole page
+// i.e. for open menus
+//
+// js can add the classes .collapse-open and .dropdown-open
+// to body and this will darken the page accordingly
+//
+// .collapse-open                               - enabled
+// .collapse-open and breakpoint $large-up      - disabled
+// .dropdown-open and breakpoint $large-up      - enabled
+//
+body {
+    &:before {
+        content: none;
+        background: rgba($black, 0.33);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 5;
+    }
+
+    &.collapse-open:before {
+        content: "";
+    }
+    @include breakpoint($large-up) {
+        &.collapse-open:before {
+            content: none;
+        }
+        &.dropdown-open:before {
+            content: "";
+        }
+    }
+}

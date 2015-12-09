@@ -1,17 +1,20 @@
-// navbar
+// the navbar
 //
-// this is written mobile/tablet first
-// and styles for large-up are further down, overwriting the mobile styles
 //
-// opening of menus and dropdowns is done by js
-//
-// coding style: I try to limit nesting to make things simpler
 
+// we are using this hamburger-icon
 @import 'bower_components/hamburger-icon/hamburger-icon';
 
-// the height of the navbar if controlled with resp-scale('height', ...)
+
 $medium-navbar-height: rem-calc(65);
 $small-navbar-height: rem-calc(54);
+
+// used to control navbar height
+//
+// useful since we have <div.navbar-container> and actual <nav.navbar>
+// uses the global vars $medium-navbar-height and $small-navbar-height
+//
+// $attr - the attribute to be controlled
 @mixin navbar-height($attr: 'height') {
   #{$attr}: $small-navbar-height;
   @include breakpoint($medium-up) {
@@ -26,6 +29,9 @@ $small-navbar-height: rem-calc(54);
 }
 
 // a white background in full screen width
+// used for dropdowns
+//
+// $margin-top - optionaly move evrth. down
 @mixin white-background ($margin-top: 0) {
   &:before {
     position: absolute;
@@ -41,25 +47,6 @@ $small-navbar-height: rem-calc(54);
   }
 }
 
-// used by js to make the background darker,
-// when menus are open
-body.dropdown-open, body.collapse-open {
-  &:before {
-    content: "";
-    background: rgba(0, 0, 0, 0.33);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 5;
-  }
-}
-body.collapse-open:not(.dropdown-open):before { // ignore collpase-open on large-up
-  @include breakpoint($large-up) {
-    content: none;
-  }
-}
 
 // the navbar-container renders the green background
 // and is always in full-width
