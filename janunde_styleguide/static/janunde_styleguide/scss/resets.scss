@@ -1,6 +1,20 @@
+// resets
+// we are only doing the most basic resets here,
+// so have smaller css files
+
+// set consistent border-box
 html {
   box-sizing: border-box;
 }
+
+// all elements should inherit the box-sizing
+// this way we can change box sizing on a container
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+// reset margins and paddings
+html, body {
+    margin: 0;
+    padding: 0;
 }
