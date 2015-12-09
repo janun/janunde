@@ -134,12 +134,11 @@ MEDIA_URL = '/media/'
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
-COMPRESS_ENABLED = True
+#COMPRESS_ENABLED = True
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
     'django_compressor_autoprefixer.AutoprefixerFilter',
-    #'compressor.filters.cssmin.CSSMinFilter'
-    'compressor.filters.cssmin.rCSSMinFilter'
+    'compressor.filters.cssmin.rCSSMinFilter' # other filters kill css calc fct
 )
 COMPRESS_AUTOPREFIXER_BINARY = os.path.join(BASE_DIR, 'node_modules', 'autoprefixer', 'autoprefixer')
 COMPRESS_AUTOPREFIXER_ARGS = '-b "> 2%"'
@@ -148,5 +147,4 @@ COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 
 
 # Wagtail settings
-
 WAGTAIL_SITE_NAME = "janunde"

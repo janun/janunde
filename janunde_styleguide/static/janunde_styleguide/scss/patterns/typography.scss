@@ -1,28 +1,40 @@
-@import 'bower_components/modular-scale/stylesheets/modular-scale';
+// Typography
 
 
-// using the google fonts Cabin, Crimson Text
-//@import url(https://fonts.googleapis.com/css?family=Cabin|Crimson+Text:400,700,400italic);
-// using link in head
+// use Cabin and Crimson Text as fonts
+//
+// these need to be loaded using a link in the head of our html docs
+// as this is faster than using css import.
 $font-family-sans-serif: "Cabin", Helvetica, Roboto, Arial, sans-serif;
 $font-family-serif: "Crimson Text", "Times New Roman", Times, serif;
 
+// use sans-serif text
+// this mixin is in case we need special settings per font
+@mixin sans {
+  font-family: $font-family-sans-serif;
+}
+// use serif text
+// this mixin is in case we need special settings per font
+@mixin serif {
+  font-family: $font-family-serif;
+}
 
-$ms-base: rem-calc(14);
+
+$rem-base: 16px;
+html {
+    font-size: 16px;
+}
+
+@import 'bower_components/modular-scale/stylesheets/modular-scale';
+
+$ms-base: rem-calc(13px);
 $ms-range:
   $minor-third        $small-breakpoint,
   $augmented-fourth   $medium-breakpoint;
 
 
-.sans-serif, .sans {
-  font-family: $font-family-sans-serif;
-}
-.serif {
-  font-family: $font-family-serif;
-}
-
 body {
-  @extend .sans;
+  @include sans;
   @include ms-respond(font-size, 1);
   color: $brown;
 }
@@ -30,20 +42,22 @@ body {
 @mixin header-commons {
   margin-top: 0.625rem;
   margin-bottom: 0.625rem;
-  line-height: 1.5;
 }
 
 h4 {
   @include header-commons;
   @include ms-respond(font-size, 2);
+  line-height: 1.5;
 }
 h3 {
   @include header-commons;
   @include ms-respond(font-size, 3);
+  line-height: 1.5;
 }
 h2 {
   @include header-commons;
   @include ms-respond(font-size, 4);
+  line-height: 1.5;
 }
 h1 {
   @include header-commons;
@@ -54,17 +68,15 @@ h1 {
 
 // styling for paragraphs
 //
-// .intro
-// +p
+// they are serif and have font-size scale of 1
+//
+// adjacent paragraphs dont have top and bottom margins,
+// instead they have a text-indent of a font-size scale of 1
+//
 p {
-  @extend .serif;
+  @include serif;
   @include ms-respond(font-size, 1);
   margin-top: 0; margin-bottom: 0;
-
-  &.intro {
-    @include ms-respond(font-size, 1);
-    color: $green;
-  }
 
   &+p {
     @include ms-respond(text-indent, 1);
@@ -72,7 +84,12 @@ p {
 }
 
 
-// styling of links
+// styling of links/anchors
+//
+// they are normally blue and dont have an underline
+//
+// :hover   -
+// :active  -
 a {
   color: $blue;
   text-decoration: none;
@@ -88,7 +105,7 @@ a {
 
 // styling of normal lists, i.e. those next to paragraphs
 ul li, ol li {
-  @extend .serif;
+  @include serif;
   @include ms-respond(font-size, 1);
 }
 
@@ -101,7 +118,7 @@ ul li, ol li {
 .area-title {
   text-align: center;
   color: $lighterdark;
-  @extend .sans;
+  @include sans;
   @include ms-respond(font-size, 0);
   font-weight: normal;
 }

@@ -1,12 +1,6 @@
-/**
-  * @stylesheet buttons.scss Buttons
-  *
-  * @description
-  * Es gibt genau eine Art von Button.
-  *
-  **/
+// Buttons
 
-// resets for buttons
+// resets for all possible buttons
 button {
   background: transparent;
   border: none;
@@ -18,15 +12,20 @@ button {
 }
 
 // the standard button class
-// it can be used with <button.button>, <a.button> and <input.button>
-// it is green
 //
-// :hover the standard button has green-background when hovered
-// .white the same in white instead; hovered respective
+// it can be used as <button.button>, <a.button> and <input.button>
+// they should all look the same
+//
+// it is green and has a small roundness
+//
+// :hover        - the standard button has green background when hovered
+// :active       - just dont underline when active
+// .white        - the buttons border and text is white
+// .white:hover  - the white button has white background when hovered
 //
 .button {
-  border: solid 2px $green;
-  border-radius: 4px;
+  border: solid rem-calc(2) $green;
+  border-radius: rem-calc(4);
   padding: 0.75rem 0.75rem 0.625rem;
   color: $green;
   min-width: 13.625rem;
@@ -34,6 +33,7 @@ button {
   cursor: pointer;
   display: inline-block;
   margin-bottom: 0.75rem;
+  text-align: center;
 
   &:hover {
     color: $white !important;
@@ -46,7 +46,7 @@ button {
   }
 
   &.white {
-    border: solid 2px $white;
+    border: solid rem-calc(2) $white;
     color: $white;
     &:hover {
         color: $lighterdark !important;

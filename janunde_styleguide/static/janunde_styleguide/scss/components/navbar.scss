@@ -22,7 +22,7 @@ $small-navbar-height: rem-calc(54);
 // special shadow for the navbar
 // remember to remove it for transparent navbars
 @mixin navbar-shadow {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: rem-calc(0 2 4) rgba(0, 0, 0, 0.2);
 }
 
 // a white background in full screen width
@@ -66,7 +66,7 @@ body.collapse-open:not(.dropdown-open):before { // ignore collpase-open on large
 .navbar-container {
   background: $green;
   position: absolute;
-  top: 0px;
+  top: 0;
   width: 100%;
   z-index: 1000;
   @include navbar-height;
@@ -98,7 +98,7 @@ body.collapse-open:not(.dropdown-open):before { // ignore collpase-open on large
 
   a {
     color: $white;
-    @extend .sans;
+    @include sans;
     &:active {
       text-decoration: none;
     }
@@ -205,15 +205,15 @@ body.collapse-open:not(.dropdown-open):before { // ignore collpase-open on large
 // the menu inside .navbar
 .navbar-menu {
   position: absolute;
-  margin-top: 0px;
-  left: 0px;
+  margin-top: 0;
+  left: 0;
   width: 100vw;
   @include navbar-height('top');
   background: white;
   padding-top: rem-calc(25);
   padding-bottom: rem-calc(37);
   @include resp-scale('padding-left', rem-calc(20), rem-calc(180), $smallest-breakpoint, $medium-breakpoint);
-  border-bottom: 1px solid $green;
+  border-bottom: rem-calc(1) solid $green;
 
   a {
     color: $brown;

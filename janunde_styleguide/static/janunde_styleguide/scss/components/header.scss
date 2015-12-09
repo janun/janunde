@@ -1,5 +1,5 @@
-$header-height-large: 528px;
-$header-height: 480px;
+$header-height-large: rem-calc(528);
+$header-height: rem-calc(480);
 
 
 header.header {
@@ -50,9 +50,9 @@ header.header {
       margin-top: rem-calc(26);
       @include breakpoint($medium-breakpoint) { margin-top: rem-calc(63); }
       .button {
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(0, 0, 0, 0.25);
+        box-shadow: rem-calc(0 1 2) rgba(0, 0, 0, 0.25), inset rem-calc(0 1 2) rgba(0, 0, 0, 0.25);
         &:hover {
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+          box-shadow: rem-calc(0 1 2) rgba(0, 0, 0, 0.25);
         }
       }
     }

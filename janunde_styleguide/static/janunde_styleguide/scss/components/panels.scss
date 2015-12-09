@@ -19,7 +19,7 @@
  * </div>
  */
 
-$picture-height: 205px;
+$picture-height: rem-calc(205);
 
 .picture {
   position: relative;
