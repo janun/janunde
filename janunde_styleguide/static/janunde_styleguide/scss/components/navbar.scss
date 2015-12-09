@@ -48,8 +48,16 @@ $small-navbar-height: rem-calc(54);
 }
 
 
-// the navbar-container renders the green background
-// and is always in full-width
+// navbar-container
+//
+// renders a green background
+// and is always in full-width whereas the <nav.navbar> is smaller
+//
+// .fixed                                                 - position: fixed
+// .transparent                                           - transparent bg
+// .transparent.collapse-open and breakpoint $medium-down - not transparent
+// .transparent.dropdown-open and breakpoint $large-up    - not transparent
+
 .navbar-container {
   background: $green;
   position: absolute;
@@ -59,20 +67,25 @@ $small-navbar-height: rem-calc(54);
   @include navbar-height;
   @include navbar-shadow;
 
-  // the whole navbar can optionally be fixed
   &.fixed {
     position: fixed;
   }
 
-  // the whole navbar can optionally be transparent
-  &.transparent:not(.dropdown-open):not(.collapse-open) {
+  &.transparent {
     background: transparent;
     box-shadow: none;
-  }
-  &.transparent.collapse-open:not(.dropdown-open) {  // ignore collpase-open on large-up
+
+    @include breakpoint($medium-down) {
+      &.collapse-open {
+        background: $green;
+        @include navbar-shadow;
+      }
+    }
     @include breakpoint($large-up) {
-      background: transparent;
-      box-shadow: none;
+      &.dropdown-open {
+        background: $green;
+        @include navbar-shadow;
+      }
     }
   }
 }
