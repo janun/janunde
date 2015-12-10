@@ -8,6 +8,9 @@
 
 $medium-navbar-height: rem-calc(65);
 $small-navbar-height: rem-calc(54);
+$navbar-color: $green;
+
+
 
 // used to control navbar height
 //
@@ -16,16 +19,13 @@ $small-navbar-height: rem-calc(54);
 //
 // $attr - the attribute to be controlled
 @mixin navbar-height($attr: 'height') {
-  #{$attr}: $small-navbar-height;
-  @include breakpoint($medium-up) {
-    #{$attr}: $medium-navbar-height;
-  }
+  @include resp-scale($attr, $small-navbar-height, $medium-navbar-height, $small-breakpoint, $medium-breakpoint);
 }
 
 // special shadow for the navbar
 // remember to remove it for transparent navbars
 @mixin navbar-shadow {
-  box-shadow: rem-calc(0 2 4) rgba(0, 0, 0, 0.2);
+  box-shadow: rem-calc(0 2 4) rgba($black, 0.2);
 }
 
 // a white background in full screen width
@@ -54,12 +54,12 @@ $small-navbar-height: rem-calc(54);
 // and is always in full-width whereas the <nav.navbar> is smaller
 //
 // .fixed                                                 - position: fixed
-// .transparent                                           - transparent bg
+// .transparent                                           - transparent bg and no shadow
 // .transparent.collapse-open and breakpoint $medium-down - not transparent
 // .transparent.dropdown-open and breakpoint $large-up    - not transparent
-
+//
 .navbar-container {
-  background: $green;
+  background: $navbar-color;
   position: absolute;
   top: 0;
   width: 100%;
@@ -77,13 +77,13 @@ $small-navbar-height: rem-calc(54);
 
     @include breakpoint($medium-down) {
       &.collapse-open {
-        background: $green;
+        background: $navbar-color;
         @include navbar-shadow;
       }
     }
     @include breakpoint($large-up) {
       &.dropdown-open {
-        background: $green;
+        background: $navbar-color;
         @include navbar-shadow;
       }
     }
@@ -126,13 +126,8 @@ $small-navbar-height: rem-calc(54);
     height: rem-calc(65);
     padding: rem-calc(14 0);
     img {
-      // bigger on bigger screens...
-      width: rem-calc(28);
-      height: rem-calc(27);
-      @include breakpoint($medium-up) {
-        width: rem-calc(37);
-        height: rem-calc(36);
-      }
+      @include resp-scale('width', rem-calc(28), rem-calc(37), $small-breakpoint, $medium-breakpoint);
+      @include resp-scale('height', rem-calc(27), rem-calc(36), $small-breakpoint, $medium-breakpoint);
     }
   }
 
@@ -213,7 +208,7 @@ $small-navbar-height: rem-calc(54);
   padding-top: rem-calc(25);
   padding-bottom: rem-calc(37);
   @include resp-scale('padding-left', rem-calc(20), rem-calc(180), $smallest-breakpoint, $medium-breakpoint);
-  border-bottom: rem-calc(1) solid $green;
+  border-bottom: rem-calc(1) solid $navbar-color;
 
   a {
     color: $brown;
