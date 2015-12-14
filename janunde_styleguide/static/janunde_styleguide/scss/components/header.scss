@@ -13,6 +13,9 @@ header.header {
   }
 
   background-color: $green-overlay;
+  //background:
+  //  linear-gradient($green-overlay, $green-overlay),
+  //  url(static('janunde_styleguide/images/components/header/poster.png')) center/cover;
 
 
   &:after {
@@ -67,7 +70,7 @@ header.header {
   }
 
 
-  .video-wrapper {
+  #header-video {
     position: absolute;
     top: 0;
     left: 0;
@@ -75,21 +78,7 @@ header.header {
     height: 100%;
     overflow: hidden;
     z-index: -1;
-
-    //background: url(static('janunde_styleguide/images/components/header/poster.jpg'));
-  }
-
-  video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
-
-    @include breakpoint($small-down) {
-      display: none;
-    }
+    background: url(static('janunde_styleguide/images/components/header/poster.jpg'));
   }
 
 }
