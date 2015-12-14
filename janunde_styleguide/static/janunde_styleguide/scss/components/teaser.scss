@@ -1,3 +1,12 @@
+// teaser
+//
+// is a kind of full-width heading with background
+// but not an actual heading
+// like a pull-quote or sth.
+//
+// Markup:
+//      <div class="teaser">Dies ist der Teaser-Text</div>
+//
 .teaser {
   color: $white;
   @include ms-respond(font-size, 3);
