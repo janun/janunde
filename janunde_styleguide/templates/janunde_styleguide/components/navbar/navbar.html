@@ -1,43 +1,34 @@
-{% load staticfiles %}
+{% load staticfiles wagtailcore_tags janun_tags %}
+{% get_site_root as site_root %}
 
+{# TODO: toggle fixed, transparent and data-toggle-transparent-at by templatetag options #}
 <div class="navbar-container fixed transparent" data-toggle-transparent-at=440>
   <nav class="navbar" role="navigation">
 
-    <a class="logo" href="/"><img width="37" height="36" alt="JANUN Logo" src="{% static 'janunde_styleguide/images/components/navbar/janun_logo.svg' %}"></a>
-    <a class="title" href="/">JANUN</a>
+    {# the logo and site title linking to site_root #}
+    <a class="logo" href="{% pageurl site_root %}"><img width="37" height="36" alt="JANUN Logo" src="{% static 'janunde_styleguide/images/components/navbar/janun_logo.svg' %}"></a>
+    <a class="title" href="{% pageurl site_root %}">JANUN</a>
+
+    {# menu toggle #}
     <button class="menu-toggle collapsed" type="button" title="Menü ein-/ausblenden" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"><span class="hamburger"></span></button>
 
+    {# this isn't shown on mobile devices unless the menu is activated #}
     <div class="collapse" id="navbar-collapse">
+
+      {# the actual menu items #}
       <ul class="navbar-menu">
-        <li><a href="/aktuelles">Aktuelles</a></li>
-
-        <li class="dropdown">
-          <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Über uns</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Selbstverständnis</a></li>
-            <li><a href="#">Themen</a></li>
-            <li><a href="#">Geschichte</a></li>
-            <li><a href="#">Struktur</a></li>
-            <li><a href="#">Grundsätze</a></li>
-            <li><a href="#">Satzung</a></li>
-            <li><a href="#">Jobs</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Netzwerk &amp; Projekte</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Gemeinschaftsgärtnerei Acker Pella</a></li>
-            <li><a href="#">Landesjugendbüro Hannover</a></li>
-            <li><a href="#">Jugendumweltbüro Hannover</a></li>
-            <li><a href="#">Kampagnenbüro Braunschweig</a></li>
-            <li><a href="#">Lüneburg</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Angebote</a></li>
-        <li><a href="#">Veranstaltungen</a></li>
-        <li><a href="#">Kontakt</a></li>
+        {% for menuitem in menuitems %}
+          <li class="{% if menuitem.show_dropdown %}dropdown{% endif %}{% if menuitem.active %} active{% endif %}">
+            {% if menuitem.show_dropdown %}
+              <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">{{ menuitem.title }}</a>
+                {% navbar_children parent=menuitem %}
+              {% else %}
+                <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
+              {% endif %}
+          </li>
+        {% endfor %}
       </ul>
+
     </div>
 
 
