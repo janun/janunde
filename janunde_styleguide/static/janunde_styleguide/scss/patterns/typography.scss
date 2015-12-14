@@ -22,7 +22,7 @@ $font-family-serif: "Crimson Text", "Times New Roman", Times, serif;
 
 $rem-base: 16px;
 html {
-    font-size: 16px;
+    font-size: 100%;
 }
 
 @import 'bower_components/modular-scale/stylesheets/modular-scale';
