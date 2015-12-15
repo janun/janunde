@@ -42,5 +42,9 @@ so we can have consistent UX there, too.
 ### home
 The startpage
 
+### current
+A page called Current/Aktuelles
+and Articles
+
 ### search
 wagtail app for searching
