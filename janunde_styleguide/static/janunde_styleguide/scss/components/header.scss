@@ -13,10 +13,6 @@ header.header {
   }
 
   background-color: $green-overlay;
-  //background:
-  //  linear-gradient($green-overlay, $green-overlay),
-  //  url(static('janunde_styleguide/images/components/header/poster.png')) center/cover;
-
 
   &:after {
     content: "";
@@ -78,7 +74,7 @@ header.header {
     height: 100%;
     overflow: hidden;
     z-index: -1;
-    background: url(static('janunde_styleguide/images/components/header/poster.jpg'));
+    background: url(static('janunde_styleguide/images/components/header/poster.jpg')) no-repeat center/cover;
   }
 
 }
