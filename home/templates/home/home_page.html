@@ -3,14 +3,14 @@
 
 {% block body_class %}template-homepage{% endblock %}
 
-{% block content %}
-
+{# overwrite the default navbar with a transparent navbar and header #}
+{% block top %}
     {% get_site_root as site_root %}
     {% navbar parent=site_root calling_page=self transparent=True %}
-
     {% include "janunde_styleguide/components/header/header.html" %}
+{% endblock %}
 
-
+{% block content %}
     <h2 class="area-title">Highlights und Interessantes</h2>
     <div class="container">
         <div class="panel resp-third">test1</div>

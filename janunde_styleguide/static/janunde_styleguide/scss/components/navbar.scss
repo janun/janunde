@@ -47,6 +47,11 @@ $navbar-color: $green;
   }
 }
 
+// if .mainContent comes after .navbar-container it needs to be moved down
+// because .navbar-container is position: absolute
+.navbar-container + .mainContent {
+  @include navbar-height('margin-top');
+}
 
 // navbar-container
 //
@@ -217,8 +222,10 @@ $navbar-color: $green;
     margin-top: rem-calc(24);
   }
 
-  // now for large screens
+  // what we need to change for large screens
   @include breakpoint($large-up) {
+    left: inherit;
+    padding-left: 0;
     background: transparent;
     border-bottom: none;
     padding-top: 0;
