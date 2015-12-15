@@ -41,8 +41,8 @@ header.header {
     }
 
     h1 {
-      font-weight: 600;
-      @include ms-respond(font-size, 3);
+      font-weight: 700;
+      @include ms-respond(font-size, 4);
     }
 
     .buttons {
