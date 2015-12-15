@@ -6,7 +6,7 @@
 {% block content %}
 
     {% get_site_root as site_root %}
-    {% navbar parent=site_root calling_page=self %}
+    {% navbar parent=site_root calling_page=self transparent=True %}
 
     {% include "janunde_styleguide/components/header/header.html" %}
 

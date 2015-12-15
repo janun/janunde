@@ -2,7 +2,7 @@
 {% get_site_root as site_root %}
 
 {# TODO: toggle fixed, transparent and data-toggle-transparent-at by templatetag options #}
-<div class="navbar-container fixed transparent" data-toggle-transparent-at=440>
+<div class="navbar-container {{ fixed }} {{ transparent }}" data-toggle-transparent-at=440>
   <nav class="navbar" role="navigation">
 
     {# the logo and site title linking to site_root #}

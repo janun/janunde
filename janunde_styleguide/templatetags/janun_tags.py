@@ -11,7 +11,7 @@ def has_menu_children(page):
     return page.get_children().live().in_menu().exists()
 
 @register.inclusion_tag('janunde_styleguide/components/navbar/navbar.html', takes_context=True)
-def navbar(context, parent, calling_page=None):
+def navbar(context, parent, calling_page=None, transparent=False, fixed=True):
     """renders the navbar"""
     menuitems = parent.get_children().live().in_menu()
     print(parent)
@@ -23,6 +23,8 @@ def navbar(context, parent, calling_page=None):
         'calling_page': calling_page,
         'menuitems': menuitems,
         'request': context['request'], # needed by pageurl
+        'transparent': 'transparent' if transparent  else '',
+        'fixed': 'fixed' if fixed else '',
     }
 
 @register.inclusion_tag('janunde_styleguide/components/navbar/navbar_children.html', takes_context=True)
