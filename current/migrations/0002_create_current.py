@@ -4,9 +4,14 @@ from __future__ import unicode_literals
 from django.db import migrations
 
 
-currentTitle = "Aktuelles"
+current_title = "Aktuelles"
+current_slug = current_title.lower()
+current_url = '/' + current_slug + '/'
+
 
 def create_current(apps, schema_editor):
+    """Creates a new Current page titled current_title
+    being a child of the homepage created by the home app"""
     # Get models
     ContentType = apps.get_model('contenttypes.ContentType')
     Page = apps.get_model('wagtailcore.Page')
@@ -20,14 +25,14 @@ def create_current(apps, schema_editor):
 
     # Create a new current page
     current = Current.objects.create(
-        title="Aktuelles",
-        slug='aktuelles',
+        title=current_title,
+        slug=current_slug,
         show_in_menus=True,
         content_type=current_content_type,
         depth=2,
         path='00010001',
         numchild=0,
-        url_path='/aktuelles/',
+        url_path=current_url,
     )
 
     # adjust parent node
@@ -36,10 +41,9 @@ def create_current(apps, schema_editor):
     homepage.save()
 
 
-
 def delete_current(apps, schema_editor):
     Current = apps.get_model('current.Current')
-    Current.objects.get(title=currentTitle).delete()
+    Current.objects.get(title=current_title).delete()
 
 
 class Migration(migrations.Migration):
