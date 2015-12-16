@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "postdeploy": "python manage.py compress"
-  }
+  },
   "buildpacks": [
     {
       "url": "https://github.com/heroku/heroku-buildpack-nodejs"
