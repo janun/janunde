@@ -18,18 +18,8 @@ bower install
 
 
 ## Deployment
-Easy deployment to heroku is prepared.
-We are using a second nodejs buildpack in addition to the python buildpack
-for npm and bower dependencies.
-
-```bash
-heroku create
-heroku buildpacks:add --index 1 heroku/nodejs
-git push heroku master
-heroku config:set SECRET_KEY=blablabla
-heroku ps:scale web=1
-heroku open
-```
+If you want to test code changes, you can deploy on heroku with a click of a button:
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 
 ## Apps
