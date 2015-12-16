@@ -11,22 +11,23 @@ def create_homepage(apps, schema_editor):
     Site = apps.get_model('wagtailcore.Site')
     HomePage = apps.get_model('home.HomePage')
 
-    # Delete the default homepage
+    # Delete the default homepage and site root
     Page.objects.get(id=2).delete()
+    Page.objects.get(id=1).delete()
 
     # Create content type for homepage model
     homepage_content_type, created = ContentType.objects.get_or_create(
         model='homepage', app_label='home')
 
-    # Create a new homepage
+    # Create a new homepage as the site root
     homepage = HomePage.objects.create(
         title="Homepage",
         slug='home',
         content_type=homepage_content_type,
-        path='00010001',
-        depth=2,
+        path='0001',
+        depth=1,
         numchild=0,
-        url_path='/home/',
+        url_path='/',
     )
 
     # Create a site with the new homepage set as the root

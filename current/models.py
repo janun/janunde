@@ -8,8 +8,8 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
 class Current(Page):
-    """The Current page is intented to be 1x on a site
-    It lists all current articles
+    """lists all current articles
+    will be created automatically by migrations as child of homepage
     """
     class Meta:
         verbose_name = "Aktuelles"
