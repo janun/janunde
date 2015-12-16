@@ -22,6 +22,7 @@ def create_current(apps, schema_editor):
     current = Current.objects.create(
         title="Aktuelles",
         slug='aktuelles',
+        show_in_menus=True,
         content_type=current_content_type,
         depth=2,
         path='00010001',
