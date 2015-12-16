@@ -1,7 +1,7 @@
 from .base import *
 
-# Unset Debug
-DEBUG = False
+# Set Debug after environment variable
+DEBUG = os.environ.get('DJANGO_DEBUG', '').lower() in ('yes', 'true', '1')
 
 # Load special local settings if specified
 try:

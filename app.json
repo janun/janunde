@@ -11,6 +11,10 @@
     "DJANGO_SETTINGS_MODULE": {
       "description": "The settings to be used, i.e. development, production etc.",
       "value": "janunde.settings.production"
+    },
+    "DJANGO_DEBUG": {
+      "description": "turns on django debuggin mode if set to yes, true or 1",
+      "required": false
     }
   },
   "addons": [
