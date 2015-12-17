@@ -47,3 +47,6 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 # compress files via django-compress before starting app
 COMPRESS_OFFLINE = True
 COMPRESS_CSS_HASHING_METHOD = 'content'
+
+# minify
+HTML_MINIFY = True
