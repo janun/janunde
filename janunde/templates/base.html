@@ -9,7 +9,7 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        {% compress css %}
+        {% compress css inline %}
             <link rel="stylesheet" type="text/x-scss" href="{% static "janunde_styleguide/scss/all.scss" %}" />
             {% block css %}{% endblock %}
 	    {% endcompress %}
@@ -26,7 +26,7 @@
             {% block content %}{% endblock %}
         </div>
 
-        {% compress js %}
+        {% compress js inline %}
             {# use self hosted jquery because of privacy concerns for users #}
             <script type="text/javascript" src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
             <script type="text/javascript" src="{% static 'janunde_styleguide/js/collapse.js' %}"></script>
