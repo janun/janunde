@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
+from django.core.exceptions import ObjectDoesNotExist
 
 
 current_title = "Aktuelles"
@@ -29,8 +30,8 @@ def create_current(apps, schema_editor):
         slug=current_slug,
         show_in_menus=True,
         content_type=current_content_type,
-        depth=2,
-        path='00010001',
+        depth=3,
+        path='000100010001',
         numchild=0,
         url_path=current_url,
     )
@@ -43,14 +44,17 @@ def create_current(apps, schema_editor):
 
 def delete_current(apps, schema_editor):
     Current = apps.get_model('current.Current')
-    Current.objects.get(title=current_title).delete()
+    try:
+        Current.objects.get(title=current_title).delete()
+    except ObjectDoesNotExist:
+        pass
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('home', '0002_create_homepage'), # needs a created homepage
         ('current', '0001_initial'),
-        ('home', '0002_create_homepage') # needs a created homepage
     ]
 
     operations = [
