@@ -3,18 +3,19 @@
 <header class="header">
 
   <div id="header-video">
-
+    <video autoplay loop>
+      <source src="{% static 'janunde_styleguide/videos/header-video.mp4' %}" type="video/mp4" />
+      <source src="{% static 'janunde_styleguide/videos/header-video.webm' %}" type="video/webm" />
+    </video>
   </div>
 
   <div class="content">
-      <h1>Wir sind das<br>Jugendumweltnetzwerk Niedersachsen</h1>
-      <p>JANUN ist aktiv für ein gutes Leben in einer<br>ökologischen und sozial gerechten Welt.</p>
-      <div class="buttons">
-        <a href="#" class="button white">JANUN entdecken</a><br>
-        <a href="#" class="button white">Aktuelles</a>
-      </div>
-
+    <h1>Wir sind das<br>Jugendumweltnetzwerk Niedersachsen</h1>
+    <p>JANUN ist aktiv für ein gutes Leben in einer<br>ökologischen und sozial gerechten Welt.</p>
+    <div class="buttons">
+      <a href="#" class="button white">JANUN entdecken</a><br>
+      <a href="/aktuelles" class="button white">Aktuelles</a>
+    </div>
     <br><a data-slow-scroll class="scroll-down-button {{scroll_down_extra_class}}" href="#{{scroll_down_id}}"></a>
-
   </div>
 </header>
