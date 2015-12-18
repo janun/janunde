@@ -1,9 +1,35 @@
+$panel-margin: rem-calc(10);
+$panel-padding: rem-calc(20);
+
+// panel
+//
+// is a container for content, article etc.
 .panel {
+  display: block;
   background-color: $white;
   @include janun-box-shadow;
-  padding: rem-calc(20);
-  margin-bottom: rem-calc(20);
+  padding: $panel-padding;
+  margin: $panel-margin;
 }
+
+// panel container
+//
+// makes a row-based layout
+// on medium and big screens panels get 50% width each
+// on small screen they get 100% width each
+.panel-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .panel {
+    width: calc(50% - #{2*$panel-margin});
+    @include breakpoint($small-down) {
+      width: calc(100% - #{2*$panel-margin});
+    }
+  }
+}
+
 
 /* picture with overlay often in panel
  *

@@ -47,9 +47,9 @@ $navbar-color: $green;
   }
 }
 
-// if .mainContent comes after .navbar-container it needs to be moved down
+// if .content comes after .navbar-container it needs to be moved down
 // because .navbar-container is position: absolute
-.navbar-container + .mainContent {
+.navbar-container + .content {
   @include navbar-height('margin-top');
 }
 
@@ -98,8 +98,7 @@ $navbar-color: $green;
 // the actual navbar
 .navbar {
   position: relative;
-  // fit to the "grid" of $medium-breakpoint
-  @include container($medium-breakpoint);
+  @include container;
 
   a {
     color: $white;

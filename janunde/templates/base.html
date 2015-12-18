@@ -9,8 +9,8 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        {% compress css inline %}
-            <link rel="stylesheet" type="text/x-scss" href="{% static "janunde_styleguide/scss/all.scss" %}" />
+        {% compress css %}
+            <link rel="stylesheet" type="text/x-scss" href="{% static "janunde/scss/all.scss" %}" />
             {% block css %}{% endblock %}
 	    {% endcompress %}
     </head>
@@ -22,11 +22,11 @@
             {% navbar parent=site_root calling_page=self %}
         {% endblock %}
 
-        <div class="mainContent">
+        <div class="content">
             {% block content %}{% endblock %}
         </div>
 
-        {% compress js inline %}
+        {% compress js %}
             {# use self hosted jquery because of privacy concerns for users #}
             <script type="text/javascript" src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
             <script type="text/javascript" src="{% static 'janunde_styleguide/js/collapse.js' %}"></script>

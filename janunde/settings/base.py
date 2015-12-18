@@ -140,6 +140,7 @@ MEDIA_URL = '/media/'
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
+#COMPRESS_ENABLED=False 
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
     'django_compressor_autoprefixer.AutoprefixerFilter',
