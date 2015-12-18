@@ -39,6 +39,7 @@ body {
 @mixin header-commons {
   margin-top: 0.625rem;
   margin-bottom: 0.625rem;
+  font-weight: normal;
 }
 
 h4 {
@@ -96,6 +97,18 @@ a {
   &:active {
     color: $darkblue;
     text-decoration: underline;
+  }
+}
+
+// clickable headings
+h1 a, h2 a, h3 a, h4 a {
+  color: $brown;
+  &:hover {
+    color: $brown;
+    text-decoration: underline;
+  }
+  &:active {
+    color: $brown;
   }
 }
 
