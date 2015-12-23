@@ -1,33 +1,49 @@
 // Typography
 
-
+// font alternatives list
+//
 // use Cabin and Crimson Text as fonts
+// this also sets our alternatives in case the main font isnt available
 $font-family-sans-serif: "Cabin", Helvetica, Roboto, Arial, sans-serif;
 $font-family-serif: "Crimson Text", "Times New Roman", Times, serif;
 
-// use sans-serif text
-// this mixin is in case we need special settings per font
+// sans-serif text
 @mixin sans {
   font-family: $font-family-sans-serif;
 }
-// use serif text
-// this mixin is in case we need special settings per font
+
+// serif text
 @mixin serif {
   font-family: $font-family-serif;
 }
 
-
-$rem-base: 16px;
+// default font size
+//
+// is 100% meaning 16px in most browsers
+// setting this to 100% enables users to zoom the text
+// all other font sizes should be set in rem (using rem-calc)
 html {
     font-size: 100%;
 }
 
 @import 'bower_components/modular-scale/stylesheets/modular-scale';
-
+// modular scale settings
+//
+// this can set the font-size (and any ohter attribute) based on a scale
+// and this can be responsive, meaning font is smaller on smaller screens
+// using css calc.
+// More documentation: https://github.com/modularscale/modularscale-sass
+//
+// $ms-base:  base font size, i.e. ms-respond('attr', 1)
+// $ms-range: table of scales (1st col) and media breakpoints (2nd col)
+// $ms-fluid: wether $ms-range is interpreted as a list of steppoints (false)
+//            or font-sizes are fluid between them (true)
+//
 $ms-base: rem-calc(13px);
+$ms-fluid: true;
 $ms-range:
-  $minor-third        $small-breakpoint,
-  $augmented-fourth   $medium-breakpoint;
+  1.2     $small-breakpoint,
+  1.3333  $medium-breakpoint;
 
 
 body {
@@ -60,6 +76,7 @@ h2 {
 h1 {
   @include header-commons;
   @include ms-respond(font-size, 5);
+  font-weight: bold;
   line-height: 1.2;
 }
 

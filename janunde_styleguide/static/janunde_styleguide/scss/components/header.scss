@@ -40,11 +40,6 @@ header.header {
       font-family: $font-family-sans-serif;
     }
 
-    h1 {
-      font-weight: 700;
-      @include ms-respond(font-size, 4);
-    }
-
     .buttons {
       margin-top: rem-calc(26);
       @include breakpoint($medium-breakpoint) { margin-top: rem-calc(63); }
