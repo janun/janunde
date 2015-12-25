@@ -12,9 +12,9 @@ $large-range: $medium-breakpoint $large-breakpoint;
 $xlarge-range: $large-breakpoint $xlarge-breakpoint;
 
 $small-up: min-width 0;
-$medium-up: min-width $small-breakpoint;
-$large-up: min-width $medium-breakpoint;
-$xlarge-up: min-width $large-breakpoint;
+$medium-up: min-width $small-breakpoint + rem-calc(1);
+$large-up: min-width $medium-breakpoint + rem-calc(1);
+$xlarge-up: min-width $large-breakpoint + rem-calc(1);
 
 $small-down: max-width $small-breakpoint;
 $medium-down: max-width $medium-breakpoint;
