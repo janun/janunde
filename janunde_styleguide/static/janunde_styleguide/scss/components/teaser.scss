@@ -9,7 +9,7 @@
 //
 .teaser {
   color: $white;
-  @include ms-respond(font-size, 3);
+  @include ms-respond(font-size, 4);
   @include janun-text-shadow;
   text-align: center;
   padding: 2.125rem 1.75rem;

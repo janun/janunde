@@ -1,34 +1,19 @@
 $header-height-large: rem-calc(528);
 $header-height: rem-calc(480);
 
+@mixin header-height($attr: height) {
+  height: $header-height;
+  @include breakpoint($medium-breakpoint) {
+    height: $header-height-large;
+  }
+}
 
 header.header {
   position: relative;
   width: 100%;
-  height: $header-height;
   padding-top: rem-calc(82);
-  @include breakpoint($medium-breakpoint) {
-    height: $header-height-large;
-    padding-top: rem-calc(122);
-  }
-
+  @include header-height;
   background-color: $green-overlay;
-
-  &:after {
-    content: "";
-    display: block;
-    height: $header-height;
-    @include breakpoint($medium-breakpoint) {
-      height: $header-height-large;
-    }
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: -5;
-    background-color: $green;
-  }
-
 
   .content {
     @include janun-text-shadow;
@@ -41,16 +26,8 @@ header.header {
     }
 
     .buttons {
-      margin-top: rem-calc(26);
-      @include breakpoint($medium-breakpoint) { margin-top: rem-calc(63); }
-      .button {
-        box-shadow: rem-calc(0 1 2) rgba(0, 0, 0, 0.25), inset rem-calc(0 1 2) rgba(0, 0, 0, 0.25);
-        &:hover {
-          box-shadow: rem-calc(0 1 2) rgba(0, 0, 0, 0.25);
-        }
-      }
+      @include resp-medium-scale(margin-top, rem-calc(26), rem-calc(63));
     }
-
 
     // scroll down button, styled like an arrowhead
     .scroll-down-button:before {
@@ -60,12 +37,11 @@ header.header {
     }
   }
 
-
   #header-video {
     position: absolute;
     top: 0;
     left: 0;
-    min-width: 100%;
+    width: 100%;
     height: 100%;
     overflow: hidden;
     z-index: -1;
