@@ -45,6 +45,7 @@ DATABASES['default'] =  dj_database_url.config()
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # compress files via django-compress before starting app
+COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
 COMPRESS_CSS_HASHING_METHOD = 'content'
 
