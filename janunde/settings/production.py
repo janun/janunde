@@ -52,9 +52,8 @@ COMPRESS_CSS_HASHING_METHOD = 'content'
 # minify
 HTML_MINIFY = True
 
-
 # Use the cached template loader
-TEMPLATE_LOADERS = (
+TEMPLATES[0]['OPTIONS']['loaders'] = (
     ('django.template.loaders.cached.Loader', (
         'django.template.loaders.filesystem.Loader',
         'django.template.loaders.app_directories.Loader',
