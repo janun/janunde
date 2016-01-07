@@ -17,14 +17,20 @@
       {% image self.main_image fill-1400x1050-c75 jpg as image_bigger %}
 
       {# on medium screens we want only a spec height #}
-      {% image self.main_image fill-640x211-c75 jpg as medium_image %}
-      {% image self.main_image fill-1280x422-c75 jpg as medium_image_hd %}
-      {% image self.main_image fill-1004x331-c75 jpg as large_image %}
-      {% image self.main_image fill-2008x662-c75 jpg as large_image_hd %}
+      {% if self.dont_crop %}
+        {% image self.main_image width-640 jpg as medium_image %}
+        {% image self.main_image width-1280 jpg as medium_image_hd %}
+        {% image self.main_image width-1004 jpg as large_image %}
+        {% image self.main_image width-2008 jpg as large_image_hd %}
+      {% else %}
+        {% image self.main_image fill-640x320-c75 jpg as medium_image %}
+        {% image self.main_image fill-1280x640-c75 jpg as medium_image_hd %}
+        {% image self.main_image fill-1004x502-c75 jpg as large_image %}
+        {% image self.main_image fill-2008x1004-c75 jpg as large_image_hd %}
+      {% endif %}
 
       {% image self.main_image original jpg as original_image %}
 
-      <a title="Ganzes Bild sehen" href="{{original_image.url}}">
       <picture>
         <source media="(min-width: 40em)"
                 srcset="{{medium_image.url}} {{medium_image.width}}w,
@@ -39,23 +45,44 @@
                      {{image_bigger.url}} {{image_bigger.width}}w"
              sizes="99vw"
              itemProp="image" alt="{{small_image.alt}}">
+
+        <div class="overlay">
+          <h1 class="{% if self.hide_title %}hidden{% endif %}">{{self.title}}</h1>
+          <br>
+          <div>
+            <span>veröffentlicht:
+              <time itemprop="datePublished" datetime="{{ self.first_published_at|date:'Y-m-d H:i' }}">
+                {{ self.first_published_at|date }}
+              </time>
+            </span><br>
+            <span>
+              zuletzt geändert:
+              <time itemprop="dateModified" datetime="{{ self.latest_revision_created_at|date:'Y-m-d H:i' }}">
+                {{ self.latest_revision_created_at|date }}
+              </time>
+            </span>
+          </div>
+        </div>
+
       </picture>
-      </a>
+    {% else %}
+    <h1>{{self.title}}</h1>
+    <div>
+      <span>veröffentlicht:
+        <time itemprop="datePublished" datetime="{{ self.first_published_at|date:'Y-m-d H:i' }}">
+          {{ self.first_published_at|date }}
+        </time>
+      </span><br>
+      <span>
+        zuletzt geändert:
+        <time itemprop="dateModified" datetime="{{ self.latest_revision_created_at|date:'Y-m-d H:i' }}">
+          {{ self.latest_revision_created_at|date }}
+        </time>
+      </span>
+    </div>
     {% endif %}
 
-    <h1>{{self.title}}</h1>
 
-    <span>veröffentlicht:
-      <time itemprop="datePublished" datetime="{{ self.first_published_at|date:'Y-m-d H:i' }}">
-        {{ self.first_published_at|date }}
-      </time>
-    </span>
-    <span>
-      zuletzt geändert:
-      <time itemprop="dateModified" datetime="{{ self.latest_revision_created_at|date:'Y-m-d H:i' }}">
-        {{ self.latest_revision_created_at|date }}
-      </time>
-    </span>
 
     {{self.body}}
 

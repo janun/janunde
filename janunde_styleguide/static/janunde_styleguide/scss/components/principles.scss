@@ -1,8 +1,8 @@
 .principles {
   @include panel-container;
 
-  li {
-    @include panel-in-container;
+  &>* {
+    @include small-panel-in-container;
     list-style: none;
 
     span {

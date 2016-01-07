@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import BooleanField
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
@@ -39,9 +38,16 @@ class Article(Page):
         ('image', ImageChooserBlock()),
     ], blank=True, help_text = "Inhalt des Artikels")
 
-    highlight = BooleanField(
+    highlight = models.BooleanField(
         "Highlight",
-        help_text = "Falls ja, taucht es z.B. auf der Startseite auf."
+        help_text = "Ist dies ein ge-highlighteter Artikel? Falls ja, taucht es z.B. auf der Startseite auf.",
+        default=False
+    )
+
+    hide_title = models.BooleanField(
+        "Titel verstecken",
+        help_text = "Titel verstecken. Z.B. wenn der Text schon im Hauptbild enthalten ist.",
+        default=False
     )
 
     main_image = models.ForeignKey(
@@ -54,6 +60,12 @@ class Article(Page):
         help_text="Bild, das den Artikel repräsentiert. Wird in Übersichten verwendet."
     )
 
+    dont_crop = models.BooleanField(
+        "Hauptbild nicht abschneiden",
+        help_text = "Normalerweise wird das Hauptbild beschnitten, um besser auf die Seite zu passen. Falls ja, wird das Seitenverhältnis des Hauptbildes beibehalten.",
+        default=False
+    )
+
     search_fields = Page.search_fields + (
         index.SearchField('body'),
         index.SearchField('highlight'),
@@ -61,9 +73,18 @@ class Article(Page):
         index.FilterField('latest_revision_created_at'),
     )
 
-    content_panels = Page.content_panels + [
-        FieldPanel('highlight'),
-        ImageChooserPanel('main_image'),
+    content_panels = [
+        MultiFieldPanel([
+            FieldPanel('title'),
+            FieldPanel('hide_title'),
+            FieldPanel('highlight'),
+        ], heading="Titeleinstellungen"),
+
+        MultiFieldPanel([
+            ImageChooserPanel('main_image'),
+            FieldPanel('dont_crop'),
+        ], heading="Bildeinstellungen"),
+
         StreamFieldPanel('body'),
     ]
 

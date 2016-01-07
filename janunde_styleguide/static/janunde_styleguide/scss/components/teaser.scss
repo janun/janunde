@@ -8,11 +8,16 @@
 //      <div class="teaser">Dies ist der Teaser-Text</div>
 //
 .teaser {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
   color: $white;
   @include ms-respond(font-size, 4);
   @include janun-text-shadow;
   text-align: center;
-  padding: 2.125rem 1.75rem;
+  min-height: rem-calc(300);
+  padding: rem-calc(50 28);
 
   // this is a background image with (green) colored overlay
   background:

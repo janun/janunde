@@ -1,0 +1,47 @@
+{% load wagtailcore_tags %}
+
+<footer>
+
+  <div class="footer-social">
+    <div class=""><a href="http://twitter.com/janun">Twitter-Seite</a></div>
+    <div class=""><a href="https://www.facebook.com/jugendumweltnetzwerk">Facebook-Seite</a></div>
+  </div>
+
+
+  <div class="panel-container">
+
+    <div class="panel small no-bg">
+      <h4>Newsletter</h4>
+      <p>Du willst monatliche Infos per Mail?<br>Trage dich in unseren Newsletter ein:</p>
+      <form>
+        <input type="text" placeholder="E-Mail-Adresse">
+        <input class="" type="submit" value="Ich bin dabei!">
+      </form>
+    </div>
+
+    <div class="panel small no-bg">
+      <h4 class="fn">Büro Hannover</h4>
+      <span class="street-address">Goebenstraße 3a</span><br>
+      <span class="locality">30161 Hannover</span><br><br>
+      <span class="email"><a href="mailto:team@janun.de">team@janun.de</a></span><br>
+      <span class="tel">0511 123 456 78</span>
+    </div>
+
+    <div class="panel small no-bg">
+      <h4 class="fn">Büro Lüneburg  </h4>
+      <span class="street-address">Katzenstraße 3a</span><br>
+      <span class="locality">12345 Lüneburg</span><br><br>
+      <span class="email"><a href="mailto:team@janun.de">team@janun.de</a></span><br>
+      <span class="tel">0511 123 456 78</span>
+    </div>
+
+    <div class="panel small no-bg">
+      <h4>Kontakte zu Gruppen</h4>
+      <p>Kontaktmöglichkeiten zu allen Projektgruppen findest du auf der <a href="#">Gruppenseite</a></p>
+    </div>
+
+  </div>
+
+  <a href="{% slugurl 'impressum' %}">Impressum</a>
+  <div class="copyright">© {% now "Y" %} JANUN e.V. sowie den respektiven Aktiven und Gruppen.</div>
+</footer>

@@ -8,9 +8,16 @@ $header-height: rem-calc(480);
 header.header {
   position: relative;
   width: 100%;
-  padding-top: rem-calc(82);
+
   @include header-height;
   background-color: $green-overlay;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.no-flexbox {
+    padding-top: rem-calc(82);
+  }
 
   .content {
     @include janun-text-shadow;
@@ -47,7 +54,7 @@ header.header {
     background: url(static('janunde_styleguide/images/header-poster.jpg')) no-repeat center/cover;
 
     video {
-      height: 100%;
+      min-height: 100%;
       min-width: 100%;
     }
   }

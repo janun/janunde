@@ -6,18 +6,21 @@ $panel-padding: rem-calc(20);
 // is a container for content, article etc.
 @mixin panel {
   display: block;
+  overflow: hidden;
   background-color: $white;
   @include janun-box-shadow;
+
+  &.no-bg {
+    background-color: inherit;
+    box-shadow: inherit;
+  }
+
   padding: $panel-padding;
   margin: $panel-margin 0;
 
   @include breakpoint($medium-up) {
     margin-left: $panel-margin;
     margin-right: $panel-margin;
-  }
-
-  &.small {
-    height: rem-calc(300)
   }
 
   .main-image {
@@ -48,7 +51,16 @@ $panel-padding: rem-calc(20);
   @include panel;
   width: 100%;
   @include breakpoint($medium-up) {
-    width: rem-calc(341) - 2*$panel-margin;
+    // width: so that 3 panels fit
+    width: $medium-breakpoint/3 - 2*$panel-margin;
+  }
+}
+
+@mixin small-panel-in-container {
+  @include panel;
+  width: 100%;
+  @include breakpoint($medium-up) {
+    width: $medium-breakpoint/4 - 3*$panel-margin;
   }
 }
 
@@ -57,7 +69,27 @@ $panel-padding: rem-calc(20);
   @include panel-container;
 
   .panel {
-    @include panel-in-container
+    @include panel-in-container;
+  }
+  .panel.small {
+    @include small-panel-in-container;
+  }
+}
+
+
+picture {
+  position: relative;
+  .overlay {
+    position: absolute;
+    bottom: 0;
+    left: -$panel-padding;
+    margin-bottom: $panel-padding;
+
+    &>* {
+      display: inline-block;
+      background-color: white;
+      padding: rem-calc(3 20);
+    }
   }
 }
 

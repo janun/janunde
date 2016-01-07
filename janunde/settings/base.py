@@ -22,8 +22,11 @@ INSTALLED_APPS = [
     'current',
     'home',
     'search',
+    'core',
 
     'janunde_styleguide',
+
+    'wagtail.contrib.settings',
     'wagtail.contrib.wagtailsearchpromotions',
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
@@ -83,6 +86,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'wagtail.contrib.settings.context_processors.settings',
             ],
         },
     },
