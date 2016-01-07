@@ -14,7 +14,8 @@ $font-family-serif: "Crimson Text", "Times New Roman", Times, serif;
 
 // serif text
 @mixin serif {
-  font-family: $font-family-serif;
+  //font-family: $font-family-serif;
+  font-family: $font-family-sans-serif;
 }
 
 // default font size
@@ -65,7 +66,7 @@ h4 {
 }
 h3 {
   @include header-commons;
-  @include ms-respond(font-size, 3);
+  @include ms-respond(font-size, 2);
   line-height: 1.2;
 }
 h2 {
@@ -76,6 +77,9 @@ h2 {
 h1 {
   @include header-commons;
   @include ms-respond(font-size, 5);
+  @media (max-width: 40rem) {
+
+  }
   font-weight: bold;
   line-height: 1.2;
 }
@@ -134,9 +138,9 @@ ul li, ol li {
   @include ms-respond(font-size, 1);
 }
 
-// generic shadow to be used everywhere for text
+// generic shadow to be used for text at many places
 @mixin janun-text-shadow {
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  text-shadow: rem-calc(2) rem-calc(2) rem-calc(2) rgba(0, 0, 0, 0.25);
 }
 
 // headings for areas on pages

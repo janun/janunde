@@ -36,7 +36,11 @@ button {
   text-align: center;
   transition: background 0.1s ease-out 0s;
 
-  &:hover {
+  &:focus {
+    outline: 0;
+  }
+
+  &:hover, &:focus {
     color: $white !important;
     text-shadow: none;
     background-color: $green;
@@ -46,12 +50,31 @@ button {
     text-decoration: none;
   }
 
+
   &.white {
     border: solid rem-calc(2) $white;
     color: $white;
-    &:hover {
+
+    &:hover, &:focus {
         color: $lighterdark !important;
         background-color: $white;
     }
+  }
+
+  &.brown {
+    border: solid rem-calc(2) $brown;
+    color: $brown;
+
+    &:hover, &:focus {
+        color: $white !important;
+        background-color: $brown;
+    }
+  }
+
+  &.center {
+    display: block;
+    width: 2em;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

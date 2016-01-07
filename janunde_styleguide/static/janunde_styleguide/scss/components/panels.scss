@@ -9,7 +9,15 @@ $panel-padding: rem-calc(20);
   background-color: $white;
   @include janun-box-shadow;
   padding: $panel-padding;
-  margin: $panel-margin;
+  margin: $panel-margin 0;
+  @include breakpoint($medium-up) {
+    margin-left: $panel-margin;
+    margin-right: $panel-margin;
+  }
+
+  &.small {
+    height: rem-calc(300)
+  }
 }
 
 // panel container
@@ -20,15 +28,33 @@ $panel-padding: rem-calc(20);
 .panel-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
 
   .panel {
-    width: calc(50% - #{2*$panel-margin});
-    @include breakpoint($small-down) {
-      width: calc(100% - #{2*$panel-margin});
+    width: 100%;
+    @include breakpoint($medium-up) {
+      width: rem-calc(341) - 2*$panel-margin;
     }
   }
 }
+
+
+.panel {
+
+  .main-image {
+    width: calc(100% + #{2*$panel-padding});
+    margin: -$panel-padding;
+    margin-bottom: inherit;
+
+    transition: transform 0.1s linear;
+    &:hover {
+      overflow: hidden;
+
+      transform: scale(1.05);
+    }
+  }
+}
+
 
 
 /* picture with overlay often in panel

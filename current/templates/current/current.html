@@ -9,23 +9,11 @@
         <h2 class="area-title">Aktuelles zu JANUN und den Projektgruppen</h2>
         <div class="panel-container">
         {% for article in articles %}
-            <div class="panel article">
-                <h3><a href="{% pageurl article %}" title="{{article.title}}">{{article.title}}</a></h3>
-                {{article.body|richtext|truncatechars_html:200}}
-            </div>
+            {% include "current/_article.html" %}
         {% endfor %}
         </div>
     </div>
 
-    <div class="important">
-        <h2 class="area-title">Wichtiges</h2>
-        <div class="panel-container">
-            <div class="panel"><h3><a href="#">test panel</a></h3></div>
-            <div class="panel"><h3><a href="#">test panel</a></h3></div>
-            <div class="panel"><h3><a href="#">test panel</a></h3></div>
-            <div class="panel"><h3><a href="#">test panel</a></h3></div>
-        </div>
-    </div>
 
 
 {% endblock %}

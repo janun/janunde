@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load janun_tags %}
+{% load janun_tags wagtailcore_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
@@ -11,17 +11,28 @@
 {% endblock %}
 
 {% block content %}
-    <h2 class="area-title">Highlights und Interessantes</h2>
-    <div class="container">
-        <div class="panel resp-third">test1</div>
-        <div class="panel resp-third">test2</div>
-        <div class="panel resp-third">test3</div>
-    </div>
 
+    {# Highlights anzeigen #}
+    {% if highlights %}
+    <section>
+        <div class="container">
+            <h2 class="area-title"><a href="{% slugurl 'aktuelles' %}">Aktuelle Highlights</a></h2>
+            <div class="panel-container">
+                {% for article in highlights %}
+                    {% include "current/_article.html" with short=True %}
+                {% endfor %}
+            </div>
+            <a class="button brown center" href="{% slugurl 'aktuelles' %}">Mehr Aktuelles</a>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if highlights %}{# looks strange after the header if shown regardless #}
     <div class="teaser">
         JANUN ist aktiv für ein gutes Leben<br>in einer ökologischen und sozial gerechten Welt.
     </div>
-    <h2 class="area-title">Grunsätze unserer Arbeit</h2>
+    {% endif %}
+    <h2 class="area-title">Grundsätze unserer Arbeit</h2>
     <div class="container">
         <p>
             Wir sind ein Netzwerk mit vielen Engagierten und einer großen Bandbreite an Themen und Aktivitäten für Jugendliche bis 27 Jahre.

@@ -9,3 +9,7 @@
 .container {
   @include container;
 }
+
+.center {
+  align-self: center;
+}

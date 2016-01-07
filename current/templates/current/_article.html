@@ -1,0 +1,36 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<article class="panel" itemscope itemtype="http://schema.org/NewsArticle">
+
+  {% if article.main_image %}
+  <a href="{% pageurl article %}">
+    {% image article.main_image fill-320x240-c30 jpg as image_tiny %}
+    {% image article.main_image fill-400x300-c30 jpg as image_small %}
+    {% image article.main_image fill-1000x750-c30 jpg as image_big %}
+    {% image article.main_image fill-1400x1050-c30 jpg as image_bigger %}
+
+    <img src="{{ image_small.url }}" alt="{{ image_small.alt }}"
+         srcset="{{ image_tiny.url }} {{ image_tiny.width }}w,
+                 {{ image_small.url }} {{ image_small.width }}w,
+                 {{ image_big.url }} {{ image_big.width }}w,
+                 {{ image_bigger.url }} {{ image_bigger.width }}w"
+         sizes="(min-width: 64em) 20vw, (min-width: 40em) and (max-width: 64em) 50vw, 99vw"
+         class="main-image" itemProp="image">
+  </a>
+  {% endif %}
+
+  <h3 itemprop="name headline">
+    <a href="{% pageurl article %}" itemprop="url" title="{{article.title}}">{{ article.title }}</a>
+  </h3>
+
+  {% if not short or not article.main_image %}
+  <div itemprop="articleBody">
+    {{ article.body|truncatewords_html:20 }}
+  </div>
+  {% endif %}
+
+  <time itemprop="datePublished" datetime="{{ article.first_published_at|date:'Y-m-d H:i' }}">
+    {{ article.first_published_at|date }}
+  </time>
+  <meta itemprop="dateModified" content="{{ article.latest_revision_created_at|date:'Y-m-d H:i' }}"/>
+</article>

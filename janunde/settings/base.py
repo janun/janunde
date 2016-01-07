@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     'search',
 
     'janunde_styleguide',
-
+    'wagtail.contrib.wagtailsearchpromotions',
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
     'wagtail.wagtailembeds',
@@ -91,6 +91,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'janunde.wsgi.application'
 
 
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 10,
+        }
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
@@ -140,7 +159,7 @@ MEDIA_URL = '/media/'
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
-#COMPRESS_ENABLED=False 
+#COMPRESS_ENABLED=False
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
     'django_compressor_autoprefixer.AutoprefixerFilter',
@@ -154,3 +173,4 @@ COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 
 # Wagtail settings
 WAGTAIL_SITE_NAME = "janunde"
+WAGTAILIMAGES_JPEG_QUALITY = 70

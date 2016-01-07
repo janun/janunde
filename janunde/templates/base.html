@@ -1,4 +1,4 @@
-{% load static compress janun_tags %}
+{% load static compress janun_tags wagtailuserbar %}
 
 <!DOCTYPE html>
 <html>
@@ -23,6 +23,8 @@
         {% endblock %}
 
         <div class="content">
+            {% wagtailuserbar %}
+
             {% block content %}{% endblock %}
         </div>
 

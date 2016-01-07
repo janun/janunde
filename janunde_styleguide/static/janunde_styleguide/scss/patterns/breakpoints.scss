@@ -6,10 +6,17 @@ $medium-breakpoint:    rem-calc(1024);
 $large-breakpoint:     rem-calc(1440);
 $xlarge-breakpoint:    rem-calc(1920);
 
-$small-range: 0 $small-breakpoint;
-$medium-range: $small-breakpoint $medium-breakpoint;
-$large-range: $medium-breakpoint $large-breakpoint;
-$xlarge-range: $large-breakpoint $xlarge-breakpoint;
+$zero-to-small: 0 $small-breakpoint;
+$zero-to-medium: 0 $medium-breakpoint;
+$zero-to-large: 0 $large-breakpoint;
+$zero-to-xlarge: 0 $xlarge-breakpoint;
+$small-to-medium: $small-breakpoint $medium-breakpoint;
+$small-to-large: $small-breakpoint $large-breakpoint;
+$small-to-xlarge: $small-breakpoint $xlarge-breakpoint;
+$medium-to-large: $medium-breakpoint $large-breakpoint;
+$medium-to-xlarge: $medium-breakpoint $xlarge-breakpoint;
+$large-to-xlarge: $large-breakpoint $xlarge-breakpoint;
+
 
 $small-up: min-width 0;
 $medium-up: min-width $small-breakpoint + rem-calc(1);

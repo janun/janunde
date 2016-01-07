@@ -1,0 +1,11 @@
+.template-article {
+    .content {
+        margin-top: rem-calc(70);
+        @include breakpoint($medium-to-large) {
+            margin-top: rem-calc(100);
+        }
+        @include breakpoint($large-up) {
+            margin-top: rem-calc(130);
+        }
+    }
+}

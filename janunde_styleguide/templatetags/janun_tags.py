@@ -11,19 +11,21 @@ def has_menu_children(page):
     return page.get_children().live().in_menu().exists()
 
 @register.inclusion_tag('janunde_styleguide/components/navbar/navbar.html', takes_context=True)
-def navbar(context, parent, calling_page=None, transparent=False, fixed=True):
+def navbar(context, parent, calling_page=None, transparent=False, fixed=True, transparent_at=None):
     """renders the navbar"""
     menuitems = parent.get_children().live().in_menu()
-    print(parent)
     for menuitem in menuitems:
         menuitem.show_dropdown = has_menu_children(menuitem)
         menuitem.active = (calling_page.url.startswith(menuitem.url)
                            if calling_page else False)
+    if not transparent_at and transparent:
+        transparent_at = 100
     return {
         'calling_page': calling_page,
         'menuitems': menuitems,
         'request': context['request'], # needed by pageurl
         'transparent': 'transparent' if transparent  else '',
+        'transparent_at': transparent_at,
         'fixed': 'fixed' if fixed else '',
     }
 

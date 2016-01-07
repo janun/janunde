@@ -2,10 +2,7 @@ $header-height-large: rem-calc(528);
 $header-height: rem-calc(480);
 
 @mixin header-height($attr: height) {
-  height: $header-height;
-  @include breakpoint($medium-breakpoint) {
-    height: $header-height-large;
-  }
+  @include resp-medium-scale(height, rem-calc(480), rem-calc(650));
 }
 
 header.header {
@@ -19,23 +16,25 @@ header.header {
     @include janun-text-shadow;
     text-align: center;
     z-index: 5;
+    max-width: rem-calc(800);
+    margin: 0 auto;
 
     * {
       color: $white;
       font-family: $font-family-sans-serif;
     }
 
+    p {
+      padding: rem-calc(20);
+      margin: 0 auto;
+      max-width: rem-calc(450);
+    }
+
     .buttons {
       @include resp-medium-scale(margin-top, rem-calc(26), rem-calc(63));
     }
-
-    // scroll down button, styled like an arrowhead
-    .scroll-down-button:before {
-      font-size: 3rem;
-      content: "⌄"; // "down arrowhead"
-      @include show-for-small-down;
-    }
   }
+
 
   #header-video {
     position: absolute;
@@ -48,7 +47,7 @@ header.header {
     background: url(static('janunde_styleguide/images/header-poster.jpg')) no-repeat center/cover;
 
     video {
-      min-height: 100%;
+      height: 100%;
       min-width: 100%;
     }
   }

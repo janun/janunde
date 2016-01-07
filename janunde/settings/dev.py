@@ -18,3 +18,7 @@ try:
     from .local import *
 except ImportError:
     pass
+
+INSTALLED_APPS += [
+    'wagtail.contrib.wagtailstyleguide',
+]
