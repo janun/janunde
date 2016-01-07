@@ -59,3 +59,4 @@ TEMPLATES[0]['OPTIONS']['loaders'] = (
         'django.template.loaders.app_directories.Loader',
     )),
 )
+TEMPLATES[0]['APP_DIRS'] = False
