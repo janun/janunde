@@ -46,22 +46,29 @@
         </ul>
     </div>
 
+    {% if gruppen %}
     <div class="teaser">
         JANUN ist in verschiedenen<br>Gruppen und Projekten organisiert.
     </div>
     <h2 class="area-title">Projektgruppen</h2>
 
+    {% endif %}
+
+    {% comment %}
     <div class="teaser">
         Du willst kritisch die Welt verändern?<br>
         JANUN bietet Dir dazu viele Möglichkeiten!
     </div>
     <h2 class="area-title">Aktiv werden</h2>
+    {% endcomment %}
 
+    {% comment %}
     <div class="teaser">
         Hast Du Interesse an unserer Arbeit?<br>
         Nimm Kontakt zu uns auf.<br>
         Wir freuen uns von dir zu hören!
     </div>
     <h2 class="area-title">Kontakt</h2>
+    {% endcomment %}
 
 {% endblock %}
