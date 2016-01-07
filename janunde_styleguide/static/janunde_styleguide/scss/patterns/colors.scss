@@ -14,7 +14,7 @@ $aluminum: rgb(153, 153, 153);
 $steel: rgb(103, 103, 103);
 $black: rgb(0, 0, 0);
 
-$green-overlay: rgba($green, 0.65);
+$green-overlay: rgba(darken($green, 2.5%), 0.75);
 
 
 // setting the background-color
