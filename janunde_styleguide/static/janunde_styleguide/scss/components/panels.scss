@@ -4,12 +4,13 @@ $panel-padding: rem-calc(20);
 // panel
 //
 // is a container for content, article etc.
-.panel {
+@mixin panel {
   display: block;
   background-color: $white;
   @include janun-box-shadow;
   padding: $panel-padding;
   margin: $panel-margin 0;
+
   @include breakpoint($medium-up) {
     margin-left: $panel-margin;
     margin-right: $panel-margin;
@@ -18,40 +19,45 @@ $panel-padding: rem-calc(20);
   &.small {
     height: rem-calc(300)
   }
+
+  .main-image {
+    width: calc(100% + #{2*$panel-padding});
+    margin: -$panel-padding;
+    margin-bottom: inherit;
+  }
 }
+
+.panel {
+  @include panel;
+}
+
 
 // panel container
 //
 // makes a row-based layout
 // on medium and big screens panels get 50% width each
 // on small screen they get 100% width each
-.panel-container {
+@mixin panel-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
 
-  .panel {
-    width: 100%;
-    @include breakpoint($medium-up) {
-      width: rem-calc(341) - 2*$panel-margin;
-    }
+
+@mixin panel-in-container {
+  @include panel;
+  width: 100%;
+  @include breakpoint($medium-up) {
+    width: rem-calc(341) - 2*$panel-margin;
   }
 }
 
 
-.panel {
+.panel-container {
+  @include panel-container;
 
-  .main-image {
-    width: calc(100% + #{2*$panel-padding});
-    margin: -$panel-padding;
-    margin-bottom: inherit;
-
-    transition: transform 0.1s linear;
-    &:hover {
-      overflow: hidden;
-
-      transform: scale(1.05);
-    }
+  .panel {
+    @include panel-in-container
   }
 }
 

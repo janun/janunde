@@ -94,6 +94,7 @@ h1 {
 //
 p {
   line-height: 1.3;
+  color: $middledark;
   @include serif;
   @include ms-respond(font-size, 1);
   margin-top: 0;
@@ -146,7 +147,7 @@ ul li, ol li {
 // headings for areas on pages
 .area-title {
   text-align: center;
-  color: $lighterdark;
+  color: $brown;
   @include sans;
   @include ms-respond(font-size, 0);
   font-weight: normal;

@@ -62,12 +62,12 @@ button {
   }
 
   &.brown {
-    border: solid rem-calc(2) $brown;
-    color: $brown;
+    border: solid rem-calc(2) $lighterdark;
+    color: $lighterdark;
 
     &:hover, &:focus {
         color: $white !important;
-        background-color: $brown;
+        background-color: $lighterdark;
     }
   }
 
