@@ -25,7 +25,9 @@
             {% block content %}{% endblock %}
         </div>
 
-        {% include "core/footer.html" %}
+        {% block footer %}
+            {% include "core/footer.html" %}
+        {% endblock %}
 
         {% compress js %}
             {# use self hosted jquery because of privacy concerns for users #}

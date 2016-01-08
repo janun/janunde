@@ -1,17 +1,41 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Internal server error</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </head>
-    <body>
-        <h1>Internal server error</h1>
+{% load static compress janun_tags %}
 
-        <h2>Sorry, there seems to be an error. Please try again soon.</h2>
-    </body>
+
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>500. Ein Fehler ist aufgetreten. - JANUN</title>
+    {% compress css %}
+      <link rel="stylesheet" type="text/x-scss" href="{% static "janunde/scss/all.scss" %}" />
+      {% block css %}{% endblock %}
+    {% endcompress %}
+  </head>
+<body>
+
+  <div class="navbar-container transparent">
+    <nav class="navbar" role="navigation">
+      <a class="logo" href="/"><img width="37" height="36" alt="JANUN Logo" src="{% static 'janunde_styleguide/images/components/navbar/janun_logo.svg' %}"></a>
+      <a class="title" href="/">JANUN</a>
+    </nav>
+  </div>
+
+    <header class="header">
+      <div id="header-video">
+        <video autoplay loop poster="{% static 'janunde_styleguide/images/header-poster.jpg' %}">
+          <source src="{% static 'janunde_styleguide/videos/header-video.mp4' %}" type="video/mp4" />
+          <source src="{% static 'janunde_styleguide/videos/header-video.webm' %}" type="video/webm" />
+        </video>
+      </div>
+      <div class="content">
+        <h1>500. Ein Fehler ist aufgetreten.</h1>
+        <p>
+          Es tut uns leid:
+          Ein Fehler ist auf der Website aufgetreten.
+          Versuche es später nochmal.
+        </p>
+      </div>
+    </header>
+
+</body>
 </html>

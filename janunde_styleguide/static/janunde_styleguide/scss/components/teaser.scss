@@ -11,7 +11,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
+  margin-top: rem-calc(50);
+  margin-bottom: rem-calc(50);
+
   color: $white;
   @include ms-respond(font-size, 4);
   @include janun-text-shadow;

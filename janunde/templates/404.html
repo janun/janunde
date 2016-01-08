@@ -1,9 +1,35 @@
 {% extends "base.html" %}
+{% load staticfiles janun_tags wagtailcore_tags %}
+
+
 
 {% block body_class %}template-404{% endblock %}
+{% block title %}404. Seite nicht gefunden.{% endblock %}
 
-{% block content %}
-    <h1>Page not found</h1>
+{# overwrite the default navbar with a transparent navbar and header #}
+{% block top %}
+    {% get_site_root as site_root %}
+    {% navbar parent=site_root calling_page=self transparent=True %}
 
-    <h2>Sorry, this page could not be found.</h2>
+<header class="header radial-bg">
+  <div id="header-video">
+    <video autoplay loop poster="{% static 'janunde_styleguide/images/header-poster.jpg' %}">
+      <source src="{% static 'janunde_styleguide/videos/header-video.mp4' %}" type="video/mp4" />
+      <source src="{% static 'janunde_styleguide/videos/header-video.webm' %}" type="video/webm" />
+    </video>
+  </div>
+  <div class="content">
+    <h1>404. Seite nicht gefunden.</h1>
+    <p>Die Seite, die Du aufrufen wolltest, gibt es nicht.</p>
+    <p>Vielleicht findest Du sie mit der Suche:</p>
+    <form action="/search/" method="get">
+        <input type="text" name="query" placeholder="Suche">
+        <input type="submit" value="Suche">
+    </form>
+  </div>
+</header>
+{% endblock %}
+
+{# dont show footer #}
+{% block footer %}
 {% endblock %}
