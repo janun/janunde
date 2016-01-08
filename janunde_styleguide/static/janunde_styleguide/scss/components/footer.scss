@@ -1,4 +1,11 @@
 footer {
-    //background-color: $green;
-    text-align: center;
+  text-align: center;
+  color: $lighterdark;
+  @include ms-respond(font-size, 0);
+  p {
+    @include ms-respond(font-size, 0);
+  }
+  h4 {
+    @include ms-respond(font-size, 1);
+  }
 }

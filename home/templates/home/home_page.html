@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load janun_tags wagtailcore_tags %}
+{% load janun_tags wagtailcore_tags staticfiles %}
 
 {% block body_class %}template-homepage{% endblock %}
 
@@ -38,11 +38,23 @@
             Wir sind ein Netzwerk mit vielen Engagierten und einer großen Bandbreite an Themen und Aktivitäten für Jugendliche bis 27 Jahre.
             JANUN sensibilisiert Jugendliche für ökologische und soziale Themen und zeigt Handlungsmöglichkeiten auf politischer wie individueller Ebene auf. Gleichzeitig schafft JANUN Angebote und bietet Strukturen, die Jugendliche vernetzen, qualifizieren sowie in ihrem Engagement stärken und unterstützen.
         </p>
-        <div class="principles">
-            <div><span class="diverse">vielfältig</span></div>
-            <div><span class="democratic">basisdemokratisch</span></div>
-            <div><span class="political">politisch <small>(nicht parteigebunden)</small></span></div>
-            <div><span class="attractive">attraktiv</span></div>
+        <div class="panel-container">
+            <div class="small-panel centered-content" style="color: green">
+                <img alt="Gesichter" src="{% static 'janunde_styleguide/images/components/principles/diverse.png' %}">
+                vielfältig
+            </div>
+            <div class="small-panel centered-content" style="color: blue">
+                <img alt="Sprechblase" src="{% static 'janunde_styleguide/images/components/principles/democratic.png' %}">
+                basisdemokratisch
+            </div>
+            <div class="small-panel centered-content" style="color: orange">
+                <img alt="Megaphon" src="{% static 'janunde_styleguide/images/components/principles/political.png' %}">
+                politisch <small>(nicht parteigebunden)</small>
+            </div>
+            <div class="small-panel centered-content" style="color: red">
+                <img alt="Herz" src="{% static 'janunde_styleguide/images/components/principles/attractive.png' %}">
+                attraktiv
+            </div>
         </div>
     </div>
 
@@ -68,6 +80,6 @@
         Nimm Kontakt zu uns auf.<br>
         Wir freuen uns von dir zu hören!
     </div>
-    
+
 
 {% endblock %}

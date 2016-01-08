@@ -15,6 +15,13 @@ $panel-padding: rem-calc(20);
     box-shadow: inherit;
   }
 
+  &.centered-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
   padding: $panel-padding;
   margin: $panel-margin 0;
 
@@ -71,7 +78,7 @@ $panel-padding: rem-calc(20);
   .panel {
     @include panel-in-container;
   }
-  .panel.small {
+  .small-panel {
     @include small-panel-in-container;
   }
 }
