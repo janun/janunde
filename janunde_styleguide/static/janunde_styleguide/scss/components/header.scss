@@ -11,7 +11,6 @@ header.header {
 
   @include header-height;
   background: $green-overlay;
-  background: linear-gradient($green-overlay, darken($green-overlay, 17%));
   display: flex;
   align-items: center;
   justify-content: center;
