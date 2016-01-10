@@ -50,7 +50,7 @@ COMPRESS_OFFLINE = True
 COMPRESS_CSS_HASHING_METHOD = 'content'
 
 # minify
-HTML_MINIFY = True
+#HTML_MINIFY = True
 
 # Use the cached template loader
 TEMPLATES[0]['OPTIONS']['loaders'] = (
