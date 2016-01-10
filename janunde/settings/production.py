@@ -60,3 +60,11 @@ TEMPLATES[0]['OPTIONS']['loaders'] = (
     )),
 )
 TEMPLATES[0]['APP_DIRS'] = False
+
+# CACHE
+MIDDLEWARE_CLASSES = ('django.middleware.cache.UpdateCacheMiddleware',) + MIDDLEWARE_CLASSES
+MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + ('django.middleware.cache.FetchFromCacheMiddleware',)
+
+#CACHE_MIDDLEWARE_ALIAS
+#CACHE_MIDDLEWARE_SECONDS
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
