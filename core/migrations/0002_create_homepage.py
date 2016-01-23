@@ -10,13 +10,12 @@ homepage_url = '/'
 
 
 def create_homepage(apps, schema_editor):
-    """Creates a new HomePage titled homepage_title
-    being the site root, also deletes default site root and default homepage"""
+    """Creates a new HomePage titled homepage_title""" 
     # Get models
     ContentType = apps.get_model('contenttypes.ContentType')
     Page = apps.get_model('wagtailcore.Page')
     Site = apps.get_model('wagtailcore.Site')
-    HomePage = apps.get_model('home.HomePage')
+    HomePage = apps.get_model('core.HomePage')
 
     # Delete the default homepage if it exists
     try:
@@ -26,7 +25,7 @@ def create_homepage(apps, schema_editor):
 
     # Create content type for homepage model
     homepage_content_type, created = ContentType.objects.get_or_create(
-        model='homepage', app_label='home')
+        model='homepage', app_label='core')
 
     # Create a new homepage
     homepage = HomePage.objects.create(
@@ -48,7 +47,7 @@ def create_homepage(apps, schema_editor):
 
 
 def delete_homepage(apps, schema_editor):
-    HomePage = apps.get_model('home.HomePage')
+    HomePage = apps.get_model('core.HomePage')
     # Delete the homepage if it exists
     try:
         HomePage.objects.get(title=homepage_title).delete()
@@ -60,7 +59,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('wagtailcore', '0002_initial_data'),
-        ('home', '0001_initial'),
+        ('core', '0001_initial'),
     ]
 
     operations = [

@@ -19,7 +19,7 @@
             <h2 class="area-title"><a href="{% slugurl 'aktuelles' %}">Aktuelle Highlights</a></h2>
             <div class="panel-container">
                 {% for article in highlights %}
-                    {% include "current/_article.html" with short=True %}
+                    {% include "core/_article.html" with short=True %}
                 {% endfor %}
             </div>
             <a class="button brown center" href="{% slugurl 'aktuelles' %}">Mehr Aktuelles</a>

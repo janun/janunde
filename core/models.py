@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.db import models
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 MultiFieldPanel,
@@ -10,21 +12,37 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
 
+class HomePage(Page):
+    """
+    The HomePage or startpage
+    (gets created by a migration)
+    """
+    is_creatable = False
+
+    class Meta:
+        verbose_name = "Startseite"
+
+    def get_context(self, request):
+        context = super(HomePage, self).get_context(request)
+        # get all highlighted articles
+        context['highlights'] = Article.objects.filter(highlight=True).live().order_by('-first_published_at')
+        return context
+
+
 class ImageBlock(ImageChooserBlock):
     class Meta:
         template = 'blocks/image.html'
 
 
-
 class Current(Page):
-    """lists all current articles
-    will be created automatically by migrations as child of homepage
     """
+    lists all current articles
+    """
+    subpage_types = ['Article']
+    parent_page_types = ['HomePage']
+
     class Meta:
         verbose_name = "Aktuelles"
-
-    subpage_types = ['current.Article']
-    is_creatable = False
 
     def get_context(self, request):
         context = super(Current, self).get_context(request)
@@ -34,11 +52,11 @@ class Current(Page):
 
 
 class Article(Page):
-    """An Article
     """
-    class Meta:
-        verbose_name = "Artikel"
-        verbose_name_plural = "Artikel"
+    An Article
+    """
+    subpage_types = []
+    parent_page_types = ['Current']
 
     subheading = models.CharField("optionale Unterüberschrift", max_length=255, blank=True, null=True)
 
@@ -92,5 +110,6 @@ class Article(Page):
         StreamFieldPanel('body'),
     ]
 
-    parent_page_types = ['current.Current']
-    subpage_types = []
+    class Meta:
+        verbose_name = "Artikel"
+        verbose_name_plural = "Artikel"
