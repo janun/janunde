@@ -60,6 +60,11 @@ header.header {
     background: url(static('janunde_styleguide/images/header-poster.jpg')) no-repeat center/cover;
 
     video {
+      // TODO: prevent video from loading on mobile somehow!
+      display: none;
+      @include breakpoint($large-up) {
+        display: inherit;
+      }
       min-height: 100%;
       min-width: 100%;
     }
