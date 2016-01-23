@@ -1,0 +1,13 @@
+{% load janun_tags wagtailimages_tags %}
+
+{% image value original as original_image %}
+
+
+<a class="zoom-in" href="{{ original_image.url }}">
+
+     <img src="{{ original_image.url }}"
+     srcset="{{ value|srcset:'width-320|jpg width-640|jpg width-1280|jpg width-896|jpg width-1792|jpg' }}"
+     sizes="(min-width: 40em) 56em, 100vw"
+     alt="{{ original_image.alt }}">
+
+</a>

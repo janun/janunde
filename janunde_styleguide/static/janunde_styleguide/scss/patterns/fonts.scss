@@ -1,5 +1,7 @@
 // fonts
-// use self hosted fonts because of privacy concerns for users
+//
+// Why no Googlefonts? A: more privacy for users
+// Why no ttf? A: woff/2 is widely enough supported and this is simpler
 
 // Cabin
 @font-face {
@@ -7,12 +9,15 @@
   font-style: normal;
   font-weight: 400;
   src: local('Cabin Regular'), local('Cabin-Regular');
-  src: url(static('janunde_styleguide/fonts/Cabin-Regular.eot'));
-  src:
-    url("#{static('janunde_styleguide/fonts/Cabin-Regular.eot')}?#iefix") format('embedded-opentype'),
-    url(static('janunde_styleguide/fonts/Cabin-Regular.woff')) format('woff'),
-    url(static('janunde_styleguide/fonts/Cabin-Regular.ttf')) format('truetype'),
-    url("#{static('janunde_styleguide/fonts/Cabin-Regular.svg')}#Cabin-Regular") format('svg');
+  src: url(static('janunde_styleguide/fonts/Cabin-Regular.woff')) format('woff');
+}
+
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Cabin Bold'), local('Cabin-Bold');
+  src: url(static('janunde_styleguide/fonts/Cabin-Bold.woff')) format('woff');
 }
 
 // Crimson
@@ -21,12 +26,7 @@
   font-style: normal;
   font-weight: 400;
   src: local('Crimson Text'), local('CrimsonText-Roman');
-  src: url(static('janunde_styleguide/fonts/CrimsonText-Roman.eot'));
-  src:
-    url("#{static('janunde_styleguide/fonts/CrimsonText-Roman.eot')}?#iefix") format('embedded-opentype'),
-    url(static('janunde_styleguide/fonts/CrimsonText-Roman.woff')) format('woff'),
-    url(static('janunde_styleguide/fonts/CrimsonText-Roman.ttf')) format('truetype'),
-    url("#{static('janunde_styleguide/fonts/CrimsonText-Roman.svg')}#CrimsonText-Roman") format('svg');
+  src: url(static('janunde_styleguide/fonts/CrimsonText-Roman.woff')) format('woff');
 }
 
 @font-face {
@@ -34,12 +34,7 @@
   font-style: normal;
   font-weight: 700;
   src: local('Crimson Text Bold'), local('CrimsonText-Bold');
-  src: url(static('janunde_styleguide/fonts/CrimsonText-Bold.eot'));
-  src:
-    url("#{static('janunde_styleguide/fonts/CrimsonText-Bold.eot')}?#iefix") format('embedded-opentype'),
-    url(static('janunde_styleguide/fonts/CrimsonText-Bold.woff')) format('woff'),
-    url(static('janunde_styleguide/fonts/CrimsonText-Bold.ttf')) format('truetype'),
-    url("#{static('janunde_styleguide/fonts/CrimsonText-Bold.svg')}#CrimsonText-Bold") format('svg');
+  src: url(static('janunde_styleguide/fonts/CrimsonText-Bold.woff')) format('woff');
 }
 
 @font-face {
@@ -47,10 +42,5 @@
   font-style: italic;
   font-weight: 400;
   src: local('Crimson Text Italic'), local('CrimsonText-Italic');
-  src: url(static('janunde_styleguide/fonts/CrimsonText-Italic.eot'));
-  src:
-    url("#{static('janunde_styleguide/fonts/CrimsonText-Italic.eot')}?#iefix") format('embedded-opentype'),
-    url(static('janunde_styleguide/fonts/CrimsonText-Italic.woff')) format('woff'),
-    url(static('janunde_styleguide/fonts/CrimsonText-Italic.ttf')) format('truetype'),
-    url("#{static('janunde_styleguide/fonts/CrimsonText-Italic.svg')}#CrimsonText-Italic") format('svg');
+  src: url(static('janunde_styleguide/fonts/CrimsonText-Italic.woff')) format('woff');
 }

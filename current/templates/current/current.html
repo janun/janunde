@@ -7,11 +7,15 @@
 
     <div class="current">
         <h2 class="area-title">Aktuelles zu JANUN und den Projektgruppen</h2>
+        {% if articles %}
         <div class="panel-container">
         {% for article in articles %}
             {% include "current/_article.html" %}
         {% endfor %}
         </div>
+        {% else %}
+        Keine Einträge vorhanden.
+        {% endif %}
     </div>
 
 

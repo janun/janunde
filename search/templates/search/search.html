@@ -1,43 +1,33 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailsearchpromotions_tags %}
+{% load static janun_tags wagtailcore_tags %}
 
 {% block body_class %}template-searchresults{% endblock %}
 
 {% block title %}Search{% endblock %}
 
-{% block content %}
-    <h1>Search</h1>
+{% block top %}
+  {% get_site_root as site_root %}
+  {% navbar parent=site_root calling_page=self transparent=True fixed=False %}
 
-    <form action="{% url 'search' %}" method="get">
-        <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-        <input type="submit" value="Search">
-    </form>
-
-    {% get_search_promotions search_query as search_promotions %}
-    {% if search_promotions %}
-    <ul>
-        {% for search_promotion in search_promotions %}
-            <li>
-                <a href="{% pageurl search_promotion.page %}">
-                    <h3>{{ search_promotion.page.title }}</h3>
-                    <p>{{ search_promotion.description }}</p>
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+  <div style="padding: 64px 0; background: green; margin-bottom: 40px; color: white">
+    <div class="container">
+    <h1>Suchergebnisse</h1>
+    {% if search_query %}
+      Sie haben gesucht nach: "{{search_query}}"<br>
     {% endif %}
+  </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
 
     {% if search_results %}
-        <ul>
-            {% for result in search_results %}
-                <li>
-                    <h3><a href="{% pageurl result %}">{{ result }}</a></h3>
-                    {% if result.search_description %}
-                        {{ result.search_description|safe }}
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+      <div class="panel-container">
+        {% for result in search_results %}
+          {% include "current/_article.html" with short=True article=result %}
+        {% endfor %}
+      </div>
 
         {% if search_results.has_previous %}
             <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
@@ -47,6 +37,8 @@
             <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
         {% endif %}
     {% elif search_query %}
-        No results found
+      Leider nichts gefunden.
     {% endif %}
+
+  </div>
 {% endblock %}

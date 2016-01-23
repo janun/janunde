@@ -1,12 +1,19 @@
 from django.db import models
-
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsearch import index
-from wagtail.wagtailcore.fields import RichTextField, StreamField
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
+                                                MultiFieldPanel,
+                                                StreamFieldPanel)
 from wagtail.wagtailcore import blocks
+from wagtail.wagtailcore.fields import RichTextField, StreamField
+from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, StreamFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsearch import index
+
+
+class ImageBlock(ImageChooserBlock):
+    class Meta:
+        template = 'blocks/image.html'
+
 
 
 class Current(Page):
@@ -22,7 +29,7 @@ class Current(Page):
     def get_context(self, request):
         context = super(Current, self).get_context(request)
         # get all non-highlighted articles
-        context['articles'] = Article.objects.child_of(self).live()
+        context['articles'] = Article.objects.child_of(self).live().order_by('-first_published_at')
         return context
 
 
@@ -33,20 +40,16 @@ class Article(Page):
         verbose_name = "Artikel"
         verbose_name_plural = "Artikel"
 
+    subheading = models.CharField("optionale Unterüberschrift", max_length=255, blank=True, null=True)
+
     body = StreamField([
         ('paragraph', blocks.RichTextBlock()),
-        ('image', ImageChooserBlock()),
+        ('image', ImageBlock()),
     ], blank=True, help_text = "Inhalt des Artikels")
 
     highlight = models.BooleanField(
         "Highlight",
         help_text = "Ist dies ein ge-highlighteter Artikel? Falls ja, taucht es z.B. auf der Startseite auf.",
-        default=False
-    )
-
-    hide_title = models.BooleanField(
-        "Titel verstecken",
-        help_text = "Titel verstecken. Z.B. wenn der Text schon im Hauptbild enthalten ist.",
         default=False
     )
 
@@ -67,6 +70,7 @@ class Article(Page):
     )
 
     search_fields = Page.search_fields + (
+        index.SearchField('subheading'),
         index.SearchField('body'),
         index.SearchField('highlight'),
         index.FilterField('first_published_at'),
@@ -76,7 +80,7 @@ class Article(Page):
     content_panels = [
         MultiFieldPanel([
             FieldPanel('title'),
-            FieldPanel('hide_title'),
+            FieldPanel('subheading'),
             FieldPanel('highlight'),
         ], heading="Titeleinstellungen"),
 

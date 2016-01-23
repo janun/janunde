@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'compressor',
     'taggit',
 
+    'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -114,15 +115,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'janunde_db',
-    }
-}
+# Parse database configuration from env var DATABASE_URL
+import dj_database_url
+DATABASES = { 'default': dj_database_url.config(
+    default="postgres://janunde:janunde@localhost/janunde_db"
+)}
 
 
 # Internationalization

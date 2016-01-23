@@ -1,0 +1,18 @@
+.search {
+  padding: 0;
+  @include breakpoint($small-down) {
+    margin: rem-calc(12 0);
+  }
+
+  input {
+    margin-right: rem-calc(17);
+    height: rem-calc(35);
+    color: $white;
+    border: 1px $white solid;
+    background: inherit;
+
+    &:placeholder-shown, &::-webkit-input-placeholder {
+      color: $white;
+    }
+  }
+}

@@ -11,7 +11,7 @@ def search(request):
 
     # Search
     if search_query:
-        search_results = Page.objects.live().search(search_query)
+        search_results = Page.objects.live().specific().search(search_query)
         query = Query.get(search_query)
 
         # Record hit

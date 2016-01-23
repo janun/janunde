@@ -10,7 +10,9 @@ $medium-navbar-height: rem-calc(65);
 $small-navbar-height: rem-calc(54);
 $navbar-color: $green;
 
-
+.wagtail-userbar {
+  margin-top: $medium-navbar-height;
+}
 
 // used to control navbar height
 //
@@ -93,6 +95,25 @@ $navbar-color: $green;
       }
     }
   }
+
+  &.semitrans {
+    background: rgba($black, 0.333);
+    @include navbar-shadow;
+
+    @include breakpoint($medium-down) {
+      &.collapse-open {
+        background: $navbar-color;
+        @include navbar-shadow;
+      }
+    }
+    @include breakpoint($large-up) {
+      &.dropdown-open {
+        background: $navbar-color;
+        @include navbar-shadow;
+      }
+    }
+  }
+
 }
 
 // the actual navbar
@@ -146,6 +167,22 @@ $navbar-color: $green;
       display: block;
       opacity: 1;
       transition: opacity 0.2s linear;
+    }
+  }
+
+  .search input {
+    margin: rem-calc(17 10);
+    height: rem-calc(30);
+    width: rem-calc(80);
+    transition: width 0.15s linear;
+    &:focus {
+      width: rem-calc(100);
+    }
+    @include breakpoint($small-breakpoint) {
+      width: rem-calc(150);
+      &:focus {
+        width: rem-calc(200);
+      }
     }
   }
 

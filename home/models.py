@@ -20,5 +20,5 @@ class HomePage(Page):
     def get_context(self, request):
         context = super(HomePage, self).get_context(request)
         # get all highlighted articles
-        context['highlights'] = Article.objects.filter(highlight=True).live()
+        context['highlights'] = Article.objects.filter(highlight=True).live().order_by('-first_published_at')
         return context

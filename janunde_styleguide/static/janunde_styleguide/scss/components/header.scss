@@ -11,6 +11,7 @@ header.header {
 
   @include header-height;
   background: $green-overlay;
+  background: linear-gradient(to right bottom, rgba($green, 0.6), rgba($green, 1.0));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,12 +30,17 @@ header.header {
     * {
       color: $white;
       font-family: $font-family-sans-serif;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     p {
-      padding: rem-calc(20);
-      margin: 0 auto;
+
       max-width: rem-calc(450);
+    }
+
+    h1 {
+      font-weight: bold;
     }
 
     .buttons {

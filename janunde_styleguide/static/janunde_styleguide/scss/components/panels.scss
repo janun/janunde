@@ -83,18 +83,22 @@ $panel-padding: rem-calc(20);
   }
 }
 
-
+// picture overlays
 picture {
   position: relative;
+
   .overlay {
     position: absolute;
     bottom: 0;
     left: -$panel-padding;
-    margin-bottom: $panel-padding;
+    right: -$panel-padding;
+    margin-bottom: 0;
+    padding-bottom: $panel-padding;
+    background: rgba($white, 0.5);
 
     &>* {
       display: inline-block;
-      background-color: white;
+      color: $brown;
       padding: rem-calc(3 20);
     }
   }

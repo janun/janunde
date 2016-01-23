@@ -1,18 +1,18 @@
 from .base import *
 
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 for template_engine in TEMPLATES:
     template_engine['OPTIONS']['debug'] = True
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#jzmpp6wgxxl1#v$#zhvd=50ga=zskelu-synaw+qa1#1zk=#r'
-
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# Get secret key from environment variable
+# but with a default (as opposed to production)
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    'adaeföaehraoehcröcahömthcartmhghfdsgjhdfguhrg5zut3zu52z43jkjcoi;a!yfe'
+)
 
 try:
     from .local import *

@@ -1,6 +1,14 @@
 footer {
+  background: $baige;
+  background: linear-gradient($baige, darken($baige, 20%));
+
   text-align: center;
-  color: $lighterdark;
+  padding: rem-calc(30);
+  color: $brown;
+  a {
+    color: $brown;
+  }
+
   @include ms-respond(font-size, 0);
   p {
     @include ms-respond(font-size, 0);

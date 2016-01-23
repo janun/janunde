@@ -3,6 +3,10 @@ from .base import *
 # Set Debug after environment variable
 DEBUG = os.environ.get('DJANGO_DEBUG', '').lower() in ('yes', 'true', '1')
 
+# Set SSL after environment variable, defaulting to true
+SSL = os.environ.get('SSL', '').lower() not in ('no', 'false', '0')
+
+
 # Load special local settings if specified
 try:
     from .local import *
@@ -11,20 +15,21 @@ except ImportError:
 
 
 # Security Settings
-# We could disable newer browsers not to use this site without ssl
-# for specified number of seconds
-# but only if we not wanted them to be able to use non-ssl!
-#SECURE_HSTS_SECONDS = 0
+SECRET_KEY = os.environ['SECRET_KEY']
+
+if SSL:
+    # disable usage of non-ssl connection
+    SECURE_HSTS_SECONDS = 3600
 # Send the header: x-content-type-options: nosniff
 SECURE_CONTENT_TYPE_NOSNIFF = True
 # Send the header: x-xss-protection: 1; mode=block
 SECURE_BROWSER_XSS_FILTER = True
 # redirect http to https
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = SSL
 # use a secure-only session cookie
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = SSL
 # secure-only CSRF cookie
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = SSL
 # HttpOnly CSRF cookie
 CSRF_COOKIE_HTTPONLY = True
 # no x frames
@@ -33,13 +38,6 @@ X_FRAME_OPTIONS = 'DENY'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
-
-# Get secret key from environment variable
-SECRET_KEY = os.environ['SECRET_KEY']
-
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
 
 # save staticfiles using whitenoise
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
@@ -50,7 +48,7 @@ COMPRESS_OFFLINE = True
 COMPRESS_CSS_HASHING_METHOD = 'content'
 
 # minify
-#HTML_MINIFY = True
+HTML_MINIFY = True
 
 # Use the cached template loader
 TEMPLATES[0]['OPTIONS']['loaders'] = (
@@ -62,9 +60,29 @@ TEMPLATES[0]['OPTIONS']['loaders'] = (
 TEMPLATES[0]['APP_DIRS'] = False
 
 # CACHE
-MIDDLEWARE_CLASSES = ('django.middleware.cache.UpdateCacheMiddleware',) + MIDDLEWARE_CLASSES
-MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + ('django.middleware.cache.FetchFromCacheMiddleware',)
+# (cannot be used until we have a cache backend??)
+#MIDDLEWARE_CLASSES = ('django.middleware.cache.UpdateCacheMiddleware',) + MIDDLEWARE_CLASSES
+#MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + ('django.middleware.cache.FetchFromCacheMiddleware',)
 
 #CACHE_MIDDLEWARE_ALIAS
 #CACHE_MIDDLEWARE_SECONDS
-CACHE_MIDDLEWARE_KEY_PREFIX = ''
+#CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
+
+import os
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+    },
+}

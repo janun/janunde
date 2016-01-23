@@ -1,8 +1,8 @@
 {% load staticfiles wagtailcore_tags janun_tags %}
 {% get_site_root as site_root %}
 
-<div class="navbar-container {{ fixed }} {{ transparent }}"
-    {% if transparent_at %}data-toggle-transparent-at={{transparent_at}} {% endif %}>
+<div class="navbar-container {{ fixed }} {{ transparent }} {{ semitrans }}"
+    {% if transparent_at %}data-toggle-transparent-at="{{transparent_at}}" {% endif %}>
   <nav class="navbar" role="navigation">
 
     {# the logo and site title linking to site_root #}
@@ -30,6 +30,11 @@
       </ul>
 
     </div>
+
+    {# search form #}
+    <form class="search" action="/search/" method="get">
+      <input type="search" name="query" placeholder="Suche" {% if context.search_query %} value="{{ context.search_query }}"{% endif %}>
+    </form>
 
 
   </nav>

@@ -14,8 +14,7 @@ $font-family-serif: "Crimson Text", "Times New Roman", Times, serif;
 
 // serif text
 @mixin serif {
-  //font-family: $font-family-serif;
-  font-family: $font-family-sans-serif;
+  font-family: $font-family-serif;
 }
 
 // default font size
@@ -77,37 +76,24 @@ h2 {
 h1 {
   @include header-commons;
   @include ms-respond(font-size, 5);
-  @media (max-width: 40rem) {
-
-  }
-  font-weight: bold;
   line-height: 1.2;
+  font-weight: bold;
 }
 
 
 // styling for paragraphs
-//
-// they are serif and have font-size scale of 1
-//
-// adjacent paragraphs dont have top and bottom margins,
-// instead they have a text-indent of a font-size scale of 1
-//
 p {
-  line-height: 1.3;
-  color: $middledark;
+  line-height: 1.5;
   @include serif;
   @include ms-respond(font-size, 1);
-  margin-top: 0;
   @include ms-respond(margin-bottom, 1);
+  max-width: $small-breakpoint;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
 // styling of links/anchors
-//
-// they are normally blue and dont have an underline
-//
-// :hover   -
-// :active  -
 a {
   color: $blue;
   text-decoration: none;
@@ -118,6 +104,10 @@ a {
     color: $darkblue;
     text-decoration: underline;
   }
+}
+
+.zoom-in {
+  cursor: zoom-in;
 }
 
 // clickable headings
@@ -141,7 +131,7 @@ ul li, ol li {
 
 // generic shadow to be used for text at many places
 @mixin janun-text-shadow {
-  text-shadow: rem-calc(2) rem-calc(2) rem-calc(2) rgba(0, 0, 0, 0.25);
+  text-shadow: rem-calc(2 2 2) rgba(0, 0, 0, 0.25);
 }
 
 // headings for areas on pages
