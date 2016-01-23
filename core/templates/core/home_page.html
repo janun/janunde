@@ -3,83 +3,98 @@
 
 {% block body_class %}template-homepage{% endblock %}
 
-{# overwrite the default navbar with a transparent navbar and header #}
+{# overwrite the default navbar with a transparent navbar #}
 {% block top %}
     {% get_site_root as site_root %}
     {% navbar parent=site_root calling_page=self transparent=True %}
-    {% include "janunde_styleguide/components/header/header.html" %}
+    {# show header #}
+    <header class="header">
+      <div id="header-video">
+        <video autoplay loop poster="{% static 'core/images/header-poster.jpg' %}">
+          <source src="{% static 'core/videos/header-video.mp4' %}" type="video/mp4" />
+          <source src="{% static 'core/videos/header-video.webm' %}" type="video/webm" />
+        </video>
+      </div>
+      <div class="content">
+        <h1>Wir sind das<br>Jugendumweltnetzwerk Niedersachsen</h1>
+        <p>JANUN ist aktiv für ein gutes Leben in einer ökologischen und sozial gerechten Welt.</p>
+        <div class="buttons">
+          <a href="/aktuelles" class="button white">Aktuelles</a>
+        </div>
+      </div>
+    </header>
 {% endblock %}
 
 {% block content %}
 
-    {# Highlights anzeigen #}
-    {% if highlights %}
-    <section>
-        <div class="container">
-            <h2 class="area-title"><a href="{% slugurl 'aktuelles' %}">Aktuelle Highlights</a></h2>
-            <div class="panel-container">
-                {% for article in highlights %}
-                    {% include "core/_article.html" with short=True %}
-                {% endfor %}
-            </div>
-            <a class="button brown center" href="{% slugurl 'aktuelles' %}">Mehr Aktuelles</a>
-        </div>
-    </section>
-    {% endif %}
-
-    {% if highlights %}{# looks strange after the header if shown regardless #}
-    <div class="teaser">
-        JANUN ist aktiv für ein gutes Leben<br>in einer ökologischen und sozial gerechten Welt.
-    </div>
-    {% endif %}
-    <h2 class="area-title">Grundsätze unserer Arbeit</h2>
+  {# show highlights #}
+  {% if highlights %}
+  <section>
     <div class="container">
-        <p>
-            Wir sind ein Netzwerk mit vielen Engagierten und einer großen Bandbreite an Themen und Aktivitäten für Jugendliche bis 27 Jahre.
-            JANUN sensibilisiert Jugendliche für ökologische und soziale Themen und zeigt Handlungsmöglichkeiten auf politischer wie individueller Ebene auf. Gleichzeitig schafft JANUN Angebote und bietet Strukturen, die Jugendliche vernetzen, qualifizieren sowie in ihrem Engagement stärken und unterstützen.
-        </p>
-        <div class="panel-container">
-            <div class="small-panel centered-content" style="color: green">
-                <img alt="Gesichter" src="{% static 'janunde_styleguide/images/components/principles/diverse.png' %}">
-                vielfältig
-            </div>
-            <div class="small-panel centered-content" style="color: blue">
-                <img alt="Sprechblase" src="{% static 'janunde_styleguide/images/components/principles/democratic.png' %}">
-                basisdemokratisch
-            </div>
-            <div class="small-panel centered-content" style="color: orange">
-                <img alt="Megaphon" src="{% static 'janunde_styleguide/images/components/principles/political.png' %}">
-                politisch <small>(nicht parteigebunden)</small>
-            </div>
-            <div class="small-panel centered-content" style="color: red">
-                <img alt="Herz" src="{% static 'janunde_styleguide/images/components/principles/attractive.png' %}">
-                attraktiv
-            </div>
-        </div>
+      <h2 class="area-title"><a href="{% slugurl 'aktuelles' %}">Aktuelle Highlights</a></h2>
+      <div class="panel-container">
+        {% for article in highlights %}
+          {% include "core/_article.html" with short=True %}
+        {% endfor %}
+      </div>
+      <a class="button brown center" href="{% slugurl 'aktuelles' %}">Mehr Aktuelles</a>
     </div>
+  </section>
+  {% endif %}
 
-    {% if gruppen %}
-    <div class="teaser">
-        JANUN ist in verschiedenen<br>Gruppen und Projekten organisiert.
+  {% if highlights %}
+  <div class="teaser">
+    JANUN ist aktiv für ein gutes Leben<br>in einer ökologischen und sozial gerechten Welt.
+  </div>
+  {% endif %}
+  <h2 class="area-title">Grundsätze unserer Arbeit</h2>
+  <div class="container">
+    <p>
+      Wir sind ein Netzwerk mit vielen Engagierten und einer großen Bandbreite an Themen und Aktivitäten für Jugendliche bis 27 Jahre.
+      JANUN sensibilisiert Jugendliche für ökologische und soziale Themen und zeigt Handlungsmöglichkeiten auf politischer wie individueller Ebene auf. Gleichzeitig schafft JANUN Angebote und bietet Strukturen, die Jugendliche vernetzen, qualifizieren sowie in ihrem Engagement stärken und unterstützen.
+    </p>
+    <div class="panel-container">
+      <div class="small-panel centered-content" style="color: green">
+        <img alt="Gesichter" src="{% static 'core/images/components/principles/diverse.png' %}">
+        vielfältig
+      </div>
+      <div class="small-panel centered-content" style="color: blue">
+        <img alt="Sprechblase" src="{% static 'core/images/components/principles/democratic.png' %}">
+        basisdemokratisch
+      </div>
+      <div class="small-panel centered-content" style="color: orange">
+        <img alt="Megaphon" src="{% static 'core/images/components/principles/political.png' %}">
+        politisch <small>(nicht parteigebunden)</small>
+      </div>
+      <div class="small-panel centered-content" style="color: red">
+        <img alt="Herz" src="{% static 'core/images/components/principles/attractive.png' %}">
+        attraktiv
+      </div>
     </div>
-    <h2 class="area-title">Projektgruppen</h2>
+  </div>
 
-    {% endif %}
+  {% if gruppen %}
+  <div class="teaser">
+    JANUN ist in verschiedenen<br>Gruppen und Projekten organisiert.
+  </div>
+  <h2 class="area-title">Projektgruppen</h2>
 
-    {% comment %}
-    <div class="teaser">
-        Du willst kritisch die Welt verändern?<br>
-        JANUN bietet Dir dazu viele Möglichkeiten!
-    </div>
-    <h2 class="area-title">Aktiv werden</h2>
-    {% endcomment %}
+  {% endif %}
+
+  {% comment %}
+  <div class="teaser">
+    Du willst kritisch die Welt verändern?<br>
+    JANUN bietet Dir dazu viele Möglichkeiten!
+  </div>
+  <h2 class="area-title">Aktiv werden</h2>
+  {% endcomment %}
 
 
-    <div class="teaser">
-        Hast Du Interesse an unserer Arbeit?<br>
-        Nimm Kontakt zu uns auf.<br>
-        Wir freuen uns von dir zu hören!
-    </div>
+  <div class="teaser">
+    Hast Du Interesse an unserer Arbeit?<br>
+    Nimm Kontakt zu uns auf.<br>
+    Wir freuen uns von dir zu hören!
+  </div>
 
 
 {% endblock %}

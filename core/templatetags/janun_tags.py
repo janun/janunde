@@ -7,7 +7,8 @@ from wagtail.wagtailimages.models import Filter
 
 @register.filter()
 def srcset(image, filter_specs):
-    """generate a list of image renditions suitable for html5 srcset
+    """
+    generate a list of image renditions suitable for html5 srcset
     usage:
         srcset="{{ image|srcset:'width-320|jpg width-640|jpg' }}"
     """
@@ -18,7 +19,6 @@ def srcset(image, filter_specs):
     return ','.join(sources)
 
 
-
 @register.assignment_tag(takes_context=True)
 def get_site_root(context):
     return context['request'].site.root_page
@@ -27,7 +27,7 @@ def has_menu_children(page):
     """does the current page have children in the menu?"""
     return page.get_children().live().in_menu().exists()
 
-@register.inclusion_tag('janunde_styleguide/components/navbar/navbar.html', takes_context=True)
+@register.inclusion_tag('core/navbar/navbar.html', takes_context=True)
 def navbar(context, parent, calling_page=None, transparent=False, semitrans=False, fixed=True, transparent_at=None):
     """renders the navbar"""
     menuitems = parent.get_children().live().in_menu()
@@ -50,7 +50,7 @@ def navbar(context, parent, calling_page=None, transparent=False, semitrans=Fals
         'context': context,
     }
 
-@register.inclusion_tag('janunde_styleguide/components/navbar/navbar_children.html', takes_context=True)
+@register.inclusion_tag('core/navbar/navbar_children.html', takes_context=True)
 def navbar_children(context, parent):
     """used by navbar to render the menu children"""
     menuitems_children = parent.get_children()

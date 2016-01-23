@@ -57,7 +57,7 @@ header.header {
     height: 100%;
     overflow: hidden;
     z-index: -1;
-    background: url(static('janunde_styleguide/images/header-poster.jpg')) no-repeat center/cover;
+    background: url(static('core/images/header-poster.jpg')) no-repeat center/cover;
 
     video {
       // TODO: prevent video from loading on mobile somehow!

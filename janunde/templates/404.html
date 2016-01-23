@@ -8,25 +8,25 @@
 
 {# overwrite the default navbar with a transparent navbar and header #}
 {% block top %}
-    {% get_site_root as site_root %}
-    {% navbar parent=site_root calling_page=self transparent=True %}
+  {% get_site_root as site_root %}
+  {% navbar parent=site_root calling_page=self transparent=True %}
 
-<header class="header">
-  <div id="header-video">
-    <video autoplay loop poster="{% static 'janunde_styleguide/images/header-poster.jpg' %}">
-      <source src="{% static 'janunde_styleguide/videos/header-video.mp4' %}" type="video/mp4" />
-      <source src="{% static 'janunde_styleguide/videos/header-video.webm' %}" type="video/webm" />
-    </video>
-  </div>
-  <div class="content">
-    <h1>404. Seite nicht gefunden.</h1>
-    <p>Die Seite, die Du aufrufen wolltest, gibt es nicht.</p>
-    <p>Vielleicht findest Du sie mit der Suche:</p>
-    <form class="search" action="/search/" method="get">
-        <input type="search" name="query" placeholder="Suche">
-    </form>
-  </div>
-</header>
+  <header class="header">
+    <div id="header-video">
+      <video autoplay loop poster="{% static 'core/images/header-poster.jpg' %}">
+        <source src="{% static 'core/videos/header-video.mp4' %}" type="video/mp4" />
+        <source src="{% static 'core/videos/header-video.webm' %}" type="video/webm" />
+      </video>
+    </div>
+    <div class="content">
+      <h1>404. Seite nicht gefunden.</h1>
+      <p>Die Seite, die Du aufrufen wolltest, gibt es nicht.</p>
+      <p>Vielleicht findest Du sie mit der Suche:</p>
+      <form class="search" action="/search/" method="get">
+          <input type="search" name="query" placeholder="Suche">
+      </form>
+    </div>
+  </header>
 {% endblock %}
 
 {# dont show footer #}

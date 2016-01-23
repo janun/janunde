@@ -24,5 +24,5 @@
 
   // this is a background image with (green) colored overlay
   background: linear-gradient(darken($green-overlay, 10%), $green-overlay),
-    url(static('janunde_styleguide/images/header-poster.jpg')) repeat-y center/cover fixed;
+    url(static('core/images/header-poster.jpg')) repeat-y center/cover fixed;
 }
