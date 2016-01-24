@@ -4,14 +4,7 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block additional_js %}
-<script type="text/javascript">
-  if (window.matchMedia("(min-width: 40em)").matches) {
-    $('video source').each(function () {
-      $(this).attr('src', $(this).attr('data-src'));
-    });
-    $('video').load();
-  }
-</script>
+<script type="text/javascript" src="{% static 'core/js/components/header/header.js' %}"></script>
 {% endblock %}
 
 {# overwrite the default navbar with a transparent navbar #}
