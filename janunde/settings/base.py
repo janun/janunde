@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -111,7 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Parse database configuration from env var DATABASE_URL
-import dj_database_url
 DATABASES = { 'default': dj_database_url.config(
     default="postgres://janunde:janunde@localhost/janunde_db"
 )}
@@ -155,13 +155,13 @@ MEDIA_URL = '/media/'
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
-#COMPRESS_ENABLED=False
+#COMPRESS_ENABLED=True
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
     'django_compressor_autoprefixer.AutoprefixerFilter',
     'compressor.filters.cssmin.rCSSMinFilter' # other filters kill css calc fct
 )
-COMPRESS_AUTOPREFIXER_BINARY = os.path.join(BASE_DIR, 'node_modules', 'autoprefixer', 'autoprefixer')
+COMPRESS_AUTOPREFIXER_BINARY = os.path.join(BASE_DIR, 'node_modules', '.bin', 'postcss') + ' --use autoprefixer'
 COMPRESS_AUTOPREFIXER_ARGS = '-b "> 2%"'
 
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
@@ -170,3 +170,7 @@ COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 # Wagtail settings
 WAGTAIL_SITE_NAME = "janunde"
 WAGTAILIMAGES_JPEG_QUALITY = 70
+WAGTAILIMAGES_IMAGE_MODEL = 'core.AttributedImage'
+
+
+TAGGIT_CASE_INSENSITIVE = True
