@@ -1,7 +1,7 @@
 {% load static compress janun_tags wagtailuserbar %}
 
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="de">
     <head>
         <meta charset="utf-8" />
         <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %} - JANUN{% endblock %}</title>
