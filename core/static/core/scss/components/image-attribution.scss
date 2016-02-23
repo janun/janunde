@@ -1,4 +1,4 @@
-$color-image-attribution: $ghost;
+$color-image-attribution: rgba($white, 0.4);
 $font-size-image-attribution: rem-calc(10);
 
 .attributed-image {
@@ -15,5 +15,8 @@ $font-size-image-attribution: rem-calc(10);
     }
   }
   position: absolute;
+  right: -1rem;
   bottom: 1rem;
+  width: 8rem;
+  text-align: right;
 }
