@@ -1,0 +1,19 @@
+$color-image-attribution: $ghost;
+$font-size-image-attribution: rem-calc(10);
+
+.attributed-image {
+  position: relative;
+}
+
+.image-attribution {
+  font-size: $font-size-image-attribution;
+  color: $color-image-attribution;
+  a {
+    color: $color-image-attribution;
+    &:hover {
+      color: darken($color-image-attribution, 30%);
+    }
+  }
+  position: absolute;
+  bottom: 1rem;
+}
