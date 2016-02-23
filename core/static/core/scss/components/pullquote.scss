@@ -1,0 +1,24 @@
+$indent-blockquote: 3rem;
+
+blockquote {
+  @include text;
+  position: relative;
+  margin: $indent-blockquote;
+
+  &:before {
+    position: absolute;
+    left: -$indent-blockquote;
+    top: 0;
+    color: #ccc;
+    content: open-quote;
+    font-family: $font-family-serif;
+    font-size: 5em;
+    line-height: 1;
+  }
+  p {
+    display: inline;
+  }
+  .attribution {
+    display: block;
+  }
+}

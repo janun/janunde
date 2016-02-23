@@ -1,18 +1,18 @@
+import os
+
 from .base import *
+
+try:
+    from .local import *
+except ImportError:
+    pass
+
 
 # Set Debug after environment variable
 DEBUG = os.environ.get('DJANGO_DEBUG', '').lower() in ('yes', 'true', '1')
 
 # Set SSL after environment variable, defaulting to true
 SSL = os.environ.get('SSL', '').lower() not in ('no', 'false', '0')
-
-
-# Load special local settings if specified
-try:
-    from .local import *
-except ImportError:
-    pass
-
 
 # Security Settings
 SECRET_KEY = os.environ['SECRET_KEY']
@@ -69,7 +69,6 @@ TEMPLATES[0]['APP_DIRS'] = False
 #CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 
-import os
 
 LOGGING = {
     'version': 1,

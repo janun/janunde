@@ -1,5 +1,4 @@
-$panel-margin: rem-calc(10);
-$panel-padding: rem-calc(20);
+$panel-padding: rem-calc(30);
 
 // panel
 //
@@ -9,189 +8,43 @@ $panel-padding: rem-calc(20);
   overflow: hidden;
   background-color: $white;
   @include janun-box-shadow;
-
-  &.no-bg {
-    background-color: inherit;
-    box-shadow: inherit;
-  }
-
-  &.centered-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-
   padding: $panel-padding;
-  margin: $panel-margin 0;
+  border-radius: 2px;
 
-  @include breakpoint($medium-up) {
-    margin-left: $panel-margin;
-    margin-right: $panel-margin;
-  }
-
-  .main-image {
+  @mixin embedded {
     width: calc(100% + #{2*$panel-padding});
-    margin: -$panel-padding;
-    margin-bottom: inherit;
+    margin-left: -$panel-padding;
+    margin-right: -$panel-padding;
   }
+
+  // embedded main-image
+  .main-image {
+    @include embedded;
+    margin-top: -$panel-padding;
+  }
+
+  // embedded image
+  .block-image img {
+    @include embedded;
+  }
+
+  // embedded video
+  .block-embedded_video {
+    @include embedded;
+    .responsive-object {
+      position: relative;
+      iframe, object, embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
 }
 
 .panel {
   @include panel;
-}
-
-
-// panel container
-//
-// makes a row-based layout
-// on medium and big screens panels get 50% width each
-// on small screen they get 100% width each
-@mixin panel-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-
-@mixin panel-in-container {
-  @include panel;
-  width: 100%;
-  @include breakpoint($medium-up) {
-    // width: so that 3 panels fit
-    width: $medium-breakpoint/3 - 2*$panel-margin;
-  }
-}
-
-@mixin small-panel-in-container {
-  @include panel;
-  width: 100%;
-  @include breakpoint($medium-up) {
-    width: $medium-breakpoint/4 - 3*$panel-margin;
-  }
-}
-
-
-.panel-container {
-  @include panel-container;
-
-  .panel {
-    @include panel-in-container;
-  }
-  .small-panel {
-    @include small-panel-in-container;
-  }
-}
-
-// picture overlays
-picture {
-  position: relative;
-
-  .overlay {
-    position: absolute;
-    bottom: 0;
-    left: -$panel-padding;
-    right: -$panel-padding;
-    margin-bottom: 0;
-    padding-bottom: $panel-padding;
-    background: rgba($white, 0.5);
-
-    &>* {
-      display: inline-block;
-      color: $brown;
-      padding: rem-calc(3 20);
-    }
-  }
-}
-
-
-
-/* picture with overlay often in panel
- *
- * img will be cropped left and right if viewport is too small
- *
- * example usage:
- * <div class="picture">
- *   <img src="../img/content/macht-wachstum-glueck.png">
- *   <div class="overlay">
- *     <h3><small>30. Oktober bis 02. November</small></h3>
- *     <h3>Macht. Wachstum. Glück.</h3>
- *   </div>
- * </div>
- */
-
-$picture-height: rem-calc(205);
-
-.picture {
-  position: relative;
-  height: $picture-height;
-  overflow: hidden;
-  text-align: center;   // center image if cropped
-
-  img {
-    position: relative;
-    top: 0;
-    left: 100%;         // center image if cropped
-    margin-left: -200%; // center image if cropped
-    min-width: 100%;
-    max-width: none;    // was set by foundation, argh
-    min-height: $picture-height;
-  }
-
-  // picture overlay
-  .overlay {
-    width: 100%;
-    position: absolute;
-    &:first-child { // shown at the top
-      top: 0;
-    }
-    &:last-child { // shown at the bottom
-      bottom: 0;
-    }
-    z-index: 20;
-    min-width: 100%;
-    background: rgba($white, 0.75);
-    text-align: left;
-
-    // full overlay
-    &.full {
-      height: 100%;
-    }
-
-    // colored overlay
-    &%color-overlay {
-    //@include color-all-text;
-      .button {
-        //@extend .button.line; // all buttons should be line buttons
-      }
-    }
-
-    &.blue {
-      @extend %color-overlay;
-      background-color: rgba($blue, 0.75);
-    }
-    &.green {
-      @extend %color-overlay;
-      background-color: rgba($green, 0.75);
-    }
-    &.red {
-      @extend %color-overlay;
-      background-color: rgba($red, 0.75);
-    }
-    &.brown {
-      @extend %color-overlay;
-      background-color: rgba($brown, 0.75);
-    }
-
-    small {
-      color: $lighterdark;
-    }
-    a {
-      color: inherit;
-    }
-  }
-}
-
-.ellipsize *, .ellipsize {
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }

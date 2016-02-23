@@ -15,16 +15,15 @@ Python files have 4 spaces indentation,
 
 
 ## Python files
-... have 4 spaces indentation,
-should follow PEP8,
-which should be checked using:
-```
-flake8 --exclude venv **/*.py
-```
+* have 4 spaces indentation,
+* should follow PEP8, which should be checked using:
+    ```
+    flake8 --exclude venv **/*.py
+    ```
 
 ### Python Imports
 Should be ordered by `isort`,
-for which settings are in `.editorconfig`.
+for which settings are also in `.editorconfig`.
 
 ### Python Variable Names
 Use underscores, not camelCase, for variable, function and method names.

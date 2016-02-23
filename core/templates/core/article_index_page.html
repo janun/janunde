@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-article-index-page base-layout{% endblock %}
+
+{% block content %}
+
+  <main>
+    <h2 class="area-title">Aktuelles zu JANUN und den Projektgruppen</h2>
+    <div class="grid-3col masonry">
+      {% if articles %}
+      {% for object in articles %}
+          {% include object.partial_template_name %}
+      {% endfor %}
+      {% else %}
+      Keine Einträge vorhanden.
+      {% endif %}
+    </div>
+  </main>
+
+
+
+{% endblock %}

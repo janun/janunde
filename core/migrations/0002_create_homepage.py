@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import migrations
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import migrations
 
 homepage_title = "Startseite"
 homepage_slug = homepage_title.lower()

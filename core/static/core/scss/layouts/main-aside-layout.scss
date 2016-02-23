@@ -1,0 +1,63 @@
+//
+// <div class="content">
+//   <main>
+//     <h2 class="area-title"></h2>
+//     <div>content...</div>
+//   </main>
+//   <aside>
+//     <h2 class="area-title"></h2>
+//     <div>content...</div>
+//   </aside>
+// </div>
+@mixin main-aside-layout($space-inbetween: 2rem, $space-sides: 1rem) {
+  // for small/all screens
+  .content {
+     @include container;
+     padding-left: 0;
+     padding-right: 0;
+     // margin-top is set by navbar
+  }
+
+  .area-title {
+    text-align: center;
+  }
+
+
+  // for medium screens and up
+  @include breakpoint($small-breakpoint) {
+    .content {
+      padding-left: $space-sides;
+      padding-right: $space-sides;
+    }
+  }
+
+  // for large screens and up
+  @include breakpoint($medium-breakpoint) {
+    .content {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .area-title {
+      text-align: left;
+    }
+
+    main {
+      flex-basis: 66%;
+    }
+
+    aside {
+      margin-left: $space-inbetween;
+      flex-basis: 33%;
+      .grid > * {
+        width: 100%;
+      }
+    }
+  }
+
+}
+
+
+.main-aside-layout {
+  @include main-aside-layout;
+}

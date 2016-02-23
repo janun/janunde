@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags janun_tags humanize %}
+
+{% block body_class %}template-standard-page{% endblock %}
+
+{% block content %}
+
+  <main>
+    {% if self.main_image %}
+      {% include 'includes/image.html' with value=self.main_image classname="main-image" %}
+    {% endif %}
+    <h1>{{self.title}}</h1>
+    {{self.body}}
+  </main>
+
+  {% if self.related_pages.all %}
+  <aside>
+    <span class="area-title">Zugehöriges und Interessantes</span>
+    {% for related_page in self.related_pages.all %}
+      {% include related_page.related_page.specific.partial_template_name with object=related_page.related_page %}
+    {% endfor %}
+  </aside>
+  {% endif %}
+
+{% endblock %}

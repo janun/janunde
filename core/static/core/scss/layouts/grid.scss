@@ -1,0 +1,41 @@
+@mixin grid($spacing: 2rem, $children-selector: '>.panel', $columns: 2) {
+
+  // flexbox fallback of no masonry used or available
+  .no-js &.masonry, &:not(.masonry) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: flex-start;
+    align-items: flex-start;
+  }
+
+  margin-left: -$spacing/2;
+  margin-right: -$spacing/2;
+
+  &#{$children-selector} {
+    width: 100%;
+    height: auto;
+    @include breakpoint($small-breakpoint) {
+      width: #{100/$columns - 5}%; // fallback if no calc
+      width: calc(#{100/$columns}% - #{$spacing});
+    }
+    margin-left: $spacing/2;
+    margin-right: $spacing/2;
+    margin-bottom: $spacing;
+  }
+}
+
+.grid-2col {
+  @include grid;
+}
+
+.grid-3col {
+  @include grid($columns: 3);
+}
+
+.grid-medium-2col {
+  @include grid($columns: 1);
+  @include breakpoint($medium-down) {
+    @include grid;
+  }
+}

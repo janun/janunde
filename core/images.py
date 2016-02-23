@@ -69,9 +69,9 @@ class AttributedImage(AbstractImage):
     def attribution(self):
         attribution = self.title_html
         if self.author_html:
-            attribution += format_html(" {0}", self.author_html)
+            attribution += format_html("<br> {0}", self.author_html)
         if self.license_html:
-            attribution += format_html(" ({0})", self.license_html)
+            attribution += format_html("<br> ({0})", self.license_html)
         return attribution
 
 

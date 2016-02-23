@@ -1,0 +1,16 @@
+.template-article {
+
+  // to reduce line-length
+  @include breakpoint($small-to-medium) {
+    .content {
+      max-width: $small-breakpoint;
+    }
+  }
+
+  // activate justified paragraphs if hyphenation possible
+  @supports(hyphens: auto) {
+    p {
+      text-align: justify;
+    }
+  }
+}

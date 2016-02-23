@@ -1,8 +1,8 @@
 from django import template
+from wagtail.wagtailimages.shortcuts import get_rendition_or_not_found
+
 register = template.Library()
 
-from wagtail.wagtailimages.shortcuts import get_rendition_or_not_found
-from wagtail.wagtailimages.models import Filter
 
 
 @register.filter()
@@ -16,7 +16,7 @@ def srcset(image, filter_specs):
     for filter_spec in filter_specs.split(' '):
         rendition = get_rendition_or_not_found(image, filter_spec)
         sources.append( "%s %sw" % (rendition.url, rendition.width) )
-    return ','.join(sources)
+    return ', '.join(sources)
 
 
 @register.assignment_tag(takes_context=True)

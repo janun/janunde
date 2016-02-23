@@ -1,0 +1,21 @@
+{% load wagtailcore_tags wagtailimages_tags janun_tags %}
+
+<article class="panel article-partial">
+
+  {% if object.main_image %}
+  <a href="{% pageurl object %}">
+    {% image object.main_image jpg as original_image %}
+    <img src="{{ original_image.url }}"
+      srcset="{{ object.main_image|srcset:'width-320|jpg width-640|jpg width-1280|jpg width-695|jpg width-1792|jpg' }}"
+      sizes="(min-width: 40em) and (max-width: 64em) 48vw, (min-width: 64em) 20em, 100vw"
+      alt="{{ original_image.alt }}"
+      class="main-image">
+  </a>
+  {% endif %}
+
+  <h3><a href="{% pageurl object %}" title="{{object.title}}">{{ object.title }}</a></h3>
+  <time datetime="{{ object.first_published_at|date:'Y-m-d H:i' }}">
+    {{ object.first_published_at|date }}
+  </time>
+  <meta content="{{ object.latest_revision_created_at|date:'Y-m-d H:i' }}"/>
+</article>

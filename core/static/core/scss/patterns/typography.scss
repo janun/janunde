@@ -70,26 +70,36 @@ h3 {
 }
 h2 {
   @include header-commons;
-  @include ms-respond(font-size, 4);
+  font-size: 1.5rem;
   line-height: 1.2;
+  font-weight: bold;
 }
 h1 {
   @include header-commons;
-  @include ms-respond(font-size, 5);
+  font-size: 2.625rem;
   line-height: 1.2;
   font-weight: bold;
 }
 
 
 // styling for paragraphs
+$font-size-paragraph: 1.4rem;
+$line-height-paragraph: 1.35;
+$margin-bottom-paragraph: 1rem;
+$font-family-paragraph: $font-family-serif;
+@mixin text {
+  line-height: $line-height-paragraph;
+  font-family: $font-family-paragraph;
+  font-size: $font-size-paragraph;
+  text-rendering: optimizeLegibility;
+  font-variant-ligatures: common-ligatures;
+  font-feature-settings: "kern";
+	font-kerning: normal;
+}
 p {
-  line-height: 1.5;
-  @include serif;
-  @include ms-respond(font-size, 1);
-  @include ms-respond(margin-bottom, 1);
-  max-width: $small-breakpoint;
-  margin-left: auto;
-  margin-right: auto;
+  @include text;
+  margin-bottom: $margin-bottom-paragraph;
+  hyphens: auto;
 }
 
 
@@ -124,21 +134,15 @@ h1 a, h2 a, h3 a, h4 a {
 
 
 // styling of normal lists, i.e. those next to paragraphs
-ul li, ol li {
-  @include serif;
-  @include ms-respond(font-size, 1);
+ul, ol {
+  margin-left: rem-calc(30);
+  padding-left: 0px;
+  font-family: $font-family-paragraph;
+  font-size: $font-size-paragraph;
+  line-height: $line-height-paragraph;
 }
 
 // generic shadow to be used for text at many places
 @mixin janun-text-shadow {
   text-shadow: rem-calc(2 2 2) rgba(0, 0, 0, 0.25);
-}
-
-// headings for areas on pages
-.area-title {
-  text-align: center;
-  color: $brown;
-  @include sans;
-  @include ms-respond(font-size, 0);
-  font-weight: normal;
 }

@@ -1,0 +1,14 @@
+{% load wagtailcore_tags wagtailimages_tags janun_tags %}
+
+<article class="panel event-page-partial">
+  {% if object.main_image %}
+  <a href="{% pageurl object %}">
+    {% include 'includes/image.html' with value=object.main_image classname="main-image" %}
+  </a>
+  {% endif %}
+  <h3><a href="{% pageurl object %}" title="{{object.title}}">{{ object.title }}</a></h3>
+  <time datetime="{{ object.first_published_at|date:'Y-m-d H:i' }}">
+    {{ object.first_published_at|date }}
+  </time>
+  <meta content="{{ object.latest_revision_created_at|date:'Y-m-d H:i' }}"/>
+</article>

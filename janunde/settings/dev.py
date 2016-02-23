@@ -1,5 +1,11 @@
 from .base import *
 
+try:
+    from .local import *
+except ImportError:
+    pass
+    
+
 DEBUG = True
 
 for template_engine in TEMPLATES:
@@ -13,11 +19,6 @@ SECRET_KEY = os.environ.get(
     'SECRET_KEY',
     'adaeföaehraoehcröcahömthcartmhghfdsgjhdfguhrg5zut3zu52z43jkjcoi;a!yfe'
 )
-
-try:
-    from .local import *
-except ImportError:
-    pass
 
 INSTALLED_APPS += [
     'wagtail.contrib.wagtailstyleguide',

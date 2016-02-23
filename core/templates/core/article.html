@@ -1,59 +1,16 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags janun_tags humanize %}
 
-{% block body_class %}template-article{% endblock %}
+{% block body_class %}template-article main-aside-layout{% endblock %}
 
 {% block content %}
-{% block top %}{%endblock%}
 
-  {% get_site_root as site_root %}
-  {% navbar parent=site_root calling_page=self semitrans=True fixed=False %}
-
-  <article>
-
-    {% if self.main_image %}
-      {# on small screens we want to use the same image as in the listing #}
-      {% image self.main_image fill-320x240-c75 jpg as image_tiny %}
-      {% image self.main_image fill-400x300-c75 jpg as image_small %}
-      {% image self.main_image fill-1000x750-c75 jpg as image_big %}
-      {% image self.main_image fill-1400x1050-c75 jpg as image_bigger %}
-
-      {# on medium screens we want only a spec height #}
-      {% if self.dont_crop %}
-        {% image self.main_image width-640 jpg as medium_image %}
-        {% image self.main_image width-1280 jpg as medium_image_hd %}
-        {% image self.main_image width-1004 jpg as large_image %}
-        {% image self.main_image width-2008 jpg as large_image_hd %}
-      {% else %}
-        {% image self.main_image fill-640x320-c75 jpg as medium_image %}
-        {% image self.main_image fill-1280x640-c75 jpg as medium_image_hd %}
-        {% image self.main_image fill-1004x502-c75 jpg as large_image %}
-        {% image self.main_image fill-2008x1004-c75 jpg as large_image_hd %}
+  <main>
+    <h2 class="area-title">Inhalt</h2>
+    <div class="panel">
+      {% if self.main_image %}
+        {% include 'includes/image.html' with value=self.main_image classname="main-image" %}
       {% endif %}
-
-      <picture>
-        {# medium screens #}
-        <source media="(min-width: 40em)"
-                srcset="{{medium_image.url}} {{medium_image.width}}w,
-                        {{medium_image_hd.url}} {{medium_image_hd.width}}w,
-                        {{large_image.url}} {{large_image.width}}w,
-                        {{large_image_hd.url}} {{large_image_hd.width}}w"
-                sizes="100vw">
-        {# small screens #}
-        <img class="main-image" src="{{medium_image.url}}"
-             srcset="{{image_tiny.url}} {{image_tiny.width}}w,
-                     {{image_small.url}} {{image_small.width}}w,
-                     {{image_big.url}} {{image_big.width}}w,
-                     {{image_bigger.url}} {{image_bigger.width}}w"
-             sizes="100vw"
-             alt="{{small_image.alt}}">
-      </picture>
-    {% endif %}
-
-
-    <div class="container">
-
-
       <h1>{{self.title}}</h1>
       <div class="dates">
         von <time datetime="{{ self.first_published_at|date:'Y-m-d H:i' }}">{{ self.first_published_at|naturaltime }}</time>
@@ -61,16 +18,19 @@
         und aktualisiert <time datetime="{{ self.latest_revision_created_at|date:'Y-m-d H:i' }}">{{ self.latest_revision_created_at|naturaltime }}</time>
         {% endif %}
       </div>
-
-
-      {% if self.subheading %}<h2>{{self.subheading}}</h2>{% endif %}
-
-
       {{self.body}}
-
     </div>
+  </main>
 
-  </article>
-
+  {% if self.related_pages.all %}
+  <aside>
+    <h2 class="area-title">Zugehöriges und Interessantes</h2>
+    <div class="grid-medium-2col masonry">
+      {% for related_page in self.related_pages.all %}
+        {% include related_page.related_page.specific.partial_template_name with object=related_page.related_page %}
+      {% endfor %}
+    </div>
+  </aside>
+  {% endif %}
 
 {% endblock %}

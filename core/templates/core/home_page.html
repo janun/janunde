@@ -3,7 +3,6 @@
 
 {% block body_class %}template-homepage{% endblock %}
 
-
 {# overwrite the default navbar with a transparent navbar #}
 {% block top %}
     {% get_site_root as site_root %}
@@ -31,15 +30,15 @@
   {# show highlights #}
   {% if highlights %}
   <section>
-    <div class="container">
       <h2 class="area-title"><a href="{% slugurl 'aktuelles' %}">Aktuelle Highlights</a></h2>
-      <div class="panel-container">
-        {% for article in highlights %}
-          {% include "core/_article.html" with short=True %}
-        {% endfor %}
+      <div class="container">
+        <div class="grid-3col masonry">
+          {% for object in highlights %}
+            {% include object.partial_template_name %}
+          {% endfor %}
+        </div>
       </div>
       <a class="button brown center" href="{% slugurl 'aktuelles' %}">Mehr Aktuelles</a>
-    </div>
   </section>
   {% endif %}
 
