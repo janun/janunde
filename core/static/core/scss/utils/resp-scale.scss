@@ -31,3 +31,10 @@
     #{$property}: $val2;
   }
 }
+
+@mixin scale-from-smallest-to-small($property, $value-at-smallest, $value-at-small) {
+  @include resp-scale(
+                      $property, $value-at-smallest, $value-at-small,
+                      $smallest-breakpoint, $small-breakpoint
+                     )
+}

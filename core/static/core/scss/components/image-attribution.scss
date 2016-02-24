@@ -1,22 +1,21 @@
-$color-image-attribution: rgba($white, 0.8);
-$font-size-image-attribution: rem-calc(10);
+$text-color-image-attribution: rgba($white, 0.8);
+$padding-image-attribution: 1rem;
 
 .attributed-image {
   position: relative;
 }
 
 .image-attribution {
-  font-size: $font-size-image-attribution;
-  color: $color-image-attribution;
+  @include scale-from-smallest-to-small('font-size', rem-calc(5), rem-calc(10));
+  color: $text-color-image-attribution;
   a {
-    color: $color-image-attribution;
+    color: $text-color-image-attribution;
     &:hover {
-      color: darken($color-image-attribution, 30%);
+      color: darken($text-color-image-attribution, 30%);
     }
   }
   position: absolute;
-  right: -1rem;
-  bottom: 1rem;
-  width: 8rem;
+  right: $padding-image-attribution - $panel-padding;
+  bottom: $padding-image-attribution;
   text-align: right;
 }
