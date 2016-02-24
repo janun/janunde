@@ -27,7 +27,7 @@
     <h2 class="area-title">Zugehöriges und Interessantes</h2>
     <div class="grid-medium-2col masonry">
       {% for related_page in self.related_pages.all %}
-        {% include related_page.related_page.specific.partial_template_name with object=related_page.related_page %}
+        {% include related_page.related_page.specific.partial_template_name with object=related_page.related_page.specific %}
       {% endfor %}
     </div>
   </aside>

@@ -15,7 +15,7 @@ $padding-image-attribution: 1rem;
     }
   }
   position: absolute;
-  right: $padding-image-attribution - $panel-padding;
-  bottom: $padding-image-attribution;
+  right:  0;
+  bottom: $panel-padding;
   text-align: right;
 }

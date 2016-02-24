@@ -1,4 +1,4 @@
-// activate isotope js layout lib
+// activate isotope
 // on .masonry containers
 // for .panel items
 var $grid = $('.masonry').isotope({
@@ -9,3 +9,11 @@ var $grid = $('.masonry').isotope({
 $grid.imagesLoaded().progress( function() {
   $grid.isotope('layout');
 });
+
+// TODO
+// activate isotope depending on screen-size
+//.masonry-small
+
+//.masonry-medium
+
+//.masonry-large

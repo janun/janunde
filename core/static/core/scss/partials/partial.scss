@@ -1,0 +1,41 @@
+.partial {
+  background: $green;
+  color: $white;
+  h3 a {
+    color: $white;
+  }
+  min-height: rem-calc(192);
+
+  .wrapper {
+    position: relative;
+  }
+
+  .main-image-wrapper {
+    position: relative;
+    display: inline-block;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: -$panel-padding; top: -$panel-padding;
+      bottom: -$panel-padding; right: -$panel-padding;
+      display: inline-block;
+      background: linear-gradient(transparent 60%, rgba($black, 0.75));
+    }
+  }
+
+  .main-image {
+    margin: -$panel-padding;
+    z-index: -1;
+    display: block;
+  }
+
+  .overlay {
+    h3 {
+      margin: 0;
+    }
+    position: absolute;
+    bottom: 0rem;
+    left: 0rem;
+  }
+}

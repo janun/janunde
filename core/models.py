@@ -23,7 +23,7 @@ def _(str):
 
 class BasePage(Page):
     """basic functionality for all our pages"""
-    partial_template_name = 'core/base_page_partial.html'
+    partial_template_name = 'core/partials/base.html'
 
     is_creatable = False
 
@@ -64,7 +64,7 @@ class StandardPage(BasePage):
         verbose_name=_("Inhalt"),
     )
 
-    partial_template_name = 'core/standard_page_partial.html'
+    partial_template_name = 'core/partials/base.html'
 
     search_fields = BasePage.search_fields + (
         index.SearchField('body'),
@@ -141,7 +141,7 @@ class Article(StandardPage):
                     "Wird in Übersichten verwendet.")
     )
 
-    partial_template_name = 'core/article_partial.html'
+    partial_template_name = 'core/partials/article.html'
 
     search_fields = StandardPage.search_fields + (
         index.SearchField('highlight'),
@@ -225,7 +225,7 @@ class EventPage(StandardPage):
         blank=True,
     )
 
-    partial_template_name = 'core/event_page_partial.html'
+    partial_template_name = 'core/partials/base.html'
 
     subpage_types = []
     parent_page_types = ['EventIndexPage']
