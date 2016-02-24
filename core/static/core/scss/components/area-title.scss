@@ -2,6 +2,7 @@
 $height-area-title: 3rem;
 $font-size-area-title: 0.9rem;
 $line-height-area-title: $height-area-title;
+$margin-area-title: 0.3rem;
 .area-title {
   display: block;
   color: $brown;
@@ -10,6 +11,6 @@ $line-height-area-title: $height-area-title;
   line-height: $line-height-area-title;
   font-weight: normal;
   height: $height-area-title;
-  margin-top: 0.625rem;
-  margin-bottom: 0.625rem;
+  margin-top: $margin-area-title;
+  margin-bottom: $margin-area-title;
 }
