@@ -9,11 +9,11 @@ footer.footer {
     color: $brown;
   }
 
-  @include ms-respond(font-size, 0);
+  //@include ms-respond(font-size, 0);
   p {
-    @include ms-respond(font-size, 0);
+    //@include ms-respond(font-size, 0);
   }
   h4 {
-    @include ms-respond(font-size, 1);
+    //@include ms-respond(font-size, 1);
   }
 }

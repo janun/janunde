@@ -16,7 +16,7 @@
   margin-bottom: rem-calc(50);
 
   color: $white;
-  @include ms-respond(font-size, 4);
+  font-size: $font-size-h1;
   @include janun-text-shadow;
   text-align: center;
   min-height: rem-calc(300);

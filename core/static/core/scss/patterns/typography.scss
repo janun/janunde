@@ -1,90 +1,42 @@
-// Typography
+/// Typography
 
-// font alternatives list
-//
-// use Cabin and Crimson Text as fonts
-// this also sets our alternatives in case the main font isnt available
+/// font stack aka font alternatives
 $font-family-sans-serif: "Cabin", Helvetica, Roboto, Arial, sans-serif;
 $font-family-serif: "Crimson Text", "Times New Roman", Times, serif;
 
-// sans-serif text
-@mixin sans {
-  font-family: $font-family-sans-serif;
-}
-
-// serif text
-@mixin serif {
-  font-family: $font-family-serif;
-}
-
-// default font size
-//
-// is 100% meaning 16px in most browsers
-// setting this to 100% enables users to zoom the text
-// all other font sizes should be set in rem (using rem-calc)
+/// default font size
 html {
-    font-size: 100%;
-}
-
-@import 'bower_components/modular-scale/stylesheets/modular-scale';
-// modular scale settings
-//
-// this can set the font-size (and any ohter attribute) based on a scale
-// and this can be responsive, meaning font is smaller on smaller screens
-// using css calc.
-// More documentation: https://github.com/modularscale/modularscale-sass
-//
-// $ms-base:  base font size, i.e. ms-respond('attr', 1)
-// $ms-range: table of scales (1st col) and media breakpoints (2nd col)
-// $ms-fluid: wether $ms-range is interpreted as a list of steppoints (false)
-//            or font-sizes are fluid between them (true)
-//
-$ms-base: rem-calc(14);
-$ms-fluid: true;
-$ms-range:
-  1.2     $small-breakpoint,
-  1.3333  $medium-breakpoint;
-
-
-body {
-  @include sans;
-  @include ms-respond(font-size, 1);
+  font-size: 100%;
+  font-family: $font-family-sans-serif;
   color: $brown;
 }
 
-@mixin header-commons {
-  margin-top: 0.625rem;
-  margin-bottom: 0.625rem;
+h4, h3, h2, h1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   font-weight: normal;
+  line-height: 1.2;
 }
 
 h4 {
-  @include header-commons;
-  @include ms-respond(font-size, 2);
-  line-height: 1.2;
+  font-size: 1.2rem;
 }
 h3 {
-  @include header-commons;
-  @include ms-respond(font-size, 2);
-  line-height: 1.2;
+  font-size: 1.3rem;
 }
 h2 {
-  @include header-commons;
   font-size: 1.5rem;
-  line-height: 1.2;
-  font-weight: bold;
+  margin-top: 2rem;
 }
+$font-size-h1: 2.2rem;
 h1 {
-  @include header-commons;
-  font-size: 2.625rem;
-  line-height: 1.2;
-  font-weight: bold;
+  font-size: $font-size-h1;
 }
 
 
-// styling for paragraphs
-$font-size-paragraph: 1.4rem;
-$line-height-paragraph: 1.35;
+/// styling for paragraphs
+$font-size-paragraph: 1.3rem;
+$line-height-paragraph: 1.3;
 $margin-bottom-paragraph: 1rem;
 $font-family-paragraph: $font-family-serif;
 @mixin text {
@@ -97,13 +49,14 @@ $font-family-paragraph: $font-family-serif;
 	font-kerning: normal;
 }
 p {
+  margin-top: 1rem;
   @include text;
   margin-bottom: $margin-bottom-paragraph;
   hyphens: auto;
 }
 
 
-// styling of links/anchors
+/// styling of links/anchors
 a {
   color: $blue;
   text-decoration: none;
@@ -120,7 +73,7 @@ a {
   cursor: zoom-in;
 }
 
-// clickable headings
+/// clickable headings
 h1 a, h2 a, h3 a, h4 a {
   color: $brown;
   &:hover {
@@ -133,7 +86,7 @@ h1 a, h2 a, h3 a, h4 a {
 }
 
 
-// styling of normal lists, i.e. those next to paragraphs
+/// styling of normal lists, i.e. those next to paragraphs
 ul, ol {
   margin-left: rem-calc(30);
   padding-left: 0px;
@@ -142,7 +95,7 @@ ul, ol {
   line-height: $line-height-paragraph;
 }
 
-// generic shadow to be used for text at many places
+/// generic shadow to be used for text at many places
 @mixin janun-text-shadow {
   text-shadow: rem-calc(2 2 2) rgba(0, 0, 0, 0.25);
 }

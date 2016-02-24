@@ -4,11 +4,12 @@ $font-size-area-title: 0.9rem;
 $line-height-area-title: $height-area-title;
 .area-title {
   display: block;
-  //text-align: center;
   color: $brown;
-  @include sans;
+  font-family: $font-family-sans-serif;
   font-size: $font-size-area-title;
   line-height: $line-height-area-title;
   font-weight: normal;
   height: $height-area-title;
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
 }

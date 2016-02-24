@@ -35,3 +35,5 @@ between the curly brackets and the tag contents.
 
 ## Sass files
 Should be commented using [SassDoc](http://sassdoc.com/)
+
+Variables are normally written in lower case, with hyphens connecting names.

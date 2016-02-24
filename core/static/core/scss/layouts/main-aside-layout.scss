@@ -1,33 +1,45 @@
-//
-// <div class="content">
-//   <main>
-//     <h2 class="area-title"></h2>
-//     <div>content...</div>
-//   </main>
-//   <aside>
-//     <h2 class="area-title"></h2>
-//     <div>content...</div>
-//   </aside>
-// </div>
+///
+/// @example markup
+///   <div class="content">
+///    <main>
+///       <h2 class="area-title"></h2>
+///       <div>content...</div>
+///     </main>
+///     <aside>
+///       <h2 class="area-title"></h2>
+///       <div>content...</div>
+///     </aside>
+///   </div>
 @mixin main-aside-layout($space-inbetween: 2rem, $space-sides: 1rem) {
   // for small/all screens
   .content {
      @include container;
      padding-left: 0;
      padding-right: 0;
-     // margin-top is set by navbar
   }
 
   .area-title {
+    display: none;
     text-align: center;
   }
 
+  aside {
+    padding-top: $space-inbetween
+  }
 
   // for medium screens and up
   @include breakpoint($small-breakpoint) {
     .content {
       padding-left: $space-sides;
       padding-right: $space-sides;
+    }
+
+    .area-title {
+      display: inherit;
+    }
+
+    aside {
+      padding-top: 0;
     }
   }
 
@@ -54,7 +66,6 @@
       }
     }
   }
-
 }
 
 

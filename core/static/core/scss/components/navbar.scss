@@ -123,7 +123,7 @@ $navbar-color: $green;
 
   a {
     color: $white;
-    @include sans;
+    font-family: $font-family-sans-serif;
     &:active {
       text-decoration: none;
     }
@@ -327,7 +327,6 @@ $navbar-color: $green;
           padding: rem-calc(4 0);
           margin: rem-calc(3 0);
           color: $brown;
-          @include ms-respond(font-size, 0);
         }
       }
     }

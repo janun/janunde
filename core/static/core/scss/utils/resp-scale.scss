@@ -1,37 +1,48 @@
-
+/// strips the unit from values
+/// @arg string $val
+/// @returns string
 @function unitless($val) {
   $val: $val / ($val - $val + 1);
   @return $val;
 }
 
-// helper for resp-scale
-@function responsive-scale-f($val1, $val2, $break1, $break2) {
+/// helper for resp-scale
+@function resp-scale-func($val1, $val2, $break1, $break2) {
   $diff: unitless($val2) - unitless($val1);
   @return calc( #{$val1} + #{$diff} * ( ( 100vw - #{$break1}) / #{unitless($break2) - unitless($break1)} ) );
 }
 
-// continuos responsive scaling
-//
-// this will scale the returned value
-// between $val1 and $val2 dependant of $break1 and $break2
-//
-// $property - the property that is to be scaled
-// $val1     - the value of the property at $break1
-// $val2     - the value of the property at $break2
-// $break1   - the screen width lower bound
-// $break2   - the screen width upper bound
-//
-// units of breaks and values must be the same!
+/// continuos responsive scaling
+///
+/// this will scale the returned value
+/// between $val1 and $val2 dependant of $break1 and $break2
+///
+/// @arg $property - the property that is to be scaled
+/// @arg $val1     - the value of the property at $break1
+/// @arg $val2     - the value of the property at $break2
+/// @arg $break1   - the screen width lower bound
+/// @arg $break2   - the screen width upper bound
+///
+/// units of breaks and values must be the same!
 @mixin resp-scale($property, $val1, $val2, $break1, $break2) {
   #{$property}: $val1;
   @media (min-width: $break1) and (max-width: $break2) {
-    #{$property}: responsive-scale-f($val1, $val2, $break1, $break2);
+    #{$property}: resp-scale-func($val1, $val2, $break1, $break2);
   }
   @media (min-width: $break2) {
     #{$property}: $val2;
   }
 }
 
+/// continuos responsive scaling
+///
+/// this will scale the returned value
+/// between $value-at-smallest and $value-at-small
+/// dependant of $smallest-breakpoint and $small-breakpoint
+///
+/// @arg $property           - the property that is to be scaled
+/// @arg $value-at-smallest  - the value of the property at $smallest-breakpoint
+/// @arg $value-at-small     - the value of the property at $small-breakpoint
 @mixin scale-from-smallest-to-small($property, $value-at-smallest, $value-at-small) {
   @include resp-scale(
                       $property, $value-at-smallest, $value-at-small,
