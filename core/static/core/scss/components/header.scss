@@ -18,11 +18,15 @@ header.header {
   position: relative;
   width: 100%;
 
-  @include scale-from-small-to-medium(
-    height,
-    $value-at-small: rem-calc(480),
-    $value-at-medium: rem-calc(526)
-  );
+
+  // on mobile: full height
+  height: rem-calc(480); // fallback
+  height: 100vh;
+  min-height: rem-calc(480);
+  @include breakpoint($medium-breakpoint) {
+    // desktop height
+    height: rem-calc(526);
+  }
 
   background: $green-overlay;
 
@@ -41,6 +45,8 @@ header.header {
     z-index: 5;
     max-width: rem-calc(800);
     margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
 
     * {
       color: $white;
@@ -50,12 +56,21 @@ header.header {
     }
 
     p {
-      font-size: rem-calc(20);
+      @include scale-from-smallest-to-small(
+        font-size,
+        $value-at-smallest: rem-calc(16),
+        $value-at-small: rem-calc(20)
+      );
       max-width: rem-calc(450);
+      padding: 1rem;
     }
 
     h1 {
-      font-size: rem-calc(42);
+      @include scale-from-smallest-to-small(
+        font-size,
+        $value-at-smallest: rem-calc(26),
+        $value-at-small: rem-calc(42)
+      );
       font-weight: bold;
     }
 
