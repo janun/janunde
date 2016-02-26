@@ -92,9 +92,10 @@ class HomePage(BasePage):
 
     def get_context(self, request):
         context = super().get_context(request)
-        # get all highlighted articles
+        # get the last three highlighted articles
+        # TODO: include events
         context['highlights'] = Article.objects.filter(highlight=True) \
-            .live().order_by('-first_published_at')
+            .live().order_by('-first_published_at')[:3]
         return context
 
 
