@@ -4,17 +4,38 @@
 /// but not an actual heading; like a pull-quote or sth.
 ///
 /// @example markup
-///      <div class="teaser">Dies ist der Teaser-Text</div>
+///      <div class="teaser">
+///        <p>Dies ist der Teaser-Text</p>
+///      </div>
 ///
 .teaser {
-  margin-top: rem-calc(50);
-  margin-bottom: rem-calc(50);
 
-  color: $white;
-  font-size: rem-calc(42);
-  @include janun-text-shadow;
-  text-align: center;
-  padding: rem-calc(50 28);
+  @include scale-from-smallest-to-small(
+    padding,
+    $value-at-smallest: rem-calc(30) 1rem,
+    $value-at-small: rem-calc(50) 1rem
+  );
+  @include scale-from-smallest-to-small(
+    margin,
+    $value-at-smallest: rem-calc(25 0),
+    $value-at-small: rem-calc(50 0)
+  );
+
+
+  p {
+    margin: 0 auto;
+    max-width: $medium-breakpoint;
+    font-family: $font-family-sans-serif;
+    color: $white;
+    font-weight: bold;
+    @include scale-from-smallest-to-small(
+      font-size,
+      $value-at-smallest: rem-calc(26),
+      $value-at-small: rem-calc(42)
+    );
+    @include janun-text-shadow;
+    text-align: center;
+  }
 
   /// this is a background image with (green) colored overlay
   background: linear-gradient($green-overlay, $green-overlay),
