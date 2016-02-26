@@ -34,18 +34,22 @@
   }
 }
 
-/// continuos responsive scaling
-///
-/// this will scale the returned value
-/// between $value-at-smallest and $value-at-small
-/// dependant of $smallest-breakpoint and $small-breakpoint
-///
-/// @arg $property           - the property that is to be scaled
-/// @arg $value-at-smallest  - the value of the property at $smallest-breakpoint
-/// @arg $value-at-small     - the value of the property at $small-breakpoint
+/// continuos responsive scaling from smallest to small
+/// @alias resp-scale
 @mixin scale-from-smallest-to-small($property, $value-at-smallest, $value-at-small) {
   @include resp-scale(
-                      $property, $value-at-smallest, $value-at-small,
-                      $smallest-breakpoint, $small-breakpoint
-                     )
+    $property,
+    $value-at-smallest, $value-at-small,
+    $smallest-breakpoint, $small-breakpoint
+  )
+}
+
+/// continuos responsive scaling from small to medium
+/// @alias resp-scale
+@mixin scale-from-small-to-medium($property, $value-at-small, $value-at-medium) {
+  @include resp-scale(
+    $property,
+    $value-at-small, $value-at-medium,
+    $small-breakpoint, $medium-breakpoint
+  )
 }

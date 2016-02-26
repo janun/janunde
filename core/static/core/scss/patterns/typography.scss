@@ -97,5 +97,5 @@ ul, ol {
 
 /// generic shadow to be used for text at many places
 @mixin janun-text-shadow {
-  text-shadow: rem-calc(2 2 2) rgba(0, 0, 0, 0.25);
+  text-shadow: rem-calc(0 1 2) rgba(0, 0, 0, 0.25);
 }

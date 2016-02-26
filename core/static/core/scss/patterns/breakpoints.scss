@@ -27,8 +27,3 @@ $small-down: max-width $small-breakpoint;
 $medium-down: max-width $medium-breakpoint;
 $large-down: max-width $large-breakpoint;
 $xlarge-down: max-width $xlarge-breakpoint;
-
-
-@mixin resp-medium-scale($attr, $small-value, $medium-value) {
-    @include resp-scale($attr, $small-value, $medium-value, $small-breakpoint, $medium-breakpoint);
-}

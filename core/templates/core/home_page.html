@@ -32,13 +32,12 @@
   <section>
       <h2 class="area-title"><a href="{% slugurl 'aktuelles' %}">Aktuelle Highlights</a></h2>
       <div class="container">
-        <div class="grid-3col masonry">
+        <div class="grid-3col">
           {% for object in highlights %}
             {% include object.partial_template_name %}
           {% endfor %}
         </div>
       </div>
-      <a class="button center" href="{% slugurl 'aktuelles' %}">Mehr Aktuelles</a>
   </section>
   {% endif %}
 

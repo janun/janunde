@@ -24,6 +24,8 @@ button {
 // .white:hover  - the white button has white background when hovered
 //
 .button {
+  font-size: rem-calc(18);
+  font-weight: bold;
   border: solid rem-calc(2) $green;
   border-radius: rem-calc(4);
   padding: 0.75rem 0.75rem 0.625rem;

@@ -1,14 +1,18 @@
-// headings for areas on pages
+/// headings for areas on pages
+///
+/// @example markup
+///  <h2 class="area-title">Aktuelles und Interessantes</h2>
 $height-area-title: 3rem;
-$font-size-area-title: 0.9rem;
-$line-height-area-title: $height-area-title;
 $margin-area-title: 0.3rem;
 .area-title {
   display: block;
-  color: $brown;
+  color: $lighterdark;
+  a {
+    color: $lighterdark;
+  }
   font-family: $font-family-sans-serif;
-  font-size: $font-size-area-title;
-  line-height: $line-height-area-title;
+  font-size: rem-calc(13);
+  line-height: $height-area-title;
   font-weight: normal;
   height: $height-area-title;
   margin-top: $margin-area-title;

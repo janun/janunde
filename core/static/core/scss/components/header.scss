@@ -1,21 +1,36 @@
-$header-height-large: rem-calc(528);
-$header-height: rem-calc(480);
-
-@mixin header-height($attr: height) {
-  @include resp-medium-scale(height, rem-calc(480), rem-calc(650));
-}
-
+/// header
+/// used on the startpage
+///
+/// @example markup
+///   <header class="header">
+///     <div id="header-video">...</video>
+///     </div>
+///     <div class="content">
+///       <h1>...</h1>
+///       <p>...</p>
+///       <div class="buttons">
+///         <a href="/aktuelles" class="button white">Aktuelles</a>
+///       </div>
+///     </div>
+///   </header>
+///
 header.header {
   position: relative;
   width: 100%;
 
-  @include header-height;
+  @include scale-from-small-to-medium(
+    height,
+    $value-at-small: rem-calc(480),
+    $value-at-medium: rem-calc(526)
+  );
+
   background: $green-overlay;
-  background: linear-gradient(to right bottom, rgba($green, 0.6), rgba($green, 1.0));
+
+  // vertically center content using flexbox
   display: flex;
   align-items: center;
   justify-content: center;
-
+  // fallback
   &.no-flexbox {
     padding-top: rem-calc(82);
   }
@@ -35,17 +50,23 @@ header.header {
     }
 
     p {
-
+      font-size: rem-calc(20);
       max-width: rem-calc(450);
     }
 
     h1 {
+      font-size: rem-calc(42);
       font-weight: bold;
     }
 
     .buttons {
-      @include resp-medium-scale(margin-top, rem-calc(26), rem-calc(63));
+      @include scale-from-small-to-medium(
+        margin-top,
+        $value-at-small: rem-calc(26),
+        $value-at-medium: rem-calc(63)
+      );
     }
+
   }
 
 
@@ -57,7 +78,6 @@ header.header {
     height: 100%;
     overflow: hidden;
     z-index: -1;
-    //background: url(static('core/images/header-poster.jpg')) no-repeat center/cover;
 
     video {
       min-height: 100%;
