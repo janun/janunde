@@ -6,10 +6,10 @@ $panel-padding: rem-calc(20);
 @mixin panel {
   display: block;
   overflow: hidden;
+  word-wrap: break-word;
   background-color: $white;
   @include janun-box-shadow;
   padding: $panel-padding;
-  border-radius: 2px;
 
   @mixin embedded {
     width: calc(100% + #{2*$panel-padding});

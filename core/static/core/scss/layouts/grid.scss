@@ -1,12 +1,12 @@
-@mixin grid($spacing: 2rem, $children-selector: '>.panel', $columns: 2) {
+@mixin grid($spacing: 2rem, $children-selector: '> div, > article', $columns: 2) {
 
-  // flexbox fallback of no masonry used or available
+  // flexbox "fallback" if no masonry used or available
   .no-js &.masonry, &:not(.masonry) {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    align-content: flex-start;
-    align-items: flex-start;
+    align-content: center;
+    align-items: center;
   }
 
   margin-left: -$spacing/2;
@@ -31,6 +31,13 @@
 
 .grid-3col {
   @include grid($columns: 3);
+}
+
+.grid-2col-medium-3-col {
+  @include grid($columns: 2);
+  @include breakpoint($medium-breakpoint) {
+    @include grid($columns: 3);
+  }
 }
 
 .grid-medium-2col {

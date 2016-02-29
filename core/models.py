@@ -24,6 +24,7 @@ def _(str):
 class BasePage(Page):
     """basic functionality for all our pages"""
     partial_template_name = 'core/partials/base.html'
+    middle_partial_template_name = 'core/partials/base-middle.html'
 
     is_creatable = False
 
@@ -63,8 +64,6 @@ class StandardPage(BasePage):
         blank=True,
         verbose_name=_("Inhalt"),
     )
-
-    partial_template_name = 'core/partials/base.html'
 
     search_fields = BasePage.search_fields + (
         index.SearchField('body'),
@@ -123,6 +122,8 @@ class Article(StandardPage):
     """
     subpage_types = []
     parent_page_types = ['ArticleIndexPage']
+    partial_template_name = 'core/partials/article.html'
+    middle_partial_template_name = 'core/partials/article-middle.html'
 
     highlight = models.BooleanField(
         _("Highlight"),
@@ -141,8 +142,6 @@ class Article(StandardPage):
         help_text=_("Bild, das den Artikel repräsentiert. "
                     "Wird in Übersichten verwendet.")
     )
-
-    partial_template_name = 'core/partials/article.html'
 
     search_fields = StandardPage.search_fields + (
         index.SearchField('highlight'),

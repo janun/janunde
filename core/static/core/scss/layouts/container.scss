@@ -1,9 +1,11 @@
 @mixin container {
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
 
   @include breakpoint($medium-breakpoint) {
     max-width: $medium-breakpoint;
+    margin-left: auto;
+    margin-right: auto;
   }
 
 }

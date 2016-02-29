@@ -1,8 +1,20 @@
 .template-article {
 
-  // to reduce line-length
+  main {
+    // remove gutters
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+  @include breakpoint($medium-breakpoint) {
+    main {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
   @include breakpoint($small-to-medium) {
     .content {
+      // to reduce line-length
       max-width: $small-breakpoint;
     }
   }
