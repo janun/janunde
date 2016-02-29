@@ -28,6 +28,8 @@
     font-family: $font-family-sans-serif;
     @include h1;
     text-align: center;
+    color: $white;
+    @include janun-text-shadow;
   }
 
   /// this is a background image with (green) colored overlay

@@ -1,7 +1,7 @@
 $indent-blockquote: 3rem;
 
 blockquote {
-  @include text;
+  @include p;
   position: relative;
   margin: $indent-blockquote;
 

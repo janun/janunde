@@ -57,6 +57,7 @@ header.header {
 
     p {
       @include p;
+      font-family: $font-family-sans-serif;
       max-width: rem-calc(450);
       padding: 1rem;
     }
