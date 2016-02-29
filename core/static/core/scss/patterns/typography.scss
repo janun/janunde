@@ -4,6 +4,14 @@
 $font-family-sans-serif: "Cabin", Helvetica, Roboto, Arial, sans-serif;
 $font-family-serif: "Crimson Text", "Times New Roman", Times, serif;
 
+
+/// generic shadow to be used for text at many places
+@mixin janun-text-shadow {
+  text-shadow: rem-calc(0 1 2) rgba(0, 0, 0, 0.25);
+}
+
+
+
 /// default font size
 html {
   font-size: 100%;
@@ -18,6 +26,35 @@ h4, h3, h2, h1 {
   line-height: 1.2;
 }
 
+/// font size h1
+@mixin h1 {
+  @include scale-from-smallest-to-small(
+    font-size,
+    $value-at-smallest: rem-calc(26),
+    $value-at-small: rem-calc(42)
+  );
+  line-height: 1.235;
+  font-weight: bold;
+  color: $white;
+  @include janun-text-shadow;
+}
+
+/// font size p
+@mixin p {
+  @include scale-from-smallest-to-small(
+    font-size,
+    $value-at-smallest: rem-calc(16),
+    $value-at-small: rem-calc(20)
+  );
+  line-height: 1.2;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-variant-ligatures: common-ligatures;
+  font-feature-settings: "kern";
+	font-kerning: normal;
+}
+
+
 h4 {
   font-size: 1.2rem;
 }
@@ -28,9 +65,9 @@ h2 {
   font-size: 1.5rem;
   margin-top: 2rem;
 }
-$font-size-h1: 2.2rem;
+
 h1 {
-  font-size: $font-size-h1;
+  @include h1;
 }
 
 
@@ -93,9 +130,4 @@ ul, ol {
   font-family: $font-family-paragraph;
   font-size: $font-size-paragraph;
   line-height: $line-height-paragraph;
-}
-
-/// generic shadow to be used for text at many places
-@mixin janun-text-shadow {
-  text-shadow: rem-calc(0 1 2) rgba(0, 0, 0, 0.25);
 }

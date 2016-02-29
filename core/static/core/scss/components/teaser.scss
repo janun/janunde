@@ -9,31 +9,24 @@
 ///      </div>
 ///
 .teaser {
-
   @include scale-from-smallest-to-small(
-    padding,
-    $value-at-smallest: rem-calc(30) 1rem,
-    $value-at-small: rem-calc(50) 1rem
+    padding-top,
+    $value-at-smallest: rem-calc(30),
+    $value-at-small: rem-calc(50)
   );
   @include scale-from-smallest-to-small(
-    margin,
-    $value-at-smallest: rem-calc(25 0),
-    $value-at-small: rem-calc(50 0)
+    padding-bottom,
+    $value-at-smallest: rem-calc(30),
+    $value-at-small: rem-calc(50)
   );
-
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   p {
     margin: 0 auto;
     max-width: $medium-breakpoint;
     font-family: $font-family-sans-serif;
-    color: $white;
-    font-weight: bold;
-    @include scale-from-smallest-to-small(
-      font-size,
-      $value-at-smallest: rem-calc(26),
-      $value-at-small: rem-calc(42)
-    );
-    @include janun-text-shadow;
+    @include h1;
     text-align: center;
   }
 

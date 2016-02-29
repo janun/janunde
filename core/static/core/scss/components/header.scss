@@ -56,22 +56,9 @@ header.header {
     }
 
     p {
-      @include scale-from-smallest-to-small(
-        font-size,
-        $value-at-smallest: rem-calc(16),
-        $value-at-small: rem-calc(20)
-      );
+      @include p;
       max-width: rem-calc(450);
       padding: 1rem;
-    }
-
-    h1 {
-      @include scale-from-smallest-to-small(
-        font-size,
-        $value-at-smallest: rem-calc(26),
-        $value-at-small: rem-calc(42)
-      );
-      font-weight: bold;
     }
 
     .buttons {
@@ -93,10 +80,21 @@ header.header {
     height: 100%;
     overflow: hidden;
     z-index: -1;
+    background: url(static('core/images/header-poster.jpg')) repeat-y center/cover;
 
     video {
       min-height: 100%;
       min-width: 100%;
+
+      // hide video on small devices or without js
+      // (not) loading will be regulated by video.js
+      display: none;
+      @media(min-width: 64em) {
+        display: block;
+        .no-js & {
+          display: none;
+        }
+      }
     }
   }
 
