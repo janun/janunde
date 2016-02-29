@@ -11,13 +11,13 @@ $font-family-serif: "Crimson Text", "Times New Roman", Times, serif;
 }
 
 
-
 /// default font size
 html {
   font-size: 100%;
   font-family: $font-family-sans-serif;
   color: $brown;
 }
+
 
 h4, h3, h2, h1 {
   margin-top: 1rem;
@@ -36,6 +36,40 @@ h4, h3, h2, h1 {
   line-height: 1.235;
   font-weight: bold;
 }
+h1 {
+  @include h1;
+}
+
+/// font size h2
+@mixin h2 {
+  @include scale-from-smallest-to-small(
+    font-size,
+    $value-at-smallest: rem-calc(18),
+    $value-at-small: rem-calc(24)
+  );
+  line-height: 1.2;
+  font-weight: normal;
+}
+h2 {
+  @include h2;
+  margin-top: 2rem;
+}
+
+.block-h2 + .block-paragraph {
+  margin-top: -0.5rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
+
+
+
 
 /// font size p
 @mixin p {
@@ -52,27 +86,9 @@ h4, h3, h2, h1 {
 	font-kerning: normal;
   font-family: $font-family-serif;
 }
-
-
-h4 {
-  font-size: 1.2rem;
-}
-h3 {
-  font-size: 1.3rem;
-}
-h2 {
-  font-size: 1.5rem;
-  margin-top: 2rem;
-}
-
-h1 {
-  @include h1;
-}
-
-
 /// styling for paragraphs
 p {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   margin-bottom: 1rem;
   @include p;
   hyphens: auto;
@@ -84,6 +100,12 @@ ul, ol {
   padding-left: 0px;
   @include p;
 }
+
+
+
+
+
+
 
 /// styling of links/anchors
 a {
