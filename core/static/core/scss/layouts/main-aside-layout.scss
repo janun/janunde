@@ -28,7 +28,7 @@
   }
 
   // for medium screens and up
-  @include breakpoint($small-breakpoint) {
+  @include above($medium) {
     .content {
       padding-left: $space-sides;
       padding-right: $space-sides;
@@ -44,7 +44,7 @@
   }
 
   // for large screens and up
-  @include breakpoint($medium-breakpoint) {
+  @include above($large) {
     .content {
       display: flex;
       flex-direction: row;

@@ -24,29 +24,25 @@ button {
 // .white:hover  - the white button has white background when hovered
 //
 .button {
-  @include scale-from-small-to-medium(
-    font-size,
-    $value-at-small: rem-calc(14),
-    $value-at-medium: rem-calc(18)
+  @include scale-from-medium-to-large(
+    font-size, rem-calc(14), rem-calc(18)
   )
   font-weight: bold;
   color: $green;
   text-align: center;
 
   border: solid rem-calc(1) $green;
-  @include breakpoint($medium-breakpoint) {
+  @include above($medium) {
     border-width: rem-calc(2);
   }
   border-radius: rem-calc(4);
 
-  // TODO: scale padding
+  // TODO: also scale padding
   padding: rem-calc(12 12 10);
   margin-bottom: rem-calc(12);
 
-  @include scale-from-small-to-medium(
-    min-width,
-    $value-at-small: rem-calc(150),
-    $value-at-medium: rem-calc(220)
+  @include scale-from-medium-to-large(
+    min-width, rem-calc(150), rem-calc(220)
   )
 
 
@@ -76,8 +72,8 @@ button {
     color: $white;
 
     &:hover, &:focus {
-        color: $lighterdark !important;
-        background-color: $white;
+      color: $lighterdark !important;
+      background-color: $white;
     }
   }
 
@@ -86,8 +82,8 @@ button {
     color: $lighterdark;
 
     &:hover, &:focus {
-        color: $white !important;
-        background-color: $lighterdark;
+      color: $white !important;
+      background-color: $lighterdark;
     }
   }
 

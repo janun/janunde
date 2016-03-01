@@ -1,48 +1,73 @@
-@mixin grid($spacing: 2rem, $children-selector: '> div, > article', $columns: 2) {
 
-  // flexbox "fallback" if no masonry used or available
-  .no-js &.masonry, &:not(.masonry) {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-content: center;
-    align-items: center;
+/// grid
+/// @arg $columns           number    - the number of columns
+/// @arg $spacing           length    - the gutter between columns
+/// @arg $children-selector selector  - selector for the children
+@mixin grid($columns: 1, $spacing: 2rem, $children-selector: '> div, > article') {
+
+  @if $columns > 1 {
+    // flexbox "fallback" if no masonry used or available
+    .no-js &.masonry, &:not(.masonry) {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+    }
+
+    margin-left: -$spacing/2;
+    margin-right: -$spacing/2;
   }
 
-  margin-left: -$spacing/2;
-  margin-right: -$spacing/2;
-
   &#{$children-selector} {
-    width: 100%;
-    height: auto;
-    @include breakpoint($small-breakpoint) {
+    @if $columns > 1 {
       width: #{100/$columns - 5}%; // fallback if no calc
       width: calc(#{100/$columns}% - #{$spacing});
+
+      margin-left: $spacing/2;
+      margin-right: $spacing/2;
     }
-    margin-left: $spacing/2;
-    margin-right: $spacing/2;
+
+    //height: auto;
     margin-bottom: $spacing;
   }
 }
 
-.grid-2col {
-  @include grid;
-}
 
-.grid-3col {
-  @include grid($columns: 3);
-}
 
-.grid-2col-medium-3-col {
-  @include grid($columns: 2);
-  @include breakpoint($medium-breakpoint) {
-    @include grid($columns: 3);
+/// 2 column grid in medium and up
+.grid-medium-2col {
+  @include grid(1);
+  @include above($medium) {
+    @include grid(2);
   }
 }
 
-.grid-medium-2col {
-  @include grid($columns: 1);
-  @include breakpoint($medium-down) {
-    @include grid;
+/// normally 1 column
+/// only in medium 2 column
+.grid-medium-only-2col {
+  @include grid(1);
+  @include between($medium, $large) {
+    @include grid(2);
+  }
+}
+
+/// 3 column grid in medium and up
+.grid-medium-3col {
+  @include grid(1);
+  @include above($medium) {
+    @include grid(3);
+  }
+}
+
+/// 2 column grid
+/// 3 column grid in medium and up
+.grid-2col-medium-3col-large {
+  @include grid(1);
+  @include between($medium, $large) {
+    @include grid(2);
+  }
+  @include above($large) {
+    @include grid(3);
   }
 }

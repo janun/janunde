@@ -14,16 +14,6 @@ $navbar-color: $green;
   margin-top: $medium-navbar-height;
 }
 
-// used to control navbar height
-//
-// useful since we have <div.navbar-container> and actual <nav.navbar>
-// uses the global vars $medium-navbar-height and $small-navbar-height
-//
-// $attr - the attribute to be controlled
-@mixin navbar-height($attr: 'height') {
-  @include resp-scale($attr, $small-navbar-height, $medium-navbar-height, $small-breakpoint, $medium-breakpoint);
-}
-
 // special shadow for the navbar
 // remember to remove it for transparent navbars
 @mixin navbar-shadow {
@@ -52,7 +42,9 @@ $navbar-color: $green;
 // if .content comes after .navbar-container it needs to be moved down
 // because .navbar-container is position: absolute
 .navbar-container + .content {
-  @include navbar-height('margin-top');
+  @include scale-from-small-to-medium(
+    margin-top, $small-navbar-height, $medium-navbar-height
+  );
 }
 
 // navbar-container
@@ -60,10 +52,10 @@ $navbar-color: $green;
 // renders a green background
 // and is always in full-width whereas the <nav.navbar> is smaller
 //
-// .fixed                                                 - position: fixed
-// .transparent                                           - transparent bg and no shadow
-// .transparent.collapse-open and breakpoint $medium-down - not transparent
-// .transparent.dropdown-open and breakpoint $large-up    - not transparent
+// .fixed                                        - position: fixed
+// .transparent                                  - transparent bg and no shadow
+// .transparent.collapse-open and until $medium  - not transparent
+// .transparent.dropdown-open and above $large   - not transparent
 //
 .navbar-container {
   background: $navbar-color;
@@ -71,7 +63,9 @@ $navbar-color: $green;
   top: 0;
   width: 100%;
   z-index: 1000;
-  @include navbar-height;
+  @include scale-from-small-to-medium(
+    height, $small-navbar-height, $medium-navbar-height
+  );
   @include navbar-shadow;
 
   &.fixed {
@@ -82,13 +76,13 @@ $navbar-color: $green;
     background: transparent;
     box-shadow: none;
 
-    @include breakpoint($medium-down) {
+    @include until($medium) {
       &.collapse-open {
         background: $navbar-color;
         @include navbar-shadow;
       }
     }
-    @include breakpoint($large-up) {
+    @include above($large) {
       &.dropdown-open {
         background: $navbar-color;
         @include navbar-shadow;
@@ -100,13 +94,13 @@ $navbar-color: $green;
     background: rgba($black, 0.333);
     @include navbar-shadow;
 
-    @include breakpoint($medium-down) {
+    @include until($medium) {
       &.collapse-open {
         background: $navbar-color;
         @include navbar-shadow;
       }
     }
-    @include breakpoint($large-up) {
+    @include above($large) {
       &.dropdown-open {
         background: $navbar-color;
         @include navbar-shadow;
@@ -142,7 +136,7 @@ $navbar-color: $green;
 
   .title {
     padding: rem-calc(20 20);
-    @include breakpoint($small-down) {
+    @include until($medium) {
       padding: rem-calc(17 17);
     }
   }
@@ -151,14 +145,18 @@ $navbar-color: $green;
     height: rem-calc(65);
     padding: rem-calc(14 0);
     img {
-      @include resp-scale('width', rem-calc(28), rem-calc(37), $small-breakpoint, $medium-breakpoint);
-      @include resp-scale('height', rem-calc(27), rem-calc(36), $small-breakpoint, $medium-breakpoint);
+      @include scale-from-small-to-medium(
+        width, rem-calc(28), rem-calc(37)
+      );
+      @include scale-from-small-to-medium(
+        height, rem-calc(27), rem-calc(36)
+      );
     }
   }
 
   // this is being collapsed
   .collapse {
-    @include breakpoint($medium-down) {
+    @include until($large) {
       display: none;
       opacity: 0;
       transition: opacity 0.2s linear;
@@ -178,7 +176,7 @@ $navbar-color: $green;
     &:focus {
       width: rem-calc(100);
     }
-    @include breakpoint($small-breakpoint) {
+    @include above($medium) {
       width: rem-calc(150);
       &:focus {
         width: rem-calc(200);
@@ -194,7 +192,7 @@ $navbar-color: $green;
     width: rem-calc(30);
     height: rem-calc(30);
     margin: rem-calc(17 0);
-    @include breakpoint($small-down) {
+    @include until($medium) {
       margin: rem-calc(12 0);
     }
     padding: 0;
@@ -203,7 +201,7 @@ $navbar-color: $green;
 
   // the search button
   .search-button {
-    @include breakpoint($small-down) {
+    @include until($medium) {
       padding: rem-calc(7 7);
     }
   }
@@ -215,7 +213,7 @@ $navbar-color: $green;
 
   // the menu toggle button
   .menu-toggle {
-    @include breakpoint($large-up) {
+    @include above($large) {
       display: none;
     }
     padding: rem-calc(0 7);
@@ -224,7 +222,8 @@ $navbar-color: $green;
     .hamburger {
       @include hamburger-generator(
         rem-calc(16), rem-calc(3), rem-calc(2), white,
-        $timing-function: linear, $duration: 0.2s
+        $timing-function: linear,
+        $duration: 0.2s
       );
     }
     &:not(.collapsed) {
@@ -244,11 +243,15 @@ $navbar-color: $green;
   margin-top: 0;
   left: 0;
   width: 100vw;
-  @include navbar-height('top');
+  @include scale-from-small-to-medium(
+    top, $small-navbar-height, $medium-navbar-height
+  );
   background: white;
   padding-top: rem-calc(25);
   padding-bottom: rem-calc(37);
-  @include resp-scale('padding-left', rem-calc(20), rem-calc(180), $smallest-breakpoint, $medium-breakpoint);
+  @include scale-from-small-to-medium(
+    padding-left, rem-calc(20), rem-calc(180)
+  );
   border-bottom: rem-calc(1) solid $navbar-color;
 
   a {
@@ -259,7 +262,7 @@ $navbar-color: $green;
   }
 
   // what we need to change for large screens
-  @include breakpoint($large-up) {
+  @include above($large) {
     left: inherit;
     padding-left: 0;
     background: transparent;
@@ -284,7 +287,7 @@ $navbar-color: $green;
     }
   }
 
-  @include breakpoint($large-up) {
+  @include above($large) {
     .dropdown {
       position: relative;
     }
@@ -294,7 +297,9 @@ $navbar-color: $green;
   .dropdown-menu {
     display: none;
     position: absolute;
-    @include resp-scale('left', rem-calc(70), rem-calc(400), $smallest-breakpoint, $medium-breakpoint);
+    @include scale-from-small-to-medium(
+      left, rem-calc(70), rem-calc(400)
+    );
     width: 100vw;
     top: 0;
     height: 100%;
@@ -308,7 +313,7 @@ $navbar-color: $green;
     }
 
     // now for larger screens
-    @include breakpoint($large-up) {
+    @include above($large) {
       height: auto;
       left: 0;
       top: rem-calc(45);

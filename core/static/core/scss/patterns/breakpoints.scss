@@ -1,29 +1,33 @@
-@import 'bower_components/compass-breakpoint/stylesheets/breakpoint';
+/// media breakpoints
+///
+/// thumb rules about devices:
+///   until($medium) its a smartphone
+///   above($medium) its a tablet or a landscape smartphone
+///   above($large)  its a netbook or a landscape tablet
+///   above($xlarge) its a desktop
+///
+/// but we will treat $netbook and desktop the same
 
-$smallest-breakpoint:  rem-calc(320);
-$small-breakpoint:     rem-calc(640);
-$medium-breakpoint:    rem-calc(1024);
-$large-breakpoint:     rem-calc(1440);
-$xlarge-breakpoint:    rem-calc(1920);
-
-$zero-to-small: 0 $small-breakpoint;
-$zero-to-medium: 0 $medium-breakpoint;
-$zero-to-large: 0 $large-breakpoint;
-$zero-to-xlarge: 0 $xlarge-breakpoint;
-$small-to-medium: $small-breakpoint $medium-breakpoint;
-$small-to-large: $small-breakpoint $large-breakpoint;
-$small-to-xlarge: $small-breakpoint $xlarge-breakpoint;
-$medium-to-large: $medium-breakpoint $large-breakpoint;
-$medium-to-xlarge: $medium-breakpoint $xlarge-breakpoint;
-$large-to-xlarge: $large-breakpoint $xlarge-breakpoint;
+$small:     rem-calc(320);
+$medium:    rem-calc(640);
+$large:     rem-calc(1024);
+$xlarge:    rem-calc(1440);
 
 
-$small-up: min-width 0;
-$medium-up: min-width $small-breakpoint + rem-calc(1);
-$large-up: min-width $medium-breakpoint + rem-calc(1);
-$xlarge-up: min-width $large-breakpoint + rem-calc(1);
+@mixin above($device-width) {
+  @media screen and (min-width: $device-width) {
+    @content
+  }
+}
 
-$small-down: max-width $small-breakpoint;
-$medium-down: max-width $medium-breakpoint;
-$large-down: max-width $large-breakpoint;
-$xlarge-down: max-width $xlarge-breakpoint;
+@mixin until($device-width) {
+  @media screen and (max-width: $device-width - rem-calc(1)) {
+    @content
+  }
+}
+
+@mixin between($device-width1, $device-width2) {
+  @media screen and (min-width: $device-width1) and (max-width: $device-width2 - rem-calc(1)) {
+    @content
+  }
+}

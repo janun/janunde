@@ -1,25 +1,14 @@
 .template-article {
 
   main {
-    // remove gutters
-    margin-left: -1rem;
-    margin-right: -1rem;
-  }
-  @include breakpoint($medium-breakpoint) {
-    main {
-      margin-left: 0;
-      margin-right: 0;
+    // remove gutters on mobile for the content part
+    @include until($medium) {
+      margin-left: -1rem;
+      margin-right: -1rem;
     }
   }
 
-  @include breakpoint($small-to-medium) {
-    .content {
-      // to reduce line-length
-      max-width: $small-breakpoint;
-    }
-  }
-
-  // activate justified paragraphs if hyphenation possible
+  // activate justified paragraphs if hyphenation is possible
   @supports(hyphens: auto) {
     p {
       text-align: justify;

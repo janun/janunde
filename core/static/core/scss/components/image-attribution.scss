@@ -6,7 +6,9 @@ $padding-image-attribution: 1rem;
 }
 
 .image-attribution {
-  @include scale-from-smallest-to-small('font-size', rem-calc(5), rem-calc(10));
+  @include scale-from-small-to-medium(
+    font-size, rem-calc(5), rem-calc(10)
+  );
   color: $text-color-image-attribution;
   a {
     color: $text-color-image-attribution;

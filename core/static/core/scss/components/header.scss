@@ -20,11 +20,10 @@ header.header {
 
 
   // on mobile: full height
-  height: rem-calc(480); // fallback
+  height: rem-calc(480); // fallback for vh
   height: 100vh;
   min-height: rem-calc(480);
-  @include breakpoint($medium-breakpoint) {
-    // desktop height
+  @include above($medium) {
     height: rem-calc(526);
   }
 
@@ -63,10 +62,8 @@ header.header {
     }
 
     .buttons {
-      @include scale-from-small-to-medium(
-        margin-top,
-        $value-at-small: rem-calc(26),
-        $value-at-medium: rem-calc(63)
+      @include scale-from-medium-to-large(
+        margin-top, rem-calc(26), rem-calc(63)
       );
     }
 
@@ -90,7 +87,7 @@ header.header {
       // hide video on small devices or without js
       // (not) loading will be regulated by video.js
       display: none;
-      @media(min-width: 64em) {
+      @include above($large) {
         display: block;
         .no-js & {
           display: none;

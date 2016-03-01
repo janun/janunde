@@ -1,6 +1,6 @@
 .search {
   padding: 0;
-  @include breakpoint($small-down) {
+  @include until($medium) {
     margin: rem-calc(12 0);
   }
 
