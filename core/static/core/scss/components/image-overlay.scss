@@ -12,11 +12,10 @@
 }
 
 .image-overlay {
-  @include embedded-in-panel;
-
+  @include remove-panel-padding;
+  padding-left: $panel-padding;
+  padding-right: $panel-padding;
   height: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
   position: absolute;
   bottom: 0;
   background: rgba($white, 0.75);

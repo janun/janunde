@@ -9,6 +9,10 @@
 $text-color-image-attribution: rgba($white, 0.8);
 $padding-image-attribution: 1rem;
 
+.image-wrapper {
+  position: relative;
+}
+
 .image-attribution {
   @include scale-from-small-to-medium(
     font-size, rem-calc(5), rem-calc(10)
@@ -27,7 +31,6 @@ $padding-image-attribution: 1rem;
     }
   }
 
-  // small hack to give embedded images the same padding as main-images
   .block-image & {
     padding-top: $panel-padding;
   }

@@ -1,28 +1,3 @@
-{% load wagtailcore_tags wagtailimages_tags janun_tags %}
+{% extends "core/__partial_base.html" %}
 
-<article class="panel {% block partial-base-class %}partial{% endblock %} {% block partial-class %}{% endblock %}">
-
-  {% if object.main_image %}
-    <div class="image-wrapper">
-      <a href="{% pageurl object %}">
-        {% image object.main_image fill-320x192 jpg as fallback_image %}
-        <img src="{{ fallback_image.url }}"
-          srcset="{{ object.main_image|srcset:'fill-320x192|jpg fill-640x384|jpg fill-1280x768|jpg fill-695x417|jpg fill-1792x1075|jpg' }}"
-          sizes="(min-width: 40em) and (max-width: 64em) 48vw, (min-width: 64em) 20em, 100vw"
-          alt="{{ fallback_image.alt }}"
-          class="main-image">
-      </a>
-      <div class="image-overlay">
-        {% block overlay %}
-          <h3><a href="{% pageurl object %}" title="{{object.title}}">{{ object.title }}</a></h3>
-        {% endblock %}
-      </div>
-    </div>
-  {% else %}
-    <h3><a href="{% pageurl object %}" title="{{object.title}}">{{ object.title }}</a></h3>
-  {% endif %}
-
-  <div class="partial-content">
-    {% block content %}{% endblock %}
-  </div>
-</article>
+{% block partial-class %}partial{% endblock %}

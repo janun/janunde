@@ -1,4 +1,3 @@
-
 /// grid
 /// @arg $columns           number    - the number of columns
 /// @arg $spacing           length    - the gutter between columns
@@ -20,6 +19,8 @@
   }
 
   &#{$children-selector} {
+    margin-bottom: $spacing;
+
     @if $columns > 1 {
       width: #{100/$columns - 5}%; // fallback if no calc
       width: calc(#{100/$columns}% - #{$spacing});
@@ -27,9 +28,6 @@
       margin-left: $spacing/2;
       margin-right: $spacing/2;
     }
-
-    //height: auto;
-    margin-bottom: $spacing;
   }
 }
 

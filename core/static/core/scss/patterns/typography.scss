@@ -51,6 +51,8 @@ h2 {
   margin-top: 2rem;
 }
 
+// reduce margin between subheading and subsequent paragraph
+// but not other elements like images
 .block-h2 + .block-paragraph {
   margin-top: -0.5rem;
 }
@@ -69,6 +71,7 @@ h4 {
   @include scale-from-small-to-medium(
     font-size, rem-calc(16), rem-calc(18)
   );
+
   line-height: 1.25;
   font-weight: normal;
   text-rendering: optimizeLegibility;
@@ -84,36 +87,19 @@ h4 {
 }
 /// styling for paragraphs
 p {
+  @include p;
+
   margin-top: 0.5rem;
   margin-bottom: 1rem;
-  @include p;
   hyphens: auto;
-}
-
-
-@mixin small-p {
-  @include scale-from-small-to-medium(
-    font-size, rem-calc(12), rem-calc(15)
-  );
-  line-height: 1.4;
-  font-weight: normal;
-  text-rendering: optimizeLegibility;
-  font-variant-ligatures: common-ligatures;
-  font-feature-settings: "kern";
-	font-kerning: normal;
-  font-family: $font-family-serif;
-
-  // activate justified paragraphs if hyphenation is possible
-  @supports(hyphens: auto) {
-    text-align: justify;
-  }
 }
 
 /// styling of lists
 ul, ol {
-  margin-left: rem-calc(30);
-  padding-left: 0px;
   @include p;
+
+  margin-left: 0;
+  padding-left: rem-calc(30);
 }
 
 

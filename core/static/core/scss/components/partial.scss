@@ -1,8 +1,11 @@
 /// partial is a small block representing the content type
 .partial {
-  height: rem-calc(192);
+  height: rem-calc(196);
+  padding-bottom: 0;
+  padding-top: 0;
 
-  .image-overlay {
-    bottom: -$panel-padding;
+  .main-image {
+    margin-top: 0;
+    height: 100%
   }
 }

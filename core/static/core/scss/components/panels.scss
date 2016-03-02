@@ -1,36 +1,47 @@
-$panel-padding: rem-calc(20);
+$panel-padding: rem-calc(22);
 
-@mixin embedded-in-panel {
+@mixin remove-panel-padding($left: true, $right: true,
+                            $top: false, $bottom: false) {
   width: calc(100% + #{2*$panel-padding});
-  margin-left: -$panel-padding;
-  margin-right: -$panel-padding;
+  @if $left {
+    margin-left: -$panel-padding;
+  }
+  @if $right {
+    margin-right: -$panel-padding;
+  }
+  @if $top {
+    margin-top: -$panel-padding;
+  }
+  @if $bottom {
+    margin-bottom: -$panel-padding;
+  }
 }
 
 // panel
 //
 // is a container for content, article etc.
-@mixin panel {
+.panel {
+  @include janun-box-shadow;
+
   display: block;
-  overflow: hidden;
   word-wrap: break-word;
   background-color: $white;
-  @include janun-box-shadow;
   padding: $panel-padding;
 
   // embedded main-image
   .main-image {
-    @include embedded-in-panel;
-    margin-top: -$panel-padding;
+    @include remove-panel-padding($top: true);
   }
 
   // embedded image
   .block-image img {
-    @include embedded-in-panel;
+    @include remove-panel-padding;
   }
 
   // embedded video
   .block-embedded_video {
-    @include embedded-in-panel;
+    @include remove-panel-padding;
+
     .responsive-object {
       position: relative;
       iframe, object, embed {
@@ -43,8 +54,4 @@ $panel-padding: rem-calc(20);
     }
   }
 
-}
-
-.panel {
-  @include panel;
 }

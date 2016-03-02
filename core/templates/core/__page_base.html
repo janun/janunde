@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags janun_tags humanize %}
+
+{% block body_class %}main-aside-layout{% endblock %}
+
+{% block content %}
+
+  <main>
+    <h2 class="area-title">Inhalt</h2>
+
+    <div class="panel">
+
+      {% if self.main_image %}
+        <div class="image-wrapper">
+          {% image self.main_image jpg as original_image %}
+            <img src="{{ original_image.url }}"
+              srcset="{{ self.main_image|srcset:'width-320|jpg width-640|jpg width-1280|jpg width-695|jpg width-1792|jpg' }}"
+              sizes="(min-width: 40em) 43.38em, 100vw"
+              alt="{{ original_image.alt }}"
+              class="main-image">
+            {% if self.main_image.attribution %}
+              <div class="image-attribution">{{ self.main_image.attribution }}</div>
+            {% endif %}
+          <div class="image-overlay">
+            <h1>{{ self.title }}</h1>
+          </div>
+        </div>
+      {% else %}
+        <h1>{{ self.title }}</h1>
+      {% endif %}
+
+      <div class="dates">
+        von <time datetime="{{ self.first_published_at|date:'Y-m-d H:i' }}">{{ self.first_published_at|naturaltime }}</time>
+        {% if self.latest_revision_created_at > self.first_published_at %}
+        und aktualisiert <time datetime="{{ self.latest_revision_created_at|date:'Y-m-d H:i' }}">{{ self.latest_revision_created_at|naturaltime }}</time>
+        {% endif %}
+      </div>
+
+      {{ self.body }}
+
+    </div>
+
+  </main>
+
+  {% if self.related_pages.all %}
+  <aside>
+    <h2 class="area-title">Zugehöriges und Interessantes</h2>
+    <div class="grid-medium-only-2col">
+      {% for related_page in self.related_pages.all %}
+        {% include related_page.related_page.specific.partial_template_name with object=related_page.related_page.specific %}
+      {% endfor %}
+    </div>
+  </aside>
+  {% endif %}
+
+{% endblock %}
