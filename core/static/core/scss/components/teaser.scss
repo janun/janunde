@@ -15,20 +15,18 @@
   @include scale-from-small-to-medium(
     padding-bottom, rem-calc(30), rem-calc(50)
   );
-  padding-left: 1rem;
-  padding-right: 1rem;
-
-  p {
-    margin: 0 auto;
-    max-width: $medium;
-    font-family: $font-family-sans-serif;
-    @include h1;
-    text-align: center;
-    color: $white;
-    @include janun-text-shadow;
-  }
 
   /// this is a background image with (green) colored overlay
   background: linear-gradient($green-overlay, $green-overlay),
     url(static('core/images/header-poster.jpg')) repeat-y center/cover fixed;
+
+  p {
+    @include h1;
+    @include janun-text-shadow;
+    @include container;
+
+    font-family: $font-family-sans-serif;
+    text-align: center;
+    color: $white;
+  }
 }

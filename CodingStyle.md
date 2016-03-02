@@ -37,3 +37,16 @@ between the curly brackets and the tag contents.
 Should be commented using [SassDoc](http://sassdoc.com/)
 
 Variables are normally written in lower case, with hyphens connecting names.
+
+### ordering
+1. sass @imports
+2. css declarations
+  1. positioning
+  2. box model
+  3. typography
+  4. visuals
+  5. other
+3. nested selectors
+
+### vendor-prefixes
+Do not prefix. It’s handled by autoprefixer automatically.

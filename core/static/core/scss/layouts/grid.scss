@@ -31,7 +31,9 @@
   }
 }
 
-
+.grid {
+  @include grid(1);
+}
 
 /// 2 column grid in medium and up
 .grid-medium-2col {
