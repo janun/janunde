@@ -26,3 +26,18 @@ body {
 @mixin janun-box-shadow {
   box-shadow: 0 0 5px rgba($black, 0.1);
 }
+
+.color {
+  &-blue {
+    color: $blue;
+  }
+  &-green {
+    color: $green;
+  }
+  &-orange {
+    color: $orange;
+  }
+  &-red {
+    color: $red;
+  }
+}

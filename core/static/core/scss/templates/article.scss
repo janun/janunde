@@ -8,10 +8,4 @@
     }
   }
 
-  // activate justified paragraphs if hyphenation is possible
-  @supports(hyphens: auto) {
-    p {
-      text-align: justify;
-    }
-  }
 }

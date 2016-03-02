@@ -1,0 +1,8 @@
+/// partial is a small block representing the content type
+.partial {
+  height: rem-calc(192);
+
+  .image-overlay {
+    bottom: -$panel-padding;
+  }
+}

@@ -1,0 +1,7 @@
+/// partial is a small block representing the content type
+.middle-partial {
+  height: auto;
+  p {
+    @include small-p;
+  }
+}

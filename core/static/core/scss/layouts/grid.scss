@@ -3,7 +3,7 @@
 /// @arg $columns           number    - the number of columns
 /// @arg $spacing           length    - the gutter between columns
 /// @arg $children-selector selector  - selector for the children
-@mixin grid($columns: 1, $spacing: 2rem, $children-selector: '> div, > article') {
+@mixin grid($columns: 1, $spacing: rem-calc(22), $children-selector: '> div, > article') {
 
   @if $columns > 1 {
     // flexbox "fallback" if no masonry used or available
@@ -57,6 +57,18 @@
   @include grid(1);
   @include above($medium) {
     @include grid(3);
+  }
+}
+
+/// 4 column grid large
+/// 2 column grid in medium
+.grid-large-4col-medium-2col {
+  @include grid(1);
+  @include between($medium, $large) {
+    @include grid(2);
+  }
+  @include above($large) {
+    @include grid(4);
   }
 }
 

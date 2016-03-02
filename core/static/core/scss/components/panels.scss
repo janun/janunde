@@ -1,5 +1,11 @@
 $panel-padding: rem-calc(20);
 
+@mixin embedded-in-panel {
+  width: calc(100% + #{2*$panel-padding});
+  margin-left: -$panel-padding;
+  margin-right: -$panel-padding;
+}
+
 // panel
 //
 // is a container for content, article etc.
@@ -11,26 +17,20 @@ $panel-padding: rem-calc(20);
   @include janun-box-shadow;
   padding: $panel-padding;
 
-  @mixin embedded {
-    width: calc(100% + #{2*$panel-padding});
-    margin-left: -$panel-padding;
-    margin-right: -$panel-padding;
-  }
-
   // embedded main-image
   .main-image {
-    @include embedded;
+    @include embedded-in-panel;
     margin-top: -$panel-padding;
   }
 
   // embedded image
   .block-image img {
-    @include embedded;
+    @include embedded-in-panel;
   }
 
   // embedded video
   .block-embedded_video {
-    @include embedded;
+    @include embedded-in-panel;
     .responsive-object {
       position: relative;
       iframe, object, embed {

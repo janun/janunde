@@ -8,10 +8,26 @@
   <main>
     <h2 class="area-title">Inhalt</h2>
     <div class="panel">
+
       {% if self.main_image %}
-        {% include 'includes/image.html' with value=self.main_image classname="main-image" %}
+        <div class="image-wrapper">
+          {% image self.main_image jpg as original_image %}
+            <img src="{{ original_image.url }}"
+              srcset="{{ self.main_image|srcset:'width-320|jpg width-640|jpg width-1280|jpg width-695|jpg width-1792|jpg' }}"
+              sizes="(min-width: 40em) 43.38em, 100vw"
+              alt="{{ original_image.alt }}"
+              class="main-image">
+            {% if self.main_image.attribution %}
+              <div class="image-attribution">{{ self.main_image.attribution }}</div>
+            {% endif %}
+          <div class="image-overlay">
+            <h1>{{self.title}}</h1>
+          </div>
+        </div>
+      {% else %}
+        <h1>{{self.title}}</h1>
       {% endif %}
-      <h1>{{self.title}}</h1>
+
       <div class="dates">
         von <time datetime="{{ self.first_published_at|date:'Y-m-d H:i' }}">{{ self.first_published_at|naturaltime }}</time>
         {% if self.latest_revision_created_at > self.first_published_at %}

@@ -64,13 +64,10 @@ h4 {
 }
 
 
-
-
-
 /// font size p
 @mixin p {
   @include scale-from-small-to-medium(
-    font-size, rem-calc(16), rem-calc(20)
+    font-size, rem-calc(16), rem-calc(18)
   );
   line-height: 1.25;
   font-weight: normal;
@@ -79,6 +76,11 @@ h4 {
   font-feature-settings: "kern";
 	font-kerning: normal;
   font-family: $font-family-serif;
+
+  // activate justified paragraphs if hyphenation is possible
+  @supports(hyphens: auto) {
+    text-align: justify;
+  }
 }
 /// styling for paragraphs
 p {
@@ -86,6 +88,25 @@ p {
   margin-bottom: 1rem;
   @include p;
   hyphens: auto;
+}
+
+
+@mixin small-p {
+  @include scale-from-small-to-medium(
+    font-size, rem-calc(12), rem-calc(15)
+  );
+  line-height: 1.4;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+  font-variant-ligatures: common-ligatures;
+  font-feature-settings: "kern";
+	font-kerning: normal;
+  font-family: $font-family-serif;
+
+  // activate justified paragraphs if hyphenation is possible
+  @supports(hyphens: auto) {
+    text-align: justify;
+  }
 }
 
 /// styling of lists

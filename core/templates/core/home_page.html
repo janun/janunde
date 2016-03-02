@@ -30,14 +30,14 @@
   {# show highlights #}
   {% if highlights %}
   <section>
-      <h2 class="area-title"><a href="{% slugurl 'aktuelles' %}">Aktuelle Highlights</a></h2>
-      <div class="container">
-        <div class="grid-medium-3col">
-          {% for object in highlights %}
-            {% include object.partial_template_name %}
-          {% endfor %}
-        </div>
+    <h2 class="area-title"><a href="{% slugurl 'aktuelles' %}">Aktuelle Highlights</a></h2>
+    <div class="container">
+      <div class="grid-medium-3col">
+        {% for object in highlights %}
+          {% include object.partial_template_name %}
+        {% endfor %}
       </div>
+    </div>
   </section>
   {% endif %}
 
@@ -48,28 +48,29 @@
     </p>
   </div>
   {% endif %}
+
   <h2 class="area-title">Grundsätze unserer Arbeit</h2>
   <div class="container">
     <p>
       Wir sind ein Netzwerk mit vielen Engagierten und einer großen Bandbreite an Themen und Aktivitäten für Jugendliche bis 27 Jahre.
       JANUN sensibilisiert Jugendliche für ökologische und soziale Themen und zeigt Handlungsmöglichkeiten auf politischer wie individueller Ebene auf. Gleichzeitig schafft JANUN Angebote und bietet Strukturen, die Jugendliche vernetzen, qualifizieren sowie in ihrem Engagement stärken und unterstützen.
     </p>
-    <div class="panel-container">
-      <div class="small-panel centered-content" style="color: green">
+    <div class="grid-large-4col-medium-2col">
+      <div class="panel principle color-green">
         <img alt="Gesichter" src="{% static 'core/images/components/principles/diverse.png' %}">
-        vielfältig
+        <span>vielfältig</span>
       </div>
-      <div class="small-panel centered-content" style="color: blue">
+      <div class="panel principle color-blue">
         <img alt="Sprechblase" src="{% static 'core/images/components/principles/democratic.png' %}">
-        basisdemokratisch
+        <span>basisdemokratisch</span>
       </div>
-      <div class="small-panel centered-content" style="color: orange">
+      <div class="panel principle color-orange">
         <img alt="Megaphon" src="{% static 'core/images/components/principles/political.png' %}">
-        politisch <small>(nicht parteigebunden)</small>
+        <span>politisch <small>(nicht parteigebunden)</small></span>
       </div>
-      <div class="small-panel centered-content" style="color: red">
+      <div class="panel principle color-red">
         <img alt="Herz" src="{% static 'core/images/components/principles/attractive.png' %}">
-        attraktiv
+        <span>attraktiv</span>
       </div>
     </div>
   </div>
@@ -84,7 +85,7 @@
 
   {% endif %}
 
-  {% comment %}
+
   <div class="teaser">
     <p>
       Du willst kritisch die Welt verändern?
@@ -92,7 +93,7 @@
     </p>
   </div>
   <h2 class="area-title">Aktiv werden</h2>
-  {% endcomment %}
+
 
 
   <div class="teaser">

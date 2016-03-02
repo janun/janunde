@@ -2,45 +2,45 @@
 
 <!DOCTYPE html>
 <html class="no-js" lang="de">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="theme-color" content="rgb(70, 187, 0)">
-        <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %} - JANUN{% endblock %}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {% compress css %}
-            <link rel="stylesheet" type="text/x-scss" href="{% static "janunde/scss/all.scss" %}" />
-            {% block css %}{% endblock %}
-	    {% endcompress %}
-    </head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="rgb(70, 187, 0)">
+    <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %} - JANUN{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% compress css %}
+      <link rel="stylesheet" type="text/x-scss" href="{% static "janunde/scss/all.scss" %}" />
+      {% block css %}{% endblock %}
+	  {% endcompress %}
+  </head>
 
-    <body class="{% block body_class %}{% endblock %}">
+  <body class="{% block body_class %}{% endblock %}">
 
-        {% block top %}
-            {% get_site_root as site_root %}
-            {% navbar parent=site_root calling_page=self %}
-        {% endblock %}
+    {% block top %}
+      {% get_site_root as site_root %}
+      {% navbar parent=site_root calling_page=self %}
+    {% endblock %}
 
-        <div class="content">
-            {% wagtailuserbar %}
-            {% block content %}{% endblock %}
-        </div>
+    <div class="content">
+      {% wagtailuserbar %}
+      {% block content %}{% endblock %}
+    </div>
 
-        {% block footer %}
-            {% include "core/footer.html" %}
-        {% endblock %}
+    {% block footer %}
+      {% include "footer.html" %}
+    {% endblock %}
 
-        {% compress js %}
-            <script type="text/javascript" src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
-            <script type="text/javascript" src="{% static 'core/js/collapse.js' %}"></script>
-            <script type="text/javascript" src="{% static 'core/js/dropdown.js' %}"></script>
-            <script type="text/javascript" src="{% static 'core/js/transition.js' %}"></script>
-            <script type="text/javascript" src="{% static 'core/js/components/navbar/navbar.js' %}"></script>
-            <script type="text/javascript" src="{% static 'core/js/video.js' %}"></script>
-            <script type="text/javascript" src="{% static 'bower_components/isotope/dist/isotope.pkgd.min.js' %}"></script>
-            <script type="text/javascript" src="{% static 'bower_components/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
-            <script type="text/javascript" src="{% static 'core/js/grid.js' %}"></script>
-            <script type="text/javascript" src="{% static 'core/js/no-js.js' %}"></script>
-        {% endcompress %}
+    {% compress js %}
+      <script type="text/javascript" src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'core/js/collapse.js' %}"></script>
+      <script type="text/javascript" src="{% static 'core/js/dropdown.js' %}"></script>
+      <script type="text/javascript" src="{% static 'core/js/transition.js' %}"></script>
+      <script type="text/javascript" src="{% static 'core/js/components/navbar/navbar.js' %}"></script>
+      <script type="text/javascript" src="{% static 'core/js/video.js' %}"></script>
+      <script type="text/javascript" src="{% static 'bower_components/isotope/dist/isotope.pkgd.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'bower_components/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'core/js/grid.js' %}"></script>
+      <script type="text/javascript" src="{% static 'core/js/no-js.js' %}"></script>
+    {% endcompress %}
 
-    </body>
+  </body>
 </html>

@@ -1,0 +1,9 @@
+{% extends "core/_partial.html" %}
+
+{% block partial-base-class %}medium-partial{% endblock %}
+
+{% block content %}
+  {% if object.body %}
+    <p>{{ object.body|truncatewords_html:30 }}</p>
+  {% endif %}
+{% endblock %}

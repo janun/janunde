@@ -23,8 +23,8 @@ def _(str):
 
 class BasePage(Page):
     """basic functionality for all our pages"""
-    partial_template_name = 'core/partials/base.html'
-    middle_partial_template_name = 'core/partials/base-middle.html'
+    partial_template_name = 'core/_partial.html'
+    medium_partial_template_name = 'core/_medium_partial.html'
 
     is_creatable = False
 
@@ -122,8 +122,6 @@ class Article(StandardPage):
     """
     subpage_types = []
     parent_page_types = ['ArticleIndexPage']
-    partial_template_name = 'core/partials/article.html'
-    middle_partial_template_name = 'core/partials/article-middle.html'
 
     highlight = models.BooleanField(
         _("Highlight"),
@@ -224,8 +222,6 @@ class EventPage(StandardPage):
         null=True,
         blank=True,
     )
-
-    partial_template_name = 'core/partials/base.html'
 
     subpage_types = []
     parent_page_types = ['EventIndexPage']

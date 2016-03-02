@@ -1,0 +1,23 @@
+/// image overlays
+///
+/// @example markup
+///   <div class="image-wrapper">
+///     <img ...>
+///     <div class="image-overlay">...</div>
+///   </div>
+
+.image-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.image-overlay {
+  @include embedded-in-panel;
+
+  height: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: absolute;
+  bottom: 0;
+  background: rgba($white, 0.75);
+}

@@ -3,5 +3,14 @@
 {% image value original as original_image %}
 
 <a class="zoom-in" href="{{ original_image.url }}">
-  {% include "includes/image.html" with value=value %}
+  <div class="image-wrapper">
+    {% image value jpg as original_image %}
+    <img src="{{ original_image.url }}"
+      srcset="{{ value|srcset:'width-320|jpg width-640|jpg width-1280|jpg width-695|jpg width-1792|jpg' }}"
+      sizes="(min-width: 40em) 43.38em, 100vw"
+      alt="{{ original_image.alt }}">
+    {% if value.attribution %}
+      <div class="image-attribution">{{ value.attribution }}</div>
+    {% endif %}
+  </div>
 </a>

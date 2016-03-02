@@ -67,7 +67,7 @@ class AttributedImage(AbstractImage):
 
     @property
     def attribution(self):
-        attribution = self.title_html
+        attribution = format_html(_("Photo: {title}"), title=self.title_html)
         if self.author_html:
             attribution += format_html("<br> {0}", self.author_html)
         if self.license_html:
