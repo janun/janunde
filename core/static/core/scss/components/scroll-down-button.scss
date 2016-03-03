@@ -1,0 +1,15 @@
+.scroll-down-button {
+  display: block;
+  margin-top: 3rem;
+  background-image: url(static('core/images/components/scroll-down-button/chevron.svg'));
+  background-size: rem-calc(20 12);
+  background-repeat: no-repeat;
+  background-position: center;
+
+  width: rem-calc(40);
+  height: rem-calc(24);
+
+  &:active {
+    text-decoration: none;
+  }
+}

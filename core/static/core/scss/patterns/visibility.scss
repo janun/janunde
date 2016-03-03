@@ -1,0 +1,19 @@
+
+@mixin small-only {
+  @include above($medium) {
+    display: none !important;
+  }
+}
+.small-only {
+  @include small-only;
+}
+
+
+@mixin js-only {
+  .no-js & {
+    display: none !important;
+  }
+}
+.js-only {
+  @include js-only;
+}
