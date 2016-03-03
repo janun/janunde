@@ -5,18 +5,17 @@
 ///     <img ...>
 ///     <div class="image-overlay">...</div>
 ///   </div>
-
 .image-wrapper {
   position: relative;
-  height: 100%;
 }
 
 .image-overlay {
-  @include remove-panel-padding;
-  padding-left: $panel-padding;
-  padding-right: $panel-padding;
-  height: auto;
   position: absolute;
   bottom: 0;
+  width: 100%;
+  height: auto;
+  padding-left: $panel-padding;
+  padding-right: $panel-padding;
+  text-align: left;
   background: rgba($white, 0.75);
 }

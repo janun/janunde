@@ -2,4 +2,7 @@
   .area-title {
     text-align: center;
   }
+  .container {
+    margin-bottom: $height-area-title - $margin-grid;
+  }
 }

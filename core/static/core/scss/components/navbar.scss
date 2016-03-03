@@ -14,6 +14,20 @@ $navbar-color: $green;
   margin-top: $medium-navbar-height;
 }
 
+
+@mixin scale-with-navbar($property, $value1, $value2) {
+  @include scale-from-medium-to-large(
+    $property, $value1, $value2
+  );
+}
+
+// used to scale propertes like margin and height
+@mixin scale-with-navbar-height($property: height) {
+  @include scale-with-navbar(
+    $property, $small-navbar-height, $medium-navbar-height
+  );
+}
+
 // special shadow for the navbar
 // remember to remove it for transparent navbars
 @mixin navbar-shadow {
@@ -42,9 +56,7 @@ $navbar-color: $green;
 // if .content comes after .navbar-container it needs to be moved down
 // because .navbar-container is position: absolute
 .navbar-container + .content {
-  @include scale-from-small-to-medium(
-    margin-top, $small-navbar-height, $medium-navbar-height
-  );
+  @include scale-with-navbar-height(margin-top);
 }
 
 // navbar-container
@@ -63,9 +75,7 @@ $navbar-color: $green;
   top: 0;
   width: 100%;
   z-index: 1000;
-  @include scale-from-small-to-medium(
-    height, $small-navbar-height, $medium-navbar-height
-  );
+  @include scale-with-navbar-height;
   @include navbar-shadow;
 
   &.fixed {
@@ -145,10 +155,10 @@ $navbar-color: $green;
     height: rem-calc(65);
     padding: rem-calc(14 0);
     img {
-      @include scale-from-small-to-medium(
+      @include scale-with-navbar(
         width, rem-calc(28), rem-calc(37)
       );
-      @include scale-from-small-to-medium(
+      @include scale-with-navbar(
         height, rem-calc(27), rem-calc(36)
       );
     }
@@ -243,13 +253,11 @@ $navbar-color: $green;
   margin-top: 0;
   left: 0;
   width: 100vw;
-  @include scale-from-small-to-medium(
-    top, $small-navbar-height, $medium-navbar-height
-  );
+  @include scale-with-navbar-height(top);
   background: white;
   padding-top: rem-calc(25);
   padding-bottom: rem-calc(37);
-  @include scale-from-small-to-medium(
+  @include scale-with-navbar(
     padding-left, rem-calc(20), rem-calc(180)
   );
   border-bottom: rem-calc(1) solid $navbar-color;
@@ -297,7 +305,7 @@ $navbar-color: $green;
   .dropdown-menu {
     display: none;
     position: absolute;
-    @include scale-from-small-to-medium(
+    @include scale-with-navbar(
       left, rem-calc(70), rem-calc(400)
     );
     width: 100vw;

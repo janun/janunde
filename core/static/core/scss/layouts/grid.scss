@@ -1,8 +1,9 @@
+$margin-grid: rem-calc(22);
+
 /// grid
 /// @arg $columns           number    - the number of columns
-/// @arg $spacing           length    - the gutter between columns
 /// @arg $children-selector selector  - selector for the children
-@mixin grid($columns: 1, $spacing: rem-calc(22), $children-selector: '> div, > article') {
+@mixin grid($columns: 1, $children-selector: '> div, > article') {
 
   @if $columns > 1 {
     // flexbox "fallback" if no masonry used or available
@@ -10,23 +11,23 @@
       display: flex;
       flex-wrap: wrap;
       flex-direction: row;
-      align-content: center;
-      align-items: center;
+      align-content: flex-start;
+      align-items: flex-start;
     }
 
-    margin-left: -$spacing/2;
-    margin-right: -$spacing/2;
+    margin-left: -$margin-grid/2;
+    margin-right: -$margin-grid/2;
   }
 
   &#{$children-selector} {
-    margin-bottom: $spacing;
+    margin-bottom: $margin-grid;
 
     @if $columns > 1 {
       width: #{100/$columns - 5}%; // fallback if no calc
-      width: calc(#{100/$columns}% - #{$spacing});
+      width: calc(#{100/$columns}% - #{$margin-grid});
 
-      margin-left: $spacing/2;
-      margin-right: $spacing/2;
+      margin-left: $margin-grid/2;
+      margin-right: $margin-grid/2;
     }
   }
 }
@@ -60,6 +61,17 @@
   }
 }
 
+/// 2column in smedium and 3 column grid in medium and up
+.grid-medium-3col-smedium-2col {
+  @include grid(1);
+  @include between($smedium, $medium) {
+    @include grid(2);
+  }
+  @include above($medium) {
+    @include grid(3);
+  }
+}
+
 /// 4 column grid large
 /// 2 column grid in medium
 .grid-large-4col-medium-2col {
@@ -67,6 +79,13 @@
   @include between($medium, $large) {
     @include grid(2);
   }
+  @include above($large) {
+    @include grid(4);
+  }
+}
+
+.grid-large-4col-medium-2col-small-2col {
+  @include grid(2);
   @include above($large) {
     @include grid(4);
   }

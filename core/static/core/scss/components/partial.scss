@@ -1,11 +1,16 @@
 /// partial is a small block representing the content type
+$height-partial: rem-calc(196);
+$height-partial-small: rem-calc(98);
+
 .partial {
-  height: rem-calc(196);
+  @include above($medium) {
+    height: $height-partial;
+  }
+
   padding-bottom: 0;
   padding-top: 0;
 
-  .main-image {
-    margin-top: 0;
-    height: 100%
+  img {
+    min-height: $height-partial;
   }
 }

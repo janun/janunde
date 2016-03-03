@@ -1,21 +1,22 @@
 $panel-padding: rem-calc(22);
 
-@mixin remove-panel-padding($left: true, $right: true,
-                            $top: false, $bottom: false) {
-  width: calc(100% + #{2*$panel-padding});
-  @if $left {
-    margin-left: -$panel-padding;
-  }
-  @if $right {
-    margin-right: -$panel-padding;
-  }
-  @if $top {
-    margin-top: -$panel-padding;
-  }
-  @if $bottom {
-    margin-bottom: -$panel-padding;
-  }
+
+@mixin remove-panel-padding {
+  margin-left: -$panel-padding;
+  margin-right: -$panel-padding;
 }
+.remove-panel-padding {
+  @include remove-panel-padding;
+}
+
+
+@mixin remove-panel-padding-top {
+  margin-top: -$panel-padding;
+}
+.remove-panel-padding-top {
+  @include remove-panel-padding-top;
+}
+
 
 // panel
 //
@@ -27,11 +28,6 @@ $panel-padding: rem-calc(22);
   word-wrap: break-word;
   background-color: $white;
   padding: $panel-padding;
-
-  // embedded main-image
-  .main-image {
-    @include remove-panel-padding($top: true);
-  }
 
   // embedded image
   .block-image img {

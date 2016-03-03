@@ -8,10 +8,11 @@
 ///
 /// but we will treat $netbook and desktop the same
 
-$small:     rem-calc(320);
-$medium:    rem-calc(640);
-$large:     rem-calc(1024);
-$xlarge:    rem-calc(1440);
+$small:     rem-calc(320);  // 20rem
+$smedium:   rem-calc(480);  // 30rem
+$medium:    rem-calc(640);  // 40rem
+$large:     rem-calc(1024); // 64rem
+$xlarge:    rem-calc(1440); // 90rem
 
 
 @mixin above($device-width) {

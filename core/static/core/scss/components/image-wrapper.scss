@@ -1,0 +1,21 @@
+.image-wrapper {
+  @include remove-panel-padding;
+
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+
+  a {
+    display: block;
+  }
+
+  img {
+    // if parent smaller than picture: center picture while cropping
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 100%;
+    margin-left: -200%;
+    min-width: 100%;
+  }
+}
