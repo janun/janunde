@@ -1,4 +1,4 @@
-// Buttons
+  // Buttons
 
 // resets for all possible buttons
 button {
@@ -24,7 +24,7 @@ button {
 // .white:hover  - the white button has white background when hovered
 //
 .button {
-  @include scale-from-medium-to-large(
+  @include scale-from-small-to-medium(
     font-size, rem-calc(14), rem-calc(18)
   )
   font-weight: bold;
@@ -41,7 +41,7 @@ button {
   padding: rem-calc(12 12 10);
   margin-bottom: rem-calc(12);
 
-  @include scale-from-medium-to-large(
+  @include scale-from-small-to-medium(
     min-width, rem-calc(150), rem-calc(220)
   )
 

@@ -62,7 +62,7 @@ header.header {
     }
 
     .buttons {
-      @include scale-from-medium-to-large(
+      @include scale-from-small-to-medium(
         margin-top, rem-calc(26), rem-calc(63)
       );
     }
