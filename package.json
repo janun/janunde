@@ -5,11 +5,15 @@
     "node": "4.2.6"
   },
   "scripts": {
-    "postinstall": "bower install"
+    "postinstall": "bower install && gulp build"
   },
   "dependencies": {
     "autoprefixer": "^6.3.1",
     "bower": "^1.6.9",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-sass": "^2.2.0",
+    "gulp-util": "^3.0.7",
     "postcss-cli": "^2.5.0"
   }
 }

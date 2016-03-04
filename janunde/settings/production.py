@@ -42,11 +42,6 @@ ALLOWED_HOSTS = ['*']
 # save staticfiles using whitenoise
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-# compress files via django-compress before starting app
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
-COMPRESS_CSS_HASHING_METHOD = 'content'
-
 # minify
 HTML_MINIFY = True
 

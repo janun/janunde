@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'wagtail.wagtailcore',
 
     'modelcluster',
-    'compressor',
+    'compressor', # can be removed with wagtail>=1.4
     'taggit',
 
     'django.contrib.humanize',
@@ -138,7 +138,6 @@ USE_TZ = True
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
 )
 
 STATICFILES_DIRS = (
@@ -150,22 +149,6 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
-
-# django-compressor settings
-COMPRESS_PRECOMPILERS = (
-    ('text/x-scss', 'django_libsass.SassCompiler'),
-)
-#COMPRESS_ENABLED=True
-COMPRESS_CSS_FILTERS = (
-    'compressor.filters.css_default.CssAbsoluteFilter',
-    'django_compressor_autoprefixer.AutoprefixerFilter',
-    'compressor.filters.cssmin.rCSSMinFilter' # other filters kill css calc fct
-)
-COMPRESS_AUTOPREFIXER_BINARY = os.path.join(BASE_DIR, 'node_modules', '.bin', 'postcss') + ' --use autoprefixer'
-COMPRESS_AUTOPREFIXER_ARGS = '-b "> 2%"'
-
-COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 
 
 # Wagtail settings

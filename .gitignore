@@ -1,7 +1,7 @@
 *.pyc
 .env
 /venv/
-/static/
+static
 /media/
 /node_modules/
 /janunde/static/bower_components/
