@@ -10,7 +10,7 @@
   {# show header #}
   <header class="header">
     <div id="header-video">
-      <video autoplay loop>
+      <video autoplay loop poster="{% static 'core/images/header-poster/header-poster-1024.jpg' %}">
         <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.mp4' %}" type="video/mp4" />
         <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.webm' %}" type="video/webm" />
         <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.mp4' %}" type="video/mp4" />
