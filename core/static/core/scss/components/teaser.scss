@@ -16,9 +16,51 @@
     padding-bottom, rem-calc(30), rem-calc(50)
   );
 
-  /// this is a background image with (green) colored overlay
-  background: linear-gradient($green-overlay, $green-overlay),
-    url(static('core/images/header-poster.jpg')) repeat-y center/cover fixed;
+  // this is a background image with (green) colored overlay
+  background-image: linear-gradient($green-overlay, $green-overlay),
+    url(static('core/images/header-poster/header-poster-640.jpg'));
+
+  background-repeat: repeat-y;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+
+  // background image for different screen resolutions
+  @include until($medium) {
+    background-image: linear-gradient($green-overlay, $green-overlay),
+      url(static('core/images/header-poster/header-poster-320.jpg'));
+  }
+  @include until($medium) {
+    @media (min-resolution: 2dppx) {
+      background-image: linear-gradient($green-overlay, $green-overlay),
+        url(static('core/images/header-poster/header-poster-640.jpg'));
+    }
+  }
+  @include between($medium, $large) {
+    background-image: linear-gradient($green-overlay, $green-overlay),
+      url(static('core/images/header-poster/header-poster-640.jpg'));
+  }
+  @include between($medium, $large) {
+    @media (min-resolution: 2dppx) {
+      background-image: linear-gradient($green-overlay, $green-overlay),
+        url(static('core/images/header-poster/header-poster-1024.jpg'));
+    }
+  }
+  @include between($large, $xlarge) {
+    background-image: linear-gradient($green-overlay, $green-overlay),
+      url(static('core/images/header-poster/header-poster-1024.jpg'));
+  }
+  @include above($large) {
+    @media (min-resolution: 2dppx) {
+      background-image: linear-gradient($green-overlay, $green-overlay),
+        url(static('core/images/header-poster/header-poster-1280.jpg'));
+    }
+  }
+  @include above($xlarge) {
+    background-image: linear-gradient($green-overlay, $green-overlay),
+    url(static('core/images/header-poster/header-poster-1280.jpg'));
+  }
+
 
   p {
     @include h1;

@@ -78,7 +78,42 @@ header.header {
     height: 100%;
     overflow: hidden;
     z-index: -1;
-    background: url(static('core/images/header-poster.jpg')) repeat-y center/cover;
+
+    // default background image
+    background-image: url(static('core/images/header-poster/header-poster-640.jpg'));
+    background-repeat: repeat-y;
+    background-size: cover;
+    background-position: center;
+
+    // background image for different resolutions
+    @include until($medium) {
+      background-image: url(static('core/images/header-poster/header-poster-320x528.jpg'));
+    }
+    @include until($medium) {
+      @media (min-resolution: 2dppx) {
+        background-image: url(static('core/images/header-poster/header-poster-640x528.jpg'));
+      }
+    }
+    @include between($medium, $large) {
+      background-image: url(static('core/images/header-poster/header-poster-640.jpg'));
+    }
+    @include between($medium, $large) {
+      @media (min-resolution: 2dppx) {
+        background-image: url(static('core/images/header-poster/header-poster-1024.jpg'));
+      }
+    }
+    @include between($large, $xlarge) {
+      background-image: url(static('core/images/header-poster/header-poster-1024.jpg'));
+    }
+    @include above($large) {
+      @media (min-resolution: 2dppx) {
+        background-image: url(static('core/images/header-poster/header-poster-1280.jpg'));
+      }
+    }
+    @include above($xlarge) {
+      background-image: url(static('core/images/header-poster/header-poster-1280.jpg'));
+    }
+
 
     video {
       min-height: 100%;
@@ -86,13 +121,13 @@ header.header {
 
       // hide video on small devices or without js
       // (not) loading will be regulated by video.js
-      display: none;
-      @include above($large) {
-        display: block;
-        .no-js & {
-          display: none;
-        }
-      }
+      //display: block;
+      //@media (min-device-width: $large) {
+        //display: block;
+        //.no-js & {
+          //display: none;
+        //}
+      //}
     }
   }
 

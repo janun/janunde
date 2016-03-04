@@ -12,23 +12,24 @@ $small:     rem-calc(320);  // 20rem
 $smedium:   rem-calc(480);  // 30rem
 $medium:    rem-calc(640);  // 40rem
 $large:     rem-calc(1024); // 64rem
-$xlarge:    rem-calc(1440); // 90rem
+$xlarge:    rem-calc(1280); // 80rem
+$xxlarge:   rem-calc(1440); // 90rem
 
 
-@mixin above($device-width) {
-  @media screen and (min-width: $device-width) {
+@mixin above($width) {
+  @media (min-width: $width) {
     @content
   }
 }
 
-@mixin until($device-width) {
-  @media screen and (max-width: $device-width - rem-calc(1)) {
+@mixin until($width) {
+  @media (max-width: $width - rem-calc(1)) {
     @content
   }
 }
 
-@mixin between($device-width1, $device-width2) {
-  @media screen and (min-width: $device-width1) and (max-width: $device-width2 - rem-calc(1)) {
+@mixin between($width1, $width2) {
+  @media (min-width: $width1) and (max-width: $width2 - rem-calc(1)) {
     @content
   }
 }
