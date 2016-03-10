@@ -7,13 +7,16 @@
   "scripts": {
     "postinstall": "bower install && gulp build"
   },
+  "cacheDirectories": [
+    "node_modules",
+    "janunde/static/bower_components"
+  ],
   "dependencies": {
-    "autoprefixer": "^6.3.1",
     "bower": "^1.6.9",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
+    "autoprefixer": "^6.3.1",
     "gulp-sass": "^2.2.0",
-    "gulp-util": "^3.0.7",
-    "postcss-cli": "^2.5.0"
+    "gulp-util": "^3.0.7"
   }
 }
