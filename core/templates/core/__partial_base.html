@@ -1,9 +1,10 @@
 {% load wagtailcore_tags wagtailimages_tags janun_tags %}
 
-<article class="panel {% block partial-class %}{% endblock %}">
+<article class="{% block partial-class %}panel panel--fixed-height@medium{% endblock %}">
 
   {% if object.main_image %}
-    <div class="image-wrapper">
+    <div class="image image--centered-when-cropped
+                remove-panel-padding--all overlay">
       <a href="{% pageurl object %}">
         {% image object.main_image fill-320x192 jpg as fallback_image %}
         <img src="{{ fallback_image.url }}"
@@ -11,7 +12,7 @@
           sizes="(min-width: 40em) and (max-width: 64em) 33vw, (min-width: 64em) 20em, 100vw"
           alt="{{ fallback_image.alt }}">
       </a>
-      <div class="image-overlay">
+      <div class="overlay__content add-panel-padding--on-sides">
         {% block overlay %}
           <h3><a href="{% pageurl object %}">{{ object.title }}</a></h3>
         {% endblock %}

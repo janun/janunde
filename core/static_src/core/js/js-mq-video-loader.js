@@ -1,7 +1,14 @@
-// video source media query "polyfill"
-// copies data-src to src if no media attribute or media matches
+// Media Query video loader
+//
+// @example markup
+//   <video class="js-mq-video-loader">
+//     <source data-src="..." media="(min-device-width: 1280px)">
+//   </video>
+//
 document.addEventListener('DOMContentLoaded', function () {
-  var sources = document.querySelectorAll('video source[data-src]');
+  var sources = document.querySelectorAll(
+    '.js-mq-video-loader source[data-src]'
+  );
 
   for (var i = 0, length=sources.length; i < length; ++i) {
     var source = sources[i];

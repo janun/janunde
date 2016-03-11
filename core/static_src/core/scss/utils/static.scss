@@ -1,4 +1,4 @@
-
+/// relative path to static files with respect to compiled css files
 @function static($url) {
   @return "../../#{$url}";
 }

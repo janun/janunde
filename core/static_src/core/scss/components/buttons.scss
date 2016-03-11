@@ -1,65 +1,41 @@
-  // Buttons
-
-// resets for all possible buttons
-button {
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  &:focus {
-    outline: none;
-  }
-}
-
-// the standard button class
+// Buttons
 //
-// it can be used as <button.button>, <a.button> and <input.button>
-// they should all look the same
-//
-// it is green and has a small roundness
-//
-// :hover        - the standard button has green background when hovered
-// :active       - just dont underline when active
-// .white        - the buttons border and text is white
-// .white:hover  - the white button has white background when hovered
+// @example markup
+//   <a href="#" class="button button--white">Click Me</a>
+// @example markup
+//   <button href="#" class="button button--white">Click Me</button>
 //
 .button {
+  display: inline-block;
+
   @include scale-from-small-to-medium(
-    font-size, rem-calc(14), rem-calc(18)
+    min-width, rem-calc(150), rem-calc(220)
   )
-  font-weight: bold;
-  color: $green;
-  text-align: center;
-
-  border: solid rem-calc(1) $green;
-  @include above($medium) {
-    border-width: rem-calc(2);
-  }
-  border-radius: rem-calc(4);
-
   // TODO: also scale padding
   padding: rem-calc(12 12 10);
   margin-bottom: rem-calc(12);
 
   @include scale-from-small-to-medium(
-    min-width, rem-calc(150), rem-calc(220)
+    font-size, rem-calc(14), rem-calc(18)
   )
+  font-weight: bold;
+  text-align: center;
 
+  border-style: solid;
+  @include until($medium) {
+    border-width: rem-calc(1);
+  }
+  @include above($medium) {
+    border-width: rem-calc(2);
+  }
+  border-radius: rem-calc(4);
 
   background: transparent;
   cursor: pointer;
-  display: inline-block;
-
   transition: background 0.1s ease-out 0s;
 
   &:focus {
     outline: 0;
-  }
-
-  &:hover, &:focus {
-    color: $white !important;
-    text-shadow: none;
-    background-color: $green;
   }
 
   &:active {
@@ -67,30 +43,25 @@ button {
   }
 
 
-  &.white {
-    border-color: $white;
-    color: $white;
+  &--green {
+    border-color: $green;
+    color: $green;
 
     &:hover, &:focus {
-      color: $lighterdark !important;
+      color: $lighterdark;
       background-color: $white;
     }
   }
 
-  &.brown {
-    border-color: $lighterdark;
-    color: $lighterdark;
+
+  &--white {
+    border-color: $white;
+    color: $white;
 
     &:hover, &:focus {
-      color: $white !important;
-      background-color: $lighterdark;
+      color: $lighterdark;
+      background-color: $white;
     }
   }
 
-  &.center {
-    display: block;
-    width: 2em;
-    margin-left: auto;
-    margin-right: auto;
-  }
 }

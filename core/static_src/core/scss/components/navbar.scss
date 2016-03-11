@@ -227,6 +227,8 @@ $navbar-color: $green;
       display: none;
     }
     padding: rem-calc(0 7);
+    background: transparent;
+    border: none;
 
     // the hamburger menu icon
     .hamburger {

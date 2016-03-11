@@ -7,9 +7,16 @@
   input {
     margin-right: rem-calc(17);
     height: rem-calc(35);
+    padding: 0.5rem;
+
+    font-size: 0.875rem;
     color: $white;
+    
     border: 1px $white solid;
+    border-radius: rem-calc(2);
     background: inherit;
+
+
 
     &:placeholder-shown, &::-webkit-input-placeholder {
       color: $white;

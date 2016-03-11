@@ -8,16 +8,6 @@ def _(str):
     return str
 
 
-class PullQuoteBlock(blocks.StructBlock):
-    quote = blocks.TextBlock(label=_("Zitat"))
-    attribution = blocks.CharBlock(label=_("Zuschreibung"))
-
-    class Meta:
-        label = _("Blockzitat")
-        icon = "openquote"
-        template = 'blocks/pullquote.html'
-
-
 class ImageBlock(ImageChooserBlock):
     class Meta:
         label = _("Bild")
@@ -48,5 +38,4 @@ class StandardStreamBlock(blocks.StreamBlock):
     h2 = H2()
     paragraph = blocks.RichTextBlock(label=_("Absatz"), icon="pilcrow")
     image = ImageBlock()
-    pullquote = PullQuoteBlock()
     embedded_video = VideoBlock()

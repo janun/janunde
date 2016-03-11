@@ -1,12 +1,41 @@
+///
+///
+///
+@mixin hide {
+  display: none !important;
+}
 
-@mixin small-only {
-  @include above($medium) {
-    display: none !important;
+.hide {
+  /// .hide@small, .hide@medium, ...
+  @each $name, $value in $breakpoints {
+    &\@#{$name} {
+      @include above($value) {
+        @include hide;
+      }
+    }
   }
+
+  /// .hide@until-small, .hide@until-medium, ...
+  @each $name, $value in $breakpoints {
+    &\@until-#{$name} {
+      @include until($value) {
+        @include hide;
+      }
+    }
+  }
+
+  /// .hide@no-js
+  .no-js &\@no-js {
+    @include hide;
+  }
+
+  /// .hide@js
+  .js &\@js {
+    @include hide;
+  }
+
 }
-.small-only {
-  @include small-only;
-}
+
 
 
 @mixin js-only {

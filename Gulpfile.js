@@ -2,10 +2,11 @@
 // static_src to static
 // currently only for the 'core' app
 //
-// TODO:
-//  * watch
-//  * static() in stylesheets
-
+// TODO: 'watch' should also watch fonts, images etc.
+// TODO: reduce images here instead of manually
+// TODO: reduce videos...
+// TODO: minify css
+// TODO: combine js and minify
 
 var gulp = require('gulp');
 var gutil = require('gulp-util');
@@ -13,10 +14,9 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 
 
-
 // styles
 gulp.task('styles', function() {
-  includePaths = ['janunde/static/'] // bower_components live here
+  includePaths = ['janunde/static/'] // bower_components lives here
 
   gulp.src('core/static_src/core/scss/all.scss')
     .pipe(sass({

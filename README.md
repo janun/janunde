@@ -13,8 +13,10 @@ virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
 npm install
-bower install
 ```
+
+`npm install` installs all frontend dependencies including bower components
+and runs gulp to compile assets.
 
 
 ## Deployment

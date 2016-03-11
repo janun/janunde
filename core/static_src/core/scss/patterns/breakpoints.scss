@@ -15,6 +15,14 @@ $large:     rem-calc(1024); // 64rem
 $xlarge:    rem-calc(1280); // 80rem
 $xxlarge:   rem-calc(1440); // 90rem
 
+$breakpoints: (
+  small: $small,
+  smedium: $smedium,
+  medium: $medium,
+  large: $large,
+  xlarge: $xlarge,
+  xxlarge: $xxlarge,
+);
 
 @mixin above($width) {
   @media (min-width: $width) {

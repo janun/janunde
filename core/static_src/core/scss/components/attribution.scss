@@ -1,0 +1,28 @@
+/// <div class="attribution">
+///   <img ... or whatever>
+///   <div class="attribution__content">...text...</div>
+/// </div>
+.attribution {
+  position: relative;
+
+  $text-color-attribution: rgba($white, 0.8);
+  &__content {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 1rem;
+
+    color: $text-color-attribution;
+    @include scale-from-small-to-medium(
+      font-size, rem-calc(5), rem-calc(10)
+    );
+    text-align: right;
+
+    a {
+      color: $text-color-attribution;
+      &:hover {
+        color: darken($text-color-attribution, 30%);
+      }
+    }
+  }
+}

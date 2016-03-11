@@ -1,0 +1,16 @@
+/// <div class="overlay">
+///   <img ... or whatever>
+///   <div class="overlay__content">...text...</div>
+/// </div>
+.overlay {
+  position: relative;
+
+  &__content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    text-align: left;
+    background: rgba($white, 0.75);
+  }
+}

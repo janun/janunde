@@ -1,7 +1,7 @@
 // make certain links scroll slow
-// those with the attribute data-scroll-slow
+// those with the class js-scroll-slow
 // add the value of data-scroll-slow-offset as an offset for the target
-$('a[data-scroll-slow]').on('click', function(e) {
+$('.js-scroll-slow').on('click', function(e) {
   e.preventDefault();
   var target = this.hash;
   var $target = $(target);

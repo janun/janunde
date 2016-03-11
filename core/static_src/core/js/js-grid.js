@@ -1,8 +1,7 @@
 // activate isotope
-// on .masonry containers
-// for .panel items
-var $grid = $('.masonry').isotope({
-  itemSelector: '.masonry>article, .masonry>div',
+// on .js-masonry containers
+var $grid = $('.js-masonry').isotope({
+  itemSelector: '.js-masonry>article, .js-masonry>div',
   percentPosition: true,
   transitionDuration: 0,
 });
@@ -13,8 +12,4 @@ $grid.imagesLoaded().progress( function() {
 
 // TODO
 // de/activate isotope depending on screen-size
-//.masonry-small
-
-//.masonry-medium
-
-//.masonry-large
+// so we dont activate it in mobile where it is unneeded

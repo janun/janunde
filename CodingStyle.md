@@ -33,12 +33,31 @@ In Django template code, put one (and only one) space
 between the curly brackets and the tag contents.
 
 
+#### template file naming
+ - `_filename.html`  for those that are included in other templates
+ - `__filename.html` for those that are extended upon from other templates
+
+
 ## Sass files
 Should be commented using [SassDoc](http://sassdoc.com/)
 
 Variables are normally written in lower case, with hyphens connecting names.
 
-### ordering
+
+### class naming
+
+#### BEM
+Classes are named/organized using the BEM principle,
+with the following naming style:
+ - `block` for blocks
+ - `block__element` for elements
+ - `block--modifier` for modifiers
+
+#### namespace for js
+Scripts should bind to extra classes that begin with `js-`
+instead of using css classes.
+
+### ordering of declarations in a selector
 1. sass @imports
 2. css declarations
   1. positioning

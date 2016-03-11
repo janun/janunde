@@ -2,19 +2,28 @@
 ///
 /// @example markup
 ///  <h2 class="area-title">Aktuelles und Interessantes</h2>
+///
+/// @example markup
+///  <h2 class="area-title"><a href="...">Aktuelles und Interessantes</a></h2>
+
 $height-area-title: 3rem;
 $margin-area-title: 0.3rem;
+$color-area-title: $lighterdark;
+
 .area-title {
   display: block;
-  color: $lighterdark;
-  a {
-    color: $lighterdark;
-  }
+
+  height: $height-area-title;
+  margin-top: $margin-area-title;
+  margin-bottom: $margin-area-title;
+
+  color: $color-area-title;
   font-family: $font-family-sans-serif;
   font-size: rem-calc(13);
   line-height: $height-area-title;
   font-weight: normal;
-  height: $height-area-title;
-  margin-top: $margin-area-title;
-  margin-bottom: $margin-area-title;
+
+  a {
+    color: $color-area-title;
+  }
 }

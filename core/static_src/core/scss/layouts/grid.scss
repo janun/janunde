@@ -7,7 +7,7 @@ $margin-grid: rem-calc(22);
 
   @if $columns > 1 {
     // flexbox "fallback" if no masonry used or available
-    .no-js &.masonry, &:not(.masonry) {
+    .no-js &.js-masonry, &:not(.js-masonry) {
       display: flex;
       flex-wrap: wrap;
       flex-direction: row;

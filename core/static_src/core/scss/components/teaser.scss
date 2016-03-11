@@ -5,7 +5,7 @@
 ///
 /// @example markup
 ///      <div class="teaser">
-///        <p>Dies ist der Teaser-Text</p>
+///        <span class="teaser__text">Dies ist der Teaser-Text</span>
 ///      </div>
 ///
 .teaser {
@@ -15,10 +15,6 @@
   @include scale-from-small-to-medium(
     padding-bottom, rem-calc(30), rem-calc(50)
   );
-
-  // this is a background image with (green) colored overlay
-  background-image: linear-gradient($green-overlay, $green-overlay),
-    url(static('core/images/header-poster/header-poster-640.jpg'));
 
   background-repeat: repeat-y;
   background-position: center;
@@ -61,14 +57,15 @@
     url(static('core/images/header-poster/header-poster-1280.jpg'));
   }
 
-
-  p {
+  &__text {
     @include h1;
     @include janun-text-shadow;
     @include container;
 
+    display: block;
     font-family: $font-family-sans-serif;
     text-align: center;
     color: $white;
   }
+
 }

@@ -10,23 +10,23 @@
   {% navbar parent=site_root calling_page=self transparent=True %}
   {# show header #}
   <header class="header">
-    <div id="header-video">
-      <video autoplay loop poster="{% static 'core/images/header-poster/header-poster-1024.jpg' %}">
-        <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.mp4' %}" type="video/mp4" />
-        <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.webm' %}" type="video/webm" />
-        <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.mp4' %}" type="video/mp4" />
-        <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.webm' %}" type="video/webm" />
+    <div class="video-background">
+      <video class="video-background__video js-mq-video-loader hide@no-js hide@until-small" autoplay loop poster="{% static 'core/images/header-poster/header-poster-1024.jpg' %}">
+        <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.mp4' %}" type="video/mp4">
+        <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.webm' %}" type="video/webm">
+        <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.mp4' %}" type="video/mp4">
+        <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.webm' %}" type="video/webm">
       </video>
     </div>
-    <div class="content">
+    <div class="header__content">
       <h1>Wir sind das<br>Jugendumweltnetzwerk Niedersachsen</h1>
       <p>JANUN ist aktiv für ein gutes Leben in einer ökologischen und sozial gerechten Welt.</p>
       <div class="buttons">
-        <a href="/aktuelles" class="button white">Aktuelles</a>
+        <a href="/aktuelles" class="button button--white">Aktuelles</a>
       </div>
-      <a data-scroll-slow data-scroll-slow-offset="-54" href="#highlights"
-         class="scroll-down-button small-only js-only">
-       </a>
+      <a class="scroll-down-button hide@medium js-scroll-slow"
+         data-scroll-slow-offset="-54" href="#highlights">
+      </a>
     </div>
   </header>
 {% endblock %}
@@ -50,9 +50,9 @@
 
   {% if highlights %}
   <div class="teaser">
-    <p>
+    <span class="teaser__text">
       JANUN ist aktiv für ein gutes Leben in einer ökologischen und sozial gerechten Welt.
-    </p>
+    </span>
   </div>
   {% endif %}
 
@@ -84,19 +84,19 @@
 
   {% if gruppen %}
   <div class="teaser">
-    <p>
+    <span class="teaser__text">
       JANUN ist in verschiedenen Gruppen und Projekten organisiert.
-    </p>
+    </span>
   </div>
   <h2 class="area-title">Projektgruppen</h2>
   {% endif %}
 
 
   <div class="teaser">
-    <p>
+    <span class="teaser__text">
       Du willst kritisch die Welt verändern?
       JANUN bietet Dir dazu viele Möglichkeiten!
-    </p>
+    </span>
   </div>
   <h2 class="area-title">Aktiv werden</h2>
   <div class="container">
@@ -134,11 +134,11 @@
 
 
   <div class="teaser">
-    <p>
+    <span class="teaser__text">
       Hast Du Interesse an unserer Arbeit?
       Nimm Kontakt zu uns auf.
       Wir freuen uns von dir zu hören!
-    <p>
+    </span>
   </div>
 
 {% endblock %}
