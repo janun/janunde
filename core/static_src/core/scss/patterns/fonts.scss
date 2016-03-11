@@ -1,51 +1,8 @@
-// fonts
-//
-// Why no Googlefonts? A: more privacy for users
-// Why no ttf? A: woff/2 is widely enough supported and this is simpler
+/// fonts
 
-// Cabin
-@font-face {
-  font-family: 'Cabin';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Cabin Regular'), local('Cabin-Regular');
-  src: url(static('core/fonts/Cabin-Regular.woff2')) format('woff2'),
-       url(static('core/fonts/Cabin-Regular.woff')) format('woff');
-}
+@include webfont('Cabin', 'Cabin-Regular', normal);
+@include webfont('Cabin', 'Cabin-Bold', bold);
 
-@font-face {
-  font-family: 'Cabin';
-  font-style: normal;
-  font-weight: bold;
-  src: local('Cabin Bold'), local('Cabin-Bold');
-  src: url(static('core/fonts/Cabin-Bold.woff2')) format('woff2'),
-       url(static('core/fonts/Cabin-Bold.woff')) format('woff');
-}
-
-// Crimson
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Crimson Text'), local('CrimsonText-Roman');
-  src: url(static('core/fonts/CrimsonText-Roman.woff2')) format('woff2'),
-       url(static('core/fonts/CrimsonText-Roman.woff')) format('woff');
-}
-
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Crimson Text Bold'), local('CrimsonText-Bold');
-  src: url(static('core/fonts/CrimsonText-Bold.woff2')) format('woff2'),
-       url(static('core/fonts/CrimsonText-Bold.woff')) format('woff');
-}
-
-@font-face {
-  font-family: 'Crimson Text';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Crimson Text Italic'), local('CrimsonText-Italic');
-  src: url(static('core/fonts/CrimsonText-Italic.woff2')) format('woff2'),
-       url(static('core/fonts/CrimsonText-Italic.woff')) format('woff');
-}
+@include webfont('Crimson Text', 'CrimsonText-Roman', normal);
+@include webfont('Crimson Text', 'CrimsonText-Bold', bold);
+@include webfont('Crimson Text', 'CrimsonText-Italic', normal, italic);

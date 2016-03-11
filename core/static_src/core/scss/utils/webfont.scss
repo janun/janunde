@@ -1,0 +1,21 @@
+/// font-root
+/// where to find font files
+$font-root: "core/fonts/";
+
+/// webfont
+/// loads fonts via font-face from the dir $font-root
+///
+/// @argument $family     - value for font-family
+/// @argument $filestub   - filename under $font-root
+/// @argument $weight     - the weight the font file has; normal, bold, ...
+/// @argument $style      - the style the font file has; normal, italic, ...
+@mixin webfont($family, $filestub, $weight, $style: normal) {
+    @font-face {
+        font-family: '#{$family}';
+        src: url(static('#{$font-root}#{$filestub}.woff2')) format('woff2'),
+           url(static('#{$font-root}#{$filestub}.woff')) format('woff'),
+           url(static('#{$font-root}#{$filestub}.ttf')) format('truetype');
+        font-weight: $weight;
+        font-style: $style;
+    }
+}
