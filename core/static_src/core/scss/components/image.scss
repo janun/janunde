@@ -1,30 +1,47 @@
+$image--fixed-height_height: $panel--fixed-height_height;
+
 /// image
 ///
 /// @example markup
-///   <div class="image image--centered-when-cropped ">
+///   <div class="image image--fixed-height">
 ///     <img ...>
 ///   </div>
 .image {
   position: relative;
 
+  // responsive
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  // fallback text
+  img:after {
+    content: "Bild konnte nicht geladen werden.";
+    display: block;
+    margin: 1rem;
+    color: $brown;
+    display: block;
+  }
+
+
   /// when the image is cropped by the browser
   /// this ensures it is cropped on both sides
-  &--centered-when-cropped {
+  &--fixed-height {
     overflow: hidden;
     text-align: center;
-
-    a {
-      display: block;
-    }
+    height: $image--fixed-height_height;
 
     img {
-      display: inline-block;
       position: relative;
       top: 0;
       left: 100%;
       margin-left: -200%;
       min-width: 100%;
+      min-height: $image--fixed-height_height;
+      width: auto;
     }
+
   }
 
 

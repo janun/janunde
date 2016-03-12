@@ -7,10 +7,14 @@
 
   <main>
     <h2 class="area-title">Aktuelles zu JANUN und den Projektgruppen</h2>
-    <div class="grid-2col-medium-3col-large js-masonry">
+    <div class="grid
+                grid--of-2@medium
+                grid--of-3@large">
       {% if articles %}
         {% for object in articles %}
-          {% include object.medium_partial_template_name %}
+          <div class="grid__element js-masonry__element">
+            {% include object.medium_partial_template_name %}
+          </div>
         {% endfor %}
       {% else %}
         Keine Einträge vorhanden.

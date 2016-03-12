@@ -49,9 +49,11 @@ Variables are normally written in lower case, with hyphens connecting names.
 #### BEM
 Classes are named/organized using the BEM principle,
 with the following naming style:
- - `block` for blocks
- - `block__element` for elements
- - `block--modifier` for modifiers
+ - `block`                          for blocks
+ - `block__element`                 for elements
+ - `block--modifier`                for modifiers
+ - `block--modifier@medium`         applies only for screen-width >= $medium
+ - `block--modifier@until-medium`   applies only for screen-width <  $medium
 
 #### namespace for js
 Scripts should bind to extra classes that begin with `js-`

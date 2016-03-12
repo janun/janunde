@@ -1,8 +1,5 @@
 .template-homepage {
-  .area-title {
-    text-align: center;
-  }
   .container {
-    margin-bottom: $height-area-title - $margin-grid;
+    margin-bottom: $height-area-title - $grid_margin;
   }
 }

@@ -61,9 +61,7 @@
     aside {
       margin-left: $space-inbetween;
       flex-basis: 33%;
-      .grid > * {
-        width: 100%;
-      }
+      
     }
   }
 }

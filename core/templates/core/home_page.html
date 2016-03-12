@@ -36,14 +36,15 @@
   {# show highlights #}
   {% if highlights %}
   <section>
-    <h2 id="highlights" class="area-title"><a href="{% slugurl 'aktuelles' %}">Aktuelle Highlights</a></h2>
+    <h2 id="highlights" class="area-title area-title--centered"><a href="{% slugurl 'aktuelles' %}">Aktuelle Highlights</a></h2>
     <div class="container">
-      <div class="grid-medium-3col">
+      <div class="grid grid--of-3@medium">
         {% for object in highlights %}
-          {% include object.partial_template_name %}
+          <div class="grid__element">
+            {% include object.partial_template_name %}
+          </div>
         {% endfor %}
       </div>
-
     </div>
   </section>
   {% endif %}
@@ -56,26 +57,26 @@
   </div>
   {% endif %}
 
-  <h2 class="area-title">Grundsätze unserer Arbeit</h2>
+  <h2 class="area-title area-title--centered">Grundsätze unserer Arbeit</h2>
   <div class="container">
     <p>
       Wir sind ein Netzwerk mit vielen Engagierten und einer großen Bandbreite an Themen und Aktivitäten für Jugendliche bis 27 Jahre.
       JANUN sensibilisiert Jugendliche für ökologische und soziale Themen und zeigt Handlungsmöglichkeiten auf politischer wie individueller Ebene auf. Gleichzeitig schafft JANUN Angebote und bietet Strukturen, die Jugendliche vernetzen, qualifizieren sowie in ihrem Engagement stärken und unterstützen.
     </p>
-    <div class="grid-large-4col-medium-2col-small-2col">
-      <div class="panel principle color-green">
+    <div class="grid grid--of-2 grid--of-4@medium">
+      <div class="grid__element panel principle color-green">
         <img alt="Gesichter" src="{% static 'core/images/components/principles/diverse.png' %}">
         <span>vielfältig</span>
       </div>
-      <div class="panel principle color-blue">
+      <div class="grid__element panel principle color-blue">
         <img alt="Sprechblase" src="{% static 'core/images/components/principles/democratic.png' %}">
         <span>basisdemokratisch</span>
       </div>
-      <div class="panel principle color-orange">
+      <div class="grid__element panel principle color-orange">
         <img alt="Megaphon" src="{% static 'core/images/components/principles/political.png' %}">
         <span>politisch <small>(nicht parteigebunden)</small></span>
       </div>
-      <div class="panel principle color-red">
+      <div class="grid__element panel principle color-red">
         <img alt="Herz" src="{% static 'core/images/components/principles/attractive.png' %}">
         <span>attraktiv</span>
       </div>
@@ -88,7 +89,7 @@
       JANUN ist in verschiedenen Gruppen und Projekten organisiert.
     </span>
   </div>
-  <h2 class="area-title">Projektgruppen</h2>
+  <h2 class="area-title area-title--centered">Projektgruppen</h2>
   {% endif %}
 
 
@@ -98,31 +99,31 @@
       JANUN bietet Dir dazu viele Möglichkeiten!
     </span>
   </div>
-  <h2 class="area-title">Aktiv werden</h2>
+  <h2 class="area-title area-title--centered">Aktiv werden</h2>
   <div class="container">
     <div class="grid">
-      <div class="panel activity">
+      <div class="grid__element panel activity">
         <h3 class="color-red">Neue Themen ergründen</h3>
         <p>
           Du willst mehr erfahren über Klimawandel, nachhaltige Ernährung oder kritischen Konsum? Naturbeobachtung, alternative Mobilität oder Geschlechtergerechtigkeit interessieren Dich? JANUN bietet Dir jährlich über 160 Workshops, Camps und Projekttage zu diesen und anderen Themen.
         </p>
       </div>
 
-      <div class="panel activity">
+      <div class="grid__element panel activity">
         <h3 class="color-orange">Aktionen starten</h3>
         <p>
           Eine ProtestTango-Aktion gegen Atomkraft, die Begrünung Deines grauen Wohnumfelds, ein Straßentheater zum Thema Massentierhaltung - Du willst kreative Aktionen vor deiner Haustür starten? Wir beraten dich gern.
         </p>
       </div>
 
-      <div class="panel activity">
+      <div class="grid__element panel activity">
         <h3 class="color-blue">Kompetenzen gewinnen</h3>
         <p>
           Du hast schon mal überlegt, ein eigenes Projekt zu starten – aber das hat bisher noch nicht geklappt? Dein Projekt kommt nicht voran und das willst Du ändern? Wir bieten Dir Handwerkszeug zur Organisation ehrenamtlicher Projekte z.B. in unseren Projektwerkstätten.
         </p>
       </div>
 
-      <div class="panel activity">
+      <div class="grid__element panel activity">
         <h3 class="color-green">JANUN von innen kennenlernen</h3>
         <p>
           Mit einem Praktikum oder freiwilligen Jahr hast du die Chance. hinter JANUNs Kulissen zu schauen. Im offenen Vorstand und bei den aktiven Gruppen gibt es viele Möglichkeiten, JANUN kennenzulernen und mitzugestalten.

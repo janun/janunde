@@ -1,7 +1,7 @@
 // activate isotope
 // on .js-masonry containers
 var $grid = $('.js-masonry').isotope({
-  itemSelector: '.js-masonry>article, .js-masonry>div',
+  itemSelector: '.js-masonry__element, .js-masonry__element',
   percentPosition: true,
   transitionDuration: 0,
 });

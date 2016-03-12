@@ -1,26 +1,45 @@
+/// hide
+/// hides with display: none
 ///
+/// @example markup
+///   <div class="hide">Never shown</div>
 ///
+/// You can use media queries:
+/// @example markup
+///   <div class="hide@only-small">Not on small</div>
+/// @example markup
+///   <div class="hide@until-large">Not on small and medium</div>
+/// @example markup
+///   <div class="hide@above-medium">Not on medium, large, ...</div>
 ///
-@mixin hide {
-  display: none !important;
-}
-
+/// or hide depending on js:
+/// @example markup
+///   <div class="hide@no-js">Not if no js</div>
 .hide {
+  @mixin hide {
+    display: none !important;
+  }
+
+  @include hide;
+
   /// .hide@small, .hide@medium, ...
   @each $name, $value in $breakpoints {
     &\@#{$name} {
-      @include above($value) {
-        @include hide;
-      }
+      @include above($value) { @include hide; }
     }
   }
 
   /// .hide@until-small, .hide@until-medium, ...
   @each $name, $value in $breakpoints {
     &\@until-#{$name} {
-      @include until($value) {
-        @include hide;
-      }
+      @include until($value) { @include hide; }
+    }
+  }
+
+  /// .hide@only-small, .hide@only-medium, ...
+  @each $name, $value in $breakpoints {
+    &\@only-#{$name} {
+      @include only($value) { @include hide; }
     }
   }
 
@@ -34,15 +53,4 @@
     @include hide;
   }
 
-}
-
-
-
-@mixin js-only {
-  .no-js & {
-    display: none !important;
-  }
-}
-.js-only {
-  @include js-only;
 }

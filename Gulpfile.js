@@ -23,7 +23,7 @@ gulp.task('styles', function() {
       includePaths: includePaths
     }).on('error', sass.logError))
     .pipe(autoprefixer({
-      browsers: ['last 3 versions', 'not ie <= 8'],
+      browsers: ['> 5% in DE',],
       cascade: false
     }))
     .pipe(gulp.dest('./core/static/core/css/'))

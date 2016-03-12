@@ -26,4 +26,8 @@ $color-area-title: $lighterdark;
   a {
     color: $color-area-title;
   }
+
+  &--centered {
+    text-align: center;
+  }
 }
