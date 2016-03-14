@@ -69,7 +69,10 @@ gulp.task('build', ['styles', 'fonts', 'videos', 'js', 'images']);
 // watch
 gulp.task('watch', function() {
     gulp.watch('core/static_src/core/scss/**/*.scss', ['styles']);
-    // TODO...
+    gulp.watch('core/static_src/core/js/**/*.js', ['js']);
+    gulp.watch('core/static_src/core/fonts/**/*', ['fonts']);
+    gulp.watch('core/static_src/core/images/**/*', ['images']);
+    gulp.watch('core/static_src/core/videos/**/*', ['videos']);
 });
 
 // default
