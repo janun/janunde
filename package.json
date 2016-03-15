@@ -5,18 +5,22 @@
     "node": "4.2.6"
   },
   "scripts": {
-    "postinstall": "bower install && gulp build"
+    "postinstall": "bower install && gulp --production build"
   },
   "cacheDirectories": [
     "node_modules",
     "janunde/static/bower_components"
   ],
   "dependencies": {
+    "autoprefixer": "^6.3.1",
     "bower": "^1.6.9",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
-    "autoprefixer": "^6.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-csso": "^1.1.0",
     "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7"
   }
 }
