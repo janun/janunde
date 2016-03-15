@@ -1,21 +1,46 @@
 // make certain links scroll slow
 // those with the class js-scroll-slow
 // add the value of data-scroll-slow-offset as an offset for the target
-$('.js-scroll-slow').on('click', function(e) {
-  e.preventDefault();
-  var target = this.hash;
-  var $target = $(target);
+(function () {
 
-  var offset = 0;
-  if ( this.getAttribute('data-scroll-slow-offset') ) {
-    offset =+ parseInt( this.getAttribute('data-scroll-slow-offset') );
+  // perform the actual scroll animation
+  function animateScrollTo(yPos, startTime, duration) {
+    duration = duration || 200;
+    var targetTime = startTime + duration;
+
+    function animate() {
+      var nowTime = new Date().getTime();
+      var multiplier = 1 - (targetTime - nowTime) / duration;
+
+      if (nowTime >= targetTime ) {
+        document.body.scrollTop = yPos;
+        return;
+      } else {
+        document.body.scrollTop = yPos * multiplier;
+        requestAnimationFrame(animate);
+      }
+    }
+
+    requestAnimationFrame(animate);
   }
 
-  $('html, body').stop().animate(
-  {
-    'scrollTop': $target.offset().top + offset,
-  },
-  900, 'swing', function () {
-    window.location.hash = target;
-  });
-});
+  // gets the data and calls scrollTo
+  function scrollSlow(event) {
+    event.preventDefault();
+    var target = document.querySelector(this.hash);
+
+    // get offset
+    var offset = 0;
+    if ( this.getAttribute('data-scroll-slow-offset') ) {
+      offset += parseInt( this.getAttribute('data-scroll-slow-offset') );
+    }
+
+    animateScrollTo( (target.offsetTop + offset), (new Date().getTime()) )
+  }
+
+  // add the event listeners to the elements
+  var elements = document.querySelectorAll('.js-scroll-slow');
+  for (i = 0; i < elements.length; ++i) {
+    elements[i].addEventListener('click', scrollSlow);
+  }
+}());
