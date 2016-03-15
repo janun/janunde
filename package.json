@@ -5,7 +5,7 @@
     "node": "4.2.6"
   },
   "scripts": {
-    "postinstall": "bower install && gulp --production build"
+    "postinstall": "bower install && gulp --production"
   },
   "cacheDirectories": [
     "node_modules",

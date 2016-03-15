@@ -101,7 +101,7 @@ gulp.task('images', function(){
 gulp.task('build', ['styles', 'fonts', 'videos', 'scripts', 'images']);
 
 // watch
-gulp.task('watch', function() {
+gulp.task('watch', ['build'], function() {
     gulp.watch('core/static_src/core/scss/**/*.scss', ['styles']);
     gulp.watch('core/static_src/core/js/**/*.js', ['scripts']);
     gulp.watch('core/static_src/core/fonts/**/*', ['fonts']);
@@ -110,4 +110,8 @@ gulp.task('watch', function() {
 });
 
 // default
-gulp.task('default', ['build', 'watch']);
+if (isProd) {
+  gulp.task('default', ['build']);
+} else {
+  gulp.task('default', ['watch']);
+}
