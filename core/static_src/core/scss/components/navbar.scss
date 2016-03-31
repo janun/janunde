@@ -55,6 +55,9 @@ $small-navbar-height: rem-calc(54);
       border-radius: rem-calc(2);
       background: rgba($white, 0.25);
     }
+    &::-moz-focus-inner {
+      border: 0;
+    }
   }
 
   // normalize all buttons
