@@ -14,21 +14,30 @@
 
   <body>
 
-    <div class="navbar-container transparent">
-      <nav class="navbar" role="navigation">
-        <a class="logo" href="/"><img width="37" height="36" alt="JANUN Logo" src="{% static 'core/images/components/navbar/janun_logo.svg' %}"></a>
-        <a class="title" href="/">JANUN</a>
+    <!-- bogus navbar -->
+    <div class="navbar navbar--green navbar--transparent navbar--absolute">
+      <nav class="navbar__inner" role="navigation" aria-label="Hauptmenü">
+        <a class="navbar__item" href="/">
+          <img class="navbar__logo"
+               alt="JANUN Logo"
+               src="{% static 'core/images/components/navbar/janun_logo.svg' %}">
+        </a>
+        <a href="/" class="navbar__item">
+          JANUN
+        </a>
       </nav>
     </div>
 
-    <header class="header" style="background: rgb(196, 23, 55);">
-      <div id="header-video">
-        <video autoplay loop poster="{% static 'core/images/header-poster.jpg' %}">
-          <source src="{% static 'core/videos/header-video/header-video-1024.mp4' %}" type="video/mp4" />
-          <source src="{% static 'core/videos/header-video/header-video-1024.webm' %}" type="video/webm" />
+    <header class="header" style="background: rgba(196, 23, 55, 0.6);">
+      <div class="video-background">
+        <video class="video-background__video js-mq-video-loader hide@no-js hide@until-medium" autoplay loop poster="{% static 'core/images/header-poster/header-poster-1024.jpg' %}">
+          <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.mp4' %}" type="video/mp4">
+          <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.webm' %}" type="video/webm">
+          <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.mp4' %}" type="video/mp4">
+          <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.webm' %}" type="video/webm">
         </video>
       </div>
-      <div class="content">
+      <div class="header__content">
         <h1>500. Ein Fehler ist aufgetreten.</h1>
         <p>
           Es tut uns leid:

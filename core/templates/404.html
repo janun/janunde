@@ -11,13 +11,15 @@
   {% include "core/_navbar.html" with navbar_class="navbar--transparent navbar--fixed" %}
 
   <header class="header">
-    <div id="header-video">
-      <video autoplay loop poster="{% static 'core/images/header-poster.jpg' %}">
-        <source src="{% static 'core/videos/header-video.mp4' %}" type="video/mp4" />
-        <source src="{% static 'core/videos/header-video.webm' %}" type="video/webm" />
+    <div class="video-background">
+      <video class="video-background__video js-mq-video-loader hide@no-js hide@until-medium" autoplay loop poster="{% static 'core/images/header-poster/header-poster-1024.jpg' %}">
+        <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.mp4' %}" type="video/mp4">
+        <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.webm' %}" type="video/webm">
+        <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.mp4' %}" type="video/mp4">
+        <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.webm' %}" type="video/webm">
       </video>
     </div>
-    <div class="content">
+    <div class="header__content">
       <h1>404. Seite nicht gefunden.</h1>
       <p>Die Seite, die Du aufrufen wolltest, gibt es nicht.</p>
       <p>Vielleicht findest Du sie mit der Suche:</p>
