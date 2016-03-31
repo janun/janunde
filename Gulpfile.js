@@ -26,22 +26,28 @@ gulp.task('styles', function() {
 
   gulp.src('core/static_src/core/scss/all.scss')
 
-    // compile sass
-    .pipe(sass({
-      includePaths: includePaths
-    }).on('error', sass.logError))
+  // init sourcemap
+  .pipe(isProd ? gutil.noop() : sourcemaps.init())
 
-    // use autoprefixer
-    .pipe(autoprefixer({
-      browsers: ['> 5% in DE',],
-      cascade: false
-    }))
+  // compile sass
+  .pipe(sass({
+    includePaths: includePaths
+  }).on('error', sass.logError))
 
-    // minify in production
-    .pipe( isProd ? csso() : gutil.noop())
+  // use autoprefixer
+  .pipe(autoprefixer({
+    browsers: ['> 5% in DE',],
+    cascade: false
+  }))
 
-    .pipe(gulp.dest('./core/static/core/css/'))
-    .on('error', gutil.log);
+  // minify in production
+  .pipe( isProd ? csso() : gutil.noop())
+
+  // write sourcemap
+  .pipe(isProd ? gutil.noop() : sourcemaps.write())
+
+  .pipe(gulp.dest('./core/static/core/css/'))
+  .on('error', gutil.log);
 });
 
 
