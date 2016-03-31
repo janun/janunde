@@ -18,6 +18,15 @@
     "DJANGO_DEBUG": {
       "description": "turns on django debuggin mode if set to yes, true or 1",
       "required": false
+    },
+    "AWS_ACCESS_KEY": {
+      "description": "Amazon AWS Access Key ID"
+    },
+    "AWS_SECRET_KEY": {
+      "description": "Amazon AWS Secret Access Key"
+    },
+    "S3_BUCKET": {
+      "description": "Amazon S3 Bucket name"
     }
   },
   "addons": [

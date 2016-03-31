@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'wagtail.wagtailcore',
 
     'modelcluster',
+    'storages', # should this be only in production?
     'compressor', # can be removed with wagtail>=1.4
     'taggit',
 
@@ -138,6 +139,7 @@ USE_TZ = True
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 STATICFILES_DIRS = (

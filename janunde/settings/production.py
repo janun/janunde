@@ -42,6 +42,13 @@ ALLOWED_HOSTS = ['*']
 # save staticfiles using whitenoise
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+# save media files in S3
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_KEY']
+AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET']
+
+
 # minify
 HTML_MINIFY = True
 
