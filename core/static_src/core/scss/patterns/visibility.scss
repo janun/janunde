@@ -1,3 +1,8 @@
+@mixin hide {
+  display: none !important;
+}
+
+
 /// hide
 /// hides with display: none
 ///
@@ -16,10 +21,6 @@
 /// @example markup
 ///   <div class="hide@no-js">Not if no js</div>
 .hide {
-  @mixin hide {
-    display: none !important;
-  }
-
   @include hide;
 
   /// .hide@small, .hide@medium, ...
@@ -53,4 +54,11 @@
     @include hide;
   }
 
+}
+
+
+// hide by aria-hidden
+// this might be used by js to hide things
+[aria-hidden="true"] {
+  @include hide;
 }

@@ -1,0 +1,37 @@
+{% extends "__base.html" %}
+
+{% load wagtailuserbar %}
+{% load static from staticfiles %}
+
+
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{% static "core/css/all.css" %}">
+{% endblock %}concat('app.js')
+
+
+{% block body_content %}
+
+  {% block top %}
+    {% include "core/_navbar.html" %}
+
+    {% comment %}
+    {% get_site_root as site_root %}
+    {% navbar parent=site_root calling_page=self %}
+    {% endcomment %}
+  {% endblock %}
+
+  <div class="{% block content_class %}content{% endblock %}">
+    {% wagtailuserbar %}
+    {% block content %}{% endblock %}
+  </div>
+
+  {% block footer %}
+    {% include "core/_footer.html" %}
+  {% endblock %}
+
+{% endblock %}
+
+
+{% block js %}
+  <script type="text/javascript" src="{% static 'core/js/app.js' %}"></script>
+{% endblock %}

@@ -3,7 +3,6 @@
   "private": true,
   "dependencies": {
     "hamburger-icon": "~1.0.3",
-    "jquery": "~2.1.4",
     "isotope": "~2.2.2",
     "imagesloaded": "^4.1.0"
   }

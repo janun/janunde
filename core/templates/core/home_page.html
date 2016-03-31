@@ -1,37 +1,20 @@
-{% extends "base.html" %}
-{% load janun_tags wagtailcore_tags %}
+{% extends "core/__base.html" %}
+
+{% load wagtailcore_tags %}
 {% load static from staticfiles %}
+
 
 {% block body_class %}template-homepage{% endblock %}
 
-{# overwrite the default navbar with a transparent navbar #}
+{# navbar should be transparent #}
 {% block top %}
-  {% get_site_root as site_root %}
-  {% navbar parent=site_root calling_page=self transparent=True %}
-  {# show header #}
-  <header class="header">
-    <div class="video-background">
-      <video class="video-background__video js-mq-video-loader hide@no-js hide@until-small" autoplay loop poster="{% static 'core/images/header-poster/header-poster-1024.jpg' %}">
-        <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.mp4' %}" type="video/mp4">
-        <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.webm' %}" type="video/webm">
-        <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.mp4' %}" type="video/mp4">
-        <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.webm' %}" type="video/webm">
-      </video>
-    </div>
-    <div class="header__content">
-      <h1>Wir sind das<br>Jugendumweltnetzwerk Niedersachsen</h1>
-      <p>JANUN ist aktiv für ein gutes Leben in einer ökologischen und sozial gerechten Welt.</p>
-      <div class="buttons">
-        <a href="/aktuelles" class="button button--white">Aktuelles</a>
-      </div>
-      <a class="scroll-down-button hide@medium js-scroll-slow"
-         data-scroll-slow-offset="-54" href="#highlights">
-      </a>
-    </div>
-  </header>
+  {% include "core/_navbar.html" with navbar_class="navbar--transparent navbar--fixed" %}
 {% endblock %}
 
+
 {% block content %}
+  {# show header #}
+  {% include 'core/_header.html' %}
 
   {# show highlights #}
   {% if highlights %}

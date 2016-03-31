@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load janun_tags wagtailcore_tags %}
+{% load wagtailcore_tags %}
 {% load static from staticfiles %}
 
 
@@ -8,8 +8,7 @@
 
 {# overwrite the default navbar with a transparent navbar and header #}
 {% block top %}
-  {% get_site_root as site_root %}
-  {% navbar parent=site_root calling_page=self transparent=True %}
+  {% include "core/_navbar.html" with navbar_class="navbar--transparent navbar--fixed" %}
 
   <header class="header">
     <div id="header-video">

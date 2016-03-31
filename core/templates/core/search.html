@@ -1,24 +1,11 @@
-{% extends "base.html" %}
-{% load janun_tags wagtailcore_tags %}
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags %}
 {% load static from staticfiles %}
 
 {% block body_class %}template-search{% endblock %}
 
 {% block title %}Search{% endblock %}
 
-{% block top %}
-  {% get_site_root as site_root %}
-  {% navbar parent=site_root calling_page=self transparent=True fixed=False %}
-
-  <div style="padding: 64px 0; background: green; margin-bottom: 40px; color: white">
-    <div class="container">
-    <h1>Suchergebnisse</h1>
-    {% if search_query %}
-      Sie haben gesucht nach: "{{ search_query }}"<br>
-    {% endif %}
-  </div>
-  </div>
-{% endblock %}
 
 {% block content %}
   <div class="container">
@@ -26,9 +13,11 @@
     {% if search_results %}
     <main>
       <h2 class="area-title">Suchergebnisse</h2>
-      <div class="grid-medium-3col">
+      <div class="grid grid--of-3">
         {% for object in search_results %}
+          <div class="grid__element">
             {% include object.partial_template_name %}
+          </div>
         {% endfor %}
       </div>
     </main>

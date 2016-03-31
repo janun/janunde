@@ -63,7 +63,8 @@ gulp.task('scripts', function(){
   gulp.src([
     'janunde/static/bower_components/imagesloaded/imagesloaded.pkgd.js',
     'janunde/static/bower_components/isotope/dist/isotope.pkgd.js',
-    'core/static_src/core/js/**/*'
+    'core/static_src/core/js/**/*',
+    'janunde/static/bower_components/a11y-toggle/a11y-toggle.js',
   ])
 
   // init sourcemap

@@ -1,19 +1,11 @@
-// the navbar
-//
-//
-
-// we are using this hamburger-icon
 @import 'bower_components/hamburger-icon/hamburger-icon';
-
 
 $medium-navbar-height: rem-calc(65);
 $small-navbar-height: rem-calc(54);
-$navbar-color: $green;
 
-.wagtail-userbar {
-  margin-top: $medium-navbar-height;
+@mixin box-shadow_navbar {
+  box-shadow: rem-calc(0 2 4) rgba($black, 0.1);
 }
-
 
 @mixin scale-with-navbar($property, $value1, $value2) {
   @include scale-from-medium-to-large(
@@ -28,337 +20,166 @@ $navbar-color: $green;
   );
 }
 
-// special shadow for the navbar
-// remember to remove it for transparent navbars
-@mixin navbar-shadow {
-  box-shadow: rem-calc(0 2 4) rgba($black, 0.2);
-}
-
-// a white background in full screen width
-// used for dropdowns
-//
-// $margin-top - optionaly move evrth. down
-@mixin white-background ($margin-top: 0) {
-  &:before {
-    position: absolute;
-    width: 5000%;
-    background: white;
-    left: -2500%;
-    content: "";
-    height: 100%;
-    margin-top: $margin-top;
-    @include navbar-shadow;
-    display: block;
-    z-index: -10;
-  }
-}
-
-// if .content comes after .navbar-container it needs to be moved down
-// because .navbar-container is position: absolute
-.navbar-container + .content {
-  @include scale-with-navbar-height(margin-top);
-}
-
-// navbar-container
-//
-// renders a green background
-// and is always in full-width whereas the <nav.navbar> is smaller
-//
-// .fixed                                        - position: fixed
-// .transparent                                  - transparent bg and no shadow
-// .transparent.collapse-open and until $medium  - not transparent
-// .transparent.dropdown-open and above $large   - not transparent
-//
-.navbar-container {
-  background: $navbar-color;
-  position: absolute;
-  top: 0;
+/// navbar
+///
+/// @example markup
+///   <div class="navbar navbar--green">
+///     <div class="navbar__inner">
+///       <a class="navbar__item" href="/"><img class="navbar__logo"></a>
+///       <a class="navbar__item  navbar__clickable" href="/">Title</a>
+///       <button class="navbar__item">Menu</button>
+///     </div>
+///   </div>
+.navbar {
   width: 100%;
   z-index: 1000;
   @include scale-with-navbar-height;
-  @include navbar-shadow;
+  @include box-shadow_navbar;
 
-  &.fixed {
-    position: fixed;
-  }
-
-  &.transparent {
-    background: transparent;
-    box-shadow: none;
-
-    @include until($medium) {
-      &.collapse-open {
-        background: $navbar-color;
-        @include navbar-shadow;
-      }
-    }
-    @include above($large) {
-      &.dropdown-open {
-        background: $navbar-color;
-        @include navbar-shadow;
-      }
-    }
-  }
-
-  &.semitrans {
-    background: rgba($black, 0.333);
-    @include navbar-shadow;
-
-    @include until($medium) {
-      &.collapse-open {
-        background: $navbar-color;
-        @include navbar-shadow;
-      }
-    }
-    @include above($large) {
-      &.dropdown-open {
-        background: $navbar-color;
-        @include navbar-shadow;
-      }
-    }
-  }
-
-}
-
-// the actual navbar
-.navbar {
-  position: relative;
-  @include container;
+  font-family: $font-family-sans-serif;
+  font-size: rem-calc(18);
+  color: $white;
 
   a {
-    color: $white;
     font-family: $font-family-sans-serif;
-    &:active {
-      text-decoration: none;
-    }
+    color: $white;
   }
 
-  li {
-    display: block;
-  }
-
-  &>* {
-    float: left;
-  }
-  .search, .login, .menu-toggle {
-    float: right;
-  }
-
-  .title {
-    padding: rem-calc(20 20);
-    @include until($medium) {
-      padding: rem-calc(17 17);
-    }
-  }
-
-  .logo {
-    height: rem-calc(65);
-    padding: rem-calc(14 0);
-    img {
-      @include scale-with-navbar(
-        width, rem-calc(28), rem-calc(37)
-      );
-      @include scale-with-navbar(
-        height, rem-calc(27), rem-calc(36)
-      );
-    }
-  }
-
-  // this is being collapsed
-  .collapse {
-    @include until($large) {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.2s linear;
-    }
-    &.in { // someone pressed the menu button
-      display: block;
-      opacity: 1;
-      transition: opacity 0.2s linear;
-    }
-  }
-
-  .search input {
-    margin: rem-calc(17 10);
-    height: rem-calc(30);
-    width: rem-calc(80);
-    transition: width 0.15s linear;
+  // overwrite focus styles for all links and buttons
+  // this also adds a padding...
+  a, button {
+    padding: 0.5rem;
     &:focus {
-      width: rem-calc(100);
-    }
-    @include above($medium) {
-      width: rem-calc(150);
-      &:focus {
-        width: rem-calc(200);
-      }
+      text-decoration: none;
+      outline: none;
+      border-radius: rem-calc(2);
+      background: rgba($white, 0.25);
     }
   }
 
-  // buttons
+  // normalize all buttons
   button {
-    &:hover {
-      background: rgba(white, 0.25);
-    }
-    width: rem-calc(30);
-    height: rem-calc(30);
-    margin: rem-calc(17 0);
-    @include until($medium) {
-      margin: rem-calc(12 0);
-    }
-    padding: 0;
-    border-radius: rem-calc(2);
-  }
-
-  // the search button
-  .search-button {
-    @include until($medium) {
-      padding: rem-calc(7 7);
-    }
-  }
-
-  // the login button
-  .login-button {
-    padding: rem-calc(4 4);
-  }
-
-  // the menu toggle button
-  .menu-toggle {
-    @include above($large) {
-      display: none;
-    }
-    padding: rem-calc(0 7);
     background: transparent;
     border: none;
-
-    // the hamburger menu icon
-    .hamburger {
-      @include hamburger-generator(
-        rem-calc(16), rem-calc(3), rem-calc(2), white,
-        $timing-function: linear,
-        $duration: 0.2s
-      );
-    }
-    &:not(.collapsed) {
-      .hamburger {
-        @include hamburger-animation;
-      }
-    }
-
-  }
-}
-
-
-
-// the menu inside .navbar
-.navbar-menu {
-  position: absolute;
-  margin-top: 0;
-  left: 0;
-  width: 100vw;
-  @include scale-with-navbar-height(top);
-  background: white;
-  padding-top: rem-calc(25);
-  padding-bottom: rem-calc(37);
-  @include scale-with-navbar(
-    padding-left, rem-calc(20), rem-calc(180)
-  );
-  border-bottom: rem-calc(1) solid $navbar-color;
-
-  a {
-    color: $brown;
-  }
-  li + li {
-    margin-top: rem-calc(24);
   }
 
-  // what we need to change for large screens
-  @include above($large) {
-    left: inherit;
-    padding-left: 0;
+  &--fixed { position: fixed; }
+  &--absolute { position: absolute; }
+
+  &--green { background: $green; }
+  &--red { background: $red; }
+
+  &--transparent {
     background: transparent;
-    border-bottom: none;
-    padding-top: 0;
-    top: 0;
-    width: auto;
-
-    & > li + li {
-      margin-top: rem-calc(20);
-      margin-left: rem-calc(30);
-    }
-
-    & > li {
-      margin-top: rem-calc(20);
-      float: left;
-      & > a {
-        padding-top: rem-calc(20);
-        padding-bottom: rem-calc(20);
-        color: white;
-      }
-    }
+    box-shadow: none;
   }
 
-  @include above($large) {
-    .dropdown {
-      position: relative;
-    }
-  }
 
-  // dropdown menu (mobile first)
-  .dropdown-menu {
-    display: none;
-    position: absolute;
-    @include scale-with-navbar(
-      left, rem-calc(70), rem-calc(400)
-    );
-    width: 100vw;
-    top: 0;
+  // horizontally center with fixed width
+  &__inner {
+    @include container;
     height: 100%;
-    background: white;
-    padding-top: rem-calc(25);
-    padding-left: rem-calc(20);
-    @include navbar-shadow;
+    display: block;
+  }
 
-    li + li {
-      margin-top: rem-calc(12);
+
+  // vertically center
+  &__item {
+    display: inline;
+    vertical-align: middle;
+    @include scale-with-navbar-height(line-height);
+    @include scale-with-navbar-height;
+  }
+
+
+  // special aligment/size for logo
+  &__logo {
+    display: inline-block;
+    vertical-align: middle;
+
+    width: rem-calc(28);
+    height: rem-calc(27);
+    @include above($medium) {
+      width: rem-calc(37);
+      height: rem-calc(36)
     }
+  }
 
-    // now for larger screens
-    @include above($large) {
+
+  // this shows its content on a white background in mobile/tablet
+  // and shows as a normal navbar__item else
+  //
+  // displaying/not displaying this is done via js and [aria-hidden]
+  &__collapsible {
+
+    @include until($large) {
       height: auto;
+
+      position: absolute;
+      @include scale-with-navbar-height(top);
       left: 0;
-      top: rem-calc(45);
-      width: 200%;
-      background: transparent;
-      box-shadow: none;
-      padding-bottom: rem-calc(32);
-      padding-left: 0;
-      margin-left: 0;
-      @include white-background(rem-calc(-25));
 
-      li {
-        clear: both;
+      width: 100vw;
 
-        a {
-          padding: rem-calc(4 0);
-          margin: rem-calc(3 0);
-          color: $brown;
-        }
+      z-index: 1000;
+      margin-top: 0;
+      @include scale-with-navbar(padding-left, rem-calc(20), rem-calc(180));
+
+      background: white;
+      border-bottom: rem-calc(1) solid $green;
+
+      a {
+        color: $brown;
       }
     }
   }
 
-  .open .dropdown-menu {
-    display: block;
-    z-index: 1000;
+}
+
+
+/// menu
+///
+/// @example markup
+///   <ul class="menu">
+///     <li class="menu__item"><a href="#">link</a></li>
+///     <li class="menu__item  menu__item--active"><a href="#">link</a></li>
+///   </ul>
+.menu {
+  display: inline-block;
+  height: 100%;
+
+  @include until($large) {
+    padding-bottom: rem-calc(37);
+    padding-top: rem-calc(25);
+  }
+
+  &__item {
+    @include above($large) {
+      display: inline-block;
+      margin-right: rem-calc(20);
+    }
+
+    // margin between adjacent menu__items on mobile
+    &+& {
+      @include until($large) {
+        margin-top: rem-calc(24);
+      }
+    }
+
+    // the active menu item
+    &--active {
+      @include above($large) {
+        border-bottom: rem-calc(5) solid $brown;
+      }
+    }
   }
 }
 
-// grey out toplevel closed links
-.dropdown-open {
-  .navbar-menu > li > a {
-    opacity: 0.5;
-  }
-  li.open > a {
-    opacity: 1;
+// if its part of a navbar, have each menu__item have 100% height,
+// so that the border-bottom on menu__item--active be on the bottom
+// of the navbar.
+.navbar .menu__item {
+  @include above($large) {
+    height: 68%; // magic number!!!
   }
 }

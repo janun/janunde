@@ -1,15 +1,25 @@
 // activate isotope
 // on .js-masonry containers
-var $grid = $('.js-masonry').isotope({
-  itemSelector: '.js-masonry__element, .js-masonry__element',
-  percentPosition: true,
-  transitionDuration: 0,
-});
-// relayout after each image loads
-$grid.imagesLoaded().progress( function() {
-  $grid.isotope('layout');
-});
+(function () {
+  // TODO: use browserify or sth. to keep track of dependencies
+  //var Isotope = require('isotope-layout');
+  //var imagesLoaded = require('imagesLoaded');
 
-// TODO
-// de/activate isotope depending on screen-size
-// so we dont activate it in mobile where it is unneeded
+  // get all relevant elements
+  var elements = document.querySelectorAll('.js-masonry');
+  for (i = 0; i < elements.length; ++i) {
+    var element = elements[i];
+
+    // activate isotope
+    var iso = new Isotope(element, {
+      itemSelector: '.js-masonry__element',
+      percentPosition: true,
+      transitionDuration: 0,
+    });
+
+    // relayout after image loading is complete
+    imagesLoaded(element, function() {
+      iso.layout();
+    });
+  }
+}());
