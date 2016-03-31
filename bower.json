@@ -4,6 +4,7 @@
   "dependencies": {
     "hamburger-icon": "~1.0.3",
     "isotope": "~2.2.2",
-    "imagesloaded": "^4.1.0"
+    "imagesloaded": "^4.1.0",
+    "a11y-toggle": "^1.0.6"
   }
 }
