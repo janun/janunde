@@ -1,0 +1,28 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-group-index-page base-layout{% endblock %}
+
+{% block content %}
+
+  <main>
+    <h2 class="area-title">Gruppen</h2>
+    <div class="grid
+                grid--of-2@medium
+                grid--of-3@large
+                js-masonry">
+      {% if groups %}
+        {% for object in groups %}
+          <div class="grid__element js-masonry__element">
+            {% include object.medium_partial_template_name %}
+          </div>
+        {% endfor %}
+      {% else %}
+        Keine Gruppen vorhanden.
+      {% endif %}
+    </div>
+  </main>
+
+
+
+{% endblock %}

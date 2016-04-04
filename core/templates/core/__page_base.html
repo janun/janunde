@@ -36,7 +36,12 @@
         {% endif %}
       </div>
 
+      {% if self.related_group %}
+        Gruppe: {{ self.related_group.title }}
+      {% endif %}
+
       {{ self.body }}
+
 
     </div>
 

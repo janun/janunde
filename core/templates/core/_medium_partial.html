@@ -29,4 +29,8 @@
     </div>
   {% endif %}
 
+  {% if object.related_group %}
+    Gruppe: {{ object.related_group.title }}
+  {% endif %}
+
 </article>

@@ -17,12 +17,20 @@ from .images import AttributedImage as Image
 
 
 def _(str):
-    """dummy trans"""
+    """dummy trans
+
+    TODO: real translation?
+    """
     return str
 
 
 class BasePage(Page):
-    """basic functionality for all our pages"""
+    """basic functionality for all our pages
+
+    Every page has a (short) partial and a medium partial template:
+     * The short partial can be used for listings where object density is high.
+     * The medium partial gives more insight into the content of the page.
+    """
     partial_template_name = 'core/_partial.html'
     medium_partial_template_name = 'core/_medium_partial.html'
 
@@ -98,6 +106,27 @@ class HomePage(BasePage):
         return context
 
 
+class Group(BasePage):
+    # title is auto added
+    class Meta:
+        verbose_name = _("Gruppe")
+        verbose_name_plural = _("Gruppen")
+
+
+class GroupIndexPage(BasePage):
+    # title is auto added
+    subpage_types = ['Group']
+    parent_page_types = ['HomePage']
+
+    class Meta:
+        verbose_name = _("Auflistung von Gruppen")
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['groups'] = Group.objects.child_of(self).live()
+        return context
+
+
 class ArticleIndexPage(BasePage):
     """
     lists articles
@@ -140,6 +169,15 @@ class Article(StandardPage):
                     "Wird in Übersichten verwendet.")
     )
 
+    related_group = models.ForeignKey(
+        Group,
+        null=True,
+        blank=False,
+        related_name='+',
+        on_delete=models.SET_NULL,
+        verbose_name=_("Zugehörige Gruppe"),
+    )
+
     search_fields = StandardPage.search_fields + (
         index.SearchField('highlight'),
         index.FilterField('first_published_at'),
@@ -147,13 +185,13 @@ class Article(StandardPage):
     )
 
     content_panels = [
-        FieldPanel('title', classname="full title"),
-
+        FieldPanel('title', classname='full title'),
         ImageChooserPanel('main_image'),
         StreamFieldPanel('body'),
     ]
 
     related_panels = [
+        PageChooserPanel('related_group', 'core.Group'),
         InlinePanel('related_pages', label=_("Zugehöriges")),
     ]
 
@@ -165,7 +203,7 @@ class Article(StandardPage):
         ObjectList(content_panels, heading=_("Inhalt")),
         ObjectList(related_panels, heading=_("Zugehöriges")),
         ObjectList(settings_panels, heading=_("Einstellungen"),
-                   classname="settings"),
+                   classname='settings'),
     ])
 
     class Meta:

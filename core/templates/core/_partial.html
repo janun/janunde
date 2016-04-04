@@ -15,13 +15,21 @@
       <div class="overlay__content add-panel-padding--on-sides">
         {% block overlay %}
           <h3><a href="{% pageurl object %}">{{ object.title }}</a></h3>
+          {% if object.related_group %}
+            Gruppe: {{ object.related_group.title }}
+          {% endif %}
         {% endblock %}
       </div>
     </div>
   {% else %}
     <h3><a href="{% pageurl object %}">{{ object.title }}</a></h3>
+    {% if object.related_group %}
+      Gruppe: {{ object.related_group.title }}
+    {% endif %}
   {% endif %}
 
   {% block content %}{% endblock %}
+
+
 
 </article>
