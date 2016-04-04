@@ -110,7 +110,6 @@ class ArticleIndexPage(BasePage):
 
     def get_context(self, request):
         context = super().get_context(request)
-        # get all non-highlighted articles
         context['articles'] = Article.objects.child_of(self) \
             .live().order_by('-first_published_at')
         return context
@@ -147,26 +146,25 @@ class Article(StandardPage):
         index.FilterField('latest_revision_created_at'),
     )
 
-    title_panels = [
-        FieldPanel('title', classname="full title"),
-        FieldPanel('highlight'),
-        ImageChooserPanel('main_image'),
-    ]
-
     content_panels = [
+        FieldPanel('title', classname="full title"),
+
+        ImageChooserPanel('main_image'),
         StreamFieldPanel('body'),
     ]
 
-    sidebar_content_panels = [
+    related_panels = [
         InlinePanel('related_pages', label=_("Zugehöriges")),
     ]
 
+    settings_panels =  [
+        FieldPanel('highlight'),
+    ] + Page.promote_panels + Page.settings_panels
+
     edit_handler = TabbedInterface([
-        ObjectList(title_panels, heading=_("Titel")),
         ObjectList(content_panels, heading=_("Inhalt")),
-        ObjectList(sidebar_content_panels, heading=_("Nebenbei")),
-        ObjectList(Page.promote_panels, heading=_("Promotion")),
-        ObjectList(Page.settings_panels, heading=_("Einstellungen"),
+        ObjectList(related_panels, heading=_("Zugehöriges")),
+        ObjectList(settings_panels, heading=_("Einstellungen"),
                    classname="settings"),
     ])
 
