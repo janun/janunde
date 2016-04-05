@@ -172,10 +172,11 @@ class Article(StandardPage):
     related_group = models.ForeignKey(
         Group,
         null=True,
-        blank=False,
-        related_name='+',
+        blank=True,
+        related_name='articles',
         on_delete=models.SET_NULL,
         verbose_name=_("Zugehörige Gruppe"),
+        help_text=_("Eine JANUN-Gruppe, die diesem Artikel zugeordnet ist")
     )
 
     search_fields = StandardPage.search_fields + (
@@ -191,7 +192,7 @@ class Article(StandardPage):
     ]
 
     related_panels = [
-        PageChooserPanel('related_group', 'core.Group'),
+        FieldPanel('related_group', 'core.Group'),
         InlinePanel('related_pages', label=_("Zugehöriges")),
     ]
 
