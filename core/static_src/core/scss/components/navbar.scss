@@ -176,6 +176,9 @@ $small-navbar-height: rem-calc(54);
       @include above($large) {
         border-bottom: rem-calc(5) solid $brown;
       }
+      @include until($large) {
+        font-weight: bold;
+      }
     }
   }
 }
