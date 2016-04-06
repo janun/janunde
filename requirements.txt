@@ -1,12 +1,12 @@
-Django>=1.9
-wagtail==1.4.2
+Django==1.9.5
+wagtail==1.4.3
 
 
 # Dependencies for hosting
 #elasticsearch==1.2.0
 django-storages==1.4
 boto==2.39.0
-django-htmlmin>=0.8.0
+django-htmlmin==0.9.1
 
 # Dependencies for Heroku deployment
 whitenoise==2.0.6
