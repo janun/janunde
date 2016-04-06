@@ -12,62 +12,44 @@
 ///     </div>
 ///   </header>
 
-$height-header: rem-calc(526);
+$height-header: rem-calc(526); // approx size of video
 $min-height-header: rem-calc(480);
 
 .header {
-  position: relative;
   width: 100%;
+  background: $green-overlay;
 
   // on mobile: full height
   @include until($medium) {
-    height: $min-height-header; // fallback for vh
     height: 100vh;
     min-height: $min-height-header;
+    padding-top: rem-calc(82); // magic number
   }
 
   // on tablets and up: fixed height
   @include above($medium) {
     height: $height-header;
+    padding-top: rem-calc(110); // magic number
   }
 
-  background: $green-overlay;
-
-  // vertically center content using flexbox
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  // fallback
-  .no-flexbox & {
-    padding-top: rem-calc(82);
-  }
-}
-
-  .header__content {
+  &__content {
     z-index: 5;
-    max-width: rem-calc(800);
+    max-width: rem-calc(800); // magic number
     margin: 0 auto;
     padding-left: 1rem;
     padding-right: 1rem;
 
     @include janun-text-shadow;
     text-align: center;
-
-    // TODO: * is really bad!
-    * {
-      margin-left: auto;
-      margin-right: auto;
-      color: $white;
-      font-family: $font-family-sans-serif;
-    }
+    color: $white;
+    font-family: $font-family-sans-serif;
 
     p {
-      max-width: rem-calc(450);
+      margin: 0 auto;
+      max-width: rem-calc(450); // magic number
       padding: 1rem;
       @include p;
       font-family: $font-family-sans-serif;
     }
-
-
-
   }
+}

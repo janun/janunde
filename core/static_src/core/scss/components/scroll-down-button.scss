@@ -1,5 +1,7 @@
 .scroll-down-button {
   display: block;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 3rem;
   background-image: url(static('core/images/components/scroll-down-button/chevron.svg'));
   background-size: rem-calc(20 12);
