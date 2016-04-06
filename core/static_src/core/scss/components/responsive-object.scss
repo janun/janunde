@@ -1,0 +1,22 @@
+.responsive-object {
+  position: relative;
+  min-width: 100%;
+  height: 0;
+  //padding-bottom is set inline
+
+  iframe {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%
+  }
+
+  // if its in a panel
+  // remove the panel_padding
+  .panel & {
+    margin-left: -$panel_padding;
+    margin-right: -$panel_padding;
+  }
+
+}
