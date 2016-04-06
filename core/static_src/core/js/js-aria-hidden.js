@@ -7,13 +7,17 @@
 //   <div class="js-aria-hidden"
 //        data-js-aria-hidden-media="(max-width: 1023px)"></div>
 function jsAriaHidden(){
-  var target = document.querySelector('.js-aria-hidden');
-  var media = target.getAttribute('data-js-aria-hidden-media');
+  var targets = document.querySelectorAll('.js-aria-hidden');
 
-  if (window.matchMedia(media).matches) {
-    target.setAttribute('aria-hidden', true);
-  } else {
-    target.setAttribute('aria-hidden', false);
+  for (i = 0; i < targets.length; ++i) {
+    var target = targets[i];
+    var media = target.getAttribute('data-js-aria-hidden-media');
+
+    if (window.matchMedia(media).matches) {
+      target.setAttribute('aria-hidden', true);
+    } else {
+      target.setAttribute('aria-hidden', false);
+    }
   }
 };
 
