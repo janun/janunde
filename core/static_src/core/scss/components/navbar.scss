@@ -110,6 +110,10 @@ $small-navbar-height: rem-calc(54);
     }
   }
 
+  &__title {
+    font-weight: bold;
+  }
+
 
   // this shows its content on a white background in mobile/tablet
   // and shows as a normal navbar__item else
