@@ -193,7 +193,7 @@ class Article(StandardPage):
 
     related_panels = [
         FieldPanel('related_group', 'core.Group'),
-        InlinePanel('related_pages', label=_("Zugehöriges")),
+        InlinePanel('related_pages', label=_("Zugehörige Seiten")),
     ]
 
     settings_panels =  [
