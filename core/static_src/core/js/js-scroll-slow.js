@@ -5,7 +5,7 @@
 
   // perform the actual scroll animation
   function animateScrollTo(yPos, startTime, duration) {
-    duration = duration || 200;
+    duration = duration || 400;
     var targetTime = startTime + duration;
 
     function animate() {
@@ -13,10 +13,10 @@
       var multiplier = 1 - (targetTime - nowTime) / duration;
 
       if (nowTime >= targetTime ) {
-        document.body.scrollTop = yPos;
+        document.documentElement.scrollTop = document.body.scrollTop = yPos;
         return;
       } else {
-        document.body.scrollTop = yPos * multiplier;
+        document.documentElement.scrollTop = document.body.scrollTop = yPos * multiplier;
         requestAnimationFrame(animate);
       }
     }
