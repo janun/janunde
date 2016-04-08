@@ -1,6 +1,8 @@
 // js-toggle-navbar--transparent
-function jsToggleNavbarTransparent(){
+function jsToggleNavbarTransparentOnScroll(){
   var target = document.querySelector('.js-toggle-navbar--transparent');
+  if(!target) { return 1; }
+
   var changeOnPosition = 480 - 65;
   var currentPos = document.body.scrollTop || document.documentElement.scrollTop;
 
@@ -13,4 +15,4 @@ function jsToggleNavbarTransparent(){
 };
 
 // register event handler
-window.addEventListener('scroll', jsToggleNavbarTransparent);
+window.addEventListener('scroll', jsToggleNavbarTransparentOnScroll);
