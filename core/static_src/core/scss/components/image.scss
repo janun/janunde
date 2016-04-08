@@ -1,18 +1,20 @@
 $image--fixed-height_height: $panel--fixed-height_height;
 
-/// image
-///
-/// @example markup
-///   <div class="image image--fixed-height">
-///     <img ...>
-///   </div>
+// image
+//
+// @example markup
+//   <div class="image image--fixed-height">
+//     <img ...>
+//   </div>
 .image {
   position: relative;
+  height: auto;
 
   // responsive
   img {
+    display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
   }
 
   // fallback text
@@ -25,23 +27,18 @@ $image--fixed-height_height: $panel--fixed-height_height;
   }
 
 
-  /// when the image is cropped by the browser
-  /// this ensures it is cropped on both sides
-  &--fixed-height {
-    overflow: hidden;
-    text-align: center;
-    height: $image--fixed-height_height;
+  &--fixed-height\@medium {
+    @include above($medium) {
+      overflow: hidden;
+      height: $image--fixed-height_height;
 
-    img {
-      position: relative;
-      top: 0;
-      left: 100%;
-      margin-left: -200%;
-      min-width: 100%;
-      min-height: $image--fixed-height_height;
-      width: auto;
+      img {
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+      }
     }
-
   }
 
 
