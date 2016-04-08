@@ -16,16 +16,6 @@ $image--fixed-height_height: $panel--fixed-height_height;
     height: 100%;
   }
 
-  // fallback text
-  img:after {
-    content: "Bild konnte nicht geladen werden.";
-    display: block;
-    margin: 1rem;
-    color: $brown;
-    display: block;
-  }
-
-
   &--fixed-height\@medium {
     @include above($medium) {
       overflow: hidden;
