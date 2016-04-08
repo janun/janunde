@@ -83,7 +83,6 @@ $small-navbar-height: rem-calc(54);
     @include container;
     height: 100%;
     display: block;
-    white-space: nowrap;
     overflow: hidden;
   }
 
@@ -123,22 +122,27 @@ $small-navbar-height: rem-calc(54);
 
     @include until($large) {
       height: auto;
-
       position: absolute;
       @include scale-with-navbar-height(top);
       left: 0;
-
       width: 100vw;
 
       z-index: 1000;
       margin-top: 0;
       @include scale-with-navbar(padding-left, rem-calc(20), rem-calc(180));
 
-      background: white;
+      background: $white;
+      color: $brown;
       border-bottom: rem-calc(1) solid $green;
 
       a {
         color: $brown;
+      }
+
+      a:focus, button:focus {
+        @include until($large) {
+          background: rgba($brown, 0.25);
+        }
       }
     }
   }
@@ -156,6 +160,10 @@ $small-navbar-height: rem-calc(54);
 .menu {
   display: inline-block;
   height: 100%;
+
+  li {
+    list-style-type: none;
+  }
 
   @include until($large) {
     padding-bottom: rem-calc(37);
@@ -187,11 +195,9 @@ $small-navbar-height: rem-calc(54);
   }
 }
 
-// if its part of a navbar, have each menu__item have 100% height,
-// so that the border-bottom on menu__item--active be on the bottom
-// of the navbar.
+
 .navbar .menu__item {
   @include above($large) {
-    height: 68%; // magic number!!!
+    height: 68%; // magic number
   }
 }
