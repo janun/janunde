@@ -3,9 +3,7 @@
 <article class="panel">
 
   {% if object.main_image %}
-    <div class="image
-                remove-panel-padding--on-top
-                overlay">
+    <div class="image remove-panel-padding--on-top overlay overlay--black-gradient">
       <a href="{% pageurl object %}">
         {% image object.main_image fill-320x192 jpg as fallback_image %}
         <img src="{{ fallback_image.url }}"
@@ -13,7 +11,7 @@
           sizes="(min-width: 40em) and (max-width: 64em) 33vw, (min-width: 64em) 20em, 100vw"
           alt="{{ fallback_image.alt }}">
       </a>
-      <div class="overlay__content add-panel-padding--on-sides">
+      <div class="overlay__content add-panel-padding--on-sides add-panel-padding--on-bottom">
         {% block overlay %}
           <h3><a href="{% pageurl object %}">{{ object.title }}</a></h3>
         {% endblock %}

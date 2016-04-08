@@ -1,9 +1,34 @@
-/// <div class="overlay">
-///   <img ... or whatever>
-///   <div class="overlay__content">...text...</div>
-/// </div>
+// overlay, i.e. over an image
+//
+// <div class="overlay">
+//   <img ... or whatever>
+//   <div class="overlay__content">...text...</div>
+// </div>
 .overlay {
   position: relative;
+
+  &--black-gradient {
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: linear-gradient(rgba($black, 0.0) 50%, rgba($black, 0.6));
+    }
+  }
+
+  &--white-box {
+    .overlay__content {
+      background: rgba($white, 0.75);
+      color: $brown;
+      h2, h3, h4, a, :hover {
+        color: $brown;
+      }
+    }
+  }
 
   &__content {
     position: absolute;
@@ -11,6 +36,16 @@
     width: 100%;
     height: auto;
     text-align: left;
-    background: rgba($white, 0.75);
+    z-index: 1;
+
+    color: $white;
+
+    h2, h3, h4, a, :hover {
+      color: $white;
+    }
+
+    h2, h3, h4 {
+      margin-bottom: 0;
+    }
   }
 }

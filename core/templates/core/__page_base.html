@@ -11,7 +11,7 @@
     <div class="panel">
 
       {% if self.main_image %}
-        <div class="image remove-panel-padding--on-top overlay attribution">
+        <div class="image remove-panel-padding--on-top overlay overlay--black-gradient attribution">
           {% image self.main_image jpg as original_image %}
             <img src="{{ original_image.url }}"
               srcset="a{{ self.main_image|srcset:'width-320|jpg width-640|jpg width-1280|jpg width-695|jpg width-1792|jpg' }}"

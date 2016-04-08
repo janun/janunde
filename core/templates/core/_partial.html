@@ -1,10 +1,10 @@
 {% load wagtailcore_tags wagtailimages_tags srcset %}
 
-<article class="{% block partial-class %}panel panel--fixed-height{% endblock %}">
+<article class="{% block partial-class %}panel panel--fixed-height@medium{% endblock %}">
 
   {% if object.main_image %}
-    <div class="image image--fixed-height
-                remove-panel-padding--all overlay">
+    <div class="image image--fixed-height@medium
+                remove-panel-padding--all overlay overlay--black-gradient">
       <a href="{% pageurl object %}">
         {% image object.main_image fill-320x192 jpg as fallback_image %}
         <img src="{{ fallback_image.url }}"
@@ -12,7 +12,7 @@
           sizes="(min-width: 40em) and (max-width: 64em) 33vw, (min-width: 64em) 20em, 100vw"
           alt="{{ fallback_image.alt }}">
       </a>
-      <div class="overlay__content add-panel-padding--on-sides">
+      <div class="overlay__content add-panel-padding--on-sides add-panel-padding--on-bottom">
         {% block overlay %}
           <h3><a href="{% pageurl object %}">{{ object.title }}</a></h3>
           {% if object.related_group %}
