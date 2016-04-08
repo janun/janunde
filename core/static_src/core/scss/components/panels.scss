@@ -16,8 +16,10 @@ $panel--fixed-height_height: rem-calc(196);
   background-color: $white;
   padding: $panel_padding;
 
-  &--fixed-height {
-    height: $panel--fixed-height_height;
+  &--fixed-height\@medium {
+    @include above($medium) {
+      height: $panel--fixed-height_height;
+    }
   }
 }
 
