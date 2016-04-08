@@ -21,6 +21,23 @@
       JANUN
     </a>
 
+
+    <div class="float-right">
+      <!-- menu toggle button -->
+      <div class="navbar__item">
+        <button class="hamburger
+                       js-aria-hidden"
+                data-js-aria-hidden-media="(min-width: 1024px)"
+                type="button"
+                title="Menü ein-/ausblenden"
+                data-a11y-toggle="collapsible"
+                aria-expanded="false">
+          <span class="hamburger__inner"></span>
+        </button>
+      </div>
+    </div>
+
+
     <!-- collapsible menu -->
     <div id="collapsible" aria-hidden="false"
          class="navbar__item navbar__collapsible js-aria-hidden"
@@ -55,29 +72,6 @@
           </li>
         {% endfor %}
       </ul>
-    </div>
-
-    <div class="float-right">
-      <!-- search form
-      <form class="navbar__item"
-            action="/search/" method="get">
-        <input type="search" name="query" placeholder="Suche"
-               {% if context.search_query %}
-                 value="{{ context.search_query }}"
-               {% endif %}>
-      </form>-->
-
-      <!-- menu toggle button -->
-      <div class="navbar__item">
-        <button class="hamburger
-                       hide@large"
-                type="button"
-                title="Menü ein-/ausblenden"
-                data-a11y-toggle="collapsible"
-                aria-expanded="false">
-          <span class="hamburger__inner"></span>
-        </button>
-      </div>
     </div>
 
   </nav>
