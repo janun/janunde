@@ -4,6 +4,8 @@ from django.db import models
 from django.utils import timezone
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
+                                                MultiFieldPanel,
+                                                FieldRowPanel,
                                                 ObjectList, PageChooserPanel,
                                                 StreamFieldPanel,
                                                 TabbedInterface)
@@ -65,7 +67,6 @@ class StandardPageRelatedPage(Orderable, RelatedPage):
 class StandardPage(BasePage):
     """
     simple "just a page"
-    basis for most other pages
     """
     body = StreamField(
         StandardStreamBlock(),
@@ -231,16 +232,12 @@ class EventIndexPage(BasePage):
         return context
 
 
-class EventPage(StandardPage):
+class EventPage(Page):
+    """
+    represents an event
+    """
     subpage_types = []
     parent_page_types = ['EventIndexPage']
-
-    highlight = models.BooleanField(
-        _("Highlight"),
-        help_text="Ist dies eine ge-highlightete Veranstaltung? "
-                  "Falls ja, taucht es z.B. auf der Startseite auf.",
-        default=False
-    )
 
     main_image = models.ForeignKey(
         Image,
@@ -248,59 +245,114 @@ class EventPage(StandardPage):
         null=True,
         blank=True,
         related_name='+',
-        verbose_name=_("Hauptbild"),
-        help_text=_("Bild, das die Veranstaltung repräsentiert. "
-                    "Wird in Übersichten verwendet.")
+        verbose_name=_("Poster"),
+        help_text=_("Poster oder Bild für diese Veranstaltung."
+                    "Bitte kein Gruppen- oder JANUN-Logo!")
     )
-
     start_datetime = models.DateTimeField(_("Startzeit"))
-    end_datetime = models.DateTimeField(
-        _("Endzeit"),
+    end_datetime = models.DateTimeField(_("Endzeit"),
+                                        null=True,
+                                        blank=True)
+    related_group = models.ForeignKey(
+        Group,
+        null=True,
+        blank=True,
+        related_name='event_pages',
+        on_delete=models.SET_NULL,
+        verbose_name=_("Zugehörige Gruppe"),
+        help_text=_("Eine JANUN-Gruppe, "
+                    "die dieser Veranstaltung zugeordnet ist")
+    )
+    facebook_event_url = models.URLField(
+        _("Facebook Event"),
+        help_text=_("Die URL zum Facebook-Event dieser Veranstaltung"),
+        null=True,
+        blank=True,
+        # TODO: validation so its only a Facebook Event URL
+    )
+    website_url = models.URLField(
+        _("externe Website"),
+        help_text=_("Die URL einer externen Website zu dieser Veranstaltung"),
         null=True,
         blank=True,
     )
+    contact_mail = models.EmailField(
+        _("Kontakt E-Mail"),
+        help_text=_("Die E-Mail-Adresse, "
+                    "um Kontakt für diese Veranstaltung aufzunehmen"),
+        null=True,
+        blank=True,
+    )
+    content = StreamField(
+        StandardStreamBlock(),
+        blank=True,
+        verbose_name=_("Inhalt"),
+    )
+    COLOR_CHOICES = (
+        ('rgb(70, 187, 0)', _("Grün")),
+        ('rgb(196, 23, 55)', _("Rot")),
+        ('rgb(0, 118, 164)', _("Blau")),
+        ('rgb(233, 88, 34)', _("Orange")),
+    )
+    color = models.CharField(
+        _("Farbe"),
+        help_text=_("Farbe, die diese Veranstaltung bekommt, "
+                    "falls kein Poster angegeben ist."),
+        choices=COLOR_CHOICES,
+        null=True,
+        blank=True,
+        max_length=18
+        # TODO: Validation: Must be present if no main_image
+    )
+    location = models.CharField(
+        _("Ort"),
+        help_text=_("Ort, an dem die Veranstaltung stattfindet"),
+        max_length=255,
+        # TODO: change this into a real location somehow
+    )
 
-    subpage_types = []
-    parent_page_types = ['EventIndexPage']
-
-    search_fields = StandardPage.search_fields + (
-        index.SearchField('highlight'),
-        index.SearchField('date_from'),
-        index.SearchField('date_to'),
-        index.FilterField('time_from'),
-        index.FilterField('time_to'),
+    search_fields = BasePage.search_fields + (
+        #title is in here by default
+        index.SearchField('content'),
+        index.SearchField('start_datetime'),
+        index.SearchField('end_datetime'),
         index.FilterField('first_published_at'),
         index.FilterField('latest_revision_created_at'),
     )
 
-    time_panels = [
-        FieldPanel('start_datetime'),
-        FieldPanel('end_datetime'),
-    ]
-
-    title_panels = [
-        FieldPanel('title', classname="full title"),
-        FieldPanel('highlight'),
-        ImageChooserPanel('main_image'),
-    ]
-
-    content_panels = [
-        StreamFieldPanel('body'),
-    ]
-
-    sidebar_content_panels = [
-        InlinePanel('related_pages', label=_("Zugehöriges")),
-    ]
-
     edit_handler = TabbedInterface([
-        ObjectList(title_panels, heading=_("Titel")),
-        ObjectList(time_panels, heading=_("Zeit")),
-        ObjectList(content_panels, heading=_("Inhalt")),
-        ObjectList(sidebar_content_panels, heading=_("Nebenbei")),
-        ObjectList(Page.promote_panels, heading=_("Promotion")),
-        ObjectList(Page.settings_panels, heading=_("Einstellungen"),
-                   classname="settings"),
+        ObjectList([
+            FieldPanel('title', classname="full title"),
+            StreamFieldPanel('content'),
+        ], heading=_("Titel und Inhalt")),
+        ObjectList([
+            MultiFieldPanel(
+                [
+                    FieldPanel('start_datetime'),
+                    FieldPanel('end_datetime'),
+                ],
+                classname="",
+                heading="Datum"
+            ),
+            FieldPanel('location'),
+            MultiFieldPanel(
+                [
+                    FieldPanel('contact_mail'),
+                    FieldPanel('website_url'),
+                    FieldPanel('facebook_event_url')
+                ],
+                heading="Links und E-Mail",
+                classname="collapsible collapsed"
+            )
+        ], heading=_("Datum, Ort und Links")),
+        ObjectList([
+            ImageChooserPanel('main_image'),
+            FieldPanel('color'),
+        ], heading=_("Poster und Gestaltung")),
     ])
+
+    partial_template_name = 'core/_partial.html'
+    medium_partial_template_name = 'core/_medium_partial.html'
 
     class Meta:
         verbose_name = _("Veranstaltung")
