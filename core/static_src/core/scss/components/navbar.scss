@@ -186,7 +186,7 @@ $small-navbar-height: rem-calc(54);
     // the active menu item
     &--active {
       @include above($large) {
-        border-bottom: rem-calc(5) solid $brown;
+        border-bottom: rem-calc(5) solid rgb(14, 133, 0);
       }
       @include until($large) {
         font-weight: bold;
