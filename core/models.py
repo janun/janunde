@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.db.models import Q
 from django.utils import timezone
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
@@ -227,8 +228,9 @@ class EventIndexPage(BasePage):
     def get_context(self, request):
         context = super().get_context(request)
         now = timezone.localtime(timezone.now())
-        context['upcoming'] = EventPage.objects.child_of(self) \
-            .live().filter(start_datetime__gte=now).order_by('start_datetime')
+        context['upcoming'] = EventPage.objects.child_of(self).live().filter(
+            Q(start_datetime__gte=now) | Q(end_datetime__gte=now)
+        ).order_by('start_datetime')
         return context
 
 

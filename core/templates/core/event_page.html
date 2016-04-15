@@ -1,0 +1,61 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags wagtailimages_tags srcset humanize %}
+
+{% block body_class %}event-page-template main-aside-layout{% endblock %}
+
+{% block content %}
+
+  <main>
+    <h1>{{ self.title }}</h1>
+    <span>in {{ self.location }}</span>
+    {{ self.content }}
+  </main>
+
+  <aside>
+    <!-- image -->
+    {% if self.main_image %}
+    <div class="image">
+      {% image self.main_image jpg as original_image %}
+        <img src="{{ original_image.url }}"
+          srcset="{{ self.main_image|srcset:'width-320|jpg width-640|jpg width-1280|jpg width-695|jpg width-1792|jpg' }}"
+          sizes="(min-width: 40em) 20em, 95vw"
+          alt="{{ original_image.alt }}"
+          class="main-image">
+    </div>
+    {% endif %}
+
+    <!-- time -->
+    <div>
+      Beginn: {{ self.start_datetime }}
+    </div>
+    {% if self.end_datetime %}
+      <div>
+        Ende: {{ self.end_datetime }}
+      </div>
+    {% endif %}
+
+    <!-- location -->
+    <div>
+      Ort: {{ self.location }}
+      <a href="https://www.google.de/maps/search/{{ self.location }}">Auf Karte anzeigen</a>
+    </div>
+
+    <!-- links etc. -->
+    {% if self.website_url %}
+      <div>
+        Website: <a href="{{ self.website_url }}">{{ self.website_url }}</a>
+      </div>
+    {% endif %}
+    {% if self.facebook_event_url %}
+      <div>
+        <a href="{{ self.facebook_event_url }}">Facebook-Event</a>
+      </div>
+    {% endif %}
+    {% if self.contact_mail %}
+      <div>
+        <a href="mailto:{{ self.contact_mail }}">Kontakt per E-Mail</a>
+      </div>
+    {% endif %}
+  </aside>
+
+{% endblock %}
