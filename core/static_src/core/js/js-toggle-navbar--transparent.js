@@ -15,4 +15,5 @@ function jsToggleNavbarTransparentOnScroll(){
 };
 
 // register event handler
+// TODO: throttle 200ms
 window.addEventListener('scroll', jsToggleNavbarTransparentOnScroll);

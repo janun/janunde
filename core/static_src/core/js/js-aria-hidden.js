@@ -22,5 +22,6 @@ function jsAriaHidden(){
 };
 
 // register event handler
+// TODO: throttle 200ms
 window.addEventListener('resize', jsAriaHidden);
 jsAriaHidden();
