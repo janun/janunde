@@ -10,6 +10,7 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 ObjectList, PageChooserPanel,
                                                 StreamFieldPanel,
                                                 TabbedInterface)
+from wagtail.wagtailadmin.widgets import AdminDateTimeInput
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
@@ -251,10 +252,14 @@ class EventPage(Page):
         help_text=_("Poster oder Bild für diese Veranstaltung."
                     "Bitte kein Gruppen- oder JANUN-Logo!")
     )
-    start_datetime = models.DateTimeField(_("Startzeit"))
-    end_datetime = models.DateTimeField(_("Endzeit"),
-                                        null=True,
-                                        blank=True)
+    start_datetime = models.DateTimeField(
+        _("Startzeit"),
+    )
+    end_datetime = models.DateTimeField(
+        _("Endzeit"),
+        null=True,
+        blank=True
+    )
     related_group = models.ForeignKey(
         Group,
         null=True,
@@ -330,8 +335,12 @@ class EventPage(Page):
         ObjectList([
             MultiFieldPanel(
                 [
-                    FieldPanel('start_datetime'),
-                    FieldPanel('end_datetime'),
+                    FieldPanel('start_datetime',
+                        widget=AdminDateTimeInput(format="%d.%m.%Y %H:%M")
+                    ),
+                    FieldPanel('end_datetime',
+                        widget=AdminDateTimeInput(format="%d.%m.%Y %H:%M")
+                    ),
                 ],
                 classname="",
                 heading="Datum"

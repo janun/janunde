@@ -38,6 +38,31 @@ def editor_js():
         </script>
     """
 
+# https://github.com/torchbox/wagtail/issues/2483
+@hooks.register('insert_editor_js')
+def change_datetimepicker_format():
+    return """
+    <script>
+      function initDateTimeChooser(id, opts) {
+        if (window.dateTimePickerTranslations) {
+            $('#' + id).datetimepicker($.extend({
+                closeOnDateSelect: true,
+                format: 'd.m.Y H:i',
+                scrollInput:false,
+                i18n: {
+                    lang: window.dateTimePickerTranslations
+                },
+                language: 'lang'
+            }, opts || {}));
+        } else {
+            $('#' + id).datetimepicker($.extend({
+                format: 'd.m.Y H:i'
+            }, opts || {}));
+        }
+    }
+    </script>
+    """
+
 
 # hide images and embeds
 # they should be done using streamfield
