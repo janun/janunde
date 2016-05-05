@@ -230,7 +230,7 @@ class EventIndexPage(BasePage):
         context = super().get_context(request)
         now = timezone.localtime(timezone.now())
         context['upcoming'] = EventPage.objects.child_of(self).live().filter(
-            Q(start_datetime__gte=now) | Q(end_datetime__gte=now)
+            Q(start_datetime__date__gte=now) | Q(end_datetime__date__gte=now)
         ).order_by('start_datetime')
         return context
 
