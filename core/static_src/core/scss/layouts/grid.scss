@@ -24,7 +24,7 @@ $grid_margin: rem-calc(22);
   /// @argument $columns   - the number of columns
   /// @argument $multiplier - size the column by this multiplier for wider cols
   @mixin width($columns, $multiplier: 1) {
-    width: #{(100 / $columns) * $multiplier - 2}%; // fallback
+    width: #{(100 / $columns) * $multiplier% - 2%}; // fallback
     width: calc(#{(100 / $columns) * $multiplier}% - #{$grid_margin})
   }
 

@@ -18,6 +18,19 @@ npm install
 `npm install` installs all frontend dependencies including bower components
 and runs gulp to compile assets.
 
+You then need to create a postgres database:
+```bash
+sudo su postgres
+createuser -P janunde
+createdb -O janunde janunde_db
+logout
+```
+
+And run the migrations:
+```bash
+python manage.py migrate
+```
+
 
 ## Deployment
 If you want to test code changes, you can deploy on heroku with a click of a button:
