@@ -5,6 +5,7 @@
     "hamburger-icon": "~1.0.3",
     "isotope": "~2.2.2",
     "imagesloaded": "^4.1.0",
-    "a11y-toggle": "^1.0.7"
+    "a11y-toggle": "^1.0.7",
+    "simple-line-icons": "^2.3.1"
   }
 }

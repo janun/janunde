@@ -1,4 +1,8 @@
-/// fonts
+// fonts
+// we include them locally instead of using google fonts,
+// so that google wouldn't track our users
+
+@include webfont('Bitter', 'Bitter-Regular', normal);
 
 @include webfont('Cabin', 'Cabin-Regular', normal);
 @include webfont('Cabin', 'Cabin-Bold', bold);

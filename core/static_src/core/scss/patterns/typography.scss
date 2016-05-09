@@ -3,6 +3,7 @@
 /// font stack aka font alternatives
 $font-family-sans-serif: "Cabin", Helvetica, Roboto, Arial, sans-serif;
 $font-family-serif: "Crimson Text", "Times New Roman", Times, serif;
+$font-family-extra: "Bitter", serif;
 
 
 /// generic shadow to be used for text at many places
@@ -105,7 +106,32 @@ ul, ol {
 }
 
 
+.font-family-extra {
+  font-family: $font-family-extra;
+}
+.font-family-sans {
+  font-family: $font-family-sans-serif;
+}
+.font-family-serif {
+  font-family: $font-family-serif;
+}
 
+.font-weight-normal {
+  font-weight: normal;
+}
+.font-weight-bold {
+  font-weight: bold;
+}
+
+
+.font-size-1 {
+  font-size: rem-calc(16);
+  line-height: rem-calc(22);
+}
+.font-size-2 {
+  font-size: rem-calc(20);
+  line-height: rem-calc(24);
+}
 
 
 

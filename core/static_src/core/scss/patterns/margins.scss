@@ -1,0 +1,11 @@
+@for $i from 1 through 4 {
+  .margin-bottom-#{$i} {
+    margin-bottom: #{$i}rem;
+  }
+}
+
+@for $i from 1 through 4 {
+  .margin-top-#{$i} {
+    margin-top: #{$i}rem;
+  }
+}

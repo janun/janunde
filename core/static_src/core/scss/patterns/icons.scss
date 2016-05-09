@@ -1,0 +1,14 @@
+
+$font-base: 'bower_components/simple-line-icons/fonts/Simple-Line-Icons';
+@font-face {
+  font-family: 'Simple-Line-Icons';
+  src: url(static('#{$font-base}.eot'));
+  src: url(static('#{$font-base}.eot?#iefix')) format("embedded-opentype"),
+       url(static('#{$font-base}.woff')) format("woff"),
+       url(static('#{$font-base}.ttf')) format("truetype"),
+       url(static('#{$font-base}.svg#Simple-Line-Icons')) format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import 'bower_components/simple-line-icons/scss/simple-line-icons';

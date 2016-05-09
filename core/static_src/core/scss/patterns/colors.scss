@@ -12,6 +12,7 @@ $white: rgb(255, 255, 255);
 $ghost: rgb(250, 250, 250);
 $silver: rgb(239, 239, 239);
 $aluminum: rgb(153, 153, 153);
+$grey: rgb(147, 130, 130);
 $steel: rgb(103, 103, 103);
 $black: rgb(0, 0, 0);
 
@@ -39,5 +40,8 @@ body {
   }
   &-red {
     color: $red;
+  }
+  &-grey {
+    color: $grey;
   }
 }
