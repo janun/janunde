@@ -1,0 +1,81 @@
+$grid_margin: rem-calc(22);
+
+/// float based grid
+///
+/// @example markup
+///   <div class="grid grid--of-3">
+///     <div class="grid__element">...</div>
+///     <div class="grid__element">...</div>
+///   </div>
+.grid {
+  /// kill outer margins
+  margin-left: -$grid_margin/2;
+  margin-right: -$grid_margin/2;
+
+  /// clearfix
+  &:after, &:before {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+
+  /// calculate width for grid__elements
+  /// @argument $columns   - the number of columns
+  /// @argument $multiplier - size the column by this multiplier for wider cols
+  @mixin width($columns, $multiplier: 1) {
+    width: #{(100 / $columns) * $multiplier% - 2%}; // fallback
+    width: calc(#{(100 / $columns) * $multiplier}% - #{$grid_margin})
+  }
+
+
+  /// create grids for number of columns
+  @each $columns in (2, 3, 4) {
+
+    /// without media query
+    &--of-#{$columns} &__element {
+      float: left;
+      @include width($columns);
+    }
+
+    /// with all possible media queries
+    @each $name, $value in $breakpoints {
+      &--of-#{$columns}\@#{$name} &__element {
+        @include above($value) {
+          float: left;
+          @include width($columns);
+        }
+      }
+    }
+
+    /// with all possible until-media queries
+    @each $name, $value in $breakpoints {
+      &--of-#{$columns}\@until-#{$name} &__element {
+        @include until($value) {
+          float: left;
+          @include width($columns);
+        }
+      }
+    }
+
+    /// with all possible only-media queries
+    @each $name, $value in $breakpoints {
+      &--of-#{$columns}\@only-#{$name} &__element {
+        @include only($value) {
+          float: left;
+          @include width($columns);
+        }
+      }
+    }
+
+  }
+
+
+  &__element {
+    display: block;
+    margin-bottom: $grid_margin;
+    margin-left: $grid_margin/2;
+    margin-right: $grid_margin/2;
+  }
+
+}

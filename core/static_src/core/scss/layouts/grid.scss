@@ -1,81 +1,49 @@
-$grid_margin: rem-calc(22);
+// float based grid library
+// it is very easy to define new grids...
+// follows BEM-naming
 
-/// float based grid
-///
-/// @example markup
-///   <div class="grid grid--of-3">
-///     <div class="grid__element">...</div>
-///     <div class="grid__element">...</div>
-///   </div>
-.grid {
-  /// kill outer margins
-  margin-left: -$grid_margin/2;
-  margin-right: -$grid_margin/2;
+// row mixin
+//
+// * removes outer left and right margins
+// * clears the floats of the columns
+@mixin row($gutter: 1.25rem) {
+  margin-left: -$gutter/2;
+  margin-right: -$gutter/2;
 
-  /// clearfix
-  &:after, &:before {
+  &:after {
     content: "";
     display: table;
     clear: both;
   }
+}
 
+// column mixin
+//
+// * is just 100% on mobile
+// * is col / sum wide on 960px or higher
+@mixin col($col, $sum, $gutter: 1.25rem) {
+  width: 100%;
+  padding-left: $gutter/2;
+  padding-right: $gutter/2;
 
-  /// calculate width for grid__elements
-  /// @argument $columns   - the number of columns
-  /// @argument $multiplier - size the column by this multiplier for wider cols
-  @mixin width($columns, $multiplier: 1) {
-    width: #{(100 / $columns) * $multiplier% - 2%}; // fallback
-    width: calc(#{(100 / $columns) * $multiplier}% - #{$grid_margin})
+  @media only screen and (min-width: rem-calc(960)) {
+    width: percentage($col / $sum);
+    float: left;
   }
+}
 
-
-  /// create grids for number of columns
-  @each $columns in (2, 3, 4) {
-
-    /// without media query
-    &--of-#{$columns} &__element {
-      float: left;
-      @include width($columns);
+// 12 column grid
+//
+// @example markup:
+// <div class="grid-12">
+//   <div class="grid-12__col-6">...</div>
+//   <div class="grid-12__col-6">...</div>
+// </div>
+.grid-12 {
+  @include row;
+  @for $i from 1 through 12 {
+    &__col-#{$i} {
+      @include col($i, 12)
     }
-
-    /// with all possible media queries
-    @each $name, $value in $breakpoints {
-      &--of-#{$columns}\@#{$name} &__element {
-        @include above($value) {
-          float: left;
-          @include width($columns);
-        }
-      }
-    }
-
-    /// with all possible until-media queries
-    @each $name, $value in $breakpoints {
-      &--of-#{$columns}\@until-#{$name} &__element {
-        @include until($value) {
-          float: left;
-          @include width($columns);
-        }
-      }
-    }
-
-    /// with all possible only-media queries
-    @each $name, $value in $breakpoints {
-      &--of-#{$columns}\@only-#{$name} &__element {
-        @include only($value) {
-          float: left;
-          @include width($columns);
-        }
-      }
-    }
-
   }
-
-
-  &__element {
-    display: block;
-    margin-bottom: $grid_margin;
-    margin-left: $grid_margin/2;
-    margin-right: $grid_margin/2;
-  }
-
 }
