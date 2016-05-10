@@ -17,7 +17,7 @@
         {% else %}
           am {{ self.start_datetime.date }}
         {% endif %}
-        
+
         <!-- short location -->
         {% if self.location %}
           in {{ self.location }}
@@ -48,7 +48,7 @@
         <div class="grid-12__col-11">
           {{ self.start_datetime|date:"l" }}, {{ self.start_datetime|date:"SHORT_DATE_FORMAT" }}<br>
           {{ self.start_datetime|time:"" }}<br>
-          <a class="font-size-1 font-family-sans color-grey" href="?format=ics">Im Kalendar speichern</a>
+          <a class="font-size-1 font-family-sans color-grey" href="?format=ical">Im Kalendar speichern</a>
         </div>
       </div>
 

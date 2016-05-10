@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
+from django.http import (HttpResponse, Http404)
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 MultiFieldPanel,
@@ -18,6 +19,7 @@ from wagtail.wagtailsearch import index
 
 from .blocks import StandardStreamBlock
 from .images import AttributedImage as Image
+from .utils import export_event
 
 
 def _(str):
@@ -364,6 +366,22 @@ class EventPage(Page):
 
     partial_template_name = 'core/_partial.html'
     medium_partial_template_name = 'core/_medium_partial.html'
+
+    def serve(self, request):
+        if "format" in request.GET:
+            if request.GET['format'] == 'ical':
+                # Export to ical format
+                response = HttpResponse(
+                    export_event(self, 'ical'),
+                    content_type='text/calendar',
+                )
+                response['Content-Disposition'] = 'attachment; filename=' + self.slug + '.ics'
+                return response
+            else:
+                raise Http404
+        else:
+            # Display event page as usual
+            return super(EventPage, self).serve(request)
 
     class Meta:
         verbose_name = _("Veranstaltung")
