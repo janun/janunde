@@ -13,9 +13,9 @@
       <h2>
         <!-- short date -->
         {% if self.end_datetime and self.end_datetime.date != self.start_datetime.date %}
-          von {{ self.start_datetime|nettes_datum }} bis {{ self.end_datetime.date|nettes_datum }}
+          von {{ self.start_datetime|nettes_datum:True }} bis {{ self.end_datetime.date|nettes_datum:True }}
         {% else %}
-          {{ self.start_datetime.date|nettes_datum }}
+          {{ self.start_datetime.date|nettes_datum:True }}
         {% endif %}
 
         <!-- short location -->

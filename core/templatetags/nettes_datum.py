@@ -22,8 +22,8 @@ def is_in_next_week(date):
     return begin_of_next_week <= date <= end_of_next_week
 
 
-@register.filter()
-def nettes_datum(our_date):
+@register.filter(expects_localtime=True)
+def nettes_datum(our_date, show_date=False):
     """
     generate a nice looking/readable date in German
     """
@@ -45,4 +45,6 @@ def nettes_datum(our_date):
         return "diesen {}".format( wochentag )
     if is_in_next_week(our_date):
         return "nächsten {}".format( wochentag )
-    return ""
+    if show_date:
+        return "{}, {}".format( wochentag, date_filter(our_date, "SHORT_DATE_FORMAT") )
+    return wochentag
