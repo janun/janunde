@@ -1,3 +1,4 @@
+
 @for $i from 1 through 4 {
   .margin-bottom-#{$i} {
     margin-bottom: #{$i}rem;
@@ -8,4 +9,10 @@
   .margin-top-#{$i} {
     margin-top: #{$i}rem;
   }
+}
+.margin-top-half {
+  margin-top: 0.5rem;
+}
+.margin-top-quarter {
+  margin-top: 0.25rem;
 }

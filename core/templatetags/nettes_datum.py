@@ -29,7 +29,6 @@ def nettes_datum(our_date):
     """
     if type(our_date) is datetime.datetime:
         our_date = our_date.date()
-    datum = date_filter(our_date, "SHORT_DATE_FORMAT")
     wochentag = date_filter(our_date, "l")
 
     if our_date == today - datetime.timedelta(days=2):
@@ -46,4 +45,4 @@ def nettes_datum(our_date):
         return "diesen {}".format( wochentag )
     if is_in_next_week(our_date):
         return "nächsten {}".format( wochentag )
-    return "{}, {}".format( wochentag, datum )
+    return ""
