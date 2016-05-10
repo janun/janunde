@@ -1,5 +1,5 @@
 {% extends "core/__base.html" %}
-{% load wagtailcore_tags wagtailimages_tags srcset humanize %}
+{% load wagtailcore_tags wagtailimages_tags srcset humanize nettes_datum %}
 
 {% block body_class %}event-page-template{% endblock %}
 
@@ -12,10 +12,10 @@
       <h1>{{ self.title }}</h1>
       <h2>
         <!-- short date -->
-        {% if self.end_datetime %}
-          vom {{ self.start_datetime.date }} bis {{ self.end_datetime.date }}
+        {% if self.end_datetime and self.end_datetime.date != self.start_datetime.date %}
+          von {{ self.start_datetime|nettes_datum }} bis {{ self.end_datetime.date|nettes_datum }}
         {% else %}
-          am {{ self.start_datetime.date }}
+          {{ self.start_datetime.date|nettes_datum }}
         {% endif %}
 
         <!-- short location -->
@@ -46,8 +46,20 @@
       <div class="grid-12 margin-top-2 font-family-extra font-size-2">
         <div class="grid-12__col-1"><i class="icon-clock"></i></div>
         <div class="grid-12__col-11">
-          {{ self.start_datetime|date:"l" }}, {{ self.start_datetime|date:"SHORT_DATE_FORMAT" }}<br>
-          {{ self.start_datetime|time:"" }}<br>
+          {% if self.end_datetime %}
+            {% if self.end_datetime.date == self.start_datetime.date %}
+              {# starts and ends on same day #}
+              {{ self.start_datetime|nettes_datum }}<br>
+              {{ self.start_datetime|time:"" }} – {{ self.end_datetime|time:"" }}&nbsp;Uhr
+            {% else %}
+              {# starts and ends on different days #}
+              ab {{ self.start_datetime|nettes_datum }} {{ self.start_datetime|time:"" }}&nbsp;Uhr <br>
+              bis {{ self.end_datetime|nettes_datum }} {{ self.end_datetime|time:"" }}&nbsp;Uhr
+            {% endif %}
+          {% else %}
+            {{ self.start_datetime|nettes_datum }}<br>
+            {{ self.start_datetime|time:"" }}&nbsp;Uhr
+          {% endif %}<br>
           <a class="font-size-1 font-family-sans color-grey" href="?format=ical">Im Kalendar speichern</a>
         </div>
       </div>
