@@ -5,7 +5,7 @@ from django.template.defaultfilters import date as date_filter
 register = template.Library()
 
 
-today = datetime.date.today()
+today = datetime.date.today() # is this the current date or of the start of the server?
 tomorrow = today + datetime.timedelta(days=1)
 
 
@@ -18,8 +18,14 @@ def is_in_this_week(date):
 def is_in_next_week(date):
     """returns the last day of this week"""
     end_of_next_week = today + datetime.timedelta(days=6 - today.weekday() + 7)
-    begin_of_next_week = today - datetime.timedelta(days=today.weekday() + 7)
+    begin_of_next_week = today + datetime.timedelta(days=7-today.weekday())
     return begin_of_next_week <= date <= end_of_next_week
+
+def is_in_last_week(date):
+    """returns the last day of this week"""
+    end_of_last_week = today + datetime.timedelta(days=6 - today.weekday() - 7)
+    begin_of_last_week = today + datetime.timedelta(days=0-today.weekday() - 7)
+    return begin_of_last_week <= date <= end_of_last_week
 
 
 @register.filter(expects_localtime=True)
@@ -31,6 +37,8 @@ def nettes_datum(our_date, show_date=False):
         our_date = our_date.date()
     wochentag = date_filter(our_date, "l")
 
+    if is_in_last_week(our_date):
+        return "letzten {}".format( wochentag )
     if our_date == today - datetime.timedelta(days=2):
         return "vorgestern"
     if our_date == today - datetime.timedelta(days=1):
