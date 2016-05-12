@@ -15,6 +15,11 @@
       </div>
     </div>
   {% endif %}
-  {{ event.start_datetime|date:"l" }} <br>
+
+  {{ event.start_datetime|date:"l" }}, {{ event.start_datetime|date:"SHORT_DATE_FORMAT" }}
+  {% if event.end_datetime and event.end_datetime.date != event.start_datetime.date %}
+    – {{ event.end_datetime|date:"SHORT_DATE_FORMAT" }}
+  {% endif %}
+  <br>
   <h3><a href="{% pageurl event %}">{{ event.title }}</a></h3>
 </div>
