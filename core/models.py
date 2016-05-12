@@ -234,7 +234,7 @@ class EventIndexPage(BasePage):
         today = datetime.date.today()
         now = timezone.localtime(timezone.now())
 
-        events = EventPage.objects.child_of(self).live().order_by('-start_datetime')
+        events = EventPage.objects.child_of(self).live().order_by('start_datetime')
 
         end_of_this_week = today + datetime.timedelta(days=6 - today.weekday())
         begin_of_this_week = today - datetime.timedelta(days=today.weekday())
