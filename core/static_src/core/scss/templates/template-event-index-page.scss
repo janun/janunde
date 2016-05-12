@@ -22,7 +22,7 @@
   .scrolls {
     overflow-x: scroll;
     overflow-y: hidden;
-    width: 85vw;
+    width: 115%;
     padding-bottom: rem-calc(40);
 
     &__inner {
@@ -44,6 +44,7 @@
     margin-bottom: 2rem;
     height: rem-calc(220);
     overflow: hidden;
+    border-radius: 5px;
 
     h3 {
       font-family: $font-family-extra;
@@ -52,6 +53,11 @@
         color: $brown;
       }
     }
+  }
+
+
+  .area-title {
+    font-size: 1rem;
   }
 
 

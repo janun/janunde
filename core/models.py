@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 import datetime
+from dateutil import relativedelta
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
@@ -236,10 +237,17 @@ class EventIndexPage(BasePage):
 
         events = EventPage.objects.child_of(self).live().order_by('start_datetime')
 
-        end_of_this_week = today + datetime.timedelta(days=6 - today.weekday())
         begin_of_this_week = today - datetime.timedelta(days=today.weekday())
-        end_of_next_week = today + datetime.timedelta(days=6 - today.weekday() + 7)
+        end_of_this_week = today + datetime.timedelta(days=6 - today.weekday())
+
         begin_of_next_week = today + datetime.timedelta(days=7-today.weekday())
+        end_of_next_week = today + datetime.timedelta(days=6 - today.weekday() + 7)
+
+        begin_of_this_month = datetime.date( today.year, today.month, 1 )
+        end_of_this_month = begin_of_this_month + relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
+
+        begin_of_next_month = begin_of_this_month + relativedelta.relativedelta(months=1)
+        end_of_next_month = begin_of_next_month + relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
 
         context['this_week'] = events.filter(
             Q(start_datetime__date__gte=begin_of_this_week) | Q(end_datetime__date__gte=begin_of_this_week),
@@ -251,8 +259,18 @@ class EventIndexPage(BasePage):
             start_datetime__date__lte=end_of_next_week
         )
 
+        context['this_month_after_next_week'] = events.filter(
+            Q(start_datetime__date__gt=end_of_next_week) | Q(end_datetime__date__gt=end_of_next_week),
+            start_datetime__date__lte=end_of_this_month
+        )
+
+        context['next_month'] = events.filter(
+            Q(start_datetime__date__gte=begin_of_next_month) | Q(end_datetime__date__gte=begin_of_next_month),
+            start_datetime__date__lte=end_of_next_month
+        )
+
         context['after'] = events.filter(
-            Q(start_datetime__date__gte=end_of_next_week) | Q(end_datetime__date__gte=end_of_next_week)
+            start_datetime__date__gt=end_of_next_month
         )
 
         return context

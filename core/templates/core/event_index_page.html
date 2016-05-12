@@ -33,6 +33,22 @@
         {% endfor %}
       </div>
 
+      {% if this_month_after_next_week %}
+        <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+          <h2 class="area-title">Später im {% now "M" %}</h2>
+          {% for event in this_month_after_next_week %}
+            {% include "core/_event_partial.html" %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+        <h2 class="area-title">Nächsten Monat</h2>
+        {% for event in next_month %}
+          {% include "core/_event_partial.html" %}
+        {% endfor %}
+      </div>
+
       <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
         <h2 class="area-title">Noch Später</h2>
         {% for event in after %}
