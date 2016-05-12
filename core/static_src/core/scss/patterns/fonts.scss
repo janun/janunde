@@ -3,6 +3,8 @@
 // so that google wouldn't track our users
 
 @include webfont('Bitter', 'Bitter-Regular', normal);
+@include webfont('Bitter', 'Bitter-Bold', bold);
+@include webfont('Bitter', 'Bitter-Italic', normal, italic);
 
 @include webfont('Cabin', 'Cabin-Regular', normal);
 @include webfont('Cabin', 'Cabin-Bold', bold);

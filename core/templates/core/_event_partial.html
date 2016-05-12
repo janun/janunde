@@ -1,0 +1,20 @@
+{% load wagtailcore_tags nettes_datum srcset wagtailimages_tags %}
+
+
+<div class="panel event">
+  {% if event.main_image %}
+    <div class="remove-panel-padding--on-sides remove-panel-padding--on-top margin-bottom-1">
+      <div class="image responsive-object" style="padding-bottom: 33%">
+        <a href="{% pageurl event %}">
+          {% image event.main_image fill-300x100 jpg as fallback_image %}
+          <img src="{{ fallback_image.url }}"
+            srcset="{{ event.main_image|srcset:'fill-300x100|jpg fill-600x200|jpg' }}"
+            sizes="(min-width: 60em) 19em, 100vw"
+            alt="{{ fallback_image.alt }}">
+        </a>
+      </div>
+    </div>
+  {% endif %}
+  {{ event.start_datetime|date:"l" }} <br>
+  <h3><a href="{% pageurl event %}">{{ event.title }}</a></h3>
+</div>

@@ -1,0 +1,58 @@
+.template-event-index-page {
+
+  background-color: rgb(240, 240, 240);
+
+  h1 {
+    font-size: rem-calc(50);
+    line-height: rem-calc(60);
+    font-family: $font-family-extra;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: rem-calc(12);
+  }
+
+
+  .header {
+    background-color: rgb(250, 250, 250);
+    padding-top: rem-calc(65);
+    padding-bottom: rem-calc(90);
+  }
+
+
+  .scrolls {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: 85vw;
+    padding-bottom: rem-calc(40);
+
+    &__inner {
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+
+      // spacing between columns
+      border-spacing: 1/12*rem-calc(960) 0;
+      margin-left: -1/12*rem-calc(960);
+    }
+
+    &__element {
+      display: table-cell;
+    }
+  }
+
+  .event {
+    margin-bottom: 1rem;
+    height: rem-calc(220);
+    overflow: hidden;
+
+    h3 {
+      font-family: $font-family-extra;
+      margin-bottom: 0;
+      a {
+        color: $brown;
+      }
+    }
+  }
+
+
+}

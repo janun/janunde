@@ -1,25 +1,46 @@
 {% extends "core/__base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags nettes_datum srcset wagtailimages_tags %}
 
-{% block body_class %}template-article-index-page base-layout{% endblock %}
+{% block body_class %}template-event-index-page{% endblock %}
 
 {% block content %}
-
-  <main>
-    <h2 class="area-title">Aktuelles zu JANUN und den Projektgruppen</h2>
-    <div class="grid-12">
-      {% if upcoming %}
-        {% for object in upcoming %}
-          <div class="grid-12__col-4">
-            {% include object.medium_partial_template_name %}
-          </div>
-        {% endfor %}
-      {% else %}
-        Keine Einträge vorhanden.
-      {% endif %}
+<header class="header">
+  <div class="container">
+    <h1>Veranstaltungen, Seminare, Demos</h1>
+    <div>
+      <a class="color-green margin-right-3 font-size-2" href="#"><i class="icon-plus"></i> Eintragen</a>
+      <a class="color-green margin-right-3 font-size-2" href="#"><i class="icon-question"></i> Wieso? Weshalb? Warum?</a>
+      <a class="color-green margin-right-3 font-size-2" href="#"><i class="icon-magnifier"></i> Suchen</a>
     </div>
-  </main>
+  </div>
+</header>
 
+<div class="container">
+  <div class="scrolls">
+    <div class="fixed-grid-12 scrolls__inner">
 
+      <div class="fixed-grid-12__col-4 scrolls__element">
+        <h2 class="area-title">Diese Woche</h2>
+        {% for event in this_week %}
+          {% include "core/_event_partial.html" %}
+        {% endfor %}
+      </div>
 
+      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+        <h2 class="area-title">Nächste Woche</h2>
+        {% for event in next_week %}
+          {% include "core/_event_partial.html" %}
+        {% endfor %}
+      </div>
+
+      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+        <h2 class="area-title">Noch Später</h2>
+        {% for event in after %}
+          {% include "core/_event_partial.html" %}
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</div>
 {% endblock %}

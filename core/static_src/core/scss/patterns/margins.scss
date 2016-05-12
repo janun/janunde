@@ -1,18 +1,18 @@
+$directions: left right top bottom;
 
-@for $i from 1 through 4 {
-  .margin-bottom-#{$i} {
-    margin-bottom: #{$i}rem;
-  }
-}
+@each $dir in $directions {
 
-@for $i from 1 through 4 {
-  .margin-top-#{$i} {
-    margin-top: #{$i}rem;
+  @for $i from 1 through 4 {
+    .margin-#{$dir}-#{$i} {
+      margin-#{$dir}: #{$i}rem;
+    }
   }
-}
-.margin-top-half {
-  margin-top: 0.5rem;
-}
-.margin-top-quarter {
-  margin-top: 0.25rem;
+
+  .margin-#{$dir}-half {
+    margin-#{$dir}: 0.5rem;
+  }
+  .margin-#{$dir}-quarter {
+    margin-#{$dir}: 0.25rem;
+  }
+
 }

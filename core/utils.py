@@ -1,5 +1,12 @@
-from datetime import datetime, time, timedelta
 import hashlib
+import datetime
+
+def start_of_this_week():
+    pass
+
+def end_of_this_week():
+    pass
+
 
 def export_event(event, format='ical'):
     """Export EventPage to ical format"""
@@ -25,7 +32,7 @@ def export_event(event, format='ical'):
         return string
 
     # Make a uid
-    event_string = event.url + str(event.start_datetime)
+    event_string = event.url + str(event.start_datedatetime.time.datedatetime.time)
     uid = hashlib.sha1(event_string.encode('utf-8')).hexdigest() + '@janun.de'
 
     # Make event
@@ -33,12 +40,12 @@ def export_event(event, format='ical'):
         'BEGIN:VEVENT',
         'UID:' + add_slashes(uid),
         'URL:' + add_slashes(event.url),
-        'DTSTAMP:' + event.start_datetime.strftime(ICAL_DATE_FORMAT),
+        'DTSTAMP:' + event.start_datedatetime.time.datedatetime.time.strfdatetime.time(ICAL_DATE_FORMAT),
         'SUMMARY:' + add_slashes(event.title),
         #'DESCRIPTION:' + add_slashes(event.search_description), # TODO
         'LOCATION:' + add_slashes(event.location),
-        'DTSTART;TZID=Europe/London:' + event.start_datetime.strftime(ICAL_DATE_FORMAT),
-        'DTEND;TZID=Europe/London:' + event.end_datetime.strftime(ICAL_DATE_FORMAT),
+        'DTSTART;TZID=Europe/London:' + event.start_datedatetime.time.datedatetime.time.strfdatetime.time(ICAL_DATE_FORMAT),
+        'DTEND;TZID=Europe/London:' + event.end_datedatetime.time.datedatetime.time.strfdatetime.time(ICAL_DATE_FORMAT),
         'END:VEVENT',
     ])
 

@@ -1,4 +1,4 @@
-// float based grid library
+// fixed width grid library
 // it is very easy to define new grids...
 // follows BEM-naming
 
@@ -6,7 +6,7 @@
 //
 // * removes outer left and right margins
 // * clears the floats of the columns
-@mixin row($gutter: 1.25rem) {
+@mixin fixedrow($gutter: 1.25rem) {
   margin-left: -$gutter/2;
   margin-right: -$gutter/2;
 
@@ -21,20 +21,20 @@
 //
 // * is just 100% on mobile
 // * is col / sum wide on 960px or higher
-@mixin col($col, $sum, $gutter: 1.25rem) {
+@mixin fixedcol($col, $sum, $gutter: 1.25rem) {
   width: 100%;
   padding-left: $gutter/2;
   padding-right: $gutter/2;
 
   @media only screen and (min-width: rem-calc(960)) {
-    width: percentage($col / $sum);
-    float: left;
+    width: $col / $sum * rem-calc(960);
+    //float: left;
   }
 }
 
 
-@mixin offset($col, $sum) {
-  margin-left: percentage($col / $sum);
+@mixin fixedoffset($col, $sum) {
+  margin-left: $col / $sum * rem-calc(960);
 }
 
 // fluid 12 column grid
@@ -44,16 +44,16 @@
 //   <div class="grid-12__col-6">...</div>
 //   <div class="grid-12__col-6">...</div>
 // </div>
-.grid-12 {
-  @include row;
+.fixed-grid-12 {
+  @include fixedrow;
   @for $i from 1 through 12 {
     &__col-#{$i} {
-      @include col($i, 12)
+      @include fixedcol($i, 12)
     }
   }
   @for $i from 1 through 12 {
     &__offset-#{$i} {
-      @include offset($i, 12)
+      @include fixedoffset($i, 12)
     }
   }
 }

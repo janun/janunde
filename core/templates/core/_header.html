@@ -1,6 +1,6 @@
 {% load static from staticfiles %}
 
-<header class="header video-background js-fade-overlay">
+<header class="site-header video-background js-fade-overlay">
   <div class="js-fade-overlay__inner"></div>
   <video class="video-background__video js-mq-video-loader" autoplay loop poster="{% static 'core/images/header-poster/header-poster-1024.jpg' %}">
     <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.mp4' %}" type="video/mp4">
@@ -8,7 +8,7 @@
     <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.mp4' %}" type="video/mp4">
     <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.webm' %}" type="video/webm">
   </video>
-  <div class="header__content">
+  <div class="site-header__content">
     <h1>Wir sind das<br>Jugendumweltnetzwerk Niedersachsen</h1>
     <p>JANUN ist aktiv für ein gutes Leben in einer ökologischen und sozial gerechten Welt.</p>
     <a href="/aktuelles" class="button button--white">Aktuelles</a>
