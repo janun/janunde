@@ -22,6 +22,7 @@
   .scrolls {
     overflow-x: scroll;
     overflow-y: hidden;
+    padding-left: rem-calc(40); // fallback will be overwritten by js-scrolls
     padding-bottom: rem-calc(40);
 
     &__inner {
