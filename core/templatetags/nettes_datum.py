@@ -50,7 +50,7 @@ def nettes_datum(our_date, show_date=False):
     if our_date == tomorrow + datetime.timedelta(days=1):
         return "übermorgen"
     if is_in_this_week(our_date):
-        return "diesen {}".format( wochentag )
+        return "diesem {}".format( wochentag )
     if is_in_next_week(our_date):
         return "nächsten {}".format( wochentag )
     if show_date:
