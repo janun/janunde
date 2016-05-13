@@ -6,7 +6,7 @@
 //
 // * removes outer left and right margins
 // * clears the floats of the columns
-@mixin fixedrow($gutter: 1.25rem) {
+@mixin fixedrow($gutter: rem-calc(20)) {
   margin-left: -$gutter/2;
   margin-right: -$gutter/2;
 
@@ -21,7 +21,7 @@
 //
 // * is just 100% on mobile
 // * is col / sum wide on 960px or higher
-@mixin fixedcol($col, $sum, $gutter: 1.25rem) {
+@mixin fixedcol($col, $sum, $gutter: rem-calc(20)) {
   width: 100%;
   padding-left: $gutter/2;
   padding-right: $gutter/2;

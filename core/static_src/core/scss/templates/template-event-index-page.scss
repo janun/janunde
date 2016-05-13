@@ -22,7 +22,6 @@
   .scrolls {
     overflow-x: scroll;
     overflow-y: hidden;
-    width: 115%;
     padding-bottom: rem-calc(40);
 
     &__inner {
@@ -32,7 +31,7 @@
 
       // spacing between columns
       border-spacing: 1/12*rem-calc(960) 0;
-      margin-left: -1/12*rem-calc(960);
+      margin-left: -1/12*rem-calc(960) - rem-calc(10);
     }
 
     &__element {

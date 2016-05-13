@@ -5,7 +5,7 @@
 
 {% block content %}
 <header class="header">
-  <div class="container">
+  <div class="container js-scrolls__offsetElement">
     <h1>Veranstaltungen, Seminare, Demos</h1>
     <div>
       <a class="color-green margin-right-3 font-size-2" href="{{ self.get_add_mail }}"><i class="icon-plus"></i> Vorschlagen</a>
@@ -14,48 +14,48 @@
   </div>
 </header>
 
-<div class="container">
-  <div class="scrolls">
-    <div class="fixed-grid-12 scrolls__inner">
 
-      <div class="fixed-grid-12__col-4 scrolls__element">
-        <h2 class="area-title">Diese Woche</h2>
-        {% for event in this_week %}
-          {% include "core/_event_partial.html" %}
-        {% endfor %}
-      </div>
+<div class="scrolls js-scrolls">
+  <div class="fixed-grid-12 scrolls__inner">
 
-      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
-        <h2 class="area-title">Nächste Woche</h2>
-        {% for event in next_week %}
-          {% include "core/_event_partial.html" %}
-        {% endfor %}
-      </div>
-
-      {% if this_month_after_next_week %}
-        <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
-          <h2 class="area-title">Später im {% now "M" %}</h2>
-          {% for event in this_month_after_next_week %}
-            {% include "core/_event_partial.html" %}
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
-        <h2 class="area-title">Nächsten Monat</h2>
-        {% for event in next_month %}
-          {% include "core/_event_partial.html" %}
-        {% endfor %}
-      </div>
-
-      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
-        <h2 class="area-title">Noch Später</h2>
-        {% for event in after %}
-          {% include "core/_event_partial.html" %}
-        {% endfor %}
-      </div>
-
+    <div class="fixed-grid-12__col-4 scrolls__element">
+      <h2 class="area-title">Diese Woche</h2>
+      {% for event in this_week %}
+        {% include "core/_event_partial.html" %}
+      {% endfor %}
     </div>
+
+    <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+      <h2 class="area-title">Nächste Woche</h2>
+      {% for event in next_week %}
+        {% include "core/_event_partial.html" %}
+      {% endfor %}
+    </div>
+
+    {% if this_month_after_next_week %}
+      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+        <h2 class="area-title">Später im {% now "M" %}</h2>
+        {% for event in this_month_after_next_week %}
+          {% include "core/_event_partial.html" %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+      <h2 class="area-title">Nächsten Monat</h2>
+      {% for event in next_month %}
+        {% include "core/_event_partial.html" %}
+      {% endfor %}
+    </div>
+
+    <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+      <h2 class="area-title">Noch Später</h2>
+      {% for event in after %}
+        {% include "core/_event_partial.html" %}
+      {% endfor %}
+    </div>
+
   </div>
 </div>
+
 {% endblock %}
