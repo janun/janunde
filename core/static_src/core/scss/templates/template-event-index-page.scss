@@ -46,10 +46,6 @@
     overflow: hidden;
     border-radius: 5px;
 
-    &:hover {
-      height: rem-calc(420);
-    }
-
     h3 {
       font-family: $font-family-extra;
       margin-bottom: 0;
