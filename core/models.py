@@ -226,6 +226,31 @@ class EventIndexPage(BasePage):
     subpage_types = ['EventPage']
     parent_page_types = ['HomePage']
 
+
+
+    def get_add_mail(self):
+        add_mail_subject = 'Vorschlag für eine Veranstaltung auf janun.de'
+        add_mail_address = 'veranstaltungen@janun.de'
+        add_mail_body = """Hallo!
+
+Ich möchte eine Veranstaltung für janun.de vorschlagen.
+
+Titel:
+Von:
+Bis:
+Beschreibungstext:
+Link:
+
+> Wenn Du ein Bild zur Veranstaltung hast, hänge es einfach an die E-Mail an.
+> Wir werden Deine E-Mail schnellstmöglichst bearbeiten und dann eine Veranstaltung auf janun.de erstellen.
+> Vielen Dank für Deinen Vorschlag!
+
+Viele Grüße"""
+
+        from django.utils.http import urlquote
+        return "mailto:{}?subject={}&body={}".format( add_mail_address,
+            urlquote(add_mail_subject), urlquote(add_mail_body) )
+
     class Meta:
         verbose_name = _("Auflistung von Veranstaltungen")
         verbose_name_plural = _("Auflistungen von Veranstaltungen")
