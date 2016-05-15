@@ -275,7 +275,7 @@ Viele Grüße"""
         end_of_next_month = begin_of_next_month + relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
 
         context['this_week'] = events.filter(
-            Q(start_datetime__date__gte=begin_of_this_week) | Q(end_datetime__date__gte=begin_of_this_week),
+            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today),
             start_datetime__date__lte=end_of_this_week
         )
 
