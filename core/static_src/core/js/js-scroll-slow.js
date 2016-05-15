@@ -2,40 +2,22 @@
 // those with the class js-scroll-slow
 // add the value of data-scroll-slow-offset as an offset for the target
 (function () {
-
-  // perform the actual scroll animation
-  function animateScrollTo(yPos, startTime, duration) {
-    duration = duration || 400;
-    var targetTime = startTime + duration;
-
-    function animate() {
-      var nowTime = new Date().getTime();
-      var multiplier = 1 - (targetTime - nowTime) / duration;
-
-      if (nowTime >= targetTime ) {
-        document.documentElement.scrollTop = document.body.scrollTop = yPos;
-        return;
-      } else {
-        document.documentElement.scrollTop = document.body.scrollTop = yPos * multiplier;
-        requestAnimationFrame(animate);
-      }
-    }
-
-    requestAnimationFrame(animate);
-  }
-
-  // gets the data and calls scrollTo
+  // gets the data and calls scrollSmooth
   function scrollSlow(event) {
     event.preventDefault();
-    var target = document.querySelector(this.hash);
 
-    // get offset
-    var offset = 0;
+    // get target pos
+    var target = document.querySelector(this.hash);
+    if (!target) return;
+    var pos = target.offsetTop;
+
+    // add offset
     if ( this.getAttribute('data-scroll-slow-offset') ) {
-      offset += parseInt( this.getAttribute('data-scroll-slow-offset') );
+      pos += parseInt( this.getAttribute('data-scroll-slow-offset') );
     }
 
-    animateScrollTo( (target.offsetTop + offset), (new Date().getTime()) )
+    // do the scrolling
+    scrollSmooth(pos);
   }
 
   // add the event listeners to the elements
