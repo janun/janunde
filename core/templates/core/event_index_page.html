@@ -18,8 +18,10 @@
 <div class="scrolls js-scrolls dragscroll">
   <div class="fixed-grid-12 scrolls__inner">
 
+
+
     <div class="fixed-grid-12__col-4 scrolls__element">
-      <h2 class="area-title">Diese Woche</h2>
+      <h2 class="area-title">Noch diese Woche</h2>
       {% for event in this_week %}
         {% include "core/_event_partial.html" %}
       {% endfor %}
@@ -32,24 +34,24 @@
       {% endfor %}
     </div>
 
-    {% if this_month_after_next_week %}
+    {% if later_this_month %}
       <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
-        <h2 class="area-title">Später im {% now "M" %}</h2>
-        {% for event in this_month_after_next_week %}
+        <h2 id="later_this_month" class="area-title">Später im {% now "M" %}</h2>
+        {% for event in later_this_month %}
           {% include "core/_event_partial.html" %}
         {% endfor %}
       </div>
     {% endif %}
 
     <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
-      <h2 class="area-title">Nächsten Monat</h2>
+      <h2 id="next_month" class="area-title">Nächsten Monat</h2>
       {% for event in next_month %}
         {% include "core/_event_partial.html" %}
       {% endfor %}
     </div>
 
     <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
-      <h2 class="area-title">Noch Später</h2>
+      <h2 id="after" class="area-title">Noch Später</h2>
       {% for event in after %}
         {% include "core/_event_partial.html" %}
       {% endfor %}

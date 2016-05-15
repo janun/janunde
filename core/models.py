@@ -284,7 +284,7 @@ Viele Grüße"""
             start_datetime__date__lte=end_of_next_week
         )
 
-        context['this_month_after_next_week'] = events.filter(
+        context['later_this_month'] = events.filter(
             Q(start_datetime__date__gt=end_of_next_week) | Q(end_datetime__date__gt=end_of_next_week),
             start_datetime__date__lte=end_of_this_month
         )
