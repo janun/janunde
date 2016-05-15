@@ -38,6 +38,23 @@
     &__element {
       display: table-cell;
     }
+
+    &__button-next {
+      position: absolute;
+      right: 0;
+      width: rem-calc(43);
+      height: rem-calc(40);
+      margin-top: rem-calc(8);
+      color: $white;
+      background-color: $green;
+      border-radius: rem-calc(46 0 0 46);
+      text-align: center;
+      padding-top: rem-calc(10);
+
+      i {
+        font-size: rem-calc(19);
+      }
+    }
   }
 
   .event {

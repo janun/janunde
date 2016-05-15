@@ -1,12 +1,23 @@
+// js-scrolls
+// js helpers for the scrolls element
 
+var scrolls = document.querySelector('.js-scrolls');
+
+// offset
+var offsetElement = document.querySelector('.js-scrolls__offsetElement');
 function setJsScrollsOffset() {
-  var offsetElement = document.querySelector('.js-scrolls__offsetElement');
-  var scrolls = document.querySelector('.js-scrolls');
-  if (offsetElement) {
-    var offset = offsetElement.offsetLeft;
-    scrolls.style.paddingLeft = offset + "px";
-  }
+  scrolls.style.paddingLeft = offsetElement.offsetLeft + "px";
+}
+if (offsetElement) {
+  window.addEventListener('resize', setJsScrollsOffset);
+  setJsScrollsOffset();
 }
 
-window.addEventListener('resize', setJsScrollsOffset);
-setJsScrollsOffset();
+// button next
+var buttonNext = document.querySelector('.js-scrolls__button-next');
+if (buttonNext) {
+  buttonNext.addEventListener('click', function (event) {
+    event.preventDefault();
+    scrollSmooth(380, 'right', 200, false, scrolls);
+  });
+}
