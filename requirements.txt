@@ -1,5 +1,5 @@
 Django==1.9.6
-wagtail==1.4.3
+wagtail==1.4.4
 python-dateutil==2.5.3
 
 # Dependencies for hosting
