@@ -31,7 +31,7 @@ function scrollSmooth(pos, direction, duration, isAbsolute, element) {
         return element.scrollLeft;
       }
     } else {
-      if (direction == 'right') {
+      if (direction == 'down') {
         return document.documentElement.scrollTop;
         return document.body.scrollTop;
       } else {
@@ -49,7 +49,7 @@ function scrollSmooth(pos, direction, duration, isAbsolute, element) {
         element.scrollLeft = pos;
       }
     } else {
-      if (direction == 'right') {
+      if (direction == 'down') {
         document.documentElement.scrollTop = pos;
         document.body.scrollTop = pos;
       } else {
