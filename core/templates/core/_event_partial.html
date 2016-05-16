@@ -6,9 +6,9 @@
     <div class="remove-panel-padding--on-sides remove-panel-padding--on-top margin-bottom-1">
       <div class="image responsive-object" style="padding-bottom: 33%">
         <a href="{% pageurl event %}">
-          {% image event.main_image fill-300x100 jpg as fallback_image %}
+          {% image event.main_image fill-295x100 jpg as fallback_image %}
           <img src="{{ fallback_image.url }}"
-            srcset="{{ event.main_image|srcset:'fill-300x100|jpg fill-600x200|jpg' }}"
+            srcset="{{ event.main_image|srcset:'fill-295x100|jpg fill-590x200|jpg' }}"
             sizes="(min-width: 60em) 19em, 100vw"
             alt="{{ fallback_image.alt }}">
         </a>
@@ -16,7 +16,7 @@
     </div>
   {% endif %}
 
-  {{ event.start_datetime|date:"l" }}, {{ event.start_datetime|date:"SHORT_DATE_FORMAT" }}
+  {{ event.start_datetime|nettes_datum }}
   {% if event.end_datetime and event.end_datetime.date != event.start_datetime.date %}
     – {{ event.end_datetime|date:"SHORT_DATE_FORMAT" }}
   {% endif %}

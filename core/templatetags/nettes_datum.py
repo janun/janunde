@@ -1,6 +1,9 @@
 import datetime
 from django import template
 from django.template.defaultfilters import date as date_filter
+from django.utils.safestring import mark_safe
+from django.utils.html import conditional_escape
+
 
 register = template.Library()
 
@@ -28,8 +31,33 @@ def is_in_last_week(date):
     return begin_of_last_week <= date <= end_of_last_week
 
 
+@register.filter(needs_autoescape=True)
+def add_tooltip(date, text, autoescape=True):
+    if autoescape:
+        esc = conditional_escape
+    else:
+        esc = lambda x: x
+    return mark_safe('<span title="{}">{}</span>'.format(
+        date_filter(date, "SHORT_DATE_FORMAT"),
+        esc(text)
+    ))
+
+@register.filter(needs_autoescape=True)
+def grey_span(text, autoescape=True):
+    if autoescape:
+        esc = conditional_escape
+    else:
+        esc = lambda x: x
+    return mark_safe('<span class="color-grey">{}</span>'.format(esc(text)))
+
+
 @register.filter(expects_localtime=True)
-def nettes_datum(our_date, show_date=False):
+def nettes_datum_grey_date(our_date):
+    return nettes_datum(our_date, grey_date=True)
+
+
+@register.filter(expects_localtime=True)
+def nettes_datum(our_date, show_date=False, tooltip=True, grey_date=False):
     """
     generate a nice looking/readable date in German
     """
@@ -37,22 +65,36 @@ def nettes_datum(our_date, show_date=False):
         our_date = our_date.date()
     wochentag = date_filter(our_date, "l")
 
+    text = ""
     if is_in_last_week(our_date):
-        return "letzten {}".format( wochentag )
-    if our_date == today - datetime.timedelta(days=2):
-        return "vorgestern"
-    if our_date == today - datetime.timedelta(days=1):
-        return "gestern"
-    if our_date == today:
-        return "heute"
-    if our_date == tomorrow:
-        return "morgen"
-    if our_date == tomorrow + datetime.timedelta(days=1):
-        return "übermorgen"
-    if is_in_this_week(our_date):
-        return "diesem {}".format( wochentag )
-    if is_in_next_week(our_date):
-        return "nächsten {}".format( wochentag )
-    if show_date:
-        return "{}, {}".format( wochentag, date_filter(our_date, "SHORT_DATE_FORMAT") )
-    return wochentag
+        text = "letzten {}".format( wochentag )
+    elif our_date == today - datetime.timedelta(days=2):
+        text = "vorgestern"
+    elif our_date == today - datetime.timedelta(days=1):
+        text = "gestern"
+    elif our_date == today:
+        text = "heute"
+    elif our_date == tomorrow:
+        text = "morgen"
+    elif our_date == tomorrow + datetime.timedelta(days=1):
+        text = "übermorgen"
+    elif is_in_this_week(our_date):
+        text = "diesem {}".format( wochentag )
+    elif is_in_next_week(our_date):
+        text = "nächsten {}".format( wochentag )
+    else:
+        tooltip = False # already has date
+        if grey_date:
+            text = mark_safe("{}., {}".format(
+                date_filter(our_date, "D"),
+                grey_span(date_filter(our_date, "SHORT_DATE_FORMAT"))
+            ))
+        else:
+            text = "{}., {}".format(
+                date_filter(our_date, "D"),
+                date_filter(our_date, "SHORT_DATE_FORMAT")
+            )
+
+    if tooltip:
+        text = add_tooltip(our_date, text)
+    return text

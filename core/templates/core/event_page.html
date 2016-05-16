@@ -50,23 +50,23 @@
             {% if self.end_datetime.date == self.start_datetime.date %}
               {# starts and ends on same day #}
               <div>
-                {{ self.start_datetime|nettes_datum }}<span class="color-grey">, {{ self.start_datetime|date:"SHORT_DATE_FORMAT" }}</span><br>
+                {{ self.start_datetime|nettes_datum_grey_date }}<br>
                 {{ self.start_datetime|time:"" }}&nbsp;–&nbsp;{{ self.end_datetime|time:"" }}&#x202F;Uhr
               </div>
             {% else %}
               {# starts and ends on different days #}
               <div>
-                ab {{ self.start_datetime|nettes_datum }}<span class="color-grey">, {{ self.start_datetime|date:"SHORT_DATE_FORMAT" }}</span><br>
+                ab {{ self.start_datetime|nettes_datum_grey_date }}<br>
                 {{ self.start_datetime|time:"" }}&#x202F;Uhr
               </div>
               <div class="margin-top-half">
-                bis {{ self.end_datetime|nettes_datum }}<span class="color-grey">, {{ self.end_datetime|date:"SHORT_DATE_FORMAT" }}</span><br>
+                bis {{ self.end_datetime|nettes_datum_grey_date }}<br>
                 {{ self.end_datetime|time:"" }}&#x202F;Uhr
               </div>
             {% endif %}
           {% else %}
             <div>
-              {{ self.start_datetime|nettes_datum }}<span class="color-grey">, {{ self.start_datetime|date:"SHORT_DATE_FORMAT" }}</span><br>
+              {{ self.start_datetime|nettes_datum_grey_date }}<br>
               {{ self.start_datetime|time:"" }}&#x202F;Uhr
             </div>
           {% endif %}

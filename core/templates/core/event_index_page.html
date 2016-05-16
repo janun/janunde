@@ -23,7 +23,7 @@
     <div class="fixed-grid-12__col-4 scrolls__element">
       <h2 class="area-title">Noch diese Woche</h2>
       {% for event in this_week %}
-        {% include "core/_event_partial.html" %}
+        {% include "core/_event_partial.html" with only_weekday=True %}
       {% endfor %}
     </div>
 
