@@ -4,6 +4,28 @@ from django.utils.http import urlquote
 from django.template.defaultfilters import striptags
 
 
+def get_add_mail():
+    add_mail_subject = 'Vorschlag für eine Veranstaltung auf janun.de'
+    add_mail_address = 'veranstaltungen@janun.de'
+    add_mail_body = """Hallo!
+
+Ich möchte eine Veranstaltung für janun.de vorschlagen.
+
+Titel:
+Von:
+Bis:
+Beschreibungstext:
+Link:
+
+> Wenn Du ein Bild zur Veranstaltung hast, hänge es einfach an die E-Mail an.
+> Wir werden Deine E-Mail schnellstmöglichst bearbeiten und dann eine Veranstaltung auf janun.de erstellen.
+> Vielen Dank für Deinen Vorschlag!
+
+Viele Grüße"""
+
+    return "mailto:{}?subject={}&body={}".format( add_mail_address,
+        urlquote(add_mail_subject), urlquote(add_mail_body) )
+
 
 def export_event_to_google_link(event):
     datetime_format = "%Y%m%dT%H%M%SZ"

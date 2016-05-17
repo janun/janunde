@@ -2,13 +2,13 @@
 
   background-color: rgb(240, 240, 240);
 
-  h1 {
+  h1, .big-font {
     font-size: rem-calc(50);
-    line-height: rem-calc(60);
+    line-height: rem-calc(68);
     font-family: $font-family-extra;
     font-weight: bold;
-    margin-top: 0;
-    margin-bottom: rem-calc(12);
+    //margin-top: 0;
+    //margin-bottom: rem-calc(12);
   }
 
 
@@ -59,11 +59,13 @@
 
   .event {
     margin-bottom: 2rem;
-    height: rem-calc(220);
+    width: rem-calc(300);
+    height: rem-calc(205);
     overflow: hidden;
     border-radius: 5px;
 
     h3 {
+      font-size: rem-calc(24);
       font-family: $font-family-extra;
       margin-bottom: 0;
       a {

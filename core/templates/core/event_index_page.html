@@ -6,33 +6,37 @@
 {% block content %}
 <header class="header">
   <div class="container js-scrolls__offsetElement">
-    <h1>Veranstaltungen, Seminare, Demos</h1>
+    <h1 class="{% if not upcoming %}line-through{% endif %}">Veranstaltungen, Seminare, Demos</h1>
     <div>
-      <a class="color-green margin-right-3 font-size-2" href="{{ self.get_add_mail }}"><i class="icon-plus"></i> Vorschlagen</a>
       <a class="color-green margin-right-3 font-size-2" href="#"><i class="icon-magnifier"></i> Suchen</a>
+      <a class="color-green margin-right-3 font-size-2" href="{{ self.get_add_mail }}"><i class="icon-plus"></i> Vorschlagen</a>
     </div>
   </div>
 </header>
 
 
+{% if upcoming %}
 <div class="scrolls js-scrolls dragscroll">
   <div class="fixed-grid-12 scrolls__inner">
 
 
-
+    {% if this_week %}
     <div class="fixed-grid-12__col-4 scrolls__element">
       <h2 class="area-title">Noch diese Woche</h2>
       {% for event in this_week %}
         {% include "core/_event_partial.html" with only_weekday=True %}
       {% endfor %}
     </div>
+    {% endif %}
 
+    {% if next_week %}
     <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
       <h2 class="area-title">Nächste Woche</h2>
       {% for event in next_week %}
         {% include "core/_event_partial.html" %}
       {% endfor %}
     </div>
+    {% endif %}
 
     {% if later_this_month %}
       <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
@@ -43,19 +47,23 @@
       </div>
     {% endif %}
 
+    {% if next_month %}
     <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
       <h2 id="next_month" class="area-title">Nächsten Monat</h2>
       {% for event in next_month %}
         {% include "core/_event_partial.html" %}
       {% endfor %}
     </div>
+    {% endif %}
 
+    {% if after %}
     <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
       <h2 id="after" class="area-title">Noch Später</h2>
       {% for event in after %}
         {% include "core/_event_partial.html" %}
       {% endfor %}
     </div>
+    {% endif %}
 
     <a class="scrolls__button-next js-scrolls__button-next" href="#">
       <i class="icon-arrow-right-circle"></i>
@@ -63,5 +71,16 @@
 
   </div>
 </div>
+
+{% else %}
+<div class="container padding-top-6 padding-bottom-5">
+    <i class="icon-present color-green" style="font-size: 7rem"></i>
+    <div class="margin-bottom-3 margin-top-4 big-font">
+      <div class="color-green">Ein Geschenk für Dich.</div>
+      <div>Veranstaltungen, die wir zeigen könnten, gibt es aber leider keine.</div>
+    </div>
+    <span>Du kannst das ändern: <a class="color-green" href="{{ self.get_add_mail }}">Schlag uns eine Veranstaltung vor</a> und wir tragen sie hier ein.</span>
+</div>
+{% endif %}
 
 {% endblock %}

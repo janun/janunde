@@ -227,29 +227,9 @@ class EventIndexPage(BasePage):
     subpage_types = ['EventPage']
     parent_page_types = ['HomePage']
 
-
-
     def get_add_mail(self):
-        add_mail_subject = 'Vorschlag für eine Veranstaltung auf janun.de'
-        add_mail_address = 'veranstaltungen@janun.de'
-        add_mail_body = """Hallo!
-
-Ich möchte eine Veranstaltung für janun.de vorschlagen.
-
-Titel:
-Von:
-Bis:
-Beschreibungstext:
-Link:
-
-> Wenn Du ein Bild zur Veranstaltung hast, hänge es einfach an die E-Mail an.
-> Wir werden Deine E-Mail schnellstmöglichst bearbeiten und dann eine Veranstaltung auf janun.de erstellen.
-> Vielen Dank für Deinen Vorschlag!
-
-Viele Grüße"""
-
-        return "mailto:{}?subject={}&body={}".format( add_mail_address,
-            urlquote(add_mail_subject), urlquote(add_mail_body) )
+        from .utils import get_add_mail
+        return get_add_mail()
 
     class Meta:
         verbose_name = _("Auflistung von Veranstaltungen")
@@ -273,6 +253,10 @@ Viele Grüße"""
 
         begin_of_next_month = begin_of_this_month + relativedelta.relativedelta(months=1)
         end_of_next_month = begin_of_next_month + relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
+
+        context['upcoming'] = events.filter(
+            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today),
+        )
 
         context['this_week'] = events.filter(
             Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today),

@@ -2,7 +2,7 @@ $directions: left right top bottom;
 
 @each $dir in $directions {
 
-  @for $i from 1 through 4 {
+  @for $i from 1 through 6 {
     .margin-#{$dir}-#{$i} {
       margin-#{$dir}: #{$i}rem;
     }
@@ -13,6 +13,24 @@ $directions: left right top bottom;
   }
   .margin-#{$dir}-quarter {
     margin-#{$dir}: 0.25rem;
+  }
+
+}
+
+
+@each $dir in $directions {
+
+  @for $i from 1 through 6 {
+    .padding-#{$dir}-#{$i} {
+      padding-#{$dir}: #{$i}rem;
+    }
+  }
+
+  .padding-#{$dir}-half {
+    padding-#{$dir}: 0.5rem;
+  }
+  .padding-#{$dir}-quarter {
+    padding-#{$dir}: 0.25rem;
   }
 
 }
