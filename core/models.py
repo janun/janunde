@@ -242,6 +242,17 @@ class EventIndexPage(BasePage):
 
         events = EventPage.objects.child_of(self).live().order_by('start_datetime')
 
+        # search stuff
+        search_query = request.GET.get('query', None)
+        search = request.GET.get('search', 0)
+        if 'query' in request.GET:
+            search = 1
+        if search_query:
+            events = events.search(search_query).get_queryset()
+            context['search_query'] = search_query
+            search = 1
+        context['search'] = search
+
         begin_of_this_week = today - datetime.timedelta(days=today.weekday())
         end_of_this_week = today + datetime.timedelta(days=6 - today.weekday())
 

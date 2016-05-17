@@ -79,5 +79,20 @@
     font-size: 1rem;
   }
 
+  .input-as-link {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .width-960 {
+    width: rem-calc(960);
+  }
+
+  .border-bottom {
+    border-bottom: rem-calc(4) solid rgba($brown, 0.2);
+  }
+
 
 }

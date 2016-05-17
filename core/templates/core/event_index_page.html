@@ -4,13 +4,26 @@
 {% block body_class %}template-event-index-page{% endblock %}
 
 {% block content %}
+<script>
+
+</script>
+
 <header class="header">
   <div class="container js-scrolls__offsetElement">
+    {% if search %}
+    <form action="{% pageurl self %}" method="get">
+      <input class="input-as-link big-font margin-top-1 margin-bottom-1 width-960 border-bottom" type="search" name="query" placeholder="Was interessiert dich? Oder wo?" value="{{ search_query }}"><br>
+      <input class="color-green margin-right-3 font-size-2 input-as-link" type="submit" value="Suchen">
+      <a class="color-green margin-right-3 font-size-2" href="{% pageurl self %}">Schließen</a>
+    </form>
+    {% else %}
     <h1 class="{% if not upcoming %}line-through{% endif %}">Veranstaltungen, Seminare, Demos</h1>
-    <div>
-      <a class="color-green margin-right-3 font-size-2" href="#"><i class="icon-magnifier"></i> Suchen</a>
-      <a class="color-green margin-right-3 font-size-2" href="{{ self.get_add_mail }}"><i class="icon-plus"></i> Vorschlagen</a>
-    </div>
+    <a class="color-green margin-right-3 font-size-2" href="?search=1">
+        <i class="icon-magnifier"></i>
+        Suchen
+    </a>
+    <a class="color-green margin-right-3 font-size-2" href="{{ self.get_add_mail }}"><i class="icon-plus"></i> Vorschlagen</a>
+    {% endif %}
   </div>
 </header>
 
@@ -72,6 +85,17 @@
   </div>
 </div>
 
+{% elif search_query %}
+<div class="container padding-top-6 padding-bottom-5">
+    <i class="icon-ghost color-red" style="font-size: 7rem"></i>
+    <div class="margin-bottom-3 margin-top-4 big-font">
+      <div class="color-red">Sorry, Weltenbummler!</div>
+      <div>Wir konnten kein Abenteuer für dich finden.</div>
+    </div>
+    {% comment TODO %}
+    <span>In der Vergangenheit gab es jedoch </a>2 Veranstaltungen</a> mit diesem Suchbegriff.</span>
+    {% endcomment %}
+</div>
 {% else %}
 <div class="container padding-top-6 padding-bottom-5">
     <i class="icon-present color-green" style="font-size: 7rem"></i>
