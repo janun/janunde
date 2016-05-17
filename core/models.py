@@ -382,10 +382,7 @@ class EventPage(Page):
     search_fields = BasePage.search_fields + (
         #title is in here by default
         index.SearchField('content'),
-        index.SearchField('start_datetime'),
-        index.SearchField('end_datetime'),
-        index.FilterField('first_published_at'),
-        index.FilterField('latest_revision_created_at'),
+        index.SearchField('location'),
     )
 
     edit_handler = TabbedInterface([
