@@ -70,7 +70,11 @@
               {{ self.start_datetime|time:"" }}&#x202F;Uhr
             </div>
           {% endif %}
-          <a class="font-size-1 font-family-sans color-grey" href="?format=ical">Im Kalendar speichern</a>
+          <span class="font-size-1 font-family-sans color-grey">
+            Im Kalendar speichern:
+            <a class="color-grey" href="?format=ical">Ical</a>,
+            <a class="color-grey" href="{{ self.create_google_calendar_link }}">Google</a>
+          </span>
         </div>
       </div>
 

@@ -5,6 +5,7 @@ from dateutil import relativedelta
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
+from django.utils.http import urlquote
 from django.http import (HttpResponse, Http404)
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
@@ -247,7 +248,6 @@ Link:
 
 Viele Grüße"""
 
-        from django.utils.http import urlquote
         return "mailto:{}?subject={}&body={}".format( add_mail_address,
             urlquote(add_mail_subject), urlquote(add_mail_body) )
 
@@ -446,6 +446,10 @@ class EventPage(Page):
         else:
             # Display event page as usual
             return super(EventPage, self).serve(request)
+
+    def create_google_calendar_link(self):
+        from .utils import export_event_to_google_link
+        return export_event_to_google_link(self)
 
     class Meta:
         verbose_name = _("Veranstaltung")
