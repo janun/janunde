@@ -46,29 +46,9 @@
         {% for menuitem in menuitems %}
           <li role="menuitem" class="menu__item
               {% if menuitem.is_active %}menu__item--active{% endif %}">
-            {% if menuitem.children %}
-              <a aria-haspopup="true" aria-expanded="false"
-                 href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
-              {% comment "we dont support dropdowns at the moment" %}
-              <ul aria-hidden="true" role="menu">
-                {# Include link to parent because the parent link is a drop down #}
-                <li role="menuitem">
-                  <a href="{% pageurl menuitem %}">
-                    {{ menuitem.title }}
-                  </a>
-                </li>
-                {% for child in menuitem.children %}
-                  <li role="menuitem"><a href="{% pageurl child %}">
-                    {{ child.title }}
-                  </a></li>
-                {% endfor %}
-              </ul>
-            {% endcomment %}
-            {% else %}
-              <a class="" href="{% pageurl menuitem %}">
-                {{ menuitem.title }}
-              </a>
-            {% endif %}
+            <a href="{% pageurl menuitem %}">
+              {{ menuitem.title }}
+            </a>
           </li>
         {% endfor %}
       </ul>
