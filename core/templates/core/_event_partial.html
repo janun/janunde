@@ -28,11 +28,12 @@
           {{ event.start_datetime|nettes_datum }}, {{ event.start_datetime.time }} Uhr
         {% endif %}
 
-        {% if event.website_url %}
-          <a class="float-right hover-reveal__hidden" href="{{ event.website_url }}"><i class="icon-share-alt"></i></a>
-        {% endif %}
+
         {% if event.facebook_event_url %}
           <a class="float-right hover-reveal__hidden" href="{{ event.facebook_event_url }}"><i class="icon-social-facebook"></i></a>
+        {% endif %}
+        {% if event.website_url %}
+          <a class="float-right margin-right-1 hover-reveal__hidden" href="{{ event.website_url }}"><i class="icon-share-alt"></i></a>
         {% endif %}
       </div>
     </div>
