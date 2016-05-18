@@ -64,9 +64,6 @@ MIDDLEWARE_CLASSES = (
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
 
     'django.middleware.gzip.GZipMiddleware',
-
-    'htmlmin.middleware.HtmlMinifyMiddleware',
-    'htmlmin.middleware.MarkRequestMiddleware',
 )
 
 ROOT_URLCONF = 'janunde.urls'

@@ -49,9 +49,6 @@ AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET']
 
 
-# minify
-HTML_MINIFY = True
-
 # Use the cached template loader
 TEMPLATES[0]['OPTIONS']['loaders'] = (
     ('django.template.loaders.cached.Loader', (
