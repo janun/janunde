@@ -1,0 +1,14 @@
+//
+// @markup html:
+// <div class="hover-reveal">
+//   <span class="hover-reveal__hidden">hidden until hovered over div</span>
+// </div>
+//
+.hover-reveal {
+  &__hidden {
+    display: none;
+  }
+  &:hover &__hidden {
+    display: inline-block;
+  }
+}

@@ -1,7 +1,7 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags %}
 
 
-<div class="panel event">
+<div class="panel event hover-reveal">
 
   <div class="remove-panel-padding--on-sides remove-panel-padding--on-top margin-bottom-1">
     <div class="image overlay overlay--white-box2">
@@ -26,6 +26,13 @@
           – {{ event.end_datetime|date:"d.m." }}
         {% else %}
           {{ event.start_datetime|nettes_datum }}, {{ event.start_datetime.time }} Uhr
+        {% endif %}
+
+        {% if event.website_url %}
+          <a class="float-right hover-reveal__hidden" href="{{ event.website_url }}"><i class="icon-share-alt"></i></a>
+        {% endif %}
+        {% if event.facebook_event_url %}
+          <a class="float-right hover-reveal__hidden" href="{{ event.facebook_event_url }}"><i class="icon-social-facebook"></i></a>
         {% endif %}
       </div>
     </div>
