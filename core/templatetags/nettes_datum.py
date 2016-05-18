@@ -87,12 +87,12 @@ def nettes_datum(our_date, show_date=False, tooltip=True, grey_date=False):
         if grey_date:
             text = mark_safe("{}., {}".format(
                 date_filter(our_date, "D"),
-                grey_span(date_filter(our_date, "SHORT_DATE_FORMAT"))
+                grey_span(date_filter(our_date, "d.m."))
             ))
         else:
             text = "{}., {}".format(
                 date_filter(our_date, "D"),
-                date_filter(our_date, "SHORT_DATE_FORMAT")
+                date_filter(our_date, "d.m.")
             )
 
     if tooltip:

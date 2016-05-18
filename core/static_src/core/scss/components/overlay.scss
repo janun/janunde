@@ -28,6 +28,19 @@
     }
   }
 
+  &--white-box2 {
+    .overlay__content {
+      background: rgba($white, 0.5);
+      color: $brown;
+      height: rem-calc(30);
+      line-height: rem-calc(30);
+      padding-left: rem-calc(20);
+      h2, h3, h4, a, :hover {
+        color: $brown;
+      }
+    }
+  }
+
   &__content {
     position: absolute;
     bottom: 0;
