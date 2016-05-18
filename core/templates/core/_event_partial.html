@@ -13,7 +13,10 @@
             sizes="(min-width: 60em) 19em, 100vw"
             alt="{{ fallback_image.alt }}">
         {% else %}
-          <div class="image-placeholder" style="width: 300px; height: 113px; background-color: {{ event.color|default:"rgb(70, 187, 0)" }}">
+          <div class="image-placeholder" style="background-color: {{ event.color|default:"#62e6c8" }}">
+            {% for x in ""|ljust:"40" %}
+              Thema
+            {% endfor %}
           </div>
         {% endif %}
       </a>

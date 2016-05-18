@@ -93,5 +93,15 @@
     border-bottom: rem-calc(4) solid rgba($brown, 0.2);
   }
 
+  .image-placeholder {
+    width: rem-calc(300);
+    height: rem-calc(113);
+    color: rgba(white, 0.4);
+    font-family: $font-family-extra;
+    line-height: rem-calc(17);
+    font-size: rem-calc(14);
+    overflow: hidden;
+  }
+
 
 }
