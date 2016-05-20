@@ -1,0 +1,45 @@
+h4, h3, h2, h1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+/// font size h1
+@mixin h1 {
+  @include scale-from-small-to-medium(
+    font-size, rem-calc(26), rem-calc(42)
+  );
+  line-height: 1.235;
+  font-weight: bold;
+}
+h1 {
+  @include h1;
+}
+
+/// font size h2
+@mixin h2 {
+  @include scale-from-small-to-medium(
+    font-size, rem-calc(18), rem-calc(24)
+  );
+  line-height: 1.2;
+  font-weight: normal;
+}
+h2 {
+  @include h2;
+  margin-top: 2rem;
+}
+
+// reduce margin between subheading and subsequent paragraph
+// but not other elements like images
+.block-h2 + .block-paragraph {
+  margin-top: -0.5rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+}

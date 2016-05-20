@@ -4,7 +4,7 @@
 
 <div class="remove-panel-padding--on-sides">
   <div class="image attribution">
-    <a class="zoom-in" href="{{ original_image.url }}">
+    <a class="cursor-zoom-in" href="{{ original_image.url }}">
       {% image value jpg as original_image %}
       <img src="{{ original_image.url }}"
         srcset="{{ value|srcset:'width-320|jpg width-640|jpg width-1280|jpg width-695|jpg width-1792|jpg' }}"

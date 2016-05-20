@@ -1,3 +1,7 @@
+// here we define a couple of colors
+// they are then used in the other files
+// and possibly redefined under semantic names like $text-color-standard
+
 $green: rgb(70, 187, 0);
 $blue: rgb(0, 118, 164);
 $darkblue: rgb(0, 58, 81);
@@ -22,10 +26,6 @@ $green-overlay: rgba($green, 0.65);
 // setting the background-color
 body {
   background-color: $baige;
-}
-
-@mixin janun-box-shadow {
-  box-shadow: 0 0 5px rgba($black, 0.1);
 }
 
 .color {

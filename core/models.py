@@ -116,6 +116,34 @@ class HomePage(BasePage):
 
 class Group(BasePage):
     # title is auto added
+
+    abbr = models.CharField(
+        _("Abkürzung"),
+        help_text=_("Nur zwei Zeichen"),
+        max_length=2,
+        null=True,
+        blank=True,
+        # TODO: if empty autogenerate from title
+    )
+
+    logo = models.ForeignKey(
+        Image,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+',
+        verbose_name=_("Logo"),
+        #help_text=_("")
+    )
+
+    edit_handler = TabbedInterface([
+        ObjectList([
+            FieldPanel('title', classname="full title"),
+            FieldPanel('abbr', classname=""),
+            ImageChooserPanel('logo'),
+        ], heading=_("Name und Logo"))
+    ])
+
     class Meta:
         verbose_name = _("Gruppe")
         verbose_name_plural = _("Gruppen")
@@ -376,13 +404,19 @@ class EventPage(Page):
         _("Ort"),
         help_text=_("Ort, an dem die Veranstaltung stattfindet"),
         max_length=255,
+        null=True,
+        blank=True,
         # TODO: change this into a real location somehow
     )
 
+    # only works with ElasticSearch
     search_fields = BasePage.search_fields + (
         #title is in here by default
         index.SearchField('content'),
         index.SearchField('location'),
+        index.RelatedFields('related_group', [
+            index.SearchField('title'),
+        ]),
     )
 
     edit_handler = TabbedInterface([
@@ -417,7 +451,8 @@ class EventPage(Page):
         ObjectList([
             ImageChooserPanel('main_image'),
             FieldPanel('color'),
-        ], heading=_("Poster und Gestaltung")),
+            FieldPanel('related_group'),
+        ], heading=_("Poster, Gestaltung und Gruppe")),
     ])
 
     partial_template_name = 'core/_partial.html'

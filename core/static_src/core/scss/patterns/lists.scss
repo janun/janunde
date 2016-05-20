@@ -1,0 +1,7 @@
+// styling of lists in (technically next to) paragraphs
+// where we cannot add a class
+.block-paragraph ul, .block-paragraph ol {
+  @include p;
+  margin-left: 0;
+  padding-left: rem-calc(30);
+}

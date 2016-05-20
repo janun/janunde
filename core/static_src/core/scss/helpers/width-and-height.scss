@@ -1,0 +1,13 @@
+.width {
+  &-full {
+    width: 100%;
+  }
+  &-960 {
+    width: rem-calc(960);
+  }
+}
+
+
+.height-full {
+  height: 100%;
+}

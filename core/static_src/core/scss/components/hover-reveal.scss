@@ -5,10 +5,19 @@
 // </div>
 //
 .hover-reveal {
-  &__hidden {
+  &__inline-block, &__inline, &__block {
     display: none;
   }
-  &:hover &__hidden {
+
+  &:hover &__inline-block {
     display: inline-block;
+  }
+
+  &:hover &__inline {
+    display: inline;
+  }
+
+  &:hover &__block {
+    display: block;
   }
 }

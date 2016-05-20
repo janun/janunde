@@ -1,26 +1,55 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags %}
 
 
-<div class="panel event hover-reveal">
+<div class="panel event hover-reveal shadow-on-hover">
 
   <div class="remove-panel-padding--on-sides remove-panel-padding--on-top margin-bottom-1">
-    <div class="image overlay overlay--white-box2">
+    <div class="image overlay">
+
+      <!-- show image (or placeholder) -->
       <a href="{% pageurl event %}">
         {% if event.main_image %}
-          {% image event.main_image fill-300x113 jpg as fallback_image %}
+          {% image event.main_image fill-300x113 as fallback_image %}
           <img src="{{ fallback_image.url }}"
             srcset="{{ event.main_image|srcset:'fill-300x113|jpg fill-600x226|jpg' }}"
             sizes="(min-width: 60em) 19em, 100vw"
             alt="{{ fallback_image.alt }}">
         {% else %}
-          <div class="image-placeholder" style="background-color: {{ event.color|default:"#62e6c8" }}">
+          <div class="image-placeholder"
+               style="height: 113px; background-color: {{ event.color|default:"#62e6c8" }}">
             {% for x in ""|ljust:"40" %}
               Thema
             {% endfor %}
           </div>
         {% endif %}
       </a>
-      <div class="overlay__content font-family-extra">
+
+      <!-- show related_group -->
+      {% if event.related_group %}
+        <a href="{% pageurl event.related_group %}"
+           class="overlay__content overlay__content--white top right"
+           style="border-bottom-left-radius: 5px; border-top-right-radius: 5px; height: 40px;">
+          <span class="hover-reveal__inline font-size-very-small font-family-sans margin-right-quarter margin-left-half float-left"
+                style="line-height: 40px">
+            von {{ event.related_group.title }}
+          </span>
+          {% if event.related_group.logo %}
+            {% image event.related_group.logo fill-32x32 class="margin-top-quarter margin-right-quarter margin-left-quarter"%}
+          {% else %}
+            <span class="font-size-2 margin-top-quarter margin-right-quarter margin-left-quarter float-right padding-left-quarter"
+                  style="width: 32px; line-height: 32px">
+              {% if event.related_group.abbr %}
+                {{ event.related_group.abbr }}
+              {% else %}
+                {{ event.related_group.title|slice:":2" }}
+              {% endif %}
+            </span>
+          {% endif %}
+        </a>
+      {% endif %}
+
+      <!-- show dates -->
+      <div class="overlay__content overlay__content--white-transparent bottom width-full font-family-extra">
         {% if event.end_datetime and event.end_datetime.date != event.start_datetime.date %}
           {{ event.start_datetime|nettes_datum }}
           – {{ event.end_datetime|date:"d.m." }}
@@ -28,18 +57,24 @@
           {{ event.start_datetime|nettes_datum }}, {{ event.start_datetime.time }} Uhr
         {% endif %}
 
-
+        <!-- show facebook -->
         {% if event.facebook_event_url %}
-          <a class="float-right hover-reveal__hidden" href="{{ event.facebook_event_url }}"><i class="icon-social-facebook"></i></a>
+          <a class="float-right hover-reveal__inline" href="{{ event.facebook_event_url }}"><i class="icon-social-facebook"></i></a>
         {% endif %}
+
+        <!-- show external website -->
         {% if event.website_url %}
-          <a class="float-right margin-right-1 hover-reveal__hidden" href="{{ event.website_url }}"><i class="icon-share-alt"></i></a>
+          <a class="float-right margin-right-1 hover-reveal__inline" href="{{ event.website_url }}"><i class="icon-share-alt"></i></a>
         {% endif %}
       </div>
     </div>
   </div>
 
-  <h3 class="{% if event.title|length > 32 %}font-size-small{% else %}font-size-3{% endif %}">
-    <a href="{% pageurl event %}">{{ event.title }}</a>
-  </h3>
+  <!-- show title -->
+  <a class="height-full display-block remove-panel-padding--all  padding-top-1 add-panel-padding--on-sides" href="{% pageurl event %}">
+    <h3 class="margin-top-0 {% if event.title|length > 32 %}font-size-small{% else %}font-size-3{% endif %}">
+      {{ event.title|truncatechars:74 }}
+    </h3>
+  </a>
+
 </div>

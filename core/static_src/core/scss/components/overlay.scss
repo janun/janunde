@@ -7,45 +7,8 @@
 .overlay {
   position: relative;
 
-  &--black-gradient {
-    .overlay__content {
-      padding-top: 3rem;
-      background: linear-gradient(rgba($black, 0.0) , rgba($black, 0.6) 3rem);
-      color: $white;
-      h2, h3, h4, a, :hover {
-        color: $white;
-      }
-    }
-  }
-
-  &--white-box {
-    .overlay__content {
-      background: rgba($white, 0.75);
-      color: $brown;
-      h2, h3, h4, a, :hover {
-        color: $brown;
-      }
-    }
-  }
-
-  &--white-box2 {
-    .overlay__content {
-      background: rgba($white, 0.5);
-      color: $brown;
-      height: rem-calc(30);
-      line-height: rem-calc(30);
-      padding-left: rem-calc(20);
-      padding-right: rem-calc(10);
-      h2, h3, h4, a, :hover {
-        color: $brown;
-      }
-    }
-  }
-
   &__content {
     position: absolute;
-    bottom: 0;
-    width: 100%;
     height: auto;
     text-align: left;
     z-index: 1;
@@ -53,5 +16,22 @@
     h2, h3, h4 {
       margin-bottom: 0;
     }
+
+    &--white-transparent {
+      background: rgba($white, 0.5);
+      color: $text-color-standard;
+      height: rem-calc(30);
+      line-height: rem-calc(30);
+      padding-left: rem-calc(20);
+      padding-right: rem-calc(10);
+      h2, h3, h4, a, :hover {
+        color: $text-color-standard;
+      }
+    }
+
+    &--white {
+      background: $white;
+    }
+
   }
 }

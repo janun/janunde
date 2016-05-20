@@ -1,0 +1,17 @@
+.display {
+  &-none {
+    display: none;
+  }
+  &-inline {
+    display: inline;
+  }
+  &-block {
+    display: block;
+  }
+  &-inline-block {
+    display: inline-block;
+  }
+  &-table-cell {
+    display: table-cell;
+  }
+}
