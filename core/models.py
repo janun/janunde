@@ -138,6 +138,7 @@ class Group(BasePage):
     )
 
     def clean(self):
+        super().clean()
         if not self.abbr:
             self.abbr = self.title[:2]
 
@@ -422,6 +423,14 @@ class EventPage(Page):
     )
 
     def clean(self):
+        # append number to slug if already in use
+        i = 2
+        while not Page._slug_is_available(self.slug, self.get_parent(), self):
+            self.slug = "-".join([self.slug, str(i)])
+            i += 1
+
+        super().clean()
+
         # title must be short
         if len(self.title) > 56:
             raise ValidationError({'title': "Der Titel ist zu lang. "
