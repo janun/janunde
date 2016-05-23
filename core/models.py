@@ -24,7 +24,7 @@ from wagtail.wagtailsearch import index
 
 from .blocks import StandardStreamBlock
 from .images import AttributedImage as Image
-from .utils import export_event
+
 
 
 def _(str):
@@ -269,12 +269,21 @@ class EventIndexPage(BasePage):
         verbose_name = _("Auflistung von Veranstaltungen")
         verbose_name_plural = _("Auflistungen von Veranstaltungen")
 
+    def get_events(self):
+        return EventPage.objects.child_of(self).live().order_by('start_datetime')
+
+    def get_upcoming_events(self):
+        today = datetime.date.today()
+        return self.get_events().filter(
+            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today),
+        )
+
     def get_context(self, request):
         context = super().get_context(request)
         today = datetime.date.today()
         now = timezone.localtime(timezone.now())
 
-        events = EventPage.objects.child_of(self).live().order_by('start_datetime')
+        events = self.get_events()
 
         # search stuff
         search_query = request.GET.get('query', None)
@@ -299,9 +308,7 @@ class EventIndexPage(BasePage):
         begin_of_next_month = begin_of_this_month + relativedelta.relativedelta(months=1)
         end_of_next_month = begin_of_next_month + relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
 
-        context['upcoming'] = events.filter(
-            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today),
-        )
+        context['upcoming'] = self.get_upcoming_events()
 
         context['this_week'] = events.filter(
             Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today),
@@ -503,8 +510,9 @@ class EventPage(Page):
         if "format" in request.GET:
             if request.GET['format'] == 'ical':
                 # Export to ical format
+                from .utils import export_event_to_ical
                 response = HttpResponse(
-                    export_event(self, 'ical'),
+                    export_event_to_ical(self),
                     content_type='text/calendar',
                 )
                 response['Content-Disposition'] = 'attachment; filename=' + self.slug + '.ics'

@@ -4,6 +4,7 @@ from django.utils.http import urlquote
 from django.template.defaultfilters import striptags
 
 
+
 def get_add_mail():
     add_mail_subject = 'Vorschlag für eine Veranstaltung auf janun.de'
     add_mail_address = 'veranstaltungen@janun.de'
@@ -27,73 +28,51 @@ Viele Grüße"""
         urlquote(add_mail_subject), urlquote(add_mail_body) )
 
 
+def get_plain_text_content(html_content):
+    content = str(html_content).replace("\n", "").replace("  ", "")
+    content = content.replace("<br>", "\n").replace("<p>", "").replace("</p>", "\n\n")
+    content = striptags(content).replace("  ", "").strip()
+    return content
+
+
 def export_event_to_google_link(event):
+    # TODO: different url if external event
+    url = event.full_url
     datetime_format = "%Y%m%dT%H%M%SZ"
     link = "http://www.google.com/calendar/event?action=TEMPLATE&"
+    # since end_datetime is mandatory, get start_datetime + 30 min
     end_datetime = event.end_datetime or event.start_datetime + datetime.timedelta(minutes=30)
-    content = str(event.content).replace("\n", "").replace("  ", "")
-    content = content.replace("<br>", "\n").replace("<p>", "").replace("</p>", "\n\n")
-    content = striptags(content).strip() + '\n' + event.full_url
     params = {
         'text': event.title,
         'dates': event.start_datetime.strftime(datetime_format) + "/" + end_datetime.strftime(datetime_format),
-        'details': content,
-        'location': event.location,
-        'sprop': event.full_url, # doesnt work anymore with google
+        'sprop': url, # doesnt work anymore with google?
     }
+    if event.location:
+        params['location'] = event.location
+    if event.details:
+        params['details'] = get_plain_text_content(event.content) + '\n\n' + url
     cons_params = [param[0] + "=" +  urlquote(param[1]) for param in params.items()]
     return link + "&".join(cons_params)
 
 
-def export_event(event, format='ical'):
-    """Export EventPage to ical format"""
-    ICAL_DATE_FORMAT = '%Y%m%dT%H%M%S'
-
-    if format != 'ical':
-        return
-
-    # Begin event
-    # VEVENT format: http://www.kanzaki.com/docs/ical/vevent.html
-    ical_components = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-    ]
-
-    def add_slashes(string):
-        string.replace('"', '\\"')
-        string.replace('\\', '\\\\')
-        string.replace(',', '\\,')
-        string.replace(':', '\\:')
-        string.replace(';', '\\;')
-        string.replace('\n', '\\n')
-        return string
-
-    # Make a uid
-    event_string = event.url + str(event.start_datetime)
-    uid = hashlib.sha1(event_string.encode('utf-8')).hexdigest() + '@janun.de'
-
-    # Make event
-    ical_components.extend([
-        'BEGIN:VEVENT',
-        'UID:' + add_slashes(uid),
-        'URL:' + add_slashes(event.full_url),
-        'DTSTAMP:' + event.start_datetime.strftime(ICAL_DATE_FORMAT),
-        'SUMMARY:' + add_slashes(event.title),
-        #'DESCRIPTION:' + add_slashes(event.search_description), # TODO
-        'LOCATION:' + add_slashes(event.location),
-        'DTSTART;TZID=Europe/London:' + event.start_datetime.strftime(ICAL_DATE_FORMAT),
-        'END:VEVENT',
-    ])
-
+def export_event_to_ical(event):
+    from icalendar import Event, Calendar
+    import pytz
+    cal = Calendar()
+    cal.add('prodid', '-//janun.de//')
+    cal.add('version', '2.0')
+    ical_event = Event()
+    ical_event.add('uid', event.slug + "@" + "janun.de")
+    ical_event.add('summary', event.title)
+    ical_event.add('dtstart', event.start_datetime.astimezone(pytz.utc))
     if event.end_datetime:
-        ical_components.extend([
-            'DTEND;TZID=Europe/London:' + event.end_datetime.strftime(ICAL_DATE_FORMAT)
-        ])
-
-    # Finish event
-    ical_components.extend([
-        'END:VCALENDAR',
-    ])
-
-    # Join components
-    return '\r'.join(ical_components)
+        ical_event.add('dtend', event.end_datetime.astimezone(pytz.utc))
+    ical_event.add('dtstamp', event.latest_revision_created_at.astimezone(pytz.utc))
+    if event.content:
+        ical_event.add('description', get_plain_text_content(event.content))
+    if event.location:
+        ical_event.add('location', event.location)
+    # TODO: different url if external event
+    ical_event.add('url', event.full_url)
+    cal.add_component(ical_event)
+    return cal.to_ical()

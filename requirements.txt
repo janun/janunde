@@ -1,6 +1,7 @@
 Django==1.9.6
 wagtail==1.4.5
 python-dateutil==2.5.3
+icalendar==3.9.2
 
 # Dependencies for hosting
 #elasticsearch==1.2.0
