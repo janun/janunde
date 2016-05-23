@@ -26,7 +26,7 @@
 
       <!-- show related_group -->
       {% if event.related_group %}
-        <a href="{% pageurl event.related_group %}"
+        <a title="zu {{ event.related_group.title }}" href="{% pageurl event.related_group %}"
            class="overlay__content overlay__content--white top right"
            style="border-bottom-left-radius: 5px; border-top-right-radius: 5px; height: 40px;">
           <span class="hover-reveal__inline font-size-very-small font-family-sans margin-right-quarter margin-left-half float-left"
@@ -38,11 +38,7 @@
           {% else %}
             <span class="font-size-2 margin-top-quarter margin-right-quarter margin-left-quarter float-right padding-left-quarter"
                   style="width: 32px; line-height: 32px">
-              {% if event.related_group.abbr %}
-                {{ event.related_group.abbr }}
-              {% else %}
-                {{ event.related_group.title|slice:":2" }}
-              {% endif %}
+              {{ event.related_group.abbr }}
             </span>
           {% endif %}
         </a>
@@ -59,12 +55,12 @@
 
         <!-- show facebook -->
         {% if event.facebook_event_url %}
-          <a class="float-right hover-reveal__inline" href="{{ event.facebook_event_url }}"><i class="icon-social-facebook"></i></a>
+          <a title="zur Facebook-Veranstaltung" class="float-right hover-reveal__inline" href="{{ event.facebook_event_url }}"><i class="icon-social-facebook"></i></a>
         {% endif %}
 
         <!-- show external website -->
         {% if event.website_url %}
-          <a class="float-right margin-right-1 hover-reveal__inline" href="{{ event.website_url }}"><i class="icon-share-alt"></i></a>
+          <a title="zur externen Website" class="float-right margin-right-1 hover-reveal__inline" href="{{ event.website_url }}"><i class="icon-share-alt"></i></a>
         {% endif %}
       </div>
     </div>
@@ -73,7 +69,7 @@
   <!-- show title -->
   <a class="height-full display-block remove-panel-padding--all  padding-top-1 add-panel-padding--on-sides" href="{% pageurl event %}">
     <h3 class="margin-top-0 {% if event.title|length > 32 %}font-size-small{% else %}font-size-3{% endif %}">
-      {{ event.title|truncatechars:74 }}
+      {{ event.title|truncatechars:56 }}
     </h3>
   </a>
 

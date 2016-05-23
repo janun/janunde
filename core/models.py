@@ -1,7 +1,9 @@
 from __future__ import unicode_literals
 
 import datetime
+import re
 from dateutil import relativedelta
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
@@ -123,7 +125,6 @@ class Group(BasePage):
         max_length=2,
         null=True,
         blank=True,
-        # TODO: if empty autogenerate from title
     )
 
     logo = models.ForeignKey(
@@ -135,6 +136,10 @@ class Group(BasePage):
         verbose_name=_("Logo"),
         #help_text=_("")
     )
+
+    def clean(self):
+        if not self.abbr:
+            self.abbr = self.title[:2]
 
     edit_handler = TabbedInterface([
         ObjectList([
@@ -331,6 +336,13 @@ class EventPage(Page):
     subpage_types = []
     parent_page_types = ['EventIndexPage']
 
+    subtitle = models.CharField(
+        verbose_name=_("Untertitel"),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
     main_image = models.ForeignKey(
         Image,
         on_delete=models.SET_NULL,
@@ -409,6 +421,26 @@ class EventPage(Page):
         # TODO: change this into a real location somehow
     )
 
+    def clean(self):
+        # title must be short
+        if len(self.title) > 56:
+            raise ValidationError({'title': "Der Titel ist zu lang. "
+            "Er darf maximal 56 Zeichen lang sein. Nutz doch den Untertitel."})
+
+        # facebook_event_url
+        if self.facebook_event_url:
+            facebook_event_regex = r'(^http(?:s)?://(?:www\.)?facebook\.com/events/\d+)'
+            match = re.match(facebook_event_regex, self.facebook_event_url)
+            if match:
+                self.facebook_event_url = match.groups()[0]
+            else:
+                raise ValidationError({'facebook_event_url': "Das ist keine gültige Facebook-Event-URL"})
+
+        # end_datetime
+        if self.end_datetime:
+            if self.end_datetime < self.start_datetime:
+                raise ValidationError({'end_datetime': "Endzeit muss nach Startzeit liegen."})
+
     # only works with ElasticSearch
     search_fields = BasePage.search_fields + (
         #title is in here by default
@@ -422,6 +454,7 @@ class EventPage(Page):
     edit_handler = TabbedInterface([
         ObjectList([
             FieldPanel('title', classname="full title"),
+            FieldPanel('subtitle', classname="full title"),
             StreamFieldPanel('content'),
         ], heading=_("Titel und Inhalt")),
         ObjectList([
@@ -445,7 +478,6 @@ class EventPage(Page):
                     FieldPanel('facebook_event_url')
                 ],
                 heading="Links und E-Mail",
-                classname="collapsible collapsed"
             )
         ], heading=_("Datum, Ort und Links")),
         ObjectList([

@@ -9,20 +9,13 @@
 
     <!-- the main column -->
     <main class="grid-12__col-7">
+      <!-- title and subtitle -->
       <h1>{{ self.title }}</h1>
-      <h2>
-        <!-- short date -->
-        {% if self.end_datetime and self.end_datetime.date != self.start_datetime.date %}
-          von {{ self.start_datetime|nettes_datum:True }} bis {{ self.end_datetime.date|nettes_datum:True }}
-        {% else %}
-          {{ self.start_datetime.date|nettes_datum:True }}
-        {% endif %}
+      {% if self.subtitle %}
+        <h2>{{ self.subtitle }}</h2>
+      {% endif %}
 
-        <!-- short location -->
-        {% if self.location %}
-          in {{ self.location }}
-        {% endif %}
-      </h2>
+      <!-- the content -->
       {{ self.content }}
     </main>
 
