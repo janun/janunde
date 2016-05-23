@@ -31,11 +31,13 @@ def export_event_to_google_link(event):
     datetime_format = "%Y%m%dT%H%M%SZ"
     link = "http://www.google.com/calendar/event?action=TEMPLATE&"
     end_datetime = event.end_datetime or event.start_datetime + datetime.timedelta(minutes=30)
-    print(event.start_datetime + datetime.timedelta(minutes=30))
+    content = str(event.content).replace("\n", "").replace("  ", "")
+    content = content.replace("<br>", "\n").replace("<p>", "").replace("</p>", "\n\n")
+    content = striptags(content).strip() + '\n' + event.full_url
     params = {
         'text': event.title,
         'dates': event.start_datetime.strftime(datetime_format) + "/" + end_datetime.strftime(datetime_format),
-        'details': striptags(event.content),
+        'details': content,
         'location': event.location,
         'sprop': event.full_url, # doesnt work anymore with google
     }

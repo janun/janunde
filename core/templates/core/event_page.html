@@ -74,6 +74,7 @@
       </div>
 
       <!-- location -->
+      {% if self.location %}
       <div class="grid-12 margin-top-2 font-family-extra font-size-2">
         <div class="grid-12__col-1"><i class="icon-location-pin"></i></div>
         <div class="grid-12__col-11">
@@ -81,6 +82,7 @@
           <a class="font-size-1 font-family-sans color-grey" href="https://www.google.de/maps/search/{{ self.location }}">Auf Karte anzeigen</a>
         </div>
       </div>
+      {% endif %}
 
       <!-- links etc. -->
       {% if self.website_url %}

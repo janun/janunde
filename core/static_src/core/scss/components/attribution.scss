@@ -14,7 +14,7 @@
 
     color: $text-color-attribution;
     // use mix-blend-mode for i.e. white background
-    mix-blend-mode: difference;
+    //mix-blend-mode: difference; // doenst really work -> unreadable
     @include scale-from-small-to-medium(
       font-size, rem-calc(5), rem-calc(10)
     );
