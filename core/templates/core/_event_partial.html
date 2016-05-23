@@ -51,7 +51,7 @@
           {{ event.start_datetime|nettes_datum }}
           – {{ event.end_datetime|date:"d.m." }}
         {% else %}
-          {{ event.start_datetime|nettes_datum }}, {{ event.start_datetime.time }} Uhr
+          {{ event.start_datetime|nettes_datum }}, {{ event.start_datetime|time:"H:i" }} Uhr
         {% endif %}
 
         <!-- show facebook -->
