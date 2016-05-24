@@ -16,10 +16,13 @@ urlpatterns = [
 
     url(r'^search/$', search, name='search'),
 
+    url(r'^styleguide/', include('styleguide.urls')),
+
     url(r'', include(wagtail_urls)),
 ]
 
 
+# TODO: do we still need this?
 if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
