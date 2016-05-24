@@ -103,14 +103,32 @@
       </div>
       {% endif %}
 
-      {% if self.contact_mail %}
-      <div class="grid-12 margin-top-1">
-        <div class="grid-12__col-1"><i class="icon-envelope"></i></div>
-        <div class="grid-12__col-11">
-          <a class="color-grey" href="mailto:{{ self.contact_mail }}">Kontakt per E-Mail</a>
+      <!-- contact information -->
+      {% if self.contact_mail or self.contact_phone %}
+      <div class="margin-top-2">
+        <span class="color-grey">Kontakt: {{ self.contact_name }}</span>
+
+        {% if self.contact_mail %}
+        <div class="grid-12 margin-top-1">
+          <div class="grid-12__col-1"><i class="icon-envelope"></i></div>
+          <div class="grid-12__col-11">
+            <a href="mailto:{{ self.contact_mail }}">{{ self.contact_mail }}</a>
+          </div>
         </div>
+        {% endif %}
+
+        {% if self.contact_phone %}
+        <div class="grid-12 margin-top-1">
+          <div class="grid-12__col-1"><i class="icon-phone"></i></div>
+          <div class="grid-12__col-11">
+            <a href="{{ self.contact_phone.as_rfc3966 }}">{{ self.contact_phone|prettyphone }}</a>
+          </div>
+        </div>
+        {% endif %}
+
       </div>
       {% endif %}
+
     </aside>
 
   </div>

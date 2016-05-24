@@ -21,6 +21,8 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
+from phonenumber_field.modelfields import PhoneNumberField
+from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
 from .blocks import StandardStreamBlock
 from .images import AttributedImage as Image
@@ -393,9 +395,20 @@ class EventPage(Page):
         blank=True,
     )
     contact_mail = models.EmailField(
-        _("Kontakt E-Mail"),
+        _("E-Mail"),
         help_text=_("Die E-Mail-Adresse, "
                     "um Kontakt für diese Veranstaltung aufzunehmen"),
+        null=True,
+        blank=True,
+    )
+    contact_name = models.CharField(
+        _("Name"),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    contact_phone = PhoneNumberField(
+        _("Telefonnummer"),
         null=True,
         blank=True,
     )
@@ -481,7 +494,6 @@ class EventPage(Page):
             FieldPanel('location'),
             MultiFieldPanel(
                 [
-                    FieldPanel('contact_mail'),
                     FieldPanel('website_url'),
                     FieldPanel('facebook_event_url')
                 ],
@@ -491,8 +503,15 @@ class EventPage(Page):
         ObjectList([
             ImageChooserPanel('main_image'),
             FieldPanel('color'),
+        ], heading=_("Bild und Gestaltung")),
+        ObjectList([
             FieldPanel('related_group'),
-        ], heading=_("Poster, Gestaltung und Gruppe")),
+            MultiFieldPanel([
+                FieldPanel('contact_name'),
+                FieldPanel('contact_mail'),
+                FieldPanel('contact_phone', widget=PhoneNumberInternationalFallbackWidget),
+            ], heading="Kontakt")
+        ], heading="Gruppe und Kontakt")
     ])
 
     partial_template_name = 'core/_partial.html'
