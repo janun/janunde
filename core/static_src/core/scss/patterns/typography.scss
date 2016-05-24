@@ -38,8 +38,12 @@ $text-color-standard: $brown;
   line-height: rem-calc(22);
 }
 .font-size-2 {
-  font-size: rem-calc(20);
-  line-height: rem-calc(24);
+  font-size: rem-calc(16px);
+  line-height: rem-calc(19px);
+  @include above($xlarge) {
+    font-size: rem-calc(20px);
+    line-height: rem-calc(24px);
+  }
 }
 .font-size-3 {
   font-size: rem-calc(24);

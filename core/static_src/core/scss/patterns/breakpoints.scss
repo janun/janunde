@@ -9,11 +9,9 @@
 /// but we will treat $netbook and desktop the same
 
 $small:     rem-calc(320);  // 20rem
-//$smedium:   rem-calc(480);  // 30rem
-$medium:    rem-calc(640);  // 40rem
+$medium:    rem-calc(768);  // 48rem
 $large:     rem-calc(1024); // 64rem
-$xlarge:    rem-calc(1280); // 80rem
-//$xxlarge:   rem-calc(1440); // 90rem
+$xlarge:    rem-calc(1224); // 76.5rem
 
 $breakpoints: (
   small: $small,
