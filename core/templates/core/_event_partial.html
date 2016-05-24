@@ -19,7 +19,7 @@
           <div class="image-placeholder"
                style="height: 113px; background-color: {{ event.color|default:"#62e6c8" }}">
             {% for x in ""|ljust:"40" %}
-              Thema
+              {{ event.title }}
             {% endfor %}
           </div>
         {% endif %}
