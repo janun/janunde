@@ -1,5 +1,5 @@
 {% extends "core/__base.html" %}
-{% load wagtailcore_tags wagtailimages_tags srcset humanize nettes_datum %}
+{% load wagtailcore_tags wagtailimages_tags srcset humanize nettes_datum stuff %}
 
 {% block body_class %}event-page-template{% endblock %}
 
@@ -89,7 +89,7 @@
         <div class="grid-12 margin-top-2">
           <div class="grid-12__col-1"><i class="icon-share-alt"></i></div>
           <div class="grid-12__col-11">
-            <a class="color-grey" href="{{ self.website_url }}">{{ self.website_url }}</a>
+            <a class="color-grey" href="{{ self.website_url }}">{{ self.website_url|prettyurl }}</a>
           </div>
         </div>
       {% endif %}
