@@ -8,7 +8,7 @@
   <div class="container js-scrolls__offsetElement">
     {% if search %}
     <form action="{% pageurl self %}" method="get">
-      <input class="input-as-link big-font margin-top-1 margin-bottom-1 width-960 border-bottom" autofocus type="search" name="query" placeholder="Was interessiert dich? Oder wo?" value="{{ search_query }}"><br>
+      <input class="input-as-link big-font margin-top-1 margin-bottom-1 width-60 border-bottom" autofocus type="search" name="query" placeholder="Was interessiert dich? Oder wo?" value="{{ search_query }}"><br>
       <input class="color-green margin-right-3 font-size-2 input-as-link" type="submit" value="Suchen">
       <a class="color-green margin-right-3 font-size-2" href="{% pageurl self %}">Schließen</a>
     </form>

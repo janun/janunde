@@ -2,9 +2,20 @@
   &-full {
     width: 100%;
   }
-  &-960 {
-    width: rem-calc(960);
+  &-60 {
+    width: 60rem; // this is 960px
   }
+
+  &-1 {
+    width: 1rem;
+  }
+  &-2 {
+    width: 2rem;
+  }
+  &-3 {
+    width: 3rem;
+  }
+
 }
 
 
