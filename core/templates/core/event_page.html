@@ -106,7 +106,7 @@
       <!-- contact information -->
       {% if self.contact_mail or self.contact_phone %}
       <div class="margin-top-2">
-        <span class="color-grey">Kontakt: {{ self.contact_name }}</span>
+        <span class="color-grey">Kontakt: {% if self.contact_name %}{{ self.contact_name }}{% endif %}</span>
 
         {% if self.contact_mail %}
         <div class="grid-12 margin-top-1">
