@@ -49,7 +49,7 @@ def export_event_to_google_link(event):
     }
     if event.location:
         params['location'] = event.location
-    if event.details:
+    if event.content:
         params['details'] = get_plain_text_content(event.content) + '\n\n' + url
     cons_params = [param[0] + "=" +  urlquote(param[1]) for param in params.items()]
     return link + "&".join(cons_params)
