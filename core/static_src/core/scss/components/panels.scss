@@ -10,34 +10,47 @@ $panel--fixed-height_height: rem-calc(196);
 /// the util classes below are to cope with that
 .panel {
   @include janun-box-shadow;
+  border-radius: rem-calc(5px);
 
   display: block;
   word-wrap: break-word;
   background-color: $white;
   padding: $panel_padding;
 
+  &--no-padding {
+    padding: 0
+  }
+
+  &--side-padding {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  &__negative-margin {
+    &-all {
+      margin: -$panel_padding;
+    }
+    &-sides {
+      margin-left: -$panel_padding;
+      margin-right: -$panel_padding;
+    }
+    &-top {
+      margin-top: -$panel_padding;
+    }
+    &-bottom {
+      margin-bottom: -$panel_padding;
+    }
+    &-up {
+      margin-top: -$panel_padding;
+      margin-left: -$panel_padding;
+      margin-right: -$panel_padding;
+    }
+  }
+
   &--fixed-height\@medium {
     @include above($medium) {
       height: $panel--fixed-height_height;
     }
-  }
-}
-
-
-/// utility class to remove the panel padding
-.remove-panel-padding {
-  &--all {
-    margin: -$panel_padding;
-  }
-  &--on-sides {
-    margin-left: -$panel_padding;
-    margin-right: -$panel_padding;
-  }
-  &--on-top {
-    margin-top: -$panel_padding;
-  }
-  &--on-bottom {
-    margin-bottom: -$panel_padding;
   }
 }
 

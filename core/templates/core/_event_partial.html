@@ -1,9 +1,9 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags %}
 
 
-<div class="panel event hover-reveal shadow-on-hover">
+<div class="panel panel--side-padding event hover-reveal shadow-on-hover">
 
-  <div class="remove-panel-padding--on-sides remove-panel-padding--on-top margin-bottom-1">
+  <div class="panel__negative-margin-sides margin-bottom-1">
     <div class="image overlay">
 
       <!-- show image (or placeholder) -->
@@ -68,7 +68,7 @@
   </div>
 
   <!-- show title -->
-  <a class="height-full display-block remove-panel-padding--all  padding-top-1 add-panel-padding--on-sides" href="{% pageurl event %}">
+  <a class="height-full display-block panel__negative-margin-up padding-top-1 add-panel-padding--on-sides" href="{% pageurl event %}">
     <h3 class="margin-top-0 {% if event.title|length > 32 %}font-size-small{% else %}font-size-3{% endif %}">
       {{ event.title|truncatechars:56 }}
     </h3>

@@ -25,14 +25,14 @@
 
       <!-- image -->
       {% if self.main_image %}
-      <div class="image">
+      <div class="image ">
         {% image self.main_image original as original_image %}
           <a class="cursor-zoom-in" href="{{ original_image.url }}">
             <img src="{{ original_image.url }}"
               srcset="{{ self.main_image|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
               sizes="(min-width: 60em) 20em, 95vw"
               alt="{{ original_image.alt }}"
-              class="main-image">
+              class="main-image panel panel--no-padding">
           </a>
       </div>
       {% endif %}

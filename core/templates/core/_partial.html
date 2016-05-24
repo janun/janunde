@@ -4,7 +4,7 @@
 
   {% if object.main_image %}
     <div class="image image--fixed-height@medium
-                remove-panel-padding--all overlay overlay--white-box">
+                panel__negative-margin-all overlay overlay--white-box">
       <a href="{% pageurl object %}">
         {% image object.main_image fill-320x192 jpg as fallback_image %}
         <img src="{{ fallback_image.url }}"
