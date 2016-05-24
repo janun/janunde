@@ -24,6 +24,7 @@ from wagtail.wagtailsearch import index
 
 from .blocks import StandardStreamBlock
 from .images import AttributedImage as Image
+from .fields import (PrettyURLField, FacebookEventURLField)
 
 
 
@@ -379,14 +380,13 @@ class EventPage(Page):
         help_text=_("Eine JANUN-Gruppe, "
                     "die dieser Veranstaltung zugeordnet ist")
     )
-    facebook_event_url = models.URLField(
+    facebook_event_url = FacebookEventURLField(
         _("Facebook Event"),
         help_text=_("Die URL zum Facebook-Event dieser Veranstaltung"),
         null=True,
         blank=True,
-        # TODO: validation so its only a Facebook Event URL
     )
-    website_url = models.URLField(
+    website_url = PrettyURLField(
         _("externe Website"),
         help_text=_("Die URL einer externen Website zu dieser Veranstaltung"),
         null=True,
@@ -443,19 +443,11 @@ class EventPage(Page):
             raise ValidationError({'title': "Der Titel ist zu lang. "
             "Er darf maximal 56 Zeichen lang sein. Nutz doch den Untertitel."})
 
-        # facebook_event_url
-        if self.facebook_event_url:
-            facebook_event_regex = r'(^http(?:s)?://(?:www\.)?facebook\.com/events/\d+)'
-            match = re.match(facebook_event_regex, self.facebook_event_url)
-            if match:
-                self.facebook_event_url = match.groups()[0]
-            else:
-                raise ValidationError({'facebook_event_url': "Das ist keine gültige Facebook-Event-URL"})
-
         # end_datetime
         if self.end_datetime:
             if self.end_datetime < self.start_datetime:
                 raise ValidationError({'end_datetime': "Endzeit muss nach Startzeit liegen."})
+
 
     # only works with ElasticSearch
     search_fields = BasePage.search_fields + (
