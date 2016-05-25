@@ -360,8 +360,8 @@ class EventPage(Page):
         null=True,
         blank=True,
         related_name='+',
-        verbose_name=_("Poster"),
-        help_text=_("Poster oder Bild für diese Veranstaltung."
+        verbose_name=_("Bild"),
+        help_text=_("Bild für diese Veranstaltung. "
                     "Bitte kein Gruppen- oder JANUN-Logo!")
     )
     start_datetime = models.DateTimeField(
