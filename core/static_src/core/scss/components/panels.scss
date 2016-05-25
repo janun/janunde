@@ -9,13 +9,21 @@ $panel--fixed-height_height: rem-calc(196);
 /// for example images should not have padding,
 /// the util classes below are to cope with that
 .panel {
-  @include janun-box-shadow;
+  box-shadow: 0 1px 1px rgba($black, 0.1);
   border-radius: rem-calc(5px);
 
   display: block;
   word-wrap: break-word;
   background-color: $white;
   padding: $panel_padding;
+
+  &--border-radius-tr-lb {
+    border-radius: rem-calc(0 5px 0 5px);
+  }
+
+  &--hover-shadow:hover {
+    box-shadow: 0 1px 3px rgba($black, 0.1);
+  }
 
   &--no-padding {
     padding: 0
