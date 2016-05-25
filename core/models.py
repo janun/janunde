@@ -445,9 +445,11 @@ class EventPage(Page):
     def clean(self):
         # append number to slug if already in use
         i = 2
-        while not Page._slug_is_available(self.slug, self.get_parent(), self):
-            self.slug = "-".join([self.slug, str(i)])
+        slug = self.slug
+        while not Page._slug_is_available(slug, self.get_parent(), self):
+            slug = "-".join([self.slug, str(i)])
             i += 1
+        self.slug = slug
 
         super().clean()
 
