@@ -15,10 +15,13 @@
     {% else %}
     <h1 class="big-font {% if not upcoming %}line-through{% endif %}">Veranstaltungen, Seminare, Demos</h1>
     <a class="color-green margin-right-3 font-size-2" href="?search=1">
-        <i class="icon-magnifier"></i>
+        <i class="icon-magnifier" aria-hidden="true"></i>
         Suchen
     </a>
-    <a class="color-green margin-right-3 font-size-2" href="{{ self.get_add_mail }}"><i class="icon-plus"></i> Vorschlagen</a>
+    <a class="color-green margin-right-3 font-size-2" href="{{ self.get_add_mail }}">
+      <i class="icon-plus" aria-hidden="true"></i>
+      Vorschlagen
+    </a>
     {% endif %}
   </div>
 </header>
@@ -27,6 +30,11 @@
 {% if upcoming %}
 <div class="scrolls js-scrolls">
   <div class="fixed-grid-12 scrolls__inner">
+
+    <a class="scrolls__button scrolls__button--previous js-scrolls__button-previous"
+       href="#" title="Zurück in die Vergangenheit">
+      <i class="icon-arrow-left-circle" aria-hidden="true"></i>
+    </a>
 
 
     {% if this_week %}
@@ -74,8 +82,9 @@
     </div>
     {% endif %}
 
-    <a class="scrolls__button-next js-scrolls__button-next" href="#">
-      <i class="icon-arrow-right-circle"></i>
+    <a class="scrolls__button scrolls__button--next js-scrolls__button-next"
+       href="#" title="Weiter in die Zukunft">
+      <i class="icon-arrow-right-circle" aria-hidden="true"></i>
     </a>
 
   </div>
@@ -83,23 +92,23 @@
 
 {% elif search_query %}
 <div class="container padding-top-6 padding-bottom-5">
-    <i class="icon-ghost color-red" style="font-size: 7rem"></i>
-    <div class="margin-bottom-3 margin-top-4 big-font">
-      <div class="color-red">Sorry, Weltenbummler!</div>
-      <div>Wir konnten kein Abenteuer für dich finden.</div>
-    </div>
-    {% comment TODO %}
-    <span>In der Vergangenheit gab es jedoch </a>2 Veranstaltungen</a> mit diesem Suchbegriff.</span>
-    {% endcomment %}
+  <i class="icon-ghost color-red" style="font-size: 7rem" aria-hidden="true"></i>
+  <div class="margin-bottom-3 margin-top-4 big-font">
+    <div class="color-red">Sorry, Weltenbummler!</div>
+    <div>Wir konnten kein Abenteuer für dich finden.</div>
+  </div>
+  {% comment TODO %}
+  <span>In der Vergangenheit gab es jedoch </a>2 Veranstaltungen</a> mit diesem Suchbegriff.</span>
+  {% endcomment %}
 </div>
 {% else %}
 <div class="container padding-top-6 padding-bottom-5">
-    <i class="icon-present color-green" style="font-size: 7rem"></i>
-    <div class="margin-bottom-3 margin-top-4 big-font">
-      <div class="color-green">Ein Geschenk für Dich.</div>
-      <div>Veranstaltungen, die wir zeigen könnten, gibt es aber leider keine.</div>
-    </div>
-    <span>Du kannst das ändern: <a class="color-green" href="{{ self.get_add_mail }}">Schlag uns eine Veranstaltung vor</a> und wir tragen sie hier ein.</span>
+  <i class="icon-present color-green" style="font-size: 7rem" aria-hidden="true"></i>
+  <div class="margin-bottom-3 margin-top-4 big-font">
+  <div class="color-green">Ein Geschenk für Dich.</div>
+    <div>Veranstaltungen, die wir zeigen könnten, gibt es aber leider keine.</div>
+  </div>
+  <span>Du kannst das ändern: <a class="color-green" href="{{ self.get_add_mail }}">Schlag uns eine Veranstaltung vor</a> und wir tragen sie hier ein.</span>
 </div>
 {% endif %}
 

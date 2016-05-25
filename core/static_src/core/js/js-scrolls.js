@@ -23,4 +23,24 @@
       scrollSmooth(380, 'right', 200, false, scrolls);
     });
   }
+
+  // button next
+  var buttonPrev = document.querySelector('.js-scrolls__button-previous');
+  if (buttonPrev) {
+    // hide button unless scrolled right
+    buttonPrev.style.display = 'none';
+    scrolls.addEventListener('scroll', function (event) {
+      if (this.scrollLeft > 0) {
+        buttonPrev.style.display = 'block';
+      } else {
+        buttonPrev.style.display = 'none';
+      }
+    });
+
+    // actually scroll
+    buttonPrev.addEventListener('click', function (event) {
+      event.preventDefault();
+      scrollSmooth(-380, 'right', 200, false, scrolls);
+    });
+  }
 })();
