@@ -56,12 +56,15 @@
 
         <!-- show facebook -->
         {% if event.facebook_event_url %}
-          <a title="zur Facebook-Veranstaltung" class="float-right hover-reveal__inline" href="{{ event.facebook_event_url }}"><i class="icon-social-facebook"></i></a>
+          <a title="zur Facebook-Veranstaltung" class="float-right hover-reveal__inline" href="{{ event.facebook_event_url }}">
+            <i class="icon-social-facebook" aria-hidden="true"></i>
+          </a>
         {% endif %}
 
         <!-- show external website -->
         {% if event.website_url %}
-          <a title="zur externen Website" class="float-right margin-right-1 hover-reveal__inline" href="{{ event.website_url }}"><i class="icon-share-alt"></i></a>
+          <a title="zur externen Website" class="float-right margin-right-1 hover-reveal__inline" href="{{ event.website_url }}">
+            <i class="icon-share-alt" aria-hidden="true"></i></a>
         {% endif %}
       </div>
     </div>

@@ -39,7 +39,7 @@
 
       <!-- time -->
       <div class="grid-12 margin-top-2 font-family-extra font-size-2">
-        <div class="grid-12__col-1"><i class="icon-clock"></i></div>
+        <div class="grid-12__col-1"><i class="icon-clock" aria-hidden="true"></i></div>
         <div class="grid-12__col-11">
           {% if self.end_datetime %}
             {% if self.end_datetime.date == self.start_datetime.date %}
@@ -67,7 +67,7 @@
           {% endif %}
           <span class="font-size-1 font-family-sans color-grey">
             Im Kalendar speichern:
-            <a class="color-grey" href="?format=ical">ICal</a>,
+            <a class="color-grey" href="?format=ical">iCal</a>,
             <a class="color-grey" href="{{ self.create_google_calendar_link }}">Google</a>
           </span>
         </div>
@@ -76,7 +76,7 @@
       <!-- location -->
       {% if self.location %}
       <div class="grid-12 margin-top-2 font-family-extra font-size-2">
-        <div class="grid-12__col-1"><i class="icon-location-pin"></i></div>
+        <div class="grid-12__col-1"><i class="icon-location-pin" aria-hidden="true"></i></div>
         <div class="grid-12__col-11">
           {{ self.location }}<br>
           <a class="font-size-1 font-family-sans color-grey" href="https://www.google.de/maps/search/{{ self.location }}">Auf Karte anzeigen</a>
@@ -87,7 +87,7 @@
       <!-- links etc. -->
       {% if self.website_url %}
         <div class="grid-12 margin-top-2">
-          <div class="grid-12__col-1"><i class="icon-share-alt"></i></div>
+          <div class="grid-12__col-1"><i class="icon-share-alt" aria-hidden="true"></i></div>
           <div class="grid-12__col-11">
             <a class="color-grey" href="{{ self.website_url }}">{{ self.website_url|prettyurl }}</a>
           </div>
@@ -96,7 +96,7 @@
 
       {% if self.facebook_event_url %}
       <div class="grid-12 margin-top-1">
-        <div class="grid-12__col-1"><i class="icon-social-facebook"></i></div>
+        <div class="grid-12__col-1"><i class="icon-social-facebook" aria-hidden="true"></i></div>
         <div class="grid-12__col-11">
           <a class="color-grey" href="{{ self.facebook_event_url }}">Facebook-Event</a>
         </div>
@@ -110,7 +110,7 @@
 
         {% if self.contact_mail %}
         <div class="grid-12 margin-top-1">
-          <div class="grid-12__col-1"><i class="icon-envelope"></i></div>
+          <div class="grid-12__col-1"><i class="icon-envelope" aria-hidden="true"></i></div>
           <div class="grid-12__col-11">
             <a href="mailto:{{ self.contact_mail }}">{{ self.contact_mail }}</a>
           </div>
@@ -119,7 +119,7 @@
 
         {% if self.contact_phone %}
         <div class="grid-12 margin-top-1">
-          <div class="grid-12__col-1"><i class="icon-phone"></i></div>
+          <div class="grid-12__col-1"><i class="icon-phone" aria-hidden="true"></i></div>
           <div class="grid-12__col-11">
             <a href="{{ self.contact_phone.as_rfc3966 }}">{{ self.contact_phone|prettyphone }}</a>
           </div>

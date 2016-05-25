@@ -40,6 +40,13 @@ $small-navbar-height: rem-calc(54);
   font-size: rem-calc(18);
   color: $white;
 
+  // hide things
+  // used by a11y-toggle
+  [aria-hidden='true'],
+  [data-a11y-toggle]:not([aria-controls]) {
+    display: none;
+  }
+
   a {
     font-family: $font-family-sans-serif;
     color: $white;

@@ -59,6 +59,6 @@
 
 // hide by aria-hidden
 // this might be used by js to hide things
-[aria-hidden="true"] {
-  @include hide;
-}
+// [aria-hidden="true"] {
+//   @include hide;
+// }
