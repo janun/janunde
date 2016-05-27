@@ -4,10 +4,10 @@
 
 <div class="image attribution">
   <a class="cursor-zoom-in" href="{{ original_image.url }}">
-    {% image value jpg as original_image %}
+    {% image value original as original_image %}
     <img src="{{ original_image.url }}"
-      srcset="{{ value|srcset:'width-320|jpg width-640|jpg width-1280|jpg width-695|jpg width-1792|jpg' }}"
-      sizes="(min-width: 40em) 43.38em, 100vw"
+      srcset="{{ value|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
+      sizes="(min-width: 40em) 34.5em, 100vw"
       alt="{{ original_image.alt }}">
     {% if value.attribution %}
       <div class="attribution__content">{{ value.attribution }}</div>
