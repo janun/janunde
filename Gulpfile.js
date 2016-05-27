@@ -62,7 +62,16 @@ gulp.task('fonts', function(){
 // modernizr
 gulp.task('modernizr', function() {
   return gulp.src('core/static_src/core/js/**/*.js')
-    .pipe(modernizr())
+    .pipe(modernizr({
+      "options" : [
+        "setClasses",
+        "addTest",
+        "html5printshiv",
+        "testProp",
+        "fnBind"
+      ],
+      tests: ['']
+    }))
     .pipe(gulp.dest('core/static/core/js/'));
 });
 
