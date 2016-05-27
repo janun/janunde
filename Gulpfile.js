@@ -79,10 +79,11 @@ gulp.task('modernizr', function() {
 // scripts
 gulp.task('scripts', ['modernizr'], function(){
   return gulp.src([
+    'core/static/core/js/modernizr.js',
     'janunde/static/bower_components/jquery/dist/jquery.js',
+    'janunde/static/bower_components/jquery-sticky/jquery.sticky.js',
     'core/static_src/core/js/**/*.js',
     'janunde/static/bower_components/a11y-toggle/a11y-toggle.js',
-    'core/static/core/js/modernizr.js',
   ])
 
   // init sourcemap
