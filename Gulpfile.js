@@ -13,6 +13,7 @@ var csso = require('gulp-csso');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
+var modernizr = require('gulp-modernizr');
 //var rev = require('gulp-rev'); // TODO
 
 
@@ -58,14 +59,21 @@ gulp.task('fonts', function(){
 });
 
 
+// modernizr
+gulp.task('modernizr', function() {
+  gulp.src('core/static_src/core/js/**/*.js')
+    .pipe(modernizr())
+    .pipe(gulp.dest('core/static/core/js/'))
+});
+
+
 // scripts
-gulp.task('scripts', function(){
+gulp.task('scripts', ['modernizr'], function(){
   gulp.src([
-    'janunde/static/bower_components/imagesloaded/imagesloaded.pkgd.js',
-    'janunde/static/bower_components/isotope/dist/isotope.pkgd.js',
+    'janunde/static/bower_components/jquery/dist/jquery.js',
     'core/static_src/core/js/**/*.js',
     'janunde/static/bower_components/a11y-toggle/a11y-toggle.js',
-    'janunde/static/bower_components/dragscroll/dragscroll.js',
+    'core/static/core/js/modernizr.js',
   ])
 
   // init sourcemap
@@ -111,7 +119,7 @@ gulp.task('build', ['styles', 'fonts', 'videos', 'scripts', 'images']);
 // watch
 gulp.task('watch', ['build'], function() {
     gulp.watch('core/static_src/core/scss/**/*.scss', ['styles']);
-    gulp.watch('core/static_src/core/js/**/*.js', ['scripts']);
+    gulp.watch('core/static_src/core/js/**/*.js', ['scripts',]);
     gulp.watch('core/static_src/core/fonts/**/*', ['fonts']);
     gulp.watch('core/static_src/core/images/**/*', ['images']);
     gulp.watch('core/static_src/core/videos/**/*', ['videos']);
