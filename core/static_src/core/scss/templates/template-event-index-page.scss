@@ -55,14 +55,16 @@
     }
 
     &__button {
+      display: block;
       position: absolute;
+      margin-top: rem-calc(12px);
       width: rem-calc(43);
       height: rem-calc(40);
-      margin-top: rem-calc(8);
       color: $white;
       background-color: $green;
       text-align: center;
       padding-top: rem-calc(10);
+      z-index: 100;
 
       i {
         font-size: rem-calc(19);
@@ -72,11 +74,13 @@
         right: 0;
         border-radius: rem-calc(46 0 0 46);
       }
-      
+
       &--previous {
+        display: none;
         left: 0;
         border-radius: rem-calc(0 46 46 0);
       }
+
     }
   }
 

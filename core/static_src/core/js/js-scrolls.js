@@ -2,45 +2,54 @@
 // js helpers for the scrolls element
 
 (function () {
-  var scrolls = document.querySelector('.js-scrolls');
+  var scrolls = $('.js-scrolls');
   if (!scrolls) return;
 
-  // offset
-  var offsetElement = document.querySelector('.js-scrolls__offsetElement');
+  // set paddingLeft of scrolls by offsetLeft of .js-scrolls__offsetElement
+  var offsetElement = $('.js-scrolls__offsetElement');
   function setJsScrollsOffset() {
-    scrolls.style.paddingLeft = offsetElement.offsetLeft + "px";
+    scrolls.css('padding-left', offsetElement.offset().left + "px" );
   }
   if (offsetElement) {
-    window.addEventListener('resize', setJsScrollsOffset);
+    $(window).on('resize', setJsScrollsOffset);
     setJsScrollsOffset();
   }
 
   // button next
-  var buttonNext = document.querySelector('.js-scrolls__button-next');
+  var buttonNext = $('.js-scrolls__button-next');
   if (buttonNext) {
-    buttonNext.addEventListener('click', function (event) {
+    buttonNext.on('click', function (event) {
       event.preventDefault();
-      scrollSmooth(380, 'right', 200, false, scrolls);
+      scrolls.animate({scrollLeft: 380});
+    });
+
+    // hide button unless scrolled right
+    scrolls.on('scroll', function (event) {
+      if (scrolls.scrollLeft() == scrolls[0].scrollWidth - $(document).width()) {
+        buttonNext.hide();
+      } else {
+        buttonNext.show();
+      }
     });
   }
 
-  // button next
-  var buttonPrev = document.querySelector('.js-scrolls__button-previous');
+  // button prev
+  var buttonPrev = $('.js-scrolls__button-prev');
   if (buttonPrev) {
+
     // hide button unless scrolled right
-    buttonPrev.style.display = 'none';
-    scrolls.addEventListener('scroll', function (event) {
+    scrolls.on('scroll', function (event) {
       if (this.scrollLeft > 0) {
-        buttonPrev.style.display = 'block';
+        buttonPrev.show()
       } else {
-        buttonPrev.style.display = 'none';
+        buttonPrev.hide()
       }
     });
 
     // actually scroll
-    buttonPrev.addEventListener('click', function (event) {
+    buttonPrev.on('click', function (event) {
       event.preventDefault();
-      scrollSmooth(-380, 'right', 200, false, scrolls);
+      scrolls.animate({scrollLeft: -380});
     });
   }
 })();

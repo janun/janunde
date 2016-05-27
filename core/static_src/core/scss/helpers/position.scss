@@ -10,3 +10,19 @@
 .right {
   right: 0;
 }
+
+.position-fixed {
+  position: fixed;
+}
+.position-absolute {
+  position: absolute;
+}
+.position-relative {
+  position: relative;
+}
+
+
+// needed by js-sticky.js
+.sticky-wrapper {
+  float: left;
+}
