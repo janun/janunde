@@ -59,22 +59,17 @@ gulp.task('fonts', function(){
 });
 
 
-// modernizr
-gulp.task('modernizr', function() {
-  gulp.src('core/static_src/core/js/**/*.js')
-    .pipe(modernizr())
-    .pipe(gulp.dest('core/static/core/js/'))
-});
-
-
 // scripts
-gulp.task('scripts', ['modernizr'], function(){
+gulp.task('scripts', function(){
   gulp.src([
     'janunde/static/bower_components/jquery/dist/jquery.js',
     'core/static_src/core/js/**/*.js',
     'janunde/static/bower_components/a11y-toggle/a11y-toggle.js',
     'core/static/core/js/modernizr.js',
   ])
+
+  // modernizr
+  .pipe(modernizr())
 
   // init sourcemap
   .pipe(isProd ? gutil.noop() : sourcemaps.init())
