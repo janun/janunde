@@ -20,10 +20,12 @@
   if (buttonNext) {
     buttonNext.on('click', function (event) {
       event.preventDefault();
-      scrolls.animate({scrollLeft: 380});
+      scrolls.animate({
+        scrollLeft: Math.floor(scrolls.scrollLeft() / 390)*390 + 390
+      });
     });
 
-    // hide button unless scrolled right
+    // hide button when farest right
     scrolls.on('scroll', function (event) {
       if (scrolls.scrollLeft() == scrolls[0].scrollWidth - $(document).width()) {
         buttonNext.hide();
@@ -49,7 +51,7 @@
     // actually scroll
     buttonPrev.on('click', function (event) {
       event.preventDefault();
-      scrolls.animate({scrollLeft: -380});
+      scrolls.animate({scrollLeft: Math.ceil(scrolls.scrollLeft() / 390)*390 - 390});
     });
   }
 })();
