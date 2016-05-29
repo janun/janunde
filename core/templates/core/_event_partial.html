@@ -51,7 +51,11 @@
           {{ event.start_datetime|nettes_datum }}
           – {{ event.end_datetime|date:"d.m." }}
         {% else %}
-          {{ event.start_datetime|nettes_datum }}, {{ event.start_datetime|time:"H:i" }} Uhr
+          {% if event.all_day %}
+            {{ event.start_datetime|nettes_datum }}
+          {% else %}
+            {{ event.start_datetime|nettes_datum }}, {{ event.start_datetime|time:"H:i" }} Uhr
+          {% endif %}
         {% endif %}
 
         <!-- show facebook -->

@@ -38,7 +38,10 @@ def get_plain_text_content(html_content):
 def export_event_to_google_link(event):
     # TODO: different url if external event
     url = event.full_url
-    datetime_format = "%Y%m%dT%H%M%SZ"
+    if event.all_day:
+        datetime_format = "%Y%m%d"
+    else:
+        datetime_format = "%Y%m%dT%H%M%SZ"
     link = "http://www.google.com/calendar/event?action=TEMPLATE&"
     # since end_datetime is mandatory, get start_datetime + 30 min
     end_datetime = event.end_datetime or event.start_datetime + datetime.timedelta(minutes=30)
@@ -64,9 +67,15 @@ def export_event_to_ical(event):
     ical_event = Event()
     ical_event.add('uid', event.slug + "@" + "janun.de")
     ical_event.add('summary', event.title)
-    ical_event.add('dtstart', event.start_datetime.astimezone(pytz.utc))
+    if event.all_day:
+        ical_event.add('dtstart', event.start_datetime.astimezone(pytz.utc).date())
+    else:
+        ical_event.add('dtstart', event.start_datetime.astimezone(pytz.utc))
     if event.end_datetime:
-        ical_event.add('dtend', event.end_datetime.astimezone(pytz.utc))
+        if event.all_day:
+            ical_event.add('dtend', event.end_datetime.astimezone(pytz.utc).date())
+        else:
+            ical_event.add('dtend', event.end_datetime.astimezone(pytz.utc))
     ical_event.add('dtstamp', event.latest_revision_created_at.astimezone(pytz.utc))
     if event.content:
         ical_event.add('description', get_plain_text_content(event.content))

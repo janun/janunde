@@ -3,14 +3,14 @@
 
 (function () {
   var scrolls = $('.js-scrolls');
-  if (!scrolls) return;
+  if (!scrolls.length) return;
 
   // set paddingLeft of scrolls by offsetLeft of .js-scrolls__offsetElement
   var offsetElement = $('.js-scrolls__offsetElement');
   function setJsScrollsOffset() {
     scrolls.css('padding-left', offsetElement.offset().left + "px" );
   }
-  if (offsetElement) {
+  if (offsetElement.length) {
     $(window).on('resize', setJsScrollsOffset);
     setJsScrollsOffset();
   }

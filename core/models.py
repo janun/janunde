@@ -314,28 +314,32 @@ class EventIndexPage(BasePage):
         context['upcoming'] = self.get_upcoming_events()
 
         context['this_week'] = events.filter(
-            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today),
+            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today, late_attendence=True),
             start_datetime__date__lte=end_of_this_week
         )
+        used_ids = list(context['this_week'].values_list('id', flat=True))
 
         context['next_week'] = events.filter(
-            Q(start_datetime__date__gte=begin_of_next_week) | Q(end_datetime__date__gte=begin_of_next_week),
+            Q(start_datetime__date__gte=begin_of_next_week) | Q(end_datetime__date__gte=begin_of_next_week, late_attendence=True),
             start_datetime__date__lte=end_of_next_week
-        )
+        ).exclude(id__in=used_ids)
+        used_ids += list(context['next_week'].values_list('id', flat=True))
 
         context['later_this_month'] = events.filter(
-            Q(start_datetime__date__gt=end_of_next_week) | Q(end_datetime__date__gt=end_of_next_week),
+            Q(start_datetime__date__gt=end_of_next_week) | Q(end_datetime__date__gt=end_of_next_week, late_attendence=True),
             start_datetime__date__lte=end_of_this_month
-        )
+        ).exclude(id__in=used_ids)
+        used_ids += list(context['later_this_month'].values_list('id', flat=True))
 
         context['next_month'] = events.filter(
-            Q(start_datetime__date__gte=begin_of_next_month) | Q(end_datetime__date__gte=begin_of_next_month),
+            Q(start_datetime__date__gte=begin_of_next_month) | Q(end_datetime__date__gte=begin_of_next_month, late_attendence=True),
             start_datetime__date__lte=end_of_next_month
-        )
+        ).exclude(id__in=used_ids)
+        used_ids += list(context['next_month'].values_list('id', flat=True))
 
         context['after'] = events.filter(
             start_datetime__date__gt=end_of_next_month
-        )
+        ).exclude(id__in=used_ids)
 
         return context
 
@@ -371,6 +375,13 @@ class EventPage(Page):
         _("Endzeit"),
         null=True,
         blank=True
+    )
+    all_day = models.BooleanField(_("ganztägig"), default=False)
+    late_attendence = models.BooleanField(
+        _("späte Teilnahme möglich"),
+        help_text=_("Falls dies ein mehrtägiger Termin ist: "
+                    "Ist es auch möglich z.B. erst am zweiten Tag zu kommen?"),
+        default=False
     )
     related_group = models.ForeignKey(
         Group,
@@ -489,6 +500,8 @@ class EventPage(Page):
                     FieldPanel('end_datetime',
                         widget=AdminDateTimeInput(format="%d.%m.%Y %H:%M")
                     ),
+                    FieldPanel('all_day'),
+                    FieldPanel('late_attendence'),
                 ],
                 classname="",
                 heading="Datum"
