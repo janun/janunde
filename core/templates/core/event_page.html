@@ -39,7 +39,7 @@
 
       <!-- time -->
       <div class="grid-12 margin-top-2 font-family-extra font-size-2">
-        <div class="grid-12__col-1"><i class="icon-clock" aria-hidden="true"></i></div>
+        <i class="grid-12__col-1 icon-clock" aria-hidden="true"></i>
         <div class="grid-12__col-11">
           {% if self.end_datetime %}
             {% if self.end_datetime.date == self.start_datetime.date %}
@@ -84,31 +84,29 @@
       <!-- location -->
       {% if self.location %}
       <div class="grid-12 margin-top-2 font-family-extra font-size-2">
-        <div class="grid-12__col-1"><i class="icon-location-pin" aria-hidden="true"></i></div>
-        <div class="grid-12__col-11">
+        <i class="grid-12__col-1 icon-location-pin" aria-hidden="true"></i>
+        <span class="grid-12__col-11">
           {{ self.location }}<br>
           <a class="font-size-1 font-family-sans color-grey" href="https://www.google.de/maps/search/{{ self.location }}">Auf Karte anzeigen</a>
-        </div>
+        </span>
       </div>
       {% endif %}
 
       <!-- links etc. -->
       {% if self.website_url %}
-        <div class="grid-12 margin-top-2">
-          <div class="grid-12__col-1"><i class="icon-share-alt" aria-hidden="true"></i></div>
-          <div class="grid-12__col-11">
-            <a class="color-grey" href="{{ self.website_url }}">{{ self.website_url|prettyurl }}</a>
-          </div>
-        </div>
+        <a href="{{ self.website_url }}"
+           class="grid-12 margin-top-1 display-block"
+           title="Website besuchen">
+          <i class="grid-12__col-1 icon-share-alt" aria-hidden="true"></i>
+          <span class="grid-12__col-11 color-grey">{{ self.website_url|prettyurl }}</span>
+        </a>
       {% endif %}
 
       {% if self.facebook_event_url %}
-      <div class="grid-12 margin-top-1">
-        <div class="grid-12__col-1"><i class="icon-social-facebook" aria-hidden="true"></i></div>
-        <div class="grid-12__col-11">
-          <a class="color-grey" href="{{ self.facebook_event_url }}">Facebook-Event</a>
-        </div>
-      </div>
+      <a href="{{ self.facebook_event_url }}" class="grid-12 margin-top-1 display-block">
+        <i class="grid-12__col-1 icon-social-facebook" aria-hidden="true"></i>
+        <span class="grid-12__col-11 color-grey">Facebook-Event</span>
+      </a>
       {% endif %}
 
       <!-- contact information -->
@@ -117,21 +115,21 @@
         <span class="color-grey">Kontakt: {% if self.contact_name %}{{ self.contact_name }}{% endif %}</span>
 
         {% if self.contact_mail %}
-        <div class="grid-12 margin-top-1">
-          <div class="grid-12__col-1"><i class="icon-envelope" aria-hidden="true"></i></div>
-          <div class="grid-12__col-11">
-            <a href="mailto:{{ self.contact_mail }}">{{ self.contact_mail }}</a>
-          </div>
-        </div>
+        <a href="mailto:{{ self.contact_mail }}"
+           class="grid-12 margin-top-1 display-block"
+           title="E-Mail schreiben">
+          <i class="grid-12__col-1 icon-envelope" aria-hidden="true"></i>
+          <span class="grid-12__col-11">{{ self.contact_mail }}</span>
+        </a>
         {% endif %}
 
         {% if self.contact_phone %}
-        <div class="grid-12 margin-top-1">
-          <div class="grid-12__col-1"><i class="icon-phone" aria-hidden="true"></i></div>
-          <div class="grid-12__col-11">
-            <a href="{{ self.contact_phone.as_rfc3966 }}">{{ self.contact_phone|prettyphone }}</a>
-          </div>
-        </div>
+        <a href="{{ self.contact_phone.as_rfc3966 }}"
+           class="grid-12 margin-top-1 display-block"
+           title="Anrufen">
+          <i class="grid-12__col-1 icon-phone" aria-hidden="true"></i>
+          <span class="grid-12__col-11">{{ self.contact_phone|prettyphone }}</span>
+        </a>
         {% endif %}
 
       </div>
