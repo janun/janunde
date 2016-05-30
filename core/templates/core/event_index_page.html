@@ -14,10 +14,12 @@
     </form>
     {% else %}
     <h1 class="big-font {% if not upcoming %}line-through{% endif %}">Veranstaltungen, Seminare, Demos</h1>
-    <a class="color-green margin-right-3 font-size-2" href="?search=1">
+    {% if upcoming %}
+      <a class="color-green margin-right-3 font-size-2" href="?search=1">
         <i class="icon-magnifier" aria-hidden="true"></i>
         Suchen
-    </a>
+      </a>
+    {% endif %}
     <a class="color-green margin-right-3 font-size-2" href="{{ self.get_add_mail }}">
       <i class="icon-plus" aria-hidden="true"></i>
       Vorschlagen

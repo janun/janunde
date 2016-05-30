@@ -46,8 +46,12 @@
       width: 100%;
 
       // spacing between columns
-      border-spacing: 1/12*rem-calc(960) 0;
-      margin-left: -1/12*rem-calc(960) - rem-calc(10);
+      border-spacing: rem-calc(43) 0;
+      margin-left: - rem-calc(43 + 10);
+      @include above($xlarge) {
+        border-spacing: rem-calc(80) 0;
+        margin-left: - rem-calc(80 + 10);
+      }
     }
 
     &__element {
@@ -85,7 +89,10 @@
   }
 
   .event {
-    margin-bottom: 2rem;
+    margin-bottom: rem-calc(9px);
+    @include above($xlarge) {
+      margin-bottom: rem-calc(19px);
+    }
     width: rem-calc(300);
     height: rem-calc(205);
     overflow: hidden;
