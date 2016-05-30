@@ -1,4 +1,4 @@
-.event-page-template {
+.event-page {
   background-color: $ghost;
 
   .content {
@@ -7,14 +7,18 @@
 
 
   // TODO: this needs to be moved away to classes or sth.
-  
-  h1 {
-    font-size: rem-calc(50);
-    line-height: rem-calc(60);
-    font-family: $font-family-extra;
-    font-weight: normal;
-    margin-top: 0;
-    margin-bottom: rem-calc(5);
+
+  &__title {
+    margin-bottom: rem-calc(42);
+
+    h1 {
+      font-size: rem-calc(50);
+      line-height: rem-calc(60);
+      font-family: $font-family-extra;
+      font-weight: normal;
+      margin-top: 0;
+      margin-bottom: rem-calc(5);
+    }
   }
 
   h2 {
@@ -23,7 +27,9 @@
     font-family: $font-family-extra;
     font-weight: normal;
     margin-top: 0;
-    margin-bottom: rem-calc(42);
   }
+
+
+
 
 }

@@ -1,7 +1,7 @@
 {% extends "core/__base.html" %}
 {% load wagtailcore_tags wagtailimages_tags srcset humanize nettes_datum stuff %}
 
-{% block body_class %}event-page-template{% endblock %}
+{% block body_class %}event-page{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -10,10 +10,12 @@
     <!-- the main column -->
     <main class="grid-12__col-7">
       <!-- title and subtitle -->
-      <h1>{{ self.title }}</h1>
-      {% if self.subtitle %}
-        <h2>{{ self.subtitle }}</h2>
-      {% endif %}
+      <div class="event-page__title">
+        <h1>{{ self.title }}</h1>
+        {% if self.subtitle %}
+          <h2>{{ self.subtitle }}</h2>
+        {% endif %}
+      </div>
 
       <!-- the content -->
       {{ self.content }}
