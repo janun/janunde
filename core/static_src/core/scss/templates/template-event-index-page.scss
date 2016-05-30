@@ -98,6 +98,11 @@
     overflow: hidden;
     border-radius: 5px;
 
+    transition: transform 0.1s;
+    &:hover {
+      transform: scale(1.02);
+    }
+
     h3 {
       font-family: $font-family-extra;
       margin-bottom: 0;

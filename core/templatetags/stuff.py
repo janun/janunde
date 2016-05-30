@@ -9,7 +9,7 @@ def cut(value, arg):
 
 @register.filter()
 def prettyurl(value):
-    return value.replace("http://", "").replace("https://", "").replace("www.", "")
+    return value.replace("http://", "").replace("https://", "").replace("www.", "").strip("/")
 
 @register.filter()
 def prettyphone(value):

@@ -9,49 +9,49 @@ $font-family-extra: "Bitter", serif;
 $text-color-standard: $brown;
 
 .font-family-extra {
-  font-family: $font-family-extra !important;
+  font-family: $font-family-extra;
 }
 .font-family-sans {
-  font-family: $font-family-sans-serif !important;
+  font-family: $font-family-sans-serif;
 }
 .font-family-serif {
-  font-family: $font-family-serif !important;
+  font-family: $font-family-serif;
 }
 
 .font-weight-normal {
-  font-weight: normal !important;
+  font-weight: normal;
 }
 .font-weight-bold {
-  font-weight: bold !important;
+  font-weight: bold;
 }
 
 .font-size-very-small {
-  font-size: rem-calc(14) !important;
-  line-height: rem-calc(16) !important;
+  font-size: rem-calc(14);
+  line-height: rem-calc(16);
 }
 .font-size-small {
-  font-size: rem-calc(18) !important;
-  line-height: rem-calc(22) !important;
+  font-size: rem-calc(18);
+  line-height: rem-calc(22);
 }
 .font-size-1 {
-  font-size: rem-calc(16) !important;
-  line-height: rem-calc(22) !important;
+  font-size: rem-calc(16);
+  line-height: rem-calc(22);
 }
 .font-size-2 {
-  font-size: rem-calc(16px) !important;
-  line-height: rem-calc(19px) !important;
+  font-size: rem-calc(16px);
+  line-height: rem-calc(19px);
   @include above($xlarge) {
-    font-size: rem-calc(20px) !important;
-    line-height: rem-calc(24px) !important;
+    font-size: rem-calc(20px);
+    line-height: rem-calc(24px);
   }
 }
 .font-size-3 {
-  font-size: rem-calc(24) !important;
-  line-height: rem-calc(28) !important;
+  font-size: rem-calc(24);
+  line-height: rem-calc(28);
 }
 
 .line-through {
-  text-decoration: line-through !important;
+  text-decoration: line-through;
 }
 
 
