@@ -143,9 +143,9 @@
 
     &:focus {
       outline: none;
-      border-bottom: rem-calc(4) solid rgba($brown, 0.5);
+      border-bottom: rem-calc(4) solid $brown;
       &::placeholder {
-        color: $brown;
+        color: rgba($brown, 0.2);
       }
     }
   }
