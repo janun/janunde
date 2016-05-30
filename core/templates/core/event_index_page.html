@@ -6,25 +6,24 @@
 {% block content %}
 <header class="header">
   <div class="container js-scrolls__offsetElement">
-    {% if search %}
-    <form action="{% pageurl self %}" method="get">
-      <input class="input-as-link big-font margin-top-1 margin-bottom-1 width-60 border-bottom" autofocus type="search" name="query" placeholder="Was interessiert dich? Oder wo?" value="{{ search_query }}"><br>
+    <form class="{% if not search %}hide{% endif %} js-search" action="{% pageurl self %}" method="get">
+      <input class="js-search-focus big-font margin-top-1 margin-bottom-1 width-60" autofocus type="search" name="query" placeholder="Was interessiert dich? Oder wo?" autocomplete="off" value="{{ search_query }}"><br>
       <input class="color-green margin-right-3 font-size-2 input-as-link" type="submit" value="Suchen">
-      <a class="color-green margin-right-3 font-size-2" href="{% pageurl self %}">Schließen</a>
+      <a class="js-search-close-button color-green margin-right-3 font-size-2" href="{% pageurl self %}">Schließen</a>
     </form>
-    {% else %}
-    <h1 class="big-font {% if not upcoming %}line-through{% endif %}">Veranstaltungen, Seminare, Demos</h1>
-    {% if upcoming %}
-      <a class="color-green margin-right-3 font-size-2" href="?search=1">
-        <i class="icon-magnifier" aria-hidden="true"></i>
-        Suchen
+    <div class="{% if search %}hide{% endif %} js-no-search">
+      <h1 class="big-font {% if not upcoming %}line-through{% endif %}">Veranstaltungen, Seminare, Demos</h1>
+      {% if upcoming %}
+        <a class="js-search-reveal-button color-green margin-right-3 font-size-2" href="?search=1">
+          <i class="icon-magnifier" aria-hidden="true"></i>
+          Suchen
+        </a>
+      {% endif %}
+      <a class="color-green margin-right-3 font-size-2" href="{{ self.get_add_mail }}">
+        <i class="icon-plus" aria-hidden="true"></i>
+        Vorschlagen
       </a>
-    {% endif %}
-    <a class="color-green margin-right-3 font-size-2" href="{{ self.get_add_mail }}">
-      <i class="icon-plus" aria-hidden="true"></i>
-      Vorschlagen
-    </a>
-    {% endif %}
+    </div>
   </div>
 </header>
 
