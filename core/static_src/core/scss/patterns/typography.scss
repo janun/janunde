@@ -76,8 +76,8 @@ html {
 
 /// font size p
 @mixin p {
-  font-size: rem-calc(16);
-  line-height: 1.375;
+  font-size: rem-calc(18);
+  line-height: 1.444444;
 
   font-weight: normal;
   text-rendering: optimizeLegibility;
@@ -85,17 +85,14 @@ html {
   font-feature-settings: "kern";
 	font-kerning: normal;
   font-family: $font-family-serif;
-
-  // activate justified paragraphs if hyphenation is possible
-  @supports(hyphens: auto) {
-    text-align: justify;
-  }
 }
 /// styling for paragraphs
 p {
   @include p;
-
   margin-top: 0.5rem;
   margin-bottom: 1rem;
-  hyphens: auto;
+  @supports(hyphens: auto) {
+    hyphens: auto;
+    text-align: justify;
+  }
 }
