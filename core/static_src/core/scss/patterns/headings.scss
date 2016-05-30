@@ -1,33 +1,18 @@
-h4, h3, h2, h1 {
+@mixin h1 {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  font-weight: normal;
-  line-height: 1.2;
-}
-
-/// font size h1
-@mixin h1 {
-  @include scale-from-small-to-medium(
-    font-size, rem-calc(26), rem-calc(42)
-  );
-  line-height: 1.235;
   font-weight: bold;
+  font-size: rem-calc(42px);
+  line-height: 1.235;
 }
-h1 {
-  @include h1;
-}
+h1, .h1 {@include h1}
 
-/// font size h2
-@mixin h2 {
-  @include scale-from-small-to-medium(
-    font-size, rem-calc(18), rem-calc(24)
-  );
+
+h2 {
+  font-size: rem-calc(24px);
   line-height: 1.2;
   font-weight: normal;
-}
-h2 {
-  @include h2;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 // reduce margin between subheading and subsequent paragraph
@@ -38,8 +23,12 @@ h2 {
 
 h3 {
   font-size: 1.3rem;
+  line-height: 1.2;
+  font-weight: normal;
 }
 
 h4 {
   font-size: 1.2rem;
+  line-height: 1.2;
+  font-weight: normal;
 }
