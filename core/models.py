@@ -275,12 +275,6 @@ class EventIndexPage(BasePage):
     def get_events(self):
         return EventPage.objects.child_of(self).live().order_by('start_datetime')
 
-    def get_upcoming_events(self):
-        today = datetime.date.today()
-        return self.get_events().filter(
-            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today),
-        )
-
     def get_context(self, request):
         context = super().get_context(request)
         today = datetime.date.today()
@@ -291,13 +285,19 @@ class EventIndexPage(BasePage):
         # search stuff
         search_query = request.GET.get('query', None)
         search = request.GET.get('search', 0)
+
+        # empty query= url param
         if 'query' in request.GET:
             search = 1
+
+        # query= url param given
         if search_query:
             events = events.search(search_query).get_queryset()
             context['search_query'] = search_query
             search = 1
+
         context['search'] = search
+
 
         begin_of_this_week = today - datetime.timedelta(days=today.weekday())
         end_of_this_week = today + datetime.timedelta(days=6 - today.weekday())
@@ -311,7 +311,10 @@ class EventIndexPage(BasePage):
         begin_of_next_month = begin_of_this_month + relativedelta.relativedelta(months=1)
         end_of_next_month = begin_of_next_month + relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
 
-        context['upcoming'] = self.get_upcoming_events()
+
+        context['upcoming'] = events.filter(
+            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today),
+        )
 
         context['this_week'] = events.filter(
             Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today, late_attendence=True),
