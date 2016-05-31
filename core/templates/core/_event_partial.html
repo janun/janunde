@@ -49,7 +49,7 @@
       <div class="overlay__content overlay__content--white-transparent bottom width-full font-family-extra">
         {% if event.end_datetime and event.end_datetime.date != event.start_datetime.date %}
           {{ event.start_datetime|nettes_datum }}
-          – {{ event.end_datetime|date:"d.m." }}
+          bis {{ event.end_datetime|nettes_datum }}
         {% else %}
           {% if event.all_day %}
             {{ event.start_datetime|nettes_datum }}
