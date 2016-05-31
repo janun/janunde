@@ -14,15 +14,13 @@ tomorrow = today + datetime.timedelta(days=1)
 
 def is_in_this_week(date):
     """returns the last day of this week"""
-    end_of_this_week = today + datetime.timedelta(days=6 - today.weekday())
-    begin_of_this_week = today - datetime.timedelta(days=today.weekday())
-    return begin_of_this_week <= date <= end_of_this_week
+    return today <= date <= today + datetime.timedelta(days=6)
 
-def is_in_next_week(date):
-    """returns the last day of this week"""
-    end_of_next_week = today + datetime.timedelta(days=6 - today.weekday() + 7)
-    begin_of_next_week = today + datetime.timedelta(days=7-today.weekday())
-    return begin_of_next_week <= date <= end_of_next_week
+# def is_in_next_week(date):
+#     """returns the last day of this week"""
+#     end_of_next_week = today + datetime.timedelta(days=6 - today.weekday() + 7)
+#     begin_of_next_week = today + datetime.timedelta(days=7-today.weekday())
+#     return begin_of_next_week <= date <= end_of_next_week
 
 def is_in_last_week(date):
     """returns the last day of this week"""
@@ -67,7 +65,7 @@ def nettes_datum(our_date, show_date=False, tooltip=True, grey_date=False):
 
     text = ""
     if is_in_last_week(our_date):
-        text = "letzten {}".format( wochentag )
+        text = "letzter {}".format( wochentag )
     elif our_date == today - datetime.timedelta(days=2):
         text = "vorgestern"
     elif our_date == today - datetime.timedelta(days=1):
@@ -79,9 +77,9 @@ def nettes_datum(our_date, show_date=False, tooltip=True, grey_date=False):
     elif our_date == tomorrow + datetime.timedelta(days=1):
         text = "übermorgen"
     elif is_in_this_week(our_date):
-        text = "diesem {}".format( wochentag )
-    elif is_in_next_week(our_date):
-        text = "nächsten {}".format( wochentag )
+        text = "dieser {}".format( wochentag )
+    # elif is_in_next_week(our_date):
+    #     text = "nächsten {}".format( wochentag )
     else:
         tooltip = False # already has date
         if grey_date:
