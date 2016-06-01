@@ -35,7 +35,7 @@
             von {{ event.related_group.title }}
           </span>
           {% if event.related_group.logo %}
-            {% image event.related_group.logo fill-32x32 class="margin-top-quarter margin-right-quarter margin-left-quarter"%}
+            {% image event.related_group.logo fill-32x32 style="width: 32px; height: 32px" class="margin-quarter"%}
           {% else %}
             <span class="font-size-2 margin-top-quarter margin-right-quarter margin-left-quarter float-right padding-left-quarter"
                   style="width: 32px; line-height: 32px">
@@ -67,7 +67,7 @@
 
         <!-- show external website -->
         {% if event.website_url %}
-          <a title="zur externen Website" class="float-right margin-right-1 hover-reveal__inline" href="{{ event.website_url }}">
+          <a title="zur externen Website" class="float-right hover-reveal__inline" href="{{ event.website_url }}">
             <i class="icon-share-alt" aria-hidden="true"></i></a>
         {% endif %}
       </div>

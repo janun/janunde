@@ -379,7 +379,11 @@ class EventPage(Page):
         null=True,
         blank=True
     )
-    all_day = models.BooleanField(_("ganztägig"), default=False)
+    all_day = models.BooleanField(
+        _("ganztägig"),
+        default=False,
+        help_text=_("Bei ganztägigen Veranstaltungen werden Uhrzeiten ignoriert."),
+    )
     late_attendence = models.BooleanField(
         _("späte Teilnahme möglich"),
         help_text=_("Falls dies ein mehrtägiger Termin ist: "

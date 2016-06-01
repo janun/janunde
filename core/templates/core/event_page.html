@@ -137,6 +137,26 @@
       </div>
       {% endif %}
 
+      <!-- related group -->
+      {% if self.related_group %}
+      <div class="margin-top-2">
+        <span class="color-grey">organisiert von</span>
+        <a href="{% pageurl self.related_group %}"
+           class="grid-12 margin-top-1 display-block">
+
+          <span class="grid-12__col-1">
+            {% if self.related_group.logo %}
+              {% image self.related_group.logo fill-24x24 %}
+            {% else %}
+              {{ self.related_group.abbr }}
+            {% endif %}
+          </span>
+
+          <span class="grid-12__col-11">{{ self.related_group.title }}</span>
+        </a>
+      </div>
+      {% endif %}
+
     </aside>
 
   </div>

@@ -8,8 +8,8 @@
   <div class="container js-scrolls__offsetElement">
     <form class="{% if not search %}hide{% endif %} js-search" action="{% pageurl self %}" method="get">
       <input class="js-search-focus big-font margin-top-1 margin-bottom-1 width-60" autofocus type="search" name="query" placeholder="Was interessiert dich? Oder wo?" autocomplete="off" value="{{ search_query }}"><br>
-      <input class="color-green margin-right-3 font-size-2 input-as-link" type="submit" value="Suchen">
-      <a class="js-search-close-button color-green margin-right-3 font-size-2" href="{% pageurl self %}">Schließen</a>
+      <input class="font-weight-bold color-green margin-right-3 font-size-2 input-as-link" type="submit" value="Suchen">
+      <a class="color-green margin-right-3 font-size-2" href="{% pageurl self %}">Schließen</a>
     </form>
     <div class="{% if search %}hide{% endif %} js-no-search">
       <h1 class="big-font {% if not upcoming %}line-through{% endif %}">Veranstaltungen, Seminare, Demos</h1>
