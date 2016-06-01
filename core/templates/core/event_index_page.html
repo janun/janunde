@@ -43,27 +43,56 @@
 
   <div class="fixed-grid-12 scrolls__inner">
 
+    {% if today %}
+      <div class="fixed-grid-12__col-4 scrolls__element">
+        <h2 class="area-title">Heute</h2>
+        {% for event in today %}
+          {% include "core/_event_partial.html" %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if tomorrow %}
+      <div class="fixed-grid-12__col-4 scrolls__element">
+        <h2 class="area-title">Morgen</h2>
+        {% for event in tomorrow %}
+          {% include "core/_event_partial.html" %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% for day, events in days_of_this_week %}
+      {% if events %}
+        <div class="fixed-grid-12__col-4 scrolls__element">
+          <h2 class="area-title">{{ day|date:"l" }}</h2>
+          {% for event in events %}
+            {% include "core/_event_partial.html" with only_weekday=True %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+
     {% if this_week %}
-    <div class="fixed-grid-12__col-4 scrolls__element">
-      <h2 class="area-title">Noch diese Woche</h2>
-      {% for event in this_week %}
-        {% include "core/_event_partial.html" with only_weekday=True %}
-      {% endfor %}
-    </div>
+      <div class="fixed-grid-12__col-4 scrolls__element">
+        <h2 class="area-title">Noch diese Woche</h2>
+        {% for event in this_week %}
+          {% include "core/_event_partial.html" with only_weekday=True %}
+        {% endfor %}
+      </div>
     {% endif %}
 
     {% if next_week %}
-    <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
-      <h2 class="area-title">Nächste Woche</h2>
-      {% for event in next_week %}
-        {% include "core/_event_partial.html" %}
-      {% endfor %}
-    </div>
+      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+        <h2 class="area-title">Nächste Woche</h2>
+        {% for event in next_week %}
+          {% include "core/_event_partial.html" %}
+        {% endfor %}
+      </div>
     {% endif %}
 
     {% if later_this_month %}
       <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
-        <h2 id="later_this_month" class="area-title">Später im {% now "F" %}</h2>
+        <h2 class="area-title">Später im {% now "F" %}</h2>
         {% for event in later_this_month %}
           {% include "core/_event_partial.html" %}
         {% endfor %}
@@ -71,32 +100,43 @@
     {% endif %}
 
     {% if next_month %}
-    <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
-      <h2 id="next_month" class="area-title">Nächsten Monat</h2>
-      {% for event in next_month %}
-        {% include "core/_event_partial.html" %}
-      {% endfor %}
-    </div>
+      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+        <h2 class="area-title">
+          {{ next_month.0.start_datetime|format_month }}
+        </h2>
+        {% for event in next_month %}
+          {% include "core/_event_partial.html" %}
+        {% endfor %}
+      </div>
     {% endif %}
 
     {% for month, events in by_month %}
       {% if events %}
-      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
-        <h2 id="next_month" class="area-title">{{ month|date:"F" }}</h2>
-        {% for event in events %}
-          {% include "core/_event_partial.html" %}
-        {% endfor %}
-      </div>
+        <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+          <h2 class="area-title">{{ month|format_month }}</h2>
+          {% for event in events %}
+            {% include "core/_event_partial.html" %}
+          {% endfor %}
+        </div>
       {% endif %}
     {% endfor %}
 
+    {% if later_this_year %}
+      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+        <h2 class="area-title">Später in {{ now|date:"Y" }}</h2>
+        {% for event in later_this_year %}
+          {% include "core/_event_partial.html" %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
     {% if after %}
-    <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
-      <h2 id="after" class="area-title">Noch Später</h2>
-      {% for event in after %}
-        {% include "core/_event_partial.html" %}
-      {% endfor %}
-    </div>
+      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+        <h2 class="area-title">Noch Später</h2>
+        {% for event in after %}
+          {% include "core/_event_partial.html" %}
+        {% endfor %}
+      </div>
     {% endif %}
 
   </div>

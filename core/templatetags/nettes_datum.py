@@ -12,6 +12,15 @@ today = datetime.date.today() # is this the current date or of the start of the 
 tomorrow = today + datetime.timedelta(days=1)
 
 
+@register.filter(expects_localtime=True)
+def format_month(date):
+    if date.year == today.year:
+        return date_filter(date, "F")
+    else:
+        return date_filter(date, "F Y")
+
+
+
 def is_in_this_week(date):
     """returns the last day of this week"""
     return today <= date <= today + datetime.timedelta(days=6)
@@ -77,7 +86,7 @@ def nettes_datum(our_date, show_date=False, tooltip=True, grey_date=False):
     elif our_date == tomorrow + datetime.timedelta(days=1):
         text = "übermorgen"
     elif is_in_this_week(our_date):
-        text = "dieser {}".format( wochentag )
+        text = wochentag
     # elif is_in_next_week(our_date):
     #     text = "nächsten {}".format( wochentag )
     else:

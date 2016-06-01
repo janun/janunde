@@ -257,6 +257,19 @@ class Article(StandardPage):
         verbose_name_plural = _("Artikel")
 
 
+def split_on_condition(list, func):
+    list1 = []
+    list2 = []
+    for item in list:
+        if func(item):
+            list1.append(item)
+        else:
+            list2.append(item)
+    return list1, list2
+
+
+
+
 class EventIndexPage(BasePage):
     """
     lists events
@@ -277,8 +290,9 @@ class EventIndexPage(BasePage):
 
     def get_context(self, request):
         context = super().get_context(request)
-        today = datetime.date.today()
-        now = timezone.localtime(timezone.now())
+        context['today'] = today = datetime.date.today()
+        context['now'] = now = timezone.localtime(timezone.now())
+        context['thisyear'] = today.year
 
         events = self.get_events()
 
@@ -312,48 +326,96 @@ class EventIndexPage(BasePage):
         end_of_next_month = begin_of_next_month + relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
 
 
-        upcoming = events.filter(
+        context['upcoming'] = upcoming = list(events.filter(
             Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today, late_attendence=True),
+        ))
+
+
+        # compute the events for this week
+        def get_this_week(upcoming):
+            return list(filter(
+                lambda event: event.start_datetime.date() <= end_of_this_week,
+                upcoming
+            ))
+
+        # try splitting off today, so this_week is not longer than 3 events
+        if len(get_this_week(upcoming)) > 3:
+            context['today'], upcoming = split_on_condition(
+                upcoming,
+                lambda event: event.start_datetime.date() == today
+            )
+
+        # try splitting off tomorrow
+        if len(get_this_week(upcoming)) > 3:
+            context['tomorrow'], upcoming = split_on_condition(
+                upcoming,
+                lambda event: event.start_datetime.date() == today + datetime.timedelta(days=1)
+            )
+
+        # try splitting off each day of the remaining week
+        next_day = today + datetime.timedelta(days=1)
+        i = 0
+        context['days_of_this_week'] = []
+        while len(get_this_week(upcoming)) > 3:
+            events_next_day, upcoming = split_on_condition(
+                upcoming,
+                lambda event: event.start_datetime.date() == next_day
+            )
+            context['days_of_this_week'].append(
+                [next_day, events_next_day]
+            )
+            next_day += datetime.timedelta(days=1)
+            i += 1
+            if i > 20: break
+
+
+        # what is left for this week
+        context['this_week'], upcoming = split_on_condition(
+            upcoming,
+            lambda event: event.start_datetime.date() <= end_of_this_week
         )
 
-        context['upcoming'] = upcoming
-
-        context['this_week'] = upcoming.filter(
-            start_datetime__date__lte=end_of_this_week
-        )
-        used_ids = list(context['this_week'].values_list('id', flat=True))
-
-        context['next_week'] = upcoming.filter(
-            Q(start_datetime__date__gte=begin_of_next_week) | Q(end_datetime__date__gte=begin_of_next_week, late_attendence=True),
-            start_datetime__date__lte=end_of_next_week
-        ).exclude(id__in=used_ids)
-        used_ids += list(context['next_week'].values_list('id', flat=True))
-
-        context['later_this_month'] = upcoming.filter(
-            Q(start_datetime__date__gt=end_of_next_week) | Q(end_datetime__date__gt=end_of_next_week, late_attendence=True),
-            start_datetime__date__lte=end_of_this_month
-        ).exclude(id__in=used_ids)
-        used_ids += list(context['later_this_month'].values_list('id', flat=True))
-
-        context['next_month'] = upcoming.filter(
-            Q(start_datetime__date__gte=begin_of_next_month) | Q(end_datetime__date__gte=begin_of_next_month, late_attendence=True),
-            start_datetime__date__lte=end_of_next_month
-        ).exclude(id__in=used_ids)
-        used_ids += list(context['next_month'].values_list('id', flat=True))
-
-        import itertools
-        six_more_months = upcoming.filter(
-            start_datetime__date__gt=end_of_next_month,
-            start_datetime__date__lte=begin_of_next_month + relativedelta.relativedelta(months=6)
-        ).exclude(id__in=used_ids)
-        used_ids += list(six_more_months.values_list('id', flat=True))
-
-        context['by_month'] = itertools.groupby(
-            six_more_months,
-            key=lambda event: datetime.date(event.start_datetime.year, event.start_datetime.month, 1)
+        context['next_week'], upcoming = split_on_condition(
+            upcoming,
+            lambda event: event.start_datetime.date() <= end_of_next_week
         )
 
-        context['after'] = upcoming.exclude(id__in=used_ids)
+        context['later_this_month'], upcoming = split_on_condition(
+            upcoming,
+            lambda event: event.start_datetime.date() <= end_of_this_month
+        )
+
+        context['next_month'], upcoming = split_on_condition(
+            upcoming,
+            lambda event: event.start_datetime.date() <= end_of_next_month
+        )
+
+        def get_end_of_month(date):
+            return date + relativedelta.relativedelta(months=1) + datetime.timedelta(days=-1)
+
+        def get_this_year(upcoming):
+            return list(filter(
+                lambda event: event.start_datetime.date() < datetime.date(today.year+1, 1, 1),
+                upcoming
+            ))
+
+        # try splitting off month by month to keep later_this_year short
+        begin_next_month = end_of_next_month + datetime.timedelta(days=1)
+        i = 0
+        context['by_month'] = []
+        while len(upcoming) > 4:
+            events_next_month, upcoming = split_on_condition(
+                upcoming,
+                lambda event: event.start_datetime.date() <= get_end_of_month(begin_next_month)
+            )
+            context['by_month'].append(
+                [begin_next_month, events_next_month]
+            )
+            begin_next_month += relativedelta.relativedelta(months=1)
+            i += 1
+            if i > 20: break
+
+        context['after'] = upcoming
 
         return context
 
