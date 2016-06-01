@@ -290,7 +290,7 @@ class EventIndexPage(BasePage):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['today'] = today = datetime.date.today()
+        today = datetime.date.today()
         context['now'] = now = timezone.localtime(timezone.now())
         context['thisyear'] = today.year
 
