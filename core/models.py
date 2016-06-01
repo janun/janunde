@@ -313,37 +313,36 @@ class EventIndexPage(BasePage):
 
 
         upcoming = events.filter(
-            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today),
+            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today, late_attendence=True),
         )
 
         context['upcoming'] = upcoming
 
-        context['this_week'] = events.filter(
-            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today, late_attendence=True),
+        context['this_week'] = upcoming.filter(
             start_datetime__date__lte=end_of_this_week
         )
         used_ids = list(context['this_week'].values_list('id', flat=True))
 
-        context['next_week'] = events.filter(
+        context['next_week'] = upcoming.filter(
             Q(start_datetime__date__gte=begin_of_next_week) | Q(end_datetime__date__gte=begin_of_next_week, late_attendence=True),
             start_datetime__date__lte=end_of_next_week
         ).exclude(id__in=used_ids)
         used_ids += list(context['next_week'].values_list('id', flat=True))
 
-        context['later_this_month'] = events.filter(
+        context['later_this_month'] = upcoming.filter(
             Q(start_datetime__date__gt=end_of_next_week) | Q(end_datetime__date__gt=end_of_next_week, late_attendence=True),
             start_datetime__date__lte=end_of_this_month
         ).exclude(id__in=used_ids)
         used_ids += list(context['later_this_month'].values_list('id', flat=True))
 
-        context['next_month'] = events.filter(
+        context['next_month'] = upcoming.filter(
             Q(start_datetime__date__gte=begin_of_next_month) | Q(end_datetime__date__gte=begin_of_next_month, late_attendence=True),
             start_datetime__date__lte=end_of_next_month
         ).exclude(id__in=used_ids)
         used_ids += list(context['next_month'].values_list('id', flat=True))
 
         import itertools
-        six_more_months = events.filter(
+        six_more_months = upcoming.filter(
             start_datetime__date__gt=end_of_next_month,
             start_datetime__date__lte=begin_of_next_month + relativedelta.relativedelta(months=6)
         ).exclude(id__in=used_ids)
@@ -354,7 +353,7 @@ class EventIndexPage(BasePage):
             key=lambda event: datetime.date(event.start_datetime.year, event.start_datetime.month, 1)
         )
 
-        context['after'] = events.exclude(id__in=used_ids)
+        context['after'] = upcoming.exclude(id__in=used_ids)
 
         return context
 

@@ -80,12 +80,14 @@
     {% endif %}
 
     {% for month, events in by_month %}
+      {% if events %}
       <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
         <h2 id="next_month" class="area-title">{{ month|date:"F" }}</h2>
         {% for event in events %}
           {% include "core/_event_partial.html" %}
         {% endfor %}
       </div>
+      {% endif %}
     {% endfor %}
 
     {% if after %}
