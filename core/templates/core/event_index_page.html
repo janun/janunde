@@ -63,7 +63,7 @@
 
     {% if later_this_month %}
       <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
-        <h2 id="later_this_month" class="area-title">Später im {% now "M" %}</h2>
+        <h2 id="later_this_month" class="area-title">Später im {% now "F" %}</h2>
         {% for event in later_this_month %}
           {% include "core/_event_partial.html" %}
         {% endfor %}
@@ -78,6 +78,15 @@
       {% endfor %}
     </div>
     {% endif %}
+
+    {% for month, events in by_month %}
+      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+        <h2 id="next_month" class="area-title">{{ month|date:"F" }}</h2>
+        {% for event in events %}
+          {% include "core/_event_partial.html" %}
+        {% endfor %}
+      </div>
+    {% endfor %}
 
     {% if after %}
     <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">

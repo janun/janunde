@@ -312,9 +312,11 @@ class EventIndexPage(BasePage):
         end_of_next_month = begin_of_next_month + relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
 
 
-        context['upcoming'] = events.filter(
+        upcoming = events.filter(
             Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today),
         )
+
+        context['upcoming'] = upcoming
 
         context['this_week'] = events.filter(
             Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today, late_attendence=True),
@@ -340,9 +342,19 @@ class EventIndexPage(BasePage):
         ).exclude(id__in=used_ids)
         used_ids += list(context['next_month'].values_list('id', flat=True))
 
-        context['after'] = events.filter(
-            start_datetime__date__gt=end_of_next_month
+        import itertools
+        six_more_months = events.filter(
+            start_datetime__date__gt=end_of_next_month,
+            start_datetime__date__lte=begin_of_next_month + relativedelta.relativedelta(months=6)
         ).exclude(id__in=used_ids)
+        used_ids += list(six_more_months.values_list('id', flat=True))
+
+        context['by_month'] = itertools.groupby(
+            six_more_months,
+            key=lambda event: datetime.date(event.start_datetime.year, event.start_datetime.month, 1)
+        )
+
+        context['after'] = events.exclude(id__in=used_ids)
 
         return context
 
