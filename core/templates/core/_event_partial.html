@@ -1,29 +1,27 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags %}
 
 
-<div class="panel panel--side-padding panel--hover-shadow event hover-reveal">
+<div class="panel panel--side-padding panel--hover-shadow event hover-reveal click-area">
 
   <div class="panel__negative-margin-sides margin-bottom-1">
     <div class="image overlay">
 
       <!-- show image (or placeholder) -->
-      <a href="{% pageurl event %}">
-        {% if event.main_image %}
-          {% image event.main_image fill-300x113 as fallback_image %}
-          <img src="{{ fallback_image.url }}"
-            srcset="{{ event.main_image|srcset:'fill-300x113 fill-600x226' }}"
-            sizes="(min-width: 60em) 18.75em, 100vw"
-            alt="{{ fallback_image.alt }}"
-            style="height: 113px;">
-        {% else %}
-          <div class="image-placeholder"
-               style="height: 113px; background-color: {{ event.color|default:"#62e6c8" }}">
-            {% for x in ""|ljust:"40" %}
-              {{ event.title }}
-            {% endfor %}
-          </div>
-        {% endif %}
-      </a>
+      {% if event.main_image %}
+        {% image event.main_image fill-300x113 as fallback_image %}
+        <img src="{{ fallback_image.url }}"
+          srcset="{{ event.main_image|srcset:'fill-300x113 fill-600x226' }}"
+          sizes="(min-width: 60em) 18.75em, 100vw"
+          alt="{{ fallback_image.alt }}"
+          style="height: 113px;">
+      {% else %}
+        <div class="image-placeholder"
+             style="height: 113px; background-color: {{ event.color|default:"#62e6c8" }}">
+          {% for x in ""|ljust:"40" %}
+            {{ event.title }}
+          {% endfor %}
+        </div>
+      {% endif %}
 
       <!-- show related_group -->
       {% if event.related_group %}
@@ -35,7 +33,7 @@
             von {{ event.related_group.title }}
           </span>
           {% if event.related_group.logo %}
-            {% image event.related_group.logo fill-32x32 style="width: 32px; height: 32px" class="margin-quarter"%}
+            {% image event.related_group.logo fill-32x32 style="width: 32px; height: 32px" class="margin-quarter float-right"%}
           {% else %}
             <span class="font-size-2 margin-top-quarter margin-right-quarter margin-left-quarter float-right padding-left-quarter"
                   style="width: 32px; line-height: 32px">
@@ -60,25 +58,34 @@
 
         <!-- show facebook -->
         {% if event.facebook_event_url %}
-          <a title="zur Facebook-Veranstaltung" class="float-right hover-reveal__inline" href="{{ event.facebook_event_url }}">
+          <a title="zur Facebook-Veranstaltung"
+             class="float-right hover-reveal__inline padding-left-quarter padding-right-quarter"
+             href="{{ event.facebook_event_url }}">
             <i class="icon-social-facebook" aria-hidden="true"></i>
           </a>
         {% endif %}
 
         <!-- show external website -->
         {% if event.website_url %}
-          <a title="zur externen Website" class="float-right hover-reveal__inline" href="{{ event.website_url }}">
-            <i class="icon-share-alt" aria-hidden="true"></i></a>
+          <a title="zur externen Website"
+             class="float-right hover-reveal__inline padding-left-quarter padding-right-quarter"
+             href="{{ event.website_url }}">
+            <i class="icon-share-alt" aria-hidden="true"></i>
+          </a>
         {% endif %}
+
       </div>
+
     </div>
   </div>
 
   <!-- show title -->
-  <a class="height-full display-block panel__negative-margin-up padding-top-1 add-panel-padding--on-sides" href="{% pageurl event %}">
-    <h3 class="margin-top-0 {% if event.title|length > 32 %}font-size-small{% else %}font-size-3{% endif %}">
-      {{ event.title|truncatechars:56 }}
-    </h3>
-  </a>
+  <h3 class="margin-top-0 {% if event.title|length > 32 %}font-size-small{% else %}font-size-3{% endif %}">
+    {{ event.title|truncatechars:56 }}
+  </h3>
+
+  <a href="#">test link</a>
+
+  <a href="{% pageurl event %}" class="click-area__area-link">{{ event.title }}</a>
 
 </div>
