@@ -66,6 +66,33 @@
       padding-left: rem-calc(40); // fallback will be overwritten by js-scrolls
       padding-bottom: rem-calc(40);
 
+
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 350px;
+        z-index: 10;
+        pointer-events: none;
+        width: 276px;
+        height: 1000px;
+        background-image: linear-gradient(to right, transparent 0%, rgb(240, 240, 240) 100%);
+      }
+
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 350px;
+        z-index: 10;
+        pointer-events: none;
+        width: 276px;
+        height: 1000px;
+        background-image: linear-gradient(to left, transparent 0%, rgb(240, 240, 240) 100%);
+      }
+
       &__inner {
         display: table;
         table-layout: fixed;
@@ -87,17 +114,18 @@
       &__button {
         display: block;
         position: absolute;
-        margin-top: rem-calc(12px);
-        width: rem-calc(43);
-        height: rem-calc(40);
+        margin-top: rem-calc(70px);
+        width: rem-calc(76);
+        height: rem-calc(73);
         color: $white;
         background-color: $green;
         text-align: center;
-        padding-top: rem-calc(10);
+        padding-top: rem-calc(18);
         z-index: 100;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 
         i {
-          font-size: rem-calc(19);
+          font-size: rem-calc(36);
         }
 
         &--next {

@@ -27,13 +27,13 @@ $(document).ready(function () {
     buttonNext.on('click', function (event) {
       event.preventDefault();
       scrolls.animate({
-        scrollLeft: Math.floor(scrolls.scrollLeft() / 390)*390 + 390
-      });
+        scrollLeft: Math.floor(scrolls.scrollLeft() / 400)*400 + 400
+      }, 200);
     });
 
     // hide button when farest right
     scrolls.on('scroll', function (event) {
-      if (scrolls.scrollLeft() == scrolls[0].scrollWidth - $(document).width()) {
+      if (scrolls.scrollLeft() >= scrolls[0].scrollWidth - $(document).width()) {
         buttonNext.hide();
       } else {
         buttonNext.show();
@@ -48,6 +48,7 @@ $(document).ready(function () {
       'widthFromWrapper': false,
       'topSpacing': 20,
     });
+
     // hide button unless scrolled right
     scrolls.on('scroll', function (event) {
       if (this.scrollLeft > 0) {
@@ -60,7 +61,9 @@ $(document).ready(function () {
     // actually scroll
     buttonPrev.on('click', function (event) {
       event.preventDefault();
-      scrolls.animate({scrollLeft: Math.ceil(scrolls.scrollLeft() / 390)*390 - 390});
+      scrolls.animate({
+        scrollLeft: Math.ceil(scrolls.scrollLeft() / 400)*400 - 400
+      }, 200);
     });
   }
 
