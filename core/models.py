@@ -86,9 +86,9 @@ class StandardPage(BasePage):
         verbose_name=_("Inhalt"),
     )
 
-    search_fields = BasePage.search_fields + (
+    search_fields = BasePage.search_fields + [
         index.SearchField('body'),
-    )
+    ]
 
     content_panels = BasePage.content_panels + [
         StreamFieldPanel('body'),
@@ -224,11 +224,11 @@ class Article(StandardPage):
         help_text=_("Eine JANUN-Gruppe, die diesem Artikel zugeordnet ist")
     )
 
-    search_fields = StandardPage.search_fields + (
+    search_fields = StandardPage.search_fields + [
         index.SearchField('highlight'),
         index.FilterField('first_published_at'),
         index.FilterField('latest_revision_created_at'),
-    )
+    ]
 
     content_panels = [
         FieldPanel('title', classname='full title'),
@@ -553,14 +553,14 @@ class EventPage(Page):
 
 
     # only works with ElasticSearch
-    search_fields = BasePage.search_fields + (
+    search_fields = BasePage.search_fields + [
         #title is in here by default
         index.SearchField('content'),
         index.SearchField('location'),
         index.RelatedFields('related_group', [
             index.SearchField('title'),
         ]),
-    )
+    ]
 
     edit_handler = TabbedInterface([
         ObjectList([
