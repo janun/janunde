@@ -8,14 +8,22 @@
     background-color: rgb(250, 250, 250);
 
     @include until($medium) {
+
       width: 100%;
       z-index: 100;
+      overflow-x: scroll;
+      overflow-y: hidden;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
 
       a {
         color: rgba($brown, 0.5);
       }
 
       .container {
+        position: relative;
         max-width: rem-calc(300);
         margin: 0 auto;
       }
