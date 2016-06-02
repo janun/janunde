@@ -361,9 +361,10 @@ class EventIndexPage(BasePage):
                 upcoming,
                 lambda event: event.start_datetime.date() == next_day
             )
-            context['days_of_this_week'].append(
-                [next_day, events_next_day]
-            )
+            if events_next_day:
+                context['days_of_this_week'].append(
+                    [next_day, events_next_day]
+                )
             next_day += datetime.timedelta(days=1)
             i += 1
             if i > 20: break
@@ -385,11 +386,6 @@ class EventIndexPage(BasePage):
             lambda event: event.start_datetime.date() <= end_of_this_month
         )
 
-        context['next_month'], upcoming = split_on_condition(
-            upcoming,
-            lambda event: event.start_datetime.date() <= end_of_next_month
-        )
-
         def get_end_of_month(date):
             return date + relativedelta.relativedelta(months=1) + datetime.timedelta(days=-1)
 
@@ -399,8 +395,8 @@ class EventIndexPage(BasePage):
                 upcoming
             ))
 
-        # try splitting off month by month to keep later_this_year short
-        begin_next_month = end_of_next_month + datetime.timedelta(days=1)
+        # try splitting off month by month to keep after short
+        begin_next_month = end_of_this_month + datetime.timedelta(days=1)
         i = 0
         context['by_month'] = []
         while len(upcoming) > 4:
@@ -408,9 +404,10 @@ class EventIndexPage(BasePage):
                 upcoming,
                 lambda event: event.start_datetime.date() <= get_end_of_month(begin_next_month)
             )
-            context['by_month'].append(
-                [begin_next_month, events_next_month]
-            )
+            if events_next_month:
+                context['by_month'].append(
+                    [begin_next_month, events_next_month]
+                )
             begin_next_month += relativedelta.relativedelta(months=1)
             i += 1
             if i > 20: break

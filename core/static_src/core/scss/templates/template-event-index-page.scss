@@ -19,7 +19,21 @@
   .header {
     background-color: rgb(250, 250, 250);
 
-    padding-top: rem-calc(10px);
+    @include until($medium) {
+      width: 100%;
+      z-index: 100;
+
+      a {
+        color: rgba($brown, 0.5);
+      }
+
+      .container {
+        max-width: rem-calc(300);
+        margin: 0 auto;
+      }
+    }
+
+    padding-top: rem-calc(20px);
     padding-bottom: rem-calc(20px);
 
     @include above($large) {
@@ -34,10 +48,19 @@
   }
 
 
-  .scrolls {
+  // needed by js-sticky.js
+  .sticky-wrapper {
+    @include above($medium) {
+      float: left;
+    }
+  }
 
-    &__element {
-      margin: 0 auto;
+
+  .scrolls {
+    @include until($medium) {
+      &__element {
+        margin: 0 auto;
+      }
     }
 
     @include above($medium) {
@@ -180,6 +203,22 @@
       opacity: 0;
     }
 
+  }
+
+  .onpagemenu {
+    display: block;
+    float: right;
+    width: rem-calc(270px);
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    a {
+      margin-right: rem-calc(25);
+    }
   }
 
 

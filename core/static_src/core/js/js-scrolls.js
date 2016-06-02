@@ -1,7 +1,7 @@
 // js-scrolls
 // js helpers for the scrolls element
 
-(function () {
+$(document).ready(function () {
   var scrolls = $('.js-scrolls');
   if (!scrolls.length) return;
 
@@ -20,6 +20,10 @@
   // button next
   var buttonNext = $('.js-scrolls__button-next');
   if (buttonNext) {
+    buttonNext.sticky({
+      'widthFromWrapper': false,
+      'topSpacing': 20,
+    });
     buttonNext.on('click', function (event) {
       event.preventDefault();
       scrolls.animate({
@@ -40,7 +44,10 @@
   // button prev
   var buttonPrev = $('.js-scrolls__button-prev');
   if (buttonPrev) {
-
+    buttonPrev.sticky({
+      'widthFromWrapper': false,
+      'topSpacing': 20,
+    });
     // hide button unless scrolled right
     scrolls.on('scroll', function (event) {
       if (this.scrollLeft > 0) {
@@ -56,4 +63,5 @@
       scrolls.animate({scrollLeft: Math.ceil(scrolls.scrollLeft() / 390)*390 - 390});
     });
   }
-})();
+
+});

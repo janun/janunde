@@ -33,7 +33,13 @@
             von {{ event.related_group.title }}
           </span>
           {% if event.related_group.logo %}
-            {% image event.related_group.logo fill-32x32 style="width: 32px; height: 32px" class="margin-quarter float-right"%}
+            {% image event.related_group.logo fill-32x32 as group_logo %}
+            <img src="{{ group_logo.url }}"
+              srcset="{{ event.related_group.logo|srcset:'fill-32x32 fill-64x64 fill-96x96' }}"
+              sizes="32px"
+              alt="{{ group_logo.alt }}"
+              style="width: 32px; height: 32px"
+              class="margin-quarter float-right">
           {% else %}
             <span class="font-size-2 margin-top-quarter margin-right-quarter margin-left-quarter float-right padding-left-quarter"
                   style="width: 32px; line-height: 32px">
