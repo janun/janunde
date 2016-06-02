@@ -35,8 +35,12 @@
 
 
   .scrolls {
-    @include above($medium) {
 
+    &__element {
+      margin: 0 auto;
+    }
+
+    @include above($medium) {
       overflow-x: scroll;
       overflow-y: hidden;
       padding-left: rem-calc(40); // fallback will be overwritten by js-scrolls
@@ -96,6 +100,7 @@
     @include above($xlarge) {
       margin-bottom: rem-calc(19px);
     }
+
     width: rem-calc(300);
     height: rem-calc(205);
     overflow: hidden;
