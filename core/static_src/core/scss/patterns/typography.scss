@@ -62,6 +62,8 @@ $text-color-standard: $brown;
 
   @include above($medium) {
     font-size: rem-calc(40);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   @include above($xlarge) {

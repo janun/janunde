@@ -22,10 +22,12 @@ $(document).ready(function () {
     }
   }
   $(".js-sticky-until-medium").each(function () {
-    $(window).on('resize', function () {
-      untilMedium($(this));
-    });
-    untilMedium($(this));
+    var elem = $(this);
+    // if we resize we loose focus when focussing the search...
+    // $(window).resize( function () {
+    //   untilMedium(elem);
+    // });
+    untilMedium(elem);
   });
 
 

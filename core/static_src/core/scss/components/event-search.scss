@@ -7,6 +7,7 @@
 // </form>
 //
 .event-search {
+  position: relative;
 
   &__input {
     background-color: transparent;
@@ -14,7 +15,6 @@
     appearance: none;
     border: none;
     border-bottom: rem-calc(2) solid $brown;
-    margin-bottom: 1rem - rem-calc(4);
 
     &::-webkit-search-cancel-button {
       display: none;
@@ -38,7 +38,13 @@
       border-bottom-color: $green;
     }
 
-    width: 100%;
+
+    @include until($medium) {
+      float: right;
+      width: 90%;
+      margin-top: -0.5rem;
+    }
+
     @include above($medium) {
       width: 60rem;
       border-bottom-width: rem-calc(4);
@@ -65,7 +71,14 @@
     @include font-size-2;
 
     @include until($medium) {
+      position: absolute;
+      left: 0;
+      top: 0;
 
+      span {
+        color: $green;
+        font-size: rem-calc(40px);
+      }
     }
   }
 

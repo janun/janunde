@@ -9,6 +9,7 @@
 
     @include until($medium) {
 
+      height: rem-calc(57px);
       width: 100%;
       z-index: 100;
       overflow-x: scroll;
