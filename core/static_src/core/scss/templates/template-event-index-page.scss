@@ -35,56 +35,59 @@
 
 
   .scrolls {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    padding-left: rem-calc(40); // fallback will be overwritten by js-scrolls
-    padding-bottom: rem-calc(40);
+    @include above($medium) {
 
-    &__inner {
-      display: table;
-      table-layout: fixed;
-      width: 100%;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      padding-left: rem-calc(40); // fallback will be overwritten by js-scrolls
+      padding-bottom: rem-calc(40);
 
-      // spacing between columns
-      border-spacing: rem-calc(43) 0;
-      margin-left: - rem-calc(43 + 10);
-      @include above($xlarge) {
-        border-spacing: rem-calc(80) 0;
-        margin-left: - rem-calc(80 + 10);
-      }
-    }
+      &__inner {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
 
-    &__element {
-      display: table-cell;
-    }
-
-    &__button {
-      display: block;
-      position: absolute;
-      margin-top: rem-calc(12px);
-      width: rem-calc(43);
-      height: rem-calc(40);
-      color: $white;
-      background-color: $green;
-      text-align: center;
-      padding-top: rem-calc(10);
-      z-index: 100;
-
-      i {
-        font-size: rem-calc(19);
+        // spacing between columns
+        border-spacing: rem-calc(43) 0;
+        margin-left: - rem-calc(43 + 10);
+        @include above($xlarge) {
+          border-spacing: rem-calc(80) 0;
+          margin-left: - rem-calc(80 + 10);
+        }
       }
 
-      &--next {
-        right: 0;
-        border-radius: rem-calc(46 0 0 46);
+      &__element {
+        display: table-cell;
       }
 
-      &--previous {
-        display: none;
-        left: 0;
-        border-radius: rem-calc(0 46 46 0);
-      }
+      &__button {
+        display: block;
+        position: absolute;
+        margin-top: rem-calc(12px);
+        width: rem-calc(43);
+        height: rem-calc(40);
+        color: $white;
+        background-color: $green;
+        text-align: center;
+        padding-top: rem-calc(10);
+        z-index: 100;
 
+        i {
+          font-size: rem-calc(19);
+        }
+
+        &--next {
+          right: 0;
+          border-radius: rem-calc(46 0 0 46);
+        }
+
+        &--previous {
+          display: none;
+          left: 0;
+          border-radius: rem-calc(0 46 46 0);
+        }
+
+      }
     }
   }
 
@@ -98,9 +101,12 @@
     overflow: hidden;
     border-radius: 5px;
 
-    transition: transform 0.1s;
-    &:hover {
-      transform: scale(1.02);
+    // highlight on hover for large screens
+    @above($large) {
+      transition: transform 0.1s;
+      &:hover {
+        transform: scale(1.02);
+      }
     }
 
     h3 {

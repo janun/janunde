@@ -5,8 +5,10 @@
 // </div>
 //
 .hover-reveal {
-  &__inline-block, &__inline, &__block {
-    display: none;
+  @include above($large) {
+    &__inline-block, &__inline, &__block {
+      display: none;
+    }
   }
 
   &:hover &__inline-block {

@@ -12,7 +12,7 @@
       <a class="color-green margin-right-3 font-size-2" href="{% pageurl self %}">Schließen</a>
     </form>
     <div class="{% if search %}hide{% endif %} js-no-search">
-      <h1 class="big-font {% if not upcoming %}line-through{% endif %}">Veranstaltungen, Seminare, Demos</h1>
+      <h1 class="hide@until-medium big-font {% if not upcoming %}line-through{% endif %}">Veranstaltungen, Seminare, Demos</h1>
       {% if upcoming %}
         <a class="js-search-reveal-button color-green margin-right-3 font-size-2" href="?search=1">
           <i class="icon-magnifier" aria-hidden="true"></i>
@@ -31,12 +31,12 @@
 {% if upcoming %}
 <div class="scrolls js-scrolls">
 
-  <a class="hide@no-js scrolls__button scrolls__button--previous js-scrolls__button-prev js-sticky"
+  <a class="hide@until-medium hide@no-js scrolls__button scrolls__button--previous js-scrolls__button-prev js-sticky"
      title="Zurück in die Vergangenheit" href="#">
     <i class="icon-arrow-left-circle" aria-hidden="true"></i>
   </a>
 
-  <a class="hide@no-js scrolls__button scrolls__button--next js-scrolls__button-next js-sticky"
+  <a class="hide@until-medium hide@no-js scrolls__button scrolls__button--next js-scrolls__button-next js-sticky"
      href="#" title="Weiter in die Zukunft">
     <i class="icon-arrow-right-circle" aria-hidden="true"></i>
   </a>
@@ -82,7 +82,7 @@
     {% endif %}
 
     {% if next_week %}
-      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+      <div class="fixed-grid-12__col-4 scrolls__element">
         <h2 class="area-title">Nächste Woche</h2>
         {% for event in next_week %}
           {% include "core/_event_partial.html" %}
@@ -91,7 +91,7 @@
     {% endif %}
 
     {% if later_this_month %}
-      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+      <div class="fixed-grid-12__col-4 scrolls__element">
         <h2 class="area-title">Später im {% now "F" %}</h2>
         {% for event in later_this_month %}
           {% include "core/_event_partial.html" %}
@@ -100,7 +100,7 @@
     {% endif %}
 
     {% if next_month %}
-      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+      <div class="fixed-grid-12__col-4 scrolls__element">
         <h2 class="area-title">
           {{ next_month.0.start_datetime|format_month }}
         </h2>
@@ -112,7 +112,7 @@
 
     {% for month, events in by_month %}
       {% if events %}
-        <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+        <div class="fixed-grid-12__col-4 scrolls__element">
           <h2 class="area-title">{{ month|format_month }}</h2>
           {% for event in events %}
             {% include "core/_event_partial.html" %}
@@ -122,7 +122,7 @@
     {% endfor %}
 
     {% if later_this_year %}
-      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+      <div class="fixed-grid-12__col-4 scrolls__element">
         <h2 class="area-title">Später in {{ now|date:"Y" }}</h2>
         {% for event in later_this_year %}
           {% include "core/_event_partial.html" %}
@@ -131,7 +131,7 @@
     {% endif %}
 
     {% if after %}
-      <div class="fixed-grid-12__col-4 fixed-grid-12__offset-1 scrolls__element">
+      <div class="fixed-grid-12__col-4 scrolls__element">
         <h2 class="area-title">Noch Später</h2>
         {% for event in after %}
           {% include "core/_event_partial.html" %}

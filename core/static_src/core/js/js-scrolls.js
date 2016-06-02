@@ -8,7 +8,9 @@
   // set paddingLeft of scrolls by offsetLeft of .js-scrolls__offsetElement
   var offsetElement = $('.js-scrolls__offsetElement');
   function setJsScrollsOffset() {
-    scrolls.css('padding-left', offsetElement.offset().left + "px" );
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      scrolls.css('padding-left', offsetElement.offset().left + "px" );
+    }
   }
   if (offsetElement.length) {
     $(window).on('resize', setJsScrollsOffset);
