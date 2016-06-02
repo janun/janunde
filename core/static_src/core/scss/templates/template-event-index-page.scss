@@ -131,9 +131,9 @@
 
     // highlight on hover for large screens
     @include above($large) {
-      transition: transform 0.1s;
+      transition: box-shadow .2s;
       &:hover {
-        transform: scale(1.02);
+        box-shadow: rem-calc(0 2px 5px) rgba($black, 0.25);
       }
     }
 
