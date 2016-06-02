@@ -8,22 +8,20 @@ from django.utils.html import conditional_escape
 register = template.Library()
 
 
-today = datetime.date.today() # is this the current date or of the start of the server?
-tomorrow = today + datetime.timedelta(days=1)
-
-
 @register.filter(expects_localtime=True)
 def format_month(date):
+    today = datetime.date.today()
     if date.year == today.year:
         return date_filter(date, "F")
     else:
         return date_filter(date, "F Y")
 
 
-
 def is_in_this_week(date):
     """returns the last day of this week"""
+    today = datetime.date.today()
     return today <= date <= today + datetime.timedelta(days=6)
+
 
 # def is_in_next_week(date):
 #     """returns the last day of this week"""
@@ -31,8 +29,10 @@ def is_in_this_week(date):
 #     begin_of_next_week = today + datetime.timedelta(days=7-today.weekday())
 #     return begin_of_next_week <= date <= end_of_next_week
 
+
 def is_in_last_week(date):
     """returns the last day of this week"""
+    today = datetime.date.today()
     end_of_last_week = today + datetime.timedelta(days=6 - today.weekday() - 7)
     begin_of_last_week = today + datetime.timedelta(days=0-today.weekday() - 7)
     return begin_of_last_week <= date <= end_of_last_week
@@ -48,6 +48,7 @@ def add_tooltip(date, text, autoescape=True):
         date_filter(date, "SHORT_DATE_FORMAT"),
         esc(text)
     ))
+
 
 @register.filter(needs_autoescape=True)
 def grey_span(text, autoescape=True):
@@ -68,6 +69,8 @@ def nettes_datum(our_date, show_date=False, tooltip=True, grey_date=False):
     """
     generate a nice looking/readable date in German
     """
+    today = datetime.date.today()
+    tomorrow = today + datetime.timedelta(days=1)
     if type(our_date) is datetime.datetime:
         our_date = our_date.date()
     wochentag = date_filter(our_date, "l")
