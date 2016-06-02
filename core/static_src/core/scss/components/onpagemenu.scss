@@ -1,0 +1,16 @@
+.onpagemenu {
+  display: block;
+  float: right;
+  width: rem-calc(270px);
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  a {
+    margin-right: rem-calc(25);
+  }
+}

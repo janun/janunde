@@ -1,0 +1,32 @@
+// click-area
+//
+// creates a clickable area which can contain links
+// useful for boxes that link to content pages,
+// but have other links too.
+//
+// doesnt really work with elements inside click-area,
+// that have position-absolute like overlays.
+//
+// @example markup:
+//   <div class="click-area">
+//     <a href="#2">other link</a>
+//     <a href="#1" class="click-area__area-link">area link</a>
+//   </div>
+.click-area {
+  position: relative;
+
+  a {
+    z-index: 1;
+  }
+
+  &__area-link {
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    overflow: hidden;
+    text-indent: 200%;
+    white-space: nowrap;
+    background: transparent;
+    z-index: 0 !important;
+    opacity: 0;
+  }
+}

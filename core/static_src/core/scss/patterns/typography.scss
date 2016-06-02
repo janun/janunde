@@ -37,7 +37,8 @@ $text-color-standard: $brown;
   font-size: rem-calc(16);
   line-height: rem-calc(22);
 }
-.font-size-2 {
+
+@mixin font-size-2 {
   font-size: rem-calc(16px);
   line-height: rem-calc(19px);
   @include above($xlarge) {
@@ -45,10 +46,30 @@ $text-color-standard: $brown;
     line-height: rem-calc(24px);
   }
 }
+.font-size-2 { @include font-size-2 }
+
 .font-size-3 {
   font-size: rem-calc(24);
   line-height: rem-calc(28);
 }
+
+
+@mixin big-font {
+  font-size: rem-calc(24);
+  font-family: $font-family-extra;
+  font-weight: bold;
+  line-height: 1.36;
+
+  @include above($medium) {
+    font-size: rem-calc(40);
+  }
+
+  @include above($xlarge) {
+    font-size: rem-calc(50);
+  }
+}
+.big-font { @include big-font }
+
 
 .line-through {
   text-decoration: line-through;

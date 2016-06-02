@@ -1,0 +1,72 @@
+//
+// @example markup:
+// <form class="event-search">
+//   <input type="search" class="event-search__input">
+//   <input type="submit" class="event-search__submit">
+//   <a class="event-search__close">Close</a>
+// </form>
+//
+.event-search {
+
+  &__input {
+    background-color: transparent;
+    padding: 0;
+    appearance: none;
+    border: none;
+    border-bottom: rem-calc(2) solid $brown;
+    margin-bottom: 1rem - rem-calc(4);
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+
+    &:-webkit-autofill {
+      background-color: $white !important;
+      color: $brown;
+    }
+
+    &:placeholder-shown {
+      border-bottom-color: rgba($brown, 0.2);
+    }
+
+    &::placeholder {
+      color: rgba($brown, 0.2);
+    }
+
+    &:focus {
+      outline: none;
+      border-bottom-color: $green;
+    }
+
+    width: 100%;
+    @include above($medium) {
+      width: 60rem;
+      border-bottom-width: rem-calc(4);
+    }
+  }
+
+
+  &__submit {
+    font-weight: bold;
+    color: $green;
+    margin-right: 3rem;
+    @include font-size-2;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    appearance: none;
+    font-family: inherit;
+  }
+
+
+  &__close {
+    color: $green;
+    @include font-size-2;
+
+    @include until($medium) {
+
+    }
+  }
+
+}

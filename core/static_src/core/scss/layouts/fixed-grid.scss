@@ -7,8 +7,8 @@
 // * removes outer left and right margins
 // * clears the floats of the columns
 @mixin fixedrow($gutter: rem-calc(20)) {
-  margin-left: -$gutter/2;
-  margin-right: -$gutter/2;
+  // margin-left: -$gutter/2;
+  // margin-right: -$gutter/2;
 
   &:after {
     content: "";
