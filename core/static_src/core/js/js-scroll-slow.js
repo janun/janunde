@@ -10,11 +10,11 @@ $(document).ready(function () {
 
     var targetPos = targetElem.offset().top;
 
-    if ( this.getAttribute('data-scroll-slow-offset') ) {
-      targetPos += parseInt( this.getAttribute('data-scroll-slow-offset') );
+    if ( $(this).attr('data-scroll-slow-offset') ) {
+      targetPos += parseInt( $(this).attr('data-scroll-slow-offset') );
     }
 
-    $('body').animate({scrollTop: targetPos});
+    $("html, body").animate({scrollTop: targetPos});
   }
 
   $('.js-scroll-slow').each(function() {

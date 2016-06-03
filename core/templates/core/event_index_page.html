@@ -31,14 +31,14 @@
 
       <!-- on page menu -->
       <span class="hide@medium onpagemenu">
-        {% if today %}<a class="js-scroll-slow" data-scroll-slow-offset="-50" href="#today">Heute</a>{% endif %}
-        {% if tomorrow %}<a class="js-scroll-slow" data-scroll-slow-offset="-50"  href="#tomorrow">Morgen</a>{% endif %}
-        {% for day, events in days_of_this_week %}<a class="js-scroll-slow" data-scroll-slow-offset="-50"  href="#{{ day|date:"l" }}">{{ day|date:"l" }}</a>{% endfor %}
-        {% if this_week %}<a class="js-scroll-slow" data-scroll-slow-offset="-50"  href="#this_week">Noch Diese Woche</a>{% endif %}
-        {% if next_week %}<a class="js-scroll-slow" data-scroll-slow-offset="-50"  href="#next_week">Nächste Woche</a>{% endif %}
-        {% if later_this_month %}<a class="js-scroll-slow" data-scroll-slow-offset="-50"  href="#later_this_month">Später im {% now "F" %}</a>{% endif %}
-        {% for month, events in by_month %}<a class="js-scroll-slow" data-scroll-slow-offset="-50"  href="#{{ month|date:"F" }}">{{ month|date:"F" }}</a>{% endfor %}
-        {% if after %}<a class="js-scroll-slow" data-scroll-slow-offset="-50" href="#after">Später</a>{% endif %}
+        {% if today %}<a class="js-scroll-slow" href="#today">Heute</a>{% endif %}
+        {% if tomorrow %}<a class="js-scroll-slow" href="#tomorrow">Morgen</a>{% endif %}
+        {% for day, events in days_of_this_week %}<a class="js-scroll-slow" href="#{{ day|date:"l" }}">{{ day|date:"l" }}</a>{% endfor %}
+        {% if this_week %}<a class="js-scroll-slow" href="#this_week">Noch Diese Woche</a>{% endif %}
+        {% if next_week %}<a class="js-scroll-slow" href="#next_week">Nächste Woche</a>{% endif %}
+        {% if later_this_month %}<a class="js-scroll-slow" href="#later_this_month">Später im {% now "F" %}</a>{% endif %}
+        {% for month, events in by_month %}<a class="js-scroll-slow" href="#{{ month|date:"F" }}">{{ month|date:"F" }}</a>{% endfor %}
+        {% if after %}<a class="js-scroll-slow" href="#after">Später</a>{% endif %}
       </span>
 
     </div>
@@ -63,8 +63,8 @@
   <div class="fixed-grid-12 scrolls__inner">
 
     {% if today %}
-      <div id="today" class="fixed-grid-12__col-4 scrolls__element">
-        <h2 class="area-title">Heute</h2>
+      <div class="fixed-grid-12__col-4 scrolls__element">
+        <h2 id="today" class="onpagemenu-scrollmark area-title">Heute</h2>
         {% for event in today %}
           {% include "core/_event_partial.html" %}
         {% endfor %}
@@ -72,8 +72,8 @@
     {% endif %}
 
     {% if tomorrow %}
-      <div id="tomorrow" class="fixed-grid-12__col-4 scrolls__element">
-        <h2 class="area-title">Morgen</h2>
+      <div class="fixed-grid-12__col-4 scrolls__element">
+        <h2 id="tomorrow" class="onpagemenu-scrollmark area-title">Morgen</h2>
         {% for event in tomorrow %}
           {% include "core/_event_partial.html" %}
         {% endfor %}
@@ -81,8 +81,8 @@
     {% endif %}
 
     {% for day, events in days_of_this_week %}
-      <div id="{{ day|date:"l" }}" class="fixed-grid-12__col-4 scrolls__element">
-        <h2 class="area-title">{{ day|date:"l" }}</h2>
+      <div class="fixed-grid-12__col-4 scrolls__element">
+        <h2 id="{{ day|date:"l" }}" class="onpagemenu-scrollmark area-title">{{ day|date:"l" }}</h2>
         {% for event in events %}
           {% include "core/_event_partial.html" with only_weekday=True %}
         {% endfor %}
@@ -90,8 +90,8 @@
     {% endfor %}
 
     {% if this_week %}
-      <div id="this_week" class="fixed-grid-12__col-4 scrolls__element">
-        <h2 class="area-title">Noch diese Woche</h2>
+      <div class="fixed-grid-12__col-4 scrolls__element">
+        <h2 id="this_week" class="onpagemenu-scrollmark area-title">Noch diese Woche</h2>
         {% for event in this_week %}
           {% include "core/_event_partial.html" with only_weekday=True %}
         {% endfor %}
@@ -99,8 +99,8 @@
     {% endif %}
 
     {% if next_week %}
-      <div id="next_week" class="fixed-grid-12__col-4 scrolls__element">
-        <h2 class="area-title">Nächste Woche</h2>
+      <div class="fixed-grid-12__col-4 scrolls__element">
+        <h2 id="next_week" class="onpagemenu-scrollmark area-title">Nächste Woche</h2>
         {% for event in next_week %}
           {% include "core/_event_partial.html" %}
         {% endfor %}
@@ -108,8 +108,8 @@
     {% endif %}
 
     {% if later_this_month %}
-      <div id="later_this_month" class="fixed-grid-12__col-4 scrolls__element">
-        <h2 class="area-title">Später im {% now "F" %}</h2>
+      <div class="fixed-grid-12__col-4 scrolls__element">
+        <h2 id="later_this_month" class="onpagemenu-scrollmark area-title">Später im {% now "F" %}</h2>
         {% for event in later_this_month %}
           {% include "core/_event_partial.html" %}
         {% endfor %}
@@ -117,8 +117,8 @@
     {% endif %}
 
     {% for month, events in by_month %}
-      <div id="{{ month|date:"F" }}" class="fixed-grid-12__col-4 scrolls__element">
-        <h2 class="area-title">{{ month|format_month }}</h2>
+      <div class="fixed-grid-12__col-4 scrolls__element">
+        <h2 id="{{ month|date:"F" }}" class="area-title onpagemenu-scrollmark">{{ month|format_month }}</h2>
         {% for event in events %}
           {% include "core/_event_partial.html" %}
         {% endfor %}
@@ -126,8 +126,8 @@
     {% endfor %}
 
     {% if after %}
-      <div id="after" class="fixed-grid-12__col-4 scrolls__element">
-        <h2 class="area-title">Noch Später</h2>
+      <div class="fixed-grid-12__col-4 scrolls__element">
+        <h2 id="after" class="onpagemenu-scrollmark area-title">Noch Später</h2>
         {% for event in after %}
           {% include "core/_event_partial.html" %}
         {% endfor %}

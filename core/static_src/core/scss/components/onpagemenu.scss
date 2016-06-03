@@ -4,8 +4,22 @@
   display: inline;
   white-space: nowrap;
 
-
   a {
     margin-right: rem-calc(25);
+  }
+}
+
+
+// offset scrolling to #target.onpagemenu-scrollmark
+$onpagemenu-scrollmark-offset: rem-calc(57px); // height of onpagemenu
+.onpagemenu-scrollmark {
+  height: auto;
+  &:before {
+    outline: 1px solid blue;
+    display: block;
+    content: " ";
+    margin-top: - $onpagemenu-scrollmark-offset;
+    height: $onpagemenu-scrollmark-offset;
+    visibility: hidden;
   }
 }
