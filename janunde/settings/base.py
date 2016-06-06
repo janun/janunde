@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     'styleguide',
     'core',
 
+    'softhyphen',
+
     'wagtail.contrib.settings',
     'wagtail.contrib.wagtailsearchpromotions',
     'wagtail.wagtailforms',

@@ -1,4 +1,4 @@
-{% load wagtailcore_tags nettes_datum srcset wagtailimages_tags %}
+{% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff %}
 
 
 <div class="panel panel--side-padding panel--hover-shadow event hover-reveal click-area">
@@ -86,8 +86,8 @@
   </div>
 
   <!-- show title -->
-  <h3 class="margin-top-0 {% if event.title|length > 32 %}font-size-small{% else %}font-size-3{% endif %}">
-    {{ event.title|truncatechars:56 }}
+  <h3 class="margin-top-0 {% if event.title|length > 40 %}font-size-small{% else %}font-size-3{% endif %}">
+    {{ event.title|truncatechars:56|softhyphen:"de-de" }}
   </h3>
 
   <a href="{% pageurl event %}" class="click-area__area-link">{{ event.title }}</a>
