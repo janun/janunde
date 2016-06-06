@@ -5,7 +5,7 @@ python-dateutil==2.5.3
 icalendar==3.9.2
 django-phonenumber-field==1.1.0
 
-django-softhyphen=1.1.0
+django-softhyphen==1.1.0
 
 # Dependencies for hosting
 #elasticsearch==1.2.0
