@@ -4,26 +4,26 @@
 {% block body_class %}event-page{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container margin-top-2">
   <div class="grid-12">
 
-    <!-- the main column -->
-    <main class="grid-12__col-7">
-      <!-- title and subtitle -->
-      <div class="event-page__title">
-        <h1>{{ self.title }}</h1>
-        {% if self.subtitle %}
-          <h2>{{ self.subtitle }}</h2>
-        {% endif %}
-      </div>
+    <!-- title and subtitle -->
+    <div class="event-page__title grid-12__col-12">
+      <h1>{{ self.title }}</h1>
+      {% if self.subtitle %}
+        <h2>{{ self.subtitle }}</h2>
+      {% endif %}
+    </div>
 
+    <!-- the main column -->
+    <div class="grid-12__col-7 float-right">
       <!-- the content -->
       {{ self.content }}
-    </main>
+    </div>
 
 
     <!-- the side column -->
-    <aside class="grid-12__col-4 float-right">
+    <div class="grid-12__col-4 float-left">
 
       <!-- image -->
       {% if self.main_image %}
@@ -157,7 +157,7 @@
       </div>
       {% endif %}
 
-    </aside>
+    </div>
 
   </div>
 </div>
