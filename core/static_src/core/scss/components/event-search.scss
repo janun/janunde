@@ -15,6 +15,7 @@
     appearance: none;
     border: none;
     border-bottom: rem-calc(2) solid $brown;
+    border-radius: 0;
 
     &::-webkit-search-cancel-button {
       display: none;
