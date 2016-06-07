@@ -6,28 +6,41 @@
   // TODO: this needs to be moved away to classes or sth.
 
   &__title {
-    margin-bottom: rem-calc(38);
+    margin-bottom: rem-calc(30);
+    @include above($medium) {
+      margin-bottom: rem-calc(38);
+    }
 
     h1 {
-      font-size: rem-calc(50);
+      font-size: rem-calc(30px);
       line-height: 1.2;
       font-family: $font-family-extra;
       font-weight: normal;
       margin-top: 0;
-      margin-bottom: rem-calc(5);
+      margin-bottom: rem-calc(5px);
+
+      @include above($medium) {
+        font-size: rem-calc(50px);
+      }
     }
   }
 
   h2 {
-    font-size: rem-calc(20);
+    font-size: rem-calc(16px);
     line-height: 1.2;
     font-family: $font-family-extra;
     font-weight: normal;
     margin-top: 0;
+    @include above($medium) {
+      font-size: rem-calc(20px);
+    }
   }
 
 
-  // fix empty p tags
+  // try to fix empty p tags
+  p:empty {
+    display: none;
+  }
   p:blank {
     display: none;
   }

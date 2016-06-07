@@ -15,34 +15,28 @@
       {% endif %}
     </div>
 
-    <!-- the main column -->
-    <div class="grid-12__col-7 float-right">
-      <!-- the content -->
-      {{ self.content }}
-    </div>
-
 
     <!-- the side column -->
-    <div class="grid-12__col-4 float-left">
+    <div class="grid-12__col-4@medium float-left">
 
       <!-- image -->
       {% if self.main_image %}
-      <div class="image margin-bottom-2">
+      <div class="margin-bottom-2">
         {% image self.main_image original as original_image %}
           <a href="{{ original_image.url }}">
             <img src="{{ original_image.url }}"
               srcset="{{ self.main_image|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
               sizes="(min-width: 60em) 20em, 95vw"
               alt="{{ original_image.alt }}"
-              class="main-image panel panel--no-padding">
+              class="main-image panel panel--no-padding image">
           </a>
       </div>
       {% endif %}
 
       <!-- time -->
-      <div class="grid-12 font-family-extra font-size-2">
+      <div class="grid-12 font-family-extra margin-bottom-1">
         <i class="grid-12__col-1 icon-clock" aria-hidden="true"></i>
-        <div class="grid-12__col-11">
+        <div class="grid-12__col-11 font-size-2">
           {% if self.end_datetime %}
             {% if self.end_datetime.date == self.start_datetime.date %}
               {# starts and ends on same day #}
@@ -89,9 +83,9 @@
 
       <!-- location -->
       {% if self.location %}
-      <div class="grid-12 margin-top-2 margin-bottom-2 font-family-extra font-size-2">
+      <div class="grid-12 margin-top-2 margin-bottom-2 font-family-extra">
         <i class="grid-12__col-1 icon-location-pin" aria-hidden="true"></i>
-        <span class="grid-12__col-11">
+        <span class="grid-12__col-11 font-size-2">
           {{ self.location }}<br>
           <a class="font-size-1 font-family-sans color-grey" target="_blank" href="https://www.google.de/maps/search/{{ self.location }}">Auf Google Maps anzeigen</a>
         </span>
@@ -101,7 +95,7 @@
       <!-- links etc. -->
       {% if self.website_url %}
         <a target="_blank" href="{{ self.website_url }}"
-           class="grid-12 margin-top-1 display-block"
+           class="grid-12 margin-top-1 margin-bottom-1 display-block"
            title="zur externen Website">
           <i class="grid-12__col-1 icon-direction" aria-hidden="true"></i>
           <span class="grid-12__col-11">{{ self.website_url|prettyurl }}</span>
@@ -110,7 +104,7 @@
 
       {% if self.facebook_event_url %}
       <a target="_blank" href="{{ self.facebook_event_url }}"
-         class="grid-12 margin-top-1 display-block"
+         class="grid-12 margin-top-1 margin-bottom-1 display-block"
          title="zur Facebook-Veranstaltung">
         <i class="grid-12__col-1 icon-social-facebook" aria-hidden="true"></i>
         <span class="grid-12__col-11 color-grey">Facebook-Event</span>
@@ -119,7 +113,7 @@
 
       <!-- Call to action button -->
       {% if self.call_to_action %}
-        <a class="grid-12__offset-1 button button--small margin-top-2"
+        <a class="grid-12__offset-1 button button--small margin-top-2 margin-bottom-2"
            target="_blank" href="{{ self.call_to_action.link }}">
           {{ self.call_to_action.text }}
         </a>
@@ -127,12 +121,12 @@
 
       <!-- contact information -->
       {% if self.contact_mail or self.contact_phone %}
-      <div class="margin-top-2">
+      <div class="margin-top-2 margin-bottom-1">
         <span class="grid-12__offset-1 color-grey">Kontakt: {% if self.contact_name %}{{ self.contact_name }}{% endif %}</span>
 
         {% if self.contact_mail %}
         <a target="_blank" href="mailto:{{ self.contact_mail }}"
-           class="grid-12 margin-top-1 display-block"
+           class="grid-12 margin-top-1 margin-bottom-1 display-block"
            title="E-Mail schreiben">
           <i class="grid-12__col-1 icon-envelope" aria-hidden="true"></i>
           <span class="grid-12__col-11">{{ self.contact_mail }}</span>
@@ -141,7 +135,7 @@
 
         {% if self.contact_phone %}
         <a target="_blank" href="{{ self.contact_phone.as_rfc3966 }}"
-           class="grid-12 margin-top-1 display-block"
+           class="grid-12 margin-top-1 margin-bottom-1 display-block"
            title="Anrufen">
           <i class="grid-12__col-1 icon-phone" aria-hidden="true"></i>
           <span class="grid-12__col-11">{{ self.contact_phone|prettyphone }}</span>
@@ -153,7 +147,7 @@
 
       <!-- related group -->
       {% if self.related_group %}
-      <div class="margin-top-2">
+      <div class="margin-top-2 margin-bottom-1">
         <span class="grid-12__offset-1 color-grey">organisiert von</span>
         <a href="{% pageurl self.related_group %}"
            class="grid-12 margin-top-1 display-block">
@@ -172,6 +166,14 @@
       {% endif %}
 
     </div>
+
+
+    <!-- the main column -->
+    <div class="grid-12__col-7@medium float-right">
+      <!-- the content -->
+      {{ self.content }}
+    </div>
+
 
   </div>
 </div>

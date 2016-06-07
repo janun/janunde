@@ -33,18 +33,15 @@ $text-color-standard: $brown;
   font-size: rem-calc(18);
   line-height: rem-calc(22);
 }
+
 .font-size-1 {
   font-size: rem-calc(16);
-  line-height: rem-calc(22);
+  line-height: 1.2;
 }
 
 @mixin font-size-2 {
-  font-size: rem-calc(16px);
-  line-height: rem-calc(19px);
-  @include above($xlarge) {
-    font-size: rem-calc(20px);
-    line-height: rem-calc(24px);
-  }
+  font-size: rem-calc(20px);
+  line-height: 1.2;
 }
 .font-size-2 { @include font-size-2 }
 
