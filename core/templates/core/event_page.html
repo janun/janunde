@@ -112,10 +112,10 @@
       {% endif %}
 
       <!-- Call to action button -->
-      {% if self.call_to_action %}
-        <a class="grid-12__offset-1 button button--small margin-top-2 margin-bottom-2"
-           target="_blank" href="{{ self.call_to_action.link }}">
-          {{ self.call_to_action.text }}
+      {% if true or self.register_url %}
+        <a class="grid-12__offset-1 button button--small margin-top-1 margin-bottom-1"
+           target="_blank" href="{{ self.register_url }}">
+          Anmelden
         </a>
       {% endif %}
 
@@ -169,7 +169,7 @@
 
 
     <!-- the main column -->
-    <div class="grid-12__col-7@medium float-right">
+    <div class="grid-12__col-7@medium float-right margin-top-2@until-medium">
       <!-- the content -->
       {{ self.content }}
     </div>

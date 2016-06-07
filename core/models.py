@@ -529,6 +529,12 @@ class EventPage(Page):
         blank=True,
         # TODO: change this into a real location somehow
     )
+    register_url = PrettyURLField(
+        _("Anmelde-Formular"),
+        help_text=_("Link zu einem externen Anmelde-Formular"),
+        null=True,
+        blank=True,
+    )
 
     def clean(self):
         # append number to slug if already in use
@@ -602,8 +608,9 @@ class EventPage(Page):
                 FieldPanel('contact_name'),
                 FieldPanel('contact_mail'),
                 FieldPanel('contact_phone', widget=PhoneNumberInternationalFallbackWidget),
-            ], heading="Kontakt")
-        ], heading="Gruppe und Kontakt")
+            ], heading="Kontakt"),
+            FieldPanel('register_url'),
+        ], heading="Gruppe, Kontakt und Anmeldung")
     ])
 
     partial_template_name = 'core/_partial.html'

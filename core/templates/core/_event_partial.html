@@ -4,7 +4,7 @@
 <div class="panel panel--side-padding panel--hover-shadow event hover-reveal click-area">
 
   <div class="panel__negative-margin-sides margin-bottom-1">
-    <div class="image overlay">
+    <div class="overlay">
 
       <!-- show image (or placeholder) -->
       {% if event.main_image %}
@@ -13,7 +13,8 @@
           srcset="{{ event.main_image|srcset:'fill-300x113 fill-600x226' }}"
           sizes="(min-width: 60em) 18.75em, 100vw"
           alt="{{ fallback_image.alt }}"
-          style="height: 113px;">
+          style="height: 113px;"
+          class="image">
       {% else %}
         <div class="image-placeholder"
              style="height: 113px; background-color: {{ event.color|default:"#62e6c8" }}">

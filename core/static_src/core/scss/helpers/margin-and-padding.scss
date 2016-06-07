@@ -59,3 +59,10 @@ $directions: left right top bottom;
 .padding-quarter {
   padding: 0.25rem;
 }
+
+
+.margin-top-2\@until-medium {
+  @include until($medium) {
+    margin-top: 2rem;
+  }
+}

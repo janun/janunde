@@ -1,3 +1,9 @@
+.footer:empty {
+  @include above($large) {
+    padding: rem-calc(130);
+  }
+}
+
 .footer {
   text-align: center;
   padding: rem-calc(30);
