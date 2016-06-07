@@ -86,8 +86,8 @@ def nettes_datum(our_date, show_date=False, tooltip=True, grey_date=False):
         text = "heute"
     elif our_date == tomorrow:
         text = "morgen"
-    elif our_date == tomorrow + datetime.timedelta(days=1):
-        text = "übermorgen"
+    # elif our_date == tomorrow + datetime.timedelta(days=1):
+    #     text = "übermorgen"
     elif is_in_this_week(our_date):
         text = wochentag
     # elif is_in_next_week(our_date):
