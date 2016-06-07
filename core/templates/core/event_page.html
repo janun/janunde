@@ -27,7 +27,7 @@
 
       <!-- image -->
       {% if self.main_image %}
-      <div class="image ">
+      <div class="image margin-bottom-2">
         {% image self.main_image original as original_image %}
           <a href="{{ original_image.url }}">
             <img src="{{ original_image.url }}"
@@ -40,7 +40,7 @@
       {% endif %}
 
       <!-- time -->
-      <div class="grid-12 margin-top-2 font-family-extra font-size-2">
+      <div class="grid-12 font-family-extra font-size-2">
         <i class="grid-12__col-1 icon-clock" aria-hidden="true"></i>
         <div class="grid-12__col-11">
           {% if self.end_datetime %}
