@@ -53,6 +53,7 @@
   }
 
 
+
   .scrolls {
     @include until($medium) {
       &__element {
@@ -114,29 +115,34 @@
       &__button {
         display: block;
         position: absolute;
-        margin-top: rem-calc(70px);
-        width: rem-calc(76);
-        height: rem-calc(73);
-        color: $white;
-        background-color: $green;
-        text-align: center;
-        padding-top: rem-calc(18);
+        margin-top: rem-calc(30px);
+        width: rem-calc(74);
+        height: rem-calc(150);
+        color: $green;
+        line-height: rem-calc(160px);
+        font-size: rem-calc(50px);
+        background-color: $white;
         z-index: 100;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 
-        i {
-          font-size: rem-calc(36);
+        transition: width 0.2s;
+        &:hover {
+
+          width: rem-calc(100);
         }
 
         &--next {
+          padding-left: rem-calc(15px);
           right: 0;
-          border-radius: rem-calc(46 0 0 46);
+          border-radius: rem-calc(5 0 0 5);
         }
 
         &--previous {
+          text-align: right;
+          padding-right: rem-calc(15px);
           display: none;
           left: 0;
-          border-radius: rem-calc(0 46 46 0);
+          border-radius: rem-calc(0 5 5 0);
         }
 
       }
