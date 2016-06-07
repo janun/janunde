@@ -27,5 +27,10 @@
   }
 
 
+  // fix empty p tags
+  p:empty {
+    display: none;
+  }
+
 
 }
