@@ -27,7 +27,7 @@
       {% if event.related_group %}
         <a title="zu {{ event.related_group.title }}" href="{% pageurl event.related_group %}"
            class="overlay__content panel panel--no-padding panel--border-radius-tr-lb top right"
-           style="height: 40px; line-height: 40px; font-size: 0">
+           style="height: 40px; line-height: 40px;">
 
           <span class="hover-reveal__inline font-size-very-small font-family-sans padding-left-half margin-right-quarter margin-left-half float-left"
                 style="line-height: 40px;">
@@ -40,7 +40,7 @@
               srcset="{{ event.related_group.logo|srcset:'width-32 width-64 width-96' }}"
               sizes="32px"
               alt="{{ group_logo.alt }}"
-              style="vertical-align: middle;"
+              style="vertical-align: middle; max-height: 32px"
               class="margin-quarter">
           {% else %}
             <span class="text-align-center font-size-2 margin-top-quarter margin-right-quarter margin-left-quarter float-right"
