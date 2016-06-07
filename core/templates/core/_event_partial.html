@@ -88,7 +88,7 @@
   </div>
 
   <!-- show title -->
-  <h3 class="margin-top-0 {% if event.title|length > 45 %}font-size-small{% else %}font-size-3{% endif %}">
+  <h3 class="margin-top-0 {% if event.title|length > 40 %}font-size-small{% else %}font-size-3{% endif %}">
     {{ event.title|truncatechars:56|softhyphen:"de-de" }}
   </h3>
 

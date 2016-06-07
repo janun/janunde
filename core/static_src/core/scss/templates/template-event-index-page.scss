@@ -144,7 +144,10 @@
   }
 
   .event {
-    margin-bottom: rem-calc(9px);
+    margin-bottom: rem-calc(19px);
+    @include above($medium) {
+      margin-bottom: rem-calc(9px);
+    }
     @include above($xlarge) {
       margin-bottom: rem-calc(19px);
     }
