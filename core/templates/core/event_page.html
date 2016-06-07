@@ -9,9 +9,9 @@
 
     <!-- title and subtitle -->
     <div class="event-page__title grid-12__col-12">
-      <h1>{{ self.title }}</h1>
+      <h1>{{ self.title|softhyphen|softhyphen:"de-de" }}</h1>
       {% if self.subtitle %}
-        <h2>{{ self.subtitle }}</h2>
+        <h2>{{ self.subtitle|softhyphen:"de-de" }}</h2>
       {% endif %}
     </div>
 
@@ -29,7 +29,7 @@
       {% if self.main_image %}
       <div class="image ">
         {% image self.main_image original as original_image %}
-          <a class="cursor-zoom-in" href="{{ original_image.url }}">
+          <a href="{{ original_image.url }}">
             <img src="{{ original_image.url }}"
               srcset="{{ self.main_image|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
               sizes="(min-width: 60em) 20em, 95vw"
@@ -75,49 +75,63 @@
               {% endif %}
             </div>
           {% endif %}
+
           <span class="font-size-1 font-family-sans color-grey">
-            Im Kalendar speichern:
-            <a class="color-grey" href="?format=ical">iCal</a>,
-            <a class="color-grey" href="{{ self.create_google_calendar_link }}">Google</a>
+            <span class="color-grey hover-color-green" role="button" data-a11y-toggle="calendar-links">Im Kalendar speichern…</span>
+            <ul class="hide-aria-hidden margin-0 padding-left-2" aria-hidden="true" id="calendar-links">
+              <li><a class="color-grey" target="_blank" href="{{ self.create_google_calendar_link }}">zu Google-Kalendar hinzufügen</a></li>
+              <li><a class="color-grey" target="_blank" href="?format=ical">iCal-Datei runterladen</a></li>
+            </ul>
           </span>
+
         </div>
       </div>
 
       <!-- location -->
       {% if self.location %}
-      <div class="grid-12 margin-top-2 font-family-extra font-size-2">
+      <div class="grid-12 margin-top-2 margin-bottom-2 font-family-extra font-size-2">
         <i class="grid-12__col-1 icon-location-pin" aria-hidden="true"></i>
         <span class="grid-12__col-11">
           {{ self.location }}<br>
-          <a class="font-size-1 font-family-sans color-grey" href="https://www.google.de/maps/search/{{ self.location }}">Auf Karte anzeigen</a>
+          <a class="font-size-1 font-family-sans color-grey" target="_blank" href="https://www.google.de/maps/search/{{ self.location }}">Auf Google Maps anzeigen</a>
         </span>
       </div>
       {% endif %}
 
       <!-- links etc. -->
       {% if self.website_url %}
-        <a href="{{ self.website_url }}"
+        <a target="_blank" href="{{ self.website_url }}"
            class="grid-12 margin-top-1 display-block"
-           title="Website besuchen">
-          <i class="grid-12__col-1 icon-share-alt" aria-hidden="true"></i>
-          <span class="grid-12__col-11 color-grey">{{ self.website_url|prettyurl }}</span>
+           title="zur externen Website">
+          <i class="grid-12__col-1 icon-direction" aria-hidden="true"></i>
+          <span class="grid-12__col-11">{{ self.website_url|prettyurl }}</span>
         </a>
       {% endif %}
 
       {% if self.facebook_event_url %}
-      <a href="{{ self.facebook_event_url }}" class="grid-12 margin-top-1 display-block">
+      <a target="_blank" href="{{ self.facebook_event_url }}"
+         class="grid-12 margin-top-1 display-block"
+         title="zur Facebook-Veranstaltung">
         <i class="grid-12__col-1 icon-social-facebook" aria-hidden="true"></i>
         <span class="grid-12__col-11 color-grey">Facebook-Event</span>
       </a>
       {% endif %}
 
+      <!-- Call to action button -->
+      {% if self.call_to_action %}
+        <a class="grid-12__offset-1 button button--small margin-top-2"
+           target="_blank" href="{{ self.call_to_action.link }}">
+          {{ self.call_to_action.text }}
+        </a>
+      {% endif %}
+
       <!-- contact information -->
       {% if self.contact_mail or self.contact_phone %}
       <div class="margin-top-2">
-        <span class="color-grey">Kontakt: {% if self.contact_name %}{{ self.contact_name }}{% endif %}</span>
+        <span class="grid-12__offset-1 color-grey">Kontakt: {% if self.contact_name %}{{ self.contact_name }}{% endif %}</span>
 
         {% if self.contact_mail %}
-        <a href="mailto:{{ self.contact_mail }}"
+        <a target="_blank" href="mailto:{{ self.contact_mail }}"
            class="grid-12 margin-top-1 display-block"
            title="E-Mail schreiben">
           <i class="grid-12__col-1 icon-envelope" aria-hidden="true"></i>
@@ -126,7 +140,7 @@
         {% endif %}
 
         {% if self.contact_phone %}
-        <a href="{{ self.contact_phone.as_rfc3966 }}"
+        <a target="_blank" href="{{ self.contact_phone.as_rfc3966 }}"
            class="grid-12 margin-top-1 display-block"
            title="Anrufen">
           <i class="grid-12__col-1 icon-phone" aria-hidden="true"></i>
@@ -140,7 +154,7 @@
       <!-- related group -->
       {% if self.related_group %}
       <div class="margin-top-2">
-        <span class="color-grey">organisiert von</span>
+        <span class="grid-12__offset-1 color-grey">organisiert von</span>
         <a href="{% pageurl self.related_group %}"
            class="grid-12 margin-top-1 display-block">
 

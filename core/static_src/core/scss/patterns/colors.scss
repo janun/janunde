@@ -72,3 +72,9 @@ body {
     color: $grey;
   }
 }
+
+.hover-color {
+  &-green:hover {
+    color: $green;
+  }
+}

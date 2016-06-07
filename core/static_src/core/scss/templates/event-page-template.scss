@@ -1,19 +1,16 @@
 .event-page {
   background-color: $ghost;
 
-  .content {
-    margin-top: rem-calc(34);
-  }
 
 
   // TODO: this needs to be moved away to classes or sth.
 
   &__title {
-    margin-bottom: rem-calc(42);
+    margin-bottom: rem-calc(38);
 
     h1 {
       font-size: rem-calc(50);
-      line-height: rem-calc(60);
+      line-height: 1.2;
       font-family: $font-family-extra;
       font-weight: normal;
       margin-top: 0;
@@ -23,7 +20,7 @@
 
   h2 {
     font-size: rem-calc(20);
-    line-height: rem-calc(24);
+    line-height: 1.2;
     font-family: $font-family-extra;
     font-weight: normal;
     margin-top: 0;

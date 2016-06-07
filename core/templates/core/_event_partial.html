@@ -66,7 +66,7 @@
         {% if event.facebook_event_url %}
           <a title="zur Facebook-Veranstaltung"
              class="float-right hover-reveal__inline padding-left-quarter padding-right-quarter"
-             href="{{ event.facebook_event_url }}">
+            target="_blank" href="{{ event.facebook_event_url }}">
             <i class="icon-social-facebook" aria-hidden="true"></i>
           </a>
         {% endif %}
@@ -75,8 +75,8 @@
         {% if event.website_url %}
           <a title="zur externen Website"
              class="float-right hover-reveal__inline padding-left-quarter padding-right-quarter"
-             href="{{ event.website_url }}">
-            <i class="icon-share-alt" aria-hidden="true"></i>
+             target="_blank" href="{{ event.website_url }}">
+            <i class="icon-direction" aria-hidden="true"></i>
           </a>
         {% endif %}
 

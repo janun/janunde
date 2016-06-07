@@ -62,3 +62,7 @@
 // [aria-hidden="true"] {
 //   @include hide;
 // }
+.hide-aria-hidden[aria-hidden="true"],
+.hide-aria-hidden [aria-hidden="true"] {
+  @include hide;
+}

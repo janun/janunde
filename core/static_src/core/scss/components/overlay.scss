@@ -19,14 +19,10 @@
 
     &--white-transparent {
       background: rgba($white, 0.8);
-      color: $text-color-standard;
       height: rem-calc(30);
       line-height: rem-calc(30);
       padding-left: rem-calc(20);
       padding-right: rem-calc(10);
-      h2, h3, h4, a, :hover {
-        color: $text-color-standard;
-      }
     }
 
   }

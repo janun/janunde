@@ -3,7 +3,7 @@
 {% image value original as original_image %}
 
 <div class="image attribution">
-  <a class="cursor-zoom-in" href="{{ original_image.url }}">
+  <a href="{{ original_image.url }}">
     {% image value original as original_image %}
     <img src="{{ original_image.url }}"
       srcset="{{ value|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"

@@ -6,7 +6,11 @@ from django.utils.safestring import mark_safe
 
 @register.filter()
 def prettyurl(value):
-    return value.replace("http://", "").replace("https://", "").replace("www.", "").strip("/")
+    url_parts = value.replace("http://", "").replace("https://", "").replace("www.", "").split("/")
+    if len(url_parts) > 1:
+        return url_parts[0] + "/…"
+    else:
+        return url_parts[0]
 
 @register.filter()
 def prettyphone(value):
@@ -16,9 +20,6 @@ def prettyphone(value):
 
 from softhyphen.html import hyphenate
 
-@register.filter
+@register.filter()
 def softhyphen(value, language=None):
-    """
-    Hyphenates html.
-    """
     return mark_safe(hyphenate(value, language=language))

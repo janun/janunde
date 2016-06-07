@@ -46,11 +46,13 @@
 // </div>
 .grid-12 {
   @include row;
+
   @for $i from 1 through 12 {
     &__col-#{$i} {
       @include col($i, 12)
     }
   }
+
   @for $i from 1 through 12 {
     &__offset-#{$i} {
       @include offset($i, 12)

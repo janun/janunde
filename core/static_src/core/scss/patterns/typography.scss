@@ -101,7 +101,6 @@ html {
 @mixin p {
   font-size: rem-calc(18);
   line-height: 1.444444;
-
   font-weight: normal;
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures;
@@ -112,10 +111,6 @@ html {
 /// styling for paragraphs
 p {
   @include p;
-  margin-top: 0.5rem;
+  margin-top: 0;
   margin-bottom: 1rem;
-  @supports(hyphens: auto) {
-    hyphens: auto;
-    text-align: justify;
-  }
 }

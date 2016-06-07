@@ -1,19 +1,27 @@
-// reset
-a {
+// all links
+a, .anchor {
   text-decoration: none;
   color: $text-color-standard;
+
+  &:hover {
+    color: $green;
+  }
 }
 
 // styling of anchors in paragraphs
 // where we cannot add a class
-.block-paragraph a {
-  color: $blue;
-  text-decoration: none;
-  &:hover {
-    color: $darkblue;
+.block-paragraph a, p a {
+
+  color: $text-color-standard;
+  text-decoration: underline;
+
+  &:visited {
+    color: rgb(34, 93, 0); // TODO: darken($green, ???)
+    text-decoration: underline;
   }
-  &:active {
-    color: $darkblue;
+
+  &:hover, &:active {
+    color: $green;
     text-decoration: underline;
   }
 }
