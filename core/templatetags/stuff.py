@@ -2,15 +2,12 @@ from django import template
 register = template.Library()
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 from django.utils.safestring import mark_safe
-
+import urllib
 
 @register.filter()
 def prettyurl(value):
-    url_parts = value.replace("http://", "").replace("https://", "").replace("www.", "").split("/")
-    if len(url_parts) > 1:
-        return url_parts[0] + "/…"
-    else:
-        return url_parts[0]
+    return urllib.parse.urlparse(value).netloc
+
 
 @register.filter()
 def prettyphone(value):
