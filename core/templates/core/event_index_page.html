@@ -91,7 +91,13 @@
 
     {% if this_week %}
       <div class="fixed-grid-12__col-4 scrolls__element">
-        <h2 id="this_week" class="onpagemenu-scrollmark area-title">Noch diese Woche</h2>
+        <h2 id="this_week" class="onpagemenu-scrollmark area-title">
+        {% if today or tomorrow or days_if_this_week %}
+          Rest dieser Woche
+        {% else %}
+          Noch diese Woche
+        {% endif %}
+        </h2>
         {% for event in this_week %}
           {% include "core/_event_partial.html" with only_weekday=True %}
         {% endfor %}
