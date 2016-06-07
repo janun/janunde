@@ -30,7 +30,7 @@
            style="height: 40px;">
           <span class="hover-reveal__inline font-size-very-small font-family-sans padding-left-half margin-right-quarter margin-left-half float-left"
                 style="line-height: 40px">
-            von {{ event.related_group.title }}
+            von {{ event.related_group.title|truncatechars:30 }}
           </span>
           {% if event.related_group.logo %}
             {% image event.related_group.logo fill-32x32 as group_logo %}
