@@ -26,7 +26,7 @@
           <a href="{{ original_image.url }}">
             <img src="{{ original_image.url }}"
               srcset="{{ self.main_image|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
-              sizes="(min-width: 60em) 20em, 95vw"
+              sizes="(min-width: 48em) and (max-width: 59.9375em) 30vw, (min-width: 60em) 19.1875em, 95vw"
               alt="{{ original_image.alt }}"
               class="main-image panel panel--no-padding image">
           </a>

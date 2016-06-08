@@ -11,9 +11,9 @@
         {% image event.main_image fill-300x113 as fallback_image %}
         <img src="{{ fallback_image.url }}"
           srcset="{{ event.main_image|srcset:'fill-300x113 fill-600x226' }}"
-          sizes="(min-width: 60em) 18.75em, 100vw"
+          sizes="18.75em"
           alt="{{ fallback_image.alt }}"
-          style="height: 113px;"
+          style="height: 7.0625rem;"
           class="image">
       {% else %}
         <div class="image-placeholder"
