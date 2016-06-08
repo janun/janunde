@@ -15,6 +15,7 @@
     appearance: none;
     border: none;
     border-bottom: rem-calc(2) solid $brown;
+    color: $brown;
     border-radius: 0;
 
     &::-webkit-search-cancel-button {
@@ -26,7 +27,7 @@
       color: $brown;
     }
 
-    &:placeholder-shown {
+    &::placeholder-shown {
       border-bottom-color: rgba($brown, 0.2);
     }
 

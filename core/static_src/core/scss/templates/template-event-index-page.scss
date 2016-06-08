@@ -53,6 +53,27 @@
   }
 
 
+  // needs position rel or abs on parent, I think
+  // center image in div
+  .center-vert {
+    max-height: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .center-horiz {
+    max-width: 100%;
+    width: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 
   .scrolls {
     @include until($medium) {
@@ -76,7 +97,7 @@
         top: 350px;
         z-index: 10;
         pointer-events: none;
-        width: 276px;
+        width: rem-calc(150px);
         height: 1000px;
         background-image: linear-gradient(to right, transparent 0%, rgb(240, 240, 240) 100%);
       }
@@ -89,7 +110,7 @@
         top: 350px;
         z-index: 10;
         pointer-events: none;
-        width: 276px;
+        width: rem-calc(150px);
         height: 1000px;
         background-image: linear-gradient(to left, transparent 0%, rgb(240, 240, 240) 100%);
       }
@@ -115,31 +136,25 @@
       &__button {
         display: block;
         position: absolute;
-        margin-top: rem-calc(30px);
+        margin-top: rem-calc(25px);
         width: rem-calc(74);
         height: rem-calc(150);
         color: $green;
-        line-height: rem-calc(160px);
-        font-size: rem-calc(50px);
         background-color: $white;
         z-index: 100;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-
         transition: width 0.2s;
-        &:hover {
 
-          width: rem-calc(100);
+        &:hover {
+          width: rem-calc(100px);
         }
 
         &--next {
-          padding-left: rem-calc(15px);
           right: 0;
           border-radius: rem-calc(5 0 0 5);
         }
 
         &--previous {
-          text-align: right;
-          padding-right: rem-calc(15px);
           display: none;
           left: 0;
           border-radius: rem-calc(0 5 5 0);

@@ -10,6 +10,8 @@ $(document).ready(function () {
   function setJsScrollsOffset() {
     if (window.matchMedia('(min-width: 768px)').matches) {
       scrolls.css('padding-left', offsetElement.offset().left + "px" );
+    } else {
+      scrolls.css('padding-left', "" );
     }
   }
   if (offsetElement.length) {
@@ -20,10 +22,8 @@ $(document).ready(function () {
   // button next
   var buttonNext = $('.js-scrolls__button-next');
   if (buttonNext) {
-    buttonNext.sticky({
-      'widthFromWrapper': false,
-      'topSpacing': 20,
-    });
+    // TODO: sticky
+
     buttonNext.on('click', function (event) {
       event.preventDefault();
       scrolls.animate({
@@ -44,15 +44,13 @@ $(document).ready(function () {
   // button prev
   var buttonPrev = $('.js-scrolls__button-prev');
   if (buttonPrev) {
-    buttonPrev.sticky({
-      'widthFromWrapper': false,
-      'topSpacing': 20,
-    });
+    // TODO: sticky
 
     // hide button unless scrolled right
     scrolls.on('scroll', function (event) {
       if (this.scrollLeft > 0) {
         buttonPrev.show()
+        $(document.body).trigger("sticky_kit:recalc");
       } else {
         buttonPrev.hide()
       }

@@ -1,0 +1,5 @@
+.is_stuck\@until-medium {
+  @include above($medium) {
+    position: inherit !important;
+  }
+}

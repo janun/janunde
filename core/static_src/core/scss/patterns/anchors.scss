@@ -1,10 +1,14 @@
+$link-color: $text-color-standard;
+$link-color-hover: $green;
+$link-color-visited: darken($link-color-hover, 18%);
+
 // all links
 a, .anchor {
   text-decoration: none;
-  color: $text-color-standard;
+  color: $link-color;
 
   &:hover {
-    color: $green;
+    color: $link-color-hover;
   }
 }
 
@@ -12,16 +16,16 @@ a, .anchor {
 // where we cannot add a class
 .block-paragraph a, p a {
 
-  color: $text-color-standard;
+  color: $link-color;
   text-decoration: underline;
 
   &:visited {
-    color: rgb(34, 93, 0); // TODO: darken($green, ???)
+    color: $link-color-visited;
     text-decoration: underline;
   }
 
   &:hover, &:active {
-    color: $green;
+    color: $link-color-hover;
     text-decoration: underline;
   }
 }
