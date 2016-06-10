@@ -13,5 +13,6 @@ django-storages==1.4
 boto==2.39.0
 
 # Dependencies for Heroku deployment
-whitenoise==2.0.6
+whitenoise==3.2
+brotlipy==0.3.0
 django-toolbelt==0.0.1
