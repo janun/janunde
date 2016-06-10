@@ -6,6 +6,7 @@
     <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %} - JANUN{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block css %}{% endblock %}
+    {% include "_favicons.html" %}
   </head>
 
   <body class="{% block body_class %}{% endblock %}">

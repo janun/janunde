@@ -15,6 +15,8 @@ var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var modernizr = require('gulp-modernizr');
 //var rev = require('gulp-rev'); // TODO
+var realFavicon = require ('gulp-real-favicon');
+var fs = require('fs');
 
 
 var isProd = gutil.env.production;
@@ -110,17 +112,98 @@ gulp.task('videos', function(){
   .pipe(gulp.dest('core/static/core/videos/'));
 });
 
+
 // fonts
 gulp.task('fonts', function(){
   return gulp.src('core/static_src/core/fonts/**/*')
   .pipe(gulp.dest('core/static/core/fonts/'));
 });
 
+
 // images
 gulp.task('images', function(){
   return gulp.src('core/static_src/core/images/**/*')
   .pipe(gulp.dest('core/static/core/images/'));
 });
+
+
+
+// Favicons
+// File where the favicon markups are stored
+var FAVICON_DATA_FILE = 'faviconData.json';
+
+// Generate the icons. This task takes a few seconds to complete.
+// You should run it at least once to create the icons. Then,
+// you should run it whenever RealFaviconGenerator updates its
+// package (see the check-for-favicon-update task below).
+gulp.task('generate-favicon', function(done) {
+	realFavicon.generateFavicon({
+		masterPicture: 'core/static/core/images/janun_logo.svg',
+		dest: 'core/static/core/images/favicons/',
+		iconsPath: '/static/core/images/favicons/',
+		design: {
+			ios: {
+				pictureAspect: 'backgroundAndMargin',
+				backgroundColor: '#ffffff',
+				margin: '14%'
+			},
+			desktopBrowser: {},
+			windows: {
+				pictureAspect: 'whiteSilhouette',
+				backgroundColor: '#46bb00',
+				onConflict: 'override'
+			},
+			androidChrome: {
+				pictureAspect: 'backgroundAndMargin',
+				margin: '17%',
+				backgroundColor: '#ffffff',
+				themeColor: '#ffffff',
+				manifest: {
+					name: 'JANUN e.V.',
+					display: 'browser',
+					orientation: 'notSet',
+					onConflict: 'override',
+					declared: true
+				}
+			},
+			safariPinnedTab: {
+				pictureAspect: 'silhouette',
+				themeColor: '#46bb00'
+			}
+		},
+		settings: {
+			scalingAlgorithm: 'Mitchell',
+			errorOnImageTooSmall: false
+		},
+		markupFile: FAVICON_DATA_FILE
+	}, function() {
+		done();
+	});
+});
+
+// Inject the favicon markups in your HTML pages. You should run
+// this task whenever you modify a page. You can keep this task
+// as is or refactor your existing HTML pipeline.
+gulp.task('inject-favicon-markups', function() {
+	gulp.src([ '_favicons.html' ])
+		.pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
+		.pipe(gulp.dest('janunde/templates/'));
+});
+
+// Check for updates on RealFaviconGenerator (think: Apple has just
+// released a new Touch icon along with the latest version of iOS).
+// Run this task from time to time. Ideally, make it part of your
+// continuous integration system.
+gulp.task('check-for-favicon-update', function(done) {
+	var currentVersion = JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).version;
+	realFavicon.checkForUpdates(currentVersion, function(err) {
+		if (err) {
+			throw err;
+		}
+	});
+});
+
+
 
 
 // build
