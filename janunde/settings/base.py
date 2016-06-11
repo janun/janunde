@@ -164,3 +164,7 @@ TAGGIT_CASE_INSENSITIVE = True
 
 PHONENUMBER_DEFAULT_REGION = 'DE'
 PHONENUMBER_DB_FORMAT = 'RFC3966'
+
+
+# save staticfiles using whitenoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
