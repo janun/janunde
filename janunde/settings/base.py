@@ -149,6 +149,9 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+# save staticfiles using whitenoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -164,7 +167,3 @@ TAGGIT_CASE_INSENSITIVE = True
 
 PHONENUMBER_DEFAULT_REGION = 'DE'
 PHONENUMBER_DB_FORMAT = 'RFC3966'
-
-
-# save staticfiles using whitenoise
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
