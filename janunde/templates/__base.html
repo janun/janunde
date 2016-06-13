@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="theme-color" content="rgb(70, 187, 0)">
-    <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %} - JANUN{% endblock %}</title>
+    <title>JANUN e.V. – {% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block css %}{% endblock %}
     {% include "_favicons.html" %}
