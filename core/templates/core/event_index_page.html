@@ -35,7 +35,7 @@
         {% if today %}<a class="js-scroll-slow" href="#today">Heute</a>{% endif %}
         {% if tomorrow %}<a class="js-scroll-slow" href="#tomorrow">Morgen</a>{% endif %}
         {% for day, events in days_of_this_week %}<a class="js-scroll-slow" href="#{{ day|date:"l" }}">{{ day|date:"l" }}</a>{% endfor %}
-        {% if this_week %}<a class="js-scroll-slow" href="#this_week">Noch Diese Woche</a>{% endif %}
+        {% if this_week %}<a class="js-scroll-slow" href="#this_week">{% if today or tomorrow or days_of_this_week %}Rest dieser Woche{% else %}Noch diese Woche{% endif %}</a>{% endif %}
         {% if next_week %}<a class="js-scroll-slow" href="#next_week">Nächste Woche</a>{% endif %}
         {% if later_this_month %}<a class="js-scroll-slow" href="#later_this_month">Später im {% now "F" %}</a>{% endif %}
         {% for month, events in by_month %}<a class="js-scroll-slow" href="#{{ month|date:"F" }}">{{ month|date:"F" }}</a>{% endfor %}

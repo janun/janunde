@@ -11,6 +11,13 @@ ALL: $(ALL)
 #$FFMPEG -vf crop=320:528:480:191 header-video-320.mp4
 #$FFMPEG -vf crop=640:720:320:0   header-video-640.mp4
 
+# 320x568
+header-video-320.mp4:
+	$(FFMPEG) -vf crop=320:528:480:0 $@
+
+header-video-320.webm:
+	$(FFMPEG) -vf crop=320:528:480:0 -c:v libvpx -b:v 0.4M $@
+
 header-video-1024.mp4:
 	$(FFMPEG) -vf crop=1024:528:128:0 $@
 

@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!media || window.matchMedia(media).matches) {
       source.setAttribute('src', source.getAttribute('data-src'));
       source.parentNode.load();
+      source.parentNode.play();
     }
   }
 });
