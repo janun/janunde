@@ -8,7 +8,6 @@
     background-color: rgb(250, 250, 250);
 
     @include until($medium) {
-
       height: rem-calc(57px);
       width: 100%;
       z-index: 100;
@@ -165,14 +164,7 @@
   }
 
   .event {
-    margin-bottom: rem-calc(19px);
-    @include above($medium) {
-      margin-bottom: rem-calc(9px);
-    }
-    @include above($xlarge) {
-      margin-bottom: rem-calc(19px);
-    }
-
+    margin-bottom: rem-calc(18px);
     width: rem-calc(300);
     height: rem-calc(205);
     overflow: hidden;

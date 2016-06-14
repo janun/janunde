@@ -6,11 +6,17 @@
 
   &__item {
     margin-right: rem-calc(10);
-    padding: 0.5rem;
+    padding: rem-calc(8px);
     border-radius: rem-calc(5px);
 
+    &:focus {
+      outline: none;
+      border: rem-calc(2px) solid lighten($grey, 40%);
+      padding: rem-calc(6px);
+    }
+
     &.active {
-      background-color: rgba($grey, 0.1)
+      background-color: lighten($grey, 40%);
     }
   }
 }

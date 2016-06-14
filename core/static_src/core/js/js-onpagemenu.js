@@ -24,24 +24,24 @@ $(document).ready(function () {
   // smooth scrolling and
   // deactivate menu scrolling when clicked
   items.each(function () {
-    $(this).click(function () {
+    $(this).click(function (event) {
       event.preventDefault();
       enableMenuScrolling = false;
-      $.scrollTo($(this.hash), 300, {
-        axis: 'y',
-        onAfter: function () {
+      $("html, body").animate({
+        scrollTop: $(this.hash).offset().top
+      },{
+        always: function () {
           enableMenuScrolling = true;
+          updateScrollPos();
         }
-      })
+      });
     })
   })
 
 
   // updates the scroll position of the menu
   function updateScrollPos() {
-    if (!enableMenuScrolling) {
-      return;
-    }
+    if (!enableMenuScrolling) {return;}
     var pos = $(window).scrollTop();
 
     // get the target above the current page scroll pos
@@ -64,12 +64,7 @@ $(document).ready(function () {
     }
 
     menuPos = targetAbove.menuPos + percentBetween * (targetBelow.menuPos - targetAbove.menuPos);
-
-    scroll.scrollTo(menuPos, 0, {
-      axis: 'x',
-      interrupt: true,
-      margin: true
-    })
+    scroll.scrollLeft(menuPos);
   }
 
 
