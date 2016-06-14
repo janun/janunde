@@ -6,6 +6,8 @@
 
   .header {
     background-color: rgb(250, 250, 250);
+    padding-top: rem-calc(20px);
+    padding-bottom: rem-calc(20px);
 
     @include until($medium) {
       height: rem-calc(57px);
@@ -29,17 +31,18 @@
       }
     }
 
-    padding-top: rem-calc(20px);
-    padding-bottom: rem-calc(20px);
+    @include above($medium) {
+      height: rem-calc(150px);
+    }
 
     @include above($large) {
+      height: rem-calc(210px);
       padding-top: rem-calc(49px);
-      padding-bottom: rem-calc(60px);
     }
 
     @include above($xlarge) {
+      height: rem-calc(280px);
       padding-top: rem-calc(65px);
-      padding-bottom: rem-calc(90px);
     }
   }
 
@@ -74,6 +77,42 @@
   }
 
 
+  .gradient {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: rem-calc(150px);
+    height: 100vh;
+    z-index: 10;
+
+    @include above($medium) {
+      top: rem-calc(150px + 65px);
+    }
+
+    @include above($large) {
+      top: rem-calc(210px + 65px);
+    }
+
+    @include above($xlarge) {
+      top: rem-calc(280px + 65px);
+    }
+
+    &--left {
+      left: 0;
+      background-image: linear-gradient(to left, transparent 0%, rgb(240, 240, 240) 100%);
+    }
+
+    &--right {
+      right: 0;
+      background-image: linear-gradient(to right, transparent 0%, rgb(240, 240, 240) 100%);
+    }
+
+    &:hover .scrolls__button {
+      width: rem-calc(100px);
+    }
+  }
+
+
   .scrolls {
     @include until($medium) {
       &__element {
@@ -82,37 +121,11 @@
     }
 
     @include above($medium) {
+      //position: relative;
       overflow-x: scroll;
       overflow-y: hidden;
       padding-left: rem-calc(40); // fallback will be overwritten by js-scrolls
       padding-bottom: rem-calc(40);
-
-
-      &:after {
-        content: "";
-        display: block;
-        position: absolute;
-        right: 0;
-        top: 350px;
-        z-index: 10;
-        pointer-events: none;
-        width: rem-calc(150px);
-        height: 1000px;
-        background-image: linear-gradient(to right, transparent 0%, rgb(240, 240, 240) 100%);
-      }
-
-      &:before {
-        content: "";
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 350px;
-        z-index: 10;
-        pointer-events: none;
-        width: rem-calc(150px);
-        height: 1000px;
-        background-image: linear-gradient(to left, transparent 0%, rgb(240, 240, 240) 100%);
-      }
 
       &__inner {
         display: table;
@@ -154,7 +167,6 @@
         }
 
         &--previous {
-          display: none;
           left: 0;
           border-radius: rem-calc(0 5 5 0);
         }
