@@ -82,7 +82,7 @@
     position: absolute;
     top: 0;
     width: rem-calc(150px);
-    height: 100vh;
+    height: 100%;
     z-index: 10;
 
     @include above($medium) {
