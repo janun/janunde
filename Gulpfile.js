@@ -84,6 +84,7 @@ gulp.task('scripts', ['modernizr'], function(){
     'core/static/core/js/modernizr.js',
     'janunde/static/bower_components/jquery/dist/jquery.js',
     'janunde/static/bower_components/sticky-kit/jquery.sticky-kit.js',
+    'janunde/static/bower_components/jquery.scrollTo/jquery.scrollTo.js',
     'core/static_src/core/js/**/*.js',
     'janunde/static/bower_components/a11y-toggle/a11y-toggle.js',
   ])

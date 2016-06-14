@@ -17,7 +17,17 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!media || window.matchMedia(media).matches) {
       source.setAttribute('src', source.getAttribute('data-src'));
       source.parentNode.load();
-      source.parentNode.play();
     }
   }
 });
+
+
+// $('.js-mq-video-loader').each(function () {
+//   var video = this;
+//   $(document).click(function () {
+//     video.play();
+//   })
+//   $(window).scroll(function () {
+//     video.play();
+//   })
+// })

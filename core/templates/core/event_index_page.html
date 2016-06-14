@@ -31,15 +31,15 @@
       </a>
 
       <!-- on page menu -->
-      <span class="hide@medium onpagemenu">
-        {% if today %}<a class="js-scroll-slow" href="#today">Heute</a>{% endif %}
-        {% if tomorrow %}<a class="js-scroll-slow" href="#tomorrow">Morgen</a>{% endif %}
-        {% for day, events in days_of_this_week %}<a class="js-scroll-slow" href="#{{ day|date:"l" }}">{{ day|date:"l" }}</a>{% endfor %}
-        {% if this_week %}<a class="js-scroll-slow" href="#this_week">{% if today or tomorrow or days_of_this_week %}Rest dieser Woche{% else %}Noch diese Woche{% endif %}</a>{% endif %}
-        {% if next_week %}<a class="js-scroll-slow" href="#next_week">Nächste Woche</a>{% endif %}
-        {% if later_this_month %}<a class="js-scroll-slow" href="#later_this_month">Später im {% now "F" %}</a>{% endif %}
-        {% for month, events in by_month %}<a class="js-scroll-slow" href="#{{ month|date:"F" }}">{{ month|date:"F" }}</a>{% endfor %}
-        {% if after %}<a class="js-scroll-slow" href="#after">Später</a>{% endif %}
+      <span class="hide@medium onpagemenu js-onpagemenu" data-offset="58">
+        {% if today %}<a class="onpagemenu__item" href="#today">Heute</a>{% endif %}
+        {% if tomorrow %}<a class="onpagemenu__item" href="#tomorrow">Morgen</a>{% endif %}
+        {% for day, events in days_of_this_week %}<a class="onpagemenu__item" href="#{{ day|date:"l" }}">{{ day|date:"l" }}</a>{% endfor %}
+        {% if this_week %}<a class="onpagemenu__item" href="#this_week">{% if today or tomorrow or days_of_this_week %}Rest dieser Woche{% else %}Noch diese Woche{% endif %}</a>{% endif %}
+        {% if next_week %}<a class="onpagemenu__item" href="#next_week">Nächste Woche</a>{% endif %}
+        {% if later_this_month %}<a class="onpagemenu__item" href="#later_this_month">Später im {% now "F" %}</a>{% endif %}
+        {% for month, events in by_month %}<a class="onpagemenu__item" href="#{{ month|date:"F" }}">{{ month|date:"F" }}</a>{% endfor %}
+        {% if after %}<a class="onpagemenu__item" href="#after">Später</a>{% endif %}
       </span>
 
     </div>

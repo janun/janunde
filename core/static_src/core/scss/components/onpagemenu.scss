@@ -4,8 +4,14 @@
   display: inline;
   white-space: nowrap;
 
-  a {
-    margin-right: rem-calc(25);
+  &__item {
+    margin-right: rem-calc(10);
+    padding: 0.5rem;
+    border-radius: rem-calc(5px);
+
+    &.active {
+      background-color: rgba($grey, 0.1)
+    }
   }
 }
 
