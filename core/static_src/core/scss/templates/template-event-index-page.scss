@@ -81,21 +81,9 @@
     display: block;
     position: absolute;
     top: 0;
-    bottom: 0;
+    height: 100%;
     width: rem-calc(150px);
     z-index: 10;
-
-    @include above($medium) {
-      top: rem-calc(150px + 65px);
-    }
-
-    @include above($large) {
-      top: rem-calc(210px + 65px);
-    }
-
-    @include above($xlarge) {
-      top: rem-calc(280px + 65px);
-    }
 
     &--left {
       left: 0;

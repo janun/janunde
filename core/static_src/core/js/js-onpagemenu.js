@@ -29,7 +29,7 @@ $(document).ready(function () {
       enableMenuScrolling = false;
       $("html, body").animate({
         scrollTop: $(this.hash).offset().top
-      },{
+      }, {
         always: function () {
           enableMenuScrolling = true;
           updateScrollPos();

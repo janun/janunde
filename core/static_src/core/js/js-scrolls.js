@@ -22,8 +22,6 @@ $(document).ready(function () {
   // button next
   var buttonNext = $('.js-scrolls__button-next');
   if (buttonNext) {
-    // TODO: sticky
-
     buttonNext.on('click', function (event) {
       event.preventDefault();
       scrolls.animate({
@@ -44,8 +42,6 @@ $(document).ready(function () {
   // button prev
   var buttonPrev = $('.js-scrolls__button-prev');
   if (buttonPrev) {
-    // TODO: sticky
-
     // hide button unless scrolled right
     scrolls.on('scroll', function (event) {
       if (this.scrollLeft > 0) {
