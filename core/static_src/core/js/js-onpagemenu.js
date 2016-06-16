@@ -1,13 +1,17 @@
 $(document).ready(function () {
-  var scroll = $('.header');
-  var items = $('.js-onpagemenu .onpagemenu__item');
+  var scroll = $('.js-onpagemenu__scroller');
+  var items = $('.onpagemenu__item');
 
   if (!items.length) {
     return;
   }
 
   var pageOffset = $('.js-onpagemenu').data('offset') || 0;
+
   var menuOffset = items.eq(0).offset().left;
+  $(window).resize(function () {
+    var menuOffset = items.eq(0).offset().left;
+  });
 
   var enableMenuScrolling = true;
 
@@ -85,7 +89,10 @@ $(document).ready(function () {
 
   $(window).on('scroll', updateActiveItem);
   updateActiveItem();
-  $(window).on('scroll', updateScrollPos);
-  updateScrollPos();
+
+  if (scroll.length) {
+    $(window).on('scroll', updateScrollPos);
+    updateScrollPos();
+  }
 
 });

@@ -1,0 +1,42 @@
+.header {
+  position: relative;
+  padding-top: rem-calc(20px);
+  padding-bottom: rem-calc(20px);
+  background-color: rgb(250, 250, 250);
+  height: rem-calc(57px);
+  z-index: 100;
+
+  &__inner {
+    position: relative;
+    @include container;
+    max-width: rem-calc(300);
+    margin: 0 auto;
+  }
+
+  @include until($medium) {
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    a {
+      color: rgba($brown, 0.5);
+    }
+  }
+
+  @include above($medium) {
+    height: rem-calc(150px);
+  }
+
+  @include above($large) {
+    height: rem-calc(210px);
+    padding-top: rem-calc(49px);
+  }
+
+  @include above($xlarge) {
+    height: rem-calc(280px);
+    padding-top: rem-calc(65px);
+  }
+}

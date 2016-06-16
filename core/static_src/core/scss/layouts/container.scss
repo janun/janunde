@@ -1,8 +1,6 @@
 @mixin container {
-  @include until($large) {
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
+  margin-left: 1rem;
+  margin-right: 1rem;
 
   @include above($large) {
     max-width: rem-calc(960);

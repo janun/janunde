@@ -5,8 +5,8 @@
 {% block body_class %}template-event-index-page{% endblock %}
 
 {% block content %}
-<header class="header js-sticky@until-medium">
-  <div class="container js-scroll-horizontal__offsetElement">
+<header class="header js-sticky@until-medium js-onpagemenu__scroller">
+  <div class="header__inner js-scroll-horizontal__offsetElement">
 
     <form class="event-search {% if not search %}hide{% endif %} js-search" action="{% pageurl self %}" method="get">
       <input class="event-search__input js-search-focus big-font js-swap-placeholder" data-placeholder-small="Suche" autofocus type="search" name="query" placeholder="Was interessiert dich? Oder wo?" autocomplete="off" value="{{ search_query }}">

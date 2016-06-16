@@ -1,97 +1,96 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff %}
 
 
-<div class="panel panel--side-padding panel--hover-shadow event hover-reveal click-area">
+<div class="panel panel--no-padding panel--hover-shadow event hover-reveal click-area">
 
-  <div class="panel__negative-margin-sides margin-bottom-1">
-    <div class="overlay">
+  <div class="overlay">
+    <!-- show image (or placeholder) -->
+    {% if event.main_image %}
+      {% image event.main_image fill-300x113 as fallback_image %}
+      <img src="{{ fallback_image.url }}"
+        srcset="{{ event.main_image|srcset:'fill-300x113 fill-600x226' }}"
+        sizes="18.75em"
+        alt="{{ fallback_image.alt }}"
+        style="height: 7.0625rem;"
+        class="image">
+    {% else %}
+      <div class="image-placeholder"
+           style="height: 113px; background-color: {{ event.color|default:"#62e6c8" }}">
+        {% for x in ""|ljust:"40" %}
+          {{ event.title }}
+        {% endfor %}
+      </div>
+    {% endif %}
 
-      <!-- show image (or placeholder) -->
-      {% if event.main_image %}
-        {% image event.main_image fill-300x113 as fallback_image %}
-        <img src="{{ fallback_image.url }}"
-          srcset="{{ event.main_image|srcset:'fill-300x113 fill-600x226' }}"
-          sizes="18.75em"
-          alt="{{ fallback_image.alt }}"
-          style="height: 7.0625rem;"
-          class="image">
+    <!-- show related_group -->
+    {% if event.related_group %}
+      <a title="zu {{ event.related_group.title }}" href="{% pageurl event.related_group %}"
+         class="overlay__content panel panel--no-padding panel--border-radius-tr-lb top right"
+         style="height: 40px; line-height: 40px;">
+
+        <span class="hover-reveal__inline font-size-very-small font-family-sans padding-left-half margin-right-quarter margin-left-half float-left"
+              style="line-height: 40px;">
+          von {{ event.related_group.title|truncatechars:30 }}
+        </span>
+
+        {% if event.related_group.logo %}
+          {% image event.related_group.logo width-32 as group_logo %}
+          <img src="{{ group_logo.url }}"
+            srcset="{{ event.related_group.logo|srcset:'width-32 width-64 width-96' }}"
+            sizes="32px"
+            alt="{{ group_logo.alt }}"
+            style="vertical-align: middle; max-height: 32px"
+            class="margin-quarter">
+        {% else %}
+          <span class="text-align-center font-size-2 margin-top-quarter margin-right-quarter margin-left-quarter float-right"
+                style="width: 32px; line-height: 32px">
+            {{ event.related_group.abbr }}
+          </span>
+        {% endif %}
+      </a>
+    {% endif %}
+
+    <!-- show dates -->
+    <div class="overlay__content overlay__content--white-transparent bottom width-full font-family-extra">
+      {% if event.end_datetime and event.end_datetime.date != event.start_datetime.date %}
+        {{ event.start_datetime|nettes_datum }}
+        bis {{ event.end_datetime|nettes_datum }}
       {% else %}
-        <div class="image-placeholder"
-             style="height: 113px; background-color: {{ event.color|default:"#62e6c8" }}">
-          {% for x in ""|ljust:"40" %}
-            {{ event.title }}
-          {% endfor %}
-        </div>
+        {% if event.all_day %}
+          {{ event.start_datetime|nettes_datum }}
+        {% else %}
+          {{ event.start_datetime|nettes_datum }}, {{ event.start_datetime|time:"H:i" }} Uhr
+        {% endif %}
       {% endif %}
 
-      <!-- show related_group -->
-      {% if event.related_group %}
-        <a title="zu {{ event.related_group.title }}" href="{% pageurl event.related_group %}"
-           class="overlay__content panel panel--no-padding panel--border-radius-tr-lb top right"
-           style="height: 40px; line-height: 40px;">
-
-          <span class="hover-reveal__inline font-size-very-small font-family-sans padding-left-half margin-right-quarter margin-left-half float-left"
-                style="line-height: 40px;">
-            von {{ event.related_group.title|truncatechars:30 }}
-          </span>
-
-          {% if event.related_group.logo %}
-            {% image event.related_group.logo width-32 as group_logo %}
-            <img src="{{ group_logo.url }}"
-              srcset="{{ event.related_group.logo|srcset:'width-32 width-64 width-96' }}"
-              sizes="32px"
-              alt="{{ group_logo.alt }}"
-              style="vertical-align: middle; max-height: 32px"
-              class="margin-quarter">
-          {% else %}
-            <span class="text-align-center font-size-2 margin-top-quarter margin-right-quarter margin-left-quarter float-right"
-                  style="width: 32px; line-height: 32px">
-              {{ event.related_group.abbr }}
-            </span>
-          {% endif %}
+      <!-- show facebook -->
+      {% if event.facebook_event_url %}
+        <a title="zur Facebook-Veranstaltung"
+           class="float-right hover-reveal__inline padding-left-quarter padding-right-quarter"
+          target="_blank" href="{{ event.facebook_event_url }}">
+          <i class="icon-social-facebook" aria-hidden="true"></i>
         </a>
       {% endif %}
 
-      <!-- show dates -->
-      <div class="overlay__content overlay__content--white-transparent bottom width-full font-family-extra">
-        {% if event.end_datetime and event.end_datetime.date != event.start_datetime.date %}
-          {{ event.start_datetime|nettes_datum }}
-          bis {{ event.end_datetime|nettes_datum }}
-        {% else %}
-          {% if event.all_day %}
-            {{ event.start_datetime|nettes_datum }}
-          {% else %}
-            {{ event.start_datetime|nettes_datum }}, {{ event.start_datetime|time:"H:i" }} Uhr
-          {% endif %}
-        {% endif %}
-
-        <!-- show facebook -->
-        {% if event.facebook_event_url %}
-          <a title="zur Facebook-Veranstaltung"
-             class="float-right hover-reveal__inline padding-left-quarter padding-right-quarter"
-            target="_blank" href="{{ event.facebook_event_url }}">
-            <i class="icon-social-facebook" aria-hidden="true"></i>
-          </a>
-        {% endif %}
-
-        <!-- show external website -->
-        {% if event.website_url %}
-          <a title="zur externen Website"
-             class="float-right hover-reveal__inline padding-left-quarter padding-right-quarter"
-             target="_blank" href="{{ event.website_url }}">
-            <i class="icon-direction" aria-hidden="true"></i>
-          </a>
-        {% endif %}
-
-      </div>
+      <!-- show external website -->
+      {% if event.website_url %}
+        <a title="zur externen Website"
+           class="float-right hover-reveal__inline padding-left-quarter padding-right-quarter"
+           target="_blank" href="{{ event.website_url }}">
+          <i class="icon-direction" aria-hidden="true"></i>
+        </a>
+      {% endif %}
 
     </div>
+
   </div>
 
-  <!-- show title -->
-  <h3 class="margin-top-0 {% if event.title|length > 40 %}font-size-small{% else %}font-size-3{% endif %}">
-    {{ event.title|truncatechars:56|softhyphen:"de-de" }}
-  </h3>
+  <div style="padding: 1.125rem">
+    <!-- show title -->
+    <h3 class="margin-top-0 {% if event.title|length > 40 %}font-size-small{% else %}font-size-3{% endif %}">
+      {{ event.title|truncatechars:56|softhyphen:"de-de" }}
+    </h3>
+  </div>
 
   <a href="{% pageurl event %}" class="click-area__area-link">{{ event.title }}</a>
 

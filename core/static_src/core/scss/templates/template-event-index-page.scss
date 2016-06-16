@@ -5,47 +5,7 @@ $event-index-background: rgb(240, 240, 240);
   // TODO: this needs to be moved away to classes or sth.
 
 
-  .header {
-    background-color: rgb(250, 250, 250);
-    padding-top: rem-calc(20px);
-    padding-bottom: rem-calc(20px);
 
-    @include until($medium) {
-      height: rem-calc(57px);
-      width: 100%;
-      z-index: 100;
-      overflow-x: scroll;
-      overflow-y: hidden;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      a {
-        color: rgba($brown, 0.5);
-      }
-
-      .container {
-        position: relative;
-        max-width: rem-calc(300);
-        margin: 0 auto;
-      }
-    }
-
-    @include above($medium) {
-      height: rem-calc(150px);
-    }
-
-    @include above($large) {
-      height: rem-calc(210px);
-      padding-top: rem-calc(49px);
-    }
-
-    @include above($xlarge) {
-      height: rem-calc(280px);
-      padding-top: rem-calc(65px);
-    }
-  }
 
 
   // needed by js-sticky.js
@@ -86,6 +46,7 @@ $event-index-background: rgb(240, 240, 240);
     border-radius: 5px;
 
     // highlight on hover for large screens
+    // because medium probably have touch
     @include above($large) {
       transition: box-shadow .2s;
       &:hover {

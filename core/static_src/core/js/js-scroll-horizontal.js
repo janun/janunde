@@ -6,7 +6,6 @@ $(document).ready(function () {
   if (!scrolls.length) return;
 
   // set paddingLeft of scrolls by offsetLeft of .js-scrolls__offsetElement
-  var offsetElement = $('.js-scroll-horizontal__offsetElement');
   function setJsScrollsOffset() {
     if (window.matchMedia('(min-width: 768px)').matches) {
       scrolls.css('padding-left', offsetElement.offset().left + "px" );
@@ -14,10 +13,13 @@ $(document).ready(function () {
       scrolls.css('padding-left', "" );
     }
   }
+  var offsetElement = $('.js-scroll-horizontal__offsetElement');
   if (offsetElement.length) {
     $(window).on('resize', setJsScrollsOffset);
+    $(window).on('scroll', setJsScrollsOffset);
     setJsScrollsOffset();
   }
+
 
   // arrow right
   var buttonNext = $('.js-scroll-horizontal__right');
