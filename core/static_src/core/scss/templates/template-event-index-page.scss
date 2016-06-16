@@ -1,5 +1,6 @@
+$event-index-background: rgb(240, 240, 240);
 .template-event-index-page {
-  background-color: rgb(240, 240, 240);
+  background-color: $event-index-background;
 
   // TODO: this needs to be moved away to classes or sth.
 
@@ -85,19 +86,23 @@
     width: rem-calc(150px);
     z-index: 10;
 
+    &:hover .scrolls__button {
+      width: rem-calc(74px);
+    }
+
+    // &:focus {
+    //   outline: none;
+    // }
+
     &--left {
       left: 0;
-      background-image: linear-gradient(to left, transparent 0%, rgb(240, 240, 240) 100%);
+      background-image: linear-gradient(to left, transparent 0%, $event-index-background 100%);
       display: none;
     }
 
     &--right {
       right: 0;
-      background-image: linear-gradient(to right, transparent 0%, rgb(240, 240, 240) 100%);
-    }
-
-    &:hover .scrolls__button {
-      width: rem-calc(100px);
+      background-image: linear-gradient(to right, transparent 0%, $event-index-background 100%);
     }
   }
 
@@ -138,7 +143,7 @@
         display: block;
         position: absolute;
         margin-top: rem-calc(25px);
-        width: rem-calc(74);
+        width: rem-calc(64);
         height: rem-calc(150);
         color: $green;
         background-color: $white;
@@ -146,8 +151,9 @@
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         transition: width 0.2s;
 
-        &:hover {
-          width: rem-calc(100px);
+        &:hover, &:focus, &.hover {
+          outline: none;
+          width: rem-calc(84px);
         }
 
         &--next {

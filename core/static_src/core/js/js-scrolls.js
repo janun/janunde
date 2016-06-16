@@ -37,6 +37,14 @@ $(document).ready(function () {
         buttonNext.show();
       }
     });
+
+    // flash button hover state after page load
+    window.setTimeout(function () {
+      $('.scrolls__button--next').addClass('hover');
+      window.setTimeout(function () {
+        $('.scrolls__button--next').removeClass('hover');
+      }, 250);
+    }, 250);
   }
 
   // button prev
