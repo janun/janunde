@@ -2,11 +2,11 @@
 // js helpers for the scrolls element
 
 $(document).ready(function () {
-  var scrolls = $('.js-scrolls');
+  var scrolls = $('.js-scroll-horizontal');
   if (!scrolls.length) return;
 
   // set paddingLeft of scrolls by offsetLeft of .js-scrolls__offsetElement
-  var offsetElement = $('.js-scrolls__offsetElement');
+  var offsetElement = $('.js-scroll-horizontal__offsetElement');
   function setJsScrollsOffset() {
     if (window.matchMedia('(min-width: 768px)').matches) {
       scrolls.css('padding-left', offsetElement.offset().left + "px" );
@@ -19,8 +19,8 @@ $(document).ready(function () {
     setJsScrollsOffset();
   }
 
-  // button next
-  var buttonNext = $('.js-scrolls__button-next');
+  // arrow right
+  var buttonNext = $('.js-scroll-horizontal__right');
   if (buttonNext) {
     buttonNext.on('click', function (event) {
       event.preventDefault();
@@ -40,15 +40,15 @@ $(document).ready(function () {
 
     // flash button hover state after page load
     window.setTimeout(function () {
-      $('.scrolls__button--next').addClass('hover');
+      $('.horizontal-scroll__arrow--right').addClass('hover');
       window.setTimeout(function () {
-        $('.scrolls__button--next').removeClass('hover');
+        $('.horizontal-scroll__arrow--right').removeClass('hover');
       }, 250);
     }, 250);
   }
 
-  // button prev
-  var buttonPrev = $('.js-scrolls__button-prev');
+  // arrow left
+  var buttonPrev = $('.js-scroll-horizontal__left');
   if (buttonPrev) {
     // hide button unless scrolled right
     scrolls.on('scroll', function (event) {

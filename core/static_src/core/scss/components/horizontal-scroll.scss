@@ -1,0 +1,115 @@
+$horizontal-scroll-breakpoint: $medium;
+
+
+// horizontal scrolling area
+//  * only active after $horizontal-scroll-breakpoint
+//  * can have left/right arrows
+//
+// @example markup:
+//   <div class="horizontal-scroll__wrapper">
+//     <div class="horizontal-scroll js-scrolls">
+//       <span class="horizontal-scroll__gradient horizontal-scroll__gradient--left">
+//         <a class="horizontal-scroll__arrow horizontal-scroll__arrow--left"></a>
+//       </span>
+//       <span class="horizontal-scroll__gradient horizontal-scroll__gradient--right">
+//         <a class="horizontal-scroll__arrow horizontal-scroll__arrow--right"></a>
+//       </span>
+//       <div class="horizontal-scroll__inner">
+//         <div class="horizontal-scroll__item"></div>
+//         <div class="horizontal-scroll__item"></div>
+//       </div>
+//     </div>
+//   </div>
+.horizontal-scroll {
+  @include above($medium) {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding-left: rem-calc(40); // fallback will be overwritten by js-scrolls
+    padding-bottom: rem-calc(40);
+  }
+
+  &__wrapper {
+    position: relative;
+  }
+
+  &__inner {
+    @include above($horizontal-scroll-breakpoint) {
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+      border-spacing: rem-calc(43) 0;
+      margin-left: - rem-calc(43 + 10);
+    }
+    @include above ($large) {
+      border-spacing: rem-calc(80) 0;
+      margin-left: - rem-calc(80 + 10);
+    }
+  }
+
+  &__item {
+    // center elements on small screens (and nothing else)
+    margin: 0 auto;
+    @include above ($horizontal-scroll-breakpoint) {
+      display: table-cell;
+    }
+  }
+
+  &__gradient {
+    // TODO: hide@no-js
+    display: none;
+    @include above($horizontal-scroll-breakpoint) {
+      display: block;
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: rem-calc(150px);
+      z-index: 10;
+    }
+
+    &--left {
+      left: 0;
+      background-image: linear-gradient(to left, transparent 0%, rgb(240, 240, 240) 100%);
+      display: none; // shown by js
+    }
+    &--right {
+      right: 0;
+      background-image: linear-gradient(to right, transparent 0%, rgb(240, 240, 240) 100%);
+    }
+
+    &:hover .horizontal-scroll__arrow {
+      width: rem-calc(84px);
+    }
+  }
+
+  &__arrow {
+    // TODO: hide@no-js
+    display: none;
+    @include above($horizontal-scroll-breakpoint) {
+      display: block;
+      position: absolute;
+      margin-top: rem-calc(25px);
+      width: rem-calc(64);
+      height: rem-calc(150);
+      color: $green;
+      background-color: $white;
+      z-index: 100;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      transition: width 0.2s;
+    }
+
+    &:hover, &:focus, &.hover {
+      outline: none;
+      width: rem-calc(84px);
+    }
+
+    &--left {
+      left: 0;
+      border-radius: rem-calc(0 5 5 0);
+      display: none; // shown by js
+    }
+    &--right {
+      right: 0;
+      border-radius: rem-calc(5 0 0 5);
+    }
+  }
+}
