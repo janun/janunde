@@ -295,6 +295,9 @@ class EventIndexPage(BasePage):
         context['thisyear'] = today.year
 
         events = self.get_events()
+        events.filter(
+            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today, late_attendence=True),
+        )
 
         # search stuff
         search_query = request.GET.get('query', None)
@@ -306,7 +309,7 @@ class EventIndexPage(BasePage):
 
         # query= url param given
         if search_query:
-            events = events.search(search_query).get_queryset()
+            events = events.search(search_query)
             context['search_query'] = search_query
             search = 1
 
@@ -326,9 +329,7 @@ class EventIndexPage(BasePage):
         end_of_next_month = begin_of_next_month + relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
 
 
-        context['upcoming'] = upcoming = list(events.filter(
-            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today, late_attendence=True),
-        ))
+        context['upcoming'] = upcoming = list(events)
 
 
         # compute the events for this week
