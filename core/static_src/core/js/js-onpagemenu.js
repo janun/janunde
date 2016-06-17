@@ -8,21 +8,28 @@ $(document).ready(function () {
 
   var pageOffset = $('.js-onpagemenu').data('offset') || 0;
 
-  var menuOffset = items.eq(0).offset().left;
-  $(window).resize(function () {
-    var menuOffset = items.eq(0).offset().left;
-  });
+  var menuOffset = 0;
+  function calcMenuOffset () {
+    menuOffset = items.eq(0).offset().left;
+  }
+  $(window).resize(calcMenuOffset);
+  calcMenuOffset();
 
   var enableMenuScrolling = true;
 
-  var targets = $.map(items, function (item) {
-    pos = $($(item).attr('href')).offset().top;
-    return {
-      pos: pos, // position on the page
-      item: item, // menu item
-      menuPos: $(item).offset().left - menuOffset // position in the menu
-    }
-  });
+  var targets = Array();
+  function calcTargets() {
+    targets = $.map(items, function (item) {
+      pos = $($(item).attr('href')).offset().top;
+      return {
+        pos: pos, // position on the page
+        item: item, // menu item
+        menuPos: $(item).offset().left - menuOffset // position in the menu
+      }
+    });
+  }
+  $(window).resize(calcTargets);
+  calcTargets();
 
 
   // smooth scrolling and

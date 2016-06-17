@@ -18,9 +18,10 @@
     }
 
     &--white-transparent {
+      font-size: rem-calc(14px);
       background: rgba($white, 0.8);
       height: rem-calc(30);
-      line-height: rem-calc(30);
+      line-height: rem-calc(32);
       padding-left: rem-calc(20);
       padding-right: rem-calc(0);
     }

@@ -8,8 +8,20 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-  $('.js-sticky\\@until-medium').stick_in_parent({
-    sticky_class: "is_stuck@until-medium",
-    spacer: false,
-  });
+  var sticky = $('.js-sticky\\@until-medium');
+
+  function updateSticky() {
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      sticky.stick_in_parent({
+        sticky_class: "is_stuck@until-medium",
+      });
+    } else {
+      sticky.trigger("sticky_kit:detach");
+    }
+  }
+
+  if (sticky.length) {
+    $(window).resize(updateSticky);
+    updateSticky();
+  }
 })
