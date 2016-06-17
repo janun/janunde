@@ -294,28 +294,6 @@ class EventIndexPage(BasePage):
         context['now'] = now = timezone.localtime(timezone.now())
         context['thisyear'] = today.year
 
-        events = self.get_events()
-        events.filter(
-            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today, late_attendence=True),
-        )
-
-        # search stuff
-        search_query = request.GET.get('query', None)
-        search = request.GET.get('search', 0)
-
-        # empty query= url param
-        if 'query' in request.GET:
-            search = 1
-
-        # query= url param given
-        if search_query:
-            events = events.search(search_query)
-            context['search_query'] = search_query
-            search = 1
-
-        context['search'] = search
-
-
         begin_of_this_week = today - datetime.timedelta(days=today.weekday())
         end_of_this_week = today + datetime.timedelta(days=6 - today.weekday())
 
@@ -328,6 +306,26 @@ class EventIndexPage(BasePage):
         begin_of_next_month = begin_of_this_month + relativedelta.relativedelta(months=1)
         end_of_next_month = begin_of_next_month + relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
 
+
+        events = self.get_events().filter(
+            Q(start_datetime__gte=today) | Q(end_datetime__gte=today, late_attendence=True),
+        )
+
+        # search stuff
+        search_query = request.GET.get('query', None)
+        search = request.GET.get('search', 0)
+
+        # empty query= url param
+        if 'query' in request.GET:
+            search = 1
+
+        # query= url param given
+        if search_query:
+            events = events.search(search_query, operator="and", order_by_relevance=False)
+            context['search_query'] = search_query
+            search = 1
+
+        context['search'] = search
 
         context['upcoming'] = upcoming = list(events)
 
@@ -567,6 +565,9 @@ class EventPage(Page):
         index.RelatedFields('related_group', [
             index.SearchField('title'),
         ]),
+        index.FilterField('start_datetime'),
+        index.FilterField('end_datetime'),
+        index.FilterField('late_attendence'),
     ]
 
     edit_handler = TabbedInterface([
