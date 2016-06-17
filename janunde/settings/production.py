@@ -70,6 +70,18 @@ TEMPLATES[0]['APP_DIRS'] = False
 #CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 
+BONSAI_URL = os.environ.get('BONSAI_URL', '')
+
+if BONSAI_URL:
+    WAGTAILSEARCH_BACKENDS = {
+        'default': {
+            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch',
+            'URLS': [BONSAI_URL ],
+            'INDEX': 'wagtail',
+            'TIMEOUT': 5,
+        }
+    }
+
 
 LOGGING = {
     'version': 1,
