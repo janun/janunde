@@ -12,9 +12,9 @@ $(document).ready(function (){
       searchFocus.focus();
     });
 
-    // searchCloseButton.on('click', function (event) {
-    //   event.preventDefault();
-    //   search.addClass('hide');
-    //   noSearch.removeClass('hide');
-    // });
+    searchCloseButton.on('click', function (event) {
+      event.preventDefault();
+      search.addClass('hide');
+      noSearch.removeClass('hide');
+    });
 });
