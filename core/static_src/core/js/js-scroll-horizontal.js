@@ -5,6 +5,14 @@ $(document).ready(function () {
   var scrolls = $('.js-scroll-horizontal');
   if (!scrolls.length) return;
 
+  // save horizontal scroll position
+  $(window).unload(function() {
+    localStorage.setItem("horizontalScrollPosition", scrolls.scrollLeft());
+  });
+  if(localStorage.horizontalScrollPosition) {
+    scrolls.scrollLeft(localStorage.getItem("horizontalScrollPosition"));
+  }
+
   // set paddingLeft of scrolls by offsetLeft of .js-scrolls__offsetElement
   function setJsScrollsOffset() {
     if (window.matchMedia('(min-width: 768px)').matches) {
