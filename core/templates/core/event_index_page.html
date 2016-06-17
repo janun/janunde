@@ -11,16 +11,16 @@
     <form class="event-search {% if not search %}hide{% endif %} js-search" action="{% pageurl self %}" method="get">
       <input class="event-search__input js-search-focus big-font js-swap-placeholder" data-placeholder-small="Suche" autofocus type="search" name="query" placeholder="Was interessiert dich? Oder wo?" autocomplete="off" value="{{ search_query }}">
       <input class="hide@until-medium event-search__submit" type="submit" value="Suchen">
-      <a class="event-search__close" href="{% pageurl self %}">
+      <a class="event-search__close icon-clicktarget@until-medium" href="{% pageurl self %}">
         <span class="hide@until-medium">Schließen</span>
-        <span class="hide@medium">×</span>
+        <span class="hide@medium" style="line-height: 1rem">×</span>
       </a>
     </form>
 
     <div class="{% if search %}hide{% endif %} js-no-search">
       <h1 class="hide@until-medium big-font {% if not upcoming %}line-through{% endif %}">Veranstaltungen, Seminare, Demos</h1>
       {% if upcoming %}
-        <a class="js-search-reveal-button color-green font-size-2" href="?search=1">
+        <a class="js-search-reveal-button color-green font-size-2 icon-clicktarget@until-medium" href="?search=1">
           <i class="icon-magnifier" aria-hidden="true"></i>
           <span class="hide@until-medium">Suchen</span>
         </a>

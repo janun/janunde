@@ -1,2 +1,35 @@
 $simple-line-font-path: '../../bower_components/simple-line-icons/fonts/';
 @import 'bower_components/simple-line-icons/scss/simple-line-icons';
+
+
+// ensures padding
+// icons are 16px/1rem wide
+// so this ensures 36x40 px clicktarget
+@mixin icon-clicktarget {
+  padding-left: rem-calc(10px);
+  margin-left: - rem-calc(10px);
+
+  padding-right: rem-calc(10px);
+  margin-right: - rem-calc(10px);
+
+  padding-top: rem-calc(5px);
+  margin-top: - rem-calc(5px);
+
+  padding-bottom: rem-calc(5px);
+  margin-bottom: - rem-calc(5px);
+
+  &--change-sides {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.icon-clicktarget {
+  @include icon-clicktarget;
+
+  &\@until-medium {
+    @include until($medium) {
+      @include icon-clicktarget;
+    }
+  }
+}
