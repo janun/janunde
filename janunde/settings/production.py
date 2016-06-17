@@ -73,13 +73,14 @@ TEMPLATES[0]['APP_DIRS'] = False
 BONSAI_URL = os.environ.get('BONSAI_URL', '')
 
 if BONSAI_URL:
+    import certifi
     WAGTAILSEARCH_BACKENDS = {
         'default': {
             'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch',
             'URLS': [BONSAI_URL ],
             'INDEX': 'wagtail',
             'TIMEOUT': 5,
-            'verify_certs': True,
+            'ca_certs': certifi.where(),
         }
     }
 
