@@ -79,6 +79,7 @@ if BONSAI_URL:
             'URLS': [BONSAI_URL ],
             'INDEX': 'wagtail',
             'TIMEOUT': 5,
+            'verify_certs': True,
         }
     }
 
