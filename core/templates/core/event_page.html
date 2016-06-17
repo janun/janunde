@@ -22,10 +22,11 @@
       <!-- image -->
       {% if self.main_image %}
       <div class="margin-bottom-2">
-        {% image self.main_image original as original_image %}
+        {% image self.main_image width-768 as original_image %}
+        {% image self.main_image fill-600x226 as fallback_image %}
           <a href="{{ original_image.url }}">
-            <img src="{{ original_image.url }}"
-              srcset="{{ self.main_image|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
+            <img src="{{ fallback_image.url }}"
+              srcset="{{ self.main_image|srcset:'fill-300x113 fill-600x226 fill-900x339 fill-1200x452' }}"
               sizes="(min-width: 48em) and (max-width: 59.9375em) 30vw, (min-width: 60em) 19.1875em, 95vw"
               alt="{{ original_image.alt }}"
               class="main-image panel panel--no-padding image">
@@ -72,10 +73,10 @@
 
           <span class="font-size-1 font-family-sans color-grey">
             <span class="color-grey hover-color-green cursor-pointer" role="button" data-a11y-toggle="calendar-links">Im Kalendar speichern…</span>
-            <ul class="hide-aria-hidden margin-0 padding-left-2" aria-hidden="true" id="calendar-links">
-              <li><a class="color-grey" target="_blank" href="{{ self.create_google_calendar_link }}">zu Google-Kalendar hinzufügen</a></li>
-              <li><a class="color-grey" target="_blank" href="?format=ical">iCal-Datei runterladen</a></li>
-            </ul>
+            <div class="hide-aria-hidden margin-0" aria-hidden="true" id="calendar-links">
+              <a class="color-grey" target="_blank" href="{{ self.create_google_calendar_link }}">zu Google-Kalendar hinzufügen</a>,
+              <a class="color-grey" target="_blank" href="?format=ical">iCal-Datei runterladen</a>
+            </div>
           </span>
 
         </div>

@@ -6,9 +6,9 @@
   // TODO: this needs to be moved away to classes or sth.
 
   &__title {
-    margin-bottom: rem-calc(30);
+    margin-bottom: rem-calc(15px);
     @include above($medium) {
-      margin-bottom: rem-calc(38);
+      margin-bottom: rem-calc(38px);
     }
 
     h1 {
