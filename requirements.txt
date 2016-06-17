@@ -17,3 +17,4 @@ whitenoise==3.2
 brotlipy==0.3.0
 cffi==1.6.0
 django-toolbelt==0.0.1
+elasticsearch==1.9.0
