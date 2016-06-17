@@ -26,9 +26,9 @@ $(document).ready(function () {
   if (buttonNext) {
     buttonNext.on('click', function (event) {
       event.preventDefault();
-      scrolls.animate({
+      scrolls.finish().animate({
         scrollLeft: Math.floor(scrolls.scrollLeft() / 400)*400 + 400
-      }, 200);
+      }, 300);
     });
 
     // hide button when farest right
@@ -50,24 +50,25 @@ $(document).ready(function () {
   }
 
   // arrow left
-  var buttonPrev = $('.js-scroll-horizontal__left');
-  if (buttonPrev) {
+  var unhide = $('.js-scroll-horizontal__unhide');
+  if (unhide.length) {
     // hide button unless scrolled right
     scrolls.on('scroll', function (event) {
       if (this.scrollLeft > 0) {
-        buttonPrev.show()
+        unhide.show()
         $(document.body).trigger("sticky_kit:recalc");
       } else {
-        buttonPrev.hide()
+        unhide.hide()
       }
     });
 
+  var buttonPrev = $('.js-scroll-horizontal__left');
     // actually scroll
     buttonPrev.on('click', function (event) {
       event.preventDefault();
-      scrolls.animate({
+      scrolls.finish().animate({
         scrollLeft: Math.ceil(scrolls.scrollLeft() / 400)*400 - 400
-      }, 200);
+      }, 300);
     });
   }
 

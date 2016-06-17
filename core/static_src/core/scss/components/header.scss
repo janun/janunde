@@ -8,9 +8,13 @@
 
   &__inner {
     position: relative;
-    @include container;
     max-width: rem-calc(300);
     margin: 0 auto;
+
+    @include above($medium) {
+      max-width: rem-calc(960);
+    }
+
   }
 
   @include until($medium) {
