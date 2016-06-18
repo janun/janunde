@@ -17,6 +17,17 @@ $(document).ready(function () {
 
   var enableMenuScrolling = true;
 
+  var isMobile = true;
+  var wasMobile = false;
+  function checkMobile() {
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      isMobile = true;
+    } else {
+      isMobile = false;
+    }
+  }
+  checkMobile();
+
   var targets = Array();
   function calcTargets() {
     targets = $.map(items, function (item) {
@@ -28,7 +39,14 @@ $(document).ready(function () {
       }
     });
   }
-  $(window).resize(calcTargets);
+
+  $(window).resize(function () {
+    checkMobile();
+    if (isMobile && !wasMobile) {
+      calcTargets();
+    }
+    wasMobile = isMobile;
+  });
   calcTargets();
 
 
