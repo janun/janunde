@@ -48,19 +48,21 @@ def nettes_datum2(value, short=False):
     today = datetime.datetime.now(tzinfo).date()
     delta = value - today
     if short:
-        grey_span = lambda x: x
+        grey_span_maybe = lambda x: x
+    else:
+        grey_span_maybe = grey_span
 
     if delta.days == 0:
-        return mark_safe( "heute" + grey_span( ", " + datum(value, today) ) )
+        return mark_safe( "heute" + grey_span_maybe( ", " + datum(value, today) ) )
     elif delta.days == 1:
-        return mark_safe( "morgen" + grey_span( ", " + datum(value, today) ) )
+        return mark_safe( "morgen" + grey_span_maybe( ", " + datum(value, today) ) )
     elif delta.days == -1:
-        return mark_safe( "gestern" + grey_span( ", " + datum(value, today) ) )
+        return mark_safe( "gestern" + grey_span_maybe( ", " + datum(value, today) ) )
     else:
         if delta.days > 7:
             return date_filter(value, "D") + " " + datum(value, today)
         else:
             if short:
-                return date_filter(value, "D") + " " + grey_span( ", " + datum(value, today) )
+                return date_filter(value, "D") + " " + grey_span_maybe( ", " + datum(value, today) )
             else:
-                return date_filter(value, "l") + ", " + grey_span( ", " + datum(value, today) )
+                return date_filter(value, "l") + ", " + grey_span_maybe( ", " + datum(value, today) )
