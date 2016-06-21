@@ -1,0 +1,49 @@
+{% load nettes_datum %}
+
+
+{# no end #}
+{% if not self.end_datetime or self.end_datetime.date == self.start_datetime.date and self.all_day %}
+  <abbr title="{% if self.all_day %}
+                 {{ self.start_datetime|date:'d.m.Y' }}
+               {% else %}
+                 {{ self.start_datetime|date:'d.m.Y H:i' }}
+               {% endif %}" }}>
+    {{ self.start_datetime|nettes_datum2 }}
+    {% if not self.all_day %}
+      <br>{{ self.start_datetime|time:"" }}&#x202F;Uhr
+    {% endif %}
+  </abbr>
+
+{% else %}{# has end date/time #}
+
+  {# starts and ends on same day but has different time #}
+  {% if self.end_datetime.date == self.start_datetime.date %}
+
+    <abbr title="{{ self.start_datetime|date:'d.m.Y H:i' }} – {{ self.end_datetime|time:'H:i' }}" }}>
+      {{ self.start_datetime|nettes_datum2 }}
+      <br>{{ self.start_datetime|time:"" }}&nbsp;–&nbsp;{{ self.end_datetime|time:"" }}&#x202F;Uhr
+    <abbr>
+
+  {# starts and ends on different days #}
+  {% else %}
+    <abbr title="{% if self.all_day %}
+                   {{ self.start_datetime|date:'d.m.Y' }} – {{ self.end_datetime|date:'d.m.Y' }}
+                 {% else %}
+                  {{ self.start_datetime|date:'d.m.Y H:i' }} – {{ self.end_datetime|date:'d.m.Y H:i' }}
+                 {% endif %}" }}>
+      <div>
+        {{ self.start_datetime|nettes_datum2 }}
+        {% if not self.all_day %}
+          <br>{{ self.start_datetime|time:"" }}&#x202F;Uhr
+        {% endif %}
+      </div>
+      <div class="margin-top-half">
+        bis {{ self.end_datetime|nettes_datum2 }}
+        {% if not self.all_day %}
+          <br>{{ self.end_datetime|time:"" }}&#x202F;Uhr
+        {% endif %}
+      </div>
+    <abbr>
+  {% endif %}
+
+{% endif %}

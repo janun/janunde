@@ -38,46 +38,14 @@
       <div class="grid-12 font-family-extra margin-bottom-1">
         <i class="grid-12__col-1 icon-clock" aria-hidden="true"></i>
         <div class="grid-12__col-11 font-size-2">
-          {% if self.end_datetime %}
-            {% if self.end_datetime.date == self.start_datetime.date %}
-              {# starts and ends on same day #}
-              <div>
-                {{ self.start_datetime|nettes_datum_grey_date }}
-                {% if not self.all_day %}
-                  <br>{{ self.start_datetime|time:"" }}&nbsp;–&nbsp;{{ self.end_datetime|time:"" }}&#x202F;Uhr
-                {% endif %}
-              </div>
-            {% else %}
-              {# starts and ends on different days #}
-              <div>
-                ab {{ self.start_datetime|nettes_datum_grey_date }}
-                {% if not self.all_day %}
-                  <br>{{ self.start_datetime|time:"" }}&#x202F;Uhr
-                {% endif %}
-              </div>
-              <div class="margin-top-half">
-                bis {{ self.end_datetime|nettes_datum_grey_date }}
-                {% if not self.all_day %}
-                  <br>{{ self.end_datetime|time:"" }}&#x202F;Uhr
-                {% endif %}
-              </div>
-            {% endif %}
-          {% else %}
-            <div>
-              {{ self.start_datetime|nettes_datum_grey_date }}
-              {% if not self.all_day %}
-                <br>{{ self.start_datetime|time:"" }}&#x202F;Uhr
-              {% endif %}
-            </div>
-          {% endif %}
-
-          <span class="font-size-1 font-family-sans color-grey">
+          {% include "core/_event_page_dates.html" %}
+          <div class="font-size-1 font-family-sans color-grey">
             <span class="color-grey hover-color-green cursor-pointer" role="button" data-a11y-toggle="calendar-links">Im Kalendar speichern…</span>
             <div class="hide-aria-hidden margin-0" aria-hidden="true" id="calendar-links">
               <a class="color-grey" target="_blank" href="{{ self.create_google_calendar_link }}">zu Google-Kalendar hinzufügen</a>,<br>
               <a class="color-grey" target="_blank" href="?format=ical">iCal-Datei runterladen</a>
             </div>
-          </span>
+          </div>
 
         </div>
       </div>

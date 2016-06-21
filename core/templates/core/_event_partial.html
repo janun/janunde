@@ -50,18 +50,26 @@
       </a>
     {% endif %}
 
-    <!-- show dates -->
+
     <div class="overlay__content overlay__content--white-transparent bottom width-full font-family-extra">
+      <!-- show dates -->
       {% if event.end_datetime and event.end_datetime.date != event.start_datetime.date %}
-        {{ event.start_datetime|nettes_datum }}
-        bis {{ event.end_datetime|nettes_datum }}
+        <abbr title="{{ event.start_datetime|date:'d.m.Y H:i' }} – {{ event.end_datetime|date:'d.m.Y H:i' }}">
+          {{ event.start_datetime|nettes_datum2:True }}
+          bis {{ event.end_datetime|nettes_datum2:True }}
+        </abbr>
       {% else %}
         {% if event.all_day %}
-          {{ event.start_datetime|nettes_datum }}
+          <abbr title="{{ event.start_datetime|date:'d.m.Y' }}">
+            {{ event.start_datetime|nettes_datum2:True }}
+          </abbr>
         {% else %}
-          {{ event.start_datetime|nettes_datum }}, {{ event.start_datetime|time:"H:i" }} Uhr
+          <abbr title="{{ event.start_datetime|date:'d.m.Y H:i' }}">
+            {{ event.start_datetime|nettes_datum2:True }} {{ event.start_datetime|time:"H:i" }} Uhr
+          </abbr>
         {% endif %}
       {% endif %}
+
 
       <!-- show facebook -->
       {% if event.facebook_event_url %}
