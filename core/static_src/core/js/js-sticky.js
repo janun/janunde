@@ -5,9 +5,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-  var sticky = $('.js-sticky\\@medium');
-
-  function updateSticky() {
+  function updateSticky(sticky) {
     if (window.matchMedia('(min-width: 768px)').matches) {
       sticky.stick_in_parent();
     } else {
@@ -15,28 +13,32 @@ $(document).ready(function () {
     }
   }
 
-  if (sticky.length) {
-    $(window).resize(updateSticky);
-    updateSticky();
-  }
+  $('.js-sticky\\@medium').each(function () {
+    $(window).resize(function () {
+      updateSticky($(this));
+    });
+    updateSticky($(this));
+  })
 })
 
 
 $(document).ready(function () {
-  var sticky = $('.js-sticky\\@until-medium');
-
-  function updateSticky() {
+  function updateSticky(sticky) {
+    //var spacerElem = sticky.closest('.js-sticky__spacer');
     if (window.matchMedia('(max-width: 767px)').matches) {
       sticky.stick_in_parent({
         sticky_class: "is_stuck@until-medium",
+        spacer: false,//spacerElem.length ? spacerElem : null,
       });
     } else {
       sticky.trigger("sticky_kit:detach");
     }
   }
 
-  if (sticky.length) {
-    $(window).resize(updateSticky);
-    updateSticky();
-  }
+  $('.js-sticky\\@until-medium').each(function () {
+    $(window).resize(function () {
+      updateSticky($(this));
+    });
+    updateSticky($(this));
+  });
 })
