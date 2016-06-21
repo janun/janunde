@@ -59,10 +59,7 @@ def nettes_datum2(value, short=False):
     elif delta.days == -1:
         return mark_safe( "gestern" + grey_span_maybe( ", " + datum(value, today) ) )
     else:
-        if delta.days > 7:
-            return date_filter(value, "D") + " " + datum(value, today)
+        if short:
+            return mark_safe( date_filter(value, "D") + grey_span_maybe( " " + datum(value, today) ) )
         else:
-            if short:
-                return mark_safe( date_filter(value, "D") + " " + grey_span_maybe( ", " + datum(value, today) ) )
-            else:
-                return mark_safe( date_filter(value, "l") + ", " + grey_span_maybe( ", " + datum(value, today) ) )
+            return mark_safe( date_filter(value, "l") + grey_span_maybe( ", " + datum(value, today) ) )
