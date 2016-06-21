@@ -63,6 +63,6 @@ def nettes_datum2(value, short=False):
             return date_filter(value, "D") + " " + datum(value, today)
         else:
             if short:
-                return date_filter(value, "D") + " " + grey_span_maybe( ", " + datum(value, today) )
+                return mark_safe( date_filter(value, "D") + " " + grey_span_maybe( ", " + datum(value, today) ) )
             else:
-                return date_filter(value, "l") + ", " + grey_span_maybe( ", " + datum(value, today) )
+                return mark_safe( date_filter(value, "l") + ", " + grey_span_maybe( ", " + datum(value, today) ) )
