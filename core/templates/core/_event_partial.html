@@ -55,22 +55,24 @@
       <!-- show dates -->
       {% if event.end_datetime and event.end_datetime.date != event.start_datetime.date %}
         {% if event.all_day %}
-          <abbr title="{{ event.start_datetime|date:'d.m.Y' }} – {{ event.end_datetime|date:'d.m.Y' }}">
+          <span title="{{ event.start_datetime|date:'d.m.Y' }} – {{ event.end_datetime|date:'d.m.Y' }}">
+          <time datetime="{{ event.start_datetime.date|date:'c' }}">{{ event.start_datetime|nettes_datum2:True }}</time>
+          bis <time datetime="{{ event.end_datetime.date|date:'c' }}">{{ event.end_datetime|nettes_datum2:True }}</time>
         {% else %}
-          <abbr title="{{ event.start_datetime|date:'d.m.Y H:i' }} – {{ event.end_datetime|date:'d.m.Y H:i' }}">
+          <span title="{{ event.start_datetime|date:'d.m.Y H:i' }} – {{ event.end_datetime|date:'d.m.Y H:i' }}">
+          <time datetime="{{ event.start_datetime|date:'c' }}">{{ event.start_datetime|nettes_datum2:True }}</time>
+          bis <time datetime="{{ event.end_datetime|date:'c' }}">{{ event.end_datetime|nettes_datum2:True }}</time>
         {% endif %}
-          {{ event.start_datetime|nettes_datum2:True }}
-          bis {{ event.end_datetime|nettes_datum2:True }}
-        </abbr>
+        </span>
       {% else %}
         {% if event.all_day %}
-          <abbr title="{{ event.start_datetime|date:'d.m.Y' }}">
-            {{ event.start_datetime|nettes_datum2:True }}
-          </abbr>
+          <span title="{{ event.start_datetime|date:'d.m.Y' }}">
+            <time datetime="{{ event.start_datetime.date|date:'c' }}">{{ event.start_datetime|nettes_datum2:True }}</time>
+          </span>
         {% else %}
-          <abbr title="{{ event.start_datetime|date:'d.m.Y H:i' }}">
-            {{ event.start_datetime|nettes_datum2:True }} {{ event.start_datetime|time:"H:i" }} Uhr
-          </abbr>
+          <span title="{{ event.start_datetime|date:'d.m.Y H:i' }}">
+            <time datetime="{{ event.start_datetime|date:'c' }}">{{ event.start_datetime|nettes_datum2:True }} {{ event.start_datetime|time:"H:i" }} Uhr</time>
+          </span>
         {% endif %}
       {% endif %}
 

@@ -49,17 +49,22 @@ def nettes_datum2(value, short=False):
     delta = value - today
     if short:
         grey_span_maybe = lambda x: x
+        seperator = " "
+        weekday_format = "D"
     else:
         grey_span_maybe = grey_span
+        weekday_format = "l"
+        seperator = ", "
 
     if delta.days == 0:
         return mark_safe( "heute" + grey_span_maybe( ", " + datum(value, today) ) )
-    elif delta.days == 1:
+    if delta.days == 1:
         return mark_safe( "morgen" + grey_span_maybe( ", " + datum(value, today) ) )
-    elif delta.days == -1:
+    if delta.days == -1:
         return mark_safe( "gestern" + grey_span_maybe( ", " + datum(value, today) ) )
-    else:
+    print( delta.days )
+    if delta.days < 7:
         if short:
-            return mark_safe( date_filter(value, "D") + grey_span_maybe( " " + datum(value, today) ) )
-        else:
-            return mark_safe( date_filter(value, "l") + grey_span_maybe( ", " + datum(value, today) ) )
+            return date_filter(value, "l")
+        return mark_safe( date_filter(value, "l") + grey_span_maybe( seperator + datum(value, today) ) )
+    return date_filter(value, weekday_format) + seperator + datum(value, today)
