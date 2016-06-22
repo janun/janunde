@@ -4,7 +4,6 @@ from django.template.defaultfilters import date as date_filter
 from django.utils.safestring import mark_safe
 from django.utils.html import conditional_escape
 
-
 register = template.Library()
 
 
@@ -15,7 +14,6 @@ def format_month(date):
         return date_filter(date, "F")
     else:
         return date_filter(date, "F Y")
-
 
 
 @register.filter(needs_autoescape=True)
@@ -47,24 +45,23 @@ def nettes_datum2(value, short=False):
         return value
     today = datetime.datetime.now(tzinfo).date()
     delta = value - today
-    if short:
-        grey_span_maybe = lambda x: x
-        seperator = " "
-        weekday_format = "D"
-    else:
-        grey_span_maybe = grey_span
-        weekday_format = "l"
-        seperator = ", "
 
     if delta.days == 0:
-        return mark_safe( "heute" + grey_span_maybe( ", " + datum(value, today) ) )
+        if short:
+            return "heute"
+        return mark_safe( "heute" + grey_span( ", " + datum(value, today) ) )
     if delta.days == 1:
-        return mark_safe( "morgen" + grey_span_maybe( ", " + datum(value, today) ) )
+        if short:
+            return "morgen"
+        return mark_safe( "morgen" + grey_span( ", " + datum(value, today) ) )
     if delta.days == -1:
-        return mark_safe( "gestern" + grey_span_maybe( ", " + datum(value, today) ) )
-    print( delta.days )
-    if delta.days < 7:
+        if short:
+            return "gestern"
+        return mark_safe( "gestern" + grey_span( ", " + datum(value, today) ) )
+    if 1 < delta.days < 7:
         if short:
             return date_filter(value, "l")
-        return mark_safe( date_filter(value, "l") + grey_span_maybe( seperator + datum(value, today) ) )
-    return date_filter(value, weekday_format) + seperator + datum(value, today)
+        return mark_safe( date_filter(value, "l") + grey_span( ", " + datum(value, today) ) )
+    if short:
+        return date_filter(value, "D") + ", " + datum(value, today)
+    return date_filter(value, "l") + " " + datum(value, today)
