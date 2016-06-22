@@ -56,7 +56,7 @@
         <i class="grid-12__col-1 icon-location-pin" aria-hidden="true"></i>
         <span class="grid-12__col-11 font-size-2">
           {{ self.location }}<br>
-          <a class="font-size-1 font-family-sans color-grey" target="_blank" href="https://www.google.de/maps/search/{{ self.location }}">Auf Google Maps anzeigen</a>
+          <a class="font-size-1 font-family-sans color-grey" target="_blank" href="https://www.google.de/maps/search/{{ self.location|urlencode }}">Auf Google Maps anzeigen</a>
         </span>
       </div>
       {% endif %}
