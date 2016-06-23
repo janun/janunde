@@ -1,3 +1,5 @@
+import os
+
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
 from wagtail.wagtailcore.models import Page
@@ -8,8 +10,10 @@ from django.http import Http404
 
 
 def acme_challenge(request):
-    if request.path == '/.well-known/acme-challenge/bUm3osaRlsNqrRgU_X_gA3IWODrk70aQ_T6ztcHFyIQ':
-        return HttpResponse("bUm3osaRlsNqrRgU_X_gA3IWODrk70aQ_T6ztcHFyIQ.SLc8EJ4p8dq4KH_yxprfSgxonZ2ggk6WKaPzXwVMEuc")
+    if not 'ACME_CHALLENGE' in os.environ:
+        raise Http404
+    if request.path == '/.well-known/acme-challenge/%s' % os.environ['ACME_CHALLENGE']:
+        return HttpResponse(os.environ['ACME_RESPONSE'])
     else:
         raise Http404
 
