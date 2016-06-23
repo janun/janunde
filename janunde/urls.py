@@ -1,11 +1,15 @@
 from django.conf import settings
 from django.conf.urls import include, url
 from django.views.defaults import page_not_found, server_error
+from django.views.generic.base import RedirectView
+
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
 from core.views import search, acme_challenge
+
+
 
 urlpatterns = [
     url(r'^404/$', page_not_found),
@@ -16,10 +20,10 @@ urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
 
-    url(r'^search/$', search, name='search'),
+    #url(r'^search/$', search, name='search'),
+    #url(r'^styleguide/', include('styleguide.urls')),
 
-    url(r'^styleguide/', include('styleguide.urls')),
-
+    url(r'^(?!(veranstaltungen))', RedirectView.as_view(url='http://janun.de/')),
     url(r'', include(wagtail_urls)),
 ]
 
