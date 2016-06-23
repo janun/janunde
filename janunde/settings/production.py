@@ -101,3 +101,13 @@ LOGGING = {
         },
     },
 }
+
+
+ROLLBAR_ACCESS_TOKEN = os.environ.get('ROLLBAR_ACCESS_TOKEN', '')
+if ROLLBAR_ACCESS_TOKEN:
+    ROLLBAR = {
+        'access_token': ROLLBAR_ACCESS_TOKEN,
+        'environment': 'development' if DEBUG else 'production',
+        'branch': 'master',
+        'root': '/',
+    }

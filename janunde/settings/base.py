@@ -65,6 +65,8 @@ MIDDLEWARE_CLASSES = (
 
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
+
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
 
