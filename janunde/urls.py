@@ -5,11 +5,13 @@ from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
-from core.views import search
+from core.views import search, acme_challenge
 
 urlpatterns = [
     url(r'^404/$', page_not_found),
     url(r'^500/$', server_error),
+
+    url(r'^.well-known/acme-challenge/', acme_challenge), # for letsencrypt
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
