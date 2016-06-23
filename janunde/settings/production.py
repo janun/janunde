@@ -36,8 +36,9 @@ if SSL:
     X_FRAME_OPTIONS = 'DENY'
     # Honor the 'X-Forwarded-Proto' header for request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    # Allow all host headers
-    ALLOWED_HOSTS = ['*']
+    
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
 
 # save media files in S3
 if 'AWS_ACCESS_KEY' in os.environ:
