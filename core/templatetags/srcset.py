@@ -9,9 +9,6 @@ def srcset(image, filter_specs):
     generate a list of image renditions suitable for html5 srcset
     usage:
         srcset="{{ image|srcset:'width-320|jpg width-640|jpg' }}"
-
-    TODO: Don't ouput image renditions that arent any bigger than previous ones,
-          i.e. when the source picture isnt big enough
     """
     sources = {}
     for filter_spec in filter_specs.split(' '):

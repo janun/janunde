@@ -437,8 +437,7 @@ class EventPage(Page):
         blank=True,
         related_name='+',
         verbose_name=_("Bild"),
-        help_text=_("Bild für diese Veranstaltung. "
-                    "Bitte kein Gruppen- oder JANUN-Logo!")
+        help_text=_("Bitte kein Gruppen- oder JANUN-Logo!")
     )
     start_datetime = models.DateTimeField(
         _("Startzeit"),
@@ -451,12 +450,10 @@ class EventPage(Page):
     all_day = models.BooleanField(
         _("ganztägig"),
         default=False,
-        help_text=_("Bei ganztägigen Veranstaltungen werden Uhrzeiten ignoriert."),
     )
     late_attendence = models.BooleanField(
         _("späte Teilnahme möglich"),
-        help_text=_("Falls dies ein mehrtägiger Termin ist: "
-                    "Ist es auch möglich z.B. erst am zweiten Tag zu kommen?"),
+        help_text=_("Ist es auch möglich z.B. erst am zweiten Tag zu kommen?"),
         default=False
     )
     related_group = models.ForeignKey(
@@ -465,26 +462,21 @@ class EventPage(Page):
         blank=True,
         related_name='event_pages',
         on_delete=models.SET_NULL,
-        verbose_name=_("Zugehörige Gruppe"),
-        help_text=_("Eine JANUN-Gruppe, "
-                    "die dieser Veranstaltung zugeordnet ist")
+        verbose_name=_("Zugehörige JANUN-Gruppe"),
     )
     facebook_event_url = FacebookEventURLField(
-        _("Facebook Event"),
-        help_text=_("Die URL zum Facebook-Event dieser Veranstaltung"),
+        _("Facebook-Event"),
         null=True,
         blank=True,
     )
     website_url = PrettyURLField(
         _("externe Website"),
-        help_text=_("Die URL einer externen Website zu dieser Veranstaltung"),
+        help_text=_("z.B. auf der Veranstalter-Homepage"),
         null=True,
         blank=True,
     )
     contact_mail = models.EmailField(
         _("E-Mail"),
-        help_text=_("Die E-Mail-Adresse, "
-                    "um Kontakt für diese Veranstaltung aufzunehmen"),
         null=True,
         blank=True,
     )
@@ -511,9 +503,8 @@ class EventPage(Page):
         ('rgb(233, 88, 34)', _("Orange")),
     )
     color = models.CharField(
-        _("Farbe"),
-        help_text=_("Farbe, die diese Veranstaltung bekommt, "
-                    "falls kein Poster angegeben ist."),
+        _("Farbe als Ersatz für Bild"),
+        help_text=_("Die Veranstaltung bekommt diese Farbe, falls es kein Bild gibt."),
         choices=COLOR_CHOICES,
         null=True,
         blank=True,
@@ -529,8 +520,8 @@ class EventPage(Page):
         # TODO: change this into a real location somehow
     )
     register_url = PrettyURLField(
-        _("Anmelde-Formular"),
-        help_text=_("Link zu einem externen Anmelde-Formular"),
+        _("Link zu Anmelde-Formular"),
+        help_text=_("z.B. auf der externen Seite oder bei einem Formularservice"),
         null=True,
         blank=True,
     )
@@ -597,13 +588,13 @@ class EventPage(Page):
                     FieldPanel('website_url'),
                     FieldPanel('facebook_event_url')
                 ],
-                heading="Links und E-Mail",
+                heading="Links",
             )
-        ], heading=_("Datum, Ort und Links")),
+        ], heading=_("Datum, Ort, Links")),
         ObjectList([
             ImageChooserPanel('main_image'),
             FieldPanel('color'),
-        ], heading=_("Bild und Gestaltung")),
+        ], heading=_("Bild")),
         ObjectList([
             FieldPanel('related_group'),
             MultiFieldPanel([
@@ -612,7 +603,7 @@ class EventPage(Page):
                 FieldPanel('contact_phone', widget=PhoneNumberInternationalFallbackWidget),
             ], heading="Kontakt"),
             FieldPanel('register_url'),
-        ], heading="Gruppe, Kontakt und Anmeldung")
+        ], heading="Gruppe, Kontakt, Anmeldung")
     ])
 
     partial_template_name = 'core/_partial.html'

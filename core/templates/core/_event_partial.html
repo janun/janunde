@@ -54,16 +54,18 @@
     <div class="overlay__content overlay__content--white-transparent bottom width-full font-family-extra">
       <!-- show dates -->
       {% if event.end_datetime and event.end_datetime.date != event.start_datetime.date %}
+        {# TODO: dont show year on second date if same year #}
         {% if event.all_day %}
           <span title="{{ event.start_datetime|date:'d.m.Y' }} – {{ event.end_datetime|date:'d.m.Y' }}">
-          <time datetime="{{ event.start_datetime.date|date:'c' }}">{{ event.start_datetime|nettes_datum2:True }}</time>
-          bis <time datetime="{{ event.end_datetime.date|date:'c' }}">{{ event.end_datetime|nettes_datum2:True }}</time>
+            <time datetime="{{ event.start_datetime.date|date:'c' }}">{{ event.start_datetime|nettes_datum2:True }}</time>
+            bis <time datetime="{{ event.end_datetime.date|date:'c' }}">{{ event.end_datetime|nettes_datum2:True }}</time>
+          </span>
         {% else %}
           <span title="{{ event.start_datetime|date:'d.m.Y H:i' }} – {{ event.end_datetime|date:'d.m.Y H:i' }}">
-          <time datetime="{{ event.start_datetime|date:'c' }}">{{ event.start_datetime|nettes_datum2:True }}</time>
-          bis <time datetime="{{ event.end_datetime|date:'c' }}">{{ event.end_datetime|nettes_datum2:True }}</time>
+            <time datetime="{{ event.start_datetime|date:'c' }}">{{ event.start_datetime|nettes_datum2:True }}</time>
+            bis <time datetime="{{ event.end_datetime|date:'c' }}">{{ event.end_datetime|nettes_datum2:True }}</time>
+          </span>
         {% endif %}
-        </span>
       {% else %}
         {% if event.all_day %}
           <span title="{{ event.start_datetime|date:'d.m.Y' }}">
