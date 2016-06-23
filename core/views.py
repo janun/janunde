@@ -7,8 +7,6 @@ from django.http import HttpResponse
 from django.http import Http404
 
 
-
-
 def acme_challenge(request):
     if request.path == '/.well-known/acme-challenge/bUm3osaRlsNqrRgU_X_gA3IWODrk70aQ_T6ztcHFyIQ':
         return HttpResponse("bUm3osaRlsNqrRgU_X_gA3IWODrk70aQ_T6ztcHFyIQ.SLc8EJ4p8dq4KH_yxprfSgxonZ2ggk6WKaPzXwVMEuc")

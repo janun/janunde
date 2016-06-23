@@ -20,22 +20,23 @@ SECRET_KEY = os.environ['SECRET_KEY']
 if SSL:
     # disable usage of non-ssl connection
     SECURE_HSTS_SECONDS = 3600
-# Send the header: x-content-type-options: nosniff
-SECURE_CONTENT_TYPE_NOSNIFF = True
-# Send the header: x-xss-protection: 1; mode=block
-SECURE_BROWSER_XSS_FILTER = True
-# redirect http to https
-SECURE_SSL_REDIRECT = SSL
-# use a secure-only session cookie
-SESSION_COOKIE_SECURE = SSL
-# secure-only CSRF cookie
-CSRF_COOKIE_SECURE = SSL
-# HttpOnly CSRF cookie
-CSRF_COOKIE_HTTPONLY = True
-# no x frames
-X_FRAME_OPTIONS = 'DENY'
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    # Send the header: x-content-type-options: nosniff
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    # Send the header: x-xss-protection: 1; mode=block
+    SECURE_BROWSER_XSS_FILTER = True
+    # redirect http to https
+    SECURE_SSL_REDIRECT = SSL
+    # use a secure-only session cookie
+    SESSION_COOKIE_SECURE = SSL
+    # secure-only CSRF cookie
+    CSRF_COOKIE_SECURE = SSL
+    # HttpOnly CSRF cookie
+    CSRF_COOKIE_HTTPONLY = True
+    # no x frames
+    X_FRAME_OPTIONS = 'DENY'
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
