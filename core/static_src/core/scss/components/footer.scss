@@ -6,6 +6,26 @@
 
 .footer {
   text-align: center;
-  padding: rem-calc(30);
-  color: $text-color-standard;
+  padding-top: rem-calc(20);
+  padding-bottom: rem-calc(20);
+  color: $grey;
+
+  @include above($medium) {
+    padding-top: rem-calc(50);
+  }
+
+  a {
+    color: $grey;
+    &:hover {
+      color: $text-color-standard;
+    }
+  }
+
+  &__item {
+    padding: rem-calc(5);
+    @include above($medium) {
+      padding-left: rem-calc(25);
+      padding-right: rem-calc(25);
+    }
+  }
 }
