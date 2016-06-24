@@ -7,9 +7,12 @@
       font-size: rem-calc(14);
     }
 
-    //height: rem-calc(65);
-    padding-top: rem-calc(22);
-    padding-bottom: rem-calc(22);
+    padding-top: rem-calc(18);
+    padding-bottom: rem-calc(18);
+    @include above($medium) {
+      padding-top: rem-calc(22);
+      padding-bottom: rem-calc(22);
+    }
     color: $red;
 
     a {
