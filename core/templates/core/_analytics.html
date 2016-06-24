@@ -1,4 +1,4 @@
-{% if not debug %}
+{% if debug %}
 
   <!-- Piwik -->
   <script type="text/javascript">
@@ -46,18 +46,18 @@
     // hack: delete the cookie, so the survey wont be hidden
     (function() {
       document.cookie = "survWidget=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      $('#toggleFeedback').click(function () {
+        event.preventDefault();
+        toggleVisibility('ax6hlRcmMHtj');
+      });
     })();
-    function toggleFeedback(event) {
-      event.preventDefault();
-      toggleVisibility('ax6hlRcmMHtj');
-    }
   </script>
   <script type='text/javascript' src='//freesurveycreator.com/embeds/ax6hlRcmMHtj.js'></script>
   <style>
     .fb-cr p, .fb-cr a, .fb-cr textarea, .fb-cr button, .fsc-logo {
       font-family: Cabin, sans-serif;
     }
-    .fb-cr p, .fb-cr a {
+    .fb-cr p, .fb-cr a, .fsc-logo {
       color: #fff !important;
     }
     .fb-cr button, .fb-cr textarea, {
