@@ -1,0 +1,31 @@
+{% if not debug %}
+
+  <!-- Piwik -->
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//piwik.janunweb.de/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 5]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <noscript><p><img src="//piwik.janunweb.de/piwik.php?idsite=5" style="border:0;" alt="" /></p></noscript>
+  <!-- End Piwik Code -->
+
+  <!-- Mouseflow -->
+  <script type="text/javascript">
+  var _mfq = _mfq || [];
+    (function() {
+      var mf = document.createElement("script");
+      mf.type = "text/javascript"; mf.async = true;
+      mf.src = "//cdn.mouseflow.com/projects/0cf9c887-b254-4b55-9e7a-776228c5003a.js";
+      document.getElementsByTagName("head")[0].appendChild(mf);
+    })();
+  </script>
+  <!-- End Mouseflow -->
+
+{% endif %}
