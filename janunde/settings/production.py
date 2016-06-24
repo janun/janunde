@@ -20,7 +20,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 if SSL:
     # disable usage of non-ssl connection
     SECURE_HSTS_SECONDS = 3600
-    
+
 # Send the header: x-content-type-options: nosniff
 SECURE_CONTENT_TYPE_NOSNIFF = True
 # Send the header: x-xss-protection: 1; mode=block
@@ -110,6 +110,6 @@ if ROLLBAR_ACCESS_TOKEN:
     ROLLBAR = {
         'access_token': ROLLBAR_ACCESS_TOKEN,
         'environment': 'development' if DEBUG else 'production',
-        'branch': 'master',
+        'branch': 'production',
         'root': '/',
     }

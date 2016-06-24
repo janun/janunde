@@ -1,4 +1,5 @@
 {% extends "__base.html" %}
+{% include "core/_rollbar.html" %}
 
 {% load wagtailuserbar %}
 {% load static from staticfiles %}
@@ -6,10 +7,12 @@
 
 {% block css %}
   <link rel="stylesheet" type="text/css" href="{% static "core/css/all.css" %}">
-{% endblock %}concat('app.js')
+{% endblock %}
 
 
 {% block body_content %}
+
+  {% include "core/_rollbar.html" %}
 
   {% block top %}
     {% include  "core/_betabanner.html" %}
