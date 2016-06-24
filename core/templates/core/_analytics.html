@@ -45,7 +45,7 @@
   <script>
     // hack: delete the cookie, so the survey wont be hidden
     (function() {
-      document.cookie = survWidget=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;
+      document.cookie = "survWidget=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     })();
     function toggleFeedback(event) {
       event.preventDefault();
@@ -54,9 +54,14 @@
   </script>
   <script type='text/javascript' src='//freesurveycreator.com/embeds/ax6hlRcmMHtj.js'></script>
   <style>
-    .fb-cr p, .fb-cr a, .fb-cr textarea, .fb-cr button {
+    .fb-cr p, .fb-cr a, .fb-cr textarea, .fb-cr button, .fsc-logo {
       font-family: Cabin, sans-serif;
+    }
+    .fb-cr p, .fb-cr a {
       color: #fff !important;
+    }
+    .fb-cr button, .fb-cr textarea, {
+      color: #37171a !important;
     }
     .fb-cr {
       box-shadow: 0px 0px 9px rgba(0,0,0,.2) !important;
