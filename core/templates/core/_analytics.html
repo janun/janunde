@@ -42,39 +42,38 @@
       })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
   </script>
 
-
-  <!-- freesurveycreator -->
-  <script>
-    // hack: delete the cookie, so the survey wont be hidden
-    (function() {
-      document.cookie = "survWidget=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-      $('#toggleFeedback').click(function () {
-        event.preventDefault();
-        toggleVisibility('ax6hlRcmMHtj');
-      });
-    })();
-  </script>
-  <script type='text/javascript' src='//freesurveycreator.com/embeds/ax6hlRcmMHtj.js'></script>
-  <style>
-    @media screen and (min-width: 501px) {
-      .fb-cr {
-        left: 50%;
-        margin-left: -160px;
-      }
-    }
-    .fb-cr p, .fb-cr a, .fb-cr textarea, .fb-cr button, .fsc-logo {
-      font-family: Cabin, sans-serif;
-    }
-    .fb-cr p, .fb-cr a, .fsc-logo, .fb-cr h3 {
-      color: #fff !important;
-    }
-    .fb-cr button, .fb-cr textarea, {
-      color: #37171a !important;
-    }
-    .fb-cr {
-      box-shadow: 0px 0px 9px rgba(0,0,0,.2) !important;
-      background: #46bb00 !important;
-    }
-  </style>
-
 {% endif %}
+
+<!-- freesurveycreator -->
+<script>
+  // hack: delete the cookie, so the survey wont be hidden
+  (function() {
+    document.cookie = "survWidget=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    $('#toggleFeedback').click(function () {
+      event.preventDefault();
+      toggleVisibility('ax6hlRcmMHtj');
+    });
+  })();
+</script>
+<script type='text/javascript' src='//freesurveycreator.com/embeds/ax6hlRcmMHtj.js'></script>
+<style>
+  @media screen and (min-width: 501px) {
+    .fb-cr {
+      left: 50%;
+      margin-left: -160px;
+    }
+  }
+  .fb-cr p, .fb-cr a, .fb-cr textarea, .fb-cr button, .fsc-logo {
+    font-family: Cabin, sans-serif;
+  }
+  .fb-cr p, .fb-cr a, .fsc-logo, .fb-cr h3 {
+    color: #fff !important;
+  }
+  .fb-cr button, .fb-cr textarea, {
+    color: #37171a !important;
+  }
+  .fb-cr {
+    box-shadow: 0px 0px 9px rgba(0,0,0,.2) !important;
+    background: #46bb00 !important;
+  }
+</style>
