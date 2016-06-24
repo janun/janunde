@@ -1,0 +1,20 @@
+.betabanner {
+  background-color: $white;
+
+  &__inner {
+    @include container;
+    @include until($medium) {
+      font-size: rem-calc(14);
+    }
+
+    //height: rem-calc(65);
+    padding-top: rem-calc(22);
+    padding-bottom: rem-calc(22);
+    color: $red;
+
+    a {
+      color: $red;
+      text-decoration: underline;
+    }
+  }
+}
