@@ -20,4 +20,12 @@
       text-decoration: underline;
     }
   }
+
+  &__close {
+    line-height: 1rem;
+    font-size: 2rem;
+    text-decoration: none !important;
+    margin-left: 1rem;
+    padding: 0 0.5rem;
+  }
 }
