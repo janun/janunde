@@ -28,7 +28,7 @@ $(document).ready(function () {
     if (window.matchMedia('(max-width: 767px)').matches) {
       sticky.stick_in_parent({
         sticky_class: "is_stuck@until-medium",
-        spacer: false,//spacerElem.length ? spacerElem : null,
+        //spacer: false,//spacerElem.length ? spacerElem : null,
       });
     } else {
       sticky.trigger("sticky_kit:detach");
