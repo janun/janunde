@@ -49,7 +49,7 @@
   // hack: delete the cookie, so the survey wont be hidden
   (function() {
     document.cookie = "survWidget=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    $('#toggleFeedback').click(function () {
+    $('#toggleFeedback').click(function (event) {
       event.preventDefault();
       toggleVisibility('ax6hlRcmMHtj');
     });
