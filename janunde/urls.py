@@ -18,9 +18,9 @@ urlpatterns = [
 
     url(r'^.well-known/acme-challenge/', acme_challenge), # for letsencrypt
 
-    url(r'^admin', include(wagtailadmin_urls)),
+    url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^django-admin/', include(admin.site.urls)),
-    url(r'^documents', include(wagtaildocs_urls)),
+    url(r'^documents/', include(wagtaildocs_urls)),
 
     #url(r'^search/$', search, name='search'),
     #url(r'^styleguide/', include('styleguide.urls')),
