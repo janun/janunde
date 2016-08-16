@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.views.defaults import page_not_found, server_error
 from django.views.generic.base import RedirectView
+from django.contrib import admin
 
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
@@ -17,8 +18,9 @@ urlpatterns = [
 
     url(r'^.well-known/acme-challenge/', acme_challenge), # for letsencrypt
 
-    url(r'^admin/', include(wagtailadmin_urls)),
-    url(r'^documents/', include(wagtaildocs_urls)),
+    url(r'^admin', include(wagtailadmin_urls)),
+    url(r'^django-admin/', include(admin.site.urls)),
+    url(r'^documents', include(wagtaildocs_urls)),
 
     #url(r'^search/$', search, name='search'),
     #url(r'^styleguide/', include('styleguide.urls')),
