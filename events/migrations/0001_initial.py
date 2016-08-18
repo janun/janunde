@@ -82,5 +82,5 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.SeparateDatabaseAndState(state_operations=state_operations),
-        migrations.RunPython(fix_contenttypes)
+        #migrations.RunPython(fix_contenttypes)
     ]
