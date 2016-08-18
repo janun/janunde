@@ -8,6 +8,8 @@ from wagtail.wagtailsearch.models import Query
 from django.http import HttpResponse
 from django.http import Http404
 
+from django.shortcuts import get_object_or_404
+
 
 def acme_challenge(request):
     if not 'ACME_CHALLENGE' in os.environ:
@@ -16,6 +18,30 @@ def acme_challenge(request):
         return HttpResponse(os.environ['ACME_RESPONSE'])
     else:
         raise Http404
+
+
+from core.models import JanunTag
+Tag = JanunTag.tag_model()
+
+def tags(request, tagname):
+    tag = get_object_or_404(Tag, name=tagname)
+
+    if tag.thema.all():
+        thema = tag.thema.all()[0]
+        tagname = thema.title
+    else:
+        thema = None
+
+    objects = []
+    for relation in JanunTag.objects.filter(tag=tag.id):
+        objects.append(relation.content_object.specific)
+
+    return render(request, 'core/thema.html', {
+            'tagname': tagname,
+            'objects': objects,
+            'thema': thema,
+        })
+
 
 
 def search(request):

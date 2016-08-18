@@ -43,44 +43,14 @@
          class="navbar__item navbar__collapsible js-aria-hidden"
          data-js-aria-hidden-media="(max-width: 1023px)">
       <ul role="menubar" class="menu">
-        <!-- {% for menuitem in menuitems %}
+        {% for menuitem in menuitems %}
           <li role="menuitem" class="menu__item
               {% if menuitem.is_active %}menu__item--active{% endif %}">
             <a href="{% pageurl menuitem %}">
               {{ menuitem.title }}
             </a>
           </li>
-        {% endfor %} -->
-        <li role="menuitem" class="menu__item">
-          <a href="http://janun.de/aktuelles">
-            Aktuelles
-          </a>
-        </li>
-        <li role="menuitem" class="menu__item menu__item--active">
-          <a href="https://beta.janun.de/veranstaltungen">
-            Veranstaltungen
-          </a>
-        </li>
-        <li role="menuitem" class="menu__item">
-          <a href="http://janun.de/aktiv_werden">
-            Aktiv werden
-          </a>
-        </li>
-        <li role="menuitem" class="menu__item">
-          <a href="http://janun.de/ueber_uns">
-            Über Uns
-          </a>
-        </li>
-        <li role="menuitem" class="menu__item">
-          <a href="http://janun.de/service">
-            Service
-          </a>
-        </li>
-        <li role="menuitem" class="menu__item">
-          <a href="http://janun.de/bilder">
-            Bilder
-          </a>
-        </li>
+        {% endfor %}
       </ul>
     </div>
 

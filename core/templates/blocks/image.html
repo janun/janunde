@@ -2,15 +2,12 @@
 
 {% image value original as original_image %}
 
-<div class="image attribution">
+<div class="image image--centered image--wide">
   <a href="{{ original_image.url }}">
     {% image value original as original_image %}
     <img src="{{ original_image.url }}"
       srcset="{{ value|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
-      sizes="(min-width: 40em) 34.5em, 100vw"
+      sizes="(min-width: 60em) 60em, 100vw"
       alt="{{ original_image.alt }}">
-    {% if value.attribution %}
-      <div class="attribution__content">{{ value.attribution }}</div>
-    {% endif %}
   </a>
 </div>

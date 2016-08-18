@@ -15,7 +15,7 @@
   {% include "core/_rollbar.html" %}
 
   {% block top %}
-    {% include  "core/_betabanner.html" %}
+    {#  {% include  "core/_betabanner.html" %} #}
 
     {% include "core/_navbar.html" %}
 
@@ -39,5 +39,5 @@
 
 {% block js %}
   <script type="text/javascript" src="{% static 'core/js/app.js' %}"></script>
-  {% include "core/_analytics.html" %}
+  {# {% include "core/_analytics.html" %} #}
 {% endblock %}

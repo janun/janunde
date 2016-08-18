@@ -1,0 +1,18 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% load static from staticfiles %}
+
+{% block body_class %}template-thema-index-page{% endblock %}
+
+{% block title %}{{ tagname }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>{{ tagname }}</h1>
+  <ul>
+    {% for object in objects %}
+      <li><a href="{% pageurl object %}">{{ object.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

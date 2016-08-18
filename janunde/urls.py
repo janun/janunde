@@ -8,7 +8,7 @@ from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
-from core.views import search, acme_challenge
+from core.views import search, acme_challenge, tags
 
 
 
@@ -25,7 +25,9 @@ urlpatterns = [
     #url(r'^search/$', search, name='search'),
     #url(r'^styleguide/', include('styleguide.urls')),
 
-    url(r'^(?!(veranstaltungen))', RedirectView.as_view(url='http://janun.de/')),
+    #url(r'^(?!(veranstaltungen))', RedirectView.as_view(url='http://janun.de/')),
+
+    url(r'^thema/(?P<tagname>\w+)/$', tags, name='tags'),
     url(r'', include(wagtail_urls)),
 ]
 

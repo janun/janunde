@@ -1,0 +1,8 @@
+{% if self.tags.all %}
+  <div class="margin-top-3">
+    <span class="margin-right-1 font-weight-bold">Themen:</span>
+    {% for tag in self.tags.all %}
+      <a class="tag" href="/thema/{{ tag }}">{{ tag }}</a>
+    {% endfor %}
+  </div>
+{% endif %}

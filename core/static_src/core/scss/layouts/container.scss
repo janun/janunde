@@ -1,9 +1,9 @@
-@mixin container {
+@mixin container($width: rem-calc(960)) {
   margin-left: 1rem;
   margin-right: 1rem;
 
-  @include above($large) {
-    max-width: rem-calc(960);
+  @include above($width) {
+    max-width: $width;
     margin-left: auto;
     margin-right: auto;
   }
@@ -12,4 +12,9 @@
 
 .container {
   @include container;
+}
+
+
+.text-container {
+  @include container(rem-calc(640));
 }
