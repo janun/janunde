@@ -65,18 +65,19 @@ class Migration(migrations.Migration):
     ]
 
 
-    def fix_contenttypes(apps, schema_editor):
-        ContentType = apps.get_model('contenttypes.ContentType')
-
-        EventPage = apps.get_model('events.EventPage')
-        eventpage_ct = ContentType.objects.get(model='eventpage', app_label='events')
-        for eventpage in EventPage.objects.all():
-            eventpage.content_type = eventpage_ct
-
-        EventIndexPage = apps.get_model('events.EventIndexPage')
-        eventindexpage_ct = ContentType.objects.get(model='eventindexpage', app_label='events')
-        for eventindexpage in EventIndexPage.objects.all():
-            eventindexpage.content_type = eventindexpage_ct
+    # isnt working: the new content type doesnt exist yet...
+    # def fix_contenttypes(apps, schema_editor):
+    #     ContentType = apps.get_model('contenttypes.ContentType')
+    #
+    #     EventPage = apps.get_model('events.EventPage')
+    #     eventpage_ct = ContentType.objects.get(model='eventpage', app_label='events')
+    #     for eventpage in EventPage.objects.all():
+    #         eventpage.content_type = eventpage_ct
+    #
+    #     EventIndexPage = apps.get_model('events.EventIndexPage')
+    #     eventindexpage_ct = ContentType.objects.get(model='eventindexpage', app_label='events')
+    #     for eventindexpage in EventIndexPage.objects.all():
+    #         eventindexpage.content_type = eventindexpage_ct
 
 
     operations = [
