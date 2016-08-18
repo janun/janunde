@@ -1,38 +1,20 @@
 from __future__ import unicode_literals
 
-import datetime
-import re
-from dateutil import relativedelta
-
-from django.core.exceptions import ValidationError
 from django.db import models
-from django.db.models import Q
-from django.utils import timezone
-from django.utils.http import urlquote
-from django.http import (HttpResponse, Http404)
-
-from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
-
+from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase
-
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
-                                                MultiFieldPanel,
-                                                FieldRowPanel,
                                                 ObjectList, PageChooserPanel,
                                                 StreamFieldPanel,
                                                 TabbedInterface)
-from wagtail.wagtailadmin.widgets import AdminDateTimeInput
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
-
 from .blocks import StandardStreamBlock
 from .images import AttributedImage as Image
-from .fields import (PrettyURLField, FacebookEventURLField)
-
 
 
 # TODO: How can we create a Thema conveniently?
@@ -42,7 +24,7 @@ class Thema(models.Model):
         max_length=255,
         null=True,
         blank=True,
-    ) # TODO: default to tagname
+    )  # TODO: default to tagname
 
     body = StreamField(
         StandardStreamBlock(),
@@ -59,7 +41,6 @@ class Thema(models.Model):
 
 class JanunTag(TaggedItemBase):
     content_object = ParentalKey(Page, related_name='tagged_items')
-
 
 
 def _(str):
@@ -172,7 +153,7 @@ class Group(BasePage):
         blank=True,
         related_name='+',
         verbose_name=_("Logo"),
-        #help_text=_("")
+        # help_text=_("")
     )
 
     def clean(self):
@@ -276,7 +257,7 @@ class Article(StandardPage):
         InlinePanel('related_pages', label=_("Zugehörige Seiten")),
     ]
 
-    settings_panels =  [
+    settings_panels = [
         FieldPanel('highlight'),
     ] + Page.promote_panels + Page.settings_panels
 

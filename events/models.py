@@ -1,33 +1,27 @@
 import datetime
-import re
+
 from dateutil import relativedelta
-from django.utils import timezone
-from django.db.models import Q
-
+from django.core.exceptions import ValidationError
 from django.db import models
-
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailsearch import index
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
-                                                MultiFieldPanel,
-                                                FieldRowPanel,
-                                                ObjectList, PageChooserPanel,
-                                                StreamFieldPanel,
+from django.db.models import Q
+from django.http import Http404, HttpResponse
+from django.utils import timezone
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
+                                                ObjectList, StreamFieldPanel,
                                                 TabbedInterface)
 from wagtail.wagtailadmin.widgets import AdminDateTimeInput
+from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsearch import index
 
-from modelcluster.contrib.taggit import ClusterTaggableManager
-
+from core.blocks import StandardStreamBlock
+from core.fields import FacebookEventURLField, PrettyURLField
+from core.images import AttributedImage as Image
+from core.models import BasePage, Group, JanunTag
 from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
-
-
-from core.models import BasePage, JanunTag, Group
-from core.images import AttributedImage as Image
-from core.fields import (PrettyURLField, FacebookEventURLField)
-from core.blocks import StandardStreamBlock
 
 
 def split_on_condition(list, func):
@@ -57,29 +51,29 @@ class EventIndexPage(BasePage):
         verbose_name_plural = "Auflistungen von Veranstaltungen"
 
     def get_events(self):
-        return EventPage.objects.child_of(self).live().order_by('start_datetime')
+        return EventPage.objects.child_of(self).live().order_by(
+            'start_datetime'
+        )
 
     def get_context(self, request):
         context = super().get_context(request)
         today = datetime.date.today()
-        context['now'] = now = timezone.localtime(timezone.now())
+        context['now'] = timezone.localtime(timezone.now())
         context['thisyear'] = today.year
 
-        begin_of_this_week = today - datetime.timedelta(days=today.weekday())
         end_of_this_week = today + datetime.timedelta(days=6 - today.weekday())
 
-        begin_of_next_week = today + datetime.timedelta(days=7-today.weekday())
-        end_of_next_week = today + datetime.timedelta(days=6 - today.weekday() + 7)
+        end_of_next_week = today + datetime.timedelta(
+            days=6 - today.weekday() + 7
+        )
 
-        begin_of_this_month = datetime.date( today.year, today.month, 1 )
-        end_of_this_month = begin_of_this_month + relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
-
-        begin_of_next_month = begin_of_this_month + relativedelta.relativedelta(months=1)
-        end_of_next_month = begin_of_next_month + relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
-
+        begin_of_this_month = datetime.date(today.year, today.month, 1)
+        end_of_this_month = begin_of_this_month + \
+            relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
 
         events = self.get_events().filter(
-            Q(start_datetime__gte=today) | Q(end_datetime__gte=today, late_attendence=True),
+            Q(start_datetime__gte=today) |
+            Q(end_datetime__gte=today, late_attendence=True),
         )
 
         # search stuff
@@ -92,14 +86,15 @@ class EventIndexPage(BasePage):
 
         # query= url param given
         if search_query:
-            events = events.search(search_query, operator="and", order_by_relevance=False)
+            events = events.search(
+                search_query, operator="and", order_by_relevance=False
+            )
             context['search_query'] = search_query
             search = 1
 
         context['search'] = search
 
         context['upcoming'] = upcoming = list(events)
-
 
         # compute the events for this week
         def get_this_week(upcoming):
@@ -119,7 +114,8 @@ class EventIndexPage(BasePage):
         if len(get_this_week(upcoming)) > 3:
             context['tomorrow'], upcoming = split_on_condition(
                 upcoming,
-                lambda event: event.start_datetime.date() == today + datetime.timedelta(days=1)
+                lambda event: event.start_datetime.date() ==
+                today + datetime.timedelta(days=1)
             )
 
         # try splitting off each day of the remaining week
@@ -137,8 +133,8 @@ class EventIndexPage(BasePage):
                 )
             next_day += datetime.timedelta(days=1)
             i += 1
-            if i > 20: break
-
+            if i > 20:
+                break
 
         # what is left for this week
         context['this_week'], upcoming = split_on_condition(
@@ -157,11 +153,13 @@ class EventIndexPage(BasePage):
         )
 
         def get_end_of_month(date):
-            return date + relativedelta.relativedelta(months=1) + datetime.timedelta(days=-1)
+            return date + relativedelta.relativedelta(months=1) + \
+                datetime.timedelta(days=-1)
 
         def get_this_year(upcoming):
             return list(filter(
-                lambda event: event.start_datetime.date() < datetime.date(today.year+1, 1, 1),
+                lambda event: event.start_datetime.date() <
+                datetime.date(today.year+1, 1, 1),
                 upcoming
             ))
 
@@ -172,7 +170,8 @@ class EventIndexPage(BasePage):
         while len(upcoming) > 4:
             events_next_month, upcoming = split_on_condition(
                 upcoming,
-                lambda event: event.start_datetime.date() <= get_end_of_month(begin_next_month)
+                lambda event: event.start_datetime.date() <=
+                get_end_of_month(begin_next_month)
             )
             if events_next_month:
                 context['by_month'].append(
@@ -180,7 +179,8 @@ class EventIndexPage(BasePage):
                 )
             begin_next_month += relativedelta.relativedelta(months=1)
             i += 1
-            if i > 20: break
+            if i > 20:
+                break
 
         context['after'] = upcoming
 
@@ -277,7 +277,8 @@ class EventPage(Page):
     )
     color = models.CharField(
         "Farbe als Ersatz für Bild",
-        help_text="Die Veranstaltung bekommt diese Farbe, falls es kein Bild gibt.",
+        help_text="Die Veranstaltung bekommt diese Farbe, "
+                  "falls es kein Bild gibt.",
         choices=COLOR_CHOICES,
         null=True,
         blank=True,
@@ -312,18 +313,23 @@ class EventPage(Page):
 
         # title must be short
         if len(self.title) > 56:
-            raise ValidationError({'title': "Der Titel ist zu lang. "
-            "Er darf maximal 56 Zeichen lang sein. Nutz doch den Untertitel."})
+            raise ValidationError({
+                'title':
+                "Der Titel ist zu lang. Er darf maximal 56 Zeichen "
+                "lang sein. Nutz doch den Untertitel."
+            })
 
         # end_datetime
         if self.end_datetime:
             if self.end_datetime < self.start_datetime:
-                raise ValidationError({'end_datetime': "Endzeit muss nach Startzeit liegen."})
-
+                raise ValidationError({
+                    'end_datetime':
+                    "Endzeit muss nach Startzeit liegen."
+                })
 
     # only works with ElasticSearch
     search_fields = BasePage.search_fields + [
-        #title is in here by default
+        # title is in here by default
         index.SearchField('content'),
         index.SearchField('location'),
         index.RelatedFields('related_group', [
@@ -344,10 +350,12 @@ class EventPage(Page):
         ObjectList([
             MultiFieldPanel(
                 [
-                    FieldPanel('start_datetime',
+                    FieldPanel(
+                        'start_datetime',
                         widget=AdminDateTimeInput(format="%d.%m.%Y %H:%M")
                     ),
-                    FieldPanel('end_datetime',
+                    FieldPanel(
+                        'end_datetime',
                         widget=AdminDateTimeInput(format="%d.%m.%Y %H:%M")
                     ),
                     FieldPanel('all_day'),
@@ -374,7 +382,10 @@ class EventPage(Page):
             MultiFieldPanel([
                 FieldPanel('contact_name'),
                 FieldPanel('contact_mail'),
-                FieldPanel('contact_phone', widget=PhoneNumberInternationalFallbackWidget),
+                FieldPanel(
+                    'contact_phone',
+                    widget=PhoneNumberInternationalFallbackWidget
+                ),
             ], heading="Kontakt"),
             FieldPanel('register_url'),
         ], heading="Gruppe, Kontakt, Anmeldung")
@@ -392,7 +403,8 @@ class EventPage(Page):
                     export_event_to_ical(self),
                     content_type='text/calendar',
                 )
-                response['Content-Disposition'] = 'attachment; filename=' + self.slug + '.ics'
+                response['Content-Disposition'] = 'attachment; filename=' + \
+                    self.slug + '.ics'
                 return response
             else:
                 raise Http404
