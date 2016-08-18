@@ -65,22 +65,30 @@ class Migration(migrations.Migration):
     ]
 
 
-    # isnt working: the new content type doesnt exist yet...
-    # def fix_contenttypes(apps, schema_editor):
-    #     ContentType = apps.get_model('contenttypes.ContentType')
-    #
-    #     EventPage = apps.get_model('events.EventPage')
-    #     eventpage_ct = ContentType.objects.get(model='eventpage', app_label='events')
-    #     for eventpage in EventPage.objects.all():
-    #         eventpage.content_type = eventpage_ct
-    #
-    #     EventIndexPage = apps.get_model('events.EventIndexPage')
-    #     eventindexpage_ct = ContentType.objects.get(model='eventindexpage', app_label='events')
-    #     for eventindexpage in EventIndexPage.objects.all():
-    #         eventindexpage.content_type = eventindexpage_ct
+    def update_contenttypes(apps, schema_editor):
+        from django.contrib.contenttypes.management import update_contenttypes
+        for app_config in apps.get_app_configs():
+            update_contenttypes(app_config)
+
+
+    def fix_contenttypes(apps, schema_editor):
+        ContentType = apps.get_model('contenttypes.ContentType')
+
+        EventPage = apps.get_model('events.EventPage')
+        eventpage_ct = ContentType.objects.get(model='eventpage', app_label='events')
+        for eventpage in EventPage.objects.all():
+            eventpage.content_type = eventpage_ct
+            eventpage.save()
+
+        EventIndexPage = apps.get_model('events.EventIndexPage')
+        eventindexpage_ct = ContentType.objects.get(model='eventindexpage', app_label='events')
+        for eventindexpage in EventIndexPage.objects.all():
+            eventindexpage.content_type = eventindexpage_ct
+            eventindexpage.save()
 
 
     operations = [
         migrations.SeparateDatabaseAndState(state_operations=state_operations),
-        #migrations.RunPython(fix_contenttypes)
+        migrations.RunPython(update_contenttypes),
+        migrations.RunPython(fix_contenttypes)
     ]
