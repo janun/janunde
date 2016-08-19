@@ -19,12 +19,17 @@
   {# show highlights #}
   {% if highlights %}
   <section>
-    <h2 id="highlights" class="area-title area-title--centered"><a href="{% slugurl 'aktuelles' %}">Aktuelle Highlights</a></h2>
+    <h2 id="highlights" class="area-title area-title--centered">Aktuelle Highlights</h2>
     <div class="container">
       <div class="grid grid--of-3@medium">
-        {% for object in highlights %}
-          <div class="grid__element">
-            {% include object.partial_template_name %}
+        {% for highlight in highlights %}
+          <div class="grid__element panel click-area">
+            <a href="{% pageurl highlight.highlighted_page %}">
+              {{ highlight.title }}
+            </a>
+            <a class="click-area__area-link" href="{% pageurl highlight.highlighted_page %}">
+              {{ highlight.title }}
+            </a>
           </div>
         {% endfor %}
       </div>

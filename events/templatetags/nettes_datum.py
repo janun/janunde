@@ -33,7 +33,7 @@ def maybe_year(value, today):
 
 
 @register.filter(expects_localtime=True)
-def nettes_datum2(value, short=False):
+def nettes_datum(value, short=False):
     try:
         tzinfo = getattr(value, 'tzinfo', None)
         value = datetime.date(value.year, value.month, value.day)

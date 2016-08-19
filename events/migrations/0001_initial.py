@@ -67,21 +67,26 @@ class Migration(migrations.Migration):
 
     def update_contenttypes(apps, schema_editor):
         from django.contrib.contenttypes.management import update_contenttypes
-        for app_config in apps.get_app_configs():
-            update_contenttypes(app_config)
+        update_contenttypes(apps.app_configs['events'])
+        # ContentType = apps.get_model('contenttypes.ContentType')
+        # print( [ct.name for ct in ContentType.objects.all()] )
 
 
     def fix_contenttypes(apps, schema_editor):
+        # from django.contrib.contenttypes.management import update_contenttypes
+        # update_contenttypes(apps.app_configs['events'])
+
         ContentType = apps.get_model('contenttypes.ContentType')
 
+
         EventPage = apps.get_model('events.EventPage')
-        eventpage_ct = ContentType.objects.get(model='eventpage', app_label='events')
+        eventpage_ct = ContentType.objects.get_for_model(EventPage)
         for eventpage in EventPage.objects.all():
             eventpage.content_type = eventpage_ct
             eventpage.save()
 
         EventIndexPage = apps.get_model('events.EventIndexPage')
-        eventindexpage_ct = ContentType.objects.get(model='eventindexpage', app_label='events')
+        eventindexpage_ct = ContentType.objects.get_for_model(EventIndexPage)
         for eventindexpage in EventIndexPage.objects.all():
             eventindexpage.content_type = eventindexpage_ct
             eventindexpage.save()
@@ -89,6 +94,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.SeparateDatabaseAndState(state_operations=state_operations),
-        migrations.RunPython(update_contenttypes),
+        # migrations.RunPython(update_contenttypes),
         migrations.RunPython(fix_contenttypes)
     ]

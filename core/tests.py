@@ -1,42 +1,51 @@
+from datetime import timedelta
+
 from django.test import TestCase
+from django.utils import timezone
 
+from wagtail.wagtailcore.models import Page
+from core.models import StandardPage, Highlight
 
+# the most basic test...
 class BasicTestCase(TestCase):
     def test_getting_root(self):
         self.client.get('/')
 
 
-from .templatetags.nettes_datum import nettes_datum
-import datetime
+class HighlightTestCase(TestCase):
 
-class TestNettesDatum(TestCase):
+    def setUp(self):
+        homepage = Page.objects.get(title="Startseite")
+        seite = homepage.add_child(
+            instance=StandardPage(title="Einfache Seite")
+        )
+        Highlight.objects.create(highlighted_page=seite)
+        Highlight.objects.create(
+            highlighted_page=seite,
+            title_override="Guck dir die Seite an!"
+        )
 
-    def test_the_day_before_yesterday(self):
-        datum = datetime.datetime.now() - datetime.timedelta(days=2)
-        self.assertEquals( nettes_datum( datum ), "Vorgestern" )
+    def test_highlights_exists_and_active(self):
+        self.assertEqual(Highlight.objects.active().count(), 2)
 
-    def test_yesterday(self):
-        datum = datetime.datetime.now() - datetime.timedelta(days=1)
-        self.assertEquals( nettes_datum( datum ), "Gestern" )
+    def test_highlight_starts_now(self):
+        highlight = Highlight.objects.first()
+        self.assertEqual(
+            highlight.start_datetime.strftime("%Y-%m-%d %H:%M:%S"),
+            timezone.now().strftime("%Y-%m-%d %H:%M:%S")
+        )
 
-    def test_today(self):
-        today = datetime.date.today()
-        self.assertEquals( nettes_datum( today ), "Heute" )
+    def test_highlight_ends_in_14_days(self):
+        highlight = Highlight.objects.first()
+        self.assertEqual(
+            highlight.end_datetime.strftime("%Y-%m-%d %H:%M:%S"),
+            (timezone.now() + timedelta(days=14)).strftime("%Y-%m-%d %H:%M:%S")
+        )
 
-    def test_tomorrow(self):
-        tomorrow = datetime.date.today() + datetime.timedelta(days=1)
-        self.assertEquals( nettes_datum( tomorrow ), "Morgen" )
+    def test_title_defaults_to_highlighted_page(self):
+        highlight = Highlight.objects.first()
+        self.assertEqual(highlight.title, highlight.highlighted_page.title)
 
-    def test_the_day_after_tomorrow(self):
-        the_day_after_tomorrow = datetime.date.today() + datetime.timedelta(days=2)
-        self.assertEquals( nettes_datum( the_day_after_tomorrow ), "Übermorgen" )
-
-    def test_this_week(self):
-        # this daytime might not always be correct
-        daytime = datetime.datetime.now() + datetime.timedelta(days=3)
-        self.assertEquals( nettes_datum( daytime ), "diesen WOCHENTAG" )
-
-    def test_next_week(self):
-        # this daytime might not always be correct
-        daytime = datetime.datetime.now() + datetime.timedelta(days=10)
-        self.assertEquals( nettes_datum( daytime ), "nächsten WOCHENTAG" )
+    def test_title_can_be_overriden(self):
+        highlight = Highlight.objects.last()
+        self.assertEqual(highlight.title, highlight.title_override)

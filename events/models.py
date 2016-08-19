@@ -9,7 +9,8 @@ from django.utils import timezone
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
                                                 ObjectList, StreamFieldPanel,
-                                                TabbedInterface)
+                                                TabbedInterface,
+                                                InlinePanel)
 from wagtail.wagtailadmin.widgets import AdminDateTimeInput
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
@@ -345,6 +346,7 @@ class EventPage(Page):
             FieldPanel('title', classname="full title"),
             FieldPanel('subtitle', classname="full title"),
             FieldPanel('event_page_tags'),
+            InlinePanel('highlights', label="Highlights"),
             StreamFieldPanel('content'),
         ], heading="Titel und Inhalt"),
         ObjectList([

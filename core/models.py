@@ -1,6 +1,10 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.utils import timezone
+
+from datetime import timedelta
+
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase
@@ -89,6 +93,57 @@ class StandardPageRelatedPage(Orderable, RelatedPage):
     page = ParentalKey(Page, related_name='related_pages')
 
 
+class HighlightManager(models.Manager):
+    def active(self):
+        return self.get_queryset().filter(
+            models.Q(start_datetime__lte=timezone.now()),
+            models.Q(end_datetime__isnull=True) |
+            models.Q(end_datetime__gt=timezone.now())
+        )
+
+
+def get_in_14_days():
+    return timezone.now() + timedelta(days=14)
+
+class Highlight(models.Model):
+    """pages can be highlighted
+       these can be shown on the homepage for example
+       - a time interval can be set, during which the highlight will be shown
+       - a custom title can be set, only for the highlighted view
+    """
+    highlighted_page = ParentalKey(Page, related_name='highlights')
+    start_datetime = models.DateTimeField(
+        "Startzeit",
+        default=timezone.now
+    )
+    end_datetime = models.DateTimeField(
+        "Endzeit",
+        null=True,
+        blank=True,
+        default=get_in_14_days
+    )
+    title_override = models.CharField(
+        max_length=255,
+        blank=True,
+    )
+
+    def title():
+        doc = "title"
+        def fget(self):
+            if self.title_override:
+                return self.title_override
+            else:
+                return self.highlighted_page.title
+        def fset(self, value):
+            self.title_override = value
+        def fdel(self):
+            del self.title_override
+        return locals()
+    title = property(**title())
+
+    objects = HighlightManager()
+
+
 class StandardPage(BasePage):
     """
     simple "just a page"
@@ -109,6 +164,7 @@ class StandardPage(BasePage):
         StreamFieldPanel('body'),
         FieldPanel('tags'),
         InlinePanel('related_pages', label=_("Zugehöriges")),
+        InlinePanel('highlights', label=_("Highlights")),
     ]
 
     class Meta:
@@ -128,10 +184,8 @@ class HomePage(BasePage):
 
     def get_context(self, request):
         context = super().get_context(request)
-        # get the last three highlighted articles
-        # TODO: include events
-        context['highlights'] = Article.objects.filter(highlight=True) \
-            .live().order_by('-first_published_at')[:3]
+        context['highlights'] = Highlight.objects.active() \
+            .order_by('start_datetime')
         return context
 
 

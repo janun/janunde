@@ -10,11 +10,11 @@
               {% endif %}{% endspaceless %}">
     {% if self.all_day %}
       <time datetime="{{ self.start_datetime.date|date:'c' }}">
-        {{ self.start_datetime|nettes_datum2 }}
+        {{ self.start_datetime|nettes_datum }}
       </time>
     {% else %}
       <time datetime="{{ self.start_datetime|date:'c' }}">
-        {{ self.start_datetime|nettes_datum2 }}
+        {{ self.start_datetime|nettes_datum }}
         <br>{{ self.start_datetime|time:"" }}&#x202F;Uhr
       </time>
     {% endif %}
@@ -27,7 +27,7 @@
 
     <div title="{{ self.start_datetime|date:'d.m.Y H:i' }} – {{ self.end_datetime|time:'H:i' }}">
       <time datetime="{{ self.start_datetime|date:'c' }}">
-        {{ self.start_datetime|nettes_datum2 }}
+        {{ self.start_datetime|nettes_datum }}
         <br>{{ self.start_datetime|time:"" }}</time>&#x202F;–&#x202F;<time datetime="{{ self.end_datetime|date:'c' }}">{{ self.end_datetime|time:"" }}&#x202F;Uhr</time>
     </div>
   {# starts and ends on different days #}
@@ -39,17 +39,17 @@
                 {% endif %}{% endspaceless %}">
       <div>
         {% if self.all_day %}
-          <time datetime="{{ self.start_datetime.date|date:'c' }}">{{ self.start_datetime|nettes_datum2 }}</time>
+          <time datetime="{{ self.start_datetime.date|date:'c' }}">{{ self.start_datetime|nettes_datum }}</time>
         {% else %}
-          <time datetime="{{ self.start_datetime|date:'c' }}">{{ self.start_datetime|nettes_datum2 }}
+          <time datetime="{{ self.start_datetime|date:'c' }}">{{ self.start_datetime|nettes_datum }}
           <br>{{ self.start_datetime|time:"" }}&#x202F;Uhr</time>
         {% endif %}
       </div>
       <div class="margin-top-half">
         {% if self.all_day %}
-          <time datetime="{{ self.end_datetime.date|date:'c' }}">{{ self.end_datetime|nettes_datum2 }}</time>
+          <time datetime="{{ self.end_datetime.date|date:'c' }}">{{ self.end_datetime|nettes_datum }}</time>
         {% else %}
-          <time datetime="{{ self.end_datetime|date:'c' }}">{{ self.end_datetime|nettes_datum2 }}
+          <time datetime="{{ self.end_datetime|date:'c' }}">{{ self.end_datetime|nettes_datum }}
           <br>{{ self.end_datetime|time:"" }}&#x202F;Uhr</time>
         {% endif %}
       </div>

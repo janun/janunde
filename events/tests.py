@@ -1,3 +1,8 @@
 from django.test import TestCase
 
-# Create your tests here.
+from events.templatetags.nettes_datum import nettes_datum
+import datetime
+
+class TestNettesDatum(TestCase):
+    pass
+    # TODO
