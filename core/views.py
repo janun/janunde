@@ -24,7 +24,7 @@ from core.models import JanunTag
 Tag = JanunTag.tag_model()
 
 def tags(request, tagname):
-    tag = get_object_or_404(Tag, name=tagname)
+    tag = get_object_or_404(Tag, name__iexact=tagname)
 
     if tag.thema.all():
         thema = tag.thema.all()[0]
