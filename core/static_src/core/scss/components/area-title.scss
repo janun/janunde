@@ -1,10 +1,10 @@
-/// headings for areas on pages
-///
-/// @example markup
-///  <h2 class="area-title">Aktuelles und Interessantes</h2>
-///
-/// @example markup
-///  <h2 class="area-title"><a href="...">Aktuelles und Interessantes</a></h2>
+/** @atom area-title
+ *
+ * @markup
+ *   <h2 class="area-title">Aktuelles und Interessantes</h2>
+ *   <h2 class="area-title"><a href="...">mit Link</a></h2>
+ *   <h2 class="area-title area-title--centered">zentriert</h2>
+ */
 
 $height-area-title: 3rem;
 $margin-area-title: 0.3rem;

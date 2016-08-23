@@ -23,7 +23,6 @@ urlpatterns = [
     url(r'^documents/', include(wagtaildocs_urls)),
 
     #url(r'^search/$', search, name='search'),
-    #url(r'^styleguide/', include('styleguide.urls')),
 
     #url(r'^(?!(veranstaltungen))', RedirectView.as_view(url='http://janun.de/')),
 

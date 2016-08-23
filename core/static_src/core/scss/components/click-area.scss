@@ -1,17 +1,19 @@
-// click-area
-//
-// creates a clickable area which can contain links
-// useful for boxes that link to content pages,
-// but have other links too.
-//
-// doesnt really work with elements inside click-area,
-// that have position-absolute like overlays.
-//
-// @example markup:
-//   <div class="click-area">
-//     <a href="#2">other link</a>
-//     <a href="#1" class="click-area__area-link">area link</a>
-//   </div>
+/** @atom click-area
+ *
+ * @description
+ *  Creates a clickable area which can also contain other links.
+ *  Useful for boxes that link to content pages,
+ *  but have other links too.
+ *
+ *  Doesnt really work with elements inside click-area,
+ *  that have position-absolute like overlays.
+ *
+ * @markup
+ *   <div class="click-area">
+ *     <a href="#other-link">other-link</a>
+ *     <a href="#area-link" class="click-area__area-link">area-link</a>
+ *   </div>
+ */
 .click-area {
   position: relative;
 

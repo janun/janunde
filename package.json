@@ -5,7 +5,8 @@
     "node": "4.4.4"
   },
   "scripts": {
-    "postinstall": "bower install && gulp --production"
+    "postinstall": "bower install && gulp --production",
+    "styleguide": "./node_modules/.bin/nucleus --config config.nucleus.json"
   },
   "cacheDirectories": [
     "node_modules",
@@ -24,5 +25,8 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7"
+  },
+  "devDependencies": {
+    "nucleus-styleguide": "^1.0.4"
   }
 }

@@ -1,10 +1,12 @@
-// Buttons
-//
-// @example markup
-//   <a href="#" class="button button--white">Click Me</a>
-// @example markup
-//   <button href="#" class="button button--white">Click Me</button>
-//
+/** @atom Button
+ *
+ * @markup
+ *   <a href="#" class="button">link button</a>
+ *   <button href="#" class="button">button button</button>
+ *   <a href="#" class="button button--small">small</a>
+ *   <a href="#" class="button button--green">green</a>
+ *   <a href="#" class="button button--white">white</a>
+ */
 .button {
   display: inline-block;
 
