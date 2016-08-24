@@ -24,6 +24,12 @@ $simple-line-font-path: '../../bower_components/simple-line-icons/fonts/';
   }
 }
 
+/**
+ * ensures padding for icons
+ * @atom icon-clicktarget
+ * @markup
+ *   <a href="#" class="icon-clicktarget icon-user"></a>
+ */
 .icon-clicktarget {
   @include icon-clicktarget;
 

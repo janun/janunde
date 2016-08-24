@@ -1,9 +1,15 @@
-.footer:empty {
-  @include above($large) {
-    padding: rem-calc(130);
-  }
-}
-
+/**
+ * Footer.
+ * The empty footer generates padding.
+ * Otherwise footer items are shown next to each other
+ * @atom footer
+ * @markup
+ *   <footer class="footer">
+ *     <a class="footer__item">Footer Item</a>
+ *     <a class="footer__item">Footer Item</a>
+ *   </footer>
+ *   <footer class="footer"></footer>
+ */
 .footer {
   text-align: center;
   padding-top: rem-calc(20);
@@ -26,6 +32,12 @@
     @include above($medium) {
       padding-left: rem-calc(25);
       padding-right: rem-calc(25);
+    }
+  }
+
+  &:empty {
+    @include above($large) {
+      padding: rem-calc(130);
     }
   }
 }

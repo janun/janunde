@@ -1,5 +1,11 @@
-// styling of lists in (technically next to) paragraphs
-// where we cannot add a class
+/**
+ * Liste innerhalb eines Textes
+ * @atom lists
+ * @section Typography
+ * @markup
+ *   <ul><li>a</li><li>b</li></ul>
+ *   <ol><li>a</li><li>b</li></ol>
+ */
 .block-paragraph ul, .block-paragraph ol {
   @include p;
   margin-left: 0;

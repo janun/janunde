@@ -5,9 +5,21 @@
   font-size: rem-calc(42px);
   line-height: 1.235;
 }
+
+/**
+ * @atom h1
+ * @section Typography
+ * @markup
+ *   <h1>Überschrift 1</h1>
+ */
 h1, .h1 {@include h1}
 
-
+/**
+ * @atom h2
+ * @section Typography
+ * @markup
+ *   <h2>Überschrift 2</h2>
+ */
 h2 {
   font-size: rem-calc(24px);
   line-height: 1.2;
@@ -21,12 +33,24 @@ h2 {
   margin-top: -0.5rem;
 }
 
+/**
+ * @atom h3
+ * @section Typography
+ * @markup
+ *   <h3>Überschrift 3</h3>
+ */
 h3 {
   font-size: 1.3rem;
   line-height: 1.2;
   font-weight: normal;
 }
 
+/**
+ * @atom h4
+ * @section Typography
+ * @markup
+ *   <h4>Überschrift 4</h4>
+ */
 h4 {
   font-size: 1.2rem;
   line-height: 1.2;

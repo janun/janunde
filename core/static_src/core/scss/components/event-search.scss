@@ -3,14 +3,20 @@ $search-placeholder-color: rgba($brown, 0.2);
 $search-focus-color: $green;
 $search-action-color: $green;
 
-//
-// @example markup:
-// <form class="event-search">
-//   <input type="search" class="event-search__input">
-//   <input type="submit" class="event-search__submit">
-//   <a class="event-search__close">Close</a>
-// </form>
-//
+/**
+ * Nach Veranstaltungen suchen
+ * @atom event search
+ * @section Events
+ * @markup
+ *   <form class="event-search js-search">
+ *     <input class="event-search__input js-search-focus big-font js-swap-placeholder" data-placeholder-small="Suche" type="search" name="query" placeholder="Was interessiert dich? Oder wo?" autocomplete="off">
+ *     <input class="hide@until-medium event-search__submit" type="submit" value="Suchen">
+ *     <a class="event-search__close icon-clicktarget@until-medium js-search-close-button" href="#">
+ *       <span class="hide@until-medium">Schließen</span>
+ *       <span class="hide@medium" style="line-height: 1rem">×</span>
+ *     </a>
+ *   </form>
+ */
 .event-search {
   position: relative;
 

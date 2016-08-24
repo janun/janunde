@@ -1,0 +1,54 @@
+/**
+ * helper for quickly setting paddings
+ *
+ * @atom padding in all directions
+ * @section Helpers > Positioning
+ * @markup
+ *   <div class="padding-quarter">padding quarter rem</div>
+ *   <div class="padding-half">padding half rem</div>
+ *   <div class="padding-1">padding 1 rem</div>
+ *   <div class="padding-6">padding 6 rem</div>
+ *
+ */
+@for $i from 0 through 6 {
+  .padding-#{$i} {
+    padding: #{$i}rem;
+  }
+}
+.padding-half {
+  padding: 0.5rem;
+}
+.padding-quarter {
+  padding: 0.25rem;
+}
+
+
+
+/**
+ * helper for quickly setting paddings
+ *
+ * @atom padding in one direction
+ * @section Helpers > Positioning
+ * @markup
+ *   <div class="padding-top-quarter">padding top quarter rem</div>
+ *   <div class="padding-top-half">padding top half rem</div>
+ *   <div class="padding-top-1">padding top 1 rem</div>
+ *   <div class="padding-top-6">padding top 6 rem</div>
+ *
+ */
+@each $dir in $directions {
+
+  @for $i from 0 through 6 {
+    .padding-#{$dir}-#{$i} {
+      padding-#{$dir}: #{$i}rem;
+    }
+  }
+
+  .padding-#{$dir}-half {
+    padding-#{$dir}: 0.5rem;
+  }
+  .padding-#{$dir}-quarter {
+    padding-#{$dir}: 0.25rem;
+  }
+
+}

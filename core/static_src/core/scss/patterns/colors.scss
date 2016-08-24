@@ -75,11 +75,25 @@ $colors: (
   black: $black
 );
 
-// setting the background-color
+/**
+ * background color for all pages
+ * @nuclide body background color
+ */
 body {
   background-color: $baige;
 }
 
+/**
+ * helper class to assign background color
+ *
+ * @atom Background Color
+ * @section Helpers > Color
+ * @markup
+ *   <span class="bg-color-green">green</span>
+ *   <span class="bg-color-red">red</span>
+ *   <span class="bg-color-blue">blue</span>
+ *   <span class="bg-color-orange">orange</span>
+ */
 .bg-color {
   @each $color, $value in $colors {
     &-#{$color} {
@@ -88,6 +102,17 @@ body {
   }
 }
 
+/**
+ * helper class to assign color
+ *
+ * @atom Color
+ * @section Helpers > Color
+ * @markup
+ *   <span class="color-green">green</span>
+ *   <span class="color-red">red</span>
+ *   <span class="color-blue">blue</span>
+ *   <span class="color-orange">orange</span>
+ */
 .color {
   &-blue {
     color: $blue;
@@ -106,6 +131,14 @@ body {
   }
 }
 
+/**
+ * helper class to assign hover color
+ *
+ * @atom Hover Color
+ * @section Helpers > Color
+ * @markup
+ *   <span class="hover-color-green">green</span>
+ */
 .hover-color {
   &-green:hover {
     color: $green;

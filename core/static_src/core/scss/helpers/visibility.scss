@@ -1,25 +1,30 @@
-@mixin hide {
+/**
+ * hides with display none important
+ * @mixin hide
+ */
+@mixin hide() {
   display: none !important;
 }
 
 
-/// hide
-/// hides with display: none
-///
-/// @example markup
-///   <div class="hide">Never shown</div>
-///
-/// You can use media queries:
-/// @example markup
-///   <div class="hide@only-small">Not on small</div>
-/// @example markup
-///   <div class="hide@until-large">Not on small and medium</div>
-/// @example markup
-///   <div class="hide@above-medium">Not on medium, large, ...</div>
-///
-/// or hide depending on js:
-/// @example markup
-///   <div class="hide@no-js">Not if no js</div>
+/**
+ * helper to hide with display: none.
+ * You can give a condition to hide on after the @.
+ * This can be media queries preceded by only, until oder above
+ * or js or no-js
+ *
+ * @atom hide
+ * @section Helpers
+ *
+ * @markup
+ *   <div class="hide">Never shown</div>
+ *   <div class="hide@large">hidden on large and above</div>
+ *   <div class="hide@only-small">hidden on small</div>
+ *   <div class="hide@until-large">hidden on small and medium</div>
+ *   <div class="hide@above-medium">hidden on medium, large and above</div>
+ *   <div class="hide@no-js">hidden if no js</div>
+ *   <div class="hide@js">hidden if js</div>
+ */
 .hide {
   @include hide;
 

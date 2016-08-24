@@ -8,50 +8,92 @@ $font-family-extra: "Bitter", serif;
 // colors
 $text-color-standard: $brown;
 
-.font-family-extra {
-  font-family: $font-family-extra;
-}
-.font-family-sans {
-  font-family: $font-family-sans-serif;
-}
-.font-family-serif {
-  font-family: $font-family-serif;
-}
-
-.font-weight-normal {
-  font-weight: normal;
-}
-.font-weight-bold {
-  font-weight: bold;
-}
-
-.font-size-very-small {
-  font-size: rem-calc(14);
-  line-height: rem-calc(16);
-}
-.font-size-small {
-  font-size: rem-calc(18);
-  line-height: rem-calc(22);
+/**
+ * helper to set the font family
+ * @atom font-family
+ * @section Helpers > Fonts
+ * @markup
+ *   <span class="font-family-extra">Bitter</span>
+ *   <span class="font-family-sans">Cabin</span>
+ *   <span class="font-family-serif">Crimson</span>
+ */
+.font-family {
+  &-extra {
+    font-family: $font-family-extra;
+  }
+  &-sans {
+    font-family: $font-family-sans-serif;
+  }
+  &-serif {
+    font-family: $font-family-serif;
+  }
 }
 
-.font-size-1 {
-  font-size: rem-calc(16);
-  line-height: 1.2;
+
+/**
+ * helper to set the font weight
+ * @atom font-weight
+ * @section Helpers > Fonts
+ * @markup
+ *   <span class="font-weight-normal">normal</span>
+ *   <span class="font-weight-bold">bold</span>
+ */
+.font-weight {
+  &-normal {
+    font-weight: normal;
+  }
+  &-bold {
+    font-weight: bold;
+  }
 }
 
-@mixin font-size-2 {
+/**
+ * @mixin font-size-2
+ * @section Fonts
+ */
+@mixin font-size-2() {
   font-size: rem-calc(20px);
   line-height: 1.2;
 }
-.font-size-2 { @include font-size-2 }
 
-.font-size-3 {
-  font-size: rem-calc(24);
-  line-height: rem-calc(28);
+/**
+ * helper to set the font size
+ * @atom font-size
+ * @section Helpers > Fonts
+ * @markup
+ *   <span class="font-size-very-small">very small</span>
+ *   <span class="font-size-small">small</span>
+ *   <span class="font-size-1">1</span>
+ *   <span class="font-size-2">2</span>
+ *   <span class="font-size-3">3</span>
+ */
+.font-size {
+  &-very-small {
+    font-size: rem-calc(14);
+    line-height: rem-calc(16);
+  }
+  &-small {
+    font-size: rem-calc(18);
+    line-height: rem-calc(22);
+  }
+  &-1 {
+    font-size: rem-calc(16);
+    line-height: 1.2;
+  }
+  &-2 {
+    @include font-size-2
+  }
+  &-3 {
+    font-size: rem-calc(24);
+    line-height: rem-calc(28);
+  }
 }
 
-
-@mixin big-font {
+/**
+ * @mixin big-font
+ * @section Fonts
+ */
+@mixin big-font() {
   font-size: rem-calc(24);
   font-family: $font-family-extra;
   font-weight: bold;
@@ -67,16 +109,33 @@ $text-color-standard: $brown;
     font-size: rem-calc(50);
   }
 }
+
+/**
+ * helper to set the font size to big
+ * @atom big-font
+ * @section Helpers > Fonts
+ * @markup
+ *   <span class="big-font">big font</span>
+ */
 .big-font { @include big-font }
 
-
+/**
+ * helper to line trough
+ * @atom font-size
+ * @section Helpers > Fonts
+ * @markup
+ *   <span class="line-through">lined through</span>
+ */
 .line-through {
   text-decoration: line-through;
 }
 
 
-/// generic shadow to be used for text at many places
-@mixin janun-text-shadow {
+/**
+ * generic shadow to be used for text at many places
+ * @mixin janun-text-shadow
+ */
+@mixin janun-text-shadow() {
   text-shadow: rem-calc(0 1 2) rgba(0, 0, 0, 0.25);
 }
 
@@ -94,8 +153,11 @@ html {
 
 
 
-/// font size p
-@mixin p {
+/**
+ * paragraph style
+ * @mixin p
+ */
+@mixin p() {
   font-size: rem-calc(18);
   line-height: 1.444444;
   font-weight: normal;
@@ -105,7 +167,15 @@ html {
 	font-kerning: normal;
   font-family: $font-family-serif;
 }
-/// styling for paragraphs
+
+/**
+ * paragraph style
+ *
+ * @atom paragraph
+ * @section Typography
+ * @markup
+ *   <p>@{lipsum:1:paragraph}</p>
+ */
 p {
   @include p;
   margin-top: 0;

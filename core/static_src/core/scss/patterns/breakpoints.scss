@@ -8,10 +8,29 @@
 ///
 /// but we will treat $netbook and desktop the same
 
-$small:     rem-calc(320);  // 20rem
-$medium:    rem-calc(768);  // 48rem
-$large:     rem-calc(1024); // 64rem
-$xlarge:    rem-calc(1224); // 76.5rem
+/**
+ * @nuclide small-breakpoint
+ * @section Breakpoints
+ */
+$small:     rem-calc(320px);  // 20rem
+
+/**
+ * @nuclide medium-breakpoint
+ * @section Breakpoints
+ */
+$medium:    rem-calc(768px);  // 48rem
+
+/**
+ * @nuclide large-breakpoint
+ * @section Breakpoints
+ */
+$large:     rem-calc(1024px); // 64rem
+
+ /**
+  * @nuclide xlarge-breakpoint
+  * @section Breakpoints
+  */
+$xlarge:    rem-calc(1224px); // 76.5rem
 
 $breakpoints: (
   small: $small,
@@ -22,24 +41,40 @@ $breakpoints: (
   //xxlarge: $xxlarge,
 );
 
+/**
+ * @mixin
+ * @section Mediaqueries
+ */
 @mixin above($width) {
   @media (min-width: $width) {
     @content
   }
 }
 
+/**
+ * @mixin
+ * @section Mediaqueries
+ */
 @mixin until($width) {
   @media (max-width: $width - rem-calc(1)) {
     @content
   }
 }
 
+/**
+ * @mixin
+ * @section Mediaqueries
+ */
 @mixin between($width1, $width2) {
   @media (min-width: $width1) and (max-width: $width2 - rem-calc(1)) {
     @content
   }
 }
 
+/**
+ * @mixin
+ * @section Mediaqueries
+ */
 @mixin only($width1) {
   $width1-index: index( map-values($breakpoints), $width1 );
   @if $width1-index < length(map-values($breakpoints)) {

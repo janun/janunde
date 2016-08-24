@@ -2,8 +2,9 @@ $link-color: $text-color-standard;
 $link-color-hover: $green;
 $link-color-visited: darken($link-color-hover, 18%);
 
-/** @atom anchor
- *
+/**
+ * Einfacher Link für überall außer im Text
+ * @atom Link
  * @markup
  *   <a href="#">anchor</a>
  */
@@ -16,9 +17,13 @@ a, .anchor {
   }
 }
 
-// TODO: according to atomic design, this should be moved to a paragraph style?
-// styling of anchors in paragraphs
-// where we cannot add a class
+// TODO: according to atomic design, this should be moved to a paragraph molecule?
+/**
+ * Link für im Text
+ * @atom Link im Text
+ * @markup
+ *   <p class=".block-paragraph"><a href="#">Link</a></p>
+ */
 .block-paragraph a, p a {
 
   color: $link-color;

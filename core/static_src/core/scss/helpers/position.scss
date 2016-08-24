@@ -1,22 +1,55 @@
+/**
+ * @atom top
+ * @section Helpers > Positioning
+ */
 .top {
   top: 0;
 }
+
+/**
+ * @atom bottom
+ * @section Helpers > Positioning
+ */
 .bottom {
   bottom: 0;
 }
+
+/**
+ * @atom left
+ * @section Helpers > Positioning
+ */
 .left {
   left: 0;
 }
+
+/**
+ * @atom right
+ * @section Helpers > Positioning
+ */
 .right {
   right: 0;
 }
 
+/**
+ * @atom position-fixed
+ * @section Helpers > Positioning
+ */
 .position-fixed {
   position: fixed;
 }
+
+/**
+ * @atom position-absolute
+ * @section Helpers > Positioning
+ */
 .position-absolute {
   position: absolute;
 }
+
+/**
+ * @atom position-relative
+ * @section Helpers > Positioning
+ */
 .position-relative {
   position: relative;
 }
