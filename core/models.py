@@ -111,18 +111,20 @@ class Highlight(models.Model):
        - a time interval can be set, during which the highlight will be shown
        - a custom title can be set, only for the highlighted view
     """
-    highlighted_page = ParentalKey(Page, related_name='highlights')
+    highlighted_page = ParentalKey(Page, related_name='highlight')
     start_datetime = models.DateTimeField(
         "Startzeit",
+        help_text="Ab wann soll das Highlight auftauchen?",
         default=timezone.now
     )
     end_datetime = models.DateTimeField(
         "Endzeit",
-        null=True,
-        blank=True,
+        help_text="Bis wann soll das Highlight auftauchen?",
         default=get_in_14_days
     )
     title_override = models.CharField(
+        "Überschreib-Titel",
+        help_text="Wird statt des Titels des Originals angezeigt.",
         max_length=255,
         blank=True,
     )
@@ -154,7 +156,10 @@ class StandardPage(BasePage):
         verbose_name=_("Inhalt"),
     )
 
-    tags = ClusterTaggableManager(through=JanunTag, blank=True)
+    tags = ClusterTaggableManager("Tags",
+        through=JanunTag, blank=True,
+        help_text=""
+    )
 
     search_fields = BasePage.search_fields + [
         index.SearchField('body'),
@@ -164,7 +169,13 @@ class StandardPage(BasePage):
         StreamFieldPanel('body'),
         FieldPanel('tags'),
         InlinePanel('related_pages', label=_("Zugehöriges")),
-        InlinePanel('highlights', label=_("Highlights")),
+        InlinePanel(
+            'highlight',
+            label=_("Highlight"),
+            help_text="""Du kannst diese Seite highlighten.
+                         Sie wird dann für den angegeben Zeitraum
+                         auf der Startseite angezeigt."""
+        ),
     ]
 
     class Meta:
@@ -266,13 +277,6 @@ class Article(StandardPage):
     subpage_types = []
     parent_page_types = ['ArticleIndexPage']
 
-    highlight = models.BooleanField(
-        _("Highlight"),
-        help_text="Ist dies ein ge-highlighteter Artikel? Falls ja, "
-                  "taucht es z.B. auf der Startseite auf.",
-        default=False
-    )
-
     main_image = models.ForeignKey(
         Image,
         on_delete=models.SET_NULL,
@@ -295,7 +299,6 @@ class Article(StandardPage):
     )
 
     search_fields = StandardPage.search_fields + [
-        index.SearchField('highlight'),
         index.FilterField('first_published_at'),
         index.FilterField('latest_revision_created_at'),
     ]
@@ -312,7 +315,7 @@ class Article(StandardPage):
     ]
 
     settings_panels = [
-        FieldPanel('highlight'),
+        InlinePanel('highlight'),
     ] + Page.promote_panels + Page.settings_panels
 
     edit_handler = TabbedInterface([

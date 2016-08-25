@@ -68,5 +68,7 @@ def change_datetimepicker_format():
 # they should be done using streamfield
 @hooks.register('insert_editor_css')
 def editor_css():
-    return '<style>.hallowagtailimage, ' \
-        '.hallowagtailembeds { display: none; }</style>'
+    return '<style>' \
+        '.hallowagtailimage, .hallowagtailembeds { display: none; }' \
+        '.object .object-help { opacity: 1 } // always show help' \
+        '</style>'

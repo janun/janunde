@@ -1,9 +1,13 @@
-/** @atom betabanner
- *
+/**
+ * Banner to be shown on top of the beta page
+ * @atom betabanner
  * @markup
  *   <div class="betabanner">
- *     <div class="betabanner__inner">Text im betabanner</div>
- *     <a class="betabanner__close float-right">×</a>
+ *     <div class="betabanner__inner">
+ *        Text im betabanner
+ *        <a href="#" class="betabanner__close float-right">×</a>
+ *        <a href="#">Link</a>
+ *     </div>
  *   </div>
  */
 .betabanner {

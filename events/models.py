@@ -195,7 +195,10 @@ class EventPage(Page):
     subpage_types = []
     parent_page_types = ['EventIndexPage']
 
-    event_page_tags = ClusterTaggableManager(through=JanunTag, blank=True)
+    event_page_tags = ClusterTaggableManager("Tags",
+        through=JanunTag, blank=True,
+        help_text=""
+    )
 
     subtitle = models.CharField(
         verbose_name="Untertitel",
@@ -346,7 +349,13 @@ class EventPage(Page):
             FieldPanel('title', classname="full title"),
             FieldPanel('subtitle', classname="full title"),
             FieldPanel('event_page_tags'),
-            InlinePanel('highlights', label="Highlights"),
+            InlinePanel(
+                'highlight',
+                label="Highlight",
+                help_text="""Du kannst diese Veranstaltung highlighten.
+                             Sie wird dann für den angegeben Zeitraum
+                             auf der Startseite angezeigt."""
+            ),
             StreamFieldPanel('content'),
         ], heading="Titel und Inhalt"),
         ObjectList([
