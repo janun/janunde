@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "4.1"
+install:
+  - npm install --dev
+script:
+  - npm run styleguide
+after_success:
+  - bash deploy_styleguide.sh

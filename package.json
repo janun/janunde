@@ -27,6 +27,6 @@
     "gulp-util": "^3.0.7"
   },
   "devDependencies": {
-    "nucleus-styleguide": "^1.0.4"
+    "nucleus-styleguide": "^1.0.6"
   }
 }
