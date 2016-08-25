@@ -1,17 +1,14 @@
 /**
- * @atom float right
  * @section Helpers
- * @markup <span class="float-right">right</span>
+ * @markup
+ *   <span class="float-right">right</span>
+ *   <span class="float-left">left</span>
  */
-.float-right {
-  float: right !important;
-}
-
-/**
- * @atom float left
- * @section Helpers
- * @markup <span class="float-left">left</span>
- */
-.float-left {
-  float: left !important;
+.float {
+  &-right {
+    float: right !important;
+  }
+  &-left {
+    float: left !important;
+  }
 }
