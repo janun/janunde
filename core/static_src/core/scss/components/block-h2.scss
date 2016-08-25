@@ -1,0 +1,11 @@
+.block-h2 h2 {
+  font-family: $font-family-extra;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: rem-calc(16px);
+  line-height: 1.1875;
+  @include above($medium) {
+    font-size: rem-calc(30px);
+    line-height: 1.2;
+  }
+}

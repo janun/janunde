@@ -1,11 +1,37 @@
 from wagtail.wagtailcore import blocks
+from wagtail.wagtailcore.blocks.field_block import FieldBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+
+
+from core.fields import PrettyURLField
 
 
 def _(str):
     """dummy trans"""
     return str
+
+
+# class PrettyURLBlock(FieldBlock):
+#     def __init__(self, required=True, help_text=None, max_length=None, min_length=None, **kwargs):
+#         self.field = PrettyURLField(
+#             required=required,
+#             help_text=help_text,
+#             max_length=max_length,
+#             #min_length=min_length
+#         )
+#         super().__init__(**kwargs)
+#     class Meta:
+#         icon = "site"
+
+
+COLOR_CHOICES = [
+    ('brown', 'Braun'),
+    ('green', 'Grün'),
+    ('red', 'Rot'),
+    ('blue', 'Blau'),
+    ('orange', 'Orange'),
+]
 
 
 class ImageBlock(blocks.StructBlock):
@@ -25,29 +51,34 @@ class ImageBlock(blocks.StructBlock):
         icon = "image"
 
 
-class H2(blocks.CharBlock):
+class H2(blocks.StructBlock):
+    title = blocks.CharBlock(label="Titel")
+    color = blocks.ChoiceBlock(label="Farbe", choices=COLOR_CHOICES, default="brown")
     class Meta:
         label = _("Überschrift")
-        icon = "title"
+        icon = "bold"
         classname = "title"
         template = 'blocks/h2.html'
 
 
 class Title(blocks.StructBlock):
     title = blocks.CharBlock(label="Titel", classname="title")
-    color = blocks.ChoiceBlock(label="Farbe", choices=[
-        ('brown', 'Braun'),
-        ('green', 'Grün'),
-        ('red', 'Rot'),
-        ('blue', 'Blau'),
-        ('orange', 'Orange'),
-    ], default="brown", classname="")
-
+    color = blocks.ChoiceBlock(label="Farbe", choices=COLOR_CHOICES, default="brown")
     class Meta:
         label = _("Titel")
         icon = "title"
         classname = "title"
         template = 'blocks/title.html'
+
+
+class Button(blocks.StructBlock):
+    text = blocks.CharBlock(label="Text")
+    link = blocks.URLBlock(label="Link")
+    color = blocks.ChoiceBlock(label="Farbe", choices=COLOR_CHOICES, default="green")
+    class Meta:
+        label = _("Knopf")
+        icon = "link"
+        template = 'blocks/button.html'
 
 
 class VideoBlock(EmbedBlock):
@@ -62,8 +93,9 @@ class VideoBlock(EmbedBlock):
 
 
 class StandardStreamBlock(blocks.StreamBlock):
-    h2 = H2()
     title = Title()
+    h2 = H2()
     paragraph = blocks.RichTextBlock(label=_("Absatz"), icon="pilcrow")
     image = ImageBlock()
     embedded_video = VideoBlock()
+    button = Button()

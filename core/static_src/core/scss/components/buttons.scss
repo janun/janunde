@@ -9,18 +9,13 @@
  */
 .button {
   display: inline-block;
-
-  @include scale-from-small-to-medium(
-    min-width, rem-calc(150), rem-calc(220)
-  )
-  // TODO: also scale padding
-  padding: rem-calc(12 12 10);
+  font-family: $font-family-extra;
+  font-size: rem-calc(20px);
+  line-height: 1.2;
+  min-width: rem-calc(200px);
+  padding: rem-calc(16 20);
   margin-bottom: rem-calc(12);
 
-  @include scale-from-small-to-medium(
-    font-size, rem-calc(14), rem-calc(18)
-  )
-  font-weight: bold;
   text-align: center;
 
   border-style: solid;
@@ -30,7 +25,7 @@
   @include above($medium) {
     border-width: rem-calc(2);
   }
-  border-radius: rem-calc(4);
+  border-radius: rem-calc(2);
 
   background: transparent;
   cursor: pointer;
