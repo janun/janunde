@@ -1,0 +1,10 @@
+.block-title h1 {
+  font-family: $font-family-extra;
+
+  font-size: rem-calc(30px);
+  line-height: 1.3666;
+  @include above($medium) {
+    font-size: rem-calc(60px);
+    line-height: 1.35;
+  }
+}

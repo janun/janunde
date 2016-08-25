@@ -1,0 +1,9 @@
+.block-paragraph p {
+  font-size: rem-calc(16px);
+  line-height: 1.75;
+
+  @include above($medium) {
+    font-size: rem-calc(20px);
+    line-height: 1.6;
+  }
+}

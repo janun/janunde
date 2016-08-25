@@ -6,73 +6,16 @@ from wagtail.wagtailimages.models import (AbstractImage, AbstractRendition,
                                           Image)
 
 
-def _(str):
-    """dummy translation"""
-    return str
-
-
 class AttributedImage(AbstractImage):
     """
     image model with optional attribution attributes
     """
-    original_title = models.CharField(_("Original Titel"),
+    attribution = models.CharField("Quellenangabe",
                                       max_length=255, blank=True)
-    author = models.CharField(_("Autor"), max_length=255, blank=True)
-    author_url = models.URLField(_("Autor-Website"),
-                                 max_length=255, blank=True)
-    source = models.URLField(_("Quelle"), max_length=255, blank=True)
-    license = models.CharField(_("Lizenz"), max_length=255, blank=True)
-    license_url = models.URLField(_("Lizenz-Website"),
-                                  max_length=255, blank=True)
 
     admin_form_fields = Image.admin_form_fields + (
-        'original_title', 'author', 'author_url', 'source', 'license',
-        'license_url'
+        'attribution',
     )
-
-    @property
-    def author_html(self):
-        if not self.author:
-            return ""
-        if not self.author_url:
-            return format_html(_("von {author}"), author=self.author)
-        return format_html(
-            _('von <a href="{author_url}">{author}</a>'),
-            author_url=self.author_url, author=self.author
-        )
-
-    @property
-    def title_html(self):
-        if not self.original_title:
-            title = self.title
-        else:
-            title = self.original_title
-        if not self.source:
-            return format_html(_("„{title}“"), title=title)
-        return format_html(
-            '<a href="{source}">„{title}“</a>',
-            source=self.source, title=title
-        )
-
-    @property
-    def license_html(self):
-        if not self.license:
-            return ""
-        if not self.license_url:
-            return self.license
-        return format_html(
-            '<a href="{license_url}">{license}</a>',
-            license_url=self.license_url, license=self.license
-        )
-
-    @property
-    def attribution(self):
-        attribution = format_html(_("Photo: {title}"), title=self.title_html)
-        if self.author_html:
-            attribution += format_html("<br> {0}", self.author_html)
-        if self.license_html:
-            attribution += format_html("<br> ({0})", self.license_html)
-        return attribution
 
 
 class AttributedRendition(AbstractRendition):

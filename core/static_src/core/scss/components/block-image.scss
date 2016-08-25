@@ -1,0 +1,71 @@
+/**
+ * Block image
+ * @molecule
+ * @markup
+ *   <div class="block-image">
+ *     <img class="block-image__image">
+ *     <p class="block-image__caption">Caption</p>
+ *     <p class="block-image__attribution">Attribution</p>
+ *   </div>
+ *   <div class="block-image">
+ *     <img class="block-image__image block-image__image--full-width">
+ *     <p class="block-image__caption">Caption</p>
+ *     <p class="block-image__attribution">Attribution</p>
+ *   </div>
+ */
+.block-image {
+  margin-bottom: rem-calc(30px);
+
+  &__image {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    @include above(rem-calc(830px)) {
+      width: rem-calc(830px);
+      left: inherit;
+      right: inherit;
+      margin-left: rem-calc(-95px);
+      margin-right: rem-calc(-95px);
+    }
+
+    &--full-width {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+  }
+
+  &__caption {
+    font-family: $font-family-serif;
+    color: $brown;
+    margin: 0;
+
+    font-size: rem-calc(16px);
+    line-height: 1.75;
+    @include above($medium) {
+      font-size: rem-calc(20px);
+      line-height: 1.7;
+    }
+  }
+
+  &__attribution {
+    font-family: $font-family-serif;
+    color: $grey;
+    margin: 0;
+
+    font-size: rem-calc(12px);
+    line-height: 1.75;
+    @include above($medium) {
+      font-size: rem-calc(16px);
+      line-height: 1.7;
+    }
+  }
+
+}

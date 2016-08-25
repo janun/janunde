@@ -1,13 +1,22 @@
 {% load wagtailimages_tags srcset %}
 
-{% image value original as original_image %}
+{% image value.image original as original_image %}
 
-<div class="image image--centered image--wide">
-  <a href="{{ original_image.url }}">
-    {% image value original as original_image %}
-    <img src="{{ original_image.url }}"
-      srcset="{{ value|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
-      sizes="(min-width: 60em) 60em, 100vw"
-      alt="{{ original_image.alt }}">
-  </a>
-</div>
+<a href="{{ original_image.url }}">
+  {% image value.image original as original_image %}
+  <img src="{{ original_image.url }}"
+    srcset="{{ value.image|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
+    {% if value.full_width %}
+      sizes="100vw"
+    {% else %}
+        sizes="(min-width: 60em) 51.875em, (min-width: 40em) 40em, 100vw"
+    {% endif %}
+    alt="{{ original_image.alt }}"
+    class="block-image__image {% if value.full_width %}block-image__image--full-width{% endif %}">
+</a>
+{% if value.caption %}
+  <p class="block-image__caption">{{ value.caption }}</p>
+{% endif %}
+{% if value.image.attribution %}
+  <p class="block-image__attribution">{{ value.image.attribution }}</p>
+{% endif %}

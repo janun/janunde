@@ -165,7 +165,8 @@ class StandardPage(BasePage):
         index.SearchField('body'),
     ]
 
-    content_panels = BasePage.content_panels + [
+    content_panels =  [
+        FieldPanel('title'),
         StreamFieldPanel('body'),
         FieldPanel('tags'),
         InlinePanel('related_pages', label=_("Zugehöriges")),
