@@ -14,17 +14,8 @@ $red: rgb(196, 23, 55);
 /** @color Orange*/
 $orange: rgb(233, 88, 34);
 
-/** @color darkblue*/
-$darkblue: rgb(0, 58, 81);
-
 /** @color brown*/
 $brown: rgb(55, 23, 26);
-
-/** @color dark*/
-$dark: rgb(20, 20, 20);
-
-/** @color middledark*/
-$middledark: rgb(60, 60, 60);
 
 /** @color lighterdark*/
 $lighterdark: rgb(74, 74, 74);
@@ -47,9 +38,6 @@ $aluminum: rgb(153, 153, 153);
 /** @color grey*/
 $grey: rgb(147, 130, 130);
 
-/** @color steel*/
-$steel: rgb(103, 103, 103);
-
 /** @color black*/
 $black: rgb(0, 0, 0);
 
@@ -58,12 +46,9 @@ $green-overlay: rgba($green, 0.65);
 $colors: (
   green: $green,
   blue: $blue,
-  darkblue: $darkblue,
   red: $red,
   orange: $orange,
   brown: $brown,
-  dark: $dark,
-  middledark: $middledark,
   lighterdark: $lighterdark,
   baige: $baige,
   white: $white,
@@ -71,7 +56,6 @@ $colors: (
   silver: $silver,
   aluminum: $aluminum,
   grey: $grey,
-  steel: $steel,
   black: $black
 );
 

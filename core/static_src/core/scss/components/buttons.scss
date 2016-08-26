@@ -1,11 +1,16 @@
+$button-default-color: $brown;
+
 /**
+ * Buttons!
  * @atom Button
  * @markup
- *   <a href="#" class="button">link button</a>
- *   <button href="#" class="button">button button</button>
+ *   <a href="#" class="button">default button</a>
  *   <a href="#" class="button button--small">small</a>
- *   <a href="#" class="button button--green">green</a>
- *   <a href="#" class="button button--white">white</a>
+ *   <a href="#" class="button button--filled">filled</a>
+ *   <a href="#" class="button color-red">red</a>
+ *   <a href="#" class="button color-green">green</a>
+ *   <a href="#" class="button button--filled color-red">red and filled</a>
+ *   <a href="#" class="button button--filled color-green">green and filled</a>
  */
 .button {
   display: inline-block;
@@ -15,21 +20,13 @@
   min-width: rem-calc(200px);
   padding: rem-calc(16 20);
   margin-bottom: rem-calc(12);
-
   text-align: center;
-
-  border-style: solid;
-  @include until($medium) {
-    border-width: rem-calc(1);
-  }
-  @include above($medium) {
-    border-width: rem-calc(2);
-  }
-  border-radius: rem-calc(2);
-
+  border: solid rem-calc(2px) $button-default-color;
+  border-radius: rem-calc(2px);
   background: transparent;
   cursor: pointer;
   transition: background 0.1s ease-out 0s;
+  color: $button-default-color;
 
   &:focus {
     outline: 0;
@@ -39,6 +36,11 @@
     text-decoration: none;
   }
 
+  &:hover, &:focus {
+    color: darken($button-default-color, 20%);
+    border-color: darken($button-default-color, 20%);
+  }
+
   &--small {
     font-size: rem-calc(16px);
     padding: rem-calc(6 20 8);
@@ -46,24 +48,39 @@
     font-weight: normal;
   }
 
+  @each $color, $value in $colors {
+    &.color-#{$color} {
+      color: $value;
+      border-color: $value;
 
-  &--green {
-    border-color: $green;
-    color: $green;
-
-    &:hover, &:focus {
-      color: $lighterdark;
-      background-color: $white;
+      &:hover, &:focus {
+        color: darken($value, 20%);
+        border-color: darken($value, 20%);
+      }
     }
   }
 
-
-  &--white {
-    border-color: $white;
+  &--filled {
     color: $white;
+    background-color: $button-default-color;
+    &:hover, &:focus {
+      color: darken($button-default-color, 20%);
+      border-color: darken($button-default-color, 20%);
+    }
+
+    @each $color, $value in $colors {
+      &.color-#{$color} {
+        color: $white;
+        border-color: $value;
+        background-color: $value;
+        &:hover, &:focus {
+          color: darken($value, 20%);
+          border-color: darken($value, 20%);
+        }
+      }
+    }
 
     &:hover, &:focus {
-      color: $lighterdark;
       background-color: $white;
     }
   }

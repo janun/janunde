@@ -76,7 +76,7 @@ class Button(blocks.StructBlock):
     link = blocks.URLBlock(label="Link")
     color = blocks.ChoiceBlock(label="Farbe", choices=COLOR_CHOICES, default="green")
     class Meta:
-        label = _("Knopf")
+        label = _("Button")
         icon = "link"
         template = 'blocks/button.html'
 
