@@ -8,6 +8,13 @@
     margin-right: auto;
   }
 
+  &--margin-top {
+    margin-top: 2rem;
+    @include above($medium) {
+      margin-top: 3rem;
+    }
+  }
+
 }
 
 .container {
