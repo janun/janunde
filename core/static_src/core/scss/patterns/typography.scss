@@ -150,20 +150,14 @@ html {
 }
 
 
-
-$paragraph-font-size: rem-calc(16px);
-$paragraph-line-height: 1.75;
-$paragraph-font-size-medium: rem-calc(16px);
-$paragraph-line-height-medium: 1.75;
-
 /**
  * paragraph style
  * @mixin p
  */
 @mixin p() {
   font-family: $font-family-serif;
-  font-size: $paragraph-font-size;
-  line-height: $paragraph-line-height;
+  font-size: rem-calc(14px);
+  line-height: 1.75;
   font-weight: normal;
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures;
@@ -171,8 +165,8 @@ $paragraph-line-height-medium: 1.75;
 	font-kerning: normal;
 
   @include above($medium) {
-    font-size: rem-calc(20px);
-    line-height: 1.6;
+    font-size: rem-calc(18px);
+    line-height: 1.75;
   }
 }
 
