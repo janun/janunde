@@ -68,31 +68,6 @@ class BasePage(Page):
     is_creatable = False
 
 
-class RelatedPage(models.Model):
-    """
-    every stadardpage and descendants can have a related page (any page)
-    """
-    related_page = models.ForeignKey(
-        Page,
-        null=True,
-        blank=False,
-        related_name='+',
-        verbose_name=_("Zugehörige Seite"),
-    )
-    panels = [
-        PageChooserPanel('related_page'),
-    ]
-
-    class Meta:
-        abstract = True
-        verbose_name = _("Zugehörige Seite")
-        verbose_name_plural = _("Zugehörige Seiten")
-
-
-class StandardPageRelatedPage(Orderable, RelatedPage):
-    page = ParentalKey(Page, related_name='related_pages')
-
-
 class HighlightManager(models.Manager):
     def active(self):
         return self.get_queryset().filter(
@@ -169,7 +144,6 @@ class StandardPage(BasePage):
         FieldPanel('title'),
         StreamFieldPanel('body'),
         FieldPanel('tags'),
-        InlinePanel('related_pages', label=_("Zugehöriges")),
         InlinePanel(
             'highlight',
             label=_("Highlight"),
@@ -312,7 +286,6 @@ class Article(StandardPage):
 
     related_panels = [
         FieldPanel('related_group', 'core.Group'),
-        InlinePanel('related_pages', label=_("Zugehörige Seiten")),
     ]
 
     settings_panels = [
