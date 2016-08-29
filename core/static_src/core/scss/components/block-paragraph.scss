@@ -6,6 +6,6 @@
   ul, ol {
     @include p;
     margin-left: 0;
-    padding-left: rem-calc(30);
+    padding-left: 0;
   }
 }
