@@ -64,8 +64,8 @@ $button-default-color: $brown;
     color: $white;
     background-color: $button-default-color;
     &:hover, &:focus {
-      color: darken($button-default-color, 20%);
-      border-color: darken($button-default-color, 20%);
+      color: $button-default-color;
+      border-color: $button-default-color;
     }
 
     @each $color, $value in $colors {
@@ -74,8 +74,8 @@ $button-default-color: $brown;
         border-color: $value;
         background-color: $value;
         &:hover, &:focus {
-          color: darken($value, 20%);
-          border-color: darken($value, 20%);
+          color: $value;
+          border-color: $value;
         }
       }
     }

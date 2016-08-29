@@ -1,8 +1,10 @@
 .block-paragraph {
   @include p;
+
   p {
     @include p;
   }
+
   ul, ol {
     @include p;
     margin-left: 0;
