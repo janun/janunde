@@ -25,25 +25,25 @@
     }
   }
 
-  h2 {
-    font-size: rem-calc(16px);
-    line-height: 1.2;
-    font-family: $font-family-extra;
-    font-weight: normal;
-    margin-top: 0;
-    @include above($medium) {
-      font-size: rem-calc(20px);
-    }
-  }
+  // h2 {
+  //   font-size: rem-calc(16px);
+  //   line-height: 1.2;
+  //   font-family: $font-family-extra;
+  //   font-weight: normal;
+  //   margin-top: 0;
+  //   @include above($medium) {
+  //     font-size: rem-calc(20px);
+  //   }
+  // }
 
 
-  // try to fix empty p tags
-  p:empty {
-    display: none;
-  }
-  p:blank {
-    display: none;
-  }
+  // // try to fix empty p tags
+  // p:empty {
+  //   display: none;
+  // }
+  // p:blank {
+  //   display: none;
+  // }
 
 
 }
