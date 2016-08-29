@@ -158,14 +158,19 @@ html {
  * @mixin p
  */
 @mixin p() {
-  font-size: rem-calc(18);
-  line-height: 1.444444;
+  font-family: $font-family-serif;
+  font-size: rem-calc(16px);
+  line-height: 1.75;
   font-weight: normal;
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures;
   font-feature-settings: "kern";
 	font-kerning: normal;
-  font-family: $font-family-serif;
+
+  @include above($medium) {
+    font-size: rem-calc(20px);
+    line-height: 1.6;
+  }
 }
 
 /**

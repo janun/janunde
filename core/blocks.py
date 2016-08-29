@@ -1,7 +1,9 @@
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.blocks.field_block import FieldBlock
+
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 
 
 from core.fields import PrettyURLField
@@ -81,6 +83,13 @@ class Button(blocks.StructBlock):
         template = 'blocks/button.html'
 
 
+class Attachment(DocumentChooserBlock):
+    class Meta:
+        label = _("Dateianhang")
+        icon = "doc-full"
+        template = 'blocks/attachment.html'
+
+
 class VideoBlock(EmbedBlock):
     def __init__(self, *args, **kwargs):
         kwargs['help_text'] = _("URL von z.B. Youtube oder "
@@ -99,3 +108,4 @@ class StandardStreamBlock(blocks.StreamBlock):
     image = ImageBlock()
     embedded_video = VideoBlock()
     button = Button()
+    attachment = Attachment()
