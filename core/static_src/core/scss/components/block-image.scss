@@ -14,10 +14,16 @@
  *   </div>
  */
 .block-image {
-  margin-bottom: rem-calc(30px);
+  margin-bottom: rem-calc(20px);
+  margin-top: rem-calc(20px);
+
+  @include above($medium) {
+    margin-bottom: rem-calc(40px);
+    margin-top: rem-calc(40px);
+  }
 
   &__image {
-    width: 100vw;
+    width: 99vw;
     position: relative;
     left: 50%;
     right: 50%;
@@ -46,12 +52,14 @@
     font-family: $font-family-serif;
     color: $brown;
     margin: 0;
-    margin-top: rem-calc(18px);
+    margin-top: rem-calc(6px);
+    font-style: italic;
 
-    font-size: rem-calc(16px);
+    font-size: rem-calc(14px);
     line-height: 1.75;
     @include above($medium) {
-      font-size: rem-calc(20px);
+      font-size: rem-calc(18px);
+      margin-top: rem-calc(12px);
       line-height: 1.7;
     }
   }
@@ -62,7 +70,7 @@
     margin: 0;
 
     font-size: rem-calc(12px);
-    line-height: 1.75;
+    line-height: 1.2;
     @include above($medium) {
       font-size: rem-calc(16px);
       line-height: 1.7;

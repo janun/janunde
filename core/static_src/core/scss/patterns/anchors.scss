@@ -25,17 +25,19 @@ a, .anchor {
  *   <p class=".block-paragraph"><a href="#">Link</a></p>
  */
 .block-paragraph a, p a {
-
   color: $link-color;
-  text-decoration: underline;
+  text-decoration: none;
+  border-bottom: 1px solid $link-color;
 
   &:visited {
     color: $link-color-visited;
-    text-decoration: underline;
+    text-decoration: none;
+    border-bottom-color: $link-color-visited;
   }
 
   &:hover, &:active {
     color: $link-color-hover;
-    text-decoration: underline;
+    text-decoration: none;
+    border-bottom-color: $link-color-hover;
   }
 }

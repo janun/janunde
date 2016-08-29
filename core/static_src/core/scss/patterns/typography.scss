@@ -151,7 +151,10 @@ html {
 
 
 
-
+$paragraph-font-size: rem-calc(16px);
+$paragraph-line-height: 1.75;
+$paragraph-font-size-medium: rem-calc(16px);
+$paragraph-line-height-medium: 1.75;
 
 /**
  * paragraph style
@@ -159,8 +162,8 @@ html {
  */
 @mixin p() {
   font-family: $font-family-serif;
-  font-size: rem-calc(16px);
-  line-height: 1.75;
+  font-size: $paragraph-font-size;
+  line-height: $paragraph-line-height;
   font-weight: normal;
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures;
