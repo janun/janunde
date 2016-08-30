@@ -1,6 +1,7 @@
 /**
  * Block image
- * @molecule
+ * @molecule image
+ * @section blocks
  * @markup
  *   <div class="block-image">
  *     <img class="block-image__image">
@@ -39,7 +40,7 @@
     }
 
     &--full-width {
-      width: 100vw;
+      width: 99vw;
       position: relative;
       left: 50%;
       right: 50%;
@@ -56,7 +57,7 @@
     font-style: italic;
 
     font-size: rem-calc(14px);
-    line-height: 1.75;
+    line-height: rem-calc(28px);
     @include above($medium) {
       font-size: rem-calc(18px);
       margin-top: rem-calc(12px);
@@ -70,7 +71,7 @@
     margin: 0;
 
     font-size: rem-calc(12px);
-    line-height: 1.2;
+    line-height: rem-calc(28px);
     @include above($medium) {
       font-size: rem-calc(16px);
       line-height: 1.7;

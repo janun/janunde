@@ -7,7 +7,11 @@
 <div class="container container--margin-top">
 
   <div class="text-container">
-    {% include_block self.body %}
+    {% if self.author %}
+      {% include "core/_author.html" with author=self.author date=self.latest_revision_created_at %}
+    {% endif %}
+
+    {% include_block self.body %}    
   </div>
 
 </div>

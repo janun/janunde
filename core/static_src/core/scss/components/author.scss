@@ -1,0 +1,67 @@
+/**
+ * Author with photo
+ * @molecule author
+ * @markup
+ *   <div class="author">
+ *     <img class="author__photo" src="@{image:128:128}">
+ *     <span class="author__name">von <strong>Nele Möhlmann</strong></span>
+ *     <span class="author__date">22. August 2016</span>
+ *   </div>
+ */
+.author {
+  margin-top: rem-calc(50px);
+  margin-bottom: rem-calc(50px);
+  width: 100%;
+  display: block;
+  min-height: rem-calc(64px);
+
+  font-family: $font-family-sans-serif;
+  font-size: rem-calc(20px);
+  line-height: 1.23;
+
+  // wider than parent
+  @include above(rem-calc(830px)) {
+    display: table;
+    width: rem-calc(830px);
+    margin-left: rem-calc(-95px);
+    margin-right: rem-calc(-95px);
+
+    font-size: rem-calc(30px);
+    line-height: 1.23;
+  }
+
+  &__photo {
+    float: left;
+    width: rem-calc(64px);
+    height: rem-calc(64px);
+    border-radius: 50%;
+    margin-right: rem-calc(10px);
+
+    @include above(rem-calc(830px)) {
+      float: inherit;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: left;
+      width: rem-calc(128px);
+      height: rem-calc(128px);
+    }
+  }
+
+  &__name {
+    @include above(rem-calc(830px)) {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+
+  &__date {
+    display: inline-block;
+    @include above(rem-calc(830px)) {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: right;
+    }
+  }
+
+}

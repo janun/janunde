@@ -1,3 +1,16 @@
+/**
+ * Paragraph block
+ * @section blocks
+ * @molecule paragraph
+ * @markup
+ *   <div class="block-paragraph">
+ *     <p>Dies ist Text…</p>
+ *     <ul>
+ *       <li>und</li>
+ *       <li>Liste…</li>
+ *     </ul>
+ *   </div>
+ */
 .block-paragraph {
   @include p;
 

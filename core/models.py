@@ -16,9 +16,35 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
+from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+
 
 from .blocks import StandardStreamBlock
 from .images import AttributedImage as Image
+
+
+@register_snippet
+class Person(models.Model):
+    first_name = models.CharField("Vorname", max_length=255)
+    last_name = models.CharField("Nachname", max_length=255, blank=True)
+    photo = models.ForeignKey(
+        Image,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('first_name'),
+        FieldPanel('last_name'),
+        ImageChooserPanel('photo'),
+    ]
+
+    def __str__(self):
+        return self.first_name + " " + self.last_name
+
 
 
 # TODO: How can we create a Thema conveniently?
@@ -131,6 +157,15 @@ class StandardPage(BasePage):
         verbose_name=_("Inhalt"),
     )
 
+    author = models.ForeignKey(
+        'core.Person',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='pages',
+        verbose_name="Autor",
+    )
+
     tags = ClusterTaggableManager("Tags",
         through=JanunTag, blank=True,
         help_text=""
@@ -144,6 +179,10 @@ class StandardPage(BasePage):
         FieldPanel('title'),
         StreamFieldPanel('body'),
         FieldPanel('tags'),
+        SnippetChooserPanel('author'),
+    ]
+
+    promote_panels = [
         InlinePanel(
             'highlight',
             label=_("Highlight"),
@@ -151,7 +190,7 @@ class StandardPage(BasePage):
                          Sie wird dann für den angegeben Zeitraum
                          auf der Startseite angezeigt."""
         ),
-    ]
+    ] + BasePage.promote_panels
 
     class Meta:
         verbose_name = _("Einfache Seite")

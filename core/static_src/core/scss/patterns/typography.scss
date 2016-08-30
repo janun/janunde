@@ -156,8 +156,8 @@ html {
  */
 @mixin p() {
   font-family: $font-family-serif;
-  font-size: rem-calc(14px);
-  line-height: 1.75;
+  font-size: rem-calc(16px);
+  line-height: rem-calc(28px);
   font-weight: normal;
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures;
@@ -165,8 +165,8 @@ html {
 	font-kerning: normal;
 
   @include above($medium) {
-    font-size: rem-calc(18px);
-    line-height: 1.75;
+    font-size: rem-calc(20px);
+    line-height: rem-calc(32px);
   }
 }
 

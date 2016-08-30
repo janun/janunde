@@ -1,6 +1,17 @@
+/**
+ * Title of a page
+ * @molecule title
+ * @section blocks
+ * @markup
+ *   <div class="block-title">
+ *     <h1>Dies ist ein Titeel</h1>
+ *   </div>
+ *   <div class="block-title">
+ *     <h1 class="color-green">Dies ist ein Titel</h1>
+ *   </div>
+ */
 .block-title h1 {
   font-family: $font-family-extra;
-
   font-size: rem-calc(30px);
   line-height: 1.3666;
   @include above($medium) {
