@@ -31,6 +31,9 @@
               alt="{{ original_image.alt }}"
               class="main-image panel panel--no-padding image">
           </a>
+          {% if self.main_image.attribution %}
+            <p class="block-image__attribution">{{ self.main_image.attribution }}</p>
+          {% endif %}
       </div>
       {% endif %}
 
