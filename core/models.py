@@ -10,8 +10,8 @@ from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 ObjectList, PageChooserPanel,
-                                                StreamFieldPanel,
-                                                TabbedInterface)
+                                                StreamFieldPanel, FieldRowPanel,
+                                                TabbedInterface, MultiFieldPanel)
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
@@ -19,9 +19,17 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
-
 from .blocks import StandardStreamBlock
 from .images import AttributedImage as Image
+
+
+COLOR_CHOICES = [
+    ('brown', 'Braun'),
+    ('green', 'Grün'),
+    ('red', 'Rot'),
+    ('blue', 'Blau'),
+    ('orange', 'Orange'),
+]
 
 
 @register_snippet
@@ -40,6 +48,11 @@ class Person(models.Model):
         FieldPanel('first_name'),
         FieldPanel('last_name'),
         ImageChooserPanel('photo'),
+    ]
+
+    search_fields = [
+        index.SearchField('first_name', partial_match=True),
+        index.SearchField('last_name', partial_match=True),
     ]
 
     def __str__(self):
@@ -151,6 +164,22 @@ class StandardPage(BasePage):
     """
     simple "just a page"
     """
+    title_color = models.CharField(
+        "Titelfarbe",
+        choices=COLOR_CHOICES,
+        null=True,
+        blank=True,
+        max_length=255,
+        default='brown',
+        help_text="Der Titel wird in dieser Farbe angezeigt."
+    )
+
+    subtitle = models.CharField(
+        "Untertitel",
+        max_length=255,
+        blank=True
+    )
+
     body = StreamField(
         StandardStreamBlock(),
         blank=True,
@@ -163,7 +192,7 @@ class StandardPage(BasePage):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='pages',
-        verbose_name="Autor",
+        verbose_name="Autor_in",
     )
 
     tags = ClusterTaggableManager("Tags",
@@ -176,7 +205,11 @@ class StandardPage(BasePage):
     ]
 
     content_panels =  [
-        FieldPanel('title'),
+        MultiFieldPanel([
+            FieldPanel('title', classname='title'),
+            FieldPanel('title_color', classname=''),
+        ], heading="Titel"),
+        FieldPanel('subtitle'),
         StreamFieldPanel('body'),
         FieldPanel('tags'),
         SnippetChooserPanel('author'),

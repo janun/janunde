@@ -20,7 +20,48 @@
 
   ul, ol {
     @include p;
+  }
+
+  ol {
+    margin-left: rem-calc(-20px);
+    .userim & {
+      margin-left: 0;
+      padding-left: 0;
+    }
+  }
+
+  ul {
+    list-style: none;
     margin-left: 0;
     padding-left: 0;
+
+    li {
+      position: relative;
+      margin-left: 20px;
+
+      @include above($medium) {
+        margin-left: 30px;
+      }
+
+      .userim & {
+        margin-left: 0;
+      }
+
+      &:before {
+        content: "●";
+        position: absolute;
+        left: rem-calc(-20px);
+        color: $green;
+        font-size: rem-calc(17px);
+
+        @include above($medium) {
+          left: rem-calc(-30px);
+          font-size: rem-calc(25px);
+        }
+      }
+
+    }
+
   }
+
 }

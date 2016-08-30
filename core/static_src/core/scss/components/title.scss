@@ -10,10 +10,12 @@
  *     <h1 class="color-green">Dies ist ein Titel</h1>
  *   </div>
  */
-.block-title h1 {
+.title {
   font-family: $font-family-extra;
   font-size: rem-calc(30px);
-  line-height: 1.3666;
+  line-height: rem-calc(41px);
+  font-weight: 700;
+  margin-bottom: rem-calc(10px);
   @include above($medium) {
     font-size: rem-calc(60px);
     line-height: 1.35;

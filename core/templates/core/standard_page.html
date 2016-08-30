@@ -6,12 +6,17 @@
 {% block content %}
 <div class="container container--margin-top">
 
-  <div class="text-container">
+  <div class="text-container userim">
+    <h1 class="title color-{{self.title_color}}">{{ self.title }}</h1>
+    {% if self.subtitle %}
+      <h2 class="subtitle">{{ self.subtitle }}</h2>
+    {% endif %}
+
     {% if self.author %}
       {% include "core/_author.html" with author=self.author date=self.latest_revision_created_at %}
     {% endif %}
 
-    {% include_block self.body %}    
+    {% include_block self.body %}
   </div>
 
 </div>

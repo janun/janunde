@@ -17,7 +17,7 @@
 
 
     <!-- the side column -->
-    <div class="grid-12__col-4@medium float-left">
+    <div class="grid-12__col-4@medium float-left js-sticky@medium">
 
       <!-- image -->
       {% if self.main_image %}
@@ -140,7 +140,7 @@
     <!-- the main column -->
     <div class="grid-12__col-7@medium float-right margin-top-2@until-medium">
       <!-- the content -->
-      {{ self.content }}
+      {% include_block self.content %}
     </div>
 
 

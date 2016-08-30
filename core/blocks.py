@@ -5,7 +5,6 @@ from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 
-
 from core.fields import PrettyURLField
 
 
@@ -63,16 +62,6 @@ class H2(blocks.StructBlock):
         template = 'blocks/h2.html'
 
 
-class Title(blocks.StructBlock):
-    title = blocks.CharBlock(label="Titel", classname="title")
-    color = blocks.ChoiceBlock(label="Farbe", choices=COLOR_CHOICES, default="brown")
-    class Meta:
-        label = _("Titel")
-        icon = "title"
-        classname = "title"
-        template = 'blocks/title.html'
-
-
 class Button(blocks.StructBlock):
     text = blocks.CharBlock(label="Text")
     link = blocks.URLBlock(label="Link")
@@ -102,7 +91,6 @@ class VideoBlock(EmbedBlock):
 
 
 class StandardStreamBlock(blocks.StreamBlock):
-    title = Title()
     h2 = H2()
     paragraph = blocks.RichTextBlock(label=_("Absatz"), icon="pilcrow")
     image = ImageBlock()

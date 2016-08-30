@@ -9,59 +9,62 @@
  *   </div>
  */
 .author {
-  margin-top: rem-calc(50px);
-  margin-bottom: rem-calc(50px);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+
   width: 100%;
-  display: block;
-  min-height: rem-calc(64px);
+  margin-top: rem-calc(30px);
+  margin-bottom: rem-calc(54px);
 
   font-family: $font-family-sans-serif;
   font-size: rem-calc(20px);
-  line-height: 1.23;
 
-  // wider than parent
-  @include above(rem-calc(830px)) {
-    display: table;
-    width: rem-calc(830px);
-    margin-left: rem-calc(-95px);
-    margin-right: rem-calc(-95px);
+  .userim & {
+    @include above(rem-calc(745px)) {
+      width: rem-calc(745px);
+      margin-left: rem-calc(-50px);
+      margin-right: rem-calc(-50px);
+    }
+  }
 
-    font-size: rem-calc(30px);
+  @include above($medium) {
+    font-size: rem-calc(24px);
     line-height: 1.23;
+    flex-wrap: nowrap;
   }
 
   &__photo {
-    float: left;
     width: rem-calc(64px);
     height: rem-calc(64px);
     border-radius: 50%;
     margin-right: rem-calc(10px);
 
-    @include above(rem-calc(830px)) {
-      float: inherit;
-      display: table-cell;
-      vertical-align: middle;
-      text-align: left;
-      width: rem-calc(128px);
-      height: rem-calc(128px);
+    @include above($medium) {
+      margin-right: rem-calc(30px);
+      width: rem-calc(100px);
+      height: rem-calc(100px);
     }
   }
 
   &__name {
-    @include above(rem-calc(830px)) {
-      display: table-cell;
-      vertical-align: middle;
-      text-align: center;
+    flex: 0 1 75%;
+    @include above($medium) {
+      flex: 0 1 50%;
+      margin-right: rem-calc(20px);
     }
   }
 
   &__date {
-    display: inline-block;
-    @include above(rem-calc(830px)) {
-      display: table-cell;
-      vertical-align: middle;
-      text-align: right;
+    color: $grey;
+    @include above($medium) {
+      margin-top: 0;
+      color: $brown;
+      margin-left: auto;
     }
+
   }
 
 }

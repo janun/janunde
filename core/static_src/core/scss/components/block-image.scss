@@ -24,6 +24,10 @@
   }
 
   &__image {
+    width: 100%;
+  }
+
+  .userim &__image {
     width: 99vw;
     position: relative;
     left: 50%;

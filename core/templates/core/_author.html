@@ -3,11 +3,10 @@
 <div class="author">
   {% image author.photo fill-128x128 as fallback_image %}
   <img src="{{ fallback_image.url }}"
-    srcset="{{ author.photo|srcset:'fill-64x64 fill-128x128 fill-256x256 fill-384x384' }}"
-    sizes="(min-width: 48em) and (max-width: 59.9375em) 30vw, (min-width: 60em) 19.1875em, 95vw"
+    srcset="{{ author.photo|srcset:'fill-64x64 fill-100x100 fill-128x128 fill-200x200 fill-300x300' }}"
+    sizes="(min-width: 46em) 6.25em, 4em"
     alt="{{ fallback_image.alt }}"
     class="author__photo">
-
   <span class="author__name">von <strong>{{ author }}</strong></span>
   <span class="author__date">{{ date|date }}</span>
 </div>
