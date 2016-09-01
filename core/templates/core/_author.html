@@ -1,10 +1,10 @@
 {% load wagtailcore_tags wagtailimages_tags srcset %}
 
 <div class="author">
-  {% image author.photo fill-128x128 as fallback_image %}
+  {% image author.photo fill-100x100 as fallback_image %}
   <img src="{{ fallback_image.url }}"
     srcset="{{ author.photo|srcset:'fill-64x64 fill-100x100 fill-128x128 fill-200x200 fill-300x300' }}"
-    sizes="(min-width: 46em) 6.25em, 4em"
+    sizes="(min-width: 53em) 6.25em, 4em"
     alt="{{ fallback_image.alt }}"
     class="author__photo">
   <span class="author__name">von <strong>{{ author }}</strong></span>
