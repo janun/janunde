@@ -55,12 +55,14 @@
         content: "●";
         position: absolute;
         left: rem-calc(-20px);
+        bottom: 0;
         color: $green;
         font-size: rem-calc(17px);
 
         @include above($medium) {
-          left: rem-calc(-30px);
+          left: rem-calc(-25px);
           font-size: rem-calc(25px);
+          bottom: rem-calc(-5px);
         }
       }
 
