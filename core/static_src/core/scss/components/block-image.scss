@@ -1,18 +1,21 @@
 /**
  * Block image
+ * inside .userim it uses the rim
  * @molecule image
  * @section blocks
  * @markup
- *   <div class="block-image">
- *     <img class="block-image__image">
- *     <p class="block-image__caption">Caption</p>
- *     <p class="block-image__attribution">Attribution</p>
- *   </div>
- *   <div class="block-image">
- *     <img class="block-image__image block-image__image--full-width">
- *     <p class="block-image__caption">Caption</p>
- *     <p class="block-image__attribution">Attribution</p>
- *   </div>
+ *   <div class="userim">
+ *     <div class="block-image">
+ *       <img class="block-image__image" src="@{image:1280:650}">
+ *       <p class="block-image__caption">Caption</p>
+ *       <p class="block-image__attribution">Attribution</p>
+ *     </div>
+ *     <div class="block-image">
+ *       <img class="block-image__image block-image__image--full-width" src="@{image:1280:650}">
+ *       <p class="block-image__caption">Caption</p>
+ *       <p class="block-image__attribution">Attribution</p>
+ *    </div>
+ *  </div>
  */
 .block-image {
   margin-bottom: rem-calc(20px);

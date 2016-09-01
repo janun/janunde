@@ -6,7 +6,7 @@
   },
   "scripts": {
     "postinstall": "bower install && gulp --production",
-    "styleguide": "./node_modules/.bin/nucleus --config config.nucleus.json"
+    "styleguide": "./node_modules/.bin/nucleus --norandom --config config.nucleus.json"
   },
   "cacheDirectories": [
     "node_modules",

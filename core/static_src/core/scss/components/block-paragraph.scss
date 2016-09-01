@@ -1,8 +1,18 @@
 /**
  * Paragraph block
+ * inside .userim it uses the rim
  * @section blocks
  * @molecule paragraph
  * @markup
+ *   <div class="userim">
+ *     <div class="block-paragraph">
+ *       <p>Dies ist Text…</p>
+ *       <ul>
+ *         <li>und</li>
+ *         <li>Liste…</li>
+ *       </ul>
+ *     </div>
+ *   </div>
  *   <div class="block-paragraph">
  *     <p>Dies ist Text…</p>
  *     <ul>
