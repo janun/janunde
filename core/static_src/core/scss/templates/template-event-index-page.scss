@@ -13,7 +13,7 @@ $event-index-background: rgb(240, 240, 240);
     margin-top: rem-calc(-60px);
     margin-bottom: rem-calc(40px);
     font-size: rem-calc(50px);
-    text-shadow: rgba($grey, 0.9) 1px 1px 1px;
+    //text-shadow: rgba($grey, 0.9) 1px 1px 1px;
     line-height: 0.75;
 
     .word1 {
@@ -23,6 +23,7 @@ $event-index-background: rgb(240, 240, 240);
             display: inline-block;
             text-shadow: none;
             transform: rotate(2deg);
+            transition: transform 0.2s;
           }
         }
       }
@@ -43,6 +44,7 @@ $event-index-background: rgb(240, 240, 240);
         position: relative;
         display: inline-block;
         transform: rotate(30deg);
+        font-size: rem-calc(95px);
       }
       .char3 {
         letter-spacing: 0px;
@@ -77,12 +79,17 @@ $event-index-background: rgb(240, 240, 240);
       color: $green;
 
       .char5 {
-          color: $red;
-          position: relative;
-          left: 20px;
-          font-size: rem-calc(100px);
-          display: inline-block;
-          transform: rotate(15deg);
+        color: $red;
+        position: relative;
+        left: 20px;
+        font-size: rem-calc(100px);
+        display: inline-block;
+        transform: rotate(15deg);
+        transition: transform 0.1s, left 0.1s;
+        &:hover {
+          transform: rotate(-5deg);
+          left: 10px;
+        }
       }
     }
   }
