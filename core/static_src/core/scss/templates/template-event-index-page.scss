@@ -5,19 +5,16 @@ $event-index-background: rgb(240, 240, 240);
 
 
   .header {
-    text-shadow: rgba($grey, 0.9) 0.5px 0.5px 1px;
-
+    //text-shadow: rgba($grey, 0.9) 0.5px 0.5px 1px;
+    font-family: $font-family-extra;
   }
 
   .title {
-    margin-top: rem-calc(-70px);
-    margin-bottom: rem-calc(20px);
+    margin-top: rem-calc(-60px);
+    margin-bottom: rem-calc(40px);
     font-size: rem-calc(50px);
     text-shadow: rgba($grey, 0.9) 1px 1px 1px;
-
-
-
-
+    line-height: 0.75;
 
     .word1 {
       @for $i from 1 through 20 {
@@ -34,8 +31,13 @@ $event-index-background: rgb(240, 240, 240);
       font-size: rem-calc(90px);
 
       .char1 {
-        font-size: rem-calc(110px);
-        letter-spacing: -8px;
+        //color: $red;
+        position: relative;
+        font-size: rem-calc(160px);
+        letter-spacing: -15px;
+        bottom: -15px;
+        display: inline-block;
+        transform: rotate(-5deg);
       }
       .char2 {
         position: relative;
@@ -71,7 +73,17 @@ $event-index-background: rgb(240, 240, 240);
       color: $blue;
     }
     .word6 {
+      position: relative;
       color: $green;
+
+      .char5 {
+          color: $red;
+          position: relative;
+          left: 20px;
+          font-size: rem-calc(100px);
+          display: inline-block;
+          transform: rotate(15deg);
+      }
     }
   }
 
