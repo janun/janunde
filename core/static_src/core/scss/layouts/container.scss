@@ -23,5 +23,9 @@
 
 
 .text-container {
-  @include container(rem-calc(640));
+  @include above(rem-calc(640px)) {
+    max-width: rem-calc(640px);
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
