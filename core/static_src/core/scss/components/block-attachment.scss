@@ -10,14 +10,24 @@
  *   </div>
  */
 .block-attachment {
-  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+
+  @extend .click-area;
+
+  width: 100%;
+
   margin-top: rem-calc(40px);
   margin-bottom: rem-calc(30px);
 
-  padding-left: rem-calc(46px);
-  padding-right: rem-calc(33px);
+  padding-left: rem-calc(44px);
+  padding-right: rem-calc(28px);
   padding-top: rem-calc(38px);
   padding-bottom: rem-calc(38px);
+
   background-color: $white;
   box-shadow: rem-calc(0 1px 2px) rgba($black, 0.1);
 
@@ -30,17 +40,21 @@
     }
   }
 
+  // icon
   &:before {
     display: none;
     @include above($medium) {
       display: inline;
     }
-    @extend .icon-doc;
+    @extend .icon-arrow-down-circle;
     float: left;
     color: $green;
     font-size: rem-calc(45px);
     margin-right: rem-calc(32px);
+  }
 
+  &__data {
+    margin-right: rem-calc(20px);
   }
 
   &__title {
@@ -49,24 +63,45 @@
     font-size: rem-calc(20px);
     line-height: 1.2;
     margin-top: rem-calc(5px);
-    width: rem-calc(450px);
-    margin-left: rem-calc(70px);
+    margin-bottom: 0;
   }
 
   &__metadata {
     font-family: $font-family-extra;
-    font-size: rem-calc(16px);
+    font-size: rem-calc(12px);
     line-height: 1.2;
     color: $grey;
+
+    @include above($medium) {
+      font-size: rem-calc(16px);
+    }
+
+    // small icon on mobile
+    &:before {
+      @extend .icon-arrow-down-circle;
+      float: left;
+      color: $green;
+      font-size: rem-calc(18px);
+      margin-left: rem-calc(-24px);
+      margin-right: rem-calc(8px);
+
+      @include above($medium) {
+        display: none;
+      };
+    }
   }
 
   &__button {
-    position: absolute;
-    right: 33px;
-    top: 38px;
+    @extend .button;
+    @extend .color-green;
+    margin-bottom: 0;
+    margin-top: rem-calc(15px);
 
-    //display: inline;
-    //float: right;
+    @include above($medium) {
+      //@extend .button--filled;
+      margin-left: auto;
+      margin-top: 0;
+    }
   }
 
 }
