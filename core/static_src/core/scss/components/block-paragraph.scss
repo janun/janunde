@@ -25,8 +25,10 @@
   ol {
     margin-left: rem-calc(-20px);
     .userim & {
-      margin-left: 0;
-      padding-left: 0;
+      @include above($medium) {
+        margin-left: 0;
+        padding-left: 0;
+      }
     }
   }
 
@@ -44,7 +46,9 @@
       }
 
       .userim & {
-        margin-left: 0;
+        @include above($medium) {
+          margin-left: 0;
+        }
       }
 
       &:before {
