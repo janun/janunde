@@ -10,14 +10,14 @@
  */
 @for $i from 0 through 6 {
   .margin-#{$i} {
-    margin: #{$i}rem;
+    margin: #{$i}rem !important;
   }
 }
 .margin-half {
-  margin: 0.5rem;
+  margin: 0.5rem !important;
 }
 .margin-quarter {
-  margin: 0.25rem;
+  margin: 0.25rem !important;
 }
 
 
@@ -39,21 +39,21 @@ $directions: left right top bottom;
 
   @for $i from 0 through 6 {
     .margin-#{$dir}-#{$i} {
-      margin-#{$dir}: #{$i}rem;
+      margin-#{$dir}: #{$i}rem !important;
     }
   }
 
   .margin-#{$dir}-half {
-    margin-#{$dir}: 0.5rem;
+    margin-#{$dir}: 0.5rem !important;
   }
   .margin-#{$dir}-quarter {
-    margin-#{$dir}: 0.25rem;
+    margin-#{$dir}: 0.25rem !important;
   }
 
 }
 
 .margin-top-2\@until-medium {
   @include until($medium) {
-    margin-top: 2rem;
+    margin-top: 2rem !important;
   }
 }
