@@ -307,7 +307,7 @@ class EventPage(Page):
     def get_image(self):
         return self.main_image
 
-    def get_desciption(self):
+    def get_description(self):
         if self.search_description:
             return self.search_description
         from django.utils.html import strip_tags
