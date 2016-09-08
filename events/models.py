@@ -307,6 +307,14 @@ class EventPage(Page):
     def get_image(self):
         return self.main_image
 
+    def get_desciption(self):
+        if self.search_description:
+            return self.search_description
+        from django.utils.html import strip_tags
+        for block in self.content:
+            if block.block_type == 'paragraph':
+                return strip_tags(block.value.source)
+
     def clean(self):
         # append number to slug if already in use
         i = 2

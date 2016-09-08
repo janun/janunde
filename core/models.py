@@ -230,6 +230,14 @@ class StandardPage(BasePage):
             if block.block_type == 'image':
                 return block.value['image']
 
+    def get_description(self):
+        if self.search_description:
+            return self.search_description
+        from django.utils.html import strip_tags
+        for block in self.body:
+            if block.block_type == 'paragraph':
+                return strip_tags(block.value.source)
+
     class Meta:
         verbose_name = _("Einfache Seite")
         verbose_name_plural = _("Einfache Seiten")
