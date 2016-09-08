@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     'core',
     'events',
-    'contact',
+    #'contact',
     'about',
 
     'softhyphen',
