@@ -225,6 +225,11 @@ class StandardPage(BasePage):
         ),
     ] + BasePage.promote_panels
 
+    def get_image(self):
+        for block in self.body:
+            if block.block_type == 'image':
+                return block.value['image']
+
     class Meta:
         verbose_name = _("Einfache Seite")
         verbose_name_plural = _("Einfache Seiten")
@@ -267,6 +272,9 @@ class Group(BasePage):
         verbose_name=_("Logo"),
         # help_text=_("")
     )
+
+    def get_image(self):
+        return self.logo
 
     def clean(self):
         super().clean()
@@ -334,6 +342,9 @@ class Article(StandardPage):
         help_text=_("Bild, das den Artikel repräsentiert. "
                     "Wird in Übersichten verwendet.")
     )
+
+    def get_image(self):
+        return self.main_image
 
     related_group = models.ForeignKey(
         Group,

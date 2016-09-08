@@ -20,4 +20,12 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
+
+  &.block-h2--bold {
+    font-weight: bold;
+    font-size: rem-calc(26px);
+    @include above($medium) {
+      font-size: rem-calc(40px);
+    }
+  }
 }

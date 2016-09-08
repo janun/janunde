@@ -1,3 +1,3 @@
 $(document).ready(function () {
-  $('.title').lettering('words').children('span').lettering();
+  $('.lettering').lettering('words').children('span').lettering();
 })

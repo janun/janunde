@@ -1,0 +1,93 @@
+.about-page {
+
+  &__title {
+    margin-left: auto;
+    margin-right: auto;
+
+    @include above(rem-calc(1400px)) {
+      margin-top: rem-calc(30px);
+    }
+
+    display: flex;
+    flex-direction: row;
+    //justify-content: flex-end;
+    //flex-wrap: nowrap;
+    align-items: center;
+    align-content: center;
+
+    h1 {
+      text-align: center;
+      font-family: $font-family-extra;
+      font-size: 24px;
+      line-height: 1.4;
+      @include above($medium) {
+        font-size: 50px;
+        text-align: left;
+      }
+    }
+
+    img {
+      display: none;
+      @include above($medium) {
+        display: block;
+        height: rem-calc(300px);
+        margin-right: rem-calc(40px);
+        margin-left: rem-calc(20px);
+      }
+    }
+
+    .word1, .word4{
+      color: $green;
+    }
+
+  }
+
+  &__intro {
+    text-align: center;
+
+    @include above(rem-calc(640px)) {
+      max-width: rem-calc(640px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @include above(rem-calc(1400px)) {
+      max-width: rem-calc(960px);
+      margin-top: rem-calc(50px);
+      margin-bottom: rem-calc(100px);
+    }
+
+    @include above($medium) {
+      text-align: left;
+    }
+
+    p {
+      font-size: rem-calc(16px);
+      line-height: 1.6;
+
+      @include above(rem-calc(640px)) {
+        font-size: rem-calc(30px);
+        a {
+          border-bottom-width: rem-calc(2px);
+        }
+      }
+
+      @include above(rem-calc(1400px)) {
+        font-size: rem-calc(35px);
+      }
+    }
+
+    // colored links
+    a {
+      &:first-of-type  { color: $red; }
+      &:nth-of-type(2) { color: $blue }
+      &:nth-of-type(3) { color: $orange }
+      &:nth-of-type(4) { color: $green }
+      &:hover {
+        color: $green;
+      }
+    }
+
+  }
+
+}

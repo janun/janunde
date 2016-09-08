@@ -11,7 +11,9 @@
  *       <p class="block-image__attribution">Attribution</p>
  *     </div>
  *     <div class="block-image">
- *       <img class="block-image__image block-image__image--full-width" src="@{image:1280:650}">
+ *       <picture>
+ *         <img class="block-image__image block-image__image--full-width" src="@{image:1280:650}">
+ *       </picture>
  *       <p class="block-image__caption">Caption</p>
  *       <p class="block-image__attribution">Attribution</p>
  *    </div>
@@ -31,7 +33,7 @@
   }
 
   .userim &__image {
-    width: 99vw;
+    width: 99.5vw;
     position: relative;
     left: 50%;
     right: 50%;
@@ -47,7 +49,7 @@
     }
 
     &--full-width {
-      width: 99vw;
+      width: 99.5vw;
       position: relative;
       left: 50%;
       right: 50%;
@@ -56,32 +58,33 @@
     }
   }
 
+
   &__caption {
+    margin-top: rem-calc(6px);
     font-family: $font-family-serif;
     color: $brown;
-    margin: 0;
-    margin-top: rem-calc(6px);
     font-style: italic;
-
     font-size: rem-calc(14px);
     line-height: rem-calc(28px);
+
     @include above($medium) {
-      font-size: rem-calc(18px);
       margin-top: rem-calc(12px);
-      line-height: 1.7;
+      font-size: rem-calc(18px);
+      line-height: rem-calc(30.6);
     }
   }
 
   &__attribution {
+    white-space: nowrap;
     font-family: $font-family-serif;
     color: $grey;
-    margin: 0;
-
+    font-style: normal;
     font-size: rem-calc(12px);
     line-height: rem-calc(28px);
+
     @include above($medium) {
       font-size: rem-calc(16px);
-      line-height: 1.7;
+      line-height: rem-calc(30.6);
     }
   }
 

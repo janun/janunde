@@ -2,11 +2,18 @@
 
 <div class="author">
   {% image author.photo fill-100x100 as fallback_image %}
-  <img src="{{ fallback_image.url }}"
-    srcset="{{ author.photo|srcset:'fill-64x64 fill-100x100 fill-128x128 fill-200x200 fill-300x300' }}"
-    sizes="(min-width: 53em) 6.25em, 4em"
-    alt="{{ fallback_image.alt }}"
-    class="author__photo">
-  <span class="author__name">von <strong>{{ author }}</strong></span>
-  <span class="author__date">{{ date|date }}</span>
+  <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img src="{{ fallback_image.url }}"
+      srcset="{{ author.photo|srcset:'fill-64x64 fill-100x100 fill-128x128 fill-200x200 fill-300x300' }}"
+      sizes="(min-width: 53em) 6.25em, 4em"
+      alt="{{ fallback_image.alt }}"
+      class="author__photo">
+    <link href="{{ fallback_image.url }}" itemprop="image" >
+    <span class="author__name">
+      von <strong itemprop="name">{{ author }}</strong>
+    </span>
+  </span>
+
+  <time itemprop="datePublished" datetime="{{ date|date:"c" }}"
+        class="author__date">{{ date|date }}</time>
 </div>

@@ -304,6 +304,9 @@ class EventPage(Page):
         blank=True,
     )
 
+    def get_image(self):
+        return self.main_image
+
     def clean(self):
         # append number to slug if already in use
         i = 2

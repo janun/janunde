@@ -32,7 +32,9 @@
               class="main-image panel panel--no-padding image">
           </a>
           {% if self.main_image.attribution %}
-            <p class="block-image__attribution margin-top-1">{{ self.main_image.attribution }}</p>
+            <div class="block-image__caption">
+              <span class="block-image__attribution">{{ self.main_image.attribution }}</span>
+            </div>
           {% endif %}
       </div>
       {% endif %}

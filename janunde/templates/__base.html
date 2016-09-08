@@ -5,11 +5,13 @@
     <meta name="theme-color" content="rgb(70, 187, 0)">
     <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %} - JANUN e.V.{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block meta %}{% endblock %}
     {% block css %}{% endblock %}
     {% include "_favicons.html" %}
   </head>
 
-  <body class="{% block body_class %}{% endblock %}">
+  <body class="{% block body_class %}{% endblock %}"
+        itemscope itemtype="http://schema.org/WebPage">
     {% block body_content %}{% endblock %}
 
     {% block js %}{% endblock %}

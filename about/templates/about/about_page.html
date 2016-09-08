@@ -1,0 +1,30 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
+{% load static from staticfiles %}
+
+{% block body_class %}about-page{% endblock %}
+
+
+{% block content %}
+
+<div class="container userim">
+
+  <div class="about-page__title">
+    <img src="{% static 'core/images/janun_logo.svg' %}">
+    <h1 class="lettering">{% if self.heading %}{{ self.heading }}{% else %}{{ self.title }}{% endif %}</h1>
+  </div>
+
+  {% if self.intro_text %}
+    <div class="about-page__intro">
+      {{ self.intro_text|richtext }}
+    </div>
+  {% endif %}
+
+  {% if self.content %}
+    <div class="text-container">
+    {% include_block self.content %}
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}

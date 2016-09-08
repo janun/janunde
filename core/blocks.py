@@ -54,7 +54,13 @@ class ImageBlock(blocks.StructBlock):
 
 class H2(blocks.StructBlock):
     title = blocks.CharBlock(label="Titel")
-    color = blocks.ChoiceBlock(label="Farbe", choices=COLOR_CHOICES, default="brown")
+    color = blocks.ChoiceBlock(
+        label="Farbe", choices=COLOR_CHOICES, default="brown"
+    )
+    bold = blocks.BooleanBlock(
+        label="Fett", required=False,
+        help_text="Für eine große und fette Überschrift"
+    )
     class Meta:
         label = _("Überschrift")
         icon = "bold"
@@ -65,7 +71,9 @@ class H2(blocks.StructBlock):
 class Button(blocks.StructBlock):
     text = blocks.CharBlock(label="Text")
     link = blocks.URLBlock(label="Link")
-    color = blocks.ChoiceBlock(label="Farbe", choices=COLOR_CHOICES, default="green")
+    color = blocks.ChoiceBlock(
+        label="Farbe", choices=COLOR_CHOICES, default="green"
+    )
     class Meta:
         label = _("Button")
         icon = "link"

@@ -9,17 +9,26 @@
 <div class="navbar navbar--green {{ navbar_class }}">
   <nav class="navbar__inner" role="navigation" aria-label="Hauptmenü">
 
-    <!-- logo -->
-    <a class="navbar__item" href="{% pageurl site_root %}">
-      <img class="navbar__logo"
-           alt="JANUN Logo"
-           src="{% static 'core/images/components/navbar/janun_logo.svg' %}">
-    </a>
+    <span itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <!-- logo -->
+      <a class="navbar__item" href="{% pageurl site_root %}"
+         itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+        <img class="navbar__logo"
+             alt="JANUN Logo"
+             src="{% static 'core/images/components/navbar/janun_logo.svg' %}">
+        <meta itemprop="url" content="{% static 'core/images/janun_logo.svg' %}">
+        <meta itemprop="width" content="37">
+        <meta itemprop="height" content="36">
+      </a>
 
-    <!-- title -->
-    <a href="{% pageurl site_root %}" class="navbar__item navbar__title">
-      JANUN
-    </a>
+      <!-- title -->
+      <meta itemprop="name" content="JANUN">
+      <meta itemprop="url" content="http://janun.de/">
+      <a href="{% pageurl site_root %}"
+         class="navbar__item navbar__title">
+        JANUN
+      </a>
+    </span>
 
 
     <div class="float-right">

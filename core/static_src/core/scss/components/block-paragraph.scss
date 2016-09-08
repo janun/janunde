@@ -28,56 +28,44 @@
     @include p;
   }
 
+
+
   ul, ol {
     @include p;
-  }
-
-  ol {
     margin-left: rem-calc(-20px);
-    .userim & {
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+    margin-bottom: rem-calc(7px);
+
+    // .userim & {
+    //   @include above($medium) {
+    //     margin-left: 0;
+    //   }
+    // }
+
+    &:before {
+      position: absolute;
+      left: rem-calc(-20px);
+      top: 0;
+      color: $green;
+      font-size: rem-calc(17px);
+
       @include above($medium) {
-        margin-left: 0;
-        padding-left: 0;
+        font-size: rem-calc(20px);
+        top: rem-calc(-3px);
       }
     }
   }
 
-  ul {
-    list-style: none;
-    margin-left: 0;
-    padding-left: 0;
+  ol li:before {
+    content: "#";
+  }
 
-    li {
-      position: relative;
-      margin-left: 20px;
-
-      @include above($medium) {
-        margin-left: 30px;
-      }
-
-      .userim & {
-        @include above($medium) {
-          margin-left: 0;
-        }
-      }
-
-      &:before {
-        content: "●";
-        position: absolute;
-        left: rem-calc(-20px);
-        top: 0;
-        color: $green;
-        font-size: rem-calc(17px);
-
-        @include above($medium) {
-          left: rem-calc(-25px);
-          font-size: rem-calc(25px);
-          top: rem-calc(-5px);
-        }
-      }
-
-    }
-
+  ul li:before {
+    content: "●";
   }
 
 }
