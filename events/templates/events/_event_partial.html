@@ -1,7 +1,8 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff %}
 
 
-<div class="panel panel--no-padding panel--hover-shadow event hover-reveal click-area">
+<div class="panel panel--no-padding panel--hover-shadow event hover-reveal click-area"
+     itemscope itemtype="http://schema.org/Event">
 
   <div class="overlay">
     <!-- show image (or placeholder) -->
@@ -13,6 +14,7 @@
         alt="{{ fallback_image.alt }}"
         style="height: 7.0625rem;"
         class="image">
+        <link itemprop="image" href="{{ fallback_image.url }}">
     {% else %}
       <div class="image-placeholder"
            style="height: 113px; background-color: {{ event.color|default:"#62e6c8" }}">
@@ -53,6 +55,8 @@
 
     <div class="overlay__content overlay__content--white-transparent bottom width-full font-family-extra">
       <!-- show dates -->
+      <meta itemprop="startDate" content="{{ event.start_datetime|date:"c" }}">
+      <meta itemprop="endDate" content="{{ event.end_datetime|date:"c" }}">
       {% if event.end_datetime and event.end_datetime.date != event.start_datetime.date %}
         {# TODO: dont show year on second date if same year #}
         {% if event.all_day %}
@@ -91,6 +95,7 @@
       <!-- show external website -->
       {% if event.website_url %}
         <a title="zur externen Website"
+           itemprop="url"
            class="float-right hover-reveal__inline icon-clicktarget icon-clicktarget--change-sides"
            target="_blank" href="{{ event.website_url }}">
           <i class="icon-direction" aria-hidden="true"></i>
@@ -103,11 +108,18 @@
 
   <div style="padding: 1.125rem">
     <!-- show title -->
-    <h3 class="margin-top-0 {% if event.title|length > 40 %}font-size-small{% else %}font-size-3{% endif %}">
+    <h3 itemprop="name" class="margin-top-0 {% if event.title|length > 40 %}font-size-small{% else %}font-size-3{% endif %}">
       {{ event.title|truncatechars:56|softhyphen:"de-de" }}
     </h3>
   </div>
 
   <a href="{% pageurl event %}" class="click-area__area-link">{{ event.title }}</a>
+
+  {% if event.location %}
+    <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+      <meta itemprop="name" content="{{ event.location }}">
+      <meta itemprop="address" content="{{ event.location }}">
+    </span>
+  {% endif %}
 
 </div>
