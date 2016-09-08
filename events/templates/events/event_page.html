@@ -4,12 +4,13 @@
 {% block body_class %}event-page{% endblock %}
 
 {% block content %}
-<div class="container margin-top-2">
+<div class="container margin-top-2"
+     itemscope itemtype="http://schema.org/Event">
   <div class="grid-12">
 
     <!-- title and subtitle -->
     <div class="event-page__title grid-12__col-12">
-      <h1>{{ self.title|softhyphen|softhyphen:"de-de" }}</h1>
+      <h1 itemprop="name">{{ self.title|softhyphen|softhyphen:"de-de" }}</h1>
       {% if self.subtitle %}
         <h2>{{ self.subtitle|softhyphen:"de-de" }}</h2>
       {% endif %}
@@ -30,6 +31,7 @@
               sizes="(min-width: 48em) and (max-width: 59.9375em) 30vw, (min-width: 60em) 19.1875em, 95vw"
               alt="{{ original_image.alt }}"
               class="main-image panel panel--no-padding image">
+            <link itemprop="image" href="{{ original_image.url }}">
           </a>
           {% if self.main_image.attribution %}
             <div class="block-image__caption">
@@ -44,6 +46,8 @@
         <i class="grid-12__col-1 icon-clock" aria-hidden="true"></i>
         <div class="grid-12__col-11 font-size-2">
           {% include "events/_event_page_dates.html" %}
+          <meta itemprop="startDate" content="{{ self.start_datetime|date:"c" }}">
+          <meta itemprop="endDate" content="{{ self.end_datetime|date:"c" }}">
           <div class="font-size-1 font-family-sans color-grey">
             <span class="color-grey hover-color-green cursor-pointer" role="button" data-a11y-toggle="calendar-links">Im Kalendar speichern…</span>
             <div class="hide-aria-hidden margin-0" aria-hidden="true" id="calendar-links">
@@ -59,8 +63,11 @@
       {% if self.location %}
       <div class="grid-12 margin-top-2 margin-bottom-2 font-family-extra">
         <i class="grid-12__col-1 icon-location-pin" aria-hidden="true"></i>
-        <span class="grid-12__col-11 font-size-2">
+        <span class="grid-12__col-11 font-size-2"
+              itemprop="location" itemscope itemtype="http://schema.org/Place">
           {{ self.location }}<br>
+          <meta itemprop="name" content="{{ self.location }}">
+          <meta itemprop="address" content="{{ self.location }}">
           <a class="font-size-1 font-family-sans color-grey" target="_blank" href="https://www.google.de/maps/search/{{ self.location|urlencode }}">Auf Google Maps anzeigen</a>
         </span>
       </div>
@@ -68,7 +75,7 @@
 
       <!-- links etc. -->
       {% if self.website_url %}
-        <a target="_blank" href="{{ self.website_url }}"
+        <a itemprop="url" target="_blank" href="{{ self.website_url }}"
            class="grid-12 margin-top-1 margin-bottom-1 display-block"
            title="zur externen Website">
           <i class="grid-12__col-1 icon-direction" aria-hidden="true"></i>
@@ -143,7 +150,8 @@
 
 
     <!-- the main column -->
-    <div class="grid-12__col-7@medium float-right margin-top-2@until-medium">
+    <div class="grid-12__col-7@medium float-right margin-top-2@until-medium"
+         itemprop="description">
       <!-- the content -->
       {% include_block self.content %}
     </div>
