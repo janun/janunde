@@ -28,34 +28,49 @@
     margin-top: rem-calc(40px);
   }
 
-  &__image {
-    width: 100%;
-  }
 
-  .userim &__image {
-    width: 99.5vw;
+  .userim & {
     position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    width: 100vw;
+    left: calc( 50% - 50vw );
 
     @include above(rem-calc(830px)) {
       width: rem-calc(830px);
-      left: inherit;
-      right: inherit;
       margin-left: rem-calc(-95px);
       margin-right: rem-calc(-95px);
+      left: inherit;
     }
+  }
 
-    &--full-width {
-      width: 99.5vw;
-      position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
+
+  .userim &--full-width {
+    position: relative;
+    width: 100vw;
+    left: calc( 50% - 50vw );
+
+    .block-image__wrapper {
+      padding-bottom: 62.5%;
+
+      @include above(40em) {
+        padding-bottom: 35.15625%;
+      }
     }
+  }
+
+
+  &__wrapper {
+    background-color: #ddd;
+    position: relative;
+  }
+
+
+  &__image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
   }
 
 
@@ -67,10 +82,23 @@
     font-size: rem-calc(14px);
     line-height: rem-calc(28px);
 
+    @include above(rem-calc(640px)) {
+      max-width: rem-calc(640px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     @include above($medium) {
       margin-top: rem-calc(12px);
       font-size: rem-calc(18px);
       line-height: rem-calc(30.6);
+    }
+  }
+
+  .userim &__caption {
+    @include until($medium) {
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
     }
   }
 
@@ -81,6 +109,10 @@
     font-style: normal;
     font-size: rem-calc(12px);
     line-height: rem-calc(28px);
+
+    a {
+      color: $grey;
+    }
 
     @include above($medium) {
       font-size: rem-calc(16px);

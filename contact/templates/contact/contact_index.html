@@ -1,0 +1,49 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
+
+{% block body_class %}person-index-page{% endblock %}
+
+{% block top %}
+  {% include "core/_navbar.html" with navbar_class="navbar--white" %}
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="person-index-page__header bg-color-white">
+    <h1>Kontakt, Team und Projekte</h1>
+  </div>
+
+  <nav class="person-index-page__controls">
+    <div class="container">
+      <ul role="menubar" class="menu">
+        <li role="menuitem" class="menu__item"><a href="#">Büros und Gruppen</a></li>
+        <li role="menuitem" class="menu__item menu__item--active"><a href="#">Personen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container margin-top-2">
+    {% if people %}
+
+      <div class="person-index-page__people-list">
+        {% for person in people %}
+          {% include 'contact/_person.html' %}
+        {% endfor %}
+      </div>
+
+    {% else %}
+
+      <div class="container padding-top-6 padding-bottom-5">
+        <i class="icon-present color-green" style="font-size: 7rem" aria-hidden="true"></i>
+        <div class="margin-bottom-3 margin-top-4 big-font">
+        <div class="color-green">Ein Geschenk für Dich.</div>
+          <div>Kontakte, die wir zeigen könnten, gibt es aber leider keine.</div>
+        </div>
+        <span><a class="color-green" href="/admin/">Du kannst das ändern.</a></span>
+      </div>
+
+    {% endif %}
+
+  </div>
+{% endblock %}

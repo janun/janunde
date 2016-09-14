@@ -38,7 +38,7 @@
 
   li {
     position: relative;
-    margin-bottom: rem-calc(7px);
+    margin-bottom: rem-calc(5px);
 
     // .userim & {
     //   @include above($medium) {
@@ -51,21 +51,25 @@
       left: rem-calc(-20px);
       top: 0;
       color: $green;
-      font-size: rem-calc(17px);
-
-      @include above($medium) {
-        font-size: rem-calc(20px);
-        top: rem-calc(-3px);
-      }
     }
   }
 
+  ol {
+    counter-reset: section;
+  }
+
   ol li:before {
-    content: "#";
+    counter-increment: section;
+    content: counters(section,".") "." " ";
   }
 
   ul li:before {
     content: "●";
+    font-size: rem-calc(17px);
+    @include above($medium) {
+      font-size: rem-calc(20px);
+      top: rem-calc(-3px);
+    }
   }
 
 }

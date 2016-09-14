@@ -5,19 +5,97 @@
 
 
 {% block content %}
+  <div class="container margin-top-2"
+       itemscope itemtype="http://schema.org/Person">
+    <div class="grid-12">
 
-{% image value.image original as original_image %}
-<a href="{{ original_image.url }}">
-  {% image value.image original as original_image %}
-  <img src="{{ original_image.url }}"
-    srcset="{{ value.image|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
-    {% if value.full_width %}
-      sizes="100vw"
-    {% else %}
-        sizes="(min-width: 60em) 51.875em, (min-width: 40em) 40em, 100vw"
-    {% endif %}
-    alt="{{ original_image.alt }}"
-    class="block-image__image {% if value.full_width %}block-image__image--full-width{% endif %}">
-</a>
+      <!-- the side column -->
+      <div class="grid-12__col-4@medium float-left js-sticky@medium">
 
+        <!-- image -->
+        {% if self.photo %}
+        <div class="margin-bottom-1 margin-top-1">
+          {% image self.photo width-768 as original_image %}
+          {% image self.photo fill-250x250 as fallback_image %}
+          <a href="{{ original_image.url }}">
+            <img src="{{ fallback_image.url }}"
+              srcset="{{ self.photo|srcset:'fill-250x250' }}"
+              sizes="(min-width: 48em) and (max-width: 59.9375em) 30vw, (min-width: 60em) 19.1875em, 95vw"
+              alt="{{ original_image.alt }}"
+              class="person__photo  person__photo--big">
+          </a>
+          <link itemprop="image" href="{{ fallback_image.url }}">
+          {% if self.photo.attribution %}
+            <div class="person-page__photo-attribution">{{ self.photo.attribution }}</div>
+          {% endif %}
+        </div>
+        {% endif %}
+
+
+
+
+        <!-- Contact Details -->
+        {% if self.mail %}
+          <a target="_blank" href="mailto:{{ self.mail }}"
+             class="grid-12 margin-top-1 margin-bottom-1 display-block font-size-2 font-weight-bold"
+             title="E-Mail schreiben">
+            <i class="grid-12__col-1 icon-envelope" aria-hidden="true"></i>
+            <span itemprop="email" class="grid-12__col-11">
+              {{ self.mail }}
+            </span>
+          </a>
+        {% endif %}
+
+        {% if self.phone %}
+          <a target="_blank" href="{{ self.phone.as_rfc3966 }}"
+             class="grid-12 margin-top-1 margin-bottom-1 display-block font-size-2 font-weight-bold"
+             title="Anrufen">
+            <i class="grid-12__col-1 icon-phone" aria-hidden="true"></i>
+            <span itemprop="telephone" class="grid-12__col-11">
+              {{ self.phone|prettyphone }}
+            </span>
+          </a>
+        {% endif %}
+
+        <div class="grid-12 margin-top-1 margin-bottom-1">
+          <i class="grid-12__col-1 icon-clock" aria-hidden="true"></i>
+          <span class="grid-12__col-11">
+            erreichbar Dienstag bis Freitag
+          </span>
+        </div>
+
+        <!-- TODO -->
+        <a href="#" class="grid-12 margin-top-1 margin-bottom-1 display-block">
+          <i class="grid-12__col-1 icon-home" aria-hidden="true"></i>
+          <span itemprop="workLocation" class="grid-12__col-11">
+            Landesbüro, Goebenstr. 3a, Hannover
+          </span>
+        </a>
+
+      </div>
+
+
+
+      <!-- the main column -->
+      <div class="grid-12__col-7@medium float-right">
+        <!-- title -->
+        <h1 class="title margin-top-0 margin-bottom-2">
+          <span itemprop="name">{{ self.title }}</span>
+          {% if self.role %}
+            <div itemprop="jobTitle" class="font-size-2 margin-top-2">
+              {{ self.role }}
+            </div>
+          {% endif %}
+        </h1>
+
+        <!-- the content -->
+        <div itemprop="description">
+          {% include_block self.text %}
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
 {% endblock %}

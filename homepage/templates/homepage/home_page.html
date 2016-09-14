@@ -1,0 +1,19 @@
+{% extends "core/__base.html" %}
+
+{% load wagtailcore_tags %}
+{% load static from staticfiles %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{# navbar should be transparent #}
+{% block top %}
+  {% include "core/_navbar.html" with navbar_class="navbar--fixed navbar--transparent" %}
+{% endblock %}
+
+
+{% block content %}
+  {# show header #}
+  {# include 'core/_header.html' #}
+  {% include 'core/_hero.html' %}
+
+{% endblock %}

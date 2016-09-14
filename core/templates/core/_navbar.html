@@ -13,9 +13,10 @@
       <!-- logo -->
       <a class="navbar__item" href="{% pageurl site_root %}"
          itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-        <img class="navbar__logo"
+        <!-- <img class="navbar__logo"
              alt="JANUN Logo"
-             src="{% static 'core/images/components/navbar/janun_logo.svg' %}">
+             src="{% static 'core/images/components/navbar/janun_logo.svg' %}"> -->
+        <span class="navbar__logo">{% include 'core/janun_logo.svg' %}</span>
         <meta itemprop="url" content="{% static 'core/images/janun_logo.svg' %}">
         <meta itemprop="width" content="37">
         <meta itemprop="height" content="36">

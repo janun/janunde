@@ -2,23 +2,29 @@
 
 {% image value.image original as original_image %}
 
-<figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+<figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject"
+        class="{% if value.full_width %}block-image--full-width{% endif %}">
   <a href="{{ original_image.url }}">
     {% if value.full_width %}
-      <picture>
-        <source media="(min-width: 40em)"
-                srcset="{{ value.image|srcset:'fill-512x180 fill-1024x360 fill-1280x450 fill-1920x675 fill-2560x900' }}"
-                sizes="100vw">
-        <source srcset="{{ value.image|srcset:'fill-320x200 fill-640x400' }}"
-                sizes="100vw">
-        <img src="{{ original_image.url }}" alt="{{ original_image.alt }}" class="block-image__image--full-width block-image__image">
-      </picture>
+      <div class="block-image__wrapper" >
+        <picture>
+          <source media="(min-width: 40em)"
+                  srcset="{{ value.image|srcset:'fill-512x180 fill-1024x360 fill-1280x450 fill-1920x675 fill-2560x900' }}"
+                  sizes="100vw">
+          <source srcset="{{ value.image|srcset:'fill-320x200 fill-640x400' }}"
+                  sizes="100vw">
+          <img src="{{ original_image.url }}" alt="{{ original_image.alt }}" class="block-image__image">
+        </picture>
+      </div>
     {% else %}
-      <img src="{{ original_image.url }}"
-        srcset="{{ value.image|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
-        sizes="(min-width: 60em) 51.875em, (min-width: 40em) 40em, 100vw"
-        alt="{{ original_image.alt }}"
-        class="block-image__image">
+      <div class="block-image__wrapper"
+           style="padding-bottom: {{ original_image.get_aspect|floatformat:"-3" }}%">
+        <img src="{{ original_image.url }}"
+          srcset="{{ value.image|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
+          sizes="(min-width: 60em) 51.875em, (min-width: 40em) 40em, 100vw"
+          alt="{{ original_image.alt }}"
+          class="block-image__image">
+      </div>
     {% endif %}
   </a>
   <meta itemprop="url" content="{{ original_image.url }}">

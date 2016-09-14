@@ -18,17 +18,18 @@
   position: relative;
 
   a {
-    z-index: 1;
+    //position: relative;
+    z-index: 2;
   }
 
   &__area-link {
-    position: absolute;
+    position: absolute !important;
     top: 0; bottom: 0; left: 0; right: 0;
     overflow: hidden;
     text-indent: 200%;
     white-space: nowrap;
     background: transparent;
-    z-index: 0 !important;
+    z-index: 1 !important;
     opacity: 0;
   }
 }

@@ -1,0 +1,64 @@
+.person-index-page {
+
+  &__people-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-left: -10px;
+    margin-right: -10px;
+
+    @include above($medium) {
+      justify-content: space-between;
+    }
+
+    .person {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+
+  &__header {
+    display: none;
+    @include above($medium) {
+      display: block;
+    };
+
+    background-color: $green;
+    height: 200px;
+    padding-top: 60px;
+
+    h1 {
+      margin: 0;
+      text-align: center;
+      font-family: $font-family-extra;
+      font-size: 50px;
+      color: $white;
+    }
+  }
+
+
+  &__controls {
+    height: 83px;
+    background-color: $white;
+
+    .menu {
+      margin-top: rem-calc(30px);
+      padding-left: 0;
+    }
+
+    .menu__item {
+      font-size: rem-calc(20px);
+      a {
+        color: $grey;
+      }
+
+      &--active {
+        border-bottom: 2px solid $green;
+        a {
+          color: $green;
+        }
+      }
+    }
+  }
+}

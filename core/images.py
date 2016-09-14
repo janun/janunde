@@ -10,8 +10,7 @@ class AttributedImage(AbstractImage):
     """
     image model with optional attribution attributes
     """
-    attribution = models.CharField("Quellenangabe",
-                                      max_length=255, blank=True)
+    attribution = models.CharField("Quellenangabe", max_length=255)
 
     admin_form_fields = Image.admin_form_fields + (
         'attribution',
@@ -20,6 +19,9 @@ class AttributedImage(AbstractImage):
 
 class AttributedRendition(AbstractRendition):
     image = models.ForeignKey(AttributedImage, related_name='renditions')
+
+    def get_aspect(self):
+        return self.height / self.width * 100;
 
     class Meta:
         unique_together = (

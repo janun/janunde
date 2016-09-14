@@ -77,15 +77,21 @@ $small-navbar-height: rem-calc(54);
   &--fixed { position: fixed; }
   &--absolute { position: absolute; }
 
+  &__logo path {
+    fill: $white;
+  }
+
   &--green { background: $green; }
   &--red { background: $red; }
+  &--blue { background: $blue; }
+
   &--white {
     background: $white;
     a {
       color: $green;
     }
-    .navbar__logo {
-      color: $green;
+    .navbar__logo path {
+      fill: $green;
     }
   }
 

@@ -1,6 +1,8 @@
 <div class="block-attachment__data">
   <span class="block-attachment__metadata">
-    {{ value.created_at }}, {{ value.file_extension|upper }}-Datei
+    {{ value.created_at }},
+    {{ value.file_extension|upper }}-Datei,
+    {{ value.file.size|filesizeformat }}
   </span>
   <h3 class="block-attachment__title">{{ value.title }}</h3>
 </div>

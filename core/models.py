@@ -32,32 +32,6 @@ COLOR_CHOICES = [
 ]
 
 
-@register_snippet
-class Person(models.Model):
-    first_name = models.CharField("Vorname", max_length=255)
-    last_name = models.CharField("Nachname", max_length=255, blank=True)
-    photo = models.ForeignKey(
-        Image,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    panels = [
-        FieldPanel('first_name'),
-        FieldPanel('last_name'),
-        ImageChooserPanel('photo'),
-    ]
-
-    search_fields = [
-        index.SearchField('first_name', partial_match=True),
-        index.SearchField('last_name', partial_match=True),
-    ]
-
-    def __str__(self):
-        return self.first_name + " " + self.last_name
-
 
 
 # TODO: How can we create a Thema conveniently?
@@ -187,7 +161,7 @@ class StandardPage(BasePage):
     )
 
     author = models.ForeignKey(
-        'core.Person',
+        'contact.PersonPage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -212,7 +186,7 @@ class StandardPage(BasePage):
         FieldPanel('subtitle'),
         StreamFieldPanel('body'),
         FieldPanel('tags'),
-        SnippetChooserPanel('author'),
+        FieldPanel('author'),
     ]
 
     promote_panels = [
@@ -255,8 +229,9 @@ class HomePage(BasePage):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['highlights'] = Highlight.objects.active() \
-            .order_by('start_datetime')
+        from events.models import EventPage
+        context['highlights'] = EventPage.objects.all()[:6]
+        context['events'] = EventPage.objects.all()[6:]
         return context
 
 

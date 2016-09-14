@@ -13,16 +13,41 @@ from core.blocks import StandardStreamBlock
 from core.models import BasePage
 from core.images import AttributedImage as Image
 
+from phonenumber_field.modelfields import PhoneNumberField
+from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
+
+
+
+
+
+class ContactIndex(BasePage):
+    subpage_types = ['PersonPage']
+    parent_page_types = ['core.HomePage']
+
+    class Meta:
+        verbose_name = "Auflistung von Kontakten"
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['people'] = PersonPage.objects.child_of(self).live().order_by('title')
+        return context
+
+
+
+# class Department(BasePage):
+#     pass
+
 
 
 class PersonPage(BasePage):
-    first_name = models.CharField("Vorname", max_length=255)
-    last_name = models.CharField("Nachname", max_length=255, blank=True)
     text = StreamField(
         StandardStreamBlock(),
         blank=True,
         verbose_name="Text",
     )
+    role = models.CharField("Rolle", max_length=255, blank=True)
+    mail = models.EmailField("E-Mail", blank=True)
+    phone = PhoneNumberField("Telefonnummer", blank=True)
 
     photo = models.ForeignKey(
         Image,
@@ -33,22 +58,14 @@ class PersonPage(BasePage):
     )
 
     content_panels = [
-        MultiFieldPanel([
-            FieldPanel('first_name'),
-            FieldPanel('last_name'),
-        ]),
+        FieldPanel('title'),
         ImageChooserPanel('photo'),
+        FieldPanel('role'),
+        FieldPanel('mail'),
+        FieldPanel('phone', widget=PhoneNumberInternationalFallbackWidget),
         StreamFieldPanel('text'),
     ]
 
     search_fields = [
-        index.SearchField('first_name', partial_match=True),
-        index.SearchField('last_name', partial_match=True),
+        index.SearchField('title', partial_match=True),
     ]
-
-
-
-    def clean(self):
-        super().clean()
-        self.title = "%s %s" % (self.first_name, self.last_name)
-        self.slug = slugify(self.title)

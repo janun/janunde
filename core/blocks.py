@@ -5,6 +5,8 @@ from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 
+from wagtail.contrib.table_block.blocks import TableBlock
+
 from core.fields import PrettyURLField
 
 
@@ -52,6 +54,18 @@ class ImageBlock(blocks.StructBlock):
         icon = "image"
 
 
+class Sticker(blocks.StructBlock):
+    title = blocks.CharBlock(label="Text")
+    color = blocks.ChoiceBlock(
+        label="Farbe", choices=COLOR_CHOICES, default="green"
+    )
+    link = blocks.URLBlock(label="Link")
+    class Meta:
+        label = _("Sticker")
+        icon = "tag"
+        template = 'blocks/sticker.html'
+
+
 class H2(blocks.StructBlock):
     title = blocks.CharBlock(label="Titel")
     color = blocks.ChoiceBlock(
@@ -87,21 +101,35 @@ class Attachment(DocumentChooserBlock):
         template = 'blocks/attachment.html'
 
 
-class VideoBlock(EmbedBlock):
-    def __init__(self, *args, **kwargs):
-        kwargs['help_text'] = _("URL von z.B. Youtube oder "
-                                "Vimeo hier reinkopieren")
-        super().__init__(*args, **kwargs)
-
+class VideoBlock(blocks.StructBlock):
+    embed = EmbedBlock(
+        "Video-URL",
+        help_text="URL von z.B. Youtube oder Vimeo hier reinkopieren"
+    )
+    caption = blocks.CharBlock(
+        label="Bildunterschrift",
+        required=False
+    )
     class Meta:
         label = _("externes Video")
         icon = "media"
+        template = 'blocks/video.html'
+
+
+class ParagraphBlock(blocks.RichTextBlock):
+    class Meta:
+        label = "Absatz"
+        icon = "pilcrow"
+        template = 'blocks/paragraph.html'
+
 
 
 class StandardStreamBlock(blocks.StreamBlock):
     h2 = H2()
-    paragraph = blocks.RichTextBlock(label=_("Absatz"), icon="pilcrow")
+    paragraph = ParagraphBlock()
     image = ImageBlock()
     embedded_video = VideoBlock()
     button = Button()
     attachment = Attachment()
+    sticker = Sticker()
+    table = TableBlock()
