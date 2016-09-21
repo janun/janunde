@@ -1,5 +1,6 @@
 {% extends "core/__base.html" %}
 {% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
+{% load static from staticfiles %}
 
 {% block body_class %}person-page{% endblock %}
 
@@ -13,23 +14,25 @@
       <div class="grid-12__col-4@medium float-left js-sticky@medium">
 
         <!-- image -->
-        {% if self.photo %}
         <div class="margin-bottom-1 margin-top-1">
-          {% image self.photo width-768 as original_image %}
-          {% image self.photo fill-250x250 as fallback_image %}
-          <a href="{{ original_image.url }}">
-            <img src="{{ fallback_image.url }}"
-              srcset="{{ self.photo|srcset:'fill-250x250' }}"
-              sizes="(min-width: 48em) and (max-width: 59.9375em) 30vw, (min-width: 60em) 19.1875em, 95vw"
-              alt="{{ original_image.alt }}"
-              class="person__photo  person__photo--big">
-          </a>
-          <link itemprop="image" href="{{ fallback_image.url }}">
-          {% if self.photo.attribution %}
-            <div class="person-page__photo-attribution">{{ self.photo.attribution }}</div>
+          {% if self.photo %}
+            {% image self.photo width-768 as original_image %}
+            {% image self.photo fill-250x250 as fallback_image %}
+            <a href="{{ original_image.url }}">
+              <img src="{{ fallback_image.url }}"
+                srcset="{{ self.photo|srcset:'fill-250x250' }}"
+                sizes="(min-width: 48em) and (max-width: 59.9375em) 30vw, (min-width: 60em) 19.1875em, 95vw"
+                alt="{{ original_image.alt }}"
+                class="person__photo">
+            </a>
+            <link itemprop="image" href="{{ fallback_image.url }}">
+            {% if self.photo.attribution %}
+              <div class="person-page__photo-attribution">{{ self.photo.attribution }}</div>
+            {% endif %}
+          {% else %}
+            <img class="person__photo" alt="" src="{% static 'core/images/person-outline.svg' %}">
           {% endif %}
         </div>
-        {% endif %}
 
 
 

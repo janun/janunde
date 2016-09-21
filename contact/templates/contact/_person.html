@@ -1,5 +1,5 @@
 {% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
-
+{% load static from staticfiles %}
 
 <div class="person click-area"
      itemscope itemtype="http://schema.org/Person">
@@ -14,6 +14,8 @@
       alt="{{ original_image.alt }}"
       class="person__photo">
     <link itemprop="image" href="{{ fallback_image.url }}">
+  {% else %}
+    <img class="person__photo" alt="" src="{% static 'core/images/person-outline.svg' %}">
   {% endif %}
 
   <div class="person__data">
