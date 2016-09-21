@@ -1,0 +1,25 @@
+.block-quote {
+  @include p;
+  border-left: 5px solid $green;
+  padding-left: 20px;
+
+  @include above($medium) {
+    font-size: 20px;
+  }
+
+
+  &__attribution {
+    display: block;
+    @include above($medium) {
+      font-size: 16px;
+    }
+  }
+
+  .userim & {
+    @include above(665px) {
+      margin-left: -25px;
+      width: 665px;
+    }
+  }
+
+}

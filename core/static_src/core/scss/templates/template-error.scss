@@ -1,0 +1,54 @@
+.template-error {
+  h1, p, a {
+    text-align: center;
+  }
+
+  &__emotion {
+    color: $red;
+    font-size: 3rem;
+    @include above($medium) {
+      font-size: 6rem;
+    }
+  }
+
+  &__sorry {
+    color: $blue;
+  }
+
+  &__searchinput {
+    @extend .event-search__input;
+    width: 100%;
+    float: none;
+    font-family: $font-family-extra;
+    font-size: 1.5rem;
+    line-height: 1.36;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include above($medium) {
+      font-size: 2rem;
+      width: rem-calc(400px);
+    };
+  }
+  &__searchsubmit {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  h1 {
+    font-family: $font-family-extra;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    @include above($medium) {
+      font-size: 3rem;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+  }
+}

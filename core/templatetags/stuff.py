@@ -13,6 +13,11 @@ def prettyurl(value):
 
 
 @register.filter()
+def pathtosearch(value):
+    return value.split('/')[-2]
+
+
+@register.filter()
 def prettyphone(value):
     widget = PhoneNumberInternationalFallbackWidget()
     return widget._format_value(value)

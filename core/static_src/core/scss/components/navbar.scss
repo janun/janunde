@@ -1,24 +1,11 @@
 @import 'bower_components/hamburger-icon/hamburger-icon';
 
-$medium-navbar-height: rem-calc(65);
-$small-navbar-height: rem-calc(54);
+$navbar-height: rem-calc(65);
 
 @mixin box-shadow_navbar {
   box-shadow: rem-calc(0 2 4) rgba($black, 0.1);
 }
 
-@mixin scale-with-navbar($property, $value1, $value2) {
-  @include scale-from-medium-to-large(
-    $property, $value1, $value2
-  );
-}
-
-// used to scale propertes like margin and height
-@mixin scale-with-navbar-height($property: height) {
-  @include scale-with-navbar(
-    $property, $small-navbar-height, $medium-navbar-height
-  );
-}
 
 /// navbar
 ///
@@ -34,7 +21,7 @@ $small-navbar-height: rem-calc(54);
   position: relative;
   width: 100%;
   z-index: 1000;
-  @include scale-with-navbar-height;
+  height: $navbar-height;
   @include box-shadow_navbar;
 
   font-family: $font-family-sans-serif;
@@ -89,9 +76,32 @@ $small-navbar-height: rem-calc(54);
     background: $white;
     a {
       color: $green;
+      &:focus {
+        background-color: rgba($grey, 0.1)
+      }
     }
     .navbar__logo path {
       fill: $green;
+    }
+    .hamburger__inner, .hamburger__inner:before, .hamburger__inner:after {
+      background-color: $green;
+    }
+  }
+  &--white\@medium {
+    @include above($medium) {
+      background: $white;
+      a {
+        color: $green;
+        &:focus {
+          background-color: rgba($grey, 0.1)
+        }
+      }
+      .navbar__logo path {
+        fill: $green;
+      }
+      .hamburger__inner, .hamburger__inner:before, .hamburger__inner:after {
+        background-color: $green;
+      }
     }
   }
 
@@ -114,8 +124,8 @@ $small-navbar-height: rem-calc(54);
   &__item {
     display: inline;
     vertical-align: middle;
-    @include scale-with-navbar-height(line-height);
-    @include scale-with-navbar-height;
+    line-height: $navbar-height;
+    height: $navbar-height;
   }
 
 
@@ -123,13 +133,8 @@ $small-navbar-height: rem-calc(54);
   &__logo {
     display: inline-block;
     vertical-align: middle;
-
-    width: rem-calc(28);
-    height: rem-calc(27);
-    @include above($medium) {
-      width: rem-calc(37);
-      height: rem-calc(36)
-    }
+    width: rem-calc(37);
+    height: rem-calc(36)
   }
 
   &__title {
@@ -150,13 +155,14 @@ $small-navbar-height: rem-calc(54);
     @include until($large) {
       height: auto;
       position: absolute;
-      @include scale-with-navbar-height(top);
+      top: $navbar-height;
       left: 0;
       width: 100vw;
 
       z-index: 1000;
       margin-top: 0;
-      @include scale-with-navbar(padding-left, rem-calc(20), rem-calc(180));
+      padding-left: rem-calc(40);
+      //@include scale-with-navbar(padding-left, rem-calc(20), rem-calc(180));
 
       background: $white;
       color: $brown;

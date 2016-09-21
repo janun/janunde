@@ -1,51 +1,48 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags %}
 {% load static from staticfiles %}
 
-<!DOCTYPE html>
-<html class="no-js" lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="theme-color" content="rgb(70, 187, 0)">
-    <title>500. Ein Fehler ist aufgetreten. - JANUN</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {% block css %}
-      <link rel="stylesheet" type="text/x-scss" href="{% static "core/css/all.css" %}" />
-    {% endblock %}
-  </head>
+{% block body_class %}template-error{% endblock %}
+{% block title %}500. Ein Fehler ist aufgetreten.{% endblock %}
 
-  <body>
+{% block content %}
+<div class="container">
+  <div class="text-container">
 
-    <!-- bogus navbar -->
-    <div class="navbar navbar--green navbar--transparent navbar--absolute">
-      <nav class="navbar__inner" role="navigation" aria-label="Hauptmenü">
-        <a class="navbar__item" href="/">
-          <img class="navbar__logo"
-               alt="JANUN Logo"
-               src="{% static 'core/images/components/navbar/janun_logo.svg' %}">
-        </a>
-        <a href="/" class="navbar__item">
-          JANUN
-        </a>
-      </nav>
+    <h1>
+      <div class="template-error__emotion">
+        Oh nein!
+      </div>
+      Bei uns ist irgendwas kaputt.
+      <div class="template-error__sorry">Das tut uns leid!</div>
+    </h1>
+
+
+    <div class="block-paragraph">
+      <p>
+        Ein Fehler ist auf unserem Server aufgetreten.<br>
+        Das ist <strong>nicht deine Schuld</strong>, sondern unsere.
+      </p><br>
     </div>
 
-    <header class="header" style="background: rgba(196, 23, 55, 0.6);">
-      <div class="video-background">
-        <video class="video-background__video js-mq-video-loader hide@no-js hide@until-medium" autoplay loop poster="{% static 'core/images/header-poster/header-poster-1024.jpg' %}">
-          <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.mp4' %}" type="video/mp4">
-          <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.webm' %}" type="video/webm">
-          <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.mp4' %}" type="video/mp4">
-          <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.webm' %}" type="video/webm">
-        </video>
-      </div>
-      <div class="header__content">
-        <h1>500. Ein Fehler ist aufgetreten.</h1>
-        <p>
-          Es tut uns leid:
-          Ein Fehler ist auf der Website aufgetreten.
-          Versuche es später nochmal.
-        </p>
-      </div>
-    </header>
+    <div class="text-align-center">
+      <a href="" class="button button--filled color-green">
+        <i class="icon-refresh"></i>
+        nochmal laden
+      </a><br>
+      <a href="/" class="button color-green">
+        zur Startseite
+      </a><br>
+      <a href="mailto:admin@janun.de?subject=Fehler 500 {{ request.get_full_path }}"
+         class="display-block padding-half">
+        E-Mail schreiben
+      </a>
+    </div>
 
-  </body>
-</html>
+  </div>
+</div>
+{% endblock %}
+
+{# dont show footer #}
+{% block footer %}
+{% endblock %}

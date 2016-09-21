@@ -4,26 +4,26 @@
 {% block body_class %}person-index-page{% endblock %}
 
 {% block top %}
-  {% include "core/_navbar.html" with navbar_class="navbar--white" %}
+  {% include "core/_navbar.html" with navbar_class="navbar--white@medium" %}
 {% endblock %}
 
 {% block content %}
 
 
-  <div class="person-index-page__header bg-color-white">
+  <div class="person-index-page__header">
     <h1>Kontakt, Team und Projekte</h1>
   </div>
 
   <nav class="person-index-page__controls">
     <div class="container">
-      <ul role="menubar" class="menu">
-        <li role="menuitem" class="menu__item"><a href="#">Büros und Gruppen</a></li>
-        <li role="menuitem" class="menu__item menu__item--active"><a href="#">Personen</a></li>
+      <ul role="menubar" class="pagemenu">
+        <li role="menuitem" class="pagemenu__item"><a href="#">Büros</a></li>
+        <li role="menuitem" class="pagemenu__item pagemenu__item--active"><a href="#">Personen</a></li>
       </ul>
     </div>
   </nav>
 
-  <div class="container margin-top-2">
+  <div class="container margin-top-2-dis">
     {% if people %}
 
       <div class="person-index-page__people-list">

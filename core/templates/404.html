@@ -1,33 +1,35 @@
-{% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags stuff %}
 {% load static from staticfiles %}
 
-
-{% block body_class %}template-404{% endblock %}
+{% block body_class %}template-error{% endblock %}
 {% block title %}404. Seite nicht gefunden.{% endblock %}
 
-{# overwrite the default navbar with a transparent navbar and header #}
-{% block top %}
-  {% include "core/_navbar.html" with navbar_class="navbar--transparent navbar--fixed" %}
+{% block content %}
+<div class="container">
+  <div class="text-container">
 
-  <header class="header">
-    <div class="video-background">
-      <video class="video-background__video js-mq-video-loader hide@no-js hide@until-medium" autoplay loop poster="{% static 'core/images/header-poster/header-poster-1024.jpg' %}">
-        <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.mp4' %}" type="video/mp4">
-        <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.webm' %}" type="video/webm">
-        <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.mp4' %}" type="video/mp4">
-        <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.webm' %}" type="video/webm">
-      </video>
-    </div>
-    <div class="header__content">
-      <h1>404. Seite nicht gefunden.</h1>
-      <p>Die Seite, die Du aufrufen wolltest, gibt es nicht.</p>
-      <p>Vielleicht findest Du sie mit der Suche:</p>
-      <form class="search" action="/search/" method="get">
-          <input type="search" name="query" placeholder="Suche">
+    <h1>
+      <div class="template-error__emotion">
+        Sorry,
+      </div>
+      Seite nicht gefunden!
+    </h1>
+
+    <div class="text-align-center">
+      <p>Vielleicht findest Du was Du suchst, über unsere Suche?</p>
+      <form action="/search">
+        <input name="query" type="search" autofocus
+               class="template-error__searchinput"
+             placeholder="Suchbegriff" value="{{ request.path|pathtosearch }}">
+        <input type="submit"
+          class="button button--filled color-green template-error__searchsubmit"
+          value="Suche">
       </form>
     </div>
-  </header>
+
+  </div>
+</div>
 {% endblock %}
 
 {# dont show footer #}

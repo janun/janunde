@@ -3,7 +3,9 @@
 {% load static from staticfiles %}
 
 {% get_site_root as site_root %}
-{% get_menuitems parent=site_root calling_page=self as menuitems %}
+{% if site_root %}
+  {% get_menuitems parent=site_root calling_page=self as menuitems %}
+{% endif %}
 
 <!-- begin of navbar -->
 <div class="navbar navbar--green {{ navbar_class }}">
@@ -11,11 +13,8 @@
 
     <span itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <!-- logo -->
-      <a class="navbar__item" href="{% pageurl site_root %}"
+      <a class="navbar__item" href="/"
          itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-        <!-- <img class="navbar__logo"
-             alt="JANUN Logo"
-             src="{% static 'core/images/components/navbar/janun_logo.svg' %}"> -->
         <span class="navbar__logo">{% include 'core/janun_logo.svg' %}</span>
         <meta itemprop="url" content="{% static 'core/images/janun_logo.svg' %}">
         <meta itemprop="width" content="37">
@@ -25,7 +24,7 @@
       <!-- title -->
       <meta itemprop="name" content="JANUN">
       <meta itemprop="url" content="http://janun.de/">
-      <a href="{% pageurl site_root %}"
+      <a href="/"
          class="navbar__item navbar__title">
         JANUN
       </a>
@@ -34,35 +33,39 @@
 
     <div class="float-right">
       <!-- menu toggle button -->
-      <div class="navbar__item">
-        <button class="hamburger
-                       js-aria-hidden"
-                data-js-aria-hidden-media="(min-width: 1024px)"
-                type="button"
-                title="Menü ein-/ausblenden"
-                data-a11y-toggle="collapsible"
-                aria-expanded="false">
-          <span class="hamburger__inner"></span>
-        </button>
-      </div>
+      {% if menuitems %}
+        <div class="navbar__item">
+          <button class="hamburger
+                         js-aria-hidden"
+                  data-js-aria-hidden-media="(min-width: 1024px)"
+                  type="button"
+                  title="Menü ein-/ausblenden"
+                  data-a11y-toggle="collapsible"
+                  aria-expanded="false">
+            <span class="hamburger__inner"></span>
+          </button>
+        </div>
+      {% endif %}
     </div>
 
 
     <!-- collapsible menu -->
-    <div id="collapsible" aria-hidden="true"
-         class="navbar__item navbar__collapsible js-aria-hidden"
-         data-js-aria-hidden-media="(max-width: 1023px)">
-      <ul role="menubar" class="menu">
-        {% for menuitem in menuitems %}
-          <li role="menuitem" class="menu__item
-              {% if menuitem.is_active %}menu__item--active{% endif %}">
-            <a href="{% pageurl menuitem %}">
-              {{ menuitem.title }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+    {% if menuitems %}
+      <div id="collapsible" aria-hidden="true"
+           class="navbar__item navbar__collapsible js-aria-hidden"
+           data-js-aria-hidden-media="(max-width: 1023px)">
+        <ul role="menubar" class="menu">
+          {% for menuitem in menuitems %}
+            <li role="menuitem" class="menu__item
+                {% if menuitem.is_active %}menu__item--active{% endif %}">
+              <a href="{% pageurl menuitem %}">
+                {{ menuitem.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
 
   </nav>
 </div>

@@ -5,28 +5,25 @@
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: flex-start;
-    margin-left: -10px;
-    margin-right: -10px;
 
     @include above($medium) {
       justify-content: space-between;
     }
 
-    .person {
-      margin-left: 10px;
-      margin-right: 10px;
-    }
+
   }
 
   &__header {
+    position: relative;
     display: none;
+    height: 200px;
+    padding-top: 60px;
+    background-color: $green;
+    box-shadow: 0 1px 2px rgba($black, 0.1);
+
     @include above($medium) {
       display: block;
     };
-
-    background-color: $green;
-    height: 200px;
-    padding-top: 60px;
 
     h1 {
       margin: 0;
@@ -39,26 +36,16 @@
 
 
   &__controls {
-    height: 83px;
+    position: relative;
+    height: 60px;
+    line-height: 60px;
     background-color: $white;
+    box-shadow: 0 1px 2px rgba($black, 0.1);
 
-    .menu {
-      margin-top: rem-calc(30px);
-      padding-left: 0;
-    }
 
-    .menu__item {
-      font-size: rem-calc(20px);
-      a {
-        color: $grey;
-      }
-
-      &--active {
-        border-bottom: 2px solid $green;
-        a {
-          color: $green;
-        }
-      }
+    @include above($medium) {
+      height: 83px;
+      line-height: 83px;
     }
   }
 }

@@ -13,8 +13,8 @@ from core.views import search, acme_challenge, tags
 
 
 urlpatterns = [
-    url(r'^404/$', page_not_found),
-    url(r'^500/$', server_error),
+    url(r'^404/$', page_not_found, kwargs={'exception': Exception("Page not Found")} ),
+    url(r'^500/$', server_error ),
 
     url(r'^.well-known/acme-challenge/', acme_challenge), # for letsencrypt
 

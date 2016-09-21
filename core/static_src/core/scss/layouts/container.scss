@@ -2,7 +2,7 @@
   margin-left: 1rem;
   margin-right: 1rem;
 
-  @include above($width) {
+  @include above($width + rem-calc(30px)) {
     max-width: $width;
     margin-left: auto;
     margin-right: auto;
@@ -23,10 +23,10 @@
 
 
 .text-container {
-  @include above(rem-calc(640px)) {
+  @include above(rem-calc(670px)) {
     max-width: rem-calc(640px);
     margin-left: auto;
     margin-right: auto;
   }
-  
+
 }

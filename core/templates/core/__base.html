@@ -6,12 +6,6 @@
 {% load static from staticfiles %}
 
 
-
-{% block css %}
-  <link rel="stylesheet" type="text/css" href="{% static "core/css/all.css" %}">
-{% endblock %}
-
-
 {% block meta %}
   <meta name="description" content="{{ self.get_description }}">
   <meta name="last-modified" content="{{ self.latest_revision_created_at|date:"c" }}">
@@ -48,14 +42,7 @@
   {% include "core/_rollbar.html" %}
 
   {% block top %}
-    {#  {% include  "core/_betabanner.html" %} #}
-
     {% include "core/_navbar.html" %}
-
-    {% comment %}
-    {% get_site_root as site_root %}
-    {% navbar parent=site_root calling_page=self %}
-    {% endcomment %}
   {% endblock %}
 
   <div class="{% block content_class %}content{% endblock %}"

@@ -1,3 +1,5 @@
+{% load static from staticfiles %}
+
 <!DOCTYPE html>
 <html class="no-js" lang="{% block lang %}de{% endblock %}">
   <head>
@@ -6,7 +8,7 @@
     <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %} - JANUN e.V.{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block meta %}{% endblock %}
-    {% block css %}{% endblock %}
+    {% block css %}<link rel="stylesheet" type="text/css" href="{% static "core/css/all.css" %}">{% endblock %}
     {% include "_favicons.html" %}
   </head>
 

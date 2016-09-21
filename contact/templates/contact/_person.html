@@ -4,6 +4,8 @@
 <div class="person click-area"
      itemscope itemtype="http://schema.org/Person">
 
+  <a href="{% pageurl person %}" class="click-area__area-link">{{ person.title }}</a>
+
   {% if person.photo %}
     {% image person.photo fill-250x250 as fallback_image %}
     <img src="{{ fallback_image.url }}"
@@ -16,19 +18,18 @@
 
   <div class="person__data">
     <h2 itemprop="name" class="person__name">
-      <div class="person__firstname">{{ person.title.split.0 }}</div>
-      <div class="person__lastname">{{ person.title.split.1 }}</div>
+      {{ person.title }}
     </h2>
 
     {% if person.role %}
-      <div class="person__role" itemprop="role">{{ person.role }}</div>
+      <span class="person__role" itemprop="role">{{ person.role }}</span>
     {% endif %}
-    <!-- {% if person.mail %}
-      <div><a itemprop="mail" href="mailto:{{ person.mail }}">{{ person.mail }}</a></div>
+    {% if person.mail %}
+      <a class="person__mail" itemprop="mail" href="mailto:{{ person.mail }}">{{ person.mail }}</a>
     {% endif %}
     {% if person.phone %}
-      <div><a itemprop="phone" href="{{ person.phone.as_rfc3966 }}">{{ person.phone|prettyphone }}</a></div>
-    {% endif %} -->
-    <a href="{% pageurl person %}" class="click-area__area-link"></a>
+      <a class="person__phone" itemprop="phone" href="{{ person.phone.as_rfc3966 }}">{{ person.phone|prettyphone }}</a>
+    {% endif %}
   </div>
+
 </div>
