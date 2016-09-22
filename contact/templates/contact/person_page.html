@@ -8,13 +8,24 @@
 {% block content %}
   <div class="container margin-top-2"
        itemscope itemtype="http://schema.org/Person">
-    <div class="grid-12">
 
+     <!-- title -->
+     <div class="float-right@medium grid-12__col-7@medium margin-bottom-2">
+       <h1 class="title" itemprop="name">{{ self.title }}</h1>
+       {% if self.role %}
+         <div itemprop="jobTitle" class="subtitle">
+           {{ self.role }}
+         </div>
+       {% endif %}
+    </div>
+
+
+    <div class="grid-12 margin-top-2">
       <!-- the side column -->
       <div class="grid-12__col-4@medium float-left js-sticky@medium">
 
         <!-- image -->
-        <div class="margin-bottom-1 margin-top-1">
+        <div class="margin-top-1">
           {% if self.photo %}
             {% image self.photo width-768 as original_image %}
             {% image self.photo fill-250x250 as fallback_image %}
@@ -35,45 +46,26 @@
         </div>
 
 
-
-
         <!-- Contact Details -->
         {% if self.mail %}
-          <a target="_blank" href="mailto:{{ self.mail }}"
-             class="grid-12 margin-top-1 margin-bottom-1 display-block font-size-2 font-weight-bold"
-             title="E-Mail schreiben">
-            <i class="grid-12__col-1 icon-envelope" aria-hidden="true"></i>
-            <span itemprop="email" class="grid-12__col-11">
-              {{ self.mail }}
-            </span>
-          </a>
+          <a class="with-icon with-icon--mail" itemprop="email"
+              href="mailto:{{ self.mail }}">{{ self.mail }}</a>
         {% endif %}
 
         {% if self.phone %}
-          <a target="_blank" href="{{ self.phone.as_rfc3966 }}"
-             class="grid-12 margin-top-1 margin-bottom-1 display-block font-size-2 font-weight-bold"
-             title="Anrufen">
-            <i class="grid-12__col-1 icon-phone" aria-hidden="true"></i>
-            <span itemprop="telephone" class="grid-12__col-11">
-              {{ self.phone|prettyphone }}
-            </span>
-          </a>
+        <a class="with-icon with-icon--phone" itemprop="telephone"
+           href="{{ self.phone.as_rfc3966 }}">{{ self.phone|prettyphone }}</a>
         {% endif %}
 
-        <div class="grid-12 margin-top-1 margin-bottom-1">
-          <i class="grid-12__col-1 icon-clock" aria-hidden="true"></i>
-          <span class="grid-12__col-11">
-            erreichbar Dienstag bis Freitag
-          </span>
-        </div>
+        <!-- TODO -->
+        <span class="with-icon with-icon--clock">
+          erreichbar Dienstag bis Freitag
+        </span>
 
         <!-- TODO -->
-        <a href="#" class="grid-12 margin-top-1 margin-bottom-1 display-block">
-          <i class="grid-12__col-1 icon-home" aria-hidden="true"></i>
-          <span itemprop="workLocation" class="grid-12__col-11">
-            Landesbüro, Goebenstr. 3a, Hannover
-          </span>
-        </a>
+        <span itemprop="workLocation" class="with-icon with-icon--home">
+          Landesbüro, Goebenstr. 3a, Hannover
+        </span>
 
       </div>
 
@@ -81,16 +73,6 @@
 
       <!-- the main column -->
       <div class="grid-12__col-7@medium float-right">
-        <!-- title -->
-        <h1 class="title margin-top-0 margin-bottom-2">
-          <span itemprop="name">{{ self.title }}</span>
-          {% if self.role %}
-            <div itemprop="jobTitle" class="font-size-2 margin-top-2">
-              {{ self.role }}
-            </div>
-          {% endif %}
-        </h1>
-
         <!-- the content -->
         <div itemprop="description">
           {% include_block self.text %}

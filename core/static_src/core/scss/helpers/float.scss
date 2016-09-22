@@ -10,4 +10,15 @@
   &-left {
     float: left !important;
   }
+
+  &-right\@medium {
+    @include above($medium) {
+      float: right !important;
+    }
+  }
+  &-left\@medium {
+    @include above($medium) {
+      float: left !important;
+    }
+  }
 }
