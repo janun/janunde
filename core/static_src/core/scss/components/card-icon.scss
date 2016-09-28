@@ -1,0 +1,66 @@
+$card-icon-size: rem-calc(40px);
+
+
+/**
+ * <span class="card-icon">
+ *  <span class="card-icon__content"></span>
+ *  <span class="card-icon__reveal"></span>
+ * </span>
+ */
+.card-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: auto;
+  height: $card-icon-size;
+  min-width: $card-icon-size;
+  max-width: 100%;
+  z-index: 4 !important;
+
+  background-color: $white;
+  box-shadow: $card-shadow;
+  line-height: $card-icon-size;
+
+  border-bottom-left-radius: $card-border-radius;
+
+
+  &__content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: $card-icon-size;
+    height: $card-icon-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5px;
+    background-color: $white;
+    border-bottom-left-radius: $card-border-radius;
+  }
+
+
+  &__reveal {
+    display: block;
+    position: relative;
+    width: auto;
+    margin-right: $card-icon-size;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: rem-calc(16px);
+    padding-left: rem-calc(10px);
+    padding-right: rem-calc(10px);
+    max-width: 100%;
+  }
+
+
+  @include above($large) {
+    transition: max-width 0.4s;
+    max-width: $card-icon-size;
+
+    .card:hover & {
+      max-width: 100%;
+    }
+  }
+
+}

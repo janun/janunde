@@ -9,90 +9,90 @@ $event-index-background: rgb(240, 240, 240);
     font-family: $font-family-extra;
   }
 
-  .title {
-    margin-top: rem-calc(-60px);
-    margin-bottom: rem-calc(40px);
-    font-size: rem-calc(50px);
-    //text-shadow: rgba($grey, 0.9) 1px 1px 1px;
-    line-height: 0.75;
-
-    .word1 {
-      @for $i from 1 through 20 {
-        .char#{$i} {
-          &:hover {
-            display: inline-block;
-            text-shadow: none;
-            transform: rotate(2deg);
-            transition: transform 0.2s;
-          }
-        }
-      }
-
-      letter-spacing: -4px;
-      font-size: rem-calc(90px);
-
-      .char1 {
-        //color: $red;
-        position: relative;
-        font-size: rem-calc(160px);
-        letter-spacing: -15px;
-        bottom: -15px;
-        display: inline-block;
-        transform: rotate(-5deg);
-      }
-      .char2 {
-        position: relative;
-        display: inline-block;
-        transform: rotate(30deg);
-        font-size: rem-calc(95px);
-      }
-      .char3 {
-        letter-spacing: 0px;
-      }
-      .char13 {
-        display: inline-block;
-        position: relative;
-        bottom: -10px;
-        transform: rotate(-15deg);
-      }
-      .char8 {
-        display: inline-block;
-        position: relative;
-        left: 10px;
-        transform: rotate(20deg);
-      }
-    }
-
-    .word2 {
-      //color: rgb(248, 231, 28);
-      color: $orange;
-    }
-
-    .word3 {
-      color: $red;
-    }
-    .word5 {
-      color: $blue;
-    }
-    .word6 {
-      position: relative;
-      color: $green;
-
-      .char5 {
-        color: $red;
-        position: relative;
-        left: 20px;
-        font-size: rem-calc(100px);
-        display: inline-block;
-        transform: rotate(15deg);
-        transition: transform 0.1s, left 0.1s;
-        &:hover {
-          transform: rotate(-5deg);
-          left: 10px;
-        }
-      }
-    }
-  }
+  // .title {
+  //   margin-top: rem-calc(-60px);
+  //   margin-bottom: rem-calc(40px);
+  //   font-size: rem-calc(50px);
+  //   //text-shadow: rgba($grey, 0.9) 1px 1px 1px;
+  //   line-height: 0.75;
+  //
+  //   .word1 {
+  //     @for $i from 1 through 20 {
+  //       .char#{$i} {
+  //         &:hover {
+  //           display: inline-block;
+  //           text-shadow: none;
+  //           transform: rotate(2deg);
+  //           transition: transform 0.2s;
+  //         }
+  //       }
+  //     }
+  //
+  //     letter-spacing: -4px;
+  //     font-size: rem-calc(90px);
+  //
+  //     .char1 {
+  //       //color: $red;
+  //       position: relative;
+  //       font-size: rem-calc(160px);
+  //       letter-spacing: -15px;
+  //       bottom: -15px;
+  //       display: inline-block;
+  //       transform: rotate(-5deg);
+  //     }
+  //     .char2 {
+  //       position: relative;
+  //       display: inline-block;
+  //       transform: rotate(30deg);
+  //       font-size: rem-calc(95px);
+  //     }
+  //     .char3 {
+  //       letter-spacing: 0px;
+  //     }
+  //     .char13 {
+  //       display: inline-block;
+  //       position: relative;
+  //       bottom: -10px;
+  //       transform: rotate(-15deg);
+  //     }
+  //     .char8 {
+  //       display: inline-block;
+  //       position: relative;
+  //       left: 10px;
+  //       transform: rotate(20deg);
+  //     }
+  //   }
+  //
+  //   .word2 {
+  //     //color: rgb(248, 231, 28);
+  //     color: $orange;
+  //   }
+  //
+  //   .word3 {
+  //     color: $red;
+  //   }
+  //   .word5 {
+  //     color: $blue;
+  //   }
+  //   .word6 {
+  //     position: relative;
+  //     color: $green;
+  //
+  //     .char5 {
+  //       color: $red;
+  //       position: relative;
+  //       left: 20px;
+  //       font-size: rem-calc(100px);
+  //       display: inline-block;
+  //       transform: rotate(15deg);
+  //       transition: transform 0.1s, left 0.1s;
+  //       &:hover {
+  //         transform: rotate(-5deg);
+  //         left: 10px;
+  //       }
+  //     }
+  //   }
+  // }
 
   // TODO: this needs to be moved away to classes or sth.
 

@@ -2,15 +2,27 @@
   margin: 30px;
   width: rem-calc(240px);
 
-  &__photo {
-    display: block;
+  &__photo-wrapper {
     height: rem-calc(240px);
     width: rem-calc(240px);
-    margin-left: auto;
-    margin-right: auto;
     margin-bottom: rem-calc(25px);
     border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+  }
+
+  &__photo {
+    height: rem-calc(240px);
+    width: rem-calc(240px);
     background-color: #ddd;
+    transition: transform 0.2s;
+
+    @include above($large) {
+      .person:hover & {
+        transform: scale(1.1);
+      }
+    }
   }
 
   &__data {
@@ -27,13 +39,18 @@
     // data grey until hovered
     @include above($medium) {
       color: $grey;
-      a { color: $grey; }
+      a {
+        color: $grey;
+        &:focus {
+          color: $green;
+        }
+      }
 
       .person:hover & {
         color: $brown;
         a {
           color: $brown;
-          &:hover {
+          &:hover, &:focus {
             color: $green;
           }
         }
@@ -62,5 +79,17 @@
   &__mail:before {
     @extend .icon-envelope;
     margin-right: 8px;
+  }
+}
+
+.click-area__area-link:focus {
+  & ~ .person__photo-wrapper .person__photo {
+    transform: scale(1.1);
+  }
+  & ~ .person__data {
+    color: $brown;
+    a {
+      color: $brown;
+    }
   }
 }

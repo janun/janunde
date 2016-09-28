@@ -12,6 +12,10 @@ class AttributedImage(AbstractImage):
     """
     attribution = models.CharField("Quellenangabe", max_length=255)
 
+    @property
+    def aspect(self):
+        return self.height / self.width * 100;
+
     admin_form_fields = Image.admin_form_fields + (
         'attribution',
     )
@@ -20,7 +24,8 @@ class AttributedImage(AbstractImage):
 class AttributedRendition(AbstractRendition):
     image = models.ForeignKey(AttributedImage, related_name='renditions')
 
-    def get_aspect(self):
+    @property
+    def aspect(self):
         return self.height / self.width * 100;
 
     class Meta:

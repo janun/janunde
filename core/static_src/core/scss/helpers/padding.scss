@@ -10,14 +10,14 @@
  */
 @for $i from 0 through 6 {
   .padding-#{$i} {
-    padding: #{$i}rem;
+    padding: #{$i}rem !important;
   }
 }
 .padding-half {
-  padding: 0.5rem;
+  padding: 0.5rem !important;
 }
 .padding-quarter {
-  padding: 0.25rem;
+  padding: 0.25rem !important;
 }
 
 
@@ -38,15 +38,15 @@
 
   @for $i from 0 through 6 {
     .padding-#{$dir}-#{$i} {
-      padding-#{$dir}: #{$i}rem;
+      padding-#{$dir}: #{$i}rem !important;
     }
   }
 
   .padding-#{$dir}-half {
-    padding-#{$dir}: 0.5rem;
+    padding-#{$dir}: 0.5rem !important;
   }
   .padding-#{$dir}-quarter {
-    padding-#{$dir}: 0.25rem;
+    padding-#{$dir}: 0.25rem !important;
   }
 
 }

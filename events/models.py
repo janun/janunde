@@ -274,10 +274,10 @@ class EventPage(Page):
         verbose_name="Inhalt",
     )
     COLOR_CHOICES = (
-        ('rgb(70, 187, 0)', "Grün"),
-        ('rgb(196, 23, 55)', "Rot"),
-        ('rgb(0, 118, 164)', "Blau"),
-        ('rgb(233, 88, 34)', "Orange"),
+        ('green', "Grün"),
+        ('red', "Rot"),
+        ('blue', "Blau"),
+        ('orange', "Orange"),
     )
     color = models.CharField(
         "Farbe als Ersatz für Bild",

@@ -1,6 +1,8 @@
+$container-margin: rem-calc(10px);
+
 @mixin container($width: rem-calc(960)) {
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: $container-margin;
+  margin-right: $container-margin;
 
   @include above($width + rem-calc(30px)) {
     max-width: $width;

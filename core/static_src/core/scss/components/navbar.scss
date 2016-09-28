@@ -61,7 +61,14 @@ $navbar-height: rem-calc(65);
     border: none;
   }
 
-  &--fixed { position: fixed; }
+  &--fixed {
+    position: fixed;
+    top: 0;
+  }
+  &--fixed ~ .content {
+    padding-top: $navbar-height;
+  }
+
   &--absolute { position: absolute; }
 
   &__logo path {
@@ -85,23 +92,6 @@ $navbar-height: rem-calc(65);
     }
     .hamburger__inner, .hamburger__inner:before, .hamburger__inner:after {
       background-color: $green;
-    }
-  }
-  &--white\@medium {
-    @include above($medium) {
-      background: $white;
-      a {
-        color: $green;
-        &:focus {
-          background-color: rgba($grey, 0.1)
-        }
-      }
-      .navbar__logo path {
-        fill: $green;
-      }
-      .hamburger__inner, .hamburger__inner:before, .hamburger__inner:after {
-        background-color: $green;
-      }
     }
   }
 
@@ -133,12 +123,13 @@ $navbar-height: rem-calc(65);
   &__logo {
     display: inline-block;
     vertical-align: middle;
-    width: rem-calc(37);
-    height: rem-calc(36)
+    height: rem-calc(38);
+    width: rem-calc(38);
   }
 
   &__title {
     font-weight: bold;
+    padding-left: 0 !important;
   }
 
 
@@ -158,11 +149,9 @@ $navbar-height: rem-calc(65);
       top: $navbar-height;
       left: 0;
       width: 100vw;
-
       z-index: 1000;
       margin-top: 0;
-      padding-left: rem-calc(40);
-      //@include scale-with-navbar(padding-left, rem-calc(20), rem-calc(180));
+      padding-left: rem-calc(20px);
 
       background: $white;
       color: $brown;
@@ -200,8 +189,8 @@ $navbar-height: rem-calc(65);
   }
 
   @include until($large) {
-    padding-bottom: rem-calc(37);
-    padding-top: rem-calc(25);
+    padding-bottom: rem-calc(20);
+    padding-top: rem-calc(10);
   }
 
   &__item {

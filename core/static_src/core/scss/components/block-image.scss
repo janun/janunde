@@ -97,8 +97,8 @@
 
   .userim &__caption {
     @include until($medium) {
-      margin-left: 1.5rem;
-      margin-right: 1.5rem;
+      margin-left: $container-margin;
+      margin-right: $container-margin;
     }
   }
 

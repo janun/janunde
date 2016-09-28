@@ -1,25 +1,20 @@
 {% extends "core/__base.html" %}
 
 {% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
 {% load static from staticfiles %}
 
 
 {% block body_class %}template-homepage{% endblock %}
-
-{# navbar should be transparent #}
-{% block top %}
-  {% include "core/_navbar.html" with navbar_class="navbar--green" %}
-{% endblock %}
-
 
 {% block content %}
   {# show header #}
   {# include 'core/_header.html' #}
 
 
-  <div class="container-dis margin-top-2-dis">
+  <!-- <div class="container margin-top-2">
     {% include 'core/_hero.html' %}
-  </div>
+  </div> -->
 
   <!-- <div class="template-homepage__menu margin-top-3">
     <div class="template-homepage__menu-inner">
@@ -38,30 +33,61 @@
       <span class="area-title__inner color-red">Highlights</span>
     </h2> -->
 
-    <div class="grid-12">
+
+    <div class="flex-grid">
       {% for event in highlights %}
-        <div class="grid-12__col-4@medium">
-          {% include 'events/_event_partial.html' %}
+
+        <div class="card click-area card--small
+                    {% if event.main_image%}card--with-image{% endif %}
+                    {% if event.main_image.aspect < 50 %}card--wide{% endif %}
+                    card--color-{{ event.color }}">
+          <a class="click-area__area-link" href="{% pageurl event %}"></a>
+
+          {% if event.main_image%}
+            {% if event.main_image.aspect < 50 %}
+              {% image event.main_image fill-630x205 as image %}
+            {% else %}
+              {% image event.main_image fill-300x205 as image %}
+            {% endif %}
+            <img class="card__image" src="{{ image.url }}">
+          {% endif %}
+
+          <div class="card__text">
+            {{ event.start_datetime }}
+            <h2 class="card__title">{{ event.title }}</h2>
+          </div>
+
+
+          {% if event.related_group.logo %}
+            <a href="{% pageurl event.related_group %}"
+               class="card-icon"
+               title="{{ event.related_group.title }}">
+
+              <span class="card-icon__reveal">
+                von {{ event.related_group.title }}
+              </span>
+
+              <span class="card-icon__content">
+                {% if event.related_group.logo.aspect < 50 %}
+                  {% image event.related_group.logo width-35 as group_logo %}
+                {% else %}
+                  {% image event.related_group.logo height-35 as group_logo %}
+                {% endif %}
+                <img src="{{ group_logo.url }}" alt="Logo {{ event.related_group.title }}">
+              </span>
+            </a>
+          {% endif %}
+
         </div>
+
+
       {% endfor %}
     </div>
 
 
 
-    <h2 class="area-title js-sticky@medium">
-      <span class="area-title__inner color-blue">Veranstaltungen</span>
-    </h2>
-
-    <div class="grid-12">
-      {% for event in events %}
-        <div class="grid-12__col-4@medium">
-          {% include 'events/_event_partial.html' %}
-        </div>
-      {% endfor %}
-    </div>
   </div>
 
-</div>
 
 
 {% endblock %}

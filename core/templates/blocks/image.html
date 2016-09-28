@@ -18,7 +18,7 @@
       </div>
     {% else %}
       <div class="block-image__wrapper"
-           style="padding-bottom: {{ original_image.get_aspect|floatformat:"-3" }}%">
+           style="padding-bottom: {{ original_image.aspect|stringformat:"f" }}%">
         <img src="{{ original_image.url }}"
           srcset="{{ value.image|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
           sizes="(min-width: 60em) 51.875em, (min-width: 40em) 40em, 100vw"
@@ -34,9 +34,11 @@
 
   {% if value.caption or value.image.attribution %}
     <figcaption class="block-image__caption">
+      {% if value.caption %}
       <span itemprop="caption">
         {{ value.caption }}
       </span>
+      {% endif %}
       {% if value.image.attribution %}
         <span itemprop="copyrightHolder"
               itemscope itemtype="http://schema.org/Person"

@@ -1,0 +1,101 @@
+$card-padding: rem-calc(22px);
+$card-shadow: rem-calc(0 1px 1px) rgba($black, 0.1);
+$card-shadow-hover: rem-calc(0 2px 5px) rgba($black, 0.25);
+$card-shadow-hover-image: rem-calc(0 3px 7px) rgba($black, 0.5);
+$card-border-radius: rem-calc(5px);
+$card-width: rem-calc(300px);
+
+.card {
+  position: relative;
+  background-color: $white;
+  width: $card-width;
+  height: rem-calc(400px);
+  border-radius: $card-border-radius;
+  margin-bottom: rem-calc(40px);
+  box-shadow: $card-shadow;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+
+  @include above($large) {
+    &:hover {
+      box-shadow: $card-shadow-hover;
+    }
+  }
+
+  &__text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: $card-padding;
+    min-height: 100px;
+    z-index: 1;
+    // font-size: 30px;
+    font-family: $font-family-extra;
+  }
+
+  &__title {
+    margin-bottom: 0;
+  }
+
+
+  &--with-image {
+    @include above($large) {
+      &:hover {
+        box-shadow: $card-shadow-hover-image;
+      }
+    }
+
+    &__image {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: $baige;
+    }
+
+    &:after {
+      content: "";
+      //background-image: linear-gradient(0deg, rgba(0,15,20,0.6) 15%,rgba(0,15,20,0.15) 52%, rgba(0,15,20,0) 70%);
+      background-image: linear-gradient(0deg, rgba(0,15,20,0.6) 15%,rgba(0,15,20,0.15) 52%,rgba(0,15,20,0) 70%);
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    & .card__text {
+      //background-image: linear-gradient(0deg, rgba(0,15,20,0.8), rgba(0,15,20,0.1), transparent);
+      color: $white;
+      background-image: linear-gradient(0deg, rgba(0, 15, 20, 0.1) 90%, transparent);
+      text-shadow: 0 0 20px rgba(0, 0, 20, 0.25);
+    }
+  }
+
+
+  &--small {
+    height: rem-calc(205px);
+  }
+
+
+  &--wide {
+    width: 630px;
+  }
+
+
+  &--color-red, &--color-green, &--color-blue, &--color-orange {
+    color: $white;
+    @include above($large) {
+      &:hover {
+        box-shadow: $card-shadow-hover-image;
+      }
+    }
+  }
+  @each $color, $value in $colors {
+    &--color-#{$color} {
+      background-color: $value;
+    }
+  }
+
+
+}

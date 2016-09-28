@@ -6,17 +6,19 @@
 
   <a href="{% pageurl person %}" class="click-area__area-link">{{ person.title }}</a>
 
-  {% if person.photo %}
-    {% image person.photo fill-250x250 as fallback_image %}
-    <img src="{{ fallback_image.url }}"
-      srcset="{{ person.photo|srcset:'fill-250x250' }}"
-      sizes="(min-width: 48em) and (max-width: 59.9375em) 30vw, (min-width: 60em) 19.1875em, 95vw"
-      alt="{{ original_image.alt }}"
-      class="person__photo">
-    <link itemprop="image" href="{{ fallback_image.url }}">
-  {% else %}
-    <img class="person__photo" alt="" src="{% static 'core/images/person-outline.svg' %}">
-  {% endif %}
+  <div class="person__photo-wrapper">
+    {% if person.photo %}
+      {% image person.photo fill-240x240 as fallback_image %}
+      <img src="{{ fallback_image.url }}"
+        srcset="{{ person.photo|srcset:'fill-264x264' }}"
+        sizes="240px"
+        alt="{{ original_image.alt }}"
+        class="person__photo">
+      <link itemprop="image" href="{{ fallback_image.url }}">
+    {% else %}
+      <img class="person__photo" alt="" src="{% static 'core/images/person-outline.svg' %}">
+    {% endif %}
+  </div>
 
   <div class="person__data">
     <h2 itemprop="name" class="person__name">

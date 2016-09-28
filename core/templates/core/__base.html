@@ -42,7 +42,7 @@
   {% include "core/_rollbar.html" %}
 
   {% block top %}
-    {% include "core/_navbar.html" %}
+    {% include "core/_navbar.html" with navbar_class="navbar--white navbar--fixed" %}
   {% endblock %}
 
   <div class="{% block content_class %}content{% endblock %}"

@@ -19,7 +19,7 @@
 
   a {
     //position: relative;
-    z-index: 2;
+    z-index: 3;
   }
 
   &__area-link {
@@ -29,7 +29,7 @@
     text-indent: 200%;
     white-space: nowrap;
     background: transparent;
-    z-index: 1 !important;
+    z-index: 2 !important;
     opacity: 0;
   }
 }

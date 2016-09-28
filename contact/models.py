@@ -9,6 +9,9 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
+from modelcluster.fields import ParentalKey
+from wagtail.wagtailcore.models import Orderable
+
 from core.blocks import StandardStreamBlock
 from core.models import BasePage
 from core.images import AttributedImage as Image
@@ -34,8 +37,16 @@ class ContactIndex(BasePage):
 
 
 
-# class Department(BasePage):
-#     pass
+
+
+
+# class PersonPageContactPossibility(Orderable):
+#     page = ParentalKey(PersonPage, related_name='contact_possibilities')
+#     contact = models.CharField(max_length=255)
+#
+#     panels = [
+#         FieldPanel('contact'),
+#     ]
 
 
 

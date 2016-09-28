@@ -1,18 +1,5 @@
 .person-index-page {
 
-  &__people-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-
-    @include above($medium) {
-      justify-content: space-between;
-    }
-
-
-  }
-
   &__header {
     position: relative;
     display: none;

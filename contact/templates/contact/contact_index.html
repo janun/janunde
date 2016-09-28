@@ -3,10 +3,6 @@
 
 {% block body_class %}person-index-page{% endblock %}
 
-{% block top %}
-  {% include "core/_navbar.html" with navbar_class="navbar--white@medium" %}
-{% endblock %}
-
 {% block content %}
 
 
@@ -18,15 +14,15 @@
     <div class="container">
       <ul role="menubar" class="pagemenu">
         <li role="menuitem" class="pagemenu__item"><a href="#">Büros</a></li>
-        <li role="menuitem" class="pagemenu__item pagemenu__item--active"><a href="#">Personen</a></li>
+        <li role="menuitem" class="pagemenu__item pagemenu__item--active"><a href="#">Leute</a></li>
       </ul>
     </div>
   </nav>
 
-  <div class="container margin-top-2-dis">
+  <div class="container">
     {% if people %}
 
-      <div class="person-index-page__people-list">
+      <div class="flex-grid">
         {% for person in people %}
           {% include 'contact/_person.html' %}
         {% endfor %}
