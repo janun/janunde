@@ -13,7 +13,7 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
                                                 InlinePanel)
 from wagtail.wagtailadmin.widgets import AdminDateTimeInput
 from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.models import Page, PageManager, PageQuerySet
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
@@ -51,11 +51,6 @@ class EventIndexPage(BasePage):
         verbose_name = "Auflistung von Veranstaltungen"
         verbose_name_plural = "Auflistungen von Veranstaltungen"
 
-    def get_events(self):
-        return EventPage.objects.child_of(self).live().order_by(
-            'start_datetime'
-        )
-
     def get_context(self, request):
         context = super().get_context(request)
         today = datetime.date.today()
@@ -72,11 +67,6 @@ class EventIndexPage(BasePage):
         end_of_this_month = begin_of_this_month + \
             relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
 
-        events = self.get_events().filter(
-            Q(start_datetime__gte=today) |
-            Q(end_datetime__gte=today, late_attendence=True),
-        )
-
         # search stuff
         search_query = request.GET.get('query', None)
         search = request.GET.get('search', 0)
@@ -87,34 +77,40 @@ class EventIndexPage(BasePage):
 
         # query= url param given
         if search_query:
-            events = events.search(
+            events = EventPage.objects.all().live().search(
                 search_query, operator="and", order_by_relevance=False
             )
             context['search_query'] = search_query
             search = 1
+        else:
+            events = EventPage.objects.upcoming()
 
         context['search'] = search
+        context['events'] = events
 
-        context['upcoming'] = upcoming = list(events)
+        context['past'], events = split_on_condition(
+            events,
+            lambda event: event.start_datetime.date() < today
+        )
 
         # compute the events for this week
-        def get_this_week(upcoming):
+        def get_this_week(events):
             return list(filter(
                 lambda event: event.start_datetime.date() <= end_of_this_week,
-                upcoming
+                events
             ))
 
         # try splitting off today, so this_week is not longer than 3 events
-        if len(get_this_week(upcoming)) > 3:
-            context['today'], upcoming = split_on_condition(
-                upcoming,
+        if len(get_this_week(events)) > 3:
+            context['today'], events = split_on_condition(
+                events,
                 lambda event: event.start_datetime.date() == today
             )
 
         # try splitting off tomorrow
-        if len(get_this_week(upcoming)) > 3:
-            context['tomorrow'], upcoming = split_on_condition(
-                upcoming,
+        if len(get_this_week(events)) > 3:
+            context['tomorrow'], events = split_on_condition(
+                events,
                 lambda event: event.start_datetime.date() ==
                 today + datetime.timedelta(days=1)
             )
@@ -123,9 +119,9 @@ class EventIndexPage(BasePage):
         next_day = today + datetime.timedelta(days=1)
         i = 0
         context['days_of_this_week'] = []
-        while len(get_this_week(upcoming)) > 3:
-            events_next_day, upcoming = split_on_condition(
-                upcoming,
+        while len(get_this_week(events)) > 3:
+            events_next_day, events = split_on_condition(
+                events,
                 lambda event: event.start_datetime.date() == next_day
             )
             if events_next_day:
@@ -138,18 +134,18 @@ class EventIndexPage(BasePage):
                 break
 
         # what is left for this week
-        context['this_week'], upcoming = split_on_condition(
-            upcoming,
+        context['this_week'], events = split_on_condition(
+            events,
             lambda event: event.start_datetime.date() <= end_of_this_week
         )
 
-        context['next_week'], upcoming = split_on_condition(
-            upcoming,
+        context['next_week'], events = split_on_condition(
+            events,
             lambda event: event.start_datetime.date() <= end_of_next_week
         )
 
-        context['later_this_month'], upcoming = split_on_condition(
-            upcoming,
+        context['later_this_month'], events = split_on_condition(
+            events,
             lambda event: event.start_datetime.date() <= end_of_this_month
         )
 
@@ -157,20 +153,20 @@ class EventIndexPage(BasePage):
             return date + relativedelta.relativedelta(months=1) + \
                 datetime.timedelta(days=-1)
 
-        def get_this_year(upcoming):
+        def get_this_year(events):
             return list(filter(
                 lambda event: event.start_datetime.date() <
                 datetime.date(today.year+1, 1, 1),
-                upcoming
+                events
             ))
 
         # try splitting off month by month to keep after short
         begin_next_month = end_of_this_month + datetime.timedelta(days=1)
         i = 0
         context['by_month'] = []
-        while len(upcoming) > 4:
-            events_next_month, upcoming = split_on_condition(
-                upcoming,
+        while len(events) > 4:
+            events_next_month, events = split_on_condition(
+                events,
                 lambda event: event.start_datetime.date() <=
                 get_end_of_month(begin_next_month)
             )
@@ -183,9 +179,28 @@ class EventIndexPage(BasePage):
             if i > 20:
                 break
 
-        context['after'] = upcoming
-
+        context['after'] = events
         return context
+
+
+class EventPageManager(PageManager):
+
+    def get_queryset(self):
+         return super().get_queryset().order_by('start_datetime')
+
+    def upcoming(self):
+        today = datetime.date.today()
+        return self.get_queryset().filter(
+            Q(start_datetime__gte=today) |
+            Q(end_datetime__gte=today, late_attendence=True),
+        )
+
+    def expired(self):
+        today = datetime.date.today()
+        return self.get_queryset().filter(
+            Q(end_datetime__lt=today) |
+            Q(start_datetime__lt=today, late_attendence=False),
+        )
 
 
 class EventPage(Page):
@@ -303,6 +318,8 @@ class EventPage(Page):
         null=True,
         blank=True,
     )
+
+    objects = EventPageManager()
 
     def get_image(self):
         return self.main_image

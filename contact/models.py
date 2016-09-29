@@ -80,3 +80,7 @@ class PersonPage(BasePage):
     search_fields = [
         index.SearchField('title', partial_match=True),
     ]
+
+    class Meta:
+        verbose_name = "Person"
+        verbose_name_plural = "Personen"

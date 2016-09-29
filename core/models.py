@@ -230,8 +230,8 @@ class HomePage(BasePage):
     def get_context(self, request):
         context = super().get_context(request)
         from events.models import EventPage
-        context['highlights'] = EventPage.objects.all()[:6]
-        context['events'] = EventPage.objects.all()[6:]
+        #context['highlights'] = EventPage.objects.all()[:6]
+        context['upcoming_events'] = EventPage.objects.upcoming()
         return context
 
 

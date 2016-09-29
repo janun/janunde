@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'softhyphen',
 
     'wagtail.contrib.table_block',
+    'wagtail.contrib.modeladmin',
 
     'wagtail.contrib.settings',
     'wagtail.contrib.wagtailsearchpromotions',
