@@ -3,8 +3,8 @@ $card-icon-size: rem-calc(40px);
 
 /**
  * <span class="card-icon">
- *  <span class="card-icon__content"></span>
  *  <span class="card-icon__reveal"></span>
+ *  <span class="card-icon__content"></span>
  * </span>
  */
 .card-icon {
@@ -15,12 +15,9 @@ $card-icon-size: rem-calc(40px);
   height: $card-icon-size;
   min-width: $card-icon-size;
   max-width: 100%;
-  z-index: 4 !important;
-
   background-color: $white;
   box-shadow: $card-shadow;
   line-height: $card-icon-size;
-
   border-bottom-left-radius: $card-border-radius;
 
 
@@ -36,6 +33,11 @@ $card-icon-size: rem-calc(40px);
     padding: 2.5px;
     background-color: $white;
     border-bottom-left-radius: $card-border-radius;
+
+    img {
+      max-width: 35px;
+      max-height: 35px;
+    }
   }
 
 

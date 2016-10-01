@@ -1,7 +1,7 @@
-{% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff %}
+{% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff humanize %}
 
 <div class="card click-area card--small card--color-{{ object.color }}"
-     itemscope itemtype="http://schema.org/Event">
+     itemscope itemtype="http://schema.org/Article">
 
   <a class="click-area__area-link" href="{% pageurl object %}" itemprop="url">
     {{ object.title }}
@@ -20,25 +20,7 @@
   {% endif %}
 
   <div class="card__overlay">
-    <meta itemprop="startDate" content="{{ object.start|date:"c" }}">
-    <meta itemprop="endDate" content="{{ object.end|date:"c" }}">
-
-    {{ object.start|nettes_datum:True }}
-    {% if object.end %}
-      – {{ object.end|nettes_datum:True }}
-    {% endif %}
-
-    {% if object.facebook_object_url %}
-      <a class="card__overlay-link icon-social-facebook" title="Facebook-Event"
-         target="_blank" itemprop="sameAs"
-         href="{{ object.facebook_object_url }}"></a>
-    {% endif %}
-
-    {% if object.website_url %}
-      <a class="card__overlay-link icon-direction" title="externe Website"
-         target="_blank" itemprop="sameAs"
-         href="{{ object.website_url }}"></a>
-    {% endif %}
+    Artikel {{ object.first_published_at|naturaltime }}
   </div>
 
   <div class="card__text">
@@ -66,13 +48,6 @@
              alt="Logo {{ object.related_group.title }}">
       </span>
     </a>
-  {% endif %}
-
-  {% if object.location %}
-    <span itemprop="location" itemscope itemtype="http://schema.org/Place">
-      <meta itemprop="name" content="{{ object.location }}">
-      <meta itemprop="address" content="{{ object.location }}">
-    </span>
   {% endif %}
 
 </div>

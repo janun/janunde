@@ -13,7 +13,7 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
                                                 StreamFieldPanel, FieldRowPanel,
                                                 TabbedInterface, MultiFieldPanel)
 from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Orderable, Page
+from wagtail.wagtailcore.models import Orderable, Page, PageManager
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
@@ -84,6 +84,7 @@ class BasePage(Page):
 class HighlightManager(models.Manager):
     def active(self):
         return self.get_queryset().filter(
+            models.Q(highlighted_page__live=True),
             models.Q(start_datetime__lte=timezone.now()),
             models.Q(end_datetime__isnull=True) |
             models.Q(end_datetime__gt=timezone.now())
@@ -186,8 +187,11 @@ class StandardPage(BasePage):
         FieldPanel('subtitle'),
         StreamFieldPanel('body'),
         FieldPanel('tags'),
-        FieldPanel('author'),
     ]
+
+    settings_panels = [
+        FieldPanel('author'),
+    ] + BasePage.settings_panels
 
     promote_panels = [
         InlinePanel(
@@ -230,8 +234,21 @@ class HomePage(BasePage):
     def get_context(self, request):
         context = super().get_context(request)
         from events.models import EventPage
-        #context['highlights'] = EventPage.objects.all()[:6]
-        context['upcoming_events'] = EventPage.objects.upcoming()
+
+        highlights = Highlight.objects.active()
+        context['highlights'] = highlights[:6]
+
+        upcoming_events = EventPage.objects.upcoming().exclude(
+            pk__in=[h.highlighted_page.pk for h in highlights]
+        )
+        context['upcoming_events'] = upcoming_events[:3]
+        context['more_upcoming_events'] = upcoming_events.count() > 3
+
+        articles = Article.objects.live().exclude(
+            pk__in=[h.highlighted_page.pk for h in highlights]
+        )
+        context['articles'] = articles[:3]
+        context['more_articles'] = articles.count() > 3
         return context
 
 
@@ -299,7 +316,7 @@ class ArticleIndexPage(BasePage):
     parent_page_types = ['HomePage']
 
     class Meta:
-        verbose_name = _("Auflistung von Artikeln")
+        verbose_name = _("Sammlung von Artikeln")
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -308,11 +325,16 @@ class ArticleIndexPage(BasePage):
         return context
 
 
+
+class ArticleManager(PageManager):
+    def get_queryset(self):
+         return super().get_queryset().order_by('first_published_at')
+
+
 class Article(StandardPage):
     """
     An Article
     """
-    subpage_types = []
     parent_page_types = ['ArticleIndexPage']
 
     main_image = models.ForeignKey(
@@ -326,8 +348,20 @@ class Article(StandardPage):
                     "Wird in Übersichten verwendet.")
     )
 
+    @property
+    def partial_template_name(self):
+        return "core/_article.html"
+
     def get_image(self):
         return self.main_image
+
+    def get_description(self):
+        if self.search_description:
+            return self.search_description
+        from django.utils.html import strip_tags
+        for block in self.body:
+            if block.block_type == 'paragraph':
+                return strip_tags(block.value.source)
 
     related_group = models.ForeignKey(
         Group,
@@ -339,31 +373,25 @@ class Article(StandardPage):
         help_text=_("Eine JANUN-Gruppe, die diesem Artikel zugeordnet ist")
     )
 
-    search_fields = StandardPage.search_fields + [
-        index.FilterField('first_published_at'),
-        index.FilterField('latest_revision_created_at'),
-    ]
-
     content_panels = [
-        FieldPanel('title', classname='full title'),
-        ImageChooserPanel('main_image'),
+        MultiFieldPanel([
+            FieldPanel('title', classname='title'),
+            FieldPanel('title_color', classname=''),
+        ], heading="Titel"),        ImageChooserPanel('main_image'),
+        FieldPanel('subtitle'),
         StreamFieldPanel('body'),
+        FieldPanel('tags'),
     ]
 
-    related_panels = [
+    promote_panels = [
         FieldPanel('related_group', 'core.Group'),
-    ]
+    ] + StandardPage.promote_panels
 
     settings_panels = [
-        InlinePanel('highlight'),
-    ] + Page.promote_panels + Page.settings_panels
+    ] + StandardPage.settings_panels
 
-    edit_handler = TabbedInterface([
-        ObjectList(content_panels, heading=_("Inhalt")),
-        ObjectList(related_panels, heading=_("Zugehöriges")),
-        ObjectList(settings_panels, heading=_("Einstellungen"),
-                   classname='settings'),
-    ])
+
+    objects = ArticleManager()
 
     class Meta:
         verbose_name = _("Artikel")

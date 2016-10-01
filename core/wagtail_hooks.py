@@ -72,3 +72,22 @@ def change_datetimepicker_format():
 #         '.hallowagtailimage, .hallowagtailembeds { display: none; }' \
 #         '.object .object-help { opacity: 1 } // always show help' \
 #         '</style>'
+
+
+
+from wagtail.contrib.modeladmin.options import (
+    ModelAdmin, ModelAdminGroup, modeladmin_register)
+from .models import Article
+
+
+class ArticleModelAdmin(ModelAdmin):
+    model = Article
+    menu_icon = 'doc-full'
+    menu_order = 202
+    add_to_settings_menu = False
+    list_display = ('title', 'author', 'first_published_at')
+    list_filter = ('first_published_at',)
+    search_fields = ('title', 'author', 'body')
+    ordering = ('first_published_at',)
+
+modeladmin_register(ArticleModelAdmin)

@@ -19,27 +19,23 @@
     </div>
   </nav>
 
-  <div class="container">
-    {% if people %}
+  {% if people %}
+    <div class="card-grid">
+      {% for person in people %}
+        {% include 'contact/_person.html' %}
+      {% endfor %}
+    </div>
 
-      <div class="flex-grid">
-        {% for person in people %}
-          {% include 'contact/_person.html' %}
-        {% endfor %}
+  {% else %}
+
+    <div class="container padding-top-6 padding-bottom-5">
+      <i class="icon-present color-green" style="font-size: 7rem" aria-hidden="true"></i>
+      <div class="margin-bottom-3 margin-top-4 big-font">
+      <div class="color-green">Ein Geschenk für Dich.</div>
+        <div>Kontakte, die wir zeigen könnten, gibt es aber leider keine.</div>
       </div>
+      <span><a class="color-green" href="/admin/">Du kannst das ändern.</a></span>
+    </div>
 
-    {% else %}
-
-      <div class="container padding-top-6 padding-bottom-5">
-        <i class="icon-present color-green" style="font-size: 7rem" aria-hidden="true"></i>
-        <div class="margin-bottom-3 margin-top-4 big-font">
-        <div class="color-green">Ein Geschenk für Dich.</div>
-          <div>Kontakte, die wir zeigen könnten, gibt es aber leider keine.</div>
-        </div>
-        <span><a class="color-green" href="/admin/">Du kannst das ändern.</a></span>
-      </div>
-
-    {% endif %}
-
-  </div>
+  {% endif %}
 {% endblock %}

@@ -22,3 +22,13 @@
     }
   }
 }
+
+.clear-after {
+  &:after {
+    content: ".";
+    clear: both !important;
+    display: block;
+    visibility: hidden;
+    height: 0px;
+  }
+}

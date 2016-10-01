@@ -3,9 +3,12 @@ register = template.Library()
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 from django.utils.safestring import mark_safe
 import urllib
+from django.template import Context
 
 from wagtail.wagtailembeds import embeds
 from wagtail.wagtailembeds.exceptions import EmbedException
+
+
 
 @register.filter()
 def prettyurl(value):

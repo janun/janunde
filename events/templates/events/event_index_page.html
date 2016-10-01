@@ -1,6 +1,7 @@
 {% extends "core/__base.html" %}
 {% load wagtailcore_tags nettes_datum %}
 {% load static from staticfiles %}
+{% load render_partial %}
 
 {% block body_class %}template-event-index-page{% endblock %}
 
@@ -19,8 +20,8 @@
     </form>
 
     <div class="{% if search %}hide{% endif %} js-no-search">
-      <h1 class="hide@until-medium big-font {% if not upcoming %}line-through{% endif %}">Veranstaltungen, Seminare, Demos…</h1>
-      {% if upcoming %}
+      <h1 class="hide@until-medium big-font {% if not events %}line-through{% endif %}">Veranstaltungen, Seminare, Demos…</h1>
+      {% if events %}
         <a class="js-search-reveal-button font-size-2 icon-clicktarget@until-medium" href="?search=1">
           <i class="icon-magnifier" aria-hidden="true"></i>
           <span class="hide@until-medium">Suchen</span>
@@ -33,6 +34,7 @@
 
       <!-- on page menu -->
       <span class="hide@medium onpagemenu js-onpagemenu" data-offset="58">
+        {% if past %}<a class="onpagemenu__item" href="#past">Vergangenheit</a>{% endif %}
         {% if today %}<a class="onpagemenu__item" href="#today">Heute</a>{% endif %}
         {% if tomorrow %}<a class="onpagemenu__item" href="#tomorrow">Morgen</a>{% endif %}
         {% for day, events in days_of_this_week %}<a class="onpagemenu__item" href="#{{ day|date:"l" }}">{{ day|date:"l" }}</a>{% endfor %}
@@ -49,7 +51,7 @@
 </header>
 
 
-{% if upcoming %}
+{% if events %}
 <div class="horizontal-scroll__wrapper">
 <div class="horizontal-scroll js-scroll-horizontal">
 
@@ -73,11 +75,20 @@
 
   <div class="fixed-grid-12 horizontal-scroll__inner">
 
+    {% if past %}
+      <div class="fixed-grid-12__col-4 horizontal-scroll__item">
+        <h2 id="past" class="onpagemenu-scrollmark area-title">Vergangenheit</h2>
+        {% for event in past %}
+          {% render_partial event %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
     {% if today %}
       <div class="fixed-grid-12__col-4 horizontal-scroll__item">
         <h2 id="today" class="onpagemenu-scrollmark area-title">Heute</h2>
         {% for event in today %}
-          {% include "events/_event_partial.html" %}
+          {% render_partial event %}
         {% endfor %}
       </div>
     {% endif %}
@@ -86,7 +97,7 @@
       <div class="fixed-grid-12__col-4 horizontal-scroll__item">
         <h2 id="tomorrow" class="onpagemenu-scrollmark area-title">Morgen</h2>
         {% for event in tomorrow %}
-          {% include "events/_event_partial.html" %}
+          {% render_partial event %}
         {% endfor %}
       </div>
     {% endif %}
@@ -95,7 +106,7 @@
       <div class="fixed-grid-12__col-4 horizontal-scroll__item">
         <h2 id="{{ day|date:"l" }}" class="onpagemenu-scrollmark area-title">{{ day|date:"l" }}</h2>
         {% for event in events %}
-          {% include "events/_event_partial.html" with only_weekday=True %}
+          {% render_partial event %}
         {% endfor %}
       </div>
     {% endfor %}
@@ -110,7 +121,7 @@
         {% endif %}
         </h2>
         {% for event in this_week %}
-          {% include "events/_event_partial.html" with only_weekday=True %}
+          {% render_partial event %}
         {% endfor %}
       </div>
     {% endif %}
@@ -119,7 +130,7 @@
       <div class="fixed-grid-12__col-4 horizontal-scroll__item">
         <h2 id="next_week" class="onpagemenu-scrollmark area-title">Nächste Woche</h2>
         {% for event in next_week %}
-          {% include "events/_event_partial.html" %}
+          {% render_partial event %}
         {% endfor %}
       </div>
     {% endif %}
@@ -128,7 +139,7 @@
       <div class="fixed-grid-12__col-4 horizontal-scroll__item">
         <h2 id="later_this_month" class="onpagemenu-scrollmark area-title">Später im {% now "F" %}</h2>
         {% for event in later_this_month %}
-          {% include "events/_event_partial.html" %}
+          {% render_partial event %}
         {% endfor %}
       </div>
     {% endif %}
@@ -137,7 +148,7 @@
       <div class="fixed-grid-12__col-4 horizontal-scroll__item">
         <h2 id="{{ month|date:"F" }}" class="area-title onpagemenu-scrollmark">{{ month|format_month }}</h2>
         {% for event in events %}
-          {% include "events/_event_partial.html" %}
+          {% render_partial event %}
         {% endfor %}
       </div>
     {% endfor %}
@@ -146,7 +157,7 @@
       <div class="fixed-grid-12__col-4 horizontal-scroll__item">
         <h2 id="after" class="onpagemenu-scrollmark area-title">Noch Später</h2>
         {% for event in after %}
-          {% include "events/_event_partial.html" %}
+          {% render_partial event %}
         {% endfor %}
       </div>
     {% endif %}

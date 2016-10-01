@@ -56,6 +56,9 @@
            class="navbar__item navbar__collapsible js-aria-hidden"
            data-js-aria-hidden-media="(max-width: 1023px)">
         <ul role="menubar" class="menu">
+          <li role="menuitem" class="menu__item hide@medium">
+            <a href="/">Startseite</a>
+          </li>
           {% for menuitem in menuitems %}
             <li role="menuitem" class="menu__item
                 {% if menuitem.is_active %}menu__item--active{% endif %}">

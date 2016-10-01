@@ -1,2 +1,42 @@
-{% extends "core/__page_base.html" %}
-{% block body_class %}template-article {{ block.super }}{% endblock %}
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}{% endblock %}
+
+{% block content %}
+<article class="container container--margin-top"
+         itemprop="mainEntity" itemscope itemtype="http://schema.org/Article"
+         itemref="publisher">
+
+  <div class="text-container userim">
+    <h1 class="title color-{{self.title_color}}"
+        itemprop="headline">
+      {{ self.title }}
+    </h1>
+    {% if self.subtitle %}
+      <h2 class="subtitle">{{ self.subtitle }}</h2>
+    {% endif %}
+
+    <div itemprop="articleBody">
+      {% if self.author %}
+        {% include "core/_author.html" with author=self.author date=self.latest_revision_created_at %}
+      {% endif %}
+
+      <p class="block-paragraph">
+        {{ self.get_description }}
+      </p>
+
+      {% if self.main_image %}
+        <div class="block-image">
+          {% include "core/_image.html" with image=self.main_image %}
+        </div>
+      {% endif %}
+
+      {% include_block self.body %}
+    </div>
+
+
+  </div>
+
+</article>
+{% endblock %}

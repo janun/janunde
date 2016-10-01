@@ -11,33 +11,33 @@
  *   <footer class="footer"></footer>
  */
 .footer {
+  position: relative;
+  padding-top: rem-calc(20px);
+  padding-bottom: rem-calc(20px);
+  margin-top: rem-calc(40px);
   text-align: center;
-  padding-top: rem-calc(20);
-  padding-bottom: rem-calc(70);
-  color: $grey;
+  line-height: rem-calc(25px + 16px);
+  color: $white;
+  background-color: $grey;
+  // border-top: 1px solid $grey;
 
   @include above($medium) {
-    padding-top: rem-calc(50);
+    padding-top: rem-calc(50px);
+    padding-bottom: rem-calc(50px);
   }
 
   a {
-    color: $grey;
+    color: $white;
     &:hover {
       color: $text-color-standard;
     }
   }
 
   &__item {
-    padding: rem-calc(5);
+    padding: rem-calc(5px);
     @include above($medium) {
-      padding-left: rem-calc(25);
-      padding-right: rem-calc(25);
-    }
-  }
-
-  &:empty {
-    @include above($large) {
-      padding: rem-calc(130);
+      padding-left: rem-calc(25px);
+      padding-right: rem-calc(25px);
     }
   }
 }

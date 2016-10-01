@@ -53,7 +53,7 @@ class EventIndexPage(BasePage):
 
     def get_context(self, request):
         context = super().get_context(request)
-        today = datetime.date.today()
+        today = timezone.localtime(timezone.now()).date()
         context['now'] = timezone.localtime(timezone.now())
         context['thisyear'] = today.year
 
@@ -96,7 +96,7 @@ class EventIndexPage(BasePage):
         # compute the events for this week
         def get_this_week(events):
             return list(filter(
-                lambda event: event.start_datetime.date() <= end_of_this_week,
+                lambda event: timezone.localtime(event.start_datetime).date() <= end_of_this_week,
                 events
             ))
 
@@ -136,7 +136,7 @@ class EventIndexPage(BasePage):
         # what is left for this week
         context['this_week'], events = split_on_condition(
             events,
-            lambda event: event.start_datetime.date() <= end_of_this_week
+            lambda event: timezone.localtime(event.start_datetime).date() <= end_of_this_week
         )
 
         context['next_week'], events = split_on_condition(
@@ -189,14 +189,14 @@ class EventPageManager(PageManager):
          return super().get_queryset().order_by('start_datetime')
 
     def upcoming(self):
-        today = datetime.date.today()
+        today = timezone.now().date()
         return self.get_queryset().filter(
             Q(start_datetime__gte=today) |
             Q(end_datetime__gte=today, late_attendence=True),
         )
 
     def expired(self):
-        today = datetime.date.today()
+        today = timezone.now().date()
         return self.get_queryset().filter(
             Q(end_datetime__lt=today) |
             Q(start_datetime__lt=today, late_attendence=False),
@@ -319,6 +319,22 @@ class EventPage(Page):
         blank=True,
     )
 
+    @property
+    def start(self):
+        start = timezone.localtime(self.start_datetime)
+        if self.all_day:
+            return start.date()
+        return start
+
+    @property
+    def end(self):
+        if not self.end_datetime:
+            return None
+        end = timezone.localtime(self.end_datetime)
+        if self.all_day:
+            return end.date()
+        return end
+
     objects = EventPageManager()
 
     def get_image(self):
@@ -331,6 +347,8 @@ class EventPage(Page):
         for block in self.content:
             if block.block_type == 'paragraph':
                 return strip_tags(block.value.source)
+
+    partial_template_name = "events/_event_partial.html"
 
     def clean(self):
         # append number to slug if already in use
@@ -429,9 +447,6 @@ class EventPage(Page):
             FieldPanel('register_url'),
         ], heading="Gruppe, Kontakt, Anmeldung")
     ])
-
-    partial_template_name = 'core/_partial.html'
-    medium_partial_template_name = 'core/_medium_partial.html'
 
     def serve(self, request):
         if "format" in request.GET:

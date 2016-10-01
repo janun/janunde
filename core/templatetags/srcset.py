@@ -14,6 +14,6 @@ def srcset(image, filter_specs):
     for filter_spec in filter_specs.split(' '):
         rendition = get_rendition_or_not_found(image, filter_spec)
         if not rendition.width in sources:
-            sources[rendition.width] = "%s %sw" % (rendition.url, rendition.width)
+            sources[rendition.width] = "%s %iw" % (rendition.url, rendition.width)
 
     return ', '.join(sources.values())

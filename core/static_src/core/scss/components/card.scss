@@ -1,17 +1,18 @@
 $card-padding: rem-calc(22px);
 $card-shadow: rem-calc(0 1px 1px) rgba($black, 0.1);
 $card-shadow-hover: rem-calc(0 2px 5px) rgba($black, 0.25);
-$card-shadow-hover-image: rem-calc(0 3px 7px) rgba($black, 0.5);
 $card-border-radius: rem-calc(5px);
 $card-width: rem-calc(300px);
+$card-height: rem-calc(205px);
+$card-image-height: rem-calc(113px);
 
 .card {
   position: relative;
   background-color: $white;
   width: $card-width;
-  height: rem-calc(400px);
+  height: $card-height;
   border-radius: $card-border-radius;
-  margin-bottom: rem-calc(40px);
+  margin-bottom: 2*$card-grid-margin;
   box-shadow: $card-shadow;
   overflow: hidden;
   transition: box-shadow 0.2s;
@@ -27,74 +28,70 @@ $card-width: rem-calc(300px);
     bottom: 0;
     left: 0;
     right: 0;
-    padding: $card-padding;
-    min-height: 100px;
+    height: $card-height - $card-image-height;
+    padding: $card-padding / 2 $card-padding;
     z-index: 1;
-    // font-size: 30px;
+    overflow: hidden;
     font-family: $font-family-extra;
+    font-weight: bold;
+    background-color: $white;
+
   }
 
   &__title {
-    margin-bottom: 0;
+    margin-bottom: 10px;
+    margin-top: 0;
+    font-size: rem-calc(20px);
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
   }
 
-
-  &--with-image {
-    @include above($large) {
-      &:hover {
-        box-shadow: $card-shadow-hover-image;
-      }
-    }
-
-    &__image {
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      background-color: $baige;
-    }
-
-    &:after {
-      content: "";
-      //background-image: linear-gradient(0deg, rgba(0,15,20,0.6) 15%,rgba(0,15,20,0.15) 52%, rgba(0,15,20,0) 70%);
-      background-image: linear-gradient(0deg, rgba(0,15,20,0.6) 15%,rgba(0,15,20,0.15) 52%,rgba(0,15,20,0) 70%);
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-    }
-
-    & .card__text {
-      //background-image: linear-gradient(0deg, rgba(0,15,20,0.8), rgba(0,15,20,0.1), transparent);
-      color: $white;
-      background-image: linear-gradient(0deg, rgba(0, 15, 20, 0.1) 90%, transparent);
-      text-shadow: 0 0 20px rgba(0, 0, 20, 0.25);
-    }
+  &__overlay {
+    position: absolute;
+    bottom: $card-height - $card-image-height;
+    padding-left: $card-padding;
+    background-color: rgba($white, 0.8);
+    width: 100%;
+    height: rem-calc(30px);
+    line-height: rem-calc(30px);
+    font-size: rem-calc(14px);
+    font-family: $font-family-extra;
   }
 
-
-  &--small {
-    height: rem-calc(205px);
+  &__overlay-link {
+    position: relative;
+    float: right;
+    line-height: rem-calc(30px);
+    height: rem-calc(30px);
+    width: rem-calc(30px);
+    padding-left: rem-calc(8px);
+    padding-right: rem-calc(8px);
   }
 
+  &__image, &__image-placeholder {
+    position: absolute;
+    top: 0;
+    height: $card-image-height;
+    width: 100%;
+    background-color: $baige;
+  }
 
   &--wide {
     width: 630px;
   }
 
-
-  &--color-red, &--color-green, &--color-blue, &--color-orange {
-    color: $white;
-    @include above($large) {
-      &:hover {
-        box-shadow: $card-shadow-hover-image;
+  @each $color, $value in $colors {
+    &--color-#{$color} {
+      .card__image-placeholder {
+        background-color: $value;
       }
     }
   }
-  @each $color, $value in $colors {
-    &--color-#{$color} {
-      background-color: $value;
-    }
+  &--with-image {
+    background-color: $white;
   }
 
 
