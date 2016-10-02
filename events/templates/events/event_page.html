@@ -9,12 +9,12 @@
   <div class="grid-12">
 
     <!-- title and subtitle -->
-    <div class="event-page__title grid-12__col-12">
-      <h1 itemprop="name">{{ self.title|softhyphen|softhyphen:"de-de" }}</h1>
+    <header class="event-page__title grid-12__col-12">
+      <h1 itemprop="name">{{ self.title }}</h1>
       {% if self.subtitle %}
-        <h2>{{ self.subtitle|softhyphen:"de-de" }}</h2>
+        <p class="subtitle">{{ self.subtitle|softhyphen:"de-de" }}</p>
       {% endif %}
-    </div>
+    </header>
 
 
     <!-- the side column -->

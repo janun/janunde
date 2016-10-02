@@ -20,12 +20,13 @@
   </nav>
 
   {% if people %}
-    <div class="card-grid">
-      {% for person in people %}
-        {% include 'contact/_person.html' %}
-      {% endfor %}
+    <div class="center-container">
+      <div class="card-grid">
+        {% for person in people %}
+          {% include 'contact/_person.html' %}
+        {% endfor %}
+      </div>
     </div>
-
   {% else %}
 
     <div class="container padding-top-6 padding-bottom-5">

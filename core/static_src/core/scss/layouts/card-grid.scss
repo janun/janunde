@@ -2,9 +2,9 @@ $card-grid-margin: rem-calc(15px);
 $card-grid-margin-small: rem-calc(10px);
 
 .card-grid {
-  width: rem-calc(320px);
-  margin-left: auto;
-  margin-right: auto;
+
+  margin-left: - $card-grid-margin-small;
+  margin-right: - $card-grid-margin-small;
 
   & > * {
     margin-left: $card-grid-margin-small;
@@ -13,7 +13,8 @@ $card-grid-margin-small: rem-calc(10px);
 
   // 2 column
   @include above( rem-calc(680px) ) {
-    width: rem-calc(660px);
+    margin-left: - $card-grid-margin;
+    margin-right: - $card-grid-margin;
 
     & > * {
       margin-left: $card-grid-margin;
@@ -26,11 +27,6 @@ $card-grid-margin-small: rem-calc(10px);
       display: table;
       clear: left;
     }
-  }
-
-  // 3 column, optical 960px
-  @include above( rem-calc(1010px) ) {
-    width: rem-calc(990px);
   }
 
 }

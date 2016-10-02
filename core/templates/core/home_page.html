@@ -12,11 +12,12 @@
 
 {% block content %}
 
-  <div class="margin-top-3">
+  <div class="center-container margin-top-1">
 
     {% if highlights %}
       <div class="clear-after">
-        <div class="card-grid clear-after">
+        <h2 class="area-title">Highlights</h2>
+        <div class="card-grid">
           {% for highlight in highlights %}
             {% render_partial highlight.highlighted_page.specific %}
           {% endfor %}
@@ -25,9 +26,9 @@
     {% endif %}
 
     {% if upcoming_events %}
-      <h2 class="container area-title">Nächste Veranstaltungen</h2>
       <div class="clear-after">
-        <div class="card-grid clear-after">
+        <h2 class="area-title">Nächste Veranstaltungen</h2>
+        <div class="card-grid swipe-cards">
           {% for event in upcoming_events %}
             {% render_partial event %}
           {% endfor %}

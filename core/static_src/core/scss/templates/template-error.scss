@@ -3,11 +3,24 @@
     text-align: center;
   }
 
+  h1 {
+    // font-family: $font-family-extra;
+    font-size: rem-calc(30px);
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    @include above($medium) {
+      font-size: rem-calc(40px);
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+  }
+
   &__emotion {
     color: $red;
-    font-size: 3rem;
+    font-family: $font-family-extra;
+    font-size: rem-calc(35px);
     @include above($medium) {
-      font-size: 6rem;
+      font-size: rem-calc(45px);
     }
   }
 
@@ -40,15 +53,4 @@
   }
 
 
-  h1 {
-    font-family: $font-family-extra;
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    @include above($medium) {
-      font-size: 3rem;
-      margin-top: 3rem;
-      margin-bottom: 3rem;
-    }
-  }
 }

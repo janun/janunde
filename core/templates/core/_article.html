@@ -27,27 +27,8 @@
     <h2 class="card__title" itemprop="name">{{ object.title|softhyphen }}</h2>
   </div>
 
-  {% if object.related_group.logo %}
-    <a href="{% pageurl object.related_group %}"
-       class="card-icon"
-       title="{{ object.related_group.title }}">
-
-      <span class="card-icon__reveal">
-        {{ object.related_group.title }}
-      </span>
-
-      <span class="card-icon__content">
-        {% image object.related_group.logo width-35 as group_logo %}
-        <img src="{{ group_logo.url }}"
-             {% if object.related_group.logo.aspect < 100 %}
-               srcset="{{ object.related_group.logo|srcset:'width-35 width-70 width-105 width-140' }}"
-             {% else %}
-               srcset="{{ object.related_group.logo|srcset:'height-35 height-70 height-105 height-140' }}"
-             {% endif %}
-             sizes="2.1875em"
-             alt="Logo {{ object.related_group.title }}">
-      </span>
-    </a>
+  {% if object.related_group %}
+    {% include "core/_related_group.html" with related_group=object.related_group %}
   {% endif %}
 
 </div>
