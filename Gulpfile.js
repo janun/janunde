@@ -139,29 +139,27 @@ var FAVICON_DATA_FILE = 'faviconData.json';
 // package (see the check-for-favicon-update task below).
 gulp.task('generate-favicon', function(done) {
 	realFavicon.generateFavicon({
-		masterPicture: 'core/static/core/images/janun_logo.svg',
-		dest: 'core/static/core/images/favicons/',
-		iconsPath: '/static/core/images/favicons/',
+		masterPicture: 'core/static_src/core/images/janun_logo_whitebg.svg',
+		dest: 'core/static_src/core/images/favicons/',
+		iconsPath: '/static_src/core/images/favicons/',
 		design: {
 			ios: {
 				pictureAspect: 'backgroundAndMargin',
 				backgroundColor: '#ffffff',
-				margin: '14%'
+				margin: '0%'
 			},
 			desktopBrowser: {},
 			windows: {
-				pictureAspect: 'whiteSilhouette',
-				backgroundColor: '#46bb00',
+				pictureAspect: 'noChange',
+				backgroundColor: '#da532c',
 				onConflict: 'override'
 			},
 			androidChrome: {
-				pictureAspect: 'backgroundAndMargin',
-				margin: '17%',
-				backgroundColor: '#ffffff',
+				pictureAspect: 'noChange',
 				themeColor: '#ffffff',
 				manifest: {
 					name: 'JANUN e.V.',
-					display: 'browser',
+					display: 'standalone',
 					orientation: 'notSet',
 					onConflict: 'override',
 					declared: true
@@ -173,9 +171,14 @@ gulp.task('generate-favicon', function(done) {
 			}
 		},
 		settings: {
+      compression: 1,
 			scalingAlgorithm: 'Mitchell',
 			errorOnImageTooSmall: false
 		},
+    versioning: {
+      paramName: 'v',
+      paramValue: 'YAKyYP2owb'
+    },
 		markupFile: FAVICON_DATA_FILE
 	}, function() {
 		done();
