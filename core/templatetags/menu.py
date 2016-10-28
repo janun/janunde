@@ -21,6 +21,9 @@ def get_menuitems(context, parent, calling_page=None):
 
     for menuitem in menuitems:
         menuitem.children = get_children(menuitem)
-        menuitem.is_active = (calling_page.url.startswith(menuitem.url)
-                               if calling_page else False)
+        try:
+            menuitem.is_active = calling_page.url.startswith(menuitem.url)
+        except:
+            pass
+
     return menuitems

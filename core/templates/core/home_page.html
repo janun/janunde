@@ -40,13 +40,12 @@
       </div>
     {% endif %}
 
-
     {% if articles %}
       <h2 class="area-title container">Letzte Neuigkeiten</h2>
       <div class="clear-after">
         <div class="card-grid clear-after">
           {% for article in articles %}
-            {% include "core/_article.html" %}
+            {% render_partial article %}
           {% endfor %}
         </div>
         {% if more_articles %}

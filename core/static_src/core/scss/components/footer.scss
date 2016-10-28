@@ -1,3 +1,5 @@
+$footer-height: rem-calc(90px);
+
 /**
  * Footer.
  * The empty footer generates padding.
@@ -10,24 +12,34 @@
  *   </footer>
  *   <footer class="footer"></footer>
  */
-.footer {
+html {
+  height: 100%;
+}
+body {
   position: relative;
-  padding-top: rem-calc(20px);
-  padding-bottom: rem-calc(20px);
-  margin-top: rem-calc(40px);
-  text-align: center;
-  line-height: rem-calc(25px + 16px);
-  color: $white;
-  background-color: $grey;
-  // border-top: 1px solid $grey;
+  padding-bottom: $footer-height + rem-calc(60px);
+  min-height: 100%;
+}
 
-  @include above($medium) {
-    padding-top: rem-calc(50px);
-    padding-bottom: rem-calc(50px);
+.footer {
+  height: $footer-height;
+  line-height: $footer-height;
+  margin-top: rem-calc(60px);
+  color: $grey;
+  border-top: 1px solid $grey;
+  text-align: center;
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  &__inner {
+    @extend .container;
   }
 
   a {
-    color: $white;
+    color: $grey;
     &:hover {
       color: $text-color-standard;
     }
@@ -38,6 +50,20 @@
     @include above($medium) {
       padding-left: rem-calc(25px);
       padding-right: rem-calc(25px);
+    }
+  }
+
+  &__logo {
+    display: inline-block;
+    height: $footer-height;
+    width: rem-calc(30px);
+    vertical-align: middle;
+
+    path {
+      fill: $grey;
+      &:hover {
+        color: $text-color-standard;
+      }
     }
   }
 }

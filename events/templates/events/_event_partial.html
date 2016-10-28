@@ -41,12 +41,12 @@
     {% endif %}
   </div>
 
-  <div class="card__text">
+  <div class="card__content card__content-short">
     <h2 class="card__title" itemprop="name">{{ object.title|softhyphen }}</h2>
   </div>
 
-  {% if object.related_group.logo %}
-    {% include "core/_related_group.html" with related_group=object.related_group %}
+  {% if object.related_group %}
+    {% include "core/_card_related_group.html" with related_group=object.related_group %}
   {% endif %}
 
   {% if object.location %}

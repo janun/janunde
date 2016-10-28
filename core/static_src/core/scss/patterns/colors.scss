@@ -3,8 +3,7 @@
 // and possibly redefined under semantic names like $text-color-standard
 
 /** @color Green */
-$green: darken(rgb(70, 187, 0), 5%);
-//$green: #0d8a2f;
+$green: rgb(70, 187, 0);
 
 /** @color Blue */
 $blue: rgb(0, 118, 164);
@@ -16,7 +15,7 @@ $red: rgb(196, 23, 55);
 $orange: rgb(233, 88, 34);
 
 /** @color brown*/
-$brown: rgb(55, 23, 26);
+$brown: rgb(100, 67, 39);
 
 /** @color lighterdark*/
 $lighterdark: rgb(74, 74, 74);

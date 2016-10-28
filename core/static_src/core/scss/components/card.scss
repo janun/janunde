@@ -1,9 +1,7 @@
 $card-padding: rem-calc(22px);
-$card-shadow: rem-calc(0 1px 1px) rgba($black, 0.1);
-$card-shadow-hover: rem-calc(0 2px 5px) rgba($black, 0.25);
 $card-border-radius: rem-calc(5px);
 $card-width: rem-calc(300px);
-$card-height: rem-calc(205px);
+$card-height: rem-calc(210px);
 $card-image-height: rem-calc(113px);
 
 .card {
@@ -13,40 +11,52 @@ $card-image-height: rem-calc(113px);
   height: $card-height;
   border-radius: $card-border-radius;
   margin-bottom: 2*$card-grid-margin;
-  box-shadow: $card-shadow;
+  @include shadow(1);
   overflow: hidden;
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s;
 
   @include above($large) {
     &:hover {
-      box-shadow: $card-shadow-hover;
+      @include shadow(2);
+      transform: translate(0, -2px);
     }
   }
 
-  &__text {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: $card-height - $card-image-height;
+  &__content {
     padding: $card-padding / 2 $card-padding;
     z-index: 1;
     overflow: hidden;
-    font-family: $font-family-extra;
+    font-size: rem-calc(14px);
+    font-family: $font-family-sans-serif;
     font-weight: bold;
     background-color: $white;
-
   }
 
   &__title {
     margin-bottom: 10px;
     margin-top: 0;
-    font-size: rem-calc(20px);
+    font-size: rem-calc(28.28px);
     -webkit-line-clamp: 3;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    font-family: $font-family-sans-serif;
+    font-weight: bold;
+  }
+
+  &__content--short &__title {
+    -webkit-line-clamp: 2;
+  }
+
+  &__subtitle {
+    font-size: rem-calc(14px);
+    font-family: $font-family-sans-serif;
+    font-weight: bold;
+  }
+
+  &__text {
+    font-size: rem-calc(14px);
   }
 
   &__overlay {
@@ -58,7 +68,23 @@ $card-image-height: rem-calc(113px);
     height: rem-calc(30px);
     line-height: rem-calc(30px);
     font-size: rem-calc(14px);
-    font-family: $font-family-extra;
+    font-family: $font-family-sans-serif;
+    font-weight: bold;
+  }
+
+  &__related-group {
+    position: absolute;
+    top: rem-calc(10px);
+    right: rem-calc(10px);
+    background-color: $white;
+    width: rem-calc(50px);
+    height: rem-calc(50px);
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: rem-calc(7.5px);
   }
 
   &__overlay-link {
@@ -72,15 +98,15 @@ $card-image-height: rem-calc(113px);
   }
 
   &__image, &__image-placeholder {
-    position: absolute;
-    top: 0;
+    // position: absolute;
+    // top: 0;
     height: $card-image-height;
     width: 100%;
     background-color: $baige;
-  }
 
-  &--wide {
-    width: 630px;
+    &--short {
+      height: $card-image-height - rem-calc(30px);
+    }
   }
 
   @each $color, $value in $colors {
