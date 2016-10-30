@@ -189,17 +189,17 @@ class EventPageManager(PageManager):
          return super().get_queryset().order_by('start_datetime')
 
     def upcoming(self):
-        today = timezone.now().date()
+        now = timezone.now()
         return self.get_queryset().filter(
-            Q(start_datetime__gte=today) |
-            Q(end_datetime__gte=today, late_attendence=True),
+            Q(start_datetime__date__gte=now) |
+            Q(end_datetime__date__gte=now, late_attendence=True),
         )
 
     def expired(self):
-        today = timezone.now().date()
+        now = timezone.now()
         return self.get_queryset().filter(
-            Q(end_datetime__lt=today) |
-            Q(start_datetime__lt=today, late_attendence=False),
+            Q(end_datetime__date__lt=now) |
+            Q(start_datetime__date__lt=now, late_attendence=False),
         )
 
 
