@@ -241,14 +241,14 @@ class HomePage(BasePage):
         upcoming_events = EventPage.objects.upcoming().exclude(
             pk__in=[h.highlighted_page.pk for h in highlights]
         )
-        context['upcoming_events'] = upcoming_events[:6]
-        context['more_upcoming_events'] = upcoming_events.count() > 6
+        context['upcoming_events'] = upcoming_events[:3]
+        context['more_upcoming_events'] = upcoming_events.count() > 3
 
         articles = Article.objects.live().exclude(
             pk__in=[h.highlighted_page.pk for h in highlights]
         )
-        context['articles'] = articles[:6]
-        context['more_articles'] = articles.count() > 6
+        context['articles'] = articles[:3]
+        context['more_articles'] = articles.count() > 3
         return context
 
 

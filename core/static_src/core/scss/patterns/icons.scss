@@ -6,17 +6,17 @@ $simple-line-font-path: '../../bower_components/simple-line-icons/fonts/';
 // icons are 16px/1rem wide
 // so this ensures 36x40 px clicktarget
 @mixin icon-clicktarget {
-  padding-left: rem-calc(10px);
-  margin-left: - rem-calc(10px);
+  padding-left: rem-calc(5px);
+  // margin-left: - rem-calc(10px);
 
-  padding-right: rem-calc(10px);
-  margin-right: - rem-calc(10px);
+  padding-right: rem-calc(5px);
+  // margin-right: - rem-calc(10px);
 
   padding-top: rem-calc(5px);
-  margin-top: - rem-calc(5px);
+  // margin-top: - rem-calc(5px);
 
   padding-bottom: rem-calc(5px);
-  margin-bottom: - rem-calc(5px);
+  // margin-bottom: - rem-calc(5px);
 
   &--change-sides {
     margin-left: 0;

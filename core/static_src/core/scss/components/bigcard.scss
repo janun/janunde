@@ -1,0 +1,225 @@
+$bigcard-padding: rem-calc(20px);
+$bigcard-border-radius: rem-calc(5px);
+$bigcard-width: rem-calc(300px);
+$bigcard-height: rem-calc(390px);
+$bigcard-image-height: rem-calc(150px);
+
+$related-group-size: rem-calc(70px);
+
+
+.related-group {
+  a {
+    position: relative;
+    color: $grey;
+
+    &:hover {
+      color: $brown;
+    }
+  }
+
+  &__image-wrapper {
+    background-color: $white;
+    width: $related-group-size;
+    height: $related-group-size;
+    border-radius: 50%;
+    border: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.146 * $related-group-size;
+    z-index: 10;
+
+    &:hover {
+      @include above($large) {
+        @include shadow(1);
+        z-index: 10;
+      }
+    }
+  }
+
+  &__image {
+    max-width: 0.707 * $related-group-size;
+    max-height: 0.707 * $related-group-size;
+  }
+
+  &__name {
+    position: relative;
+    display: block;
+    text-align: center;
+    font-size: rem-calc(14px);
+    font-weight: normal;
+    margin-bottom: rem-calc(5px);
+  }
+}
+
+
+.bigcard {
+  position: relative;
+  background-color: $white;
+  width: $bigcard-width;
+  height: $bigcard-height;
+  border-radius: $bigcard-border-radius;
+  margin-bottom: 2*$card-grid-margin;
+  @include shadow(1);
+  overflow: hidden;
+  transition: box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s;
+  transform: translate3d(0, 0, 0);
+  color: $grey;
+  font-family: $font-family-sans-serif;
+  font-weight: normal;
+  text-align: center;
+
+  a {
+    color: $grey;
+
+    &:hover {
+      color: $brown;
+    }
+  }
+
+  @include above($large) {
+    &:hover {
+      @include shadow(2);
+      transform: translate3d(0, -1px, 0);
+    }
+  }
+
+
+  &--color {
+    @each $color, $value in $colors {
+      color: $white;
+      a {
+        color: $white;
+        &:hover {
+          color: $grey;
+        }
+      }
+      &-#{$color} {
+        background-color: $value;
+      }
+    }
+  }
+
+
+  &__image, &__image-placeholder {
+    height: $bigcard-image-height;
+    width: 100%;
+    background-color: $baige;
+  }
+
+  &__image-placeholder {
+    @each $color, $value in $colors {
+      &--color-#{$color} {
+        background-color: $value;
+      }
+    }
+  }
+
+
+  &__content {
+    padding: $bigcard-padding / 2 $bigcard-padding;
+    padding-top: $related-group-size - rem-calc(32px);
+  }
+
+  &__title {
+    margin-bottom: 10px;
+    margin-top: 0;
+    font-size: rem-calc(28.28px);
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: rem-calc(70px);
+    font-weight: bold;
+    color: $brown;
+
+    .bigcard--color & {
+      color: $white;
+    }
+  }
+
+  &__subtitle {
+    font-size: rem-calc(14px);
+    font-weight: bold;
+  }
+
+  &__datetime {
+    display: block;
+    font-size: rem-calc(20px);
+
+    i {
+      font-size: 16px;
+    }
+  }
+
+  &__location {
+    margin-top: rem-calc(12px);
+    display: block;
+    font-size: rem-calc(20px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    i {
+      font-size: 16px;
+    }
+  }
+
+  &__footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    padding: 0 $bigcard-padding;
+    height: rem-calc(30px);
+    line-height: rem-calc(30px);
+  }
+
+  &__secondary {
+    font-size: rem-calc(14px);
+    position: absolute;
+    display: block;
+    height: rem-calc(30px);
+    line-height: rem-calc(30px);
+  }
+
+  &__primary {
+    position: absolute;
+    display: block;
+    width: rem-calc(110px);
+    height: rem-calc(30px);
+    line-height: rem-calc(30px);
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    border-radius: rem-calc(2px);
+    border: 1px solid $grey;
+    text-align: center;
+  }
+
+  &__tertiary-container {
+    position: absolute;
+    right: $bigcard-padding;
+    width: rem-calc(60px);
+
+    a {
+      position: relative;;
+    }
+  }
+
+  &__related-group {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: $bigcard-image-height - $related-group-size * 3/4;
+  }
+
+  &__text {
+    font-size: rem-calc(14px);
+  }
+
+
+}

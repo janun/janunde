@@ -1,6 +1,6 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff %}
 
-<div class="card click-area card--small card--color-{{ object.color }}"
+<div class="card click-area card--color-{{ object.color }}"
      itemscope itemtype="http://schema.org/Event">
 
   <a class="click-area__area-link" href="{% pageurl object %}" itemprop="url">
@@ -23,9 +23,10 @@
     <meta itemprop="startDate" content="{{ object.start|date:"c" }}">
     <meta itemprop="endDate" content="{{ object.end|date:"c" }}">
 
-    {{ object.start|nettes_datum:True }}
+    <!-- TODO: better dateformat -->
+    {{ object.start|date:"d.m." }}
     {% if object.end %}
-      – {{ object.end|nettes_datum:True }}
+      bis {{ object.end|date:"d.m." }}
     {% endif %}
 
     {% if object.facebook_object_url %}
@@ -43,6 +44,9 @@
 
   <div class="card__content card__content-short">
     <h2 class="card__title" itemprop="name">{{ object.title|softhyphen }}</h2>
+    {% if object.location %}
+      <span class="card__text"><i class="icon-location-pin"></i> {{ object.location }}</span>
+    {% endif %}
   </div>
 
   {% if object.related_group %}
@@ -55,5 +59,6 @@
       <meta itemprop="address" content="{{ object.location }}">
     </span>
   {% endif %}
+
 
 </div>

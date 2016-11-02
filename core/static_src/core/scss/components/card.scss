@@ -1,7 +1,7 @@
-$card-padding: rem-calc(22px);
+$card-padding: rem-calc(20px);
 $card-border-radius: rem-calc(5px);
 $card-width: rem-calc(300px);
-$card-height: rem-calc(210px);
+$card-height: rem-calc(240px);
 $card-image-height: rem-calc(113px);
 
 .card {
@@ -85,6 +85,11 @@ $card-image-height: rem-calc(113px);
     justify-content: center;
     align-items: center;
     padding: rem-calc(7.5px);
+
+    img {
+      max-width: rem-calc(35px);
+      max-height: rem-calc(35px);
+    }
   }
 
   &__overlay-link {

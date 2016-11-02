@@ -11,12 +11,13 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
+  {% include "core/_header.html" %}
 
-  <div class="center-container margin-top-1">
+  <div class="center-container">
 
     {% if highlights %}
       <div class="clear-after">
-        <h2 class="area-title">Highlights</h2>
+        <h2 class="area-title area-title--centered">Aktuelle Highlights</h2>
         <div class="card-grid">
           {% for highlight in highlights %}
             {% render_partial highlight.highlighted_page.specific %}
@@ -27,21 +28,20 @@
 
     {% if upcoming_events %}
       <div class="clear-after">
-        <h2 class="area-title">Nächste Veranstaltungen</h2>
+        <h2 class="area-title area-title--centered">Nächste Veranstaltungen</h2>
         <div class="card-grid swipe-cards">
           {% for event in upcoming_events %}
             {% render_partial event %}
           {% endfor %}
           {% if more_upcoming_events %}
-            <a class="button button--filled color-orange float-right"
-               href="/veranstaltungen">mehr Veranstaltungen…</a>
+            <a class="float-right" href="/veranstaltungen">mehr Veranstaltungen…</a>
           {% endif %}
         </div>
       </div>
     {% endif %}
 
     {% if articles %}
-      <h2 class="area-title container">Letzte Neuigkeiten</h2>
+      <h2 class="area-title area-title--centered container">Letzte Neuigkeiten</h2>
       <div class="clear-after">
         <div class="card-grid clear-after">
           {% for article in articles %}
@@ -49,7 +49,7 @@
           {% endfor %}
         </div>
         {% if more_articles %}
-          <a class="button button--filled color-orange float-right"
+          <a class="float-right"
              href="/artikel">mehr Artikel…</a>
         {% endif %}
       </div>

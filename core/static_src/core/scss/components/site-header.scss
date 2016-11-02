@@ -12,8 +12,8 @@
 ///     </div>
 ///   </header>
 
-$height-header: rem-calc(526); // approx size of video
-$min-height-header: rem-calc(480);
+$height-header: rem-calc(450); // approx size of video
+$min-height-header: rem-calc(450);
 
 .site-header {
   width: 100%;
@@ -21,15 +21,15 @@ $min-height-header: rem-calc(480);
 
   // on mobile: full height
   @include until($medium) {
-    height: 100vh;
+    height: calc(100vh - 60px);
     min-height: $min-height-header;
-    padding-top: rem-calc(82); // magic number
+    padding-top: rem-calc(32); // magic number
   }
 
   // on tablets and up: fixed height
   @include above($medium) {
     height: $height-header;
-    padding-top: rem-calc(110); // magic number
+    padding-top: rem-calc(60); // magic number
   }
 
   &__content {
@@ -44,12 +44,41 @@ $min-height-header: rem-calc(480);
     color: $white;
     font-family: $font-family-sans-serif;
 
+    h1 {
+      font-size: rem-calc(28.8);
+      @include above($medium) {
+        font-size: rem-calc(40px);
+      }
+    }
+
     p {
       margin: 0 auto;
-      max-width: rem-calc(450); // magic number
+      max-width: rem-calc(400); // magic number
       padding: 1rem;
       @include p;
       font-family: $font-family-sans-serif;
+      font-size: rem-calc(20px);
+      line-height: 1.4;
+
+      @include above($medium) {
+        font-size: rem-calc(20px);
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__arrow {
+    display: block;
+    margin-top: 3rem;
+    font-size: 2rem;
+    color: $white;
+
+    &:hover, &:focus, &:active {
+      color: $white;
+    }
+
+    @include above($medium) {
+      display: none;
     }
   }
 }

@@ -335,6 +335,18 @@ class EventPage(Page):
             return end.date()
         return end
 
+    @property
+    def multipledays(self):
+        if not self.end:
+            return False
+        if self.all_day:
+            if self.start != self.end:
+                return True
+        else:
+            if self.start.date() != self.end.date():
+                return True
+        return False
+
     objects = EventPageManager()
 
     def get_image(self):
@@ -348,7 +360,7 @@ class EventPage(Page):
             if block.block_type == 'paragraph':
                 return strip_tags(block.value.source)
 
-    partial_template_name = "events/_event_partial.html"
+    partial_template_name = "events/_event_big.html"
 
     def clean(self):
         # append number to slug if already in use
