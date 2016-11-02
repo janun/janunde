@@ -196,6 +196,10 @@ $related-group-size: rem-calc(70px);
     border-radius: rem-calc(2px);
     border: 1px solid $grey;
     text-align: center;
+
+    .bigcard--color & {
+      border-color: $white;
+    }
   }
 
   &__tertiary-container {

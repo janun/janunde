@@ -1,7 +1,6 @@
 {% load static from staticfiles %}
 
-<header class="site-header video-background js-fade-overlay">
-  <div class="js-fade-overlay__inner"></div>
+<header class="site-header video-background">
   <video class="video-background__video js-mq-video-loader" autoplay loop poster="{% static 'core/images/header-poster/header-poster-1024.jpg' %}">
     <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.mp4' %}" type="video/mp4">
     <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.webm' %}" type="video/webm">
