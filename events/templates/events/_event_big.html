@@ -1,7 +1,10 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff %}
 
 <div class="bigcard click-area
-     {% if object.main_image and object.color %}bigcard--color bigcard--color-{{ object.color }}{% endif %}"
+     {% if object.main_image and object.color %}
+       bigcard--color bigcard--color-{{ object.color }}
+     {% endif %}
+     "
      itemscope itemtype="http://schema.org/Event">
 
   <a class="click-area__area-link" href="{% pageurl object %}"
@@ -39,7 +42,7 @@
     </div>
   {% endif %}
 
-  <div class="bigcard__content">
+  <div class="bigcard__content bigcard__content--padding-top">
     <h2 class="js-dotdotdot bigcard__title" itemprop="name">
       {{ object.title|softhyphen }}
     </h2>
@@ -65,23 +68,25 @@
 
   <div class="bigcard__footer">
     {% if object.register_url %}
-      <a class="bigcard__secondary" href="{{ object.register_url }}"
+      <a class="bigcard__footer-item" href="{{ object.register_url }}"
          title="Anmeldung zu »{{ object.title }}«">Anmelden</a>
     {% endif %}
+
     <a href="{% pageurl object %}" title="{{ object.title }}"
-       class="bigcard__primary">Mehr Infos</a>
-    <div class="bigcard__tertiary-container">
+       class="bigcard__footer-item bigcard__button bigcard__primary">Mehr Infos</a>
+
+    <div>
       {% if object.facebook_event_url %}
         <a href="{{ object.facebook_event_url }}"
            title="Facebook-Event zu »{{ object.title }}«"
-           class="icon-clicktarget">
+           class="icon-clicktarget bigcard__footer-item">
           <i class="icon-social-facebook"></i>
         </a>
       {% endif %}
       {% if object.website_url %}
         <a href="{{ object.website_url }}"
            title="Externe Website zu »{{ object.title }}«"
-           class="icon-clicktarget">
+           class="icon-clicktarget bigcard__footer-item">
           <i class="icon-direction"></i>
         </a>
       {% endif %}

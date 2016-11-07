@@ -4,21 +4,29 @@ $bigcard-width: rem-calc(300px);
 $bigcard-height: rem-calc(390px);
 $bigcard-image-height: rem-calc(150px);
 
+$bigcard-background: $white;
+$bigcard-text-color: $grey;
+$bigcard-hover-text-color: $brown;
+$bigcard-title-color: $brown;
+$bigcard-color-text-color: $white;
+$bigcard-color-hover-text-color: darken($bigcard-color-text-color, 20%);
+$bigcard-color-title-color: $white;
+
 $related-group-size: rem-calc(70px);
 
 
 .related-group {
   a {
     position: relative;
-    color: $grey;
+    color: $bigcard-text-color;
 
     &:hover {
-      color: $brown;
+      color: $bigcard-hover-text-color;
     }
   }
 
   &__image-wrapper {
-    background-color: $white;
+    background-color: $bigcard-background;
     width: $related-group-size;
     height: $related-group-size;
     border-radius: 50%;
@@ -30,10 +38,11 @@ $related-group-size: rem-calc(70px);
     align-items: center;
     padding: 0.146 * $related-group-size;
     z-index: 10;
+    @include shadow(1);
 
     &:hover {
       @include above($large) {
-        @include shadow(1);
+        @include shadow(2);
         z-index: 10;
       }
     }
@@ -55,9 +64,14 @@ $related-group-size: rem-calc(70px);
 }
 
 
+/**
+ * @example
+ *   <div class="bigcard">
+ *   </div>
+ */
 .bigcard {
   position: relative;
-  background-color: $white;
+  background-color: $bigcard-background;
   width: $bigcard-width;
   height: $bigcard-height;
   border-radius: $bigcard-border-radius;
@@ -66,16 +80,19 @@ $related-group-size: rem-calc(70px);
   overflow: hidden;
   transition: box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s;
   transform: translate3d(0, 0, 0);
-  color: $grey;
+  color: $bigcard-text-color;
   font-family: $font-family-sans-serif;
   font-weight: normal;
   text-align: center;
+  font-size: rem-calc(20px);
+  line-height: rem-calc(30px);
 
   a {
-    color: $grey;
+    position: relative;
+    color: $bigcard-text-color;
 
     &:hover {
-      color: $brown;
+      color: $bigcard-hover-text-color;
     }
   }
 
@@ -88,14 +105,15 @@ $related-group-size: rem-calc(70px);
 
 
   &--color {
-    @each $color, $value in $colors {
-      color: $white;
-      a {
-        color: $white;
-        &:hover {
-          color: $grey;
-        }
+    color: $bigcard-color-text-color;
+    a {
+      color: $bigcard-color-text-color;
+      &:hover {
+        color: $bigcard-color-hover-text-color;
       }
+    }
+
+    @each $color, $value in $colors {
       &-#{$color} {
         background-color: $value;
       }
@@ -120,7 +138,13 @@ $related-group-size: rem-calc(70px);
 
   &__content {
     padding: $bigcard-padding / 2 $bigcard-padding;
-    padding-top: $related-group-size - rem-calc(32px);
+    height: $bigcard-height - $bigcard-image-height - rem-calc(30px) - rem-calc(30px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &--padding-top {
+      padding-top: $related-group-size - rem-calc(32px);
+    }
   }
 
   &__title {
@@ -130,23 +154,23 @@ $related-group-size: rem-calc(70px);
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: rem-calc(70px);
+    max-height: rem-calc(70px);
     font-weight: bold;
-    color: $brown;
+    color: $bigcard-title-color;
 
     .bigcard--color & {
-      color: $white;
+      color: $bigcard-color-title-color;
     }
   }
 
   &__subtitle {
     font-size: rem-calc(14px);
     font-weight: bold;
+    margin-bottom: rem-calc(10px);
   }
 
   &__datetime {
     display: block;
-    font-size: rem-calc(20px);
 
     i {
       font-size: 16px;
@@ -154,9 +178,7 @@ $related-group-size: rem-calc(70px);
   }
 
   &__location {
-    margin-top: rem-calc(12px);
     display: block;
-    font-size: rem-calc(20px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -173,6 +195,20 @@ $related-group-size: rem-calc(70px);
     padding: 0 $bigcard-padding;
     height: rem-calc(30px);
     line-height: rem-calc(30px);
+    font-size: rem-calc(14px);
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__primary {
+    // align-content: center;
+  }
+
+  &__footer-item {
   }
 
   &__secondary {
@@ -183,24 +219,31 @@ $related-group-size: rem-calc(70px);
     line-height: rem-calc(30px);
   }
 
-  &__primary {
-    position: absolute;
-    display: block;
-    width: rem-calc(110px);
-    height: rem-calc(30px);
-    line-height: rem-calc(30px);
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    border-radius: rem-calc(2px);
-    border: 1px solid $grey;
-    text-align: center;
-
-    .bigcard--color & {
-      border-color: $white;
-    }
-  }
+  // &__primary {
+  //   position: absolute;
+  //   // display: block;
+  //   width: rem-calc(110px);
+  //   // height: rem-calc(30px);
+  //   padding: 5px 10px;
+  //   line-height: rem-calc(30px);
+  //   border-radius: rem-calc(2px);
+  //   border: 1px solid $bigcard-text-color;
+  //   text-align: center;
+  //   font-size: rem-calc(16px);
+  //
+  //   &:hover {
+  //     border-color: $bigcard-hover-text-color;
+  //   }
+  //
+  //   .bigcard--color & {
+  //     border-color: $bigcard-color-text-color;
+  //     &:hover {
+  //       border-color: $bigcard-color-hover-text-color;
+  //     }
+  //   }
+  //
+  //
+  // }
 
   &__tertiary-container {
     position: absolute;
@@ -208,7 +251,7 @@ $related-group-size: rem-calc(70px);
     width: rem-calc(60px);
 
     a {
-      position: relative;;
+      position: relative;
     }
   }
 
@@ -223,7 +266,25 @@ $related-group-size: rem-calc(70px);
 
   &__text {
     font-size: rem-calc(14px);
+    text-align: left;
   }
 
+  &__button {
+    border-radius: rem-calc(2px);
+    border: 1px solid $bigcard-text-color;
+    font-size: rem-calc(16px);
+    padding: rem-calc(0 10);
+
+    &:hover {
+      border-color: $bigcard-hover-text-color;
+    }
+
+    .bigcard--color & {
+      border-color: $bigcard-color-text-color;
+      &:hover {
+        border-color: $bigcard-color-hover-text-color;
+      }
+    }
+  }
 
 }

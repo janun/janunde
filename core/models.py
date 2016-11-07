@@ -262,12 +262,10 @@ class HomePage(BasePage):
 class Group(BasePage):
     # title is auto added
 
-    abbr = models.CharField(
-        _("Abkürzung"),
-        help_text=_("Nur zwei Zeichen"),
-        max_length=2,
-        null=True,
+    body = StreamField(
+        StandardStreamBlock(),
         blank=True,
+        verbose_name=_("Inhalt"),
     )
 
     logo = models.ForeignKey(
@@ -283,16 +281,11 @@ class Group(BasePage):
     def get_image(self):
         return self.logo
 
-    def clean(self):
-        super().clean()
-        if not self.abbr:
-            self.abbr = self.title[:2]
-
     edit_handler = TabbedInterface([
         ObjectList([
             FieldPanel('title', classname="full title"),
-            FieldPanel('abbr', classname=""),
             ImageChooserPanel('logo'),
+            StreamFieldPanel('body'),
         ], heading=_("Name und Logo"))
     ])
 

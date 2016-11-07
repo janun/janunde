@@ -1,129 +1,21 @@
 .pageheader {
   position: relative;
-  overflow: hidden;
-  height: rem-calc(500px);
-  height: calc(100vh - 65px);
+  display: none;
+  height: 200px;
+  padding-top: 60px;
+  box-shadow: 0 1px 2px rgba($black, 0.1);
+  background-color: $green;
+  color: $white;
 
-  @include above(40em) {
-    height: rem-calc(600px);
-    height: calc(100vh - 65px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  @include above(85em) {
-    height: rem-calc(512px);
-  }
-
-  &:before {
-    content: "";
+  @include above($medium) {
     display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    transition: blackground 0.2s;
+  };
 
-    background: linear-gradient(180deg, transparent 10%, rgba($black, 0.6) 50%);
-
-    @include above($medium) {
-      background: rgba($green, 0.1);
-    }
-
-  }
-
-  picture {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  &__image {
-    position: absolute;
-    left: -1%;
-    min-width: 102%;
-    min-height: 100%;
-    transition: filter 0.2s;
-    z-index: -1;
-
-    @include above($medium) {
-      // filter: blur(1px);
-    }
-    @include above($xlarge) {
-      filter: blur(3px);
-    }
-
-  }
-
-  &:hover {
-    @include above($large) {
-      .pageheader__image {
-        filter: blur(0px);
-      }
-    }
-  }
-
-  &__heading {
-    color: $white;
+  h1 {
+    margin: 0;
     text-align: center;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    width: 100%;
-    font-size: rem-calc(28.28px);
-    text-shadow: rem-calc(1 1 0) $black;
-    z-index: 1;
-    transition: filter 0.2s;
-
-
-    @include until(40rem) {
-      position: absolute;
-      bottom: 20px;
-    }
-
-    @include above(40em) {
-      width: rem-calc(600px);
-      font-size: rem-calc(56.543px);
-      text-shadow: rem-calc(2 2 0) $black;
-      filter: blur(1px);
-
-      &:hover {
-        filter: blur(0px);
-      }
-
-      &:hover ~ picture > .pageheader__image {
-        filter: blur(2px);
-      }
-    }
-
-    @include above(85em) {
-      width: rem-calc(1000px);
-      font-size: rem-calc(79.952px);
-      text-shadow: rem-calc(4 4 0) $black;
-    }
-  }
-
-  &__arrow {
-    display: block;
-    margin-top: 3rem;
-    font-size: 2rem;
+    font-family: $font-family-extra;
+    font-size: 50px;
     color: $white;
-
-    &:hover, &:focus, &:active {
-      color: $white;
-    }
-
-    @include above($medium) {
-      display: none;
-    }
-
   }
-
 }

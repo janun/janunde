@@ -1,0 +1,41 @@
+$bigcard-width: rem-calc(240px);
+
+.bigcircle {
+  margin: 40px;
+  width: $bigcard-width;
+  height: rem-calc(330px);
+
+  &__image-wrapper {
+    position: relative;
+    height: $bigcard-width;
+    width: $bigcard-width;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1/4 * (2-$SQRT2) * $bigcard-width;
+    @include shadow(1);
+    margin-bottom: rem-calc(28px);
+
+    .bigcircle:hover & {
+      @include shadow(2);
+    }
+  }
+
+  &__image {
+    max-width: $SQRT2/2 * $bigcard-width;
+    max-height: $SQRT2/2 * $bigcard-width;
+  }
+
+  &__text {
+    font-size: rem-calc(28px);
+    color: $brown;
+    font-weight: bold;
+    text-align: center;
+  }
+
+
+
+}

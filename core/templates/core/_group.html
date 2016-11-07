@@ -1,0 +1,31 @@
+{% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
+{% load static from staticfiles %}
+
+<div class="bigcircle click-area"
+     itemscope itemtype="http://schema.org/Organization">
+
+  <a href="{% pageurl object %}" itemprop="url" class="click-area__area-link">
+    {{ object.title }}
+  </a>
+
+  <div class="bigcircle__image-wrapper">
+    {% if object.logo %}
+      {% image object.logo max-240x240 as fallback_image %}
+      <img src="{{ fallback_image.url }}"
+        srcset="{{ object.logo|srcset:'max-240x240' }}"
+        sizes="240px"
+        alt="{{ original_image.alt }}"
+        class="bigcircle__image">
+      <link itemprop="logo" href="{{ fallback_image.url }}">
+    {% else %}
+      <span class="bigcircle__image-placeholder"></span>
+    {% endif %}
+  </div>
+
+  <div class="bigcircle__text">
+    <a href="{% pageurl object %}">{{ object.title }}</a>
+  </div>
+
+  <meta itemprop="name" content="{{ object.title }}">
+
+</div>

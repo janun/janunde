@@ -23,7 +23,7 @@ $card-grid-margin-small: rem-calc(10px);
     }
 
     // one item shown in the middle
-    &>*:nth-last-child(-n+1):first-child, &>*:nth-last-child(-n+1):first-child ~ * {
+    &--center-one>*:nth-last-child(-n+1):first-child, &--center-one>*:nth-last-child(-n+1):first-child ~ * {
       float: none;
       margin-left: auto;
       margin-right: auto;

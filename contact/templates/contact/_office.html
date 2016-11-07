@@ -1,0 +1,41 @@
+{% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
+{% load static from staticfiles %}
+
+<div class="bigcard click-area">
+
+  <a class="click-area__area-link" href="{% pageurl object %}">{{ object.title }}</a>
+
+  {% if object.photo %}
+    {% image object.photo fill-300x150 as image %}
+    <img class="bigcard__image"
+         srcset="{{ object.photo|srcset:'fill-300x150 fill-600x300 fill-900x450 fill-1200x600' }}"
+         sizes="18.75em"
+         src="{{ image.url }}" alt="image.alt">
+    {% image object.photo original as orig_image %}
+    <link itemprop="image" href="{{ orig_image.url }}">
+  {% else %}
+    <div class="bigcard__image-placeholder bigcard__image-placeholder--color-{{ object.color }}"></div>
+  {% endif %}
+
+  <div class="bigcard__content">
+    <h2 class="bigcard__title">{{ object.title }}</h2>
+
+    {% if object.mail %}
+      <a href="mailto:{{ object.mail }}">
+        <i class="icon-envelope"></i> {{ object.mail }}
+      </a><br>
+    {% endif %}
+
+    {% if object.phone %}
+      <a href="tel:{{ object.phone }}">
+        <i class="icon-phone"></i> {{ object.phone }}
+      </a>
+    {% endif %}
+
+  </div>
+
+  <div class="bigcard__footer">
+    <a class="bigcard__primary bigcard__button" href="{% pageurl object %}">Mehr Infos</a>
+  </div>
+
+</div>

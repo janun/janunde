@@ -24,7 +24,7 @@ from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
 
 class ContactIndex(BasePage):
-    subpage_types = ['PersonPage']
+    subpage_types = ['PersonPage', 'OfficePage']
     parent_page_types = ['core.HomePage']
 
     class Meta:
@@ -33,6 +33,7 @@ class ContactIndex(BasePage):
     def get_context(self, request):
         context = super().get_context(request)
         context['people'] = PersonPage.objects.child_of(self).live().order_by('title')
+        context['offices'] = OfficePage.objects.child_of(self).live().order_by('title')
         return context
 
 
@@ -50,6 +51,45 @@ class ContactIndex(BasePage):
 
 
 
+class OfficePage(BasePage):
+
+    photo = models.ForeignKey(
+        Image,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    text = StreamField(
+        StandardStreamBlock(),
+        blank=True,
+        verbose_name="Text",
+    )
+
+    mail = models.EmailField("E-Mail", blank=True)
+    phone = PhoneNumberField("Telefonnummer", blank=True)
+    address = models.CharField("Adresse", blank=True, max_length=255)
+
+    content_panels = [
+        FieldPanel('title'),
+        ImageChooserPanel('photo'),
+        FieldPanel('address'),
+        FieldPanel('mail'),
+        FieldPanel('phone', widget=PhoneNumberInternationalFallbackWidget),
+        StreamFieldPanel('text'),
+    ]
+
+    search_fields = [
+        index.SearchField('title', partial_match=True),
+    ]
+
+    class Meta:
+        verbose_name = "Büro"
+        verbose_name_plural = "Büros"
+
+
+
 class PersonPage(BasePage):
     text = StreamField(
         StandardStreamBlock(),
@@ -59,6 +99,15 @@ class PersonPage(BasePage):
     role = models.CharField("Rolle", max_length=255, blank=True)
     mail = models.EmailField("E-Mail", blank=True)
     phone = PhoneNumberField("Telefonnummer", blank=True)
+
+    office = models.ForeignKey(
+        OfficePage,
+        null=True,
+        blank=True,
+        related_name='people',
+        on_delete=models.SET_NULL,
+        verbose_name="Zugehöriges Büro",
+    )
 
     photo = models.ForeignKey(
         Image,
@@ -75,6 +124,7 @@ class PersonPage(BasePage):
         FieldPanel('mail'),
         FieldPanel('phone', widget=PhoneNumberInternationalFallbackWidget),
         StreamFieldPanel('text'),
+        FieldPanel('office'),
     ]
 
     search_fields = [

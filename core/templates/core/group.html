@@ -1,2 +1,53 @@
-{% extends "core/__page_base.html" %}
-{% block body_class %}template-group {{ block.super }}{% endblock %}
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
+{% load static from staticfiles %}
+
+{% block body_class %}group-page{% endblock %}
+
+
+{% block content %}
+  <div class="container"
+       itemscope itemtype="http://schema.org/Organization">
+
+     <!-- title -->
+     <div class="float-right@medium grid-12__col-7@medium margin-bottom-2">
+       <h1 class="title margin-top-0 padding-top-0" itemprop="name">{{ self.title }}</h1>
+    </div>
+
+
+    <div class="grid-12 margin-top-2">
+      <!-- the side column -->
+      <div class="grid-12__col-4@medium float-left js-sticky@medium">
+
+        <!-- image -->
+        <div class="bigcircle__image-wrapper">
+          {% if self.logo %}
+            {% image self.logo max-250x250 as fallback_image %}
+              <img src="{{ fallback_image.url }}"
+                srcset="{{ self.logo|srcset:'max-240x240' }}"
+                sizes="240px"
+                alt="{{ original_image.alt }}"
+                class="bigcircle__image">
+            <link itemprop="logo" href="{{ fallback_image.url }}">
+          {% else %}
+            <span class="bigcircle__image-placeholder"></span>
+          {% endif %}
+        </div>
+
+      </div>
+
+
+
+      <!-- the main column -->
+      <div class="grid-12__col-7@medium float-right margin-top-2@until-medium">
+        <!-- the content -->
+        <div itemprop="description">
+          {{ self.body }}
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+{% endblock %}

@@ -36,7 +36,8 @@ $silver: rgb(239, 239, 239);
 $aluminum: rgb(153, 153, 153);
 
 /** @color grey*/
-$grey: rgb(147, 130, 130);
+//$grey: rgb(147, 130, 130);
+$grey: rgb(100, 100, 100);
 
 /** @color black*/
 $black: rgb(0, 0, 0);
@@ -66,6 +67,7 @@ $colors: (
 body {
   background-color: $ghost;
   //background-color: #f0f0f0;
+  // background
 }
 
 /**

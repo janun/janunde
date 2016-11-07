@@ -1,28 +1,33 @@
 {% extends "core/__base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
 
-{% block body_class %}template-group-index-page base-layout{% endblock %}
+{% block body_class %}person-index-page{% endblock %}
 
 {% block content %}
 
-  <main>
-    <h2 class="area-title">Gruppen</h2>
-    <div class="grid
-                grid--of-2@medium
-                grid--of-3@large
-                js-masonry">
-      {% if groups %}
-        {% for object in groups %}
-          <div class="grid__element js-masonry__element">
-            {% include object.medium_partial_template_name %}
-          </div>
+
+  <div class="pageheader">
+    <h1>Netzwerk und Projektgruppen</h1>
+  </div>
+
+  {% if groups %}
+    <div class="center-container">
+      <div class="card-grid">
+        {% for group in groups %}
+          {% include "core/_group.html" with object=group %}
         {% endfor %}
-      {% else %}
-        Keine Gruppen vorhanden.
-      {% endif %}
+      </div>
     </div>
-  </main>
+  {% else %}
 
+    <div class="container padding-top-6 padding-bottom-5">
+      <i class="icon-present color-green" style="font-size: 7rem" aria-hidden="true"></i>
+      <div class="margin-bottom-3 margin-top-4 big-font">
+      <div class="color-green">Ein Geschenk für Dich.</div>
+        <div>Gruppen und Projekte, die wir zeigen könnten, gibt es aber leider keine.</div>
+      </div>
+      <span><a class="color-green" href="/admin/">Du kannst das ändern.</a></span>
+    </div>
 
-
+  {% endif %}
 {% endblock %}
