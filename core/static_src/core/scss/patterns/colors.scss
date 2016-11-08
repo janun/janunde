@@ -65,9 +65,8 @@ $colors: (
  * @nuclide body background color
  */
 body {
-  background-color: $ghost;
-  //background-color: #f0f0f0;
-  background: url(static('core/images/janun_background.png'));
+  background: rgba($green, 0.06);
+  background: url(static('core/images/janun_background.svg')), rgba($green, 0.06);
 }
 
 /**
