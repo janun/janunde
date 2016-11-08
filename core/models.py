@@ -304,7 +304,7 @@ class GroupIndexPage(BasePage):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['groups'] = Group.objects.child_of(self).live()
+        context['groups'] = Group.objects.child_of(self).live().order_by('title')
         return context
 
 
