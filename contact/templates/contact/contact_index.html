@@ -10,27 +10,23 @@
     <h1>Kontakt, Team und Projekte</h1>
   </div>
 
-  <nav class="person-index-page__controls">
+  <!-- <nav class="person-index-page__controls">
     <div class="container">
       <ul role="menubar" class="pagemenu">
         <li role="menuitem" class="pagemenu__item"><a href="#">Büros</a></li>
         <li role="menuitem" class="pagemenu__item pagemenu__item--active"><a href="#">Leute</a></li>
       </ul>
     </div>
-  </nav>
+  </nav> -->
 
 
   {% if offices %}
-    <div class="center-container">
-      <div class="card-grid margin-top-3">
-
+    <div class="center-container margin-top-3">
         <div class="card-grid">
           {% for office in offices %}
             {% include 'contact/_office.html' with object=office %}
           {% endfor %}
         </div>
-
-      </div>
     </div>
   {% else %}
     <div class="container padding-top-6 padding-bottom-5">
