@@ -10,10 +10,10 @@
 
   <div class="bigcircle__image-wrapper">
     {% if object.logo %}
-      {% image object.logo max-240x240 as fallback_image %}
+      {% image object.logo max-170x170 as fallback_image %}
       <img src="{{ fallback_image.url }}"
-        srcset="{{ object.logo|srcset:'max-240x240' }}"
-        sizes="240px"
+        srcset="{{ object.logo|srcset:'max-170x170 max-340x340 max-510x510 max-680x680' }}"
+        sizes="170px"
         alt="{{ original_image.alt }}"
         class="bigcircle__image">
       <link itemprop="logo" href="{{ fallback_image.url }}">
