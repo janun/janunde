@@ -389,6 +389,11 @@ class EventPage(Page):
                     "Endzeit muss nach Startzeit liegen."
                 })
 
+        # get fallback image
+        if not self.main_image:
+            self.main_image = Image.objects.filter(tags__name='event-fallback').order_by('?').first()
+
+
     # only works with ElasticSearch
     search_fields = BasePage.search_fields + [
         # title is in here by default

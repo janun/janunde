@@ -393,6 +393,10 @@ class Article(StandardPage):
 
     objects = ArticleManager()
 
+    def clean(self):
+        if not self.main_image:
+            self.main_image = Image.objects.filter(tags__name='article-fallback').order_by('?').first()
+
     class Meta:
         verbose_name = _("Artikel")
         verbose_name_plural = _("Artikel")
