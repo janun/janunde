@@ -263,6 +263,8 @@ $related-group-size: rem-calc(70px);
     align-items: center;
     font-size: rem-calc(14px);
     z-index: 10;
+    i { color: $brown; }
+    @include shadow(1);
   }
 
   &__text {
