@@ -7,7 +7,8 @@
      "
      itemscope itemtype="http://schema.org/Article">
 
-  <a class="click-area__area-link" href="{% pageurl object %}" itemprop="url">
+  <a class="click-area__area-link" href="{% pageurl object %}"
+     itemprop="url" title="{{ object.title }}">
     {{ object.title }}
   </a>
 
@@ -23,7 +24,28 @@
     <div class="bigcard__image-placeholder bigcard__image-placeholder--color-{{ object.color }}"></div>
   {% endif %}
 
-  <div class="bigcard__content">
+  {% if object.related_group %}
+    <div class="bigcard__related-group related-group">
+       {% image object.related_group.logo max-50x50 as group_logo %}
+       <a href="{% pageurl object.related_group %}"
+          title="{{ object.related_group.title }}"
+          class="related-group__image-wrapper">
+         <img class="related-group__image" src="{{ group_logo.url }}"
+              srcset="{{ object.related_group.logo|srcset:'max-50x50 max-100x100' }}"
+              sizes="50px"
+              alt="Logo {{ object.related_group.title }}">
+       </a>
+       <span class="related-group__name">
+         <a href="{% pageurl object.related_group %}">{{ object.related_group.title }}</a>
+         schreibt:
+       </span>
+    </div>
+  {% else %}
+  <!-- <span class="bigcard__top-text">JANUN empfiehlt:</span> -->
+  <span title="externer Artikel" class="bigcard__corner"><i class="icon-action-redo"></i></span>
+  {% endif %}
+
+  <div class="bigcard__content {%if object.related_group%}bigcard__content--padding-top{%endif%}">
     <h2 class="bigcard__title" itemprop="name">{{ object.title|softhyphen }}</h2>
     {% if object.subtitle %}
       <p class="bigcard__subtitle">{{ object.subtitle|softhyphen }}</p>

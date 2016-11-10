@@ -74,10 +74,9 @@ $related-group-size: rem-calc(70px);
   background-color: $bigcard-background;
   width: $bigcard-width;
   height: $bigcard-height;
-  border-radius: $bigcard-border-radius;
   margin-bottom: 2*$card-grid-margin;
+  border-radius: $bigcard-border-radius;
   @include shadow(1);
-  overflow: hidden;
   transition: box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s;
   transform: translate3d(0, 0, 0);
   color: $bigcard-text-color;
@@ -86,6 +85,11 @@ $related-group-size: rem-calc(70px);
   text-align: center;
   font-size: rem-calc(20px);
   line-height: rem-calc(30px);
+
+  &__inner {
+    overflow: hidden;
+    border-radius: $bigcard-border-radius;
+  }
 
   a {
     position: relative;
@@ -122,6 +126,7 @@ $related-group-size: rem-calc(70px);
 
 
   &__image, &__image-placeholder {
+    position: relative;
     height: $bigcard-image-height;
     width: 100%;
     background-color: $baige;
@@ -204,13 +209,6 @@ $related-group-size: rem-calc(70px);
     align-items: center;
   }
 
-  &__primary {
-    // align-content: center;
-  }
-
-  &__footer-item {
-  }
-
   &__secondary {
     font-size: rem-calc(14px);
     position: absolute;
@@ -218,32 +216,6 @@ $related-group-size: rem-calc(70px);
     height: rem-calc(30px);
     line-height: rem-calc(30px);
   }
-
-  // &__primary {
-  //   position: absolute;
-  //   // display: block;
-  //   width: rem-calc(110px);
-  //   // height: rem-calc(30px);
-  //   padding: 5px 10px;
-  //   line-height: rem-calc(30px);
-  //   border-radius: rem-calc(2px);
-  //   border: 1px solid $bigcard-text-color;
-  //   text-align: center;
-  //   font-size: rem-calc(16px);
-  //
-  //   &:hover {
-  //     border-color: $bigcard-hover-text-color;
-  //   }
-  //
-  //   .bigcard--color & {
-  //     border-color: $bigcard-color-text-color;
-  //     &:hover {
-  //       border-color: $bigcard-color-hover-text-color;
-  //     }
-  //   }
-  //
-  //
-  // }
 
   &__tertiary-container {
     position: absolute;
@@ -262,6 +234,35 @@ $related-group-size: rem-calc(70px);
     left: 0;
     right: 0;
     top: $bigcard-image-height - $related-group-size * 3/4;
+  }
+
+  &__top-text {
+    position: absolute;
+    top: rem-calc(-24px);
+    right: 0;
+    font-size: rem-calc(14px);
+    line-height: rem-calc(24px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    z-index: 10;
+    color: $brown;
+  }
+
+  &__corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: rem-calc(40px);
+    height: rem-calc(40px);
+    background: $white;
+    border-bottom-left-radius: $bigcard-border-radius;
+    border-top-right-radius: $bigcard-border-radius;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: rem-calc(14px);
+    z-index: 10;
   }
 
   &__text {
