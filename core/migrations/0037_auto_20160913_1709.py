@@ -16,6 +16,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('core', '0036_auto_20160912_1623'),
+        ('contact', '0006_auto_20160913_1709'),
     ]
 
     operations = [
