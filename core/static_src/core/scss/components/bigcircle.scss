@@ -30,10 +30,14 @@ $bigcard-width: rem-calc(240px);
   }
 
   &__text {
+    text-align: center;
+    color: $grey;
+  }
+
+  &__title {
     font-size: rem-calc(28px);
     color: $brown;
     font-weight: bold;
-    text-align: center;
   }
 
 

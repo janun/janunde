@@ -18,6 +18,7 @@ $min-height-header: rem-calc(450);
 .site-header {
   width: 100%;
   background: $green-overlay;
+  @include shadow(1);
 
   // on mobile: full height
   @include until($medium) {

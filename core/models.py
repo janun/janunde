@@ -19,6 +19,11 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
+from core.fields import FacebookProfileURLField, PrettyURLField
+from phonenumber_field.modelfields import PhoneNumberField
+from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
+
+
 from .blocks import StandardStreamBlock
 from .images import AttributedImage as Image
 
@@ -262,6 +267,13 @@ class HomePage(BasePage):
 class Group(BasePage):
     # title is auto added
 
+    subtitle = models.CharField("Untertitel",
+        max_length=80,
+        null=True,
+        blank=True,
+        help_text="Z.B. eine sehr kurze Beschreibung"
+    )
+
     body = StreamField(
         StandardStreamBlock(),
         blank=True,
@@ -278,14 +290,65 @@ class Group(BasePage):
         # help_text=_("")
     )
 
+
+    contact_mail = models.EmailField(
+        "E-Mail",
+        null=True,
+        blank=True,
+    )
+    contact_name = models.CharField(
+        "Name",
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    contact_phone = PhoneNumberField(
+        "Telefonnummer",
+        null=True,
+        blank=True,
+    )
+    facebook_url = FacebookProfileURLField(
+        "Facebook-Profil",
+        null=True,
+        blank=True,
+    )
+    website = PrettyURLField(
+        "externe Website",
+        null=True,
+        blank=True,
+    )
+
+    address = models.CharField(
+        "Adresse",
+        help_text="Adresse, an dem die Gruppe zu finden ist",
+        max_length=255,
+        null=True,
+        blank=True,
+        # TODO: change this into a real location somehow
+    )
+
     def get_image(self):
         return self.logo
 
     edit_handler = TabbedInterface([
         ObjectList([
             FieldPanel('title', classname="full title"),
+            FieldPanel('subtitle'),
             ImageChooserPanel('logo'),
+            FieldPanel('facebook_url'),
+            FieldPanel('website'),
+            FieldPanel('address'),
+            MultiFieldPanel([
+                FieldPanel('contact_name'),
+                FieldPanel('contact_mail'),
+                FieldPanel(
+                    'contact_phone',
+                    widget=PhoneNumberInternationalFallbackWidget
+                ),
+            ], heading="Kontakt"),
+
             StreamFieldPanel('body'),
+
         ], heading=_("Name und Logo"))
     ])
 

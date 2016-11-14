@@ -59,3 +59,18 @@ class FacebookEventURLField(PrettyURLField):
             else:
                 raise ValidationError("Das ist keine gültige Facebook-Event-URL")
         return value
+
+
+class FacebookProfileURLField(PrettyURLField):
+    """validates that its a valid facebook profile url and removes extraneous stuff"""
+    facebook_profile_regex = r'(?:https?:\/\/)?(?:www\.)?facebook\.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]*)'
+
+    def to_python(self, value):
+        value = super().to_python(value)
+        if value and isinstance(value, str):
+            match = re.match(self.facebook_profile_regex, value)
+            if match:
+                return match.string
+            else:
+                raise ValidationError("Das ist keine gültige Facebook-Profil-URL")
+        return value

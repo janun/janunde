@@ -1,6 +1,7 @@
 {% extends "core/__base.html" %}
 {% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
 {% load static from staticfiles %}
+{% load render_partial %}
 
 {% block body_class %}group-page{% endblock %}
 
@@ -12,6 +13,9 @@
      <!-- title -->
      <div class="float-right@medium grid-12__col-7@medium margin-bottom-2">
        <h1 class="title margin-top-0 padding-top-0" itemprop="name">{{ self.title }}</h1>
+       {% if self.subtitle %}
+        <p class="subtitle margin-top-0 padding-top-0" itemprop="name">{{ self.subtitle }}</p>
+       {% endif %}
     </div>
 
 
@@ -34,6 +38,65 @@
           {% endif %}
         </div>
 
+
+        <!-- address -->
+        {% if self.address %}
+        <div class="grid-12 margin-top-2 margin-bottom-2 font-family-extra">
+          <i class="grid-12__col-1 icon-location-pin" aria-hidden="true"></i>
+          <span class="grid-12__col-11 font-size-2"
+                itemprop="location" itemscope itemtype="http://schema.org/Place">
+            {{ self.address }}<br>
+            <meta itemprop="name" content="{{ self.address }}">
+            <meta itemprop="address" content="{{ self.address }}">
+            <a class="font-size-1 font-family-sans color-grey" target="_blank" href="https://www.google.de/maps/search/{{ self.address|urlencode }}">Auf Google Maps anzeigen</a>
+          </span>
+        </div>
+        {% endif %}
+
+        {% if self.contact_mail or self.contact_phone %}
+        <div class="margin-top-2 margin-bottom-1">
+          <span class="grid-12__offset-1 color-grey">Kontakt: {% if self.contact_name %}{{ self.contact_name }}{% endif %}</span>
+
+          {% if self.contact_mail %}
+          <a target="_blank" href="mailto:{{ self.contact_mail }}"
+             class="grid-12 margin-top-1 margin-bottom-1 display-block"
+             title="E-Mail schreiben">
+            <i class="grid-12__col-1 icon-envelope" aria-hidden="true"></i>
+            <span class="grid-12__col-11">{{ self.contact_mail }}</span>
+          </a>
+          {% endif %}
+
+          {% if self.contact_phone %}
+          <a target="_blank" href="{{ self.contact_phone.as_rfc3966 }}"
+             class="grid-12 margin-top-1 margin-bottom-1 display-block"
+             title="Anrufen">
+            <i class="grid-12__col-1 icon-phone" aria-hidden="true"></i>
+            <span class="grid-12__col-11">{{ self.contact_phone|prettyphone }}</span>
+          </a>
+          {% endif %}
+
+        </div>
+        {% endif %}
+
+        {% if self.facebook_url %}
+        <a target="_blank" href="{{ self.facebook_url }}"
+           class="grid-12 margin-top-1 margin-bottom-1 display-block"
+           title="zum Facebook-Profil">
+          <i class="grid-12__col-1 icon-social-facebook" aria-hidden="true"></i>
+          <span class="grid-12__col-11">Facebook-Profil</span>
+        </a>
+        {% endif %}
+
+        <!-- links etc. -->
+        {% if self.website %}
+          <a itemprop="url" target="_blank" href="{{ self.website }}"
+             class="grid-12 margin-top-1 margin-bottom-1 display-block"
+             title="zur externen Website">
+            <i class="grid-12__col-1 icon-direction" aria-hidden="true"></i>
+            <span class="grid-12__col-11">{{ self.website|prettyurl }}</span>
+          </a>
+        {% endif %}
+
       </div>
 
 
@@ -46,8 +109,30 @@
         </div>
       </div>
 
-
-
     </div>
+
+
+    {% if self.event_pages.all %}
+    <div class="clear-after margin-top-2">
+      <h2 class="area-title">Veranstaltungen von {{ self.title }}</h2>
+      <div class="card-grid">
+        {% for event in self.event_pages.all %}
+          {% render_partial event %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if self.articles.all %}
+    <div class="clear-after margin-top-2">
+      <h2 class="area-title">Artikel von {{ self.title }}</h2>
+      <div class="card-grid">
+        {% for event in self.articles.all %}
+          {% render_partial event %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
   </div>
 {% endblock %}

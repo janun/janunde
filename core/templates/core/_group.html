@@ -23,7 +23,10 @@
   </div>
 
   <div class="bigcircle__text">
-    <a href="{% pageurl object %}">{{ object.title }}</a>
+    <a href="{% pageurl object %}" class="bigcircle__title">{{ object.title }}</a>
+    {% if object.subtitle %}
+      <div>{{ object.subtitle }}</div>
+    {% endif %}
   </div>
 
   <meta itemprop="name" content="{{ object.title }}">
