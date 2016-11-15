@@ -114,7 +114,7 @@
 
     {% if self.event_pages.all %}
     <div class="clear-after margin-top-2">
-      <h2 class="area-title">Veranstaltungen von {{ self.title }}</h2>
+      <h2 class="area-title">Kommende Veranstaltungen von {{ self.title }}</h2>
       <div class="card-grid">
         {% for event in self.event_pages.all %}
           {% render_partial event %}

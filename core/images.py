@@ -10,7 +10,7 @@ class AttributedImage(AbstractImage):
     """
     image model with optional attribution attributes
     """
-    attribution = models.CharField("Quellenangabe", max_length=255, blank=True)
+    attribution = models.CharField("Quellenangabe", max_length=255)
 
     @property
     def aspect(self):
