@@ -29,7 +29,7 @@ def prettyphone(value):
 from softhyphen.html import hyphenate
 
 @register.filter()
-def softhyphen(value, language=None):
+def softhyphen(value, language='de-de'):
     return mark_safe(hyphenate(value, language=language))
 
 
