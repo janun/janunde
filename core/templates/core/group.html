@@ -112,11 +112,11 @@
     </div>
 
 
-    {% if self.event_pages.all %}
+    {% if self.event_pages.upcoming %}
     <div class="clear-after margin-top-2">
       <h2 class="area-title">Kommende Veranstaltungen von {{ self.title }}</h2>
       <div class="card-grid">
-        {% for event in self.event_pages.all %}
+        {% for event in self.event_pages.upcoming %}
           {% render_partial event %}
         {% endfor %}
       </div>
