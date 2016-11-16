@@ -32,10 +32,12 @@
          <a href="{% pageurl object.related_group %}"
             title="{{ object.related_group.title }}"
             class="related-group__image-wrapper">
-           <img class="related-group__image" src="{{ group_logo.url }}"
-                srcset="{{ object.related_group.logo|srcset:'max-50x50 max-100x100' }}"
-                sizes="50px"
-                alt="Logo {{ object.related_group.title }}">
+           {% if object.related_group.logo %}
+             <img class="related-group__image" src="{{ group_logo.url }}"
+                  srcset="{{ object.related_group.logo|srcset:'max-50x50 max-100x100' }}"
+                  sizes="50px"
+                  alt="Logo {{ object.related_group.title }}">
+           {% endif %}
          </a>
          <span class="related-group__name">
            <a href="{% pageurl object.related_group %}">{{ object.related_group.title }}</a>
