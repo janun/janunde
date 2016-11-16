@@ -64,7 +64,7 @@
       <path d="M0 842h595.3V0H0v842z"/>
     </clipPath>
   </defs>
-  <g fill="#46bb00" fill-opacity=".06">
+  <g fill="#eaf7e2">
     <g clip-path="url(#a)" transform="matrix(1.25 0 0 -1.25 0 1052.36)">
       <path d="M303.7 9.4V9h-2.4v.4h2.4zm-2-11c-.7 0-1.5 0-1.8-.4v-.7c-1-.2-2 .5-2 .7 4-.7 2 2.8 6 2 0-1.3-4 0-3-1.7"/>
     </g>
