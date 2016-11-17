@@ -74,8 +74,21 @@ TEMPLATES[0]['APP_DIRS'] = False
 
 
 BONSAI_URL = os.environ.get('BONSAI_URL', '')
+SEARCHBOX_SSL_URL = os.environ.get('SEARCHBOX_SSL_URL', '')
 
-if BONSAI_URL:
+if SEARCHBOX_SSL_URL:
+    import certifi
+    WAGTAILSEARCH_BACKENDS = {
+        'default': {
+            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch',
+            'URLS': [SEARCHBOX_SSL_URL ],
+            'INDEX': 'wagtail',
+            'TIMEOUT': 5,
+            'ca_certs': certifi.where(),
+        }
+    }
+
+elif BONSAI_URL:
     import certifi
     WAGTAILSEARCH_BACKENDS = {
         'default': {
