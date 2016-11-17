@@ -76,8 +76,20 @@
         </div>
       </div>
 
-
-
     </div>
+
+    {% if self.people.all %}
+      <div class="margin-top-3">
+        <h2>Mitarbeiter_innen beim {{ self.title }}:</h2>
+        <div class="center-container">
+          <div class="card-grid">
+            {% for person in self.people.all %}
+              {% include 'contact/_person.html' %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
   </div>
 {% endblock %}
