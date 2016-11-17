@@ -79,7 +79,7 @@ if BONSAI_URL:
     import certifi
     WAGTAILSEARCH_BACKENDS = {
         'default': {
-            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch2',
+            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch',
             'URLS': [BONSAI_URL ],
             'INDEX': 'wagtail',
             'TIMEOUT': 5,
