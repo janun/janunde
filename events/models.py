@@ -254,7 +254,15 @@ class EventPage(Page):
         blank=True,
         related_name='event_pages',
         on_delete=models.SET_NULL,
-        verbose_name="Zugehörige JANUN-Gruppe",
+        verbose_name="JANUN-Gruppe",
+        help_text="JANUN-Gruppe, falls Veranstaltung vom JANUN-Netzwerk",
+    )
+    organizer = models.CharField(
+        "Veranstalter",
+        null=True,
+        blank=True,
+        help_text="externer Veranstalter, falls externe Veranstaltung",
+        max_length=255,
     )
     facebook_event_url = FacebookEventURLField(
         "Facebook-Event",
@@ -393,25 +401,28 @@ class EventPage(Page):
         if not self.main_image:
             self.main_image = Image.objects.filter(tags__name='event-fallback').order_by('?').first()
 
+        # there must not be organizer and related_group
+        if self.organizer and self.related_group:
+            raise ValidationError({
+                'organizer':"Veranstalter oder JANUN-Gruppe, nicht beides."
+            })
 
-    # only works with ElasticSearch
     search_fields = BasePage.search_fields + [
         # title is in here by default
+        index.SearchField('subtitle'),
         index.SearchField('content'),
         index.SearchField('location'),
+        index.SearchField('organizer'),
         index.RelatedFields('related_group', [
             index.SearchField('title'),
         ]),
-        index.FilterField('start_datetime'),
-        index.FilterField('end_datetime'),
-        index.FilterField('late_attendence'),
     ]
 
     edit_handler = TabbedInterface([
         ObjectList([
             FieldPanel('title', classname="full title"),
-            FieldPanel('subtitle', classname="full title"),
-            FieldPanel('event_page_tags'),
+            FieldPanel('subtitle', classname=""),
+            #FieldPanel('event_page_tags'),
             InlinePanel(
                 'highlight',
                 label="Highlight",
@@ -452,7 +463,10 @@ class EventPage(Page):
             FieldPanel('color'),
         ], heading="Bild"),
         ObjectList([
-            FieldPanel('related_group'),
+            MultiFieldPanel([
+                FieldPanel('organizer'),
+                FieldPanel('related_group'),
+            ], heading="Veranstalter"),
             MultiFieldPanel([
                 FieldPanel('contact_name'),
                 FieldPanel('contact_mail'),
@@ -462,7 +476,7 @@ class EventPage(Page):
                 ),
             ], heading="Kontakt"),
             FieldPanel('register_url'),
-        ], heading="Gruppe, Kontakt, Anmeldung")
+        ], heading="Veranstalter, Kontakt")
     ])
 
     def serve(self, request):

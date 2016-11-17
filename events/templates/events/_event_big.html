@@ -27,11 +27,11 @@
 
     {% if object.related_group %}
       <div class="bigcard__related-group related-group">
-         {% image object.related_group.logo max-50x50 as group_logo %}
          <a href="{% pageurl object.related_group %}"
             title="{{ object.related_group.title }}"
             class="related-group__image-wrapper">
            {% if object.related_group.logo %}
+             {% image object.related_group.logo max-50x50 as group_logo %}
              <img class="related-group__image" src="{{ group_logo.url }}"
                   srcset="{{ object.related_group.logo|srcset:'max-50x50 max-100x100' }}"
                   sizes="50px"
@@ -47,10 +47,16 @@
       <span class="bigcard__top-text">nicht vom JANUN-Netzwerk</span>
       <!-- <span title="externe Veranstaltung" class="bigcard__corner"><i class="icon-action-redo"></i></span> -->
       <!-- <span title="externe Veranstaltung" class="bigcard__corner">JANUN </span> -->
-
+      {% if object.organizer %}
+        <div class="bigcard__related-group related-group">
+           <span class="related-group__name margin-top-4">
+             {{ object.organizer }} organisiert:
+           </span>
+        </div>
+      {% endif %}
     {% endif %}
 
-    <div class="bigcard__content {%if object.related_group%}bigcard__content--padding-top{%endif%}">
+    <div class="bigcard__content {%if object.related_group or object.organizer %}bigcard__content--padding-top{%endif%}">
       <h2 class="js-dotdotdot bigcard__title" itemprop="name">
         {{ object.title|softhyphen }}
       </h2>

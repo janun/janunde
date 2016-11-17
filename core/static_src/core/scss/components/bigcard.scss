@@ -60,6 +60,9 @@ $related-group-size: rem-calc(70px);
     font-size: rem-calc(14px);
     font-weight: normal;
     margin-bottom: rem-calc(5px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
