@@ -58,14 +58,15 @@
         {% endif %}
 
         <!-- TODO -->
-        <span class="with-icon with-icon--clock">
+        <!-- <span class="with-icon with-icon--clock">
           erreichbar Dienstag bis Freitag
-        </span>
+        </span> -->
 
-        <!-- TODO -->
-        <span itemprop="workLocation" class="with-icon with-icon--home">
-          Landesbüro, Goebenstr. 3a, Hannover
-        </span>
+        {% if self.office %}
+          <span itemprop="workLocation" class="with-icon with-icon--home">
+            <a href="{% pageurl self.office %}">{{ self.office.title }}</a>
+          </span>
+        {% endif %}
 
       </div>
 

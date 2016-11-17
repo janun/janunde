@@ -1,0 +1,83 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
+{% load static from staticfiles %}
+
+{% block body_class %}person-page{% endblock %}
+
+
+{% block content %}
+  <div class="container">
+
+     <!-- title -->
+     <div class="float-right@medium grid-12__col-7@medium margin-bottom-2">
+       <h1 class="title margin-top-0 padding-top-0" itemprop="name">{{ self.title }}</h1>
+    </div>
+
+
+    <div class="grid-12 margin-top-2">
+      <!-- the side column -->
+      <div class="grid-12__col-4@medium float-left js-sticky@medium">
+
+        <!-- image -->
+        {% if self.photo %}
+        <div class="margin-bottom-2">
+          {% image self.photo fill-300x150 as image %}
+          {% image self.photo width-768 as big_image %}
+            <a href="{{ big_image.url }}">
+              <img src="{{ image.url }}"
+                srcset="{{ self.photo|srcset:'fill-300x150 fill-600x300 fill-900x450 fill-1200x600' }}"
+                sizes="18.75em"
+                alt="{{ image.alt }}"
+                class="main-image panel panel--no-padding image">
+              <link itemprop="image" href="{{ image.url }}">
+            </a>
+            {% if self.photo.attribution %}
+              <div class="block-image__caption">
+                <span class="block-image__attribution">{{ self.photo.attribution }}</span>
+              </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- address -->
+        {% if self.address %}
+        <div class="grid-12 margin-top-2 margin-bottom-2 font-family-extra">
+          <i class="grid-12__col-1 icon-location-pin" aria-hidden="true"></i>
+          <span class="grid-12__col-11 font-size-2"
+                itemprop="location" itemscope itemtype="http://schema.org/Place">
+            {{ self.address }}<br>
+            <meta itemprop="name" content="{{ self.address }}">
+            <meta itemprop="address" content="{{ self.address }}">
+            <a class="font-size-1 font-family-sans color-grey" target="_blank" href="https://www.google.de/maps/search/{{ self.address|urlencode }}">Auf Google Maps anzeigen</a>
+          </span>
+        </div>
+        {% endif %}
+
+        <!-- Contact Details -->
+        {% if self.mail %}
+          <a class="with-icon with-icon--mail" itemprop="email"
+              href="mailto:{{ self.mail }}">{{ self.mail }}</a>
+        {% endif %}
+
+        {% if self.phone %}
+        <a class="with-icon with-icon--phone" itemprop="telephone"
+           href="{{ self.phone.as_rfc3966 }}">{{ self.phone|prettyphone }}</a>
+        {% endif %}
+
+      </div>
+
+
+
+      <!-- the main column -->
+      <div class="grid-12__col-7@medium float-right margin-top-2@until-medium">
+        <!-- the content -->
+        <div itemprop="description">
+          {% include_block self.text %}
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+{% endblock %}
