@@ -14,7 +14,6 @@
     h1 {
       font-size: rem-calc(30px);
       line-height: 1.2;
-      font-family: $font-family-extra;
       font-weight: normal;
       margin-top: 0;
       margin-bottom: rem-calc(5px);
@@ -28,7 +27,6 @@
   // h2 {
   //   font-size: rem-calc(16px);
   //   line-height: 1.2;
-  //   font-family: $font-family-extra;
   //   font-weight: normal;
   //   margin-top: 0;
   //   @include above($medium) {

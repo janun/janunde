@@ -59,7 +59,6 @@
 
   &__title {
     //display: inline-block;
-    font-family: $font-family-extra;
     font-size: rem-calc(20px);
     line-height: 1.2;
     margin-top: rem-calc(5px);
@@ -67,7 +66,6 @@
   }
 
   &__metadata {
-    font-family: $font-family-extra;
     font-size: rem-calc(12px);
     line-height: 1.2;
     color: $grey;

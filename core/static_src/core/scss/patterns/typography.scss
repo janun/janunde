@@ -3,7 +3,6 @@
 // font stack
 $font-family-sans-serif: "Cabin", Helvetica, Roboto, Arial, sans-serif;
 $font-family-serif: "Crimson Text", "Times New Roman", Times, serif;
-$font-family-extra: "Bitter", serif;
 
 // colors
 $text-color-standard: $brown;
@@ -13,14 +12,10 @@ $text-color-standard: $brown;
  * @atom font-family
  * @section Helpers > Fonts
  * @markup
- *   <span class="font-family-extra">Bitter</span>
  *   <span class="font-family-sans">Cabin</span>
  *   <span class="font-family-serif">Crimson</span>
  */
 .font-family {
-  &-extra {
-    font-family: $font-family-extra;
-  }
   &-sans {
     font-family: $font-family-sans-serif;
   }
@@ -95,7 +90,6 @@ $text-color-standard: $brown;
  */
 @mixin big-font() {
   font-size: rem-calc(24);
-  font-family: $font-family-extra;
   font-weight: bold;
   line-height: 1.36;
 
