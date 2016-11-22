@@ -1,5 +1,6 @@
 {% extends "core/__base.html" %}
 {% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
+{% load static from staticfiles %}
 
 {% block body_class %}person-index-page{% endblock %}
 
@@ -8,6 +9,7 @@
 
   <div class="pageheader">
     <h1>Netzwerk und Projektgruppen</h1>
+    <img class="pageheader__image" src="{% static 'core/images/projekte-1.png' %}" alt="" >
   </div>
 
   {% if groups %}

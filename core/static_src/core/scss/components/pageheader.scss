@@ -1,20 +1,29 @@
+$pageheader-height: rem-calc(300px);
+$pageheader-h1-margin: rem-calc(30px);
+$pageheader-h1-font-size: rem-calc(40px);
+
 .pageheader {
   position: relative;
   display: none;
-  height: 200px;
-  padding-top: 60px;
+  height: $pageheader-height;
+  // padding-top: 30px;
   background-color: $green;
   color: $white;
   @include shadow(1);
+  text-align: center;
+  overflow: hidden;
 
   @include above($medium) {
     display: block;
   };
 
   h1 {
-    margin: 0;
-    text-align: center;
-    font-size: 50px;
+    margin: $pageheader-h1-margin 0;
+    font-size: $pageheader-h1-font-size;
     color: $white;
+  }
+
+  &__image {
+    height: $pageheader-height - 3* $pageheader-h1-margin - $pageheader-h1-font-size;
   }
 }
