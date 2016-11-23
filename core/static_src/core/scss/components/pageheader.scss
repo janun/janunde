@@ -1,5 +1,5 @@
-$pageheader-height: rem-calc(300px);
-$pageheader-h1-margin: rem-calc(30px);
+$pageheader-height: rem-calc(200px);
+$pageheader-h1-margin: rem-calc(20px);
 $pageheader-h1-font-size: rem-calc(40px);
 
 .pageheader {
@@ -21,9 +21,12 @@ $pageheader-h1-font-size: rem-calc(40px);
     margin: $pageheader-h1-margin 0;
     font-size: $pageheader-h1-font-size;
     color: $white;
+    text-shadow: 1px 1px 1px #000;
   }
 
   &__image {
-    height: $pageheader-height - 3* $pageheader-h1-margin - $pageheader-h1-font-size;
+    position: relative;
+    bottom: 5px;
+    height: $pageheader-height - 2* $pageheader-h1-margin - $pageheader-h1-font-size;
   }
 }
