@@ -342,7 +342,7 @@ class Group(BasePage):
         if self.subtitle:
             return self.subtitle
         from django.utils.html import strip_tags
-        for block in self.content:
+        for block in self.body:
             if block.block_type == 'paragraph':
                 return strip_tags(block.value.source)
 
