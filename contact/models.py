@@ -10,7 +10,7 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
 from modelcluster.fields import ParentalKey
-from wagtail.wagtailcore.models import Orderable
+from wagtail.wagtailcore.models import Orderable, PageManager
 
 from core.blocks import StandardStreamBlock
 from core.models import BasePage
@@ -32,8 +32,8 @@ class ContactIndex(BasePage):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['people'] = PersonPage.objects.child_of(self).live().order_by('title')
-        context['offices'] = OfficePage.objects.child_of(self).live().order_by('title')
+        context['people'] = PersonPage.objects.child_of(self).live()
+        context['offices'] = OfficePage.objects.child_of(self).live()
         return context
 
 
@@ -50,6 +50,9 @@ class ContactIndex(BasePage):
 #     ]
 
 
+class OfficePageManager(PageManager):
+    def get_queryset(self):
+         return super().get_queryset().order_by('title')
 
 class OfficePage(BasePage):
 
@@ -71,6 +74,8 @@ class OfficePage(BasePage):
     phone = PhoneNumberField("Telefonnummer", blank=True)
     address = models.CharField("Adresse", blank=True, max_length=255)
 
+    objects = OfficePageManager()
+
     content_panels = [
         FieldPanel('title'),
         ImageChooserPanel('photo'),
@@ -89,6 +94,9 @@ class OfficePage(BasePage):
         verbose_name_plural = "Büros"
 
 
+class PersonPageManager(PageManager):
+    def get_queryset(self):
+         return super().get_queryset().order_by('title')
 
 class PersonPage(BasePage):
     text = StreamField(
@@ -116,6 +124,8 @@ class PersonPage(BasePage):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+
+    objects = PersonPageManager()
 
     content_panels = [
         FieldPanel('title'),
