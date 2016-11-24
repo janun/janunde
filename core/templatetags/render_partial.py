@@ -19,10 +19,5 @@ class PartialNode(template.Node):
             return ''
         template_name = object.partial_template_name
         t = context.template.engine.get_template(template_name)
-        return t.render(Context(
-            {
-                'object': object,
-                'request': context['request'],
-            },
-            autoescape=context.autoescape)
-        )
+        context['object'] = object
+        return t.render(context)
