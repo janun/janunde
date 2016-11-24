@@ -129,5 +129,5 @@ if ROLLBAR_ACCESS_TOKEN:
     }
 
 
-BETABANNER = os.environ.get('BETABANNER', '')
+BETABANNER = os.environ.get('BETABANNER', '').lower() in ('yes', 'true', '1')
 FREESURVEYCREATOR_ID = os.environ.get('FREESURVEYCREATOR_ID', '')

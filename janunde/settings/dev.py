@@ -24,6 +24,3 @@ SECRET_KEY = os.environ.get(
 INSTALLED_APPS += [
     'wagtail.contrib.wagtailstyleguide',
 ]
-
-BETABANNER=True
-FREESURVEYCREATOR_ID="Vis8PUVrIkR5"
