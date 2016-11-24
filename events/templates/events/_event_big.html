@@ -1,8 +1,8 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff %}
 
 <div class="bigcard click-area
-     {% if object.main_image and object.color %}
-       bigcard--color bigcard--color-{{ object.color }}
+     {% if card_color %}
+       bigcard--color bigcard--color-{{ card_color }}
      {% endif %}
      "
      itemscope itemtype="http://schema.org/Event">
