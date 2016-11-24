@@ -182,6 +182,11 @@ class EventIndexPage(BasePage):
         context['after'] = events
         return context
 
+    def get_description(self):
+        if self.search_description:
+            return self.search_description
+        return "Veranstaltungen bei JANUN"
+
 
 class EventPageManager(PageManager):
 
