@@ -10,13 +10,25 @@
     {% include "_favicons.html" %}
     {% block meta %}{% endblock %}
     {% block css %}<link rel="stylesheet" type="text/css" href="{% static "core/css/all.css" %}">{% endblock %}
-
   </head>
+
+  {% if ROLLBAR_ACCESS_TOKEN_JS %}
+    {% include "_rollbar.html" %}
+  {% endif %}
 
   <body class="{% block body_class %}{% endblock %}"
         itemscope itemtype="http://schema.org/WebPage">
+
+    {% if BETABANNER %}
+      {% include "_betabanner.html" %}
+    {% endif %}
+
     {% block body_content %}{% endblock %}
 
     {% block js %}{% endblock %}
+
+    {% if FREESURVEYCREATOR_ID %}
+      {% include "_survey.html" %}
+    {% endif %}
   </body>
 </html>

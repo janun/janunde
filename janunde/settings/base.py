@@ -94,7 +94,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'wagtail.contrib.settings.context_processors.settings',
-                "core.context_processors.rollbar_access_token",
+                'janunde.context_processors.rollbar_access_token',
+                'janunde.context_processors.freesurveycreator_id',
+                'janunde.context_processors.betabanner',
             ],
         },
     },
@@ -180,3 +182,6 @@ INTERNAL_IPS = (
     '0.0.0.0',
     '127.0.0.1',
 )
+
+
+ALLOWED_HOSTS = ['*']

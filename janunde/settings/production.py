@@ -127,3 +127,7 @@ if ROLLBAR_ACCESS_TOKEN:
         'branch': 'production',
         'root': '/',
     }
+
+
+BETABANNER = os.environ.get('BETABANNER', '')
+FREESURVEYCREATOR_ID = os.environ.get('FREESURVEYCREATOR_ID', '')

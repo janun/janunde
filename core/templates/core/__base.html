@@ -39,10 +39,8 @@
 
 {% block body_content %}
 
-  {% include "core/_rollbar.html" %}
-
   {% block top %}
-    {% include "core/_navbar.html" with navbar_class="navbar--white navbar--fixed" %}
+    {% include "core/_navbar.html" with navbar_class="navbar--white" %}
   {% endblock %}
 
   <div class="{% block content_class %}content{% endblock %}"
@@ -60,5 +58,4 @@
 
 {% block js %}
   <script type="text/javascript" src="{% static 'core/js/app.js' %}"></script>
-  {# {% include "core/_analytics.html" %} #}
 {% endblock %}

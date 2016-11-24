@@ -12,6 +12,9 @@
  */
 .betabanner {
   background-color: $white;
+  position: relative;
+  z-index: 1001;
+  @include shadow(1);
 
   &__inner {
     @include container;
