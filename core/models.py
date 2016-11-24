@@ -264,6 +264,12 @@ class HomePage(BasePage):
     ])
 
 
+    def get_description(self):
+        if self.search_description:
+            return self.search_description
+        return "JANUN ist das Jugendumweltnetzwerk Niedersachsen"
+
+
 class Group(BasePage):
     # title is auto added
 
@@ -330,6 +336,16 @@ class Group(BasePage):
     def get_image(self):
         return self.logo
 
+    def get_description(self):
+        if self.search_description:
+            return self.search_description
+        if self.subtitle:
+            return self.subtitle
+        from django.utils.html import strip_tags
+        for block in self.content:
+            if block.block_type == 'paragraph':
+                return strip_tags(block.value.source)
+
     edit_handler = TabbedInterface([
         ObjectList([
             FieldPanel('title', classname="full title"),
@@ -370,6 +386,11 @@ class GroupIndexPage(BasePage):
         context['groups'] = Group.objects.child_of(self).live().order_by('title')
         return context
 
+    def get_description(self):
+        if self.search_description:
+            return self.search_description
+        return "Auflistung aller JANUN-Gruppen"
+
 
 class ArticleIndexPage(BasePage):
     """
@@ -386,6 +407,11 @@ class ArticleIndexPage(BasePage):
         context['articles'] = Article.objects.child_of(self) \
             .live().order_by('-first_published_at')
         return context
+
+    def get_description(self):
+        if self.search_description:
+            return self.search_description
+        return "Auflistung von Artikeln bei JANUN"
 
 
 
