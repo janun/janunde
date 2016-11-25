@@ -3,30 +3,28 @@ $card-grid-margin-small: rem-calc(10px);
 
 .card-grid {
 
+  // one item shown in the middle
+  &--center-one>*:nth-last-child(-n+1):first-child, &--center-one>*:nth-last-child(-n+1):first-child ~ * {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  // minimum margin
   margin-left: - $card-grid-margin-small;
   margin-right: - $card-grid-margin-small;
-
   & > * {
     margin-left: $card-grid-margin-small;
     margin-right: $card-grid-margin-small;
   }
 
-  // room for 2 column and up
+  // flexbox fallback
   @include above( rem-calc(680px) ) {
     margin-left: - $card-grid-margin;
     margin-right: - $card-grid-margin;
-
     & > * {
       margin-left: $card-grid-margin;
       margin-right: $card-grid-margin;
       float: left;
-    }
-
-    // one item shown in the middle
-    &--center-one>*:nth-last-child(-n+1):first-child, &--center-one>*:nth-last-child(-n+1):first-child ~ * {
-      float: none;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     &:after {
@@ -36,5 +34,53 @@ $card-grid-margin-small: rem-calc(10px);
     }
   }
 
+  @supports (display: flex) {
+    float: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 
 }
+
+
+// $card-grid-margin: rem-calc(15px);
+// $card-grid-margin-small: rem-calc(10px);
+//
+// .card-grid {
+//
+//   margin-left: - $card-grid-margin-small;
+//   margin-right: - $card-grid-margin-small;
+//
+//   & > * {
+//     margin-left: $card-grid-margin-small;
+//     margin-right: $card-grid-margin-small;
+//   }
+//
+//   // room for 2 column and up
+//   @include above( rem-calc(680px) ) {
+//     margin-left: - $card-grid-margin;
+//     margin-right: - $card-grid-margin;
+//
+//     & > * {
+//       margin-left: $card-grid-margin;
+//       margin-right: $card-grid-margin;
+//       float: left;
+//     }
+//
+//     // one item shown in the middle
+//     &--center-one>*:nth-last-child(-n+1):first-child, &--center-one>*:nth-last-child(-n+1):first-child ~ * {
+//       float: none;
+//       margin-left: auto;
+//       margin-right: auto;
+//     }
+//
+//     &:after {
+//       content: "";
+//       display: table;
+//       clear: left;
+//     }
+//   }
+//
+//
+// }

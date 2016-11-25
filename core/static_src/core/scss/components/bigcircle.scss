@@ -4,6 +4,9 @@ $bigcard-width: rem-calc(240px);
   margin: 40px;
   width: $bigcard-width;
   height: rem-calc(330px);
+  @supports (display: flex) {
+    height: auto;
+  }
 
   &__image-wrapper {
     position: relative;
@@ -17,7 +20,7 @@ $bigcard-width: rem-calc(240px);
     align-items: center;
     padding: 1/4 * (2-$SQRT2) * $bigcard-width;
     @include shadow(1);
-    margin-bottom: rem-calc(28px);
+    margin-bottom: rem-calc(10px);
 
     .bigcircle:hover & {
       @include shadow(2);
