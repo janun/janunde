@@ -26,3 +26,19 @@ def betabanner(request):
         }
     except AttributeError:
         return {}
+
+def mouseflow_id(request):
+    try:
+        return {
+            'MOUSEFLOW_ID': settings.MOUSEFLOW_ID,
+        }
+    except AttributeError:
+        return {}
+
+def piwik_url(request):
+    try:
+        return {
+            'PIWIK_URL': settings.PIWIK_URL,
+        }
+    except AttributeError:
+        return {}

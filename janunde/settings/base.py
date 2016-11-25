@@ -97,6 +97,8 @@ TEMPLATES = [
                 'janunde.context_processors.rollbar_access_token',
                 'janunde.context_processors.freesurveycreator_id',
                 'janunde.context_processors.betabanner',
+                'janunde.context_processors.mouseflow_id',
+                'janunde.context_processors.piwik_url',
             ],
         },
     },

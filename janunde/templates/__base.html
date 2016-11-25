@@ -12,9 +12,7 @@
     {% block css %}<link rel="stylesheet" type="text/css" href="{% static "core/css/all.css" %}">{% endblock %}
   </head>
 
-  {% if ROLLBAR_ACCESS_TOKEN_JS %}
-    {% include "_rollbar.html" %}
-  {% endif %}
+  {% include "analytics/_rollbar.html" %}
 
   <body class="{% block body_class %}{% endblock %}"
         itemscope itemtype="http://schema.org/WebPage">
@@ -30,5 +28,8 @@
     {% if FREESURVEYCREATOR_ID %}
       {% include "_survey.html" %}
     {% endif %}
+
+    {% include "analytics/_mouseflow.html" %}
+    {% include "analytics/_piwik.html" %}
   </body>
 </html>

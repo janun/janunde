@@ -131,3 +131,5 @@ if ROLLBAR_ACCESS_TOKEN:
 
 BETABANNER = os.environ.get('BETABANNER', '').lower() in ('yes', 'true', '1')
 FREESURVEYCREATOR_ID = os.environ.get('FREESURVEYCREATOR_ID', '')
+PIWIK_URL = os.environ.get('PIWIK_URL', '')
+MOUSEFLOW_ID = os.environ.get('MOUSEFLOW_ID', '')
