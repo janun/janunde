@@ -405,7 +405,7 @@ class ArticleIndexPage(BasePage):
     def get_context(self, request):
         context = super().get_context(request)
         context['articles'] = Article.objects.child_of(self) \
-            .live().order_by('-first_published_at')
+            .live()
         return context
 
     def get_description(self):
@@ -417,7 +417,7 @@ class ArticleIndexPage(BasePage):
 
 class ArticleManager(PageManager):
     def get_queryset(self):
-         return super().get_queryset().order_by('first_published_at')
+         return super().get_queryset().order_by('-first_published_at')
 
 
 class Article(StandardPage):
