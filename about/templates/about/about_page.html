@@ -11,7 +11,7 @@
 
   <div class="about-page__title">
     <img src="{% static 'core/images/janun_logo.svg' %}">
-    <h1 class="lettering">{% if self.heading %}{{ self.heading }}{% else %}{{ self.title }}{% endif %}</h1>
+    <h1>{% if self.heading %}{{ self.heading }}{% else %}{{ self.title }}{% endif %}</h1>
   </div>
 
   {% if self.intro_text %}
