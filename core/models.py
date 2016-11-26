@@ -404,8 +404,7 @@ class ArticleIndexPage(BasePage):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['articles'] = Article.objects.child_of(self) \
-            .live()
+        context['articles'] = Article.objects.child_of(self).live()
         return context
 
     def get_description(self):

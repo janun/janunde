@@ -13,6 +13,8 @@
 
 {% block content %}
 
+  <div class="container">
+
     {% if articles %}
       <div class="card-grid margin-top-3 clear-after">
         {% for article in articles %}
@@ -22,6 +24,8 @@
     {% else %}
       Schade, es wurden noch keine Artikel veröffentlicht…
     {% endif %}
+
+  </div>
 
 
 {% endblock %}
