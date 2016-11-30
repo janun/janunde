@@ -22,12 +22,6 @@
         {% include "core/_author.html" with author=self.author date=self.latest_revision_created_at %}
       {% endif %}
 
-      {% if self.main_image %}
-        <div class="block-image">
-          {% include "core/_image.html" with image=self.main_image %}
-        </div>
-      {% endif %}
-
       {% include_block self.body %}
     </div>
 
