@@ -1,6 +1,8 @@
 {% extends "core/__base.html" %}
 {% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
 {% load static from staticfiles %}
+{% load render_partial %}
+
 
 {% block body_class %}person-index-page{% endblock %}
 
@@ -12,16 +14,40 @@
     <img class="pageheader__image" src="{% static 'core/images/projekte-1.png' %}" alt="" >
   </div>
 
-  {% if groups %}
+  {% if countrywide_projects %}
     <div class="center-container">
+      <h2 class="area-title area-title--centered">Landesweite Projekte</h2>
       <div class="card-grid">
-        {% for group in groups %}
-          {% include "core/_group.html" with object=group %}
+        {% for project in countrywide_projects %}
+          {% render_partial project %}
         {% endfor %}
       </div>
     </div>
-  {% else %}
+  {% endif %}
 
+  {% if groups %}
+    <div class="center-container">
+      <h2 class="area-title area-title--centered">Mitglieder und Projektgruppen</h2>
+      <div class="card-grid">
+        {% for group in groups %}
+          {% render_partial group %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if other_projects %}
+    <div class="center-container">
+      <h2 class="area-title area-title--centered">Projekte von JANUN-Mitgliedsgruppen</h2>
+      <div class="card-grid">
+        {% for project in other_projects %}
+          {% render_partial project %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if not groups and not other_projects and not countrywide_projects %}
     <div class="container padding-top-6 padding-bottom-5">
       <i class="icon-present color-green" style="font-size: 7rem" aria-hidden="true"></i>
       <div class="margin-bottom-3 margin-top-4 big-font">
@@ -30,6 +56,6 @@
       </div>
       <span><a class="color-green" href="/admin/">Du kannst das ändern.</a></span>
     </div>
-
   {% endif %}
+
 {% endblock %}

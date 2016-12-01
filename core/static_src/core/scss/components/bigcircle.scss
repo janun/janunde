@@ -2,6 +2,8 @@ $bigcard-width: rem-calc(240px);
 
 .bigcircle {
   margin: 40px;
+  margin-top: 0;
+  margin-bottom: 60px;
   width: $bigcard-width;
   height: rem-calc(330px);
   @supports (display: flex) {

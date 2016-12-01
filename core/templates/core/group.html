@@ -38,6 +38,12 @@
           {% endif %}
         </div>
 
+        {% if self.get_parent_group %}
+          <span class="with-icon with-icon--home">
+            <a href="{% pageurl self.get_parent_group %}">{{ self.get_parent_group.title }}</a>
+          </span>
+        {% endif %}
+
 
         <!-- address -->
         {% if self.address %}
@@ -111,28 +117,42 @@
 
     </div>
 
+    {% block after_content %}
 
-    {% if self.event_pages.upcoming %}
-    <div class="clear-after margin-top-2">
-      <h2 class="area-title">Kommende Veranstaltungen von {{ self.title }}</h2>
-      <div class="card-grid">
-        {% for event in self.event_pages.upcoming %}
-          {% render_partial event %}
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
+      {% if self.get_children %}
+        <div class="clear-after margin-top-2">
+          <h2 class="area-title">Unterseiten von {{ self.title }}:</h2>
+          <div class="card-grid">
+            {% for child in self.get_children %}
+              {% render_partial child.specific %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
 
-    {% if self.articles.all %}
-    <div class="clear-after margin-top-2">
-      <h2 class="area-title">Artikel von {{ self.title }}</h2>
-      <div class="card-grid">
-        {% for event in self.articles.all %}
-          {% render_partial event %}
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
+      {% if self.event_pages.upcoming %}
+        <div class="clear-after margin-top-2">
+          <h2 class="area-title">Kommende Veranstaltungen von {{ self.title }}:</h2>
+          <div class="card-grid">
+            {% for event in self.event_pages.upcoming %}
+              {% render_partial event %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if self.articles.all %}
+        <div class="clear-after margin-top-2">
+          <h2 class="area-title">Artikel von {{ self.title }}:</h2>
+          <div class="card-grid">
+            {% for event in self.articles.all %}
+              {% render_partial event %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+    {% endblock %}
 
   </div>
 {% endblock %}
