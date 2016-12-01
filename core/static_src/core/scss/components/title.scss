@@ -11,12 +11,21 @@
  *   </div>
  */
 .title {
-  font-size: rem-calc(30px);
-  line-height: rem-calc(41px);
-  font-weight: 700;
-  margin-bottom: rem-calc(10px);
+  font-family: $font-family-sans-serif;
+  color: $green;
+  font-size: rem-calc(28.28px);
+  line-height: rem-calc(30px);
+  font-weight: bold;
+
   @include above($medium) {
-    font-size: rem-calc(60px);
-    line-height: 1.35;
+    font-size: rem-calc(56.543px);
+    line-height: rem-calc(60px);
+    margin-bottom: rem-calc(30px);
+  }
+
+  @each $color, $value in $colors {
+    &--color-#{$color} {
+      color: $value;
+    }
   }
 }

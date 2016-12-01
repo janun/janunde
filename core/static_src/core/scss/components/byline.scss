@@ -1,9 +1,8 @@
 .byline {
   font-family: $font-family-sans-serif;
   font-size: rem-calc(20px);
-
-  margin-bottom: rem-calc(20px);
-  margin-top: rem-calc(30px);
+  line-height: rem-calc(30px);
+  margin-bottom: rem-calc(30px);
 
   display: flex;
   flex-direction: row;
@@ -12,9 +11,8 @@
   align-items: center;
 
   @include above($medium) {
-    font-size: rem-calc(24px);
-    line-height: 1.23;
-    margin-bottom: rem-calc(54px);
+    margin-bottom: rem-calc(60px);
+    margin-top: rem-calc(30px);
   }
 
   .userim & {

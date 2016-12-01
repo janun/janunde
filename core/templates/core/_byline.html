@@ -2,21 +2,25 @@
 
 <div class="byline">
   {% if self.author %}
-    {% if self.author.photo %}
-      {% image self.author.photo fill-100x100 as fallback_image %}
-      <img src="{{ fallback_image.url }}"
-        srcset="{{ self.author.photo|srcset:'fill-64x64 fill-100x100 fill-128x128 fill-200x200 fill-300x300' }}"
-        sizes="(min-width: 53em) 6.25em, 4em"
-        alt="{{ fallback_image.alt }}"
-        class="byline__author-photo">
-      <link href="{{ fallback_image.url }}" itemprop="image" >
-    {% endif %}
-    <span class="byline__author-name">von <strong itemprop="name">{{ self.author.title }}</strong></span>
+
+      {% if self.author.photo %}
+        {% image self.author.photo fill-100x100 as fallback_image %}
+        <a href="{% pageurl self.author %}">
+          <img src="{{ fallback_image.url }}"
+            srcset="{{ self.author.photo|srcset:'fill-64x64 fill-100x100 fill-128x128 fill-200x200 fill-300x300' }}"
+            sizes="(min-width: 53em) 6.25em, 4em"
+            alt="{{ fallback_image.alt }}"
+            class="byline__author-photo">
+        </a>
+        <link href="{{ fallback_image.url }}" itemprop="image" >
+      {% endif %}
+      <a href="{% pageurl self.author %}" class="byline__author-name">von <strong itemprop="name">{{ self.author.title }}</strong></a>
+
   {% endif %}
   <div class="byline__dates">
-    <div class="byline__created">geschrieben: <time title="{{ self.first_published_at|date:'SHORT_DATETIME_FORMAT' }}" datetime="{{ self.first_published_at|date:"c" }}">{{ self.first_published_at|naturaltime }}</time></div>
+    <div class="byline__created"><span class="hide@until-medium">geschrieben:</span> <time title="{{ self.first_published_at|date:'SHORT_DATETIME_FORMAT' }}" datetime="{{ self.first_published_at|date:"c" }}">{{ self.first_published_at|naturaltime }}</time></div>
     {% if self.first_published_at != self.latest_revision_created_at %}
-      <div class="byline__updated">geändert: <time title="{{ self.latest_revision_created_at|date:'SHORT_DATETIME_FORMAT' }}" datetime="{{ self.latest_revision_created_at|date:"c" }}">{{ self.latest_revision_created_at|naturaltime }}</time></div>
+      <div class="byline__updated hide@until-medium">geändert: <time title="{{ self.latest_revision_created_at|date:'SHORT_DATETIME_FORMAT' }}" datetime="{{ self.latest_revision_created_at|date:"c" }}">{{ self.latest_revision_created_at|naturaltime }}</time></div>
     {% endif %}
   </div>
 </div>

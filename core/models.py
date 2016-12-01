@@ -29,14 +29,11 @@ from .images import AttributedImage as Image
 
 
 COLOR_CHOICES = [
-    ('brown', 'Braun'),
     ('green', 'Grün'),
     ('red', 'Rot'),
     ('blue', 'Blau'),
     ('orange', 'Orange'),
 ]
-
-
 
 
 # TODO: How can we create a Thema conveniently?
@@ -147,10 +144,8 @@ class StandardPage(BasePage):
     title_color = models.CharField(
         "Titelfarbe",
         choices=COLOR_CHOICES,
-        null=True,
-        blank=True,
         max_length=255,
-        default='brown',
+        default='green',
         help_text="Der Titel wird in dieser Farbe angezeigt."
     )
 
@@ -191,7 +186,7 @@ class StandardPage(BasePage):
         ], heading="Titel"),
         FieldPanel('subtitle'),
         StreamFieldPanel('body'),
-        FieldPanel('tags'),
+        #FieldPanel('tags'),
     ]
 
     settings_panels = [
@@ -465,10 +460,11 @@ class Article(StandardPage):
         MultiFieldPanel([
             FieldPanel('title', classname='title'),
             FieldPanel('title_color', classname=''),
-        ], heading="Titel"),        ImageChooserPanel('main_image'),
+        ], heading="Titel"),
         FieldPanel('subtitle'),
+        ImageChooserPanel('main_image'),
         StreamFieldPanel('body'),
-        FieldPanel('tags'),
+        #FieldPanel('tags'),
     ]
 
     promote_panels = [
