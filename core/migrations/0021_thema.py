@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(blank=True, max_length=255, null=True, verbose_name='Titel')),
-                ('body', wagtail.wagtailcore.fields.StreamField((('h2', core.blocks.H2()), ('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', core.blocks.ImageBlock()), ('embedded_video', core.blocks.VideoBlock())), blank=True, verbose_name='Beschreibung')),
+                ('body', wagtail.wagtailcore.fields.StreamField((('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', core.blocks.ImageBlock()), ('embedded_video', core.blocks.EmbedBlock())), blank=True, verbose_name='Beschreibung')),
                 ('tag', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='thema', to='taggit.Tag')),
             ],
         ),

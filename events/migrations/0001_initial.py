@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
                 ('contact_mail', models.EmailField(blank=True, max_length=254, null=True, verbose_name='E-Mail')),
                 ('contact_name', models.CharField(blank=True, max_length=255, null=True, verbose_name='Name')),
                 ('contact_phone', phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, null=True, verbose_name='Telefonnummer')),
-                ('content', wagtail.wagtailcore.fields.StreamField((('h2', core.blocks.H2()), ('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', core.blocks.ImageBlock()), ('embedded_video', core.blocks.VideoBlock())), blank=True, verbose_name='Inhalt')),
+                ('content', wagtail.wagtailcore.fields.StreamField((('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', core.blocks.ImageBlock()), ('embedded_video', core.blocks.EmbedBlock())), blank=True, verbose_name='Inhalt')),
                 ('color', models.CharField(blank=True, choices=[('rgb(70, 187, 0)', 'Grün'), ('rgb(196, 23, 55)', 'Rot'), ('rgb(0, 118, 164)', 'Blau'), ('rgb(233, 88, 34)', 'Orange')], help_text='Die Veranstaltung bekommt diese Farbe, falls es kein Bild gibt.', max_length=18, null=True, verbose_name='Farbe als Ersatz für Bild')),
                 ('location', models.CharField(blank=True, help_text='Ort, an dem die Veranstaltung stattfindet', max_length=255, null=True, verbose_name='Ort')),
                 ('register_url', core.fields.PrettyURLField(blank=True, help_text='z.B. auf der externen Seite oder bei einem Formularservice', null=True, verbose_name='Link zu Anmelde-Formular')),

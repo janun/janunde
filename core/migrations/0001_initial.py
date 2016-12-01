@@ -124,7 +124,7 @@ class Migration(migrations.Migration):
             name='StandardPage',
             fields=[
                 ('basepage_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='core.BasePage')),
-                ('body', wagtail.wagtailcore.fields.StreamField((('h2', core.blocks.H2()), ('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', core.blocks.ImageBlock()), ('pullquote', wagtail.wagtailcore.blocks.StructBlock((('quote', wagtail.wagtailcore.blocks.TextBlock(label='Zitat')), ('attribution', wagtail.wagtailcore.blocks.CharBlock(label='Zuschreibung'))))), ('embedded_video', core.blocks.VideoBlock())), blank=True, verbose_name='Inhalt')),
+                ('body', wagtail.wagtailcore.fields.StreamField((('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', core.blocks.ImageBlock()), ('pullquote', wagtail.wagtailcore.blocks.StructBlock((('quote', wagtail.wagtailcore.blocks.TextBlock(label='Zitat')), ('attribution', wagtail.wagtailcore.blocks.CharBlock(label='Zuschreibung'))))), ('embedded_video', core.blocks.EmbedBlock())), blank=True, verbose_name='Inhalt')),
             ],
             options={
                 'verbose_name': 'Einfache Seite',

@@ -3,9 +3,9 @@
 {% image image original as original_image %}
 
 <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject"
-        class="{% if full_width %}block-image--full-width{% endif %}">
+        class="block-image--{{ size }}">
   <a href="{{ original_image.url }}">
-    {% if full_width %}
+    {% if size == 'screen-width' %}
       <div class="block-image__wrapper" >
         <picture>
           <source media="(min-width: 40em)"
@@ -21,7 +21,11 @@
            style="padding-bottom: {{ original_image.aspect|stringformat:"f" }}%">
         <img src="{{ original_image.url }}"
           srcset="{{ image|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
-          sizes="(min-width: 60em) 51.875em, (min-width: 40em) 40em, 100vw"
+          {% if size == 'over-text-width' %}
+            sizes="(min-width: 60em) 51.875em, (min-width: 40em) 40em, 100vw"
+          {% else %}
+            sizes="(min-width: 60em) 40em, (min-width: 40em) 40em, 100vw"
+          {% endif %}
           alt="{{ original_image.alt }}"
           class="block-image__image">
       </div>

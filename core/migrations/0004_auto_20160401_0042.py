@@ -31,6 +31,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='standardpage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField((('h2', core.blocks.H2()), ('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', core.blocks.ImageBlock()), ('embedded_video', core.blocks.VideoBlock())), blank=True, verbose_name='Inhalt'),
+            field=wagtail.wagtailcore.fields.StreamField((('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', core.blocks.ImageBlock()), ('embedded_video', core.blocks.EmbedBlock())), blank=True, verbose_name='Inhalt'),
         ),
     ]

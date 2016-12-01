@@ -12,7 +12,7 @@
  *     </div>
  *     <div class="block-image">
  *       <picture>
- *         <img class="block-image__image block-image__image--full-width" src="@{image:1280:650}">
+ *         <img class="block-image__image block-image__image--screen-width" src="@{image:1280:650}">
  *       </picture>
  *       <p class="block-image__caption">Caption</p>
  *       <p class="block-image__attribution">Attribution</p>
@@ -29,7 +29,7 @@
   }
 
 
-  .userim & {
+  .userim &--over-text-width {
     position: relative;
     width: 100vw;
     left: calc( 50% - 50vw );
@@ -43,7 +43,7 @@
   }
 
 
-  .userim &--full-width {
+  .userim &--screen-width {
     position: relative;
     width: 100vw;
     left: calc( 50% - 50vw );

@@ -2,9 +2,11 @@
 {% load wagtailembeds_tags %}
 {% with embed=value.embed.url|get_embed %}
 
-  <figure itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
+    <figure class="block-image--{{ value.size }}"  itemscope itemtype="http://schema.org/MediaObject">
 
     {{ value.embed }}
+
+    <meta itemprop="embedUrl" content="{{ value.embed.url }}">
 
     <figcaption class="block-image__caption">
       <span itemprop="caption">

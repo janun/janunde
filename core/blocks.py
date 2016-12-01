@@ -7,79 +7,42 @@ from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 
 from wagtail.contrib.table_block.blocks import TableBlock
 
-from core.fields import PrettyURLField
-
+from .fields import PrettyURLField
+#from .models import COLOR_CHOICES
 
 def _(str):
     """dummy trans"""
     return str
 
-
-# class PrettyURLBlock(FieldBlock):
-#     def __init__(self, required=True, help_text=None, max_length=None, min_length=None, **kwargs):
-#         self.field = PrettyURLField(
-#             required=required,
-#             help_text=help_text,
-#             max_length=max_length,
-#             #min_length=min_length
-#         )
-#         super().__init__(**kwargs)
-#     class Meta:
-#         icon = "site"
-
-
 COLOR_CHOICES = [
-    ('brown', 'Braun'),
     ('green', 'Grün'),
     ('red', 'Rot'),
     ('blue', 'Blau'),
     ('orange', 'Orange'),
 ]
 
+class SizeChoiceBlock(blocks.ChoiceBlock):
+    choices = [
+        ('text-width', 'Text-Breite'),
+        ('over-text-width', 'Über-Text-Breite'),
+        ('screen-width', 'Bildchirm-Breite')
+    ]
+    class Meta:
+        default = 'over-text-width'
+        label = "Größe"
+
 
 class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock(label="Bild")
     caption = blocks.CharBlock(
-        label="Bildunterschrift",
+        label="opt. Beschrift.",
         required=False
     )
-    full_width = blocks.BooleanBlock(
-        label="volle Breite",
-        help_text="Soll das Bild auf voller Breite des Bildschirms angezeigt werden?",
-        required=False
-    )
+    size = SizeChoiceBlock()
     class Meta:
         label = _("Bild")
         template = 'blocks/image.html'
         icon = "image"
-
-
-class Sticker(blocks.StructBlock):
-    title = blocks.CharBlock(label="Text")
-    color = blocks.ChoiceBlock(
-        label="Farbe", choices=COLOR_CHOICES, default="green"
-    )
-    link = blocks.URLBlock(label="Link")
-    class Meta:
-        label = _("Sticker")
-        icon = "tag"
-        template = 'blocks/sticker.html'
-
-
-class H2(blocks.StructBlock):
-    title = blocks.CharBlock(label="Titel")
-    color = blocks.ChoiceBlock(
-        label="Farbe", choices=COLOR_CHOICES, default="brown"
-    )
-    bold = blocks.BooleanBlock(
-        label="Fett", required=False,
-        help_text="Für eine große und fette Überschrift"
-    )
-    class Meta:
-        label = _("Überschrift")
-        icon = "bold"
-        classname = "title"
-        template = 'blocks/h2.html'
 
 
 class Button(blocks.StructBlock):
@@ -101,19 +64,20 @@ class Attachment(DocumentChooserBlock):
         template = 'blocks/attachment.html'
 
 
-class VideoBlock(blocks.StructBlock):
+class OurEmbedBlock(blocks.StructBlock):
     embed = EmbedBlock(
-        "Video-URL",
-        help_text="URL von z.B. Youtube oder Vimeo hier reinkopieren"
+        label="URL",
+        help_text="von z.B. einem Youtube-Video, Facebook-Post, Instagram-Bild, …"
     )
     caption = blocks.CharBlock(
-        label="Bildunterschrift",
+        label="opt. Beschrift.",
         required=False
     )
+    size = SizeChoiceBlock()
     class Meta:
-        label = _("externes Video")
+        label = _("externe Medien")
         icon = "media"
-        template = 'blocks/video.html'
+        template = 'blocks/embed.html'
 
 
 class ParagraphBlock(blocks.RichTextBlock):
@@ -125,11 +89,9 @@ class ParagraphBlock(blocks.RichTextBlock):
 
 
 class StandardStreamBlock(blocks.StreamBlock):
-    h2 = H2()
     paragraph = ParagraphBlock()
     image = ImageBlock()
-    embedded_video = VideoBlock()
+    embed = OurEmbedBlock()
     button = Button()
     attachment = Attachment()
-    sticker = Sticker()
     table = TableBlock()
