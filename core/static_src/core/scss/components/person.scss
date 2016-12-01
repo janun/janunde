@@ -11,19 +11,20 @@
     overflow: hidden;
     position: relative;
     z-index: 0;
+    @include shadow(1);
+    transition: box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    @include above($large) {
+      .person:hover & {
+        @include shadow(2);
+      }
+    }
   }
 
   &__photo {
     height: rem-calc(240px);
     width: rem-calc(240px);
     background-color: #ddd;
-    transition: transform 0.2s;
-
-    @include above($large) {
-      .person:hover & {
-        transform: scale(1.1);
-      }
-    }
   }
 
   &__data {

@@ -21,6 +21,7 @@ $bigcard-width: rem-calc(240px);
     padding: 1/4 * (2-$SQRT2) * $bigcard-width;
     @include shadow(1);
     margin-bottom: rem-calc(10px);
+    transition: box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 
     .bigcircle:hover & {
       @include shadow(2);

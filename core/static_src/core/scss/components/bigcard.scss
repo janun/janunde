@@ -80,8 +80,7 @@ $related-group-size: rem-calc(70px);
   margin-bottom: 2*$card-grid-margin;
   border-radius: $bigcard-border-radius;
   @include shadow(1);
-  transition: box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s;
-  transform: translate3d(0, 0, 0);
+  transition: box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
   color: $bigcard-text-color;
   font-family: $font-family-sans-serif;
   font-weight: normal;
@@ -106,7 +105,6 @@ $related-group-size: rem-calc(70px);
   @include above($large) {
     &:hover {
       @include shadow(2);
-      transform: translate3d(0, -1px, 0);
     }
   }
 

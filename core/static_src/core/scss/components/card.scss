@@ -13,12 +13,11 @@ $card-image-height: rem-calc(113px);
   margin-bottom: 2*$card-grid-margin;
   @include shadow(1);
   overflow: hidden;
-  transition: box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.2s;
+  transition: box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   @include above($large) {
     &:hover {
       @include shadow(2);
-      transform: translate(0, -2px);
     }
   }
 
