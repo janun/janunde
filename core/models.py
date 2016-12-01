@@ -397,6 +397,8 @@ class GroupIndexPage(BasePage):
         if country_group:
             context['countrywide_projects'] = Project.objects.descendant_of(country_group).live().order_by('title')
             context['groups'] = context['groups'].exclude(pk=country_group.pk)
+        else:
+            context['countrywide_projects'] = []
 
         context['other_projects'] = Project.objects.descendant_of(self).live().exclude(
             pk__in=[p.pk for p in context['countrywide_projects']]
