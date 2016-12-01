@@ -391,13 +391,12 @@ class GroupIndexPage(BasePage):
     def get_context(self, request):
         context = super().get_context(request)
 
+        context['groups'] = Group.objects.child_of(self).live().order_by('title')
+
         country_group = Group.objects.filter(title="JANUN Landesbüro").first()
         if country_group:
             context['countrywide_projects'] = Project.objects.descendant_of(country_group).live().order_by('title')
-
-        context['groups'] = Group.objects.child_of(self).live().exclude(
-            pk=country_group.pk
-        ).order_by('title')
+            context['groups'] = context['groups'].exclude(pk=country_group.pk)
 
         context['other_projects'] = Project.objects.descendant_of(self).live().exclude(
             pk__in=[p.pk for p in context['countrywide_projects']]
