@@ -137,6 +137,38 @@ class Highlight(models.Model):
     objects = HighlightManager()
 
 
+class HeaderMixin(models.Model):
+    """
+    A Page with big heading bar,
+    containing a heading and a header_image
+    typically for top-level pages
+
+    templates of subclasses should include core/_pageheader.html
+    """
+    heading = models.CharField(
+        "Überschrift",
+        max_length=255,
+        blank=True,
+    )
+    header_image = models.ForeignKey(
+        Image,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+',
+        verbose_name="Header-Bild",
+    )
+    panels =  [
+        FieldPanel('heading', classname='title'),
+        ImageChooserPanel('header_image'),
+    ]
+    def get_image(self):
+        if self.header_image:
+            return self.header_image
+    class Meta:
+        abstract = True
+
+
 class StandardPage(BasePage):
     """
     simple "just a page"
@@ -367,7 +399,7 @@ class Project(Group):
     parent_page_types = ['Group']
 
 
-class GroupIndexPage(BasePage):
+class GroupIndexPage(BasePage, HeaderMixin):
     # title is auto added
     subpage_types = ['Group', 'Project']
     parent_page_types = ['HomePage']
@@ -397,6 +429,11 @@ class GroupIndexPage(BasePage):
         if self.search_description:
             return self.search_description
         return "Auflistung aller JANUN-Gruppen"
+
+    content_panels = [
+        FieldPanel('title'),
+        MultiFieldPanel(HeaderMixin.panels, "Header"),
+    ]
 
 
 class ArticleIndexPage(BasePage):

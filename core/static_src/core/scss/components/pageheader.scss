@@ -3,26 +3,26 @@ $pageheader-height-medium: rem-calc(200px);
 $pageheader-h1-margin: rem-calc(20px);
 $pageheader-h1-font-size: rem-calc(20px);
 $pageheader-h1-font-size-medium: rem-calc(40px);
+$pageheader-image-height: rem-calc(100px);
 
 .pageheader {
   position: relative;
-  display: block;
   height: $pageheader-height;
   @include above($medium) {
     height: $pageheader-height-medium;
   }
-  // padding-top: 30px;
   background-color: $green;
   color: $white;
   @include shadow(1);
   text-align: center;
   overflow: hidden;
+  margin-bottom: rem-calc(30px);
 
-  // display: none;
-  //
-  // @include above($medium) {
-  //   display: block;
-  // };
+  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   h1 {
     margin: $pageheader-h1-margin 0;
@@ -32,16 +32,17 @@ $pageheader-h1-font-size-medium: rem-calc(40px);
     }
     color: $white;
     text-shadow: 1px 1px 1px #000;
+    width: rem-calc(960px);
   }
 
   &__image {
     display: none;
     @include above($medium) {
       display: inline;
-    };
+    }
 
     position: relative;
     bottom: 0px;
-    height: $pageheader-height-medium - 2* $pageheader-h1-margin - 1.25*$pageheader-h1-font-size-medium;
+    height: $pageheader-image-height;
   }
 }

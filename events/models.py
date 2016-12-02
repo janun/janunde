@@ -20,7 +20,7 @@ from wagtail.wagtailsearch import index
 from core.blocks import StandardStreamBlock
 from core.fields import FacebookEventURLField, PrettyURLField
 from core.images import AttributedImage as Image
-from core.models import BasePage, Group, JanunTag
+from core.models import BasePage, Group, JanunTag, HeaderMixin
 from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
@@ -36,7 +36,7 @@ def split_on_condition(list, func):
     return list1, list2
 
 
-class EventIndexPage(BasePage):
+class EventIndexPage(BasePage, HeaderMixin):
     """
     lists events
     """
@@ -46,6 +46,11 @@ class EventIndexPage(BasePage):
     def get_add_mail(self):
         from .utils import get_add_mail
         return get_add_mail()
+
+    content_panels = [
+        FieldPanel('title'),
+        MultiFieldPanel(HeaderMixin.panels, "Header"),
+    ]
 
     class Meta:
         verbose_name = "Auflistung von Veranstaltungen"

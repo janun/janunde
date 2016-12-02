@@ -13,22 +13,12 @@ from wagtail.wagtailcore.fields import StreamField
 
 
 from core.blocks import StandardStreamBlock
-from core.models import BasePage
+from core.models import HeaderMixin, BasePage
 from core.images import AttributedImage as Image
 
 
 
-class AboutPage(BasePage):
-    heading = models.CharField(
-        "Überschrift",
-        max_length=255,
-        blank=True
-    )
-
-    intro_text = RichTextField(
-        "Eingangstext",
-        blank=True,
-    )
+class AboutPage(BasePage, HeaderMixin):
 
     content = StreamField(
         StandardStreamBlock(),
@@ -37,15 +27,14 @@ class AboutPage(BasePage):
     )
 
     content_panels = [
-        MultiFieldPanel([
-            FieldPanel('title', classname="full"),
-            FieldPanel('heading', classname="full"),
-        ]),
-        FieldPanel('intro_text'),
+        FieldPanel('title'),
+        MultiFieldPanel(HeaderMixin.panels, "Header"),
         StreamFieldPanel('content'),
     ]
 
     def get_image(self):
+        if super().get_image():
+            return super().get_image()
         for block in self.content:
             if block.block_type == 'image':
                 return block.value['image']

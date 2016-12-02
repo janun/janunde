@@ -7,12 +7,9 @@
 
 {% block content %}
 
-<div class="container userim">
+{% include "core/_pageheader.html" %}
 
-  <div class="about-page__title">
-    <img src="{% static 'core/images/janun_logo.svg' %}">
-    <h1>{% if self.heading %}{{ self.heading }}{% else %}{{ self.title }}{% endif %}</h1>
-  </div>
+<div class="container userim">
 
   {% if self.intro_text %}
     <div class="about-page__intro">

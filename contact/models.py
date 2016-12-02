@@ -13,7 +13,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.wagtailcore.models import Orderable, PageManager
 
 from core.blocks import StandardStreamBlock
-from core.models import BasePage
+from core.models import BasePage, HeaderMixin
 from core.images import AttributedImage as Image
 
 from phonenumber_field.modelfields import PhoneNumberField
@@ -23,7 +23,7 @@ from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
 
 
-class ContactIndex(BasePage):
+class ContactIndex(BasePage, HeaderMixin):
     subpage_types = ['PersonPage', 'OfficePage']
     parent_page_types = ['core.HomePage']
 
@@ -35,6 +35,11 @@ class ContactIndex(BasePage):
         context['people'] = PersonPage.objects.child_of(self).live()
         context['offices'] = OfficePage.objects.child_of(self).live()
         return context
+
+    content_panels = [
+        FieldPanel('title'),
+        MultiFieldPanel(HeaderMixin.panels, "Header"),
+    ]
 
 
 

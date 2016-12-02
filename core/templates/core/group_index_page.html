@@ -8,11 +8,7 @@
 
 {% block content %}
 
-
-  <div class="pageheader">
-    <h1>Netzwerk und Projektgruppen</h1>
-    <img class="pageheader__image" src="{% static 'core/images/projekte-1.png' %}" alt="" >
-  </div>
+  {% include "core/_pageheader.html" %}
 
   {% if countrywide_projects %}
     <div class="center-container">
