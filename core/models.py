@@ -90,7 +90,7 @@ class HighlightManager(models.Manager):
             models.Q(start_datetime__lte=timezone.now()),
             models.Q(end_datetime__isnull=True) |
             models.Q(end_datetime__gt=timezone.now())
-        )
+        ).order_by('-start_datetime')
 
 
 def get_in_14_days():
@@ -161,15 +161,6 @@ class StandardPage(BasePage):
         verbose_name=_("Inhalt"),
     )
 
-    author = models.ForeignKey(
-        'contact.PersonPage',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='pages',
-        verbose_name="Autor_in",
-    )
-
     tags = ClusterTaggableManager("Tags",
         through=JanunTag, blank=True,
         help_text=""
@@ -188,10 +179,6 @@ class StandardPage(BasePage):
         StreamFieldPanel('body'),
         #FieldPanel('tags'),
     ]
-
-    settings_panels = [
-        FieldPanel('author'),
-    ] + BasePage.settings_panels
 
     promote_panels = [
         InlinePanel(
@@ -479,6 +466,15 @@ class Article(StandardPage):
         on_delete=models.SET_NULL,
         verbose_name=_("Zugehörige Gruppe"),
         help_text=_("Eine JANUN-Gruppe, die diesem Artikel zugeordnet ist")
+    )
+
+    author = models.ForeignKey(
+        'contact.PersonPage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='pages',
+        verbose_name="Autor_in",
     )
 
     content_panels = [
