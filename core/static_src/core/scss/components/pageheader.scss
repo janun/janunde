@@ -7,7 +7,7 @@ $pageheader-image-height: rem-calc(100px);
 
 .pageheader {
   position: relative;
-  height: $pageheader-height;
+  // height: $pageheader-height;
   @include above($medium) {
     height: $pageheader-height-medium;
   }
@@ -25,14 +25,15 @@ $pageheader-image-height: rem-calc(100px);
   align-items: center;
 
   h1 {
-    margin: $pageheader-h1-margin 0;
+    white-space: normal;
+    margin: $pageheader-h1-margin;
     font-size: $pageheader-h1-font-size;
+    color: $white;
+
     @include above($medium) {
       font-size: $pageheader-h1-font-size-medium;
+      text-shadow: rem-calc(1px 1px 1px) $black;
     }
-    color: $white;
-    text-shadow: 1px 1px 1px #000;
-    width: rem-calc(960px);
   }
 
   &__image {
