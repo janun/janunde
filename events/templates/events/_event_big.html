@@ -18,7 +18,7 @@
       <img class="bigcard__image"
            srcset="{{ object.main_image|srcset:'fill-300x150 fill-600x300 fill-900x450 fill-1200x600' }}"
            sizes="18.75em"
-           src="{{ image.url }}" alt="image.alt">
+           src="{{ image.url }}" alt="{{ image.alt }}">
       {% image object.main_image original as orig_image %}
       <link itemprop="image" href="{{ orig_image.url }}">
     {% else %}
