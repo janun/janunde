@@ -284,6 +284,10 @@ class HomePage(BasePage):
         return "JANUN ist das Jugendumweltnetzwerk Niedersachsen"
 
 
+class GroupManager(PageManager):
+    def get_queryset(self):
+         return super().get_queryset().order_by('title')
+
 class Group(BasePage):
     parent_page_types = ['GroupIndexPage', 'Group']
     subpage_types = ['Project', 'StandardPage', 'Group']
@@ -349,6 +353,8 @@ class Group(BasePage):
         # TODO: change this into a real location somehow
     )
 
+    objects = GroupManager()
+
     def get_image(self):
         return self.logo
 
@@ -398,6 +404,8 @@ class Project(Group):
     subpage_types = []
     parent_page_types = ['Group']
 
+    objects = GroupManager()
+
 
 class GroupIndexPage(BasePage, HeaderMixin):
     # title is auto added
@@ -410,18 +418,18 @@ class GroupIndexPage(BasePage, HeaderMixin):
     def get_context(self, request):
         context = super().get_context(request)
 
-        context['groups'] = Group.objects.child_of(self).live().order_by('title')
+        context['groups'] = Group.objects.child_of(self).live()
 
         country_group = Group.objects.filter(title="JANUN Landesbüro").first()
         if country_group:
-            context['countrywide_projects'] = Project.objects.descendant_of(country_group).live().order_by('title')
+            context['countrywide_projects'] = Project.objects.descendant_of(country_group).live()
             context['groups'] = context['groups'].exclude(pk=country_group.pk)
         else:
             context['countrywide_projects'] = []
 
         context['other_projects'] = Project.objects.descendant_of(self).live().exclude(
             pk__in=[p.pk for p in context['countrywide_projects']]
-        ).order_by('title')
+        )
 
         return context
 
