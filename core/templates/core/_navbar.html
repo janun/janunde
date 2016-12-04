@@ -17,7 +17,7 @@
       <a class="navbar__item padding-left-0" href="/"
          itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
         <span class="navbar__logo">{% include 'core/janun_logo.svg' %}</span>
-        <meta itemprop="url" content="{% static 'core/images/janun_logo.svg' %}">
+        <meta itemprop="url" content="{{ page.get_site.root_url }}{% static 'core/images/janun_logo.svg' %}">
         <meta itemprop="width" content="37">
         <meta itemprop="height" content="36">
       </a>

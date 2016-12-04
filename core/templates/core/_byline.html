@@ -15,4 +15,6 @@
       {% endif %}
       <a href="{% pageurl self.author %}" class="byline__author-name">von <strong itemprop="name">{{ self.author.title }}</strong></a>
   </div>
+{% else %}
+  <link itemprop="author" href="#janunOrg">
 {% endif %}
