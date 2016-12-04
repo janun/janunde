@@ -1,11 +1,14 @@
+$person-width: rem-calc(240px);
+$person-height: rem-calc(420px);
+
 .person {
   margin: 40px;
-  width: rem-calc(240px);
-  height: rem-calc(420px);
+  width: $person-width;
+  height: $person-height;
 
   &__photo-wrapper {
-    height: rem-calc(240px);
-    width: rem-calc(240px);
+    height: $person-width;
+    width: $person-width;
     margin-bottom: rem-calc(25px);
     border-radius: 50%;
     overflow: hidden;
@@ -22,9 +25,12 @@
   }
 
   &__photo {
-    height: rem-calc(240px);
-    width: rem-calc(240px);
+    height: $person-width;
+    width: $person-width;
     background-color: #ddd;
+    line-height: $person-width;
+    text-align: center;
+    white-space: nowrap;
   }
 
   &__data {
@@ -86,7 +92,7 @@
 
 .click-area__area-link:focus {
   & ~ .person__photo-wrapper .person__photo {
-    transform: scale(1.1);
+    @include shadow(2);
   }
   & ~ .person__data {
     color: $brown;

@@ -13,7 +13,7 @@
       {% image object.logo max-170x170 as fallback_image %}
       <img src="{{ fallback_image.url }}"
         srcset="{{ object.logo|srcset:'max-170x170 max-340x340 max-510x510 max-680x680' }}"
-        sizes="170px"
+        sizes="10.625em"
         alt="{{ original_image.alt }}"
         class="bigcircle__image">
       <link itemprop="logo" href="{{ fallback_image.url }}">
