@@ -73,7 +73,7 @@ class OurEmbedBlock(blocks.StructBlock):
         label="opt. Beschrift.",
         required=False
     )
-    size = SizeChoiceBlock()
+    size = SizeChoiceBlock(default="text-width")
     class Meta:
         label = _("externe Medien")
         icon = "media"

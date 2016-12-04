@@ -8,23 +8,13 @@
 
     <meta itemprop="embedUrl" content="{{ value.embed.url }}">
 
-    <figcaption class="block-image__caption">
-      <span itemprop="caption">
-        {% if value.caption %}
+    {% if value.caption %}
+      <figcaption class="block-image__caption">
+        <span itemprop="caption">
           {{ value.caption }}
-        {% else %}
-          {{ embed.title }}
-        {% endif %}
-      </span>
-      {% if embed.author_name %}
-        <span itemprop="author"
-              itemscope itemtype="http://schema.org/Person"
-              class="block-image__attribution">
-          {{ embed.type|capfirst }}: <span itemprop="name">{{ embed.author_name|title }}</span>
-          (<a href="{{ embed.url }}">{{ embed.provider_name }}</a>)
         </span>
-      {% endif %}
-    </figcaption>
+      </figcaption>
+    {% endif %}
 
   </figure>
 
