@@ -83,7 +83,7 @@ class EventIndexPage(BasePage, HeaderMixin):
         # query= url param given
         if search_query:
             events = EventPage.objects.all().live().search(
-                search_query, operator="and", order_by_relevance=False
+                search_query#, operator="and", order_by_relevance=False
             )
             context['search_query'] = search_query
             search = 1
