@@ -520,6 +520,7 @@ class Article(StandardPage):
             FieldPanel('title_color', classname=''),
         ], heading="Titel"),
         FieldPanel('subtitle'),
+        FieldPanel('author'),
         ImageChooserPanel('main_image'),
         StreamFieldPanel('body'),
         #FieldPanel('tags'),
