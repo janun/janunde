@@ -5,10 +5,12 @@
 
 {% block content %}
 <article class="container container--margin-top"
-         itemprop="mainEntity" itemscope itemtype="http://schema.org/Article"
-         itemref="publisher">
+         itemprop="mainEntity" itemscope itemtype="http://schema.org/Article">
 
   <div class="text-container userim">
+
+    {% include "core/_dateline.html" %}
+
     <h1 class="title title--color-{{self.title_color}}"
         itemprop="headline">
       {{ self.title }}
@@ -17,14 +19,16 @@
       <p class="subtitle">{{ self.subtitle }}</p>
     {% endif %}
 
+    {% include "core/_byline.html" %}
+
     <div itemprop="articleBody">
-
-      {% include "core/_byline.html" %}
-
-      <!-- the actual text -->
       {% include_block self.body %}
     </div>
 
+    {% image self.main_image original as image %}
+    <link itemprop="image" href="{{ image.url }}">
+
+    <link itemprop="publisher" href="#janunOrg"/>
 
   </div>
 

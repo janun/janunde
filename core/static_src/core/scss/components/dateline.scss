@@ -1,0 +1,12 @@
+.dateline {
+  font-family: $font-family-sans-serif;
+  font-size: rem-calc(14px);
+
+  @include above($medium) {
+    font-size: rem-calc(20px);
+  }
+
+  &__updated {
+    color: $grey;
+  }
+}

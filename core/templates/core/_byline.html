@@ -1,8 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags srcset humanize %}
 
-<div class="byline">
-  {% if self.author %}
-
+{% if self.author %}
+  <div class="byline" itemprop="author" itemscope itemtype="http://schema.org/Person">
       {% if self.author.photo %}
         {% image self.author.photo fill-100x100 as fallback_image %}
         <a href="{% pageurl self.author %}">
@@ -15,12 +14,5 @@
         <link href="{{ fallback_image.url }}" itemprop="image" >
       {% endif %}
       <a href="{% pageurl self.author %}" class="byline__author-name">von <strong itemprop="name">{{ self.author.title }}</strong></a>
-
-  {% endif %}
-  <div class="byline__dates">
-    <div class="byline__created"><span class="hide@until-medium">geschrieben:</span> <time title="{{ self.first_published_at|date:'SHORT_DATETIME_FORMAT' }}" datetime="{{ self.first_published_at|date:"c" }}">{{ self.first_published_at|naturaltime }}</time></div>
-    {% if self.first_published_at != self.latest_revision_created_at %}
-      <div class="byline__updated hide@until-medium">geändert: <time title="{{ self.latest_revision_created_at|date:'SHORT_DATETIME_FORMAT' }}" datetime="{{ self.latest_revision_created_at|date:"c" }}">{{ self.latest_revision_created_at|naturaltime }}</time></div>
-    {% endif %}
   </div>
-</div>
+{% endif %}
