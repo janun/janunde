@@ -33,8 +33,8 @@ class PrettyURLField(models.URLField):
         if value and isinstance(value, str):
             if not self.has_scheme(value):
                 return "http://" + value
-            if self.has_changed(value) and not self.can_open_url(value):
-                raise ValidationError("Kann diese Website nicht aufrufen.")
+            # if self.has_changed(value) and not self.can_open_url(value):
+            #     raise ValidationError("Kann diese Website nicht aufrufen.")
         return super().to_python(value)
 
     def formfield(self, **kwargs):
