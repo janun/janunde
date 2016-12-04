@@ -1,3 +1,6 @@
+{% load wagtailcore_tags %}
+
+
 <footer class="footer">
   <div class="footer__inner">
 
@@ -8,8 +11,7 @@
       </a>
     </span>
 
-    <a class="footer__item" href="http://janun.de/impressum">Impressum</a>
-    <a class="footer__item" href="http://janun.de/impressum/datenschutz_auf_beta_janun_de">Datenschutz</a>
+    <a class="footer__item" href="{% slugurl 'impressum' %}">Impressum</a>
 
     <span class="float-right">
       <a class="icon-social-youtube font-size-2 footer__item" target="_blank"

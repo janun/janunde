@@ -51,6 +51,8 @@ $related-group-size: rem-calc(70px);
   &__image {
     max-width: 0.707 * $related-group-size;
     max-height: 0.707 * $related-group-size;
+    font-size: rem-calc(10px);
+    line-height: rem-calc(10px);
   }
 
   &__name {
@@ -131,6 +133,8 @@ $related-group-size: rem-calc(70px);
     height: $bigcard-image-height;
     width: 100%;
     background-color: $baige;
+    color: $brown;
+    display: block;
   }
 
   &__image-placeholder {
