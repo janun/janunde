@@ -34,7 +34,7 @@
   {% endif %}
 {% else %}
   {% if events %}
-    <h2 id="aktuell" class="area-title onpagemenu-scrollmark">Die nächsten drei Veranstaltungen</h2>
+    <h2 id="aktuell" class="area-title onpagemenu-scrollmark">Nächste Veranstaltungen</h2>
     <div class="card-grid">
       {% for event in events|slice:":3" %}
         {% render_partial event %}
