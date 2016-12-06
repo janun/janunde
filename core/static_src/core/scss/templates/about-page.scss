@@ -1,7 +1,7 @@
 .about-page {
 
   // this background colors links pseudo randomly in red, blue and orange
-  .colored-links {
+ .rich-text {
     a {
       color: $white;
       display: inline-block;
@@ -11,11 +11,9 @@
       padding-left: 5px;
       padding-right: 5px;
 
-      &:nth-of-type(3n+0) { background-color: $red; }
-      &:nth-of-type(3n+1) { background-color: $blue }
-      &:nth-of-type(3n+2) { background-color: $orange }
+      background-color: $orange;
       &:hover {
-        background-color: $green;
+        background-color: $green !important;
       }
     }
   }
