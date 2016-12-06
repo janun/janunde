@@ -1,6 +1,7 @@
 import datetime
 
-from dateutil import relativedelta
+from itertools import groupby
+
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
@@ -25,17 +26,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
 
-def split_on_condition(list, func):
-    list1 = []
-    list2 = []
-    for item in list:
-        if func(item):
-            list1.append(item)
-        else:
-            list2.append(item)
-    return list1, list2
-
-
 class EventIndexPage(BasePage, HeaderMixin):
     """
     lists events
@@ -58,19 +48,6 @@ class EventIndexPage(BasePage, HeaderMixin):
 
     def get_context(self, request):
         context = super().get_context(request)
-        today = timezone.localtime(timezone.now()).date()
-        context['now'] = timezone.localtime(timezone.now())
-        context['thisyear'] = today.year
-
-        end_of_this_week = today + datetime.timedelta(days=6 - today.weekday())
-
-        end_of_next_week = today + datetime.timedelta(
-            days=6 - today.weekday() + 7
-        )
-
-        begin_of_this_month = datetime.date(today.year, today.month, 1)
-        end_of_this_month = begin_of_this_month + \
-            relativedelta.relativedelta(months=1) - datetime.timedelta(days=1)
 
         # search stuff
         search_query = request.GET.get('query', None)
@@ -93,98 +70,6 @@ class EventIndexPage(BasePage, HeaderMixin):
         context['search'] = search
         context['events'] = events
 
-        context['past'], events = split_on_condition(
-            events,
-            lambda event: event.start_datetime.date() < today
-        )
-
-        # compute the events for this week
-        def get_this_week(events):
-            return list(filter(
-                lambda event: timezone.localtime(event.start_datetime).date() <= end_of_this_week,
-                events
-            ))
-
-        # try splitting off today, so this_week is not longer than 3 events
-        if len(get_this_week(events)) > 3:
-            context['today'], events = split_on_condition(
-                events,
-                lambda event: event.start_datetime.date() == today
-            )
-
-        # try splitting off tomorrow
-        if len(get_this_week(events)) > 3:
-            context['tomorrow'], events = split_on_condition(
-                events,
-                lambda event: event.start_datetime.date() ==
-                today + datetime.timedelta(days=1)
-            )
-
-        # try splitting off each day of the remaining week
-        next_day = today + datetime.timedelta(days=1)
-        i = 0
-        context['days_of_this_week'] = []
-        while len(get_this_week(events)) > 3:
-            events_next_day, events = split_on_condition(
-                events,
-                lambda event: event.start_datetime.date() == next_day
-            )
-            if events_next_day:
-                context['days_of_this_week'].append(
-                    [next_day, events_next_day]
-                )
-            next_day += datetime.timedelta(days=1)
-            i += 1
-            if i > 20:
-                break
-
-        # what is left for this week
-        context['this_week'], events = split_on_condition(
-            events,
-            lambda event: timezone.localtime(event.start_datetime).date() <= end_of_this_week
-        )
-
-        context['next_week'], events = split_on_condition(
-            events,
-            lambda event: event.start_datetime.date() <= end_of_next_week
-        )
-
-        context['later_this_month'], events = split_on_condition(
-            events,
-            lambda event: event.start_datetime.date() <= end_of_this_month
-        )
-
-        def get_end_of_month(date):
-            return date + relativedelta.relativedelta(months=1) + \
-                datetime.timedelta(days=-1)
-
-        def get_this_year(events):
-            return list(filter(
-                lambda event: event.start_datetime.date() <
-                datetime.date(today.year+1, 1, 1),
-                events
-            ))
-
-        # try splitting off month by month to keep after short
-        begin_next_month = end_of_this_month + datetime.timedelta(days=1)
-        i = 0
-        context['by_month'] = []
-        while len(events) > 4:
-            events_next_month, events = split_on_condition(
-                events,
-                lambda event: event.start_datetime.date() <=
-                get_end_of_month(begin_next_month)
-            )
-            if events_next_month:
-                context['by_month'].append(
-                    [begin_next_month, events_next_month]
-                )
-            begin_next_month += relativedelta.relativedelta(months=1)
-            i += 1
-            if i > 20:
-                break
-
-        context['after'] = events
         return context
 
     def get_description(self):
@@ -364,6 +249,11 @@ class EventPage(Page):
             if self.start.date() != self.end.date():
                 return True
         return False
+
+    @property
+    def month(self):
+        """The 1st of month of the month the event is starting in"""
+        return datetime.date(self.start_datetime.year, self.start_datetime.month, 1)
 
     objects = EventPageManager()
 

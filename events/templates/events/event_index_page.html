@@ -7,140 +7,53 @@
 
 {% block content %}
 
- {% include "core/_pageheader.html" %}
+{% include "core/_pageheader.html" %}
 
-{% if events %}
-  <div class="center-container">
-
-    {% if past %}
-    <div class="clear-after">
-      <h2 id="past" class="onpagemenu-scrollmark area-title">laufende Veranstaltungen</h2>
-      <div class="card-grid">
-        {% for event in past %}
-          {% render_partial event %}
-        {% endfor %}
+{% if search_query %}
+  {% if events %}
+    <div class="center-container">
+      <div class="clear-after">
+        <div class="card-grid">
+          {% for event in events %}
+            {% render_partial event %}
+          {% endfor %}
+        </div>
       </div>
     </div>
-    {% endif %}
-
-    {% if today %}
-    <div class="clear-after">
-      <h2 id="today" class="onpagemenu-scrollmark area-title">Heute</h2>
-      <div class="card-grid">
-        {% for event in today %}
-          {% render_partial event %}
-        {% endfor %}
+  {% else %}
+    <div class="container padding-top-6 padding-bottom-5">
+      <i class="icon-ghost color-red" style="font-size: 7rem" aria-hidden="true"></i>
+      <div class="margin-bottom-3 margin-top-4 big-font">
+        <div class="color-red">Sorry, Weltenbummler!</div>
+        <div>Wir konnten kein Abenteuer für dich finden.</div>
       </div>
     </div>
-    {% endif %}
-
-    {% if tomorrow %}
-    <div class="clear-after">
-      <h2 id="tomorrow" class="onpagemenu-scrollmark area-title">Morgen</h2>
-      <div class="card-grid">
-        {% for event in tomorrow %}
-          {% render_partial event %}
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-    {% for day, events in days_of_this_week %}
-    <div class="clear-after">
-      <h2 id="{{ day|date:"l" }}" class="onpagemenu-scrollmark area-title">{{ day|date:"l" }}</h2>
-      <div class="card-grid">
-        {% for event in events %}
-          {% render_partial event %}
-        {% endfor %}
-      </div>
-    </div>
-    {% endfor %}
-
-    {% if this_week %}
-    <div class="clear-after">
-      <h2 id="this_week" class="onpagemenu-scrollmark area-title">
-        {% if today or tomorrow or days_of_this_week %}
-          Rest dieser Woche
-        {% else %}
-          Noch diese Woche
-        {% endif %}
-      </h2>
-      <div class="card-grid">
-        {% for event in this_week %}
-          {% render_partial event %}
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-    {% if next_week %}
-    <div class="clear-after">
-      <h2 id="next_week" class="onpagemenu-scrollmark area-title">Nächste Woche</h2>
-      <div class="card-grid">
-        {% for event in next_week %}
-          {% render_partial event %}
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-    {% if later_this_month %}
-    <div class="clear-after">
-      <h2 id="later_this_month" class="onpagemenu-scrollmark area-title">Später im {% now "F" %}</h2>
-      <div class="card-grid">
-        {% for event in later_this_month %}
-          {% render_partial event %}
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-    {% for month, events in by_month %}
-    <div class="clear-after">
-      <h2 id="{{ month|date:"F" }}" class="area-title onpagemenu-scrollmark">{{ month|format_month }}</h2>
-      <div class="card-grid">
-        {% for event in events %}
-          {% render_partial event %}
-        {% endfor %}
-      </div>
-    </div>
-    {% endfor %}
-
-    {% if after %}
-    <div class="clear-after">
-      <h2 id="after" class="onpagemenu-scrollmark area-title">Noch Später</h2>
-      <div class="card-grid">
-        {% for event in after %}
-          {% render_partial event %}
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-  </div>
-</div>
-</div>
-
-{% elif search_query %}
-<div class="container padding-top-6 padding-bottom-5">
-  <i class="icon-ghost color-red" style="font-size: 7rem" aria-hidden="true"></i>
-  <div class="margin-bottom-3 margin-top-4 big-font">
-    <div class="color-red">Sorry, Weltenbummler!</div>
-    <div>Wir konnten kein Abenteuer für dich finden.</div>
-  </div>
-  {% comment TODO %}
-  <span>In der Vergangenheit gab es jedoch </a>2 Veranstaltungen</a> mit diesem Suchbegriff.</span>
-  {% endcomment %}
-</div>
+  {% endif %}
 {% else %}
-<div class="container padding-top-6 padding-bottom-5">
-  <i class="icon-present color-green" style="font-size: 7rem" aria-hidden="true"></i>
-  <div class="margin-bottom-3 margin-top-4 big-font">
-  <div class="color-green">Ein Geschenk für Dich.</div>
-    <div>Veranstaltungen, die wir zeigen könnten, gibt es aber leider keine.</div>
-  </div>
-  <span>Du kannst das ändern: <a class="color-green" href="{{ self.get_add_mail }}">Schlag uns eine Veranstaltung vor</a> und wir tragen sie hier ein.</span>
-</div>
+  {% if events %}
+    {% regroup events by month as events_by_month %}
+    <div class="center-container">
+      {% for events in events_by_month %}
+        <div class="clear-after">
+          <h2 id="{{ month|date:"F" }}" class="area-title onpagemenu-scrollmark">{{ events.grouper|format_month }}</h2>
+          <div class="card-grid">
+            {% for event in events.list %}
+              {% render_partial event %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="container padding-top-6 padding-bottom-5">
+      <i class="icon-present color-green" style="font-size: 7rem" aria-hidden="true"></i>
+      <div class="margin-bottom-3 margin-top-4 big-font">
+      <div class="color-green">Ein Geschenk für Dich.</div>
+        <div>Veranstaltungen, die wir zeigen könnten, gibt es aber leider keine.</div>
+      </div>
+      <span>Du kannst das ändern: <a class="color-green" href="{{ self.get_add_mail }}">Schlag uns eine Veranstaltung vor</a> und wir tragen sie hier ein.</span>
+    </div>
+  {% endif %}
 {% endif %}
 
 {% endblock %}
