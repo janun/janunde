@@ -51,7 +51,9 @@
       {% if object.subtitle %}
         <p class="bigcard__subtitle">{{ object.subtitle|softhyphen }}</p>
       {% endif %}
-      <p class="bigcard__text">{{ object.get_description|softhyphen }}</p>
+      {% if object.get_description %}
+        <p class="bigcard__text">{{ object.get_description|softhyphen }}</p>
+      {% endif %}
     </div>
 
     <div class="bigcard__footer">
