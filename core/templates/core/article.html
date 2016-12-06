@@ -9,17 +9,17 @@
 
   <div class="text-container userim">
 
-    {% include "core/_dateline.html" %}
-
-    <h1 class="title title--color-{{self.title_color}}"
-        itemprop="headline">
-      {{ self.title }}
-    </h1>
-    {% if self.subtitle %}
-      <p class="subtitle">{{ self.subtitle }}</p>
-    {% endif %}
-
-    {% include "core/_byline.html" %}
+    <div class="margin-bottom-4">
+      {% include "core/_dateline.html" %}
+      <h1 class="title title--color-{{self.title_color}}"
+          itemprop="headline">
+        {{ self.title }}
+      </h1>
+      {% if self.subtitle %}
+        <p class="subtitle">{{ self.subtitle }}</p>
+      {% endif %}
+      {% include "core/_byline.html" %}
+    </div>
 
     <div itemprop="articleBody">
       {% include_block self.body %}

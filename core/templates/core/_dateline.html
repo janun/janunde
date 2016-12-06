@@ -4,7 +4,7 @@
   <div class="dateline">
     <span class="dateline__created"><time itemprop="datePublished" title="{{ self.first_published_at|date:'SHORT_DATETIME_FORMAT' }}" datetime="{{ self.first_published_at|date:"c" }}">{{ self.first_published_at|naturaltime }}</time></span>
     {% if self.first_published_at != self.latest_revision_created_at %}
-      <span class="dateline__updated">, aktualisiert: <time itemprop="dateModified"  title="{{ self.latest_revision_created_at|date:'SHORT_DATETIME_FORMAT' }}" datetime="{{ self.latest_revision_created_at|date:"c" }}">{{ self.latest_revision_created_at|naturaltime }}</time></span>
+      <span class="dateline__updated hide@until-medium">, aktualisiert: <time itemprop="dateModified"  title="{{ self.latest_revision_created_at|date:'SHORT_DATETIME_FORMAT' }}" datetime="{{ self.latest_revision_created_at|date:"c" }}">{{ self.latest_revision_created_at|naturaltime }}</time></span>
     {% endif %}
   </div>
 {% endspaceless %}
