@@ -137,6 +137,28 @@ class Highlight(models.Model):
     objects = HighlightManager()
 
 
+class FallbackImageMixin(object):
+    """
+    of main_image_field is not set, set it to a random image,
+    that's tagged with fallback_image_tag
+    """
+    main_image_field = "main_image"
+    fallback_image_tag = ""
+
+    def clean(self):
+        super().clean()
+        if not self.fallback_image_tag:
+            self.fallback_image_tag = type(self).__name__.lower() + "-fallback"
+        if not self.__getattribute__(self.main_image_field):
+            self.__setattr__(
+                self.main_image_field,
+                Image.objects.filter(tags__name=self.fallback_image_tag).order_by('?').first()
+            )
+
+    class Meta:
+        abstract = True
+
+
 class HeaderMixin(models.Model):
     """
     A Page with big heading bar,
@@ -471,7 +493,7 @@ class ArticleManager(PageManager):
          return super().get_queryset().order_by('-first_published_at')
 
 
-class Article(StandardPage):
+class Article(FallbackImageMixin, StandardPage):
     """
     An Article
     """
@@ -543,10 +565,6 @@ class Article(StandardPage):
 
 
     objects = ArticleManager()
-
-    def clean(self):
-        if not self.main_image:
-            self.main_image = Image.objects.filter(tags__name='article-fallback').order_by('?').first()
 
     class Meta:
         verbose_name = _("Artikel")
