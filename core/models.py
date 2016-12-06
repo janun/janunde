@@ -137,6 +137,22 @@ class Highlight(models.Model):
     objects = HighlightManager()
 
 
+class PublishedAtFromGoLiveAtMixin(object):
+    """
+    set the first_published_at date to the go_live_at
+    attribute on live pages on save.
+    Thus enabling editors to create pages in the past
+    """
+
+    def clean(self):
+        super().clean()
+        if self.live and self.go_live_at:
+            self.first_published_at = self.go_live_at
+
+    class Meta:
+        abstract = True
+
+
 class FallbackImageMixin(object):
     """
     of main_image_field is not set, set it to a random image,
@@ -493,7 +509,7 @@ class ArticleManager(PageManager):
          return super().get_queryset().order_by('-first_published_at')
 
 
-class Article(FallbackImageMixin, StandardPage):
+class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
     """
     An Article
     """
