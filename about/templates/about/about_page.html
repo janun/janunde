@@ -19,17 +19,3 @@
 
 </div>
 {% endblock %}
-
-
-{% block js %}
-  {{ block.super }}
-  <script>
-    $(document).ready(function() {
-      var colors = ['red', 'orange', 'blue']
-      $('.rich-text a').each(function (i, link) {
-        var randColor = colors[i%colors.length];
-        $(link).addClass('bg-color-' + randColor)
-      });
-    });
-  </script>
-{% endblock %}
