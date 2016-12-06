@@ -12,7 +12,7 @@
 
   {% if countrywide_projects %}
     <div class="center-container">
-      <h2 class="area-title area-title--centered">Projekte des Landesbüros</h2>
+      <h2 id="projekte-des-landesbueros" class="area-title area-title--centered">Projekte des Landesbüros</h2>
       <div class="card-grid">
         {% for project in countrywide_projects %}
           {% render_partial project %}
@@ -23,7 +23,7 @@
 
   {% if groups %}
     <div class="center-container">
-      <h2 class="area-title area-title--centered">Mitglieder und Projektgruppen</h2>
+      <h2 id="mitglieder-und-projektgruppen" class="area-title area-title--centered">Mitglieder und Projektgruppen</h2>
       <div class="card-grid">
         {% for group in groups %}
           {% render_partial group %}
@@ -34,7 +34,7 @@
 
   {% if other_projects %}
     <div class="center-container">
-      <h2 class="area-title area-title--centered">Projekte von JANUN-Mitgliedsgruppen</h2>
+      <h2 id="projekte-von-janun-mitgliedsgruppen" class="area-title area-title--centered">Projekte von JANUN-Mitgliedsgruppen</h2>
       <div class="card-grid">
         {% for project in other_projects %}
           {% render_partial project %}
