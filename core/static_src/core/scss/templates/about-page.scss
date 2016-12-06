@@ -1,93 +1,45 @@
 .about-page {
 
-  &__title {
-    margin-left: auto;
-    margin-right: auto;
+  // this background colors links pseudo randomly in red, blue and orange
+  .colored-links {
+    a {
+      color: $white;
+      display: inline-block;
+      padding-top: 5px;
+      margin-top: -5px;
+      padding-bottom: 0;
+      padding-left: 5px;
+      padding-right: 5px;
 
-    @include above(rem-calc(1400px)) {
-      margin-top: rem-calc(30px);
-    }
-
-    display: flex;
-    flex-direction: row;
-    //justify-content: flex-end;
-    //flex-wrap: nowrap;
-    align-items: center;
-    align-content: center;
-
-    h1 {
-      text-align: center;
-      font-size: 24px;
-      line-height: 1.4;
-      @include above($medium) {
-        font-size: 50px;
-        text-align: left;
+      &:nth-of-type(3n+0) { background-color: $red; }
+      &:nth-of-type(3n+1) { background-color: $blue }
+      &:nth-of-type(3n+2) { background-color: $orange }
+      &:hover {
+        background-color: $green;
       }
     }
-
-    img {
-      display: none;
-      @include above($medium) {
-        display: block;
-        height: rem-calc(300px);
-        margin-right: rem-calc(40px);
-        margin-left: rem-calc(20px);
-      }
-    }
-
-    .word1, .word4{
-      color: $green;
-    }
-
   }
 
-  &__intro {
-    text-align: center;
-
-    @include above(rem-calc(640px)) {
-      max-width: rem-calc(640px);
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    @include above(rem-calc(1400px)) {
-      max-width: rem-calc(960px);
-      margin-top: rem-calc(50px);
-      margin-bottom: rem-calc(100px);
-    }
-
-    @include above($medium) {
-      text-align: left;
-    }
-
+  // this is a yellow text-marker effect
+  .text-marker-links {
     a {
       border-bottom: none;
-    }
+      position: relative;
 
-    p {
-      font-size: rem-calc(16px);
-      line-height: 1.6;
-
-      @include above(rem-calc(640px)) {
-        font-size: rem-calc(30px);
-      }
-
-      @include above(rem-calc(1400px)) {
-        font-size: rem-calc(35px);
-      }
-    }
-
-    // colored links
-    a {
-      &:first-of-type  { color: $red; }
-      &:nth-of-type(2) { color: $blue }
-      &:nth-of-type(3) { color: $orange }
-      &:nth-of-type(4) { color: $green }
-      &:hover {
-        color: $green;
+      &:before {
+        content: "";
+        height: 120%;
+        width: 100%;
+        background-color: yellow;
+        border: .29em dotted white;
+        position: absolute;
+        top: -5px;
+        left: 0;
+        z-index: -1;
+        transform: skewX(-45deg);
+        filter: blur(2px);
       }
     }
-
   }
 
 }

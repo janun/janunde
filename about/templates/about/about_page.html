@@ -11,15 +11,9 @@
 
 <div class="container userim">
 
-  {% if self.intro_text %}
-    <div class="about-page__intro">
-      {{ self.intro_text|richtext }}
-    </div>
-  {% endif %}
-
   {% if self.content %}
-    <div class="text-container">
-    {% include_block self.content %}
+    <div class="text-container colored-links">
+      {% include_block self.content %}
     </div>
   {% endif %}
 
