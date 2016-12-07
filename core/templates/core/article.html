@@ -9,8 +9,7 @@
 
   <div class="text-container userim">
 
-    <div class="margin-bottom-4">
-      {% include "core/_dateline.html" %}
+    <div class="margin-bottom-2">
       <h1 class="title title--color-{{self.title_color}}"
           itemprop="headline">
         {{ self.title }}
@@ -27,9 +26,7 @@
 
     {% image self.main_image original as image %}
     <link itemprop="image" href="{{ image.url }}">
-
     <link itemprop="publisher" href="#janunOrg"/>
-
   </div>
 
 </article>

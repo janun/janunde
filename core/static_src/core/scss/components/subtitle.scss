@@ -2,10 +2,11 @@
  * @atom subtitle
  */
 .subtitle {
-  font-family: $font-family-serif;
+  font-family: $font-family-sans-serif;
   font-size: rem-calc(20px);
   line-height: rem-calc(30px);
   color: $grey;
+  font-weight: normal;
 
   @include above($medium) {
     margin-top: rem-calc(30px);

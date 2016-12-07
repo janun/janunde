@@ -13,8 +13,12 @@
         </a>
         <link href="{{ fallback_image.url }}" itemprop="image" >
       {% endif %}
-      <a href="{% pageurl self.author %}" class="byline__author-name">von <strong itemprop="name">{{ self.author.title }}</strong></a>
+      <a href="{% pageurl self.author %}" class="byline__author-name">von <span itemprop="name">{{ self.author.title }}</span></a>
+      <span class="byline__published">vom <time itemprop="datePublished" title="{{ self.first_published_at|date:'SHORT_DATETIME_FORMAT' }}" datetime="{{ self.first_published_at|date:"c" }}">{{ self.first_published_at|date:'SHORT_DATE_FORMAT' }}</time></span>
   </div>
 {% else %}
-  <link itemprop="author" href="#janunOrg">
+  <div class="byline">
+    <link itemprop="author" href="#janunOrg">
+    <span class="byline__published">vom <time itemprop="datePublished" title="{{ self.first_published_at|date:'SHORT_DATETIME_FORMAT' }}" datetime="{{ self.first_published_at|date:"c" }}">{{ self.first_published_at|date:'SHORT_DATE_FORMAT' }}</time></span>
+  </div>
 {% endif %}

@@ -1,9 +1,0 @@
-.dateline {
-  font-family: $font-family-sans-serif;
-  font-size: rem-calc(14px);
-  color: $grey;
-
-  @include above($medium) {
-    font-size: rem-calc(20px);
-  }
-}
