@@ -7,24 +7,22 @@ from django.contrib import admin
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
+from wagtail.wagtailsearch.urls.frontend import search
 
-from core.views import search, acme_challenge, tags
+from acme_challenge import urls as acme_challenge_urls
 
+from core.views import tags
 
 
 urlpatterns = [
+    url(r'^', include(acme_challenge_urls)),
+
     url(r'^404/$', page_not_found, kwargs={'exception': Exception("Page not Found")} ),
     url(r'^500/$', server_error ),
-
-    url(r'^.well-known/acme-challenge/', acme_challenge), # for letsencrypt
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^django-admin/', include(admin.site.urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-
-    #url(r'^search/$', search, name='search'),
-
-    #url(r'^(?!(veranstaltungen))', RedirectView.as_view(url='http://janun.de/')),
 
     url(r'^thema/(?P<tagname>\w+)/$', tags, name='tags'),
     url(r'', include(wagtail_urls)),
