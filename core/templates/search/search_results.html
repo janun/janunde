@@ -24,7 +24,20 @@
 
 
   <div class="center-container">
-    <div id="spinner" class="hide big-font blinking-dots">Laden<span>.</span><span>.</span><span>.</span></div>
+    <div id="spinner" class="hide">
+      <div class="big-font blinking-dots">Laden<span>.</span><span>.</span><span>.</span></div>
+      <div class="pagination"></div>
+      <div class="card-grid margin-top-1">
+        {% for i in "123" %}
+          <div class="bigcard">
+            <div class="bigcard__inner">
+              <div class="bigcard__image-placeholder"></div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
     <div id="searchresults">
       {% include "search/_search_results.html" %}
     </div>

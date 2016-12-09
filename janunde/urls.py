@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^documents/', include(wagtaildocs_urls)),
 
     url(r'^search/', search, {
-            'results_per_page': 10,
+            'results_per_page': 9,
             'template': "search/search_results.html",
             'template_ajax': "search/_search_results.html",
         }, name="search"),
