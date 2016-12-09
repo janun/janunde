@@ -1,7 +1,11 @@
+{% load wagtailcore_tags wagtailsearchpromotions_tags %}
 {% load render_partial %}
 
-{% if search_results %}
-  {% with num_results=search_results.paginator.count %}
+{% get_search_promotions query_string as search_promotions %}
+
+
+{% if search_results or search_promotions %}
+  {% with num_results=search_results.paginator.count|add:search_promotions.count %}
     <div class="hide@until-medium">
       {% if num_results == 1 %}
         <div class="big-font">Genau <strong>ein Ergebnis!</strong></div>
@@ -19,6 +23,9 @@
   {% include "search/_pagination.html" %}
 
   <div class="card-grid margin-top-1 clear-after">
+    {% for search_promotion in search_promotions %}
+      {% render_partial search_promotion.page %}
+    {% endfor %}
     {% for object in search_results %}
       {% render_partial object.specific %}
     {% endfor %}

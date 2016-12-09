@@ -14,7 +14,7 @@ class PartialNode(template.Node):
 
     def render(self, context):
         try:
-            object = self.object.resolve(context)
+            object = self.object.resolve(context).specific
         except template.VariableDoesNotExist:
             return ''
         template_name = object.partial_template_name
