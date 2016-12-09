@@ -3,26 +3,38 @@
 
   &:before {
     @extend .icon-magnifier;
-    color: $aluminum;
-    font-size: 14px;
+    color: $brown;
+    font-size: 16px;
     position: absolute;
     height: 100%;
-    top: 6px;
-    left: 10px;
+    top: 4px;
+    left: 0px;
   }
 
   &__input {
-    width: 100px;
-    border: 1px solid $aluminum;
+    width: 75px;
+    appearance: none;
+    border: none;
+    font-size: 16px;
+    //border: 1px solid $aluminum;
+    // background-color: rgba($green, 0.3);
     color: $brown;
-    border-radius: 5px;
-    padding: 4px 15px 4px 30px;
-    transition: width 0.1s;
+    // border-radius: 5px;
+    padding: 4px 4px 4px 20px;
+    transition: all 0.1s;
 
     &:focus, &[value] {
       width: 130px;
-      border-color: $grey;
+      // height: 30px;
+      // padding: 10px 10px 10px 30px;
+      // font-size: 20px;
+      // border-color: $grey;
       outline: none;
+      border-bottom: 1px solid $brown;
+
+      &::placeholder {
+        color: $white;
+      }
     }
 
     &::-webkit-search-cancel-button {
@@ -30,7 +42,7 @@
     }
 
     &::placeholder {
-      color: $aluminum;
+      color: $brown;
     }
   }
 }
