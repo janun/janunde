@@ -20,13 +20,9 @@
     transition: width 0.1s;
 
     &:focus, &[value] {
-      width: 140px;
+      width: 130px;
       border-color: $grey;
       outline: none;
-
-      @include above($medium) {
-        width: 200px;
-      }
     }
 
     &::-webkit-search-cancel-button {
