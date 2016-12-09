@@ -92,8 +92,11 @@ class OfficePage(BasePage):
         StreamFieldPanel('text'),
     ]
 
-    search_fields = [
-        index.SearchField('title', partial_match=True),
+    search_fields = BasePage.search_fields + [
+        index.SearchField('text'),
+        index.SearchField('mail'),
+        index.SearchField('phone'),
+        index.SearchField('address'),
     ]
 
     class Meta:
@@ -136,6 +139,13 @@ class PersonPage(BasePage):
 
     objects = PersonPageManager()
 
+    search_fields = BasePage.search_fields + [
+        index.SearchField('text'),
+        index.SearchField('mail'),
+        index.SearchField('phone'),
+        index.SearchField('role'),
+    ]
+
     content_panels = [
         FieldPanel('title'),
         ImageChooserPanel('photo'),
@@ -144,10 +154,6 @@ class PersonPage(BasePage):
         FieldPanel('phone', widget=PhoneNumberInternationalFallbackWidget),
         StreamFieldPanel('text'),
         FieldPanel('office'),
-    ]
-
-    search_fields = [
-        index.SearchField('title', partial_match=True),
     ]
 
     class Meta:
