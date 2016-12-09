@@ -237,6 +237,7 @@ class StandardPage(BasePage):
     )
 
     search_fields = BasePage.search_fields + [
+        index.SearchField('subtitle'),
         index.SearchField('body'),
     ]
 
@@ -392,6 +393,15 @@ class Group(BasePage):
     )
 
     objects = GroupManager()
+
+    search_fields = BasePage.search_fields + [
+        index.SearchField('subtitle'),
+        index.SearchField('body'),
+        index.SearchField('address'),
+        index.SearchField('contact_mail'),
+        index.SearchField('contact_name'),
+        index.SearchField('website'),
+    ]
 
     def get_image(self):
         return self.logo
