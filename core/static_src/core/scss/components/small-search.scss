@@ -1,0 +1,40 @@
+.small-search {
+  position: relative;
+
+  &:before {
+    @extend .icon-magnifier;
+    color: $aluminum;
+    font-size: 14px;
+    position: absolute;
+    height: 100%;
+    top: 6px;
+    left: 10px;
+  }
+
+  &__input {
+    width: 100px;
+    border: 1px solid $aluminum;
+    color: $brown;
+    border-radius: 5px;
+    padding: 4px 15px 4px 30px;
+    transition: width 0.1s;
+
+    &:focus, &[value] {
+      width: 140px;
+      border-color: $grey;
+      outline: none;
+
+      @include above($medium) {
+        width: 200px;
+      }
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+
+    &::placeholder {
+      color: $aluminum;
+    }
+  }
+}

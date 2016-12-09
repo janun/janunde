@@ -1,14 +1,16 @@
 {% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
 
 <div class="pageheader">
-  <h1>{% if self.heading %}{{ self.heading }}{% else %}{{ self.title }}{% endif %}</h1>
-  {% if self.header_image %}
-    {% image self.header_image height-100 as image %}
-    <img class="pageheader__image"
-         srcset="{{ self.header_image|srcset:'height-100 height-200 height-300 height-400' }}"
-         sizes="{{ image.width }}"
-         src="{{ image.url }}" alt="{{ image.alt }}">
-    {% image object.main_image original as orig_image %}
-    <link itemprop="image" href="{{ orig_image.url }}">
-  {% endif %}
+  <div class="container">
+    <h1 class="pageheader__heading">{% if self.heading %}{{ self.heading }}{% else %}{{ self.title }}{% endif %}</h1>
+    {% if self.header_image %}
+      {% image self.header_image height-100 as image %}
+      <img class="pageheader__image"
+           srcset="{{ self.header_image|srcset:'height-100 height-200 height-300 height-400' }}"
+           sizes="{{ image.width }}"
+           src="{{ image.url }}" alt="{{ image.alt }}">
+      {% image object.main_image original as orig_image %}
+      <link itemprop="image" href="{{ orig_image.url }}">
+    {% endif %}
+  </div>
 </div>

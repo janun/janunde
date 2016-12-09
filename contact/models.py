@@ -61,6 +61,8 @@ class OfficePageManager(PageManager):
 
 class OfficePage(BasePage):
 
+    partial_template_name = "contact/_office.html"
+
     photo = models.ForeignKey(
         Image,
         null=True,
@@ -104,6 +106,8 @@ class PersonPageManager(PageManager):
          return super().get_queryset().order_by('title')
 
 class PersonPage(BasePage):
+    partial_template_name = "contact/_person.html"
+
     text = StreamField(
         StandardStreamBlock(),
         blank=True,

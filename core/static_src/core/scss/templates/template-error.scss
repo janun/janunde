@@ -37,6 +37,8 @@
     margin-bottom: 30px;
     margin-left: auto;
     margin-right: auto;
+    color: $brown;
+    border-bottom-color: $brown !important;
 
     @include above($medium) {
       font-size: 2rem;

@@ -18,9 +18,9 @@
 
     <div class="text-align-center">
       <p>Vielleicht findest Du was Du suchst, über unsere Suche?</p>
-      <form action="/search">
-        <input name="query" type="search" autofocus
-               class="template-error__searchinput"
+      <form action="{% url 'search' %}">
+        <input name="q" type="search" autofocus
+             class="template-error__searchinput"
              placeholder="Suchbegriff" value="{{ request.path|pathtosearch }}">
         <input type="submit"
           class="button button--filled color-green template-error__searchsubmit"

@@ -24,6 +24,12 @@ urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
 
+    url(r'^search/', search, {
+            'results_per_page': 10,
+            'template': "search/search_results.html",
+            'template_ajax': "search/_search_results.html",
+        }, name="search"),
+
     url(r'^thema/(?P<tagname>\w+)/$', tags, name='tags'),
     url(r'', include(wagtail_urls)),
 ]

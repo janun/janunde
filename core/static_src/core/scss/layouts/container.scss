@@ -1,6 +1,7 @@
 $container-margin: rem-calc(10px);
+$container-width-medium: rem-calc(960);
 
-@mixin container($width: rem-calc(960)) {
+@mixin container($width: $container-width-medium) {
   margin-left: $container-margin;
   margin-right: $container-margin;
 
@@ -30,5 +31,4 @@ $container-margin: rem-calc(10px);
     margin-left: auto;
     margin-right: auto;
   }
-
 }

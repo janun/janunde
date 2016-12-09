@@ -33,6 +33,13 @@
 
 
     <div class="float-right">
+      <!-- Search -->
+      <form class="navbar__item small-search" action="{% url 'search' %}" method="get">
+        <input class="small-search__input" type="search"
+               placeholder="Suche" autocomplete="off"
+               name="q"{% if query_string %} value="{{ query_string }}"{% endif %}>
+      </form>
+
       <!-- menu toggle button -->
       {% if menuitems %}
         <div class="navbar__item">

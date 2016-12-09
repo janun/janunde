@@ -1,5 +1,6 @@
 {% extends "core/__base.html" %}
 {% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
+{% load render_partial %}
 
 {% block body_class %}person-index-page{% endblock %}
 
@@ -21,7 +22,7 @@
     <div class="center-container margin-top-3">
         <div class="card-grid">
           {% for office in offices %}
-            {% include 'contact/_office.html' with object=office %}
+            {% render_partial office %}
           {% endfor %}
         </div>
     </div>
@@ -40,7 +41,7 @@
     <div class="center-container">
       <div class="card-grid">
         {% for person in people %}
-          {% include 'contact/_person.html' %}
+          {% render_partial person %}
         {% endfor %}
       </div>
     </div>

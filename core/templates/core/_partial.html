@@ -1,35 +1,41 @@
-{% load wagtailcore_tags wagtailimages_tags srcset %}
+{% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff humanize %}
 
-<article class="{% block partial-class %}panel panel--fixed-height@medium{% endblock %}">
+<div class="bigcard click-area">
 
-  {% if object.main_image %}
-    <div class="image image--fixed-height@medium
-                panel__negative-margin-all overlay overlay--white-box">
-      <a href="{% pageurl object %}">
-        {% image object.main_image fill-320x192 jpg as fallback_image %}
-        <img src="{{ fallback_image.url }}"
-          srcset="{{ object.main_image|srcset:'fill-320x192|jpg fill-640x384|jpg fill-1280x768|jpg fill-695x417|jpg fill-1792x1075|jpg' }}"
-          sizes="(min-width: 40em) and (max-width: 64em) 33vw, (min-width: 64em) 20em, 100vw"
-          alt="{{ fallback_image.alt }}">
-      </a>
-      <div class="overlay__content add-panel-padding--on-sides add-panel-padding--on-bottom">
-        {% block overlay %}
-          <h3><a href="{% pageurl object %}">{{ object.title }}</a></h3>
-          {% if object.related_group %}
-            Gruppe: {{ object.related_group.title }}
-          {% endif %}
-        {% endblock %}
-      </div>
-    </div>
-  {% else %}
-    <h3><a href="{% pageurl object %}">{{ object.title }}</a></h3>
-    {% if object.related_group %}
-      Gruppe: {{ object.related_group.title }}
+  <div class="bigcard__inner">
+
+    <a class="click-area__area-link" href="{% pageurl object %}"
+       itemprop="url" title="{{ object.title }}">
+      {{ object.title }}
+    </a>
+
+    {% if object.main_image %}
+      {% image object.main_image fill-300x150 as image %}
+      <img class="bigcard__image"
+           srcset="{{ object.main_image|srcset:'fill-300x150 fill-600x300 fill-900x450 fill-1200x600' }}"
+           sizes="18.75em"
+           src="{{ image.url }}" alt="{{ image.alt }}">
+      {% image object.main_image original as orig_image %}
+      <link itemprop="image" href="{{ orig_image.url }}">
+    {% else %}
+      <div class="bigcard__image-placeholder bigcard__image-placeholder--color-{{ object.color }}"></div>
     {% endif %}
-  {% endif %}
 
-  {% block content %}{% endblock %}
+    <div class="bigcard__content">
+      <h2 class="bigcard__title" itemprop="name">{{ object.title|softhyphen }}</h2>
+      {% if object.subtitle %}
+        <p class="bigcard__subtitle">{{ object.subtitle|softhyphen }}</p>
+      {% endif %}
+      {% if object.get_description %}
+        <p class="bigcard__text">{{ object.get_description|softhyphen }}</p>
+      {% endif %}
+    </div>
 
+    <div class="bigcard__footer">
+      <a href="{% pageurl object %}" class="bigcard__button">Weiterlesen</a>
+      <span class="">{{ object.first_published_at|naturaltime }}</span>
+    </div>
 
+  </div>
 
-</article>
+</div>
