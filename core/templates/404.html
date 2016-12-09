@@ -17,16 +17,14 @@
     </h1>
 
     <div class="text-align-center">
-      <p>Vielleicht findest Du was Du suchst, über unsere Suche?</p>
-      <form action="{% url 'search' %}">
-        <input name="q" type="search" autofocus
-             class="template-error__searchinput"
-             placeholder="Suchbegriff" value="{{ request.path|pathtosearch }}">
-        <input type="submit"
-          class="button button--filled color-green template-error__searchsubmit"
-          value="Suche">
-      </form>
+      <p>Offenbar suchst du nach »{{ request.path }}«.</p>
+      <p>Probier doch Folgendes:</p>
+
+      <a class="button button--filled color-green" href="{% url 'search' %}?q={{ request.path|pathtosearch }}">Suche</a><br>
+      <a class="button button--filled color-orange" href="http://alt.janun.de{{ request.path }}">alte Website probieren</a><br>
+      <a class="button color-green" href="/">Startseite</a>
     </div>
+
 
   </div>
 </div>
