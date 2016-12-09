@@ -95,7 +95,7 @@ class OfficePage(BasePage):
     search_fields = BasePage.search_fields + [
         index.SearchField('text'),
         index.SearchField('mail'),
-        index.SearchField('phone'),
+        #index.SearchField('phone'), # currently unable to serialize
         index.SearchField('address'),
     ]
 
@@ -142,7 +142,7 @@ class PersonPage(BasePage):
     search_fields = BasePage.search_fields + [
         index.SearchField('text'),
         index.SearchField('mail'),
-        index.SearchField('phone'),
+        #index.SearchField('phone'), # currently unable to serialize
         index.SearchField('role'),
     ]
 
