@@ -57,7 +57,10 @@
           resetTimer(this.timer);
           this.timer = setTimeout(function() {
             var q = $('#searchinput').val();
-            $('#searchresults').html('&nbsp;').load('{% url "search" %}?q=' + encodeURIComponent(q) );
+            $('#searchresults').html('&nbsp;')
+              .load('{% url "search" %}?q=' + encodeURIComponent(q), function () {
+                window.history.pushState({}, "Suche", '{% url "search" %}?q=' + encodeURIComponent(q));
+              });
           }, 300);
           previousValue = $(this).val();
         }
