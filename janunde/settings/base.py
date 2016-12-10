@@ -99,6 +99,7 @@ TEMPLATES = [
                 'janunde.context_processors.betabanner',
                 'janunde.context_processors.mouseflow_id',
                 'janunde.context_processors.piwik_url',
+                'janunde.context_processors.google_verification_id',
             ],
         },
     },

@@ -42,3 +42,11 @@ def piwik_url(request):
         }
     except AttributeError:
         return {}
+
+def google_verification_id(request):
+    try:
+        return {
+            'GOOGLE_VERIFICATION_ID': settings.GOOGLE_VERIFICATION_ID,
+        }
+    except AttributeError:
+        return {}
