@@ -389,7 +389,7 @@ class EventPage(Page):
                     content_type='text/calendar',
                 )
                 response['Content-Disposition'] = 'attachment; filename=' + \
-                    self.slug + '.ics'
+                    self.slug.encode("ascii", errors="replace").decode() + '.ics'
                 return response
             else:
                 raise Http404
