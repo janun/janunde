@@ -1,8 +1,9 @@
 $bigcard-padding: rem-calc(20px);
 $bigcard-border-radius: rem-calc(5px);
-$bigcard-width: rem-calc(300px);
-$bigcard-height: rem-calc(390px);
+$bigcard-width: rem-calc(290px);
+$bigcard-height: 4/3 * $bigcard-width;
 $bigcard-image-height: rem-calc(150px);
+$bigcard-margin-bottom: rem-calc(60px);
 
 $bigcard-background: $white;
 $bigcard-text-color: $grey;
@@ -80,7 +81,7 @@ $related-group-size: rem-calc(70px);
   background-color: $bigcard-background;
   width: $bigcard-width;
   height: $bigcard-height;
-  margin-bottom: 2*$card-grid-margin;
+  margin-bottom: $bigcard-margin-bottom;
   border-radius: $bigcard-border-radius;
   @include shadow(1);
   transition: box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
