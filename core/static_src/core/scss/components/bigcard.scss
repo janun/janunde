@@ -62,6 +62,7 @@ $related-group-size: rem-calc(70px);
     font-size: rem-calc(14px);
     font-weight: normal;
     margin-bottom: rem-calc(5px);
+    margin-top: rem-calc(-5px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -238,7 +239,7 @@ $related-group-size: rem-calc(70px);
     margin-right: auto;
     left: 0;
     right: 0;
-    top: $bigcard-image-height - $related-group-size * 3/4;
+    top: $bigcard-image-height - $related-group-size * 5/6;
   }
 
   &__top-text {
