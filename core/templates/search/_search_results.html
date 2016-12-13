@@ -8,11 +8,11 @@
   {% with num_results=search_results.paginator.count|add:search_promotions.count %}
     <div class="hide@until-medium">
       {% if num_results == 1 %}
-        <div class="big-font">Genau <strong>ein Ergebnis!</strong></div>
+        <div class="big-font">Genau <strong class="color-blue">ein Ergebnis!</strong></div>
       {% elif num_results < 11 %}
-        <div class="big-font">Okay, wir haben <strong>{{ num_results }} Ergebnis{{ num_results|pluralize:"se" }}</strong> für dich gefunden:</div>
+        <div class="big-font"><span class="color-blue">Okay</span>, wir haben <strong class="color-blue">{{ num_results }} Ergebnis{{ num_results|pluralize:"se" }}</strong> für dich gefunden:</div>
       {% else %}
-        <div class="big-font">Uiuiui, wir haben <strong>{{ num_results }} Ergebnis{{ num_results|pluralize:"se" }}</strong> für dich gefunden:</div>
+        <div class="big-font">Uiuiui, wir haben <strong class="color-blue">{{ num_results }} Ergebnis{{ num_results|pluralize:"se" }}</strong> für dich gefunden:</div>
       {% endif %}
     </div>
     <div>
@@ -38,13 +38,13 @@
     {% if query_string %}
       <i class="icon-ghost color-red" style="font-size: 7rem" aria-hidden="true"></i>
       <div class="margin-bottom-3 margin-top-1 big-font">
-        <div class="color-red">Sorry, Weltenbummler!</div>
+        <div class="color-red">Sorry!</div>
         <div>Wir haben leider nichts für dich finden können…</div>
       </div>
     {% else %}
       <i class="icon-magnifier margin-right-1 color-green" style="font-size: 7rem" aria-hidden="true"></i>
       <div class="margin-bottom-3 margin-top-1 big-font">
-        <div>Gib deinen Suchbegriff ein und los geht’s…</div>
+        <div>Gib deinen Suchbegriff ein <span class="color-green">und los geht’s…</span></div>
       </div>
     {% endif %}
   </div>
