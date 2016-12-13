@@ -34,15 +34,9 @@
   {% endif %}
 {% else %}
   {% if events %}
-    <h2 id="aktuell" class="area-title onpagemenu-scrollmark">Nächste Veranstaltungen</h2>
-    <div class="card-grid">
-      {% for event in events|slice:":3" %}
-        {% render_partial event %}
-      {% endfor %}
-    </div>
-    {% regroup events|slice:"3:" by month as events_by_month %}
+    {% regroup events by month as events_by_month %}
     {% for events in events_by_month %}
-      <h2 id="{{ month|date:"FY" }}" class="area-title onpagemenu-scrollmark">{{ events.grouper|format_month }}</h2>
+      <h2 id="{{ events.grouper|date:"Y-m" }}" class="area-title">{{ events.grouper|format_month }}</h2>
       <div class="card-grid">
         {% for event in events.list %}
           {% render_partial event %}
