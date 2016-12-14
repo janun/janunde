@@ -167,7 +167,7 @@ gulp.task('generate-favicon', function(done) {
 			},
 			safariPinnedTab: {
 				pictureAspect: 'silhouette',
-				themeColor: '#46bb00'
+				themeColor: '#3a9d00'
 			}
 		},
 		settings: {
@@ -177,7 +177,7 @@ gulp.task('generate-favicon', function(done) {
 		},
     versioning: {
       paramName: 'v',
-      paramValue: 'YAKyYP2owb'
+      paramValue: 'asdasdaksd'
     },
 		markupFile: FAVICON_DATA_FILE
 	}, function() {
