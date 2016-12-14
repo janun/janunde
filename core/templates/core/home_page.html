@@ -19,11 +19,9 @@
       <div class="clear-after">
         <h2 class="area-title area-title--centered">Aktuelle Highlights</h2>
         <div class="card-grid card-grid--center-one">
-          {% with "green" as card_color %}
-            {% for highlight in highlights %}
-              {% render_partial highlight.highlighted_page.specific %}
-            {% endfor %}
-          {% endwith %}
+          {% for highlight in highlights %}
+            {% render_partial highlight.highlighted_page.specific %}
+          {% endfor %}
         </div>
       </div>
     {% endif %}
