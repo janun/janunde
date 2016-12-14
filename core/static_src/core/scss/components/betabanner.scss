@@ -15,6 +15,13 @@
   position: relative;
   z-index: 1001;
   @include shadow(1);
+  height: rem-calc(60px);
+  transition: 0.2s height;
+  overflow-y: hidden;
+
+  &--hidden {
+    height: 0;
+  }
 
   &__inner {
     @include container;

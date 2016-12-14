@@ -1,35 +1,44 @@
-<div class="betabanner" id="betabanner">
-  <div class="betabanner__inner">
-
-    <a class="hide@until-medium betabanner__close float-right hide@no-js" href="#" title="Dieses Banner schließen">×</a>
-
-    <span class="hide@until-medium">
-      Willkommen auf unserer neuen Website! Wir freuen uns über dein
-      <a id="toggleFeedback" href="mailto:admin@janun.de?subject=Feedback zur neuen JANUN-Website">Feedback</a>.
-      <a class="float-right" href="http://alt.janun.de/">zur alten Seite</a>
-    </span>
-
-    <span class="hide@medium">
-      Willkommen!
-      <a id="toggleFeedback" href="mailto:admin@janun.de?subject=Feedback zur neuen JANUN-Website">Feedback?</a>
-      <a class="float-right" href="http://alt.janun.de/">alte Seite</a>
-    </span>
-
+{% if not request.COOKIES.hideBetabanner %}
+  <div class="betabanner" id="betabanner">
+    <div class="betabanner__inner">
+      <a class="hide@until-medium betabanner__close float-right hide@no-js"
+         onclick="closeBetabanner()"
+         href="#" title="Dieses Banner schließen">×</a>
+      <span class="hide@until-medium">
+        Willkommen auf unserer neuen Website! Wir freuen uns über dein
+        <a id="toggleFeedback" href="mailto:admin@janun.de?subject=Feedback zur neuen JANUN-Website">Feedback</a>.
+        <a class="float-right" href="http://alt.janun.de/">zur alten Seite</a>
+      </span>
+      <span class="hide@medium">
+        Willkommen!
+        <a id="toggleFeedback" href="mailto:admin@janun.de?subject=Feedback zur neuen JANUN-Website">Feedback?</a>
+        <a class="float-right" href="http://alt.janun.de/">alte Seite</a>
+      </span>
+    </div>
   </div>
-</div>
-<script>
-  function readCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-      var c = ca[i];
-      while (c.charAt(0)==' ') c = c.substring(1,c.length);
-      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-  }
 
-  if (readCookie('hide-betabanner')) {
-    document.getElementById('betabanner').style.display = 'none';
-  }
-</script>
+  <script>
+    function readCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
+    }
+
+    if (readCookie('hideBetabanner')) {
+      document.getElementById('betabanner').style.display = 'none';
+    }
+
+    function closeBetabanner() {
+      document.getElementById('betabanner').classList.add('betabanner--hidden');
+      var d = new Date();
+      d.setTime(d.getTime() + 30*60*1000); // 30 minutes
+      document.cookie = 'hideBetabanner=1;path=/;expires='+d.toGMTString()+';';
+      return false;
+    }
+  </script>
+{% endif %}
