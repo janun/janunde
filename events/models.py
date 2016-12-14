@@ -98,12 +98,15 @@ class EventPageManager(PageManager):
         )
 
 
+# TODO: rebase this to PageBase
 class EventPage(Page):
     """
     represents an event
     """
     subpage_types = []
     parent_page_types = ['EventIndexPage']
+
+    og_type = 'article'
 
     event_page_tags = ClusterTaggableManager("Tags",
         through=JanunTag, blank=True,

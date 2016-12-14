@@ -77,6 +77,7 @@ class BasePage(Page):
      * The short partial can be used for listings where object density is high.
      * The medium partial gives more insight into the content of the page.
     """
+    og_type = 'article'
     partial_template_name = 'core/_partial.html'
     medium_partial_template_name = 'core/_medium_partial.html'
 
@@ -285,6 +286,25 @@ class HomePage(BasePage):
     (gets created by a migration)
     """
     is_creatable = False
+    og_type = 'website'
+
+    search_image = models.ForeignKey(
+        Image,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+',
+        verbose_name=_("Suchmaschinen-Bild"),
+        help_text=_("Wird z.B. angezeigt, wenn jmd. www.janun.de bei Facebook postet")
+    )
+
+    # content_panels = BasePage.content_panels + [
+    #
+    # ]
+
+    promote_panels = BasePage.promote_panels + [
+        ImageChooserPanel('search_image')
+    ]
 
     class Meta:
         verbose_name = _("Startseite")
@@ -310,11 +330,8 @@ class HomePage(BasePage):
         return context
 
 
-    edit_handler = TabbedInterface([
-        ObjectList([
-            FieldPanel('title', classname="full title"),
-        ], heading=_("Inhalt"))
-    ])
+    def get_image(self):
+        return self.search_image
 
 
     def get_description(self):
