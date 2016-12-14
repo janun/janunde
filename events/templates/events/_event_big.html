@@ -33,7 +33,7 @@
            {% if object.related_group.logo %}
              {% image object.related_group.logo max-50x50 as group_logo %}
              <img class="related-group__image" src="{{ group_logo.url }}"
-                  srcset="{{ object.related_group.logo|srcset:'max-50x50 max-100x100' }}"
+                  srcset="{{ object.related_group.logo|srcset:'max-50x50 max-100x100 max-150x150 max-200x200' }}"
                   sizes="50px"
                   alt="Logo {{ object.related_group.title }}">
            {% endif %}
