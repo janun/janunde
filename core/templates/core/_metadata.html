@@ -1,6 +1,7 @@
 {% load wagtailimages_tags %}
 
-<meta name="description" content="{{ self.get_description }}">
+
+<meta name="description" content="{{ self.get_description|default:"" }}">
 <meta name="last-modified" content="{{ self.latest_revision_created_at|date:"c" }}">
 <meta name="date" content="{{ self.first_published_at|date:"c" }}">
 <meta name="twitter:card" content="summary_large_image">
@@ -9,11 +10,11 @@
   <meta name="twitter:creator" content="{{ self.author.twitter }}">
 {% endif %}
 <meta name="twitter:title" content="{{ self.title }}">
-<meta name="twitter:description" content="{{ self.get_description }}">
+<meta name="twitter:description" content="{{ self.get_description|default:"" }}">
 <meta property="og:site_name" content="JANUN e.V.">
 <meta property="og:title" content="{{ self.title }}">
 <meta property="og:type" content="{{ self.og_type }}">
-<meta property="og:description" content="{{ self.get_description }}">
+<meta property="og:description" content="{{ self.get_description|default:"" }}">
 <meta property="og:url" content="{{ self.full_url }}">
 {% if self.get_image %}
   {% image self.get_image fill-1200x630 as facebook_image %}
