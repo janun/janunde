@@ -71,17 +71,19 @@ def _(str):
 
 
 class BasePage(Page):
-    """basic functionality for all our pages
-
-    Every page has a (short) partial and a medium partial template:
-     * The short partial can be used for listings where object density is high.
-     * The medium partial gives more insight into the content of the page.
-    """
+    """basic functionality for all our pages"""
     og_type = 'article'
     partial_template_name = 'core/_partial.html'
     medium_partial_template_name = 'core/_medium_partial.html'
-
     is_creatable = False
+
+    def get_description(self):
+        """Short description text for SEO, overwrite in subclass"""
+        return self.search_description
+
+    def get_image(self):
+        """image for SEO, overwrite in subclass"""
+        return None
 
 
 class HighlightManager(models.Manager):
@@ -270,10 +272,14 @@ class StandardPage(BasePage):
     def get_description(self):
         if self.search_description:
             return self.search_description
-        from django.utils.html import strip_tags
+        if self.subtitle:
+            return self.subtitle
+        from django.utils.text import Truncator
+        from bs4 import BeautifulSoup
         for block in self.body:
             if block.block_type == 'paragraph':
-                return strip_tags(block.value.source)
+                text = BeautifulSoup(block.value.source, "html5lib").get_text()
+                return Truncator(text).words(25)
 
     class Meta:
         verbose_name = _("Einfache Seite")
@@ -428,10 +434,12 @@ class Group(BasePage):
             return self.search_description
         if self.subtitle:
             return self.subtitle
-        from django.utils.html import strip_tags
+        from django.utils.text import Truncator
+        from bs4 import BeautifulSoup
         for block in self.body:
             if block.block_type == 'paragraph':
-                return strip_tags(block.value.source)
+                text = BeautifulSoup(block.value.source, "html5lib").get_text()
+                return Truncator(text).words(25)
 
     def get_parent_group(self):
         return Group.objects.parent_of(self).first()
@@ -560,13 +568,13 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
     def get_image(self):
         return self.main_image
 
-    def get_description(self):
-        if self.search_description:
-            return self.search_description
-        from django.utils.html import strip_tags
+    def get_text(self):
+        from bs4 import BeautifulSoup
+        from django.utils.text import Truncator
         for block in self.body:
             if block.block_type == 'paragraph':
-                return strip_tags(block.value.source)
+                text = BeautifulSoup(block.value.source, "html5lib").get_text()
+                return Truncator(text).words(25)
 
     related_group = models.ForeignKey(
         Group,

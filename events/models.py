@@ -266,10 +266,14 @@ class EventPage(Page):
     def get_description(self):
         if self.search_description:
             return self.search_description
-        from django.utils.html import strip_tags
+        if self.subtitle:
+            return self.subtitle
+        from django.utils.text import Truncator
+        from bs4 import BeautifulSoup
         for block in self.content:
             if block.block_type == 'paragraph':
-                return strip_tags(block.value.source)
+                text = BeautifulSoup(block.value.source, "html5lib").get_text()
+                return Truncator(text).words(25)
 
     partial_template_name = "events/_event_big.html"
 

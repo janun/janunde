@@ -1,20 +1,16 @@
 Django==1.10.4
 wagtail==1.7
-
-django-acme==0.2.1
-
+beautifulsoup4>=4.3.2
 Wand==0.4.3
 python-dateutil==2.5.3
 icalendar==3.9.2
 django-phonenumber-field==1.1.0
-
 django-softhyphen==1.1.0
 
-# Dependencies for hosting
+# production
 django-storages==1.4
 boto==2.39.0
-
-# Dependencies for Heroku deployment
+django-acme==0.2.1
 whitenoise==3.2
 brotlipy==0.3.0
 cffi==1.6.0
