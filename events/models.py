@@ -85,14 +85,14 @@ class EventPageManager(PageManager):
 
     def upcoming(self):
         now = timezone.now()
-        return self.get_queryset().filter(
+        return self.get_queryset().live().filter(
             Q(start_datetime__date__gte=now) |
             Q(end_datetime__date__gte=now, late_attendence=True),
         )
 
     def expired(self):
         now = timezone.now()
-        return self.get_queryset().filter(
+        return self.get_queryset().live().filter(
             Q(end_datetime__date__lt=now) |
             Q(start_datetime__date__lt=now, late_attendence=False),
         )
