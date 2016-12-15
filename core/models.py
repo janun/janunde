@@ -69,6 +69,24 @@ def _(str):
     """
     return str
 
+def stream2text(stream, truncate=False):
+    from django.utils.text import Truncator
+    import html2text
+    h = html2text.HTML2Text()
+    h.ignore_links = True
+    for block in stream:
+        if block.block_type == 'paragraph':
+            text = h.handle(block.value.source)
+            if truncate:
+                return Truncator(text).words(truncate)
+            else:
+                return text
+
+def stream2image(stream):
+    for block in stream:
+        if block.block_type == 'image':
+            return block.value['image']
+
 
 class BasePage(Page):
     """basic functionality for all our pages"""
@@ -78,12 +96,28 @@ class BasePage(Page):
     is_creatable = False
 
     def get_description(self):
-        """Short description text for SEO, overwrite in subclass"""
-        return self.search_description
+        """Short description text for SEO"""
+        for attr in ('search_description', 'subtitle', 'role'):
+            if hasattr(self, attr) and getattr(self, attr):
+                return getattr(self, attr)
+        for attr in ('body', 'content', 'text'):
+            if hasattr(self, attr) and getattr(self, attr):
+                return stream2text(getattr(self, attr), 25)
+        if hasattr(type(self)._meta, 'verbose_name'):
+            return type(self)._meta.verbose_name
+        return ""
+
 
     def get_image(self):
-        """image for SEO, overwrite in subclass"""
+        """image for SEO"""
+        for attr in ('main_image', 'logo', 'photo', 'header_image'):
+            if hasattr(self, attr) and getattr(self, attr):
+                return getattr(self, attr)
+        for attr in ('body', 'content', 'text'):
+            if hasattr(self, attr) and getattr(self, attr):
+                return stream2image(getattr(self, attr))
         return None
+
 
 
 class HighlightManager(models.Manager):
@@ -203,9 +237,7 @@ class HeaderMixin(models.Model):
         FieldPanel('heading', classname='title'),
         ImageChooserPanel('header_image'),
     ]
-    def get_image(self):
-        if self.header_image:
-            return self.header_image
+
     class Meta:
         abstract = True
 
@@ -264,23 +296,6 @@ class StandardPage(BasePage):
         ),
     ] + BasePage.promote_panels
 
-    def get_image(self):
-        for block in self.body:
-            if block.block_type == 'image':
-                return block.value['image']
-
-    def get_description(self):
-        if self.search_description:
-            return self.search_description
-        if self.subtitle:
-            return self.subtitle
-        from django.utils.text import Truncator
-        from bs4 import BeautifulSoup
-        for block in self.body:
-            if block.block_type == 'paragraph':
-                text = BeautifulSoup(block.value.source, "html5lib").get_text()
-                return Truncator(text).words(25)
-
     class Meta:
         verbose_name = _("Einfache Seite")
         verbose_name_plural = _("Einfache Seiten")
@@ -335,10 +350,8 @@ class HomePage(BasePage):
         context['more_articles'] = articles.count() > 3
         return context
 
-
     def get_image(self):
         return self.search_image
-
 
     def get_description(self):
         if self.search_description:
@@ -426,21 +439,6 @@ class Group(BasePage):
         index.SearchField('website'),
     ]
 
-    def get_image(self):
-        return self.logo
-
-    def get_description(self):
-        if self.search_description:
-            return self.search_description
-        if self.subtitle:
-            return self.subtitle
-        from django.utils.text import Truncator
-        from bs4 import BeautifulSoup
-        for block in self.body:
-            if block.block_type == 'paragraph':
-                text = BeautifulSoup(block.value.source, "html5lib").get_text()
-                return Truncator(text).words(25)
-
     def get_parent_group(self):
         return Group.objects.parent_of(self).first()
 
@@ -506,11 +504,6 @@ class GroupIndexPage(BasePage, HeaderMixin):
 
         return context
 
-    def get_description(self):
-        if self.search_description:
-            return self.search_description
-        return "Auflistung aller JANUN-Gruppen"
-
     content_panels = [
         FieldPanel('title'),
         MultiFieldPanel(HeaderMixin.panels, "Header"),
@@ -531,12 +524,6 @@ class ArticleIndexPage(BasePage):
         context = super().get_context(request)
         context['articles'] = Article.objects.child_of(self).live()
         return context
-
-    def get_description(self):
-        if self.search_description:
-            return self.search_description
-        return "Auflistung von Artikeln bei JANUN"
-
 
 
 class ArticleManager(PageManager):
@@ -564,9 +551,6 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
     @property
     def partial_template_name(self):
         return "core/_article.html"
-
-    def get_image(self):
-        return self.main_image
 
     def get_text(self):
         from bs4 import BeautifulSoup

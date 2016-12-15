@@ -33,10 +33,6 @@ class EventIndexPage(BasePage, HeaderMixin):
     subpage_types = ['EventPage']
     parent_page_types = ['core.HomePage']
 
-    def get_add_mail(self):
-        from .utils import get_add_mail
-        return get_add_mail()
-
     content_panels = [
         FieldPanel('title'),
         MultiFieldPanel(HeaderMixin.panels, "Header"),
@@ -269,10 +265,12 @@ class EventPage(Page):
         if self.subtitle:
             return self.subtitle
         from django.utils.text import Truncator
-        from bs4 import BeautifulSoup
+        import html2text
+        h = html2text.HTML2Text()
+        h.ignore_links = True
         for block in self.content:
             if block.block_type == 'paragraph':
-                text = BeautifulSoup(block.value.source, "html5lib").get_text()
+                text = h.handle(block.value.source)
                 return Truncator(text).words(25)
 
     partial_template_name = "events/_event_big.html"

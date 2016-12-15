@@ -38,3 +38,15 @@ class AboutPage(BasePage, HeaderMixin):
         for block in self.content:
             if block.block_type == 'image':
                 return block.value['image']
+
+    def get_description(self):
+        if self.search_description:
+            return self.search_description
+        from django.utils.text import Truncator
+        import html2text
+        h = html2text.HTML2Text()
+        h.ignore_links = True
+        for block in self.content:
+            if block.block_type == 'paragraph':
+                text = h.handle(block.value.source)
+                return Truncator(text).words(25)
