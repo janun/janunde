@@ -21,8 +21,9 @@
       <p>Probier doch Folgendes:</p>
 
       <a class="button button--filled color-green" href="{% url 'search' %}?q={{ request.path|pathtosearch }}">Suche</a><br>
-      <a class="button button--filled color-orange" href="http://alt.janun.de{{ request.path }}">alte Website probieren</a><br>
-      <a class="button color-green" href="/">Startseite</a>
+      <a class="button button--filled color-green" href="/">Startseite</a><br>
+      <!-- TODO: only show if not 404 for old page? -->
+      <a class="button color-orange" href="http://alt.janun.de{{ request.path }}">alte Website probieren</a><br>
     </div>
 
 
