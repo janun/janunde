@@ -94,6 +94,9 @@ class EventPageManager(PageManager):
         )
 
 
+from core.forms import ShortTitleForm
+
+
 # TODO: rebase this to PageBase
 class EventPage(Page):
     """
@@ -101,7 +104,7 @@ class EventPage(Page):
     """
     subpage_types = []
     parent_page_types = ['EventIndexPage']
-
+    base_form_class = ShortTitleForm
     og_type = 'article'
 
     event_page_tags = ClusterTaggableManager("Tags",
@@ -285,14 +288,6 @@ class EventPage(Page):
         self.slug = slug
 
         super().clean()
-
-        # title must be short
-        if len(self.title) > 56:
-            raise ValidationError({
-                'title':
-                "Der Titel ist zu lang. Er darf maximal 56 Zeichen "
-                "lang sein. Nutz doch den Untertitel."
-            })
 
         # end_datetime
         if self.end_datetime:

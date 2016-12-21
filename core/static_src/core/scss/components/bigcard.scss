@@ -163,12 +163,13 @@ $related-group-size: rem-calc(70px);
     margin-bottom: 10px;
     margin-top: 0;
     font-size: rem-calc(28.28px);
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-height: rem-calc(70px);
+    max-height: 3 * rem-calc(30px);
     font-weight: bold;
     color: $bigcard-title-color;
+    line-height: rem-calc(30px);
 
     .bigcard--color & {
       color: $bigcard-color-title-color;

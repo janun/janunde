@@ -59,9 +59,11 @@ class OfficePageManager(PageManager):
     def get_queryset(self):
          return super().get_queryset().order_by('title')
 
-class OfficePage(BasePage):
+from core.forms import ShortTitleForm
 
+class OfficePage(BasePage):
     partial_template_name = "contact/_office.html"
+    base_form_class = ShortTitleForm
 
     photo = models.ForeignKey(
         Image,

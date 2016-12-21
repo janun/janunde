@@ -531,11 +531,15 @@ class ArticleManager(PageManager):
          return super().get_queryset().order_by('-first_published_at')
 
 
+from .forms import ShortTitleForm
+
 class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
     """
     An Article
     """
     parent_page_types = ['ArticleIndexPage']
+
+    base_form_class = ShortTitleForm
 
     main_image = models.ForeignKey(
         Image,
