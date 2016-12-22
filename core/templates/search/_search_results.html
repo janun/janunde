@@ -20,9 +20,7 @@
     </div>
   {% endwith %}
 
-  {% include "search/_pagination.html" %}
-
-  <div class="card-grid margin-top-1 clear-after">
+  <div class="card-grid clear-after">
     {% for search_promotion in search_promotions %}
       {% render_partial search_promotion.page %}
     {% endfor %}

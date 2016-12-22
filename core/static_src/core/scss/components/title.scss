@@ -16,6 +16,7 @@
   font-size: rem-calc(39.988px);
   line-height: 1.2;
   font-weight: bold;
+  word-wrap: break-word;
 
   @include above($medium) {
     font-size: rem-calc(56.543px);

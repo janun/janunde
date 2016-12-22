@@ -1,43 +1,22 @@
 .about-page {
 
-  // this background colors links pseudo randomly in red, blue and orange
+// links on the about-page will be shown in a special style
  .rich-text {
     a {
-      color: $white;
-      // display: inline-block;
+      color: $brown;
       padding-top: 7px;
       margin-top: -7px;
       padding-bottom: 2px;
       margin-bottom: -2px;
       padding-left: 5px;
       padding-right: 5px;
-      background-color: $green;
+      background-color: rgba($green, 0.2);
       font-weight: normal;
+      border-bottom: none;
+      border-radius: 5px;
 
       &:hover {
-        background-color: $orange;
-      }
-    }
-  }
-
-  // this is a yellow text-marker effect
-  .text-marker-links {
-    a {
-      border-bottom: none;
-      position: relative;
-
-      &:before {
-        content: "";
-        height: 120%;
-        width: 100%;
-        background-color: yellow;
-        border: .29em dotted white;
-        position: absolute;
-        top: -5px;
-        left: 0;
-        z-index: -1;
-        transform: skewX(-45deg);
-        filter: blur(2px);
+        background-color: rgba($green, 0.4);
       }
     }
   }
