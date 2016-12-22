@@ -4,6 +4,10 @@
   margin-top: rem-calc(32px);
   margin-bottom: rem-calc(32px);
 
+  &:first-of-type {
+    margin-top: 0;
+  }
+
   .userim & {
     position: relative;
     width: 100vw;

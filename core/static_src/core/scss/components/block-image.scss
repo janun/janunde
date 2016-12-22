@@ -28,6 +28,10 @@
     margin-top: rem-calc(40px);
   }
 
+  &:first-of-type {
+    margin-top: 0;
+  }
+
 
   .userim &--over-text-width {
     position: relative;

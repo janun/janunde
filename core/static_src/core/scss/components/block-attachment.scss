@@ -31,6 +31,10 @@
   background-color: $white;
   box-shadow: rem-calc(0 1px 2px) rgba($black, 0.1);
 
+  &:first-of-type {
+    margin-top: 0;
+  }
+
   // // wider than parent
   // .userim & {
   //   @include above(rem-calc(830px)) {

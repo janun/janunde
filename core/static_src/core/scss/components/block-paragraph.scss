@@ -80,5 +80,9 @@
     }
   }
 
+}
 
+// special formatting for the first h2 on the page
+.block-paragraph:first-of-type h2:first-of-type {
+  margin-top: 0;
 }
