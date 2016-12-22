@@ -150,7 +150,8 @@ $related-group-size: rem-calc(70px);
 
   &__content {
     padding: $bigcard-padding / 2 $bigcard-padding;
-    height: $bigcard-height - $bigcard-image-height - rem-calc(30px) - rem-calc(30px);
+    padding-bottom: 0;
+    height: rem-calc(195px);
     overflow: hidden;
     text-overflow: ellipsis;
 
