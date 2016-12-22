@@ -1,0 +1,126 @@
+.block-several_images {
+  position: relative;
+  width: 100%;
+
+  margin-bottom: rem-calc(30px);
+  margin-top: rem-calc(30px);
+
+  @include above($medium) {
+    margin-bottom: rem-calc(60px);
+    margin-top: rem-calc(60px);
+  }
+  .userim & {
+    position: relative;
+    width: 100vw;
+    left: calc( 50% - 50vw );
+
+    @include above(rem-calc(500px)) {
+      width: 100%;
+      left: inherit;
+    }
+
+    @include above(rem-calc(830px)) {
+      width: rem-calc(830px);
+      margin-left: rem-calc(-95px);
+      margin-right: rem-calc(-95px);
+      left: inherit;
+    }
+  }
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+
+.images {
+  font-size: 0; // hiding newlines between __item's
+
+  &__item {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    @include above($medium) {
+      padding: rem-calc(5px);
+    }
+    @include until($medium) {
+      margin-bottom: rem-calc(15px)
+    }
+  }
+
+  @include above($medium) {
+    &--2 &__item {
+      width: 50%;
+    }
+    &--3 &__item {
+      width: 33%;
+    }
+    &--4 &__item {
+      width: 25%;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+
+    &:before { // grey area while loading
+      display: block;
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background-color: #ddd;
+    }
+  }
+
+  &__attribution {
+    white-space: nowrap;
+    font-family: $font-family-serif;
+    color: $grey;
+    font-style: normal;
+    font-size: rem-calc(12px);
+    line-height: rem-calc(14px);
+  }
+
+  &__caption {
+    margin-top: rem-calc(6px);
+    font-family: $font-family-serif;
+    color: $brown;
+    font-style: italic;
+    font-size: rem-calc(14px);
+    line-height: rem-calc(20px);
+  }
+
+  .userim &__caption {
+    @include until($medium) {
+      margin-left: $container-margin;
+      margin-right: $container-margin;
+    }
+  }
+
+  &--1 &__caption {
+    @include above($medium) {
+      margin-top: rem-calc(12px);
+      font-size: rem-calc(18px);
+      line-height: rem-calc(30.6);
+    }
+  }
+  &--4 &__caption, &--4 &__attribution {
+    @include above($medium) {
+      font-size: rem-calc(10px);
+    }
+  }
+
+  .userim &--1 &__caption {
+    @include above(rem-calc(640px)) {
+      max-width: rem-calc(640px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+}

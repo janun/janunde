@@ -1,3 +1,1 @@
-{% load wagtailimages_tags srcset %}
-
-{% include "core/_image.html" with image=value.image caption=value.caption size=value.size %}
+{% include "core/_image.html" with class='images__item' image=value.image caption=value.caption srcset='width-300 width-600 width-900' sizes='(min-width: 830px) 830px, 100vw' %}

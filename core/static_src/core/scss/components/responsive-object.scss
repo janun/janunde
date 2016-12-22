@@ -1,5 +1,6 @@
 // padding-bottom hack
 .responsive-object {
+  display: block;
   position: relative;
   background-color: #ddd;
   //padding-bottom is set inline
@@ -13,10 +14,4 @@
     width: 100%;
     height: 100%;
   }
-}
-
-
-.panel .block-embedded_video {
-  margin-left: -$panel_padding;
-  margin-right: -$panel_padding;
 }

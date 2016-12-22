@@ -1,43 +1,19 @@
 {% load wagtailimages_tags srcset %}
-
-{% image image original as original_image %}
-
-<figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject"
-        class="block-image--{{ size }}">
-  <a href="{{ original_image.url }}">
-    {% if size == 'screen-width' %}
-      <div class="block-image__wrapper" >
-        <picture>
-          <source media="(min-width: 40em)"
-                  srcset="{{ image|srcset:'fill-512x180 fill-1024x360 fill-1280x450 fill-1920x675 fill-2560x900' }}"
-                  sizes="100vw">
-          <source srcset="{{ image|srcset:'fill-320x200 fill-640x400 fill-960x600 fill-1280x800' }}"
-                  sizes="100vw">
-          <img src="{{ original_image.url }}" alt="{{ original_image.alt }}" class="block-image__image">
-        </picture>
-      </div>
-    {% else %}
-      <div class="block-image__wrapper"
-           style="padding-bottom: {{ original_image.aspect|stringformat:"f" }}%">
-        <img src="{{ original_image.url }}"
-          srcset="{{ image|srcset:'width-320 width-640 width-1280 width-695 width-1792' }}"
-          {% if size == 'over-text-width' %}
-            sizes="(min-width: 60em) 51.875em, (min-width: 40em) 40em, 100vw"
-          {% else %}
-            sizes="(min-width: 60em) 40em, (min-width: 40em) 40em, 100vw"
-          {% endif %}
-          alt="{{ original_image.alt }}"
-          class="block-image__image">
-      </div>
-    {% endif %}
+<figure class="{{ class }}">
+  {% image image width-768 as original_image %}
+  <a href="{{ original_image.url }}"
+     {% if aspect %}
+       class="responsive-object"
+       style="padding-bottom: {{ aspect|stringformat:"f" }}%"
+     {% endif %}>
+    <img src="{{ original_image.url }}"
+      srcset="{{ image|srcset:srcset }}"
+      sizes="{{ sizes }}"
+      class="images__image"
+      alt="{{ image.alt }} ">
   </a>
-  <meta itemprop="url" content="{{ original_image.url }}">
-  <meta itemprop="width" content="{{ original_image.width }}">
-  <meta itemprop="height" content="{{ original_image.height }}">
-
-
   {% if caption or image.attribution %}
-    <figcaption class="block-image__caption">
+    <figcaption class="images__caption">
       {% if caption %}
       <span itemprop="caption">
         {{ caption }}
@@ -46,7 +22,7 @@
       {% if image.attribution %}
         <span itemprop="copyrightHolder"
               itemscope itemtype="http://schema.org/Person"
-              class="block-image__attribution">
+              class="images__attribution">
           <span itemprop="name">{{ image.attribution }}</span>
         </span>
       {% endif %}

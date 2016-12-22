@@ -1,0 +1,5 @@
+<div class="images images--{{ multiple }}">
+  {% for item in self %}
+    {% include "core/_image.html" with class='images__item' image=item.image caption=item.caption srcset=srcset sizes=sizes aspect=aspect%}
+  {% endfor %}
+</div>
