@@ -47,7 +47,7 @@
     {% endif %}
 
     <div class="bigcard__content {%if object.related_group%}bigcard__content--padding-top{%endif%}">
-      <h2 class="bigcard__title" itemprop="name">{{ object.title|softhyphen }}</h2>
+      <h2 class="bigcard__title js-dotdotdot" itemprop="name">{{ object.title|softhyphen }}</h2>
       {% if object.subtitle %}
         <p class="bigcard__subtitle">{{ object.subtitle|softhyphen }}</p>
       {% endif %}

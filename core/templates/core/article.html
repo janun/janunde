@@ -1,5 +1,5 @@
 {% extends "core/__base.html" %}
-{% load wagtailcore_tags humanize wagtailimages_tags srcset %}
+{% load wagtailcore_tags humanize wagtailimages_tags srcset stuff %}
 
 {% block body_class %}{% endblock %}
 
@@ -12,7 +12,7 @@
     <div class="margin-bottom-2">
       <h1 class="title title--color-{{self.title_color}}"
           itemprop="headline">
-        {{ self.title }}
+        {{ self.title|softhyphen }}
       </h1>
       {% if self.subtitle %}
         <p class="subtitle">{{ self.subtitle }}</p>
