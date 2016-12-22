@@ -19,7 +19,6 @@
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-csso": "^1.1.0",
-    "gulp-modernizr": "^1.0.0-alpha",
     "gulp-real-favicon": "^0.2.1",
     "gulp-sass": "^2.2.0",
     "gulp-sourcemaps": "^1.6.0",

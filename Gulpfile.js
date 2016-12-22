@@ -13,7 +13,7 @@ var csso = require('gulp-csso');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
-var modernizr = require('gulp-modernizr');
+// var modernizr = require('gulp-modernizr');
 //var rev = require('gulp-rev'); // TODO
 var realFavicon = require ('gulp-real-favicon');
 var fs = require('fs');
@@ -61,27 +61,27 @@ gulp.task('fonts', function(){
 });
 
 
-// modernizr
-gulp.task('modernizr', function() {
-  return gulp.src('core/static_src/core/js/**/*.js')
-    .pipe(modernizr({
-      "options" : [
-        "setClasses",
-        "addTest",
-        "html5printshiv",
-        "testProp",
-        "fnBind"
-      ],
-      tests: ['']
-    }))
-    .pipe(gulp.dest('core/static/core/js/'));
-});
+// // modernizr
+// gulp.task('modernizr', function() {
+//   return gulp.src('core/static_src/core/js/**/*.js')
+//     .pipe(modernizr({
+//       "options" : [
+//         "setClasses",
+//         "addTest",
+//         "html5printshiv",
+//         "testProp",
+//         "fnBind"
+//       ],
+//       tests: ['']
+//     }))
+//     .pipe(gulp.dest('core/static/core/js/'));
+// });
 
 
 // scripts
-gulp.task('scripts', ['modernizr'], function(){
+gulp.task('scripts', function(){
   return gulp.src([
-    'core/static/core/js/modernizr.js',
+    // 'core/static/core/js/modernizr.js',
     'janunde/static/bower_components/jquery/dist/jquery.js',
     'janunde/static/bower_components/sticky-kit/jquery.sticky-kit.js',
     'janunde/static/bower_components/jQuery.dotdotdot/src/jquery.dotdotdot.js',
