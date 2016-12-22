@@ -30,6 +30,10 @@ from softhyphen.html import hyphenate
 
 @register.filter()
 def softhyphen(value, language='de-de'):
+    """
+    use hyphenation using shy until its supported natively in browsers
+    http://caniuse.com/#search=hyphenation
+    """
     return mark_safe(hyphenate(value, language=language))
 
 
