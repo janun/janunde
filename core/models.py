@@ -86,6 +86,8 @@ def stream2image(stream):
     for block in stream:
         if block.block_type == 'image':
             return block.value['image']
+        if block.block_type == 'several_images':
+            return block.value[0]['image']
 
 
 class BasePage(Page):
