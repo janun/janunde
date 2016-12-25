@@ -23,9 +23,9 @@
   </div>
 
   <div class="bigcircle__text">
-    <a href="{% pageurl object %}" class="bigcircle__title">{{ object.title|softhyphen }}</a>
+    <a href="{% pageurl object %}" class="bigcircle__title">{{ object.hyphenated_title|safe }}</a>
     {% if object.subtitle %}
-      <div>{{ object.subtitle|softhyphen }}</div>
+      <div>{{ object.subtitle }}</div>
     {% endif %}
   </div>
 

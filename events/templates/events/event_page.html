@@ -10,7 +10,7 @@
 
     <!-- title and subtitle -->
     <header class="event-page__title grid-12__col-12">
-      <h1 class="title" itemprop="name">{{ self.title|softhyphen }}</h1>
+      <h1 class="title" itemprop="name">{{ self.hyphenated_title|safe }}</h1>
       {% if self.subtitle %}
         <p class="subtitle">{{ self.subtitle }}</p>
       {% endif %}

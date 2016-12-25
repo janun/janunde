@@ -95,10 +95,10 @@ class EventPageManager(PageManager):
 
 
 from core.forms import ShortTitleForm
-
+from core.models import HyphenatedTitleMixin
 
 # TODO: rebase this to PageBase
-class EventPage(Page):
+class EventPage(Page, HyphenatedTitleMixin):
     """
     represents an event
     """

@@ -22,12 +22,12 @@
     {% endif %}
 
     <div class="bigcard__content">
-      <h2 class="bigcard__title" itemprop="name">{{ object.title|softhyphen }}</h2>
+      <h2 class="bigcard__title" itemprop="name">{{ object.hyphenated_title|safe }}</h2>
       {% if object.subtitle %}
-        <p class="bigcard__subtitle">{{ object.subtitle|softhyphen }}</p>
+        <p class="bigcard__subtitle">{{ object.subtitle }}</p>
       {% endif %}
       {% if object.get_description %}
-        <p class="bigcard__text">{{ object.get_description|softhyphen }}</p>
+        <p class="bigcard__text">{{ object.get_description }}</p>
       {% endif %}
     </div>
 

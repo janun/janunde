@@ -58,7 +58,7 @@
 
     <div class="bigcard__content {%if object.related_group or object.organizer %}bigcard__content--padding-top{%endif%}">
       <h2 class="js-dotdotdot bigcard__title" itemprop="name">
-        {{ object.title|softhyphen }}
+        {{ object.hyphenated_title|safe }}
       </h2>
 
       <span class="bigcard__datetime">

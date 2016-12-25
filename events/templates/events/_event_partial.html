@@ -43,7 +43,7 @@
   </div>
 
   <div class="card__content card__content-short">
-    <h2 class="card__title" itemprop="name">{{ object.title|softhyphen }}</h2>
+    <h2 class="card__title" itemprop="name">{{ object.hyphenated_title|safe }}</h2>
     {% if object.location %}
       <span class="card__text"><i class="icon-location-pin"></i> {{ object.location }}</span>
     {% endif %}

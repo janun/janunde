@@ -90,7 +90,24 @@ def stream2image(stream):
             return block.value[0]['image']
 
 
-class BasePage(Page):
+class HyphenatedTitleMixin(models.Model):
+    """provides hyphenated_title with shy tags"""
+    hyphenated_title = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    def save(self, *args, **kwargs):
+        from softhyphen.html import hyphenate
+        self.hyphenated_title = hyphenate(self.title, language="de-de")
+        super().save(*args, **kwargs)
+
+    class Meta:
+        abstract = True
+
+
+class BasePage(Page, HyphenatedTitleMixin):
     """basic functionality for all our pages"""
     og_type = 'article'
     partial_template_name = 'core/_partial.html'

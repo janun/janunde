@@ -1,7 +1,6 @@
 from django import template
 register = template.Library()
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
-from django.utils.safestring import mark_safe
 import urllib
 from django.template import Context
 
@@ -24,17 +23,6 @@ def pathtosearch(value):
 def prettyphone(value):
     widget = PhoneNumberInternationalFallbackWidget()
     return widget._format_value(value)
-
-
-from softhyphen.html import hyphenate
-
-@register.filter()
-def softhyphen(value, language='de-de'):
-    """
-    use hyphenation using shy until its supported natively in browsers
-    http://caniuse.com/#search=hyphenation
-    """
-    return mark_safe(hyphenate(value, language=language))
 
 
 @register.filter

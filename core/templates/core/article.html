@@ -12,7 +12,7 @@
     <div class="margin-bottom-2">
       <h1 class="title title--color-{{self.title_color}}"
           itemprop="headline">
-        {{ self.title|softhyphen }}
+        {{ self.hyphenated_title|safe }}
       </h1>
       {% if self.subtitle %}
         <p class="subtitle">{{ self.subtitle }}</p>
