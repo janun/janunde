@@ -1,34 +1,36 @@
-{% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
+{% load wagtailcore_tags wagtailimages_tags srcset humanize stuff cache %}
 {% load static from staticfiles %}
 
-<div class="bigcircle click-area"
-     itemscope itemtype="http://schema.org/Organization">
+{% cache 36000 group object.id object.latest_revision_created_at %}
+  <div class="bigcircle click-area"
+       itemscope itemtype="http://schema.org/Organization">
 
-  <a href="{% pageurl object %}" itemprop="url" class="click-area__area-link">
-    {{ object.title }}
-  </a>
+    <a href="{% pageurl object %}" itemprop="url" class="click-area__area-link">
+      {{ object.title }}
+    </a>
 
-  <div class="bigcircle__image-wrapper">
-    {% if object.logo %}
-      {% image object.logo max-170x170 as fallback_image %}
-      <img src="{{ fallback_image.url }}"
-        srcset="{{ object.logo|srcset:'max-170x170 max-340x340 max-510x510 max-680x680' }}"
-        sizes="10.625em"
-        alt="{{ original_image.alt }}"
-        class="bigcircle__image">
-      <link itemprop="logo" href="{{ fallback_image.url }}">
-    {% else %}
-      <span class="bigcircle__image-placeholder"></span>
-    {% endif %}
+    <div class="bigcircle__image-wrapper">
+      {% if object.logo %}
+        {% image object.logo max-170x170 as fallback_image %}
+        <img src="{{ fallback_image.url }}"
+          srcset="{{ object.logo|srcset:'max-170x170 max-340x340 max-510x510 max-680x680' }}"
+          sizes="10.625em"
+          alt="{{ original_image.alt }}"
+          class="bigcircle__image">
+        <link itemprop="logo" href="{{ fallback_image.url }}">
+      {% else %}
+        <span class="bigcircle__image-placeholder"></span>
+      {% endif %}
+    </div>
+
+    <div class="bigcircle__text">
+      <a href="{% pageurl object %}" class="bigcircle__title">{{ object.hyphenated_title|safe }}</a>
+      {% if object.subtitle %}
+        <div>{{ object.subtitle }}</div>
+      {% endif %}
+    </div>
+
+    <meta itemprop="name" content="{{ object.title }}">
+
   </div>
-
-  <div class="bigcircle__text">
-    <a href="{% pageurl object %}" class="bigcircle__title">{{ object.hyphenated_title|safe }}</a>
-    {% if object.subtitle %}
-      <div>{{ object.subtitle }}</div>
-    {% endif %}
-  </div>
-
-  <meta itemprop="name" content="{{ object.title }}">
-
-</div>
+{% endcache %}

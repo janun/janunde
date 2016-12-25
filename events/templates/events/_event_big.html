@@ -1,120 +1,122 @@
-{% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff %}
+{% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff cache %}
 
-<div class="bigcard click-area
-     {% if card_color %}
-       bigcard--color bigcard--color-{{ card_color }}
-     {% endif %}
-     "
-     itemscope itemtype="http://schema.org/Event">
-  <div class="bigcard__inner">
+{% cache 36000 event object.id object.latest_revision_created_at %}
+  <div class="bigcard click-area
+       {% if card_color %}
+         bigcard--color bigcard--color-{{ card_color }}
+       {% endif %}
+       "
+       itemscope itemtype="http://schema.org/Event">
+    <div class="bigcard__inner">
 
-    <a class="click-area__area-link" href="{% pageurl object %}"
-       itemprop="url" title="{{ object.title }}">
-      {{ object.title }}
-    </a>
+      <a class="click-area__area-link" href="{% pageurl object %}"
+         itemprop="url" title="{{ object.title }}">
+        {{ object.title }}
+      </a>
 
-    {% if object.main_image %}
-      {% image object.main_image fill-300x150 as image %}
-      <img class="bigcard__image"
-           srcset="{{ object.main_image|srcset:'fill-300x150 fill-600x300 fill-900x450 fill-1200x600' }}"
-           sizes="18.75em"
-           src="{{ image.url }}" alt="{{ image.alt }}">
-      {% image object.main_image original as orig_image %}
-      <link itemprop="image" href="{{ orig_image.url }}">
-    {% else %}
-      <div class="bigcard__image-placeholder bigcard__image-placeholder--color-{{ object.color }}"></div>
-    {% endif %}
+      {% if object.main_image %}
+        {% image object.main_image fill-300x150 as image %}
+        <img class="bigcard__image"
+             srcset="{{ object.main_image|srcset:'fill-300x150 fill-600x300 fill-900x450 fill-1200x600' }}"
+             sizes="18.75em"
+             src="{{ image.url }}" alt="{{ image.alt }}">
+        {% image object.main_image original as orig_image %}
+        <link itemprop="image" href="{{ orig_image.url }}">
+      {% else %}
+        <div class="bigcard__image-placeholder bigcard__image-placeholder--color-{{ object.color }}"></div>
+      {% endif %}
 
-    {% if object.related_group %}
-      <div class="bigcard__related-group related-group">
-         <a href="{% pageurl object.related_group %}"
-            title="{{ object.related_group.title }}"
-            class="related-group__image-wrapper">
-           {% if object.related_group.logo %}
-             {% image object.related_group.logo max-50x50 as group_logo %}
-             <img class="related-group__image" src="{{ group_logo.url }}"
-                  srcset="{{ object.related_group.logo|srcset:'max-50x50 max-100x100 max-150x150 max-200x200' }}"
-                  sizes="50px"
-                  alt="Logo {{ object.related_group.title }}">
-           {% endif %}
-         </a>
-         <span class="related-group__name">
-           <a href="{% pageurl object.related_group %}">{{ object.related_group.title }}</a>
-           organisiert:
-         </span>
-      </div>
-    {% else %}
-      <span class="bigcard__top-text">nicht vom JANUN-Netzwerk</span>
-      <!-- <span title="externe Veranstaltung" class="bigcard__corner"><i class="icon-action-redo"></i></span> -->
-      <!-- <span title="externe Veranstaltung" class="bigcard__corner">JANUN </span> -->
-      {% if object.organizer %}
+      {% if object.related_group %}
         <div class="bigcard__related-group related-group">
-           <span class="related-group__name margin-top-4">
-             {{ object.organizer }} organisiert:
+           <a href="{% pageurl object.related_group %}"
+              title="{{ object.related_group.title }}"
+              class="related-group__image-wrapper">
+             {% if object.related_group.logo %}
+               {% image object.related_group.logo max-50x50 as group_logo %}
+               <img class="related-group__image" src="{{ group_logo.url }}"
+                    srcset="{{ object.related_group.logo|srcset:'max-50x50 max-100x100 max-150x150 max-200x200' }}"
+                    sizes="50px"
+                    alt="Logo {{ object.related_group.title }}">
+             {% endif %}
+           </a>
+           <span class="related-group__name">
+             <a href="{% pageurl object.related_group %}">{{ object.related_group.title }}</a>
+             organisiert:
            </span>
         </div>
+      {% else %}
+        <span class="bigcard__top-text">nicht vom JANUN-Netzwerk</span>
+        <!-- <span title="externe Veranstaltung" class="bigcard__corner"><i class="icon-action-redo"></i></span> -->
+        <!-- <span title="externe Veranstaltung" class="bigcard__corner">JANUN </span> -->
+        {% if object.organizer %}
+          <div class="bigcard__related-group related-group">
+             <span class="related-group__name margin-top-4">
+               {{ object.organizer }} organisiert:
+             </span>
+          </div>
+        {% endif %}
       {% endif %}
-    {% endif %}
 
-    <div class="bigcard__content {%if object.related_group or object.organizer %}bigcard__content--padding-top{%endif%}">
-      <h2 class="js-dotdotdot bigcard__title" itemprop="name">
-        {{ object.hyphenated_title|safe }}
-      </h2>
+      <div class="bigcard__content {%if object.related_group or object.organizer %}bigcard__content--padding-top{%endif%}">
+        <h2 class="js-dotdotdot bigcard__title" itemprop="name">
+          {{ object.hyphenated_title|safe }}
+        </h2>
 
-      <span class="bigcard__datetime">
-        <i class="icon-clock"></i>
-        {% if object.multipledays %}
-          {{ object.start|date:"D d.m." }} – {{ object.end|date:"D d.m." }}
-        {% else %}
-          {{ object.start|date:"D d.m." }}
-          {% if object.start|time:"H:i" %}
-            {{ object.start|time:"H:i" }} Uhr
+        <span class="bigcard__datetime">
+          <i class="icon-clock"></i>
+          {% if object.multipledays %}
+            {{ object.start|date:"D d.m." }} – {{ object.end|date:"D d.m." }}
+          {% else %}
+            {{ object.start|date:"D d.m." }}
+            {% if object.start|time:"H:i" %}
+              {{ object.start|time:"H:i" }} Uhr
+            {% endif %}
           {% endif %}
-        {% endif %}
-      </span>
-
-      {% if object.location %}
-        <span class="bigcard__location">
-          <i class="icon-location-pin"></i> {{ object.location }}
         </span>
-      {% endif %}
-    </div>
 
-    <div class="bigcard__footer">
-      {% if object.register_url %}
-        <a class="bigcard__footer-item" href="{{ object.register_url }}"
-           title="Anmeldung zu »{{ object.title }}«">Anmelden</a>
-      {% endif %}
-
-      <a href="{% pageurl object %}" title="{{ object.title }}"
-         class="bigcard__footer-item bigcard__button bigcard__primary">Mehr Infos</a>
-
-      <div>
-        {% if object.facebook_event_url %}
-          <a href="{{ object.facebook_event_url }}"
-             title="{{ object.facebook_event_url }}"
-             class="icon-clicktarget bigcard__footer-item">
-            <i class="icon-social-facebook"></i>
-          </a>
-        {% endif %}
-        {% if object.website_url %}
-          <a href="{{ object.website_url }}"
-             title="{{ object.website_url|prettyurl }}"
-             class="icon-clicktarget bigcard__footer-item">
-            <i class="icon-share-alt"></i>
-          </a>
+        {% if object.location %}
+          <span class="bigcard__location">
+            <i class="icon-location-pin"></i> {{ object.location }}
+          </span>
         {% endif %}
       </div>
+
+      <div class="bigcard__footer">
+        {% if object.register_url %}
+          <a class="bigcard__footer-item" href="{{ object.register_url }}"
+             title="Anmeldung zu »{{ object.title }}«">Anmelden</a>
+        {% endif %}
+
+        <a href="{% pageurl object %}" title="{{ object.title }}"
+           class="bigcard__footer-item bigcard__button bigcard__primary">Mehr Infos</a>
+
+        <div>
+          {% if object.facebook_event_url %}
+            <a href="{{ object.facebook_event_url }}"
+               title="{{ object.facebook_event_url }}"
+               class="icon-clicktarget bigcard__footer-item">
+              <i class="icon-social-facebook"></i>
+            </a>
+          {% endif %}
+          {% if object.website_url %}
+            <a href="{{ object.website_url }}"
+               title="{{ object.website_url|prettyurl }}"
+               class="icon-clicktarget bigcard__footer-item">
+              <i class="icon-share-alt"></i>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <meta itemprop="startDate" content="{{ object.start|date:"c" }}">
+      <meta itemprop="endDate" content="{{ object.end|date:"c" }}">
+      {% if object.location %}
+        <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+          <meta itemprop="name" content="{{ object.location }}">
+          <meta itemprop="address" content="{{ object.location }}">
+        </span>
+      {% endif %}
+
     </div>
-
-    <meta itemprop="startDate" content="{{ object.start|date:"c" }}">
-    <meta itemprop="endDate" content="{{ object.end|date:"c" }}">
-    {% if object.location %}
-      <span itemprop="location" itemscope itemtype="http://schema.org/Place">
-        <meta itemprop="name" content="{{ object.location }}">
-        <meta itemprop="address" content="{{ object.location }}">
-      </span>
-    {% endif %}
-
   </div>
-</div>
+{% endcache %}

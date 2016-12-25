@@ -1,83 +1,82 @@
-{% load wagtailcore_tags %}
-{% load menu %}
+{% load wagtailcore_tags menu cache %}
 {% load static from staticfiles %}
 
-{% get_site_root as site_root %}
-{% if site_root %}
-  {% get_menuitems parent=site_root calling_page=self as menuitems %}
-{% endif %}
+{% cache 36000 navbar request.path %}
 
-<!-- begin of navbar -->
-<div class="navbar navbar--green {{ navbar_class }}">
-  <nav class="navbar__inner" role="navigation" aria-label="Hauptmenü">
+  {% get_site_root as site_root %}
+  {% if site_root %}
+    {% get_menuitems parent=site_root calling_page=self as menuitems %}
+  {% endif %}
 
+  <!-- begin of navbar -->
+  <div class="navbar navbar--green {{ navbar_class }}">
+    <nav class="navbar__inner" role="navigation" aria-label="Hauptmenü">
 
-    <span itemprop="publisher" itemid="#janunOrg" itemscope itemtype="http://schema.org/Organization">
-      <!-- logo -->
-      <a class="navbar__item padding-left-0" href="/"
-         itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-        <span class="navbar__logo">{% include 'core/janun_logo.svg' %}</span>
-        <meta itemprop="url" content="{{ page.get_site.root_url }}{% static 'core/images/janun_logo.svg' %}">
-        <meta itemprop="width" content="37">
-        <meta itemprop="height" content="36">
-      </a>
+      <span itemprop="publisher" itemid="#janunOrg" itemscope itemtype="http://schema.org/Organization">
+        <!-- logo -->
+        <a class="navbar__item padding-left-0" href="/"
+           itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+          <span class="navbar__logo">{% include 'core/janun_logo.svg' %}</span>
+          <meta itemprop="url" content="{{ page.get_site.root_url }}{% static 'core/images/janun_logo.svg' %}">
+          <meta itemprop="width" content="37">
+          <meta itemprop="height" content="36">
+        </a>
 
-      <!-- title -->
-      <meta itemprop="name" content="JANUN">
-      <meta itemprop="url" content="http://janun.de/">
-      <a href="/"
-         class="navbar__item navbar__title">
-        JANUN
-      </a>
-    </span>
+        <!-- title -->
+        <meta itemprop="name" content="JANUN">
+        <meta itemprop="url" content="http://janun.de/">
+        <a href="/"
+           class="navbar__item navbar__title">
+          JANUN
+        </a>
+      </span>
 
+      <div class="float-right">
+        <!-- Search -->
+        <form class="navbar__item small-search" action="{% url 'search' %}" method="get">
+          <input class="small-search__input" type="search"
+                 placeholder="Suche" autocomplete="off"
+                 name="q"{% if query_string %} value="{{ query_string }}"{% endif %}>
+        </form>
 
-    <div class="float-right">
-      <!-- Search -->
-      <form class="navbar__item small-search" action="{% url 'search' %}" method="get">
-        <input class="small-search__input" type="search"
-               placeholder="Suche" autocomplete="off"
-               name="q"{% if query_string %} value="{{ query_string }}"{% endif %}>
-      </form>
+        <!-- menu toggle button -->
+        {% if menuitems %}
+          <div class="navbar__item">
+            <button class="hamburger
+                           js-aria-hidden"
+                    data-js-aria-hidden-media="(min-width: 1024px)"
+                    type="button"
+                    title="Menü ein-/ausblenden"
+                    data-a11y-toggle="collapsible"
+                    aria-expanded="false">
+              <span class="hamburger__inner"></span>
+            </button>
+          </div>
+        {% endif %}
+      </div>
 
-      <!-- menu toggle button -->
+      <!-- collapsible menu -->
       {% if menuitems %}
-        <div class="navbar__item">
-          <button class="hamburger
-                         js-aria-hidden"
-                  data-js-aria-hidden-media="(min-width: 1024px)"
-                  type="button"
-                  title="Menü ein-/ausblenden"
-                  data-a11y-toggle="collapsible"
-                  aria-expanded="false">
-            <span class="hamburger__inner"></span>
-          </button>
+        <div id="collapsible" aria-hidden="true"
+             class="navbar__item navbar__collapsible js-aria-hidden"
+             data-js-aria-hidden-media="(max-width: 1023px)">
+          <ul role="menubar" class="menu">
+            <li role="menuitem" class="menu__item hide@medium">
+              <a href="/">Startseite</a>
+            </li>
+            {% for menuitem in menuitems %}
+              <li role="menuitem" class="menu__item
+                  {% if menuitem.is_active %}menu__item--active{% endif %}">
+                <a href="{% pageurl menuitem %}">
+                  {{ menuitem.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
         </div>
       {% endif %}
-    </div>
 
-
-    <!-- collapsible menu -->
-    {% if menuitems %}
-      <div id="collapsible" aria-hidden="true"
-           class="navbar__item navbar__collapsible js-aria-hidden"
-           data-js-aria-hidden-media="(max-width: 1023px)">
-        <ul role="menubar" class="menu">
-          <li role="menuitem" class="menu__item hide@medium">
-            <a href="/">Startseite</a>
-          </li>
-          {% for menuitem in menuitems %}
-            <li role="menuitem" class="menu__item
-                {% if menuitem.is_active %}menu__item--active{% endif %}">
-              <a href="{% pageurl menuitem %}">
-                {{ menuitem.title }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-
-  </nav>
-</div>
-<!-- end of navbar -->
+    </nav>
+  </div>
+  <!-- end of navbar -->
+{% endcache %}

@@ -37,16 +37,19 @@ urlpatterns = [
 
     url(r'^thema/(?P<tagname>\w+)/$', tags, name='tags'),
     url(r'^lueneburg', RedirectView.as_view(url='/netzwerk-projekte/janun-lüneburg/') ),
-    url(r'', include(wagtail_urls)),
 ]
 
 
-# TODO: do we still need this?
 if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    import debug_toolbar
 
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+    urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls)),]
+
+
+urlpatterns += [url(r'', include(wagtail_urls))]

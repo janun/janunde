@@ -1,26 +1,27 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags cache %}
 
+{% cache 36000 footer %}
+  <footer class="footer">
+    <div class="footer__inner">
 
-<footer class="footer">
-  <div class="footer__inner">
+      <span class="float-left">
+        <a class="footer__item" href="/">
+          <span class="footer__logo">{% include 'core/janun_logo.svg' %}</span>
+          JANUN
+        </a>
+      </span>
 
-    <span class="float-left">
-      <a class="footer__item" href="/">
-        <span class="footer__logo">{% include 'core/janun_logo.svg' %}</span>
-        JANUN
-      </a>
-    </span>
+      <a class="footer__item" href="{% slugurl 'impressum' %}">Impressum</a>
 
-    <a class="footer__item" href="{% slugurl 'impressum' %}">Impressum</a>
+      <span class="float-right">
+        <a class="icon-social-youtube font-size-2 footer__item" target="_blank"
+          href="https://www.youtube.com/user/JANUNvideo"></a>
+        <a class="icon-social-facebook font-size-2 footer__item" target="_blank"
+          href="https://www.facebook.com/jugendumweltnetzwerk/"></a>
+        <a class="icon-social-twitter font-size-2 footer__item" target="_blank"
+          href="https://twitter.com/janun_de"></a>
+      </span>
 
-    <span class="float-right">
-      <a class="icon-social-youtube font-size-2 footer__item" target="_blank"
-        href="https://www.youtube.com/user/JANUNvideo"></a>
-      <a class="icon-social-facebook font-size-2 footer__item" target="_blank"
-        href="https://www.facebook.com/jugendumweltnetzwerk/"></a>
-      <a class="icon-social-twitter font-size-2 footer__item" target="_blank"
-        href="https://twitter.com/janun_de"></a>
-    </span>
-
-  </div>
-</footer>
+    </div>
+  </footer>
+{% endcache %}

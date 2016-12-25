@@ -26,6 +26,9 @@ INSTALLED_APPS = [
     'contact',
     'about',
 
+    'debug_toolbar',
+    'template_profiler_panel',
+
     'softhyphen',
 
     'wagtail.contrib.table_block',
@@ -77,6 +80,7 @@ MIDDLEWARE_CLASSES = (
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
 
     'django.middleware.gzip.GZipMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'janunde.urls'
@@ -87,8 +91,14 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(PROJECT_DIR, 'templates'),
         ],
-        'APP_DIRS': True,
+        # 'APP_DIRS': True,
         'OPTIONS': {
+            'loaders': [
+                ('django.template.loaders.cached.Loader', [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                ]),
+            ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -105,6 +115,17 @@ TEMPLATES = [
         },
     },
 ]
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000
+        }
+    }
+}
+
 
 WSGI_APPLICATION = 'janunde.wsgi.application'
 
@@ -130,7 +151,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Parse database configuration from env var DATABASE_URL
 DATABASES = { 'default': dj_database_url.config(
-    default="postgres://janunde:janunde@localhost/janunde_db"
+    default="postgres://janunde:janunde@localhost/janunde_db",
+    conn_max_age=600
 )}
 
 
@@ -187,5 +209,21 @@ INTERNAL_IPS = (
     '127.0.0.1',
 )
 
-
 ALLOWED_HOSTS = ['*']
+
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.logging.LoggingPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+    'debug_toolbar.panels.profiling.ProfilingPanel',
+    'template_profiler_panel.panels.template.TemplateProfilerPanel'
+]
