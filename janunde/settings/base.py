@@ -30,6 +30,7 @@ INSTALLED_APPS = [
 
     'wagtail.contrib.table_block',
     'wagtail.contrib.modeladmin',
+    'wagtail.contrib.wagtailsitemaps',
 
     'wagtail.contrib.settings',
     'wagtail.contrib.wagtailsearchpromotions',

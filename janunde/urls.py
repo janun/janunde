@@ -1,13 +1,15 @@
 from django.conf import settings
 from django.conf.urls import include, url
 from django.views.defaults import page_not_found, server_error
-from django.views.generic.base import RedirectView
+from django.views.generic.base import RedirectView, TemplateView
+
 from django.contrib import admin
 
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailsearch.urls.frontend import search
+from wagtail.contrib.wagtailsitemaps.views import sitemap
 
 from acme_challenge import urls as acme_challenge_urls
 
@@ -23,6 +25,9 @@ urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^django-admin/', include(admin.site.urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
+
+    url(r'^sitemap\.xml$', sitemap, name='sitemap'),
+    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 
     url(r'^search/', search, {
             'results_per_page': 9,
