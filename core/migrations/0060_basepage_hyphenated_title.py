@@ -14,6 +14,7 @@ class Migration(migrations.Migration):
     def populate_hyphenated_title(apps, schema_editor):
         BasePage = apps.get_model("core", "BasePage")
         for page in BasePage.objects.all():
+            page.hyphenated_title = hyphenate(page.title, language="de-de")
             page.save()
 
     operations = [

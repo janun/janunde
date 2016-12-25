@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+from softhyphen.html import hyphenate
 
 
 class Migration(migrations.Migration):
@@ -14,6 +15,7 @@ class Migration(migrations.Migration):
     def populate_hyphenated_title(apps, schema_editor):
         EventPage = apps.get_model("events", "EventPage")
         for page in EventPage.objects.all():
+            page.hyphenated_title = hyphenate(page.title, language="de-de")
             page.save()
 
     operations = [
