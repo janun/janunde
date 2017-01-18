@@ -135,6 +135,9 @@ PIWIK_URL = os.environ.get('PIWIK_URL', '')
 MOUSEFLOW_ID = os.environ.get('MOUSEFLOW_ID', '')
 GOOGLE_VERIFICATION_ID = os.environ.get('GOOGLE_VERIFICATION_ID', '')
 
+
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'website@janun.de')
+SERVER_EMAIL = os.environ.get('SERVER_EMAIL', 'website@janun.de')
 EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
 EMAIL_PORT = os.environ.get('EMAIL_PORT', '')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
