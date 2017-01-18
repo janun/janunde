@@ -134,3 +134,8 @@ FREESURVEYCREATOR_ID = os.environ.get('FREESURVEYCREATOR_ID', '')
 PIWIK_URL = os.environ.get('PIWIK_URL', '')
 MOUSEFLOW_ID = os.environ.get('MOUSEFLOW_ID', '')
 GOOGLE_VERIFICATION_ID = os.environ.get('GOOGLE_VERIFICATION_ID', '')
+
+EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', '')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
