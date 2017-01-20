@@ -154,10 +154,7 @@ $related-group-size: rem-calc(70px);
     height: rem-calc(195px);
     overflow: hidden;
     text-overflow: ellipsis;
-
-    &--padding-top {
-      padding-top: $related-group-size - rem-calc(32px);
-    }
+    padding-top: rem-calc(30px);
   }
 
   &__title {
@@ -239,7 +236,7 @@ $related-group-size: rem-calc(70px);
     margin-right: auto;
     left: 0;
     right: 0;
-    top: $bigcard-image-height - $related-group-size * 5/6;
+    top: $bigcard-image-height - $related-group-size*15/16;
   }
 
   &__top-text {

@@ -39,15 +39,13 @@
                     alt="Logo {{ object.related_group.title }}">
              {% endif %}
            </a>
-           <!-- <span class="related-group__name">
+           <span class="related-group__name">
              <a href="{% pageurl object.related_group %}">{{ object.related_group.title }}</a>
              organisiert:
-           </span> -->
+           </span>
         </div>
       {% else %}
         <span class="bigcard__top-text">nicht vom JANUN-Netzwerk</span>
-        <!-- <span title="externe Veranstaltung" class="bigcard__corner"><i class="icon-action-redo"></i></span> -->
-        <!-- <span title="externe Veranstaltung" class="bigcard__corner">JANUN </span> -->
         {% if object.organizer %}
           <div class="bigcard__related-group related-group">
              <span class="related-group__name margin-top-4">
@@ -57,7 +55,7 @@
         {% endif %}
       {% endif %}
 
-      <div class="bigcard__content {%if object.related_group or object.organizer %}padding-top-1{%endif%}">
+      <div class="bigcard__content">
         <div class="margin-bottom-1">
           <h2 class="js-dotdotdot bigcard__title" itemprop="name">
             {{ object.hyphenated_title|safe }}
