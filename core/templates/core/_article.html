@@ -47,13 +47,15 @@
         </div>
       {% endif %}
 
-      <div class="bigcard__content {%if object.related_group%}bigcard__content--padding-top{%endif%}">
-        <h2 class="bigcard__title js-dotdotdot" itemprop="name">{{ object.hyphenated_title|safe }}</h2>
-        {% if object.subtitle %}
-          <p class="bigcard__subtitle">{{ object.subtitle }}</p>
-        {% endif %}
+      <div class="bigcard__content">
+        <div class="bigcard__heading">
+          <h2 class="bigcard__title js-dotdotdot" itemprop="name">{{ object.hyphenated_title|safe }}</h2>
+          {% if object.subtitle %}
+            <h3 class="bigcard__subtitle">{{ object.subtitle }}</h3>
+          {% endif %}
+        </div>
         {% if object.get_text %}
-          <p class="bigcard__text">{{ object.get_text }}</p>
+          <p class="bigcard__text js-dotdotdot">{{ object.get_text }}</p>
         {% endif %}
       </div>
 
