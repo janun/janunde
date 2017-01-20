@@ -30,6 +30,7 @@ class DatetimeListFilter(admin.SimpleListFilter):
 class EventPageModelAdmin(ModelAdmin):
     model = EventPage
     menu_icon = 'date'
+    list_per_page = 10
     menu_order = 200
     add_to_settings_menu = False
     list_display = ('title', 'start_datetime', 'location', 'related_group')

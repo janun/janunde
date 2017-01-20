@@ -84,6 +84,7 @@ from .models import Article
 class ArticleModelAdmin(ModelAdmin):
     model = Article
     menu_icon = 'doc-full'
+    list_per_page = 10
     menu_order = 202
     add_to_settings_menu = False
     list_display = ('title', 'author', 'first_published_at')
