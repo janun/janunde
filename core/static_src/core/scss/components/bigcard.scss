@@ -161,16 +161,14 @@ $related-group-size: rem-calc(70px);
   }
 
   &__title {
-    margin-bottom: 10px;
-    margin-top: 0;
-    font-size: rem-calc(28.28px);
-    -webkit-line-clamp: 2;
-    overflow: hidden;
+    margin: 0;
+    font-size: rem-calc(24px);
+    -webkit-line-clamp: 3;
     text-overflow: ellipsis;
-    max-height: 2 * rem-calc(30px);
+    max-height: 3 * rem-calc(30px);
     font-weight: bold;
     color: $bigcard-title-color;
-    line-height: rem-calc(30px);
+    line-height: rem-calc(26px);
 
     .bigcard--color & {
       color: $bigcard-color-title-color;
@@ -178,14 +176,14 @@ $related-group-size: rem-calc(70px);
   }
 
   &__subtitle {
-    font-size: rem-calc(14px);
-    font-weight: bold;
-    margin-bottom: rem-calc(10px);
+    font-size: rem-calc(16px);
+    font-weight: normal;
+    color: $brown;
+    margin: 0;
   }
 
   &__datetime {
     display: block;
-
     i {
       font-size: 16px;
     }
@@ -196,7 +194,6 @@ $related-group-size: rem-calc(70px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
     i {
       font-size: 16px;
     }

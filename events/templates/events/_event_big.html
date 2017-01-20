@@ -29,7 +29,7 @@
       {% if object.related_group %}
         <div class="bigcard__related-group related-group">
            <a href="{% pageurl object.related_group %}"
-              title="{{ object.related_group.title }}"
+              title="organisiert von {{ object.related_group.title }}"
               class="related-group__image-wrapper">
              {% if object.related_group.logo %}
                {% image object.related_group.logo max-50x50 as group_logo %}
@@ -39,10 +39,10 @@
                     alt="Logo {{ object.related_group.title }}">
              {% endif %}
            </a>
-           <span class="related-group__name">
+           <!-- <span class="related-group__name">
              <a href="{% pageurl object.related_group %}">{{ object.related_group.title }}</a>
              organisiert:
-           </span>
+           </span> -->
         </div>
       {% else %}
         <span class="bigcard__top-text">nicht vom JANUN-Netzwerk</span>
@@ -57,10 +57,19 @@
         {% endif %}
       {% endif %}
 
-      <div class="bigcard__content {%if object.related_group or object.organizer %}bigcard__content--padding-top{%endif%}">
-        <h2 class="js-dotdotdot bigcard__title" itemprop="name">
-          {{ object.hyphenated_title|safe }}
-        </h2>
+      <div class="bigcard__content {%if object.related_group or object.organizer %}padding-top-1{%endif%}">
+        <div class="margin-bottom-1">
+          <h2 class="js-dotdotdot bigcard__title" itemprop="name">
+            {{ object.hyphenated_title|safe }}
+          </h2>
+
+          {% if object.subtitle %}
+            <h3 class="bigcard__subtitle">
+              {{ object.subtitle }}
+            </h3>
+          {% endif %}
+        </div>
+
 
         <span class="bigcard__datetime">
           <i class="icon-clock"></i>
@@ -79,6 +88,7 @@
             <i class="icon-location-pin"></i> {{ object.location }}
           </span>
         {% endif %}
+
       </div>
 
       <div class="bigcard__footer">
