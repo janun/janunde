@@ -154,7 +154,12 @@ $related-group-size: rem-calc(70px);
     height: rem-calc(195px);
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-top: rem-calc(30px);
+    padding-top: rem-calc(28px);
+  }
+
+  &__heading {
+    margin-bottom: rem-calc(10px);
+    max-height: rem-calc(100px);
   }
 
   &__title {
