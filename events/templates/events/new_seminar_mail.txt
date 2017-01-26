@@ -1,0 +1,22 @@
+Psst,
+jemand hat einen neuen Antrag zur Förderung eines Seminars erstellt:
+
+Titel: {{ title }}
+Untertitel: {{ subtitle }}
+Beginn: {{ begin }}
+Ende: {{ end }}
+Tage mit Bildungsarbeit: {{ days }}
+Ort: {{ location }}
+Beschreibung: {{ description }}
+erwartete Teilnehmer_innen: {{ attendees }}
+
+{% if publish %}Das Seminar soll auf janun.de veröffentlicht werden.{% endif %}
+
+Name der Antragssteller_in: {{ contact_name }}
+E-Mail-Adresse der Antragssteller_in: {{ contact_mail }}
+{% if contact_phone %}Telefonnummer der Antragssteller_in: {{ contact_phone }}{% endif %}
+
+{% if comments %}
+------- Anmerkungen:
+{{ comments }}
+{% endif %}

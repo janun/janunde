@@ -1,9 +1,14 @@
 @mixin h1 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
   font-weight: bold;
-  font-size: rem-calc(42px);
-  line-height: 1.235;
+  font-size: rem-calc(30px);
+  line-height: 1.2;
+
+  @include above($medium) {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: rem-calc(42px);
+    line-height: 1.235;
+  }
 }
 
 /**

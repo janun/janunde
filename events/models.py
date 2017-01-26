@@ -11,9 +11,9 @@ from modelcluster.contrib.taggit import ClusterTaggableManager
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
                                                 ObjectList, StreamFieldPanel,
                                                 TabbedInterface,
-                                                InlinePanel)
+                                                InlinePanel, FieldRowPanel)
 from wagtail.wagtailadmin.widgets import AdminDateTimeInput
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Page, PageManager, PageQuerySet
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
@@ -25,12 +25,66 @@ from core.models import BasePage, Group, JanunTag, HeaderMixin
 from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
+from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
+from modelcluster.fields import ParentalKey
+from django.shortcuts import render
+
+
+class SeminarFormPage(BasePage):
+    subpage_types = []
+    parent_page_types = ['events.EventIndexPage']
+
+    description = StreamField(
+        StandardStreamBlock(),
+        blank=True,
+        verbose_name="Erklärung",
+    )
+
+    content_panels = [
+        FieldPanel('title'),
+        StreamFieldPanel('description')
+    ]
+
+    def serve(self, request):
+        from events.forms import SeminarForm
+
+        if request.method == 'POST':
+            form = SeminarForm(request.POST)
+            if form.is_valid():
+                from django.core.mail import send_mail
+                from django.template.loader import render_to_string
+                send_mail(
+                    "Antrag auf Förderung für %s" % form.cleaned_data['title'],
+                     render_to_string("events/thankyou_mail.txt", form.cleaned_data),
+                    'website@janun.de',
+                    [form.cleaned_data['contact_mail'], ],
+                    fail_silently=True,
+                )
+                send_mail(
+                    "Antrag auf Förderung für %s" % form.cleaned_data['title'],
+                     render_to_string("events/new_seminar_mail.txt", form.cleaned_data),
+                    'website@janun.de',
+                    ["seminare@janun.de",],
+                    fail_silently=True,
+                )
+                return render(request, 'events/thankyou.html', {
+                    'self': self,
+                    'form': form
+                })
+        else:
+            form = SeminarForm()
+
+        return render(request, 'events/apply.html', {
+            'self': self,
+            'form': form,
+        })
+
 
 class EventIndexPage(BasePage, HeaderMixin):
     """
     lists events
     """
-    subpage_types = ['EventPage']
+    subpage_types = ['EventPage', 'SeminarFormPage']
     parent_page_types = ['core.HomePage']
 
     content_panels = [

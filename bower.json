@@ -7,6 +7,7 @@
     "simple-line-icons": "^2.4.1",
     "jquery": "^2.2.4",
     "sticky-kit": "^1.1.2",
-    "jQuery.dotdotdot": "dotdotdot#^1.8.3"
+    "jQuery.dotdotdot": "dotdotdot#^1.8.3",
+    "pickadate": "^3.5.6"
   }
 }

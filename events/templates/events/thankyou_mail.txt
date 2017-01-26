@@ -1,0 +1,32 @@
+Liebe_r {{ contact_name }},
+Dein Antrag auf Förderung für das Seminar „{{ title }}“
+ist bei uns eingegangen.
+Sobald wir wissen ob wir Dein Seminar fördern können,
+sagen wir Dir bescheid.
+
+Sollten sich noch Änderungen zu den Daten Deines Seminars ergeben,
+schreibe bitte eine E-Mail an seminare@janun.de.
+
+Liebe Grüße
+JANUN e.V.
+
+PS: Hier nochmal die Daten, die Du eingegeben hast:
+Titel: {{ title }}
+Untertitel: {{ subtitle }}
+Beginn: {{ begin }}
+Ende: {{ end }}
+Tage mit Bildungsarbeit: {{ days }}
+Ort: {{ location }}
+Beschreibung: {{ description }}
+erwartete Teilnehmer_innen: {{ attendees }}
+
+{% if publish %}Dein Seminar wird auf janun.de veröffentlicht.{% endif %}
+
+Dein Name: {{ contact_name }}
+Deine E-Mail-Adresse: {{ contact_mail }}
+{% if contact_phone %}Deine Telefonnummer: {{ contact_phone }}{% endif %}
+
+{% if comments %}
+Du hast uns noch folgende Anmerkungen geschrieben:
+{{ comments }}
+{% endif %}

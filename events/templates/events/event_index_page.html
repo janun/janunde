@@ -7,53 +7,53 @@
 
 {% block content %}
 
-{% include "core/_pageheader.html" %}
+  {% include "core/_pageheader.html" %}
 
-<div class="center-container">
+  <div class="center-container">
 
-{% if search_query %}
-  {% if events %}
-    Okay, wir haben {{ events|length }} Veranstaltungen für dich gefunden.
-    {% regroup events by month as events_by_month %}
-    {% for events in events_by_month %}
-      <h2 id="{{ month|date:"FY" }}" class="area-title onpagemenu-scrollmark">{{ events.grouper|date:"F Y" }}</h2>
-      <div class="card-grid">
-        {% for event in events.list %}
-          {% render_partial event %}
+    {% if search_query %}
+      {% if events %}
+        Okay, wir haben {{ events|length }} Veranstaltungen für dich gefunden.
+        {% regroup events by month as events_by_month %}
+        {% for events in events_by_month %}
+          <h2 id="{{ month|date:"FY" }}" class="area-title onpagemenu-scrollmark">{{ events.grouper|date:"F Y" }}</h2>
+          <div class="card-grid">
+            {% for event in events.list %}
+              {% render_partial event %}
+            {% endfor %}
+          </div>
         {% endfor %}
-      </div>
-    {% endfor %}
-  {% else %}
-    <div class="padding-top-6 padding-bottom-5">
-      <i class="icon-ghost color-red" style="font-size: 7rem" aria-hidden="true"></i>
-      <div class="margin-bottom-3 margin-top-4 big-font">
-        <div class="color-red">Sorry, Weltenbummler!</div>
-        <div>Wir konnten kein Abenteuer für dich finden.</div>
-      </div>
-    </div>
-  {% endif %}
-{% else %}
-  {% if events %}
-    {% regroup events by month as events_by_month %}
-    {% for events in events_by_month %}
-      <h2 id="{{ events.grouper|date:"Y-m" }}" class="area-title">{{ events.grouper|format_month }}</h2>
-      <div class="card-grid">
-        {% for event in events.list %}
-          {% render_partial event %}
+      {% else %}
+        <div class="padding-top-6 padding-bottom-5">
+          <i class="icon-ghost color-red" style="font-size: 7rem" aria-hidden="true"></i>
+          <div class="margin-bottom-3 margin-top-4 big-font">
+            <div class="color-red">Sorry, Weltenbummler!</div>
+            <div>Wir konnten kein Abenteuer für dich finden.</div>
+          </div>
+        </div>
+      {% endif %}
+    {% else %}
+      {% if events %}
+        {% regroup events by month as events_by_month %}
+        {% for events in events_by_month %}
+          <h2 id="{{ events.grouper|date:"Y-m" }}" class="area-title">{{ events.grouper|format_month }}</h2>
+          <div class="card-grid">
+            {% for event in events.list %}
+              {% render_partial event %}
+            {% endfor %}
+          </div>
         {% endfor %}
-      </div>
-    {% endfor %}
-  {% else %}
-    <div class="padding-top-6 padding-bottom-5">
-      <i class="icon-present color-green" style="font-size: 7rem" aria-hidden="true"></i>
-      <div class="margin-bottom-3 margin-top-4 big-font">
-      <div class="color-green">Ein Geschenk für Dich.</div>
-        <div>Veranstaltungen, die wir zeigen könnten, gibt es aber leider keine.</div>
-      </div>
-    </div>
-  {% endif %}
-{% endif %}
+      {% else %}
+        <div class="padding-top-6 padding-bottom-5">
+          <i class="icon-present color-green" style="font-size: 7rem" aria-hidden="true"></i>
+          <div class="margin-bottom-3 margin-top-4 big-font">
+          <div class="color-green">Ein Geschenk für Dich.</div>
+            <div>Veranstaltungen, die wir zeigen könnten, gibt es aber leider keine.</div>
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
 
-</div>
+  </div>
 
 {% endblock %}

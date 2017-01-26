@@ -85,6 +85,10 @@ gulp.task('scripts', function(){
     'janunde/static/bower_components/jquery/dist/jquery.js',
     'janunde/static/bower_components/sticky-kit/jquery.sticky-kit.js',
     'janunde/static/bower_components/jQuery.dotdotdot/src/jquery.dotdotdot.js',
+    'janunde/static/bower_components/pickadate/lib/picker.js',
+    'janunde/static/bower_components/pickadate/lib/picker.date.js',
+    'janunde/static/bower_components/pickadate/lib/picker.time.js',
+    'janunde/static/bower_components/pickadate/lib/translations/de_DE.js',
     'core/static_src/core/js/**/*.js',
     'janunde/static/bower_components/a11y-toggle/a11y-toggle.js',
   ])
