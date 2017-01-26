@@ -1,0 +1,25 @@
+.widecard-grid {
+
+}
+
+.widecard {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: rem-calc(150px);
+  background-color: $white;
+  margin-bottom: rem-calc(30px);
+  @include shadow(1);
+  font-size: rem-calc(20px);
+  line-height: rem-calc(30px);
+  // border-radius: 5px;
+
+  &__image {
+    float: left;
+    width: rem-calc(300px);
+    height: rem-calc(150px);
+    background-color: $baige;
+    color: $brown;
+    display: block;
+  }
+}
