@@ -26,6 +26,8 @@
     "gulp-util": "^3.0.7"
   },
   "devDependencies": {
+    "eslint": "^3.14.1",
+    "eslint-config-google": "^0.7.1",
     "nucleus-styleguide": "^1.0.6"
   }
 }
