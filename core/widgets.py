@@ -12,7 +12,7 @@ class DateInput(forms.DateInput):
         if value != '':
             # Only add the 'value' attribute if a value is non-empty.
             final_attrs['value'] = force_text(self.format_value(value))
-        return format_html('<span class="dateinput"><input{} /><a href="#" class="dateinput__open hide@no-js"><i class="icon-calendar"></i></a><span class="extra-help">Datum</span></span>', flatatt(final_attrs))
+        return format_html('<span class="dateinput"><input{} /><a href="#" title="Datum auswählen" class="dateinput__open hide@no-js"><i class="icon-calendar"></i></a><span class="extra-help">Datum</span></span>', flatatt(final_attrs))
 
 
 class TimeInput(forms.DateInput):
@@ -23,7 +23,7 @@ class TimeInput(forms.DateInput):
         if value != '':
             # Only add the 'value' attribute if a value is non-empty.
             final_attrs['value'] = force_text(self.format_value(value))
-        return format_html('<span class="timeinput"><input{} /><a href="#" class="timeinput__open hide@no-js"><i class="icon-clock"></i></a><span class="extra-help">Uhrzeit</span></span>', flatatt(final_attrs))
+        return format_html('<span class="timeinput"><input{} /><a title="Uhrzeit auswählen" href="#" class="timeinput__open hide@no-js"><i class="icon-clock"></i></a><span class="extra-help">Uhrzeit</span></span>', flatatt(final_attrs))
 
 
 class SplitDateTimeWidget(forms.MultiWidget):

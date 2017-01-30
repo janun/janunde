@@ -1,0 +1,28 @@
+Titel: {{ title }}
+{% if subtitle %}Untertitel: {{ subtitle }}{% endif %}
+Beginn: {{ begin }}
+Ende: {{ end }}
+Tage mit Bildungsarbeit: {{ days }}
+Ort: {{ location }}
+erwartete Teilnehmer_innen: {{ attendees }}
+{% if group %}JANUN-Gruppe: {{ group }}{% else %}Das Seminar wurde als Einzelperson angemeldet.{% endif %}
+Von der maximalen Förderungssumme wird voraussichtlich {{ requested }} € abgerufen werden.
+Beschreibung: {{ description }}
+
+Name der Antragssteller_in: {{ contact_name }}
+E-Mail-Adresse der Antragssteller_in: {{ contact_mail }}
+Telefonnummer der Antragssteller_in: {{ contact_phone|default:"keine angegeben" }}
+
+{% if publish %}
+Das Seminar soll auf janun.de veröffentlicht werden.
+{% if image %}Es wurde ein Bild angehängt.
+Copyright: {{ image_copyright }}{% endif %}
+Folgende Kontaktdaten sollen auf der Website verwendet werden:
+Name: {{ website_contact_name }}
+E-Mail-Adresse: {{ website_contact_mail }}
+Telefonnummer: {{ website_contact_phone|default:"keine angegeben" }}
+{% else %}Das Seminar soll *nicht* auf janun.de veröffentlicht werden.{% endif %}
+
+{% if comments %}Anmerkungen:
+{{ comments }}
+{% endif %}

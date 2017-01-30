@@ -1,0 +1,4 @@
+Psst,
+{{ contact_name }} hat einen neuen Antrag zur Förderung eines Seminars gestellt:
+
+{% include "events/seminar_form_page/_seminar_mail_data.html" %}

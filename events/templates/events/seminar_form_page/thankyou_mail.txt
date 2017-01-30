@@ -1,0 +1,12 @@
+Liebe_r {{ contact_name }},
+Dein Antrag auf Förderung für das Seminar „{{ title }}“ ist bei uns eingegangen.
+Sobald wir wissen ob wir Dein Seminar fördern können, sagen wir Dir bescheid.
+Das Landesjugendbüro wird Dir in der Regel innerhalb von 7–14 Tagen eine Rückmeldung geben.
+
+Sollten sich noch Änderungen zu den Daten Deines Seminars ergeben, schreibe bitte eine E-Mail an seminare@janun.de.
+
+Liebe Grüße
+JANUN e.V.
+
+Hier nochmal die Daten, die Du eben eingegeben hast:
+{% include "events/seminar_form_page/_seminar_mail_data.html" %}

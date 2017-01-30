@@ -1,12 +1,5 @@
 .template-seminaranmeldung {
-
-  @include above(40rem) {
-    #wrapper-id_begin_0, #wrapper-id_end_0 {
-      display: inline-block;
-      width: 50%;
-    }
-    #wrapper-id_end_0 {
-      float: right;
-    }
+  #wrapper-id_comments {
+    margin-top: 50px;
   }
 }

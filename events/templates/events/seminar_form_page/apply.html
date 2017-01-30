@@ -1,0 +1,79 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags %}
+{% load form_utils %}
+
+{% block body_class %}template-seminaranmeldung{% endblock %}
+
+{% block content %}
+  {% if self.description %}
+    <div class="container container--margin-top">
+      <div class="text-container userim">
+        <h1 class="title title--color-green">{{ self.title }}</h1>
+        {% include_block self.description %}
+      </div>
+    </div>
+  {% endif %}
+
+  <form action="." method="post" enctype="multipart/form-data" class="form">
+
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for fieldset in form.fieldsets %}
+      <fieldset class="{{ fieldset.classes }}">
+        {% if fieldset.legend %}<legend>{{ fieldset.legend }}</legend>{% endif %}
+        {% if fieldset.description %}<p>{{ fieldset.description }}</p>{% endif %}
+
+        {% for field in fieldset %}
+          {% if field.is_hidden %}{{ field }}{% else %}
+
+          <div id="wrapper-{{field.id_for_label}}"
+               class="form__fieldwrapper
+               {% if field.errors %}form__fieldwrapper--has-error{% endif %}">
+
+               {% if field|is_checkbox %}
+                 <div class="form__textwrapper grid-12">
+                   <div class="grid-12__col-1">
+                     {{ field }}
+                  </div>
+                  <div class="grid-12__col-11" style="vertical-align:baseline">
+                    <label for="{{ field.id_for_label }}">
+                      {{ field.label|safe }}
+                      {% if field.field.required == False %} (optional){% endif %}
+                    </label>
+                    {% if field.help_text %}
+                      <p class="form__helptext">{{ field.help_text|safe }}</p>
+                      {% endif %}
+                  </div>
+                </div>
+              {% else %}
+                <div class="form__textwrapper">
+                  <label for="{{ field.id_for_label }}">
+                    {{ field.label|safe }}
+                    {% if field.field.required == False %} (optional){% endif %}
+                  </label>
+                  {% if field.help_text %}
+                    <p class="form__helptext">{{ field.help_text|safe }}</p>
+                  {% endif %}
+                </div>
+              {{ field }}
+            {% endif %}
+            {{ field.errors }}
+          </div>
+          {% endif %}
+        {% endfor %}
+
+      </fieldset>
+    {% endfor %}
+
+    <div class="form__controls">
+      <input class="button button--filled font-weight-bold color-green" type="submit" value="Beantragen" />
+      <a href="/veranstaltungen" class="button float-right@medium">Zurück zu Veranstaltungen</a>
+    </div>
+
+  </form>
+{% endblock %}
+
+{% block extra_js %}
+  <script>{% include "events/seminar_form_page/apply.js" %}</script>
+{% endblock %}

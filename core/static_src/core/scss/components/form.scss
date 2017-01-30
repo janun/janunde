@@ -14,6 +14,36 @@ $form-breakpoint: rem-calc(670px);
     border-radius: 5px;
   }
 
+  fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+    margin-top: rem-calc(30px);
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    legend {
+      // border-bottom: 1px solid $green;
+      display: block;
+      width: 100%;
+      font-family: $font-family-sans-serif;
+      font-size: rem-calc(24px);
+      line-height: 1.2;
+      color: $green;
+      margin-bottom: rem-calc(20px);
+
+      @include above($form-breakpoint) {
+        font-size: rem-calc(28.28px);
+        margin-bottom: rem-calc(30px);
+      }
+    }
+    legend ~ p {
+      margin-top: rem-calc(-20px);
+    }
+  }
+
   label {
     display: block;
     margin-bottom: 5px;
@@ -22,9 +52,17 @@ $form-breakpoint: rem-calc(670px);
     line-height: 1.2;
     font-weight: bold;
     color: $brown;
+
+    a {
+      border-bottom: 1px solid $brown;
+      &:hover {
+        color: $green;
+        border-bottom-color: $green;
+      }
+    }
   }
 
-  input:not([type="submit"]):not([type=checkbox]), textarea, select {
+  input:not([type="submit"]):not([type=checkbox]):not([type=file]), textarea, select {
     font-family: $font-family-sans-serif;
     font-size: 20px;
     border-radius: 2px;
@@ -45,9 +83,8 @@ $form-breakpoint: rem-calc(670px);
   }
 
   input[type=checkbox] {
-    height: 30px;
-    width: 30px;
     background: transparent;
+    height: 20px !important;
   }
 
   input[type=number] {
@@ -66,7 +103,11 @@ $form-breakpoint: rem-calc(670px);
     resize:vertical;
   }
 
-  input:not([type="submit"]), select {
+  input[type=file] {
+    font-size: 20px;
+  }
+
+  input:not([type="submit"]):not([type=file]), select {
     height: 48px;
   }
 
@@ -109,7 +150,9 @@ $form-breakpoint: rem-calc(670px);
   }
 
   &__fieldwrapper {
+    display: block;
     margin-bottom: 50px;
+    margin-right: 20px;
     width: 100%;
 
     &--has-error {
@@ -132,29 +175,33 @@ $form-breakpoint: rem-calc(670px);
     }
   }
 
+  p {
+    font-family: $font-family-sans-serif !important;
+    margin-bottom: 30px;
+  }
+
   &__helptext {
     display: block;
     font-family: $font-family-sans-serif !important;
     font-size: 16px !important;
     line-height: 1.2;
     color: $grey;
-    margin-bottom: 5px;
+    margin-bottom: 5px !important;
     margin-top: -5px;
 
     .length {
       float: right;
       margin-left: 5px;
-      font-weight: bold;
     }
 
-    a {
-      color: $grey;
-      border-bottom: none;
-      &:hover {
-        color: $grey;
-        text-decoration: underline;
-      }
-    }
+    // a {
+    //   color: $grey;
+    //   border-bottom: none;
+    //   &:hover {
+    //     color: $grey;
+    //     text-decoration: underline;
+    //   }
+    // }
   }
 
 

@@ -26,8 +26,10 @@ INSTALLED_APPS = [
     'contact',
     'about',
 
-    'debug_toolbar',
-    'template_profiler_panel',
+    # 'debug_toolbar',
+    # 'template_profiler_panel',
+
+    'form_utils',
 
     'softhyphen',
 
@@ -80,7 +82,7 @@ MIDDLEWARE_CLASSES = (
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
 
     'django.middleware.gzip.GZipMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'janunde.urls'

@@ -1,19 +1,28 @@
+/*global $ */
+
 // show hints for inputs with maxlength
-$(".form input[maxlength]").on('input', function() {
-  if ($(this).siblings(".form__helptext").length == 0) {
-    $("<p class=\"form__helptext\"></p>").insertAfter(this);
+$(".form input[maxlength]").on("input", function() {
+  var textwrapper = $(this).siblings(".form__textwrapper");
+
+  // no helptext -> create empty helptext
+  if (textwrapper.find(".form__helptext").length === 0) {
+    textwrapper.append("<p class=\"form__helptext\"></p>");
   }
-  if ($(this).siblings(".form__helptext").find(".length").length === 0) {
-    $(this).siblings(".form__helptext").prepend("<span class=\"length\"></span>");
+
+  // no length -> create length
+  if (textwrapper.find(".form__helptext .length").length === 0) {
+    textwrapper.find(".form__helptext").prepend("<span class=\"length\"></span>");
   }
-  $(this).siblings(".form__helptext").find(".length").html(
+
+  // actually add it
+  textwrapper.find(".form__helptext .length").html(
     $(this).val().length + "/" + $(this).attr("maxlength")
   );
 });
 
 
 $(".dateinput").each(function (i, elem) {
-  var input = $(elem).find('input');
+  var input = $(elem).find("input");
   var isDesktop = window.matchMedia("(min-device-width: 800px)").matches;
 
   var picker = input.pickadate({
@@ -21,24 +30,24 @@ $(".dateinput").each(function (i, elem) {
     formatSubmit: "dd.mm.yyyy",
     editable: isDesktop,
     hiddenName: true,
-    clear: input.attr('required') ? "" : "Löschen",
-  }).pickadate('picker');
+    clear: input.attr("required") ? "" : "Löschen",
+  }).pickadate("picker");
 
-  $(elem).find('.dateinput__open').click(function (e) {
-    e.stopPropagation()
+  $(elem).find(".dateinput__open").click(function(e) {
+    e.stopPropagation();
     e.preventDefault();
-    if (picker.get('open')) {
+    if (picker.get("open")) {
       picker.close();
     } else {
-    picker.set('select', input.val());
+      picker.set("select", input.val());
       picker.open();
     }
   });
 });
 
 
-$(".timeinput").each(function (i, elem) {
-  var input = $(elem).find('input');
+$(".timeinput").each(function(i, elem) {
+  var input = $(elem).find("input");
   var isDesktop = window.matchMedia("(min-device-width: 800px)").matches;
 
   var picker = input.pickatime({
@@ -49,13 +58,13 @@ $(".timeinput").each(function (i, elem) {
     interval: 60,
     min: "8:00",
     max: "22:00",
-    clear: input.attr('required') ? "" : "Löschen",
-  }).pickatime('picker');
+    clear: input.attr("required") ? "" : "Löschen",
+  }).pickatime("picker");
 
-  $(elem).find('.timeinput__open').click(function (e) {
-    e.stopPropagation()
+  $(elem).find(".timeinput__open").click(function(e) {
+    e.stopPropagation();
     e.preventDefault();
-    picker.set('select', input.val());
+    picker.set("select", input.val());
     picker.open();
   });
-})
+});

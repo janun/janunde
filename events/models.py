@@ -16,6 +16,9 @@ from wagtail.wagtailadmin.widgets import AdminDateTimeInput
 from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Page, PageManager, PageQuerySet
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
+from wagtail.wagtaildocs.models import Document
+
 from wagtail.wagtailsearch import index
 
 from core.blocks import StandardStreamBlock
@@ -40,41 +43,64 @@ class SeminarFormPage(BasePage):
         verbose_name="Erklärung",
     )
 
+    richtlinie = models.ForeignKey(
+        Document,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+',
+        verbose_name="Seminarabrechnungsrichtlinie",
+        help_text="Wird im Formular verlinkt"
+    )
+
     content_panels = [
         FieldPanel('title'),
-        StreamFieldPanel('description')
+        StreamFieldPanel('description'),
+        DocumentChooserPanel('richtlinie'),
     ]
+
+    class Meta:
+        verbose_name = "Formular zur Seminaranmeldung"
 
     def serve(self, request):
         from events.forms import SeminarForm
 
         if request.method == 'POST':
-            form = SeminarForm(request.POST)
+            form = SeminarForm(request.POST, request.FILES, richtlinie=self.richtlinie)
             if form.is_valid():
-                from django.core.mail import send_mail
+                from django.core.mail import send_mail, EmailMessage
                 from django.template.loader import render_to_string
-                send_mail(
-                    "Antrag auf Förderung für %s" % form.cleaned_data['title'],
-                     render_to_string("events/thankyou_mail.txt", form.cleaned_data),
-                    'website@janun.de',
-                    [form.cleaned_data['contact_mail'], ],
-                    fail_silently=True,
-                )
-                send_mail(
-                    "Antrag auf Förderung für %s" % form.cleaned_data['title'],
-                     render_to_string("events/new_seminar_mail.txt", form.cleaned_data),
-                    'website@janun.de',
-                    ["seminare@janun.de",],
-                    fail_silently=True,
-                )
-                return render(request, 'events/thankyou.html', {
+                attachments = []
+                if request.FILES:
+                    image = request.FILES['image']
+                    attachments = [(image.name, image.read(), image.content_type)]
+                    
+                EmailMessage(
+                    subject="Antrag auf Förderung für %s" % form.cleaned_data['title'],
+                    body=render_to_string("events/seminar_form_page/thankyou_mail.txt", form.cleaned_data),
+                    from_email='website@janun.de',
+                    to=[form.cleaned_data['contact_mail']],
+                    reply_to=["seminare@janun.de"],
+                    attachments=attachments,
+                ).send(fail_silently=True)
+
+                EmailMessage(
+                    subject="Antrag auf Förderung für %s" % form.cleaned_data['title'],
+                    body=render_to_string("events/seminar_form_page/new_seminar_mail.txt", form.cleaned_data),
+                    from_email='website@janun.de',
+                    to=["seminare@janun.de"],
+                    reply_to=[form.cleaned_data['contact_mail']],
+                    attachments=attachments,
+                ).send(fail_silently=True)
+
+                return render(request, 'events/seminar_form_page/thankyou.html', {
                     'self': self,
                     'form': form
                 })
         else:
-            form = SeminarForm()
+            form = SeminarForm(richtlinie=self.richtlinie)
 
-        return render(request, 'events/apply.html', {
+        return render(request, 'events/seminar_form_page/apply.html', {
             'self': self,
             'form': form,
         })
