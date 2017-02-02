@@ -2,7 +2,7 @@
 {% load static from staticfiles %}
 
 {% cache 36000 office object.id object.latest_revision_created_at object.photo.updated_at %}
-  <div class="bigcard click-area">
+  <div class="bigcard click-area hover-reveal">
     <div class="bigcard__inner">
 
       <a class="click-area__area-link" href="{% pageurl object %}">{{ object.title }}</a>
@@ -36,7 +36,7 @@
 
       </div>
 
-      <div class="bigcard__footer">
+      <div class="bigcard__footer hover-reveal__hidden">
         <a class="bigcard__primary bigcard__button" href="{% pageurl object %}">Mehr Infos</a>
       </div>
 

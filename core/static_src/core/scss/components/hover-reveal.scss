@@ -6,20 +6,12 @@
 //
 .hover-reveal {
   @include above($large) {
-    &__inline-block, &__inline, &__block {
-      display: none;
+    &__hidden {
+      visibility: hidden;
     }
   }
 
-  &:hover &__inline-block {
-    display: inline-block;
-  }
-
-  &:hover &__inline {
-    display: inline;
-  }
-
-  &:hover &__block {
-    display: block;
+  &:hover &__hidden {
+    visibility: inherit;
   }
 }

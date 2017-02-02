@@ -1,6 +1,6 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff humanize %}
 
-<div class="bigcard click-area">
+<div class="bigcard click-area hover-reveal">
 
   <div class="bigcard__inner">
 
@@ -31,9 +31,8 @@
       {% endif %}
     </div>
 
-    <div class="bigcard__footer">
+    <div class="bigcard__footer hover-reveal__hidden">
       <a href="{% pageurl object %}" class="bigcard__button">Weiterlesen</a>
-      <span class="">{{ object.first_published_at|naturaltime }}</span>
     </div>
 
   </div>

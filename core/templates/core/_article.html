@@ -1,7 +1,7 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff humanize cache %}
 
 {% cache 36000 article object.id object.latest_revision_created_at object.main_image.updated_at %}
-  <div class="bigcard click-area
+  <div class="bigcard click-area hover-reveal
        {% if object.main_image and object.color %}
          bigcard--color bigcard--color-{{ object.color }}
        {% endif %}
@@ -59,9 +59,9 @@
         {% endif %}
       </div>
 
-      <div class="bigcard__footer">
+      <div class="bigcard__footer hover-reveal__hidden">
         <a href="{% pageurl object %}" class="bigcard__button">Weiterlesen</a>
-        <span class="">{{ object.first_published_at|naturaltime }}</span>
+        <span class="">{{ object.first_published_at|date }}</span>
       </div>
 
     </div>
