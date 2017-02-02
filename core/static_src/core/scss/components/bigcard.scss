@@ -149,12 +149,17 @@ $related-group-size: rem-calc(70px);
 
 
   &__content {
-    padding: $bigcard-padding / 2 $bigcard-padding;
-    padding-bottom: 0;
     height: rem-calc(195px);
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-top: rem-calc(28px);
+    padding-left: $bigcard-padding;
+    padding-right: $bigcard-padding;
+    padding-bottom: 0;
+    padding-top: rem-calc(16px);
+
+    &--padding-top {
+      padding-top: rem-calc(28px);
+    }
   }
 
   &__heading {
@@ -182,6 +187,7 @@ $related-group-size: rem-calc(70px);
     font-weight: normal;
     color: $brown;
     margin: 0;
+    margin-top: rem-calc(5px);
   }
 
   &__datetime {

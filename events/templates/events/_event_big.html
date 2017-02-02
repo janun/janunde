@@ -55,7 +55,7 @@
         {% endif %}
       {% endif %}
 
-      <div class="bigcard__content">
+      <div class="bigcard__content {% if object.related_group or object.organizer %}bigcard__content--padding-top{% endif %}">
         <div class="bigcard__heading">
           <h2 class="js-dotdotdot bigcard__title" itemprop="name">
             {{ object.hyphenated_title|safe }}
