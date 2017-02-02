@@ -1,0 +1,33 @@
+.event-page {
+  .block-image__attribution {
+    white-space: normal;
+  }
+
+  &__title {
+    .title{
+      margin-top: 0;
+      margin-bottom: rem-calc(10px);
+    }
+    .subtitle {
+      margin-top: 0;
+    }
+  }
+
+  @include above($medium) {
+    &__title {
+      margin-bottom: rem-calc(40px);
+
+      .title {
+        margin-top: rem-calc(10px);
+        margin-bottom: rem-calc(20px);
+      }
+      .subtitle {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .grid-12__col-4\@medium.is_stuck {
+    margin-top: rem-calc(20px);
+  }
+}
