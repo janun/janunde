@@ -28,6 +28,7 @@
   "devDependencies": {
     "eslint": "^3.14.1",
     "eslint-config-google": "^0.7.1",
+    "gulp-svgmin": "^1.2.3",
     "nucleus-styleguide": "^1.0.6"
   }
 }
