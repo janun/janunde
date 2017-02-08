@@ -66,7 +66,7 @@ class SeminarForm(BetterForm):
     )
 
     location = forms.CharField(
-        label='Ort', help_text="Wo findet das Seminar statt? Bsp.: <em>UJZ Korn, Kornstraße 28, 30167 Hannover</em>",
+        label='Ort', help_text="Wo findet das Seminar statt? Bsp.: <em>Jugendumweltbüro, Goebenstr. 3a, 30161 Hannover</em>",
         widget=forms.TextInput(attrs={'class': "form__input--full"})
     )
 

@@ -2,6 +2,7 @@ import datetime
 
 from itertools import groupby
 
+from django.core.files.images import ImageFile
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
@@ -62,6 +63,36 @@ class SeminarFormPage(BasePage):
     class Meta:
         verbose_name = "Formular zur Seminaranmeldung"
 
+
+    def create_event(self, data, image=None):
+        from wagtail.wagtailcore.rich_text import RichText
+        index = EventIndexPage.objects.all()[0]
+        event = EventPage(
+            title=data['title'],
+            subtitle=data['subtitle'],
+            start_datetime=data['begin'],
+            end_datetime=data['end'],
+            location=data['location'],
+            contact_name=data['website_contact_name'],
+            contact_mail=data['website_contact_mail'],
+            contact_phone=data['website_contact_phone'],
+            related_group=data['group'],
+            content=[('paragraph', RichText(data['description']))]
+        )
+        if image:
+            image_object = Image(
+                title="Bild für " + data['title'],
+                file=ImageFile(image),
+                attribution=data['image_copyright'],
+            )
+            image_object.save()
+            event.main_image=image_object
+        index.add_child(instance=event)
+        event.unpublish()
+        event.save_revision(submitted_for_moderation=True)
+        return event
+
+
     def serve(self, request):
         from events.forms import SeminarForm
 
@@ -71,10 +102,16 @@ class SeminarFormPage(BasePage):
                 from django.core.mail import send_mail, EmailMessage
                 from django.template.loader import render_to_string
                 attachments = []
+                image = None
+                event = None
                 if request.FILES:
                     image = request.FILES['image']
                     attachments = [(image.name, image.read(), image.content_type)]
-                    
+
+                if form.cleaned_data['publish']:
+                    event = self.create_event(form.cleaned_data, image)
+                    form.cleaned_data['event'] = event
+
                 EmailMessage(
                     subject="Antrag auf Förderung für %s" % form.cleaned_data['title'],
                     body=render_to_string("events/seminar_form_page/thankyou_mail.txt", form.cleaned_data),
