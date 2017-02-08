@@ -15,5 +15,4 @@ def srcset(image, filter_specs):
         rendition = get_rendition_or_not_found(image, filter_spec)
         if not rendition.width in sources:
             sources[rendition.width] = "%s %iw" % (rendition.url, rendition.width)
-
     return ', '.join(sources.values())

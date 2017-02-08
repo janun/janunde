@@ -16,8 +16,7 @@
                class="big-search__input js-search-focus js-swap-placeholder"
                data-placeholder-small="Suche" autofocus type="search"
                placeholder="Was interessiert dich?" autocomplete="off"
-               name="q"{% if query_string %} value="{{ query_string }}"{% endif %}
-               onfocus="this.value = this.value;">
+               name="q"{% if query_string %} value="{{ query_string }}"{% endif %}>
       </form>
     </div>
   </div>
@@ -26,7 +25,7 @@
   <div class="center-container">
     <div id="spinner" class="hide">
       <div class="big-font blinking-dots">Laden<span>.</span><span>.</span><span>.</span></div>
-      <div class="card-grid">
+      <div class="card-grid margin-top-1">
         {% for i in "123" %}
           <div class="bigcard">
             <div class="bigcard__inner">
