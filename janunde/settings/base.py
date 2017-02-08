@@ -115,11 +115,8 @@ TEMPLATES = [
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'OPTIONS': {
-            'MAX_ENTRIES': 1000
-        }
-    }
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+   }
 }
 
 

@@ -8,6 +8,8 @@ except ImportError:
     pass
 
 
+
+
 # Set Debug after environment variable
 DEBUG = os.environ.get('DJANGO_DEBUG', '').lower() in ('yes', 'true', '1')
 
@@ -63,14 +65,14 @@ TEMPLATES[0]['OPTIONS']['loaders'] = (
 )
 TEMPLATES[0]['APP_DIRS'] = False
 
-# CACHE
-# (cannot be used until we have a cache backend??)
-#MIDDLEWARE_CLASSES = ('django.middleware.cache.UpdateCacheMiddleware',) + MIDDLEWARE_CLASSES
-#MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + ('django.middleware.cache.FetchFromCacheMiddleware',)
-
-#CACHE_MIDDLEWARE_ALIAS
-#CACHE_MIDDLEWARE_SECONDS
-#CACHE_MIDDLEWARE_KEY_PREFIX = ''
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000
+        }
+    }
+}
 
 
 BONSAI_URL = os.environ.get('BONSAI_URL', '')
