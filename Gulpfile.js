@@ -56,7 +56,9 @@ gulp.task("scripts", function(){
     "janunde/static/bower_components/jquery/dist/jquery.js",
     "janunde/static/bower_components/sticky-kit/jquery.sticky-kit.js",
     "janunde/static/bower_components/jQuery.dotdotdot/src/jquery.dotdotdot.js",
+    "janunde/static/bower_components/jquery-auto-grow-input/jquery.auto-grow-input.js",
     "core/static_src/core/js/*.js",
+    "janunde/static/bower_components/a11y-toggle/a11y-toggle.js",
   ], "app.js");
 
   scriptsBundle([
