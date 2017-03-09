@@ -1,11 +1,7 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff humanize cache %}
 
 {% cache 36000 article object.id object.latest_revision_created_at object.main_image.updated_at %}
-  <div class="bigcard click-area hover-reveal
-       {% if object.main_image and object.color %}
-         bigcard--color bigcard--color-{{ object.color }}
-       {% endif %}
-       "
+  <div class="bigcard click-area hover-reveal"
        itemscope itemtype="http://schema.org/Article">
 
     <div class="bigcard__inner">
@@ -54,7 +50,7 @@
             <h3 class="bigcard__subtitle">{{ object.subtitle }}</h3>
           {% endif %}
         </div>
-        {% if object.get_text %}
+        {% if object.get_text and not object.subtitle %}
           <p class="bigcard__text js-dotdotdot">{{ object.get_text }}</p>
         {% endif %}
       </div>

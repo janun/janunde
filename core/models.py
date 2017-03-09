@@ -279,6 +279,16 @@ class StandardPage(BasePage):
         blank=True
     )
 
+    feed_image = models.ForeignKey(
+        Image,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+',
+        verbose_name=_("Hauptbild"),
+        help_text=_("Wird in Übersichten verwendet.")
+    )
+
     body = StreamField(
         StandardStreamBlock(),
         blank=True,
@@ -301,6 +311,7 @@ class StandardPage(BasePage):
             FieldPanel('title_color', classname=''),
         ], heading="Titel"),
         FieldPanel('subtitle'),
+        ImageChooserPanel('feed_image'),
         StreamFieldPanel('body'),
         #FieldPanel('tags'),
     ]
