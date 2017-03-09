@@ -89,7 +89,7 @@ class ArticleModelAdmin(ModelAdmin):
     add_to_settings_menu = False
     list_display = ('title', 'author', 'first_published_at')
     list_filter = ('first_published_at',)
-    search_fields = ('title', 'author', 'body')
+    search_fields = ('title', 'body')
     ordering = ('first_published_at',)
 
 modeladmin_register(ArticleModelAdmin)
