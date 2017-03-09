@@ -90,6 +90,6 @@ class ArticleModelAdmin(ModelAdmin):
     list_display = ('title', 'author', 'first_published_at')
     list_filter = ('first_published_at',)
     search_fields = ('title', 'body')
-    ordering = ('first_published_at',)
+    ordering = ('-first_published_at',)
 
 modeladmin_register(ArticleModelAdmin)
