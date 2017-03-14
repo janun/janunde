@@ -37,6 +37,7 @@ urlpatterns = [
 
     url(r'^thema/(?P<tagname>\w+)/$', tags, name='tags'),
     url(r'^lueneburg', RedirectView.as_view(url='/netzwerk-projekte/janun-lüneburg/') ),
+    url(r'^scp', RedirectView.as_view(url='/netzwerk-projekte/janun-landesbüro/silent-climate-parade/') ),
 ]
 
 
