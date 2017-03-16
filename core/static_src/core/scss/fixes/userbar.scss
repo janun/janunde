@@ -1,0 +1,4 @@
+// https://github.com/wagtail/wagtail/issues/3455
+.wagtail-userbar__item {
+  transition: none !important;
+}
