@@ -60,8 +60,8 @@ class ImageCarouselBlock(blocks.StructBlock):
 
 class ImagesBlock(blocks.ListBlock):
 
-    def get_context(self, value):
-       context = super(ImagesBlock, self).get_context(value)
+    def get_context(self, value, parent_context=None):
+       context = super(ImagesBlock, self).get_context(value, parent_context=parent_context)
        count = len(context['self'])
        context['aspect'] = 66.66
        context['srcset'] = 'fill-300x200 fill-600x400 fill-900x600 fill-1200x800'
