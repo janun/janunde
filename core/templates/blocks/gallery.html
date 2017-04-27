@@ -1,0 +1,25 @@
+{% load wagtailimages_tags srcset %}
+<div class="image-gallery js-image-gallery">
+  {% image images.0 fill-790x550 as first_image %}
+  {% image images.0 original as first_huge_image %}
+
+  <a class="image-gallery__active-image-link" href="{{ first_huge_image.url }}">
+    <img class="image-gallery__active-image" src="{{ first_image.url }}">
+  </a>
+  <span class="image-gallery__attribution">{{ images.0.attribution }}</span>
+
+  <div class="image-gallery__image-list">
+    {% for image in images %}
+      {% image image fill-144x100 as small_image %}
+      {% image image fill-790x550 as big_image %}
+      {% image image original as huge_image %}
+      <a href="{{ big_image.url }}">
+        <img class="image-gallery__image"
+             data-attribution="{{ image.attribution }}"
+             data-src="{{ big_image.url }}"
+             data-huge-src="{{ huge_image.url }}"
+             src="{{ small_image.url }}">
+      </a>
+    {% endfor %}
+  </div>
+</div>

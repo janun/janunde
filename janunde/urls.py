@@ -14,6 +14,7 @@ from wagtail.contrib.wagtailsitemaps.views import sitemap
 from acme_challenge import urls as acme_challenge_urls
 
 from core.views import tags
+from core.addmultiple import add
 
 
 urlpatterns = [
@@ -22,7 +23,9 @@ urlpatterns = [
     url(r'^404/$', page_not_found, kwargs={'exception': Exception("Page not Found")} ),
     url(r'^500/$', server_error ),
 
+    url(r'^admin/images/multiple/add/$', add, name='add_multiple'),
     url(r'^admin/', include(wagtailadmin_urls)),
+
     url(r'^django-admin/', include(admin.site.urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
 

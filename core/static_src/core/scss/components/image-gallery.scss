@@ -1,0 +1,54 @@
+.image-gallery {
+  position: relative;
+  width: 100%;
+  background: $white;
+  border-radius: 5px;
+  padding: 20px;
+  @include shadow(1);
+
+
+  @include above($medium) {
+    margin-bottom: rem-calc(60px);
+    margin-top: rem-calc(60px);
+  }
+  .userim & {
+    position: relative;
+    width: 100vw;
+    left: calc( 50% - 50vw );
+
+    @include above(rem-calc(500px)) {
+      width: 100%;
+      left: inherit;
+    }
+
+    @include above(rem-calc(830px)) {
+      width: rem-calc(830px);
+      margin-left: rem-calc(-95px);
+      margin-right: rem-calc(-95px);
+      left: inherit;
+    }
+  }
+
+
+  &__active-image {
+    width: 100%;
+    height: auto;
+  }
+
+  &__image-list {
+    margin-top: 20px;
+    width: auto;
+    overflow-x: scroll;
+    white-space: nowrap;
+  }
+
+  &__image {
+    height: 100px;
+    width: auto;
+    margin: 10px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+  }
+}

@@ -8,6 +8,8 @@ from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.contrib.table_block.blocks import TableBlock
 
 from .fields import PrettyURLField
+from .images import AttributedImage as Image
+from wagtail.wagtailcore.models import Collection
 #from .models import COLOR_CHOICES
 
 def _(str):
@@ -90,6 +92,35 @@ class ImagesBlock(blocks.ListBlock):
         icon = "image"
 
 
+class ImageGalleryBlock(blocks.StructBlock):
+
+    collection = blocks.ChoiceBlock(
+        label = "Sammlung",
+        choices = [(collection.id, collection.name) for collection in Collection.objects.all()],
+        help_text="Die Bilder aus der Sammlung werden dann als Gallerie angezeigt."
+    )
+
+    def get_gallery_images(self, collection, tags=None):
+        images = None
+        try:
+            images = Image.objects.filter(collection__id=collection).order_by('-created_at')
+        except Exception as e:
+            pass
+        if images and tags:
+            images = images.filter(tags__name__in=tags).distinct()
+        return images
+
+    def get_context(self, value, parent_context=None):
+       context = super().get_context(value, parent_context=parent_context)
+       context['images'] = self.get_gallery_images(value['collection'])
+       return context
+
+    class Meta:
+        template = "blocks/gallery.html",
+        form_template = 'blocks/gallery_form.html'
+        label = "Gallerie"
+        icon = "image"
+
 
 class Button(blocks.StructBlock):
     text = blocks.CharBlock(label="Text")
@@ -137,6 +168,7 @@ class StandardStreamBlock(blocks.StreamBlock):
     paragraph = ParagraphBlock()
     image = ImageBlock()
     several_images = ImagesBlock(ImageCarouselBlock)
+    gallery = ImageGalleryBlock()
     embed = OurEmbedBlock()
     button = Button()
     attachment = Attachment()
