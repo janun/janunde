@@ -16,6 +16,9 @@ from acme_challenge import urls as acme_challenge_urls
 from core.views import tags
 from core.addmultiple import add
 
+from wagtail.wagtailimages.views.serve import ServeView
+
+
 
 urlpatterns = [
     url(r'^', include(acme_challenge_urls)),
@@ -28,6 +31,8 @@ urlpatterns = [
 
     url(r'^django-admin/', include(admin.site.urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
+
+    url(r'^images/([^/]*)/(\d*)/([^/]*)/[^/]*$', ServeView.as_view(), name='wagtailimages_serve'),
 
     url(r'^sitemap\.xml$', sitemap, name='sitemap'),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
