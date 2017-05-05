@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'storages',
     'taggit',
 
+    'django.forms',
     'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -112,6 +113,8 @@ TEMPLATES = [
     },
 ]
 
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+
 
 CACHES = {
     'default': {
@@ -151,15 +154,10 @@ DATABASES = { 'default': dj_database_url.config(
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
-
 LANGUAGE_CODE = 'de-de'
-
 TIME_ZONE = 'Europe/Berlin'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 

@@ -1,6 +1,5 @@
 from django import forms
 from core.models import Group
-from core.widgets import SplitDateTimeWidget
 
 from form_utils.forms import BetterForm
 
@@ -57,13 +56,9 @@ class SeminarForm(BetterForm):
         help_text="Gib, falls nötig, noch mehr Infos in weiteren max. 100 Zeichen."
     )
 
-    begin = forms.SplitDateTimeField(
-        label='Beginn', widget=SplitDateTimeWidget()
-    )
+    begin = forms.SplitDateTimeField(label='Beginn')
 
-    end = forms.SplitDateTimeField(
-        label='Ende', widget=SplitDateTimeWidget()
-    )
+    end = forms.SplitDateTimeField(label='Ende')
 
     location = forms.CharField(
         label='Ort', help_text="Wo findet das Seminar statt? Bsp.: <em>Jugendumweltbüro, Goebenstr. 3a, 30161 Hannover</em>",
