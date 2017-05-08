@@ -35,8 +35,6 @@ INSTALLED_APPS = [
 
     'wagtail.contrib.table_block',
     'wagtail.contrib.modeladmin',
-    'wagtail.contrib.wagtailsitemaps',
-
     'wagtail.contrib.settings',
     'wagtail.contrib.wagtailsearchpromotions',
     'wagtail.wagtailforms',
@@ -63,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE_CLASSES = (
