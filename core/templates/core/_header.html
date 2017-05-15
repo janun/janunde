@@ -4,45 +4,18 @@
 {% cache 36000 header %}
   <header class="site-header video-background">
 
-    <div class="video-background__wrapper">
-      <div class="video-background__video" id="site-video"></div>
-    </div>
-
-    <script>
-      if (window.matchMedia('(min-device-width: 1024px)').matches) {
-
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        function onYouTubeIframeAPIReady() {
-          var player;
-          player = new YT.Player('site-video', {
-            videoId: 'YGXxlRYozD0',
-            width: 1024,
-            height: 500,
-            playerVars: {
-              autoplay: 1,
-              controls: 0,
-              showinfo: 0,
-              modestbranding: 1,
-              loop: 1,
-              playlist: 'YGXxlRYozD0',
-              fs: 0,
-              cc_load_policy: 0,
-              iv_load_policy: 3,
-              autohide: 0
-            },
-            events: {
-              onReady: function(e) {
-                e.target.mute();
-              }
-            }
-          });
-        }
-      }
-    </script>
+    <video class="video-background__video hide@no-js js-mq-video-loader" autoplay muted playsinline loop poster="{% static 'core/images/header-poster/header-poster-1024.jpg' %}">
+      <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.mp4' %}" type="video/mp4">
+      <source media="(min-device-width: 1280px)" data-src="{% static 'core/videos/header-video/header-video-1280.webm' %}" type="video/webm">
+      <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.mp4' %}" type="video/mp4">
+      <source media="(min-device-width: 1024px) and (max-device-width: 1279px)" data-src="{% static 'core/videos/header-video/header-video-1024.webm' %}" type="video/webm">
+    </video>
+    <noscript>
+      <video class="video-background__video" autoplay muted playsinline loop poster="{% static 'core/images/header-poster/header-poster-1024.jpg' %}">
+        <source src="{% static 'core/videos/header-video/header-video-1024.mp4' %}" type="video/mp4">
+        <source src="{% static 'core/videos/header-video/header-video-1024.webm' %}" type="video/webm">
+      </video>
+    </noscript>
 
     <div class="site-header__content">
       <h1>JANUN ist das<br>Jugendumweltnetzwerk<br>Niedersachsen</h1>
@@ -52,10 +25,5 @@
       </a>
     </div>
 
-    <div style="position: absolute; bottom: 10px; width: 100%">
-      <div class="container hide@until-medium">
-        <a href="/veranstaltungen/silent-climate-parade-2" style="color: white">Am 13. Mai wieder: Silent Climate Parade</a>
-      </div>
-    </div>
   </header>
 {% endcache %}
