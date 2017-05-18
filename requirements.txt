@@ -13,7 +13,7 @@ django-form-utils==1.0.3
 django-storages==1.4
 boto==2.39.0
 django-acme==0.2.1
-whitenoise==3.2
+whitenoise==3.3
 brotlipy==0.3.0
 cffi==1.6.0
 django-toolbelt==0.0.1
