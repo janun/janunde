@@ -1,4 +1,4 @@
-{% load imageurl %}
+{% load imageurl wagtailimages_tags %}
 
 <div class="image-gallery"
     v-on:touchstart="touchstart" v-on:touchend="touchend"
@@ -79,9 +79,12 @@
         {% for image in images %}
           {
             {% if image.attribution %}attribution: "{{ image.attribution }}",{% endif %}
-            thumb: "{{ image|imageurl:'fill-100x100' }}",
-            big: "{{ image|imageurl:'max-790x550' }}",
-            original: "{{ image|imageurl:'original' }}",
+            {% image image fill-100x100 as thumb %}
+            thumb: "{{ thumb.url }}",
+            {% image image max-790x550 as big %}
+            big: "{{ big.url }}",
+            {% image image original as original %}
+            original: "{{ original.url }}",
           },
         {% endfor %}
       ],
