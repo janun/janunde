@@ -176,7 +176,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 # save staticfiles using whitenoise
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+from whitenoise.storage import CompressedManifestStaticFilesStorage
+class MyCompressedManifestStaticFilesStorage(CompressedManifestStaticFilesStorage):
+    manifest_strict=False
+
+STATICFILES_STORAGE = 'janunde.settings.base.MyCompressedManifestStaticFilesStorage'
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
