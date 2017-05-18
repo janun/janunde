@@ -53,6 +53,10 @@ function scriptsBundle(scripts, bundleName) {
 
 gulp.task("scripts", function(){
   scriptsBundle([
+    "janunde/static/bower_components/vue/dist/vue.min.js",
+  ], 'start.js');
+
+  scriptsBundle([
     "janunde/static/bower_components/jquery/dist/jquery.js",
     "janunde/static/bower_components/sticky-kit/jquery.sticky-kit.js",
     "janunde/static/bower_components/jQuery.dotdotdot/src/jquery.dotdotdot.js",

@@ -1,20 +1,91 @@
 {% load imageurl %}
 
-<div class="image-gallery js-image-gallery">
-  <a class="image-gallery__active-image-link" href="{{ images.0|imageurl:"original" }}">
-    <img class="image-gallery__active-image" src="{{ images.0|imageurl:"fill-790x550" }}">
-  </a>
-  <span class="image-gallery__attribution">{{ images.0.attribution }}</span>
+<div class="image-gallery"
+    v-on:touchstart="touchstart" v-on:touchend="touchend"
+    v-on:keyup.left="prev" v-on:keyup.right="next">
+  <div class="image-gallery__active-wrapper">
+    <a class="image-gallery__active-image-link" v-bind:href="activeImage.original">
+      <img class="image-gallery__active-image" src="{{ images.0|imageurl:'max-790x550' }}" v-bind:src="activeImage.big">
+    </a>
+    <div class="image-gallery__attribution">${ activeImage.attribution }</div>
 
+    <a href="#" v-on:click.prevent="prev" class="image-gallery__prev">
+      {% include 'core/arrow-left.svg' %}
+    </a>
+    <a href="#" v-on:click.prevent="next" class="image-gallery__next">
+      {% include 'core/arrow-right.svg' %}
+    </a>
+
+  </div>
   <div class="image-gallery__image-list">
-    {% for image in images %}
-      <a href="{{ image|imageurl:"original" }}">
-        <img class="image-gallery__image"
-             data-attribution="{{ image.attribution }}"
-             data-src="{{ image|imageurl:"fill-790x550" }}"
-             data-huge-src="{{ image|imageurl:"original" }}"
-             src="{{ image|imageurl:"fill-144x100" }}">
-      </a>
-    {% endfor %}
+    <a v-bind:href="image.original" v-for="(image, index) in images" v-on:click.prevent="changeActive(index)">
+      <img class="image-gallery__image" v-bind:src="image.thumb">
+    </a>
   </div>
 </div>
+
+<script>
+
+  // vue stuff
+  testGallery = new Vue({
+    el: '.image-gallery',
+    delimiters: ['${', '}'],
+
+    methods: {
+      changeActive: function(index) {
+        this.index = index;
+      },
+
+      next: function() {
+        if (this.index == this.images.length-1) {
+          this.index = 0;
+        }
+        else {
+          this.index++;
+        }
+      },
+      prev: function() {
+        if (this.index == 0) {
+          this.index = this.images.length-1;
+        }
+        else {
+          this.index--;
+        }
+      },
+
+      touchstart: function(event) {
+        this.touchstartX = event.changedTouches[0].screenX;
+      },
+      touchend: function(event) {
+        var touchendX = event.changedTouches[0].screenX;
+        if (touchendX + 70 < this.touchstartX) {
+          this.prev();
+        }
+        if (touchendX > this.touchstartX + 70) {
+          this.next();
+        }
+      }
+    },
+
+    computed: {
+      activeImage: function () {
+        return this.images[this.index];
+      }
+    },
+
+    data: {
+      touchstartX: 0,
+      images: [
+        {% for image in images %}
+          {
+            {% if image.attribution %}attribution: "{{ image.attribution }}",{% endif %}
+            thumb: "{{ image|imageurl:'fill-100x100' }}",
+            big: "{{ image|imageurl:'max-790x550' }}",
+            original: "{{ image|imageurl:'original' }}",
+          },
+        {% endfor %}
+      ],
+      index: 0
+    }
+  });
+</script>

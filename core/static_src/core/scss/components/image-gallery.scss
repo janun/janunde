@@ -30,10 +30,37 @@
   }
 
 
-  &__active-image {
+  &__active-image-link {
+    display: block;
     width: 100%;
-    height: auto;
+    overflow: hidden;
+    height: 200px;
+    @include above($medium) {
+      height: 550px;
+    }
   }
+
+  &__active-wrapper {
+    position: relative;
+  }
+
+  &__active-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  &__attribution {
+    height: 20px;
+    font-family: $font-family-serif;
+    color: $grey;
+    font-style: normal;
+    font-size: rem-calc(12px);
+    line-height: rem-calc(28px);
+  }
+
 
   &__image-list {
     margin-top: 20px;
@@ -50,5 +77,37 @@
     &:first-of-type {
       margin-left: 0;
     }
+  }
+
+  &__prev, &__next {
+    position: absolute;
+    top: 0px;
+    height: 100%;
+
+    svg {
+      position: relative;
+      top: 40px;
+      height: 40px;
+      width: 40px;
+      border-radius: 10px;
+      background: white;
+      padding: 10px;
+
+      @include above($medium) {
+        height: 50px;
+        width: 60px;
+        padding: 14px;
+        top: 30%;
+      }
+    }
+
+  }
+  &__next {
+    right: -20px;
+    padding-left: 20px;
+  }
+  &__prev {
+    left: -20px;
+    padding-right: 20px;
   }
 }
