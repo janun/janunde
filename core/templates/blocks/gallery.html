@@ -59,10 +59,10 @@
       touchend: function(event) {
         var touchendX = event.changedTouches[0].screenX;
         if (touchendX + 70 < this.touchstartX) {
-          this.prev();
+          this.next();
         }
         if (touchendX > this.touchstartX + 70) {
-          this.next();
+          this.prev();
         }
       }
     },
