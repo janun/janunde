@@ -104,7 +104,13 @@ class ImageGalleryBlock(blocks.StructBlock):
     collection = blocks.ChoiceBlock(
         label = "Sammlung",
         choices = get_image_gallery_choices,
-        help_text="Die Bilder aus der Sammlung werden dann als Gallerie angezeigt."
+        help_text="Die Bilder aus der Sammlung werden dann als Gallerie angezeigt.",
+    )
+
+    start_image = ImageChooserBlock(
+        label = "erstes Bild",
+        required = False,
+        help_text = "Das Bild, das als erstes angezeigt wird.",
     )
 
     def get_gallery_images(self, collection, tags=None):
@@ -119,7 +125,9 @@ class ImageGalleryBlock(blocks.StructBlock):
 
     def get_context(self, value, parent_context=None):
        context = super().get_context(value, parent_context=parent_context)
-       context['images'] = self.get_gallery_images(value['collection'])
+       context['images'] = list(self.get_gallery_images(value['collection']))
+       if value.get('start_image', None):
+           context['images'].insert(0, value['start_image'])
        return context
 
     class Meta:
