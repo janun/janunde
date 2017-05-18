@@ -92,11 +92,18 @@ class ImagesBlock(blocks.ListBlock):
         icon = "image"
 
 
+def get_image_gallery_choices():
+    return [
+        (collection.id, collection.name)
+        for collection in Collection.objects.all()
+        if collection.name != "Root"
+    ]
+
 class ImageGalleryBlock(blocks.StructBlock):
 
     collection = blocks.ChoiceBlock(
         label = "Sammlung",
-        choices = [(collection.id, collection.name) for collection in Collection.objects.all() if collection.name != "Root"],
+        choices = get_image_gallery_choices,
         help_text="Die Bilder aus der Sammlung werden dann als Gallerie angezeigt."
     )
 
