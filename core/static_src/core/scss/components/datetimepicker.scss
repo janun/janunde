@@ -7,6 +7,10 @@
   color: $brown;
   font-size: 14px;
 
+  &__select--year {
+    width: 50% !important;
+  }
+
   &__day {
     &:hover {
       background: #ccc;

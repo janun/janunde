@@ -1,0 +1,20 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags %}
+{% load static from staticfiles %}
+
+{% block body_class %}template-formpage-landing{% endblock %}
+
+{% block content %}
+
+
+<div class="center-container">
+<div class="text-container padding-top-5 padding-bottom-5">
+  <i class="icon-check color-green" style="font-size: 7rem" aria-hidden="true"></i>
+  <div class="margin-bottom-3 margin-top-2 big-font">
+    <div>{{ page.thank_you_text|richtext }}</div>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}

@@ -638,3 +638,46 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
     class Meta:
         verbose_name = _("Artikel")
         verbose_name_plural = _("Artikel")
+
+
+
+
+from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
+from wagtail.wagtailforms.edit_handlers import FormSubmissionsPanel
+
+
+
+class FormField(AbstractFormField):
+    page = ParentalKey('FormPage', related_name='form_fields')
+
+
+class FormPage(AbstractEmailForm):
+    intro = RichTextField(
+        blank=True,
+        verbose_name="Einführung",
+        help_text="Wird über dem Formular angezeigt."
+    )
+    thank_you_text = RichTextField(
+        blank=True,
+        verbose_name="Danke-Text",
+        help_text="Wird angezeigt, nachdem das Formular erfolgreich abgesendet wurde."
+    )
+
+    content_panels = AbstractEmailForm.content_panels + [
+        FormSubmissionsPanel(),
+        FieldPanel('intro', classname="full"),
+        InlinePanel('form_fields', label="Formular-Felder"),
+        FieldPanel('thank_you_text', classname="full"),
+        MultiFieldPanel([
+            FieldRowPanel([
+                FieldPanel('from_address', classname="col6"),
+                FieldPanel('to_address', classname="col6"),
+            ]),
+            FieldPanel('subject'),
+        ], "E-Mail"),
+    ]
+
+    class Meta:
+        verbose_name = _("Formular")
+        verbose_name_plural = _("Formulare")

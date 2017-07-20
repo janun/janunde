@@ -29,6 +29,7 @@ $(".dateinput").each(function (i, elem) {
     format: "dd.mm.yyyy",
     formatSubmit: "dd.mm.yyyy",
     editable: isDesktop,
+    selectYears: 100,
     clear: input.attr("required") ? "" : "Löschen",
   }).pickadate("picker");
 
