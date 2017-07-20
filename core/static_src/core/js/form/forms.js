@@ -29,7 +29,6 @@ $(".dateinput").each(function (i, elem) {
     format: "dd.mm.yyyy",
     formatSubmit: "dd.mm.yyyy",
     editable: isDesktop,
-    hiddenName: true,
     clear: input.attr("required") ? "" : "Löschen",
   }).pickadate("picker");
 
@@ -54,7 +53,6 @@ $(".timeinput").each(function(i, elem) {
     format: "H:i",
     formatSubmit: "H:i",
     editable: isDesktop,
-    hiddenName: true,
     interval: 60,
     min: "8:00",
     max: "22:00",
