@@ -17,6 +17,7 @@
     <form action="{% pageurl page %}" method="POST" class="form">
       {% csrf_token %}
       {{ form.non_field_errors }}
+      {% if form.errors %}<div class="color-red">Bitte überprüfe die Felder noch einmal. Felder mit Problemen sind rot gekennzeichnet.</div><br>{% endif %}
 
       {% for field in form %}
         {% if field.is_hidden %}{{ field }}{% else %}
