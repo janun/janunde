@@ -648,8 +648,9 @@ from wagtail.wagtailforms.edit_handlers import FormSubmissionsPanel
 from wagtail.wagtailadmin.utils import send_mail
 from django.core.exceptions import ValidationError
 from wagtail.wagtailforms.forms import WagtailAdminPageForm
-
-
+from django.utils.text import slugify
+from django.utils.six import text_type
+from unidecode import unidecode
 
 
 
@@ -658,26 +659,36 @@ class FormField(AbstractFormField):
 
 
 # TODO: add validation
-# class FormPageForm(WagtailAdminPageForm):
-#     def clean(self):
-#         cleaned_data = super().clean()
-#
-#         # Make sure confirmation_mail_field really exists in form
-#         confirmation_mail_field = cleaned_data['confirmation_mail_field']
-#         form_fields = cleaned_data['form_fields']
-#         if confirmation_mail_field:
-#             self.add_error('confirmation_mail_field', 'Du musst das Feld %s auch definieren' % confirmation_mail_field)
-#
-#             if not cleaned_data['confirmation_mail_text']:
-#                 self.add_error('confirmation_mail_text', 'Wird benötigt')
-#             if not cleaned_data['confirmation_mail_subject']:
-#                 self.add_error('confirmation_mail_subject', 'Wird benötigt')
-#
-#         return cleaned_data
+class FormPageForm(WagtailAdminPageForm):
+    def clean(self):
+        cleaned_data = super().clean()
+
+        # Make sure confirmation_mail_field really exists in form
+        confirmation_mail_field = cleaned_data['confirmation_mail_field']
+        if confirmation_mail_field:
+            valid = False
+            if 'form_fields' in self.formsets:
+                _forms = self.formsets['form_fields'].forms
+                for f in _forms:
+                    f.is_valid()
+                for form in _forms:
+                    print ("test")
+                    if form.cleaned_data.get('label') == confirmation_mail_field:
+                        valid = True
+            if not valid:
+                self.add_error('confirmation_mail_field', "Du musst Feld '%s' auch im Formular definieren" % confirmation_mail_field)
+
+            # these fields need to be set
+            if not cleaned_data['confirmation_mail_text']:
+                self.add_error('confirmation_mail_text', 'Wird benötigt')
+            if not cleaned_data['confirmation_mail_subject']:
+                self.add_error('confirmation_mail_subject', 'Wird benötigt')
+
+        return cleaned_data
 
 
 class FormPage(AbstractEmailForm):
-    # base_form_class = FormPageForm
+    base_form_class = FormPageForm
 
     intro = RichTextField(
         blank=True,
@@ -727,8 +738,9 @@ class FormPage(AbstractEmailForm):
 
     def process_form_submission(self, form):
         submission = super().process_form_submission(form)
-        if self.confirmation_mail_field and self.confirmation_mail_text and self.confirmation_mail_subject:
-            address = form[self.confirmation_mail_field.lower()].value()
+        if self.confirmation_mail_field:
+            clean_mail_field = str(slugify(text_type(unidecode(self.confirmation_mail_field))))
+            address = form[clean_mail_field].value()
             send_mail(self.confirmation_mail_subject, self.confirmation_mail_text, [address], self.from_address)
         return submission
 
