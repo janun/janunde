@@ -645,6 +645,11 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 from wagtail.wagtailforms.edit_handlers import FormSubmissionsPanel
+from wagtail.wagtailadmin.utils import send_mail
+from django.core.exceptions import ValidationError
+from wagtail.wagtailforms.forms import WagtailAdminPageForm
+
+
 
 
 
@@ -652,7 +657,28 @@ class FormField(AbstractFormField):
     page = ParentalKey('FormPage', related_name='form_fields')
 
 
+# TODO: add validation
+# class FormPageForm(WagtailAdminPageForm):
+#     def clean(self):
+#         cleaned_data = super().clean()
+#
+#         # Make sure confirmation_mail_field really exists in form
+#         confirmation_mail_field = cleaned_data['confirmation_mail_field']
+#         form_fields = cleaned_data['form_fields']
+#         if confirmation_mail_field:
+#             self.add_error('confirmation_mail_field', 'Du musst das Feld %s auch definieren' % confirmation_mail_field)
+#
+#             if not cleaned_data['confirmation_mail_text']:
+#                 self.add_error('confirmation_mail_text', 'Wird benötigt')
+#             if not cleaned_data['confirmation_mail_subject']:
+#                 self.add_error('confirmation_mail_subject', 'Wird benötigt')
+#
+#         return cleaned_data
+
+
 class FormPage(AbstractEmailForm):
+    # base_form_class = FormPageForm
+
     intro = RichTextField(
         blank=True,
         verbose_name="Einführung",
@@ -663,6 +689,22 @@ class FormPage(AbstractEmailForm):
         verbose_name="Danke-Text",
         help_text="Wird angezeigt, nachdem das Formular erfolgreich abgesendet wurde."
     )
+    confirmation_mail_field = models.CharField(
+        blank=True,
+        verbose_name="Bestätigungsmail-Feld",
+        help_text="Benutzer bekommt Bestägigungsmail an Adresse aus diesem Feld.",
+        max_length=255
+    )
+    confirmation_mail_text = models.TextField(
+        blank=True,
+        verbose_name="Text der Bestätigungsmail",
+        help_text=""
+    )
+    confirmation_mail_subject = models.CharField(
+        blank=True,
+        verbose_name="Betreff der Bestätigungsmail",
+        max_length=255
+    )
 
     content_panels = AbstractEmailForm.content_panels + [
         FormSubmissionsPanel(),
@@ -670,13 +712,25 @@ class FormPage(AbstractEmailForm):
         InlinePanel('form_fields', label="Formular-Felder"),
         FieldPanel('thank_you_text', classname="full"),
         MultiFieldPanel([
+            FieldPanel('confirmation_mail_field'),
+            FieldPanel('confirmation_mail_subject'),
+            FieldPanel('confirmation_mail_text', classname="full"),
+        ], "Bestätigungsmail"),
+        MultiFieldPanel([
             FieldRowPanel([
                 FieldPanel('from_address', classname="col6"),
                 FieldPanel('to_address', classname="col6"),
             ]),
             FieldPanel('subject'),
-        ], "E-Mail"),
+        ], "Benachrichtigungsmail"),
     ]
+
+    def process_form_submission(self, form):
+        submission = super().process_form_submission(form)
+        if self.confirmation_mail_field and self.confirmation_mail_text and self.confirmation_mail_subject:
+            address = form[self.confirmation_mail_field.lower()].value()
+            send_mail(self.confirmation_mail_subject, self.confirmation_mail_text, [address], self.from_address)
+        return submission
 
     class Meta:
         verbose_name = _("Formular")
