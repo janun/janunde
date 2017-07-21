@@ -30,6 +30,7 @@ $(".dateinput").each(function (i, elem) {
     formatSubmit: "dd.mm.yyyy",
     editable: isDesktop,
     selectYears: 100,
+    selectMonths: true,
     clear: input.attr("required") ? "" : "Löschen",
   }).pickadate("picker");
 
