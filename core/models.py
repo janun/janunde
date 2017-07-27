@@ -751,10 +751,8 @@ class FormPage(AbstractEmailForm):
                 'confirmation_mail_text': self.confirmation_mail_text,
                 'title': self.title,
             })
-            import re
-            text_content =  re.sub(
-                r'<(?!\/?a(?=>|\s.*>))\/?.*?>', '', self.confirmation_mail_text
-            )
+            import html2text
+            text_content = html2text.html2text(self.confirmation_mail_text)
             send_mail(
                 self.confirmation_mail_subject,
                 text_content, [address], self.from_address,
