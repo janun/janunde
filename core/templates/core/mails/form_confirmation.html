@@ -1,0 +1,14 @@
+{% extends 'core/mails/base.html' %}
+{% load wagtailcore_tags %}
+
+{% block title_content %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+    {{ confirmation_mail_text|richtext }}
+{% endblock %}
+
+{% block footer_content %}
+    Du erhälst diese E-Mail, weil Du ein Formular auf janun.de ausgefüllt hast.
+{% endblock %}

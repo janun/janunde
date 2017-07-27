@@ -651,6 +651,7 @@ from wagtail.wagtailforms.forms import WagtailAdminPageForm
 from django.utils.text import slugify
 from django.utils.six import text_type
 from unidecode import unidecode
+from django.template.loader import render_to_string
 
 
 
@@ -658,31 +659,30 @@ class FormField(AbstractFormField):
     page = ParentalKey('FormPage', related_name='form_fields')
 
 
-# TODO: add validation
+# add validation
 class FormPageForm(WagtailAdminPageForm):
     def clean(self):
         cleaned_data = super().clean()
 
         # Make sure confirmation_mail_field really exists in form
-        confirmation_mail_field = cleaned_data['confirmation_mail_field']
-        if confirmation_mail_field:
-            valid = False
-            if 'form_fields' in self.formsets:
-                _forms = self.formsets['form_fields'].forms
-                for f in _forms:
-                    f.is_valid()
-                for form in _forms:
-                    print ("test")
-                    if form.cleaned_data.get('label') == confirmation_mail_field:
-                        valid = True
-            if not valid:
-                self.add_error('confirmation_mail_field', "Du musst Feld '%s' auch im Formular definieren" % confirmation_mail_field)
-
-            # these fields need to be set
+        if cleaned_data['send_confirmation_mail']:
             if not cleaned_data['confirmation_mail_text']:
-                self.add_error('confirmation_mail_text', 'Wird benötigt')
+                self.add_error('confirmation_mail_text', 'Wird für Bestätigungsmail benötigt')
             if not cleaned_data['confirmation_mail_subject']:
-                self.add_error('confirmation_mail_subject', 'Wird benötigt')
+                self.add_error('confirmation_mail_subject', 'Wird für Bestätigungsmail benötigt')
+            if not cleaned_data['confirmation_mail_field']:
+                self.add_error('confirmation_mail_field', 'Wird für Bestätigungsmail benötigt')
+            else:
+                valid = False
+                if 'form_fields' in self.formsets:
+                    _forms = self.formsets['form_fields'].forms
+                    for f in _forms:
+                        f.is_valid()
+                    for form in _forms:
+                        if form.cleaned_data.get('label') == cleaned_data['confirmation_mail_field']:
+                            valid = True
+                if not valid:
+                    self.add_error('confirmation_mail_field', "Feld '%s' ist im Formular nicht definiert." % cleaned_data['confirmation_mail_field'])
 
         return cleaned_data
 
@@ -700,20 +700,25 @@ class FormPage(AbstractEmailForm):
         verbose_name="Danke-Text",
         help_text="Wird angezeigt, nachdem das Formular erfolgreich abgesendet wurde."
     )
+    send_confirmation_mail = models.BooleanField(
+        default="False",
+        verbose_name="Bestätigungsmail versenden?",
+        help_text="Soll der Benutzer nach Ausfüllen des Formulars eine Bestätigungsmail bekommen?",
+    )
     confirmation_mail_field = models.CharField(
         blank=True,
-        verbose_name="Bestätigungsmail-Feld",
-        help_text="Benutzer bekommt Bestägigungsmail an Adresse aus diesem Feld.",
+        verbose_name="Feld für E-Mail-Adresse",
+        help_text="Exakte Beschriftung des Felds aus dem Formular für die E-Mail-Adresse des Benutzers. Dahin wird die Bestätigungsmail geschickt.",
         max_length=255
     )
-    confirmation_mail_text = models.TextField(
+    confirmation_mail_text = RichTextField(
         blank=True,
-        verbose_name="Text der Bestätigungsmail",
-        help_text=""
+        verbose_name="Text",
+        help_text="Welcher Text soll in der Bestätigungsmail sein?"
     )
     confirmation_mail_subject = models.CharField(
         blank=True,
-        verbose_name="Betreff der Bestätigungsmail",
+        verbose_name="Betreff",
         max_length=255
     )
 
@@ -723,6 +728,7 @@ class FormPage(AbstractEmailForm):
         InlinePanel('form_fields', label="Formular-Felder"),
         FieldPanel('thank_you_text', classname="full"),
         MultiFieldPanel([
+            FieldPanel('send_confirmation_mail'),
             FieldPanel('confirmation_mail_field'),
             FieldPanel('confirmation_mail_subject'),
             FieldPanel('confirmation_mail_text', classname="full"),
@@ -738,10 +744,21 @@ class FormPage(AbstractEmailForm):
 
     def process_form_submission(self, form):
         submission = super().process_form_submission(form)
-        if self.confirmation_mail_field:
+        if self.send_confirmation_mail:
             clean_mail_field = str(slugify(text_type(unidecode(self.confirmation_mail_field))))
             address = form[clean_mail_field].value()
-            send_mail(self.confirmation_mail_subject, self.confirmation_mail_text, [address], self.from_address)
+            html_content = render_to_string('core/mails/form_confirmation.html', {
+                'confirmation_mail_text': self.confirmation_mail_text,
+                'title': self.title,
+            })
+            import re
+            text_content =  re.sub(
+                r'<(?!\/?a(?=>|\s.*>))\/?.*?>', '', self.confirmation_mail_text
+            )
+            send_mail(
+                self.confirmation_mail_subject,
+                text_content, [address], self.from_address,
+                html_message=html_content)
         return submission
 
     class Meta:
