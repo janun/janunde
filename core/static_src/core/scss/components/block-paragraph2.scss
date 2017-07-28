@@ -1,0 +1,23 @@
+.block-paragraph2 {
+
+  &__inner {
+    width: 640px;
+    margin: 50px auto;
+    font-size: 20px;
+    @media (min-height: 1000px) {
+      width: 830px;
+    }
+
+    &--center {
+      text-align: center;
+    }
+
+    &--big p {
+      font-family: $font-family-sans-serif;
+      font-size: 24px;
+      @media (min-height: 1000px) {
+        font-size: 32px;
+      }
+    }
+  }
+}

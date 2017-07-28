@@ -188,3 +188,35 @@ class StandardStreamBlock(blocks.StreamBlock):
     button = Button()
     attachment = Attachment()
     table = TableBlock()
+
+
+class HeaderBlock(blocks.StructBlock):
+    background = ImageChooserBlock(
+        label="Hintergrundbild",
+        required=False,
+    )
+    class Meta:
+        label = "Header"
+        icon = "home"
+        template = 'blocks/header.html'
+
+class ParagraphTwoBlock(blocks.StructBlock):
+    big = blocks.BooleanBlock(
+        label="Groß",
+        default=False
+    )
+    center = blocks.BooleanBlock(
+        label="zentriert",
+        default=False
+    )
+    text = blocks.RichTextBlock()
+    class Meta:
+        label = "Absatz"
+        icon = "pilcrow"
+        template = 'blocks/paragraph2.html'
+
+
+class HomePageStreamBlock(blocks.StreamBlock):
+    header = HeaderBlock()
+    paragraph2 = ParagraphTwoBlock()
+    button = Button()

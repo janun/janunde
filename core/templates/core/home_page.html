@@ -13,51 +13,7 @@
 {% block title %}JANUN ist das Jugendumweltnetzwerk Niedersachsen{% endblock %}
 
 {% block content %}
-  {% include "core/_header.html" %}
 
-  <div class="center-container">
-
-    {% if highlights %}
-      <div class="clear-after">
-        <h2 class="area-title area-title--centered">Aktuelle Highlights</h2>
-        <div class="card-grid card-grid--center-one">
-          {% for highlight in highlights %}
-            {% render_partial highlight.highlighted_page.specific %}
-          {% endfor %}
-        </div>
-      </div>
-    {% endif %}
-
-    {% if upcoming_events %}
-      <div class="clear-after">
-        <h2 class="area-title area-title--centered">Nächste Veranstaltungen</h2>
-        <div class="card-grid card-grid--center-one">
-          {% for event in upcoming_events %}
-            {% render_partial event %}
-          {% endfor %}
-          {% if more_upcoming_events %}
-            <a class="float-right" href="/veranstaltungen">mehr Veranstaltungen…</a>
-          {% endif %}
-        </div>
-      </div>
-    {% endif %}
-
-    {% if articles %}
-      <h2 class="area-title area-title--centered container">Letzte Neuigkeiten</h2>
-      <div class="clear-after">
-        <div class="card-grid card-grid--center-one">
-          {% for article in articles %}
-            {% render_partial article %}
-          {% endfor %}
-        </div>
-        {% if more_articles %}
-          <a class="float-right"
-             href="/artikel">mehr Artikel…</a>
-        {% endif %}
-      </div>
-    {% endif %}
-
-
-  </div>
+  {% include_block self.content %}
 
 {% endblock %}

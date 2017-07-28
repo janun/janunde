@@ -24,7 +24,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
 
-from .blocks import StandardStreamBlock
+from .blocks import StandardStreamBlock, HomePageStreamBlock
 from .images import AttributedImage as Image
 
 
@@ -349,9 +349,15 @@ class HomePage(BasePage):
         help_text=_("Wird z.B. angezeigt, wenn jmd. www.janun.de bei Facebook postet")
     )
 
-    # content_panels = BasePage.content_panels + [
-    #
-    # ]
+    content = StreamField(
+        HomePageStreamBlock(),
+        blank=True,
+        verbose_name=_("Inhalt"),
+    )
+
+    content_panels = BasePage.content_panels + [
+        StreamFieldPanel('content')
+    ]
 
     promote_panels = BasePage.promote_panels + [
         ImageChooserPanel('search_image')
