@@ -13,12 +13,6 @@ $navbar-height: rem-calc(65);
   z-index: 1000;
   background: white;
   box-shadow: 0 3px 12px rgba(0,0,0,.23), 0 3px 12px rgba(0,0,0,.16);
-  white-space: nowrap;
-  // overflow: hidden;
-
-  &__inner {
-
-  }
 
   ul {
     padding: 0;
