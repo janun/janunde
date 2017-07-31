@@ -1,7 +1,13 @@
 .block-header {
   position: relative;
-  height: 400px;
-  height: 50vh;
+  height: 300px;
+  height: 33vh;
+
+  @media (min-width: 680px) {
+    height: 400px;
+    height: 50vh;
+  }
+
   max-height: 600px;
   overflow: hidden;
 
@@ -55,8 +61,12 @@
     left: 50%;
     transform: translate(-50%, -30%);
     display: block;
-    height: 60%;
-    width: 60%;
+    height: 80%;
+    width: 80%;
+    @media (min-width: 680px) {
+      height: 60%;
+      width: 60%;
+    }
     max-width: 1000px;
     z-index: 100;
   }

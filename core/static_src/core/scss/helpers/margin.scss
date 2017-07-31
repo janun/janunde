@@ -50,6 +50,13 @@ $directions: left right top bottom;
     margin-#{$dir}: 0.25rem !important;
   }
 
+  .margin-#{$dir}-5px {
+    margin-#{$dir}: 5px !important;
+  }
+  .margin-#{$dir}-10px {
+    margin-#{$dir}: 10px !important;
+  }
+
 }
 
 .margin-top-2\@until-medium {

@@ -1,22 +1,28 @@
 .block-button {
   text-align: center;
-  
+
   &__button {
     display: inline-block;
     margin: 0 auto;
     margin-bottom: 50px;
-    height: 48px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 20px;
     padding: 0 40px;
     border-radius: 48px;
     font-weight: bold;
-    font-size: 30px;
     color: $white;
     text-align: center;
     vertical-align: middle;
-    line-height: 48px;
     background-color: #7F006B;
     box-shadow:0 3px 12px rgba(0,0,0,.23),0 3px 12px rgba(0,0,0,.16);
     text-decoration: none;
+
+    @media (min-width: 640px) {
+      height: 48px;
+      font-size: 30px;
+      line-height: 48px;
+    }
 
     &:hover {
       color: $white;

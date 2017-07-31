@@ -1,223 +1,61 @@
-@import 'bower_components/hamburger-icon/hamburger-icon';
-
 $navbar-height: rem-calc(65);
 
-// TODO: Pseudo elements?
-// https://css-tricks.com/full-browser-width-bars/
+.content {
+  margin-top: $navbar-height;
+}
 
-/// navbar
-///
-/// @example markup
-///   <div class="navbar navbar--green">
-///     <div class="navbar__inner">
-///       <a class="navbar__item" href="/"><img class="navbar__logo"></a>
-///       <a class="navbar__item  navbar__clickable" href="/">Title</a>
-///       <button class="navbar__item">Menu</button>
-///     </div>
-///   </div>
 .navbar {
-  position: relative;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: $navbar-height;
   width: 100%;
   z-index: 1000;
-  height: $navbar-height;
-  @include shadow(2);
+  background: white;
+  box-shadow: 0 3px 12px rgba(0,0,0,.23), 0 3px 12px rgba(0,0,0,.16);
+  white-space: nowrap;
+  overflow: hidden;
 
-  font-family: $font-family-sans-serif;
-  font-size: rem-calc(18);
-  color: $white;
+  &__inner {
 
-  // hide things
-  // used by a11y-toggle
-  [aria-hidden='true'],
-  [data-a11y-toggle]:not([aria-controls]) {
-    display: none;
+  }
+
+  ul {
+    padding: 0;
+    display: inline;
+    margin-left: 20px;
+  }
+
+  svg {
+    margin-top: -3px;
   }
 
   a {
-    font-family: $font-family-sans-serif;
-    color: $white;
-  }
-
-  // overwrite focus styles for all links and buttons
-  // this also adds a padding...
-  a, button {
-    padding: 0.5rem;
-    &:focus {
-      text-decoration: none;
-      outline: none;
-      border-radius: rem-calc(2);
-      background: rgba($white, 0.25);
-    }
-    &::-moz-focus-inner {
-      border: 0;
-    }
-  }
-
-  // normalize all buttons
-  button {
-    background: transparent;
-    border: none;
-  }
-
-  &--fixed {
-    position: fixed;
-    top: 0;
-  }
-  &--fixed ~ .content {
-    padding-top: $navbar-height;
-  }
-
-  &--absolute { position: absolute; }
-
-  &__logo path {
-    fill: $white;
-  }
-
-  &--green { background: $green; }
-  &--red { background: $red; }
-  &--blue { background: $blue; }
-
-  &--white {
-    background: $white;
-    a {
-      color: $brown;
-      &:focus {
-        background-color: rgba($grey, 0.1)
-      }
-    }
-    .navbar__logo path {
-      fill: $brown;
-    }
-    .hamburger__inner, .hamburger__inner:before, .hamburger__inner:after {
-      background-color: $brown;
-    }
-  }
-
-  &--transparent {
-    background: transparent;
-    box-shadow: none;
-  }
-
-
-  // horizontally center with fixed width
-  &__inner {
-    @include container;
+    display: inline-block;
     height: 100%;
-    display: block;
-    overflow: hidden;
+    min-width: 40px;
+    &:hover {
+      color: inherit;
+    }
   }
 
-
-  // vertically center
   &__item {
-    display: inline;
+    display: inline-block;
     vertical-align: middle;
     line-height: $navbar-height;
     height: $navbar-height;
-  }
+    font-size: 16px;
+    text-align: center;
 
-
-  // special aligment/size for logo
-  &__logo {
-    display: inline-block;
-    vertical-align: middle;
-    height: rem-calc(38);
-    width: rem-calc(38);
-  }
-
-  &__title {
-    font-weight: bold;
-    padding-left: 0 !important;
-  }
-
-  // this shows its content on a white background in mobile/tablet
-  // and shows as a normal navbar__item else
-  //
-  // displaying/not displaying this is done via js and [aria-hidden]
-  &__collapsible {
-
-    // @at-root .js & {
-    //   display: none;
-    // }
-
-    @include until($large) {
-      height: auto;
-      position: absolute;
-      top: $navbar-height;
-      left: 0;
-      width: 100vw;
-      z-index: 1000;
-      margin-top: 0;
-      padding-left: rem-calc(20px);
-
-      background: $white;
-      color: $brown;
-      border-bottom: rem-calc(1) solid $green;
-
-      a {
-        color: $brown;
-      }
-
-      a:focus, button:focus {
-        @include until($large) {
-          background: rgba($brown, 0.25);
-        }
-      }
-    }
-  }
-
-}
-
-
-/// menu
-///
-/// @example markup
-///   <ul class="menu">
-///     <li class="menu__item"><a href="#">link</a></li>
-///     <li class="menu__item  menu__item--active"><a href="#">link</a></li>
-///   </ul>
-.menu {
-  display: inline-block;
-  height: 100%;
-  line-height: 1.25;
-
-  li {
-    list-style-type: none;
-  }
-
-  @include until($large) {
-    padding-bottom: rem-calc(20);
-    padding-top: rem-calc(10);
-  }
-
-  &__item {
-    @include above($large) {
-      display: inline-block;
-      margin-right: rem-calc(20);
-    }
-
-    // margin between adjacent menu__items on mobile
-    &+& {
-      @include until($large) {
-        margin-top: rem-calc(24);
-      }
-    }
-
-    // the active menu item
     &--active {
-      @include above($large) {
-        border-bottom: rem-calc(5) solid rgb(14, 133, 0);
-      }
-      @include until($large) {
-        font-weight: bold;
-      }
+      border-bottom: 5px solid $green;
     }
   }
-}
 
-
-.navbar .menu__item {
-  @include above($large) {
-    height: 68%; // magic number
+  &__item ~ &__item {
+    margin-left: 10px;
+    @include above(830px) {
+      margin-left: 20px;
+    }
   }
 }
