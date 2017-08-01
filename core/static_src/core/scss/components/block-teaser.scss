@@ -1,14 +1,21 @@
 .block-teaser {
-  margin-top: 60px;
+  margin-top: 40px;
   margin-bottom: 60px;
   overflow: hidden;
+  @include above($medium) {
+    margin-top: 60px;
+  }
 
   &__inner {
     position: relative;
     width: 100%;
     left: 0;
     overflow: hidden;
-    padding: 100px;
+
+    padding: 40px;
+    @include above($medium) {
+      padding: 100px;
+    }
 
     // green overlay
     &:before {
@@ -45,13 +52,11 @@
   // background picture
   &__background {
     position: absolute;
-    top: 25%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -30%);// rotateX(8deg);
-    min-width: 105%;
-    min-height: 105%;
-    width: 100%;
-    z-index: 0;
+    min-width: 100%;
+    min-height: 100%;
     filter: grayscale(100%);
     z-index: -1;
   }
@@ -70,16 +75,22 @@
 
   &__title {
     font-weight: bold;
-    font-size: 100px;
+    font-size: 40px;
     @include text-shadow(2);
-    margin-bottom: 0;
+    margin-bottom: 20px;
+    @include above($medium) {
+      font-size: 100px;
+    }
   }
 
   &__subtitle {
     font-weight: bold;
-    font-size: 50px;
+    font-size: 20px;
     @include text-shadow(2);
     margin-top: 0;
+    @include above($medium) {
+      font-size: 50px;
+    }
   }
 
 }

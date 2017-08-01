@@ -4,7 +4,11 @@
 
   {% if self.background %}
     {% image self.background original as background %}
-    <img class="block-teaser__background" src="{{ background.url }}">
+    <img src="{{ background.url }}"
+      srcset="{{ self.background|srcset:'width-300 width-600 width-900 width-1200' }}"
+      sizes="100vw"
+      class="block-teaser__background"
+      alt="{{ image.alt }}">
   {% endif %}
 
   <div class="block-teaser__content container">
