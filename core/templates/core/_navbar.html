@@ -32,11 +32,17 @@
       <div class="float-right navbar__item">
         <a href="{% url 'search' %}">
           <svg class="navbar__item " xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M31.7 30.3L22 20.5c1.8-2.2 3-5 3-8C25 5.5 19.2 0 12.3 0S0 5.6 0 12.5 5.4 25 12.3 25c3 0 6-1.2 8.2-3l9.7 9.7c.4.4 1 .4 1.4 0s.4-1 0-1.4zM12.4 23C6.6 23 2 18.3 2 12.5S6.5 2 12.3 2C18.2 2 23 6.7 23 12.5S18 23 12.3 23z" fill="#644327"/></svg>
-          <span class="padding-right-1 margin-left-5px hide@until-large">Suche</span>
+          <span class="padding-right-1 hide@until-large" style="margin-left: 3px">Suche</span>
         </a>
         <a href="/admin">
-          <svg class="navbar__item" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M16 2c3.4 0 7 3 7 5v5c0 2-.8 5.6-3 7.3-.5.4-.8 1-.7 1.8 0 .8.5 1.4 1 1.7l9 4s.7.3.7 1.3v2H2v-2c0-.8.6-1 .8-1.2l8.8-4c.6-.4 1-1 1.2-1.7s-.2-1.3-.8-1.7C10 17.6 9 14 9 12V7c0-2 3.6-5 7-5zm0-2c-4.4 0-9 3.7-9 7v5c0 2.2 1 6.6 3.8 8.8L2 25s-2 1-2 2v3c0 1 1 2 2 2h28c1 0 2-1 2-2v-3c0-1.2-2-2-2-2l-8.7-4c2.8-2.3 3.7-6.6 3.7-9V7c0-3.3-4.6-7-9-7z"  fill="#644327"/></svg>
-          <span class="margin-left-5px hide@until-large">Login</span>
+          {% if user.is_authenticated %}
+            <svg class="navbar__item" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M16 0c-4.4 0-9 3.7-9 7v5c0 2.2 1 6.6 3.8 8.8L2 25s-2 1-2 2v3c0 1 1 2 2 2h28c1 0 2-1 2-2v-3c0-1.2-2-2-2-2l-8.7-4c2.8-2.3 3.7-6.6 3.7-9V7c0-3.3-4.6-7-9-7z" fill="#3a9d00"/></svg>
+            <span class="hide@until-large color-green" style="margin-left: 3px">{{request.user.username}}</span>
+          {% else %}
+            <svg class="navbar__item" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M16 2c3.4 0 7 3 7 5v5c0 2-.8 5.6-3 7.3-.5.4-.8 1-.7 1.8 0 .8.5 1.4 1 1.7l9 4s.7.3.7 1.3v2H2v-2c0-.8.6-1 .8-1.2l8.8-4c.6-.4 1-1 1.2-1.7s-.2-1.3-.8-1.7C10 17.6 9 14 9 12V7c0-2 3.6-5 7-5zm0-2c-4.4 0-9 3.7-9 7v5c0 2.2 1 6.6 3.8 8.8L2 25s-2 1-2 2v3c0 1 1 2 2 2h28c1 0 2-1 2-2v-3c0-1.2-2-2-2-2l-8.7-4c2.8-2.3 3.7-6.6 3.7-9V7c0-3.3-4.6-7-9-7z"  fill="#644327"/></svg>
+            <span class="hide@until-large" style="margin-left: 3px">Login</span>
+          {% endif %}
+
         </a>
         <a class="hide@medium" href="javascript:void(0);" onclick="openMenu(event)" style="margin-right: -10px">
           <svg class="navbar__item" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M.84 6.05C.6 5.8.46 5.47.46 5.08s.13-.72.38-.98.58-.38.98-.38h28.5c.4 0 .73.12 1 .38s.37.58.37.98-.14.7-.4.97-.57.38-.97.38H1.83c-.4 0-.73-.12-1-.38zm30.47 8.9c.26.27.4.6.4 1s-.14.7-.4.96-.57.4-.97.4H1.83c-.4 0-.73-.13-1-.4s-.37-.57-.37-.96.13-.72.38-.98.58-.38.98-.38h28.5c.4 0 .73.13 1 .38zm0 10.87c.26.25.4.58.4.97s-.14.7-.4.97-.57.38-.97.38H1.83c-.4 0-.73-.12-1-.38s-.37-.58-.37-.98.13-.73.38-.98.58-.38.98-.38h28.5c.4 0 .73.13 1 .38z" fill="#644327"/></svg>
