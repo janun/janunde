@@ -1,0 +1,20 @@
+{% load wagtailcore_tags humanize wagtailimages_tags srcset stuff %}
+
+<div class="block-teaser__inner">
+
+  {% if self.background %}
+    {% image self.background original as background %}
+    <img class="block-teaser__background" src="{{ background.url }}">
+  {% endif %}
+
+  <div class="block-teaser__content container">
+    {% if self.title %}
+      <h2 class="block-teaser__title">{{ self.title }}</h2>
+    {% endif %}
+
+    {% if self.subtitle %}
+      <h3 class="block-teaser__subtitle">{{ self.subtitle }}</h3>
+    {% endif %}
+  </div>
+
+</div>

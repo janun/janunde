@@ -8,7 +8,11 @@
 
   {% if self.background %}
     {% image self.background original as background %}
-    <img class="block-header__background" src="{{ background.url }}">
+    <img src="{{ background.url }}"
+      srcset="{{ self.background|srcset:'width-300 width-600 width-900 width-1200' }}"
+      sizes="100vw"
+      class="block-header__background"
+      alt="{{ image.alt }}">
   {% endif %}
 
   <svg class="block-header__januntext" xmlns="http://www.w3.org/2000/svg" width="674" height="330" viewBox="0 0 674 330">

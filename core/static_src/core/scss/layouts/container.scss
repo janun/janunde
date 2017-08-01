@@ -1,4 +1,4 @@
-$container-margin: rem-calc(20px);
+$container-margin: rem-calc(15px);
 $container-width-medium: rem-calc(1000);
 
 @mixin container($width: $container-width-medium) {

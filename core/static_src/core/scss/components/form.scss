@@ -7,7 +7,7 @@ $form-breakpoint: rem-calc(670px);
   width: 100%;
   @include shadow(1);
   @include above($form-breakpoint) {
-    padding: 30px;
+    padding: 40px;
     max-width: rem-calc(640px);
     margin-left: auto;
     margin-right: auto;

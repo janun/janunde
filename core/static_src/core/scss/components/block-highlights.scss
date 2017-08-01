@@ -1,0 +1,25 @@
+.block-highlights {
+  @extend .container;
+  margin-top: 100px;
+  margin-bottom: 100px;
+
+  &__grid {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+    h2 {
+      // text-align: left;
+    }
+
+    &-item {
+      display: inline-block;
+    }
+
+    @include above($medium) {
+      &-item:not(:last-child) {
+        margin-right: 60px;
+      }
+    }
+  }
+}

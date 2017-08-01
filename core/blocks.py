@@ -215,8 +215,60 @@ class ParagraphTwoBlock(blocks.StructBlock):
         icon = "pilcrow"
         template = 'blocks/paragraph2.html'
 
+class TeaserBlock(blocks.StructBlock):
+    background = ImageChooserBlock(
+        label="Hintergrundbild",
+        required=False,
+    )
+    title = blocks.CharBlock(
+        label="Titel",
+        required=False
+    )
+    subtitle = blocks.CharBlock(
+        label="Untertitel",
+        required=False
+    )
+    class Meta:
+        label = "Teaser"
+        icon = "home"
+        template = 'blocks/teaser.html'
+
+
+class HighlightsBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(
+        label="Überschrift",
+        required=False
+    )
+    objects = blocks.ListBlock(blocks.PageChooserBlock())
+    class Meta:
+        label = "Highlights"
+        icon = "home"
+        template = 'blocks/highlights.html'
+
+
+class NewsletterSignupBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(
+        label="Überschrift",
+        required=False
+    )
+    text = blocks.RichTextBlock(
+        label="Text",
+        required=False
+    )
+    example_url = blocks.URLBlock(
+        label="Link zu Beispiel-E-Mail",
+        required=False
+    )
+    class Meta:
+        label = "Newsletter-Anmeldung"
+        icon = "home"
+        template = 'blocks/newsletter.html'
+
 
 class HomePageStreamBlock(blocks.StreamBlock):
     header = HeaderBlock()
     paragraph2 = ParagraphTwoBlock()
     button = Button()
+    teaser = TeaserBlock()
+    highlights = HighlightsBlock()
+    newsletter = NewsletterSignupBlock()

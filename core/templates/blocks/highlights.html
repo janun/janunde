@@ -1,0 +1,15 @@
+{% load render_partial %}
+
+<div class="block-highlights__grid">
+
+  {% if self.heading %}
+    <h2 class="area-title">{{ self.heading }}</h2>
+  {% endif %}
+
+  {% for object in self.objects %}
+    <div class="block-highlights__grid-item">
+      {% render_partial object.specific %}
+    </div>
+  {% endfor %}
+  
+</div>
