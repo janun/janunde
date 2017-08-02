@@ -1,7 +1,7 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff cache %}
 
 {% cache 36000 event object.id object.latest_revision_created_at object.main_image.updated_at %}
-  <div class="bigcard click-area hover-reveal
+  <div class="bigcard click-area
        {% if card_color %}
          bigcard--color bigcard--color-{{ card_color }}
        {% endif %}
@@ -88,7 +88,7 @@
 
       </div>
 
-      <div class="bigcard__footer hover-reveal__hidden">
+      <div class="bigcard__footer">
         {% if object.register_url %}
           <a class="bigcard__footer-item" href="{{ object.register_url }}"
              title="Anmeldung zu »{{ object.title }}«">Anmelden</a>

@@ -1,15 +1,15 @@
 .block-header {
+  backface-visibility: hidden;
   position: relative;
   height: 300px;
   height: 33vh;
-
-  @media (min-width: 680px) {
-    height: 400px;
-    height: 50vh;
-  }
-
   max-height: 600px;
   overflow: hidden;
+
+  @media (min-width: 680px) {
+    height: 500px;
+    height: 55vh;
+  }
 
   &__background {
     position: absolute;
@@ -42,7 +42,7 @@
   &:after {
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: -1px;
     left: -2%;
     right: 0;
     width: 104%;
@@ -56,17 +56,36 @@
 
   &__januntext {
     position: absolute;
-    top: 30%;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -30%);
     display: block;
     height: 80%;
     width: 80%;
     @media (min-width: 680px) {
-      height: 60%;
-      width: 60%;
+      height: 50%;
+      width: 50%;
     }
     max-width: 1000px;
     z-index: 100;
+  }
+}
+
+.block-header ~ .block-button {
+  @media (min-height: 600px) {
+    position: relative;
+    top: -170px;
+    top: -19vh;
+    z-index: 100;
+    .button {
+      position: absolute;
+      @include shadow(4);
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+  }
+  @media (min-height: 1200px) {
+    top: -120px;
+    top: -12vh;
   }
 }

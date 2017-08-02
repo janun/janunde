@@ -1,15 +1,16 @@
 {% load render_partial %}
 
-<div class="block-highlights__grid">
+{% if self.heading %}
+  <h2 class="block-highlights__heading">{{ self.heading }}</h2>
+{% endif %}
 
-  {% if self.heading %}
-    <h2 class="area-title">{{ self.heading }}</h2>
-  {% endif %}
-
+<div class="block-highlights__grid">  
   {% for object in self.objects %}
     <div class="block-highlights__grid-item">
       {% render_partial object.specific %}
     </div>
   {% endfor %}
-  
 </div>
+
+<a class="block-highlights__link" href="/veranstaltungen">Alle Veranstaltungen</a>
+<a class="block-highlights__link" href="/artikel">Alle Artikel</a>

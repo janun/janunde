@@ -1,7 +1,7 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff humanize cache %}
 
 {% cache 36000 article object.id object.latest_revision_created_at object.main_image.updated_at %}
-  <div class="bigcard click-area hover-reveal"
+  <div class="bigcard click-area"
        itemscope itemtype="http://schema.org/Article">
 
     <div class="bigcard__inner">
@@ -55,7 +55,7 @@
         {% endif %}
       </div>
 
-      <div class="bigcard__footer hover-reveal__hidden">
+      <div class="bigcard__footer">
         <a href="{% pageurl object %}" class="bigcard__button">Weiterlesen</a>
         <span class="">{{ object.first_published_at|date }}</span>
       </div>

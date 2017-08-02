@@ -3,14 +3,8 @@
 
   &__inner {
     position: relative;
-    // background-color: $white;
-    // border-radius: 5px;
-    // @include shadow(2);
-    // padding: 50px 60px;
-    // width: 640px;
-    // margin-left: auto;
-    // margin-right: auto;
-    // margin-top: 80px;
+    width: 830px;
+    max-width: 100%;
     @include above($medium) {
       padding: 40px 50px;
     }
@@ -35,9 +29,9 @@
     right: 50px;
     z-index: -1;
 
-    @include above($medium) {
+    @include above($large) {
       top: -61px;
-      right: -138px;
+      right: -142px;
       z-index: 0;
     }
   }

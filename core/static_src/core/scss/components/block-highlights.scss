@@ -1,16 +1,42 @@
 .block-highlights {
   @extend .container;
-  margin-top: 70px;
-  margin-bottom: 30px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+
+  &__heading {
+    // font-size: 20px;
+    // font-family: $font-family-sans-serif;
+    // font-weight: normal;
+    text-align: center;
+    @include above($large) {
+      text-align: left;
+    }
+    margin-bottom: 30px;
+  }
+
+  &__link {
+    display: block;
+    font-size: 20px;
+    font-family: $font-family-sans-serif;
+    font-weight: normal;
+    text-align: center;
+    @include above($large) {
+      text-align: left;
+    }
+    &:hover {
+      color: $brown;
+    }
+  }
+
+  &__link ~ &__link {
+    margin-top: 15px;
+  }
 
   &__grid {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-
-    h2 {
-      // text-align: left;
-    }
+    margin-bottom: -20px;
 
     &-item {
       display: inline-block;

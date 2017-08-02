@@ -21,6 +21,7 @@ COLOR_CHOICES = [
     ('red', 'Rot'),
     ('blue', 'Blau'),
     ('orange', 'Orange'),
+    ('purple', 'Lila'),
 ]
 
 class SizeChoiceBlock(blocks.ChoiceBlock):

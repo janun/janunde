@@ -1,21 +1,30 @@
+$teaser-angle: -5deg;
+
 .block-teaser {
-  margin-top: 40px;
+  width: 100%;
   margin-bottom: 60px;
   overflow: hidden;
+  padding: 30px;
+
   @include above($medium) {
     margin-top: 60px;
   }
 
   &__inner {
+    backface-visibility: hidden;
     position: relative;
-    width: 100%;
-    left: 0;
+    width: 120%;
+    left: -10%;
     overflow: hidden;
-
-    padding: 40px;
-    @include above($medium) {
-      padding: 100px;
+    min-height: 100px;
+    padding: 50px;
+    @media (min-height: 600px) {
+      padding: 120px;
     }
+    @media (min-height: 1200px) {
+      padding: 140px;
+    }
+    transform: rotate($teaser-angle);
 
     // green overlay
     &:before {
@@ -25,8 +34,8 @@
       bottom: 0;
       left: 0;
       right: 0;
-      width: 100%;
-      height: 100%;
+      width: 120%;
+      height: 120%;
       background: rgba(18, 117, 0, 0.75);
       z-index: 10;
     }
@@ -45,7 +54,6 @@
       background-size: 100%;
       background-position: bottom, top;
       z-index: 100;
-      // transform: rotate(-5deg);
     }
   }
 
@@ -54,9 +62,9 @@
     position: absolute;
     top: 30%;
     left: 50%;
-    transform: translate(-50%, -30%);// rotateX(8deg);
-    min-width: 100%;
-    min-height: 100%;
+    transform: translate(-50%, -30%) rotate(-$teaser-angle);
+    min-width: 120%;
+    min-height: 120%;
     filter: grayscale(100%);
     z-index: -1;
   }
@@ -70,7 +78,8 @@
     position: relative;
     z-index: 100;
     text-align: center;
-    // transform: rotate(8deg);
+    transform: rotate(-$teaser-angle);
+
   }
 
   &__title {
@@ -78,7 +87,13 @@
     font-size: 40px;
     @include text-shadow(2);
     margin-bottom: 20px;
-    @include above($medium) {
+    // @include above($medium) {
+    //   font-size: 8vh;
+    // }
+    @media (min-height: 600px) {
+      font-size: 70px;
+    }
+    @media (min-height: 1200px) {
       font-size: 100px;
     }
   }
@@ -88,7 +103,13 @@
     font-size: 20px;
     @include text-shadow(2);
     margin-top: 0;
-    @include above($medium) {
+    // @include above($medium) {
+    //   font-size: 4vh;
+    // }
+    @media (min-height: 600px) {
+      font-size: 35px;
+    }
+    @media (min-height: 1200px) {
       font-size: 50px;
     }
   }
