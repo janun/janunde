@@ -17,11 +17,10 @@
   </svg>
 
 
-  {% if self.heading %}
+  {% if self.heading == "Abonnier den monatlichen Newsletter" %}
+    <h2 id="{{ self.heading|slugify }}" class="block-newsletter__heading">Abonnier den <span class="color-blue">monatlichen Newsletter</span></h2>
+  {% elif self.heading %}
     <h2 id="{{ self.heading|slugify }}" class="block-newsletter__heading">{{ self.heading }}</h2>
-  {% else %}
-  <h2 id="newsletter" class="block-newsletter__heading">Abonnier den <span class="color-blue">monatlichen Newsletter</span></h2>
-
   {% endif %}
 
   {% if self.text %}
