@@ -1,1 +1,5 @@
-<a class="button {% if value.aslink %}button--link{% else %}button--primary{% endif %} color-{{ value.color }}" href="{{ value.link }}">{{ value.text }}</a>
+<a class="button
+  {% if value.aslink %}button--link{% else %}button--primary{% endif %} color-{{ value.color }}"
+  href="{% if value.mail %}mailto:{{ value.mail }}{% else %}{{ value.link }}{% endif %}">
+  {{ value.text }}
+</a>

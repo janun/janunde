@@ -140,7 +140,8 @@ class ImageGalleryBlock(blocks.StructBlock):
 
 class Button(blocks.StructBlock):
     text = blocks.CharBlock(label="Text")
-    link = blocks.URLBlock(label="Link")
+    link = blocks.URLBlock(label="Link", required=False)
+    mail = blocks.EmailBlock(label="E-Mail", help_text="wird anstelle von link benutzt", required=False)
     color = blocks.ChoiceBlock(
         label="Farbe", choices=COLOR_CHOICES, default="green"
     )
