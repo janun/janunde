@@ -229,6 +229,10 @@ class TeaserBlock(blocks.StructBlock):
         label="Untertitel",
         required=False
     )
+    rotate = blocks.BooleanBlock(
+        label="gedreht",
+        required=False
+    )
     class Meta:
         label = "Zwischentitel"
         icon = "title"
@@ -245,6 +249,22 @@ class HighlightsBlock(blocks.StructBlock):
         label = "Highlights"
         icon = "pick"
         template = 'blocks/highlights.html'
+
+
+class EventsBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(
+        label="Überschrift",
+        required=False
+    )
+    def get_context(self, value, parent_context=None):
+       context = super().get_context(value, parent_context=parent_context)
+       from events.models import EventPage
+       context['upcoming'] = EventPage.objects.upcoming()[:3]
+       return context
+    class Meta:
+        label = "Veranstaltungen"
+        icon = "date"
+        template = 'blocks/events.html'
 
 
 class NewsletterSignupBlock(blocks.StructBlock):
@@ -302,3 +322,4 @@ class HomePageStreamBlock(blocks.StreamBlock):
     newsletter = NewsletterSignupBlock()
     box = BoxBlock()
     gap = GapBlock()
+    events = EventsBlock()

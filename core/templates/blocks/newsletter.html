@@ -18,9 +18,9 @@
 
 
   {% if self.heading %}
-    <h2 class="block-newsletter__heading">{{ self.heading }}</h2>
+    <h2 id="{{ self.heading|slugify }}" class="block-newsletter__heading">{{ self.heading }}</h2>
   {% else %}
-  <h2 class="block-newsletter__heading">Abonnier den <span class="color-blue">monatlichen Newsletter</span></h2>
+  <h2 id="newsletter" class="block-newsletter__heading">Abonnier den <span class="color-blue">monatlichen Newsletter</span></h2>
 
   {% endif %}
 

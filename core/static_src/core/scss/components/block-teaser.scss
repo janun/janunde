@@ -26,9 +26,6 @@ $teaser-angle: -5deg;
     @media (min-height: 1000px) {
       padding: 160px 0;
     }
-    @include above($medium) {
-      transform: rotate($teaser-angle);
-    }
 
     // overlay
     &:before {
@@ -69,13 +66,26 @@ $teaser-angle: -5deg;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -30%);
-    @include above($medium) {
-      transform: translate(-50%, -30%) rotate(-$teaser-angle);
-    }
     min-width: 120%;
     min-height: 120%;
     filter: grayscale(100%);
     z-index: -1;
+  }
+
+  &__inner--rotate {
+    @include above($medium) {
+      transform: rotate($teaser-angle);
+    }
+    .block-teaser__background {
+      @include above($medium) {
+        transform: translate(-50%, -30%) rotate(-$teaser-angle);
+      }
+    }
+    .block-teaser__content {
+      @include above($medium) {
+        transform: rotate(-$teaser-angle);
+      }
+    }
   }
 
   &__video {
@@ -87,9 +97,6 @@ $teaser-angle: -5deg;
     position: relative;
     z-index: 100;
     text-align: center;
-    @include above($medium) {
-      transform: rotate(-$teaser-angle);
-    }
   }
 
   &__title {
@@ -131,5 +138,19 @@ $teaser-angle: -5deg;
   @include above($medium) {
     position: relative;
     top: -200px;
+    z-index: 100;
+  }
+}
+
+.block-teaser + .block-events {
+  @include above($medium) {
+    position: relative;
+    top: -200px;
+    z-index: 100;
+
+    .area-title, .bigcard__top-text {
+      color: $white;
+      display: none;
+    }
   }
 }

@@ -1,10 +1,10 @@
 {% load render_partial %}
 
 {% if self.heading %}
-  <h2 class="block-highlights__heading">{{ self.heading }}</h2>
+  <h2 id="{{ self.heading|slugify }}" class="block-highlights__heading">{{ self.heading }}</h2>
 {% endif %}
 
-<div class="block-highlights__grid">  
+<div class="block-highlights__grid">
   {% for object in self.objects %}
     <div class="block-highlights__grid-item">
       {% render_partial object.specific %}

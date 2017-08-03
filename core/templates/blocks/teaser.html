@@ -1,6 +1,9 @@
 {% load wagtailcore_tags humanize wagtailimages_tags srcset stuff %}
 
-<div class="block-teaser__inner">
+<a id="{{ self.title|slugify }}" style="visibility:none"></a>
+
+<div class="block-teaser__inner
+  {% if self.rotate %}block-teaser__inner--rotate{% endif %}">
 
   {% if self.background %}
     {% image self.background original as background %}
