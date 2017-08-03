@@ -248,7 +248,10 @@ class HighlightsBlock(blocks.StructBlock):
         label="Überschrift",
         required=False
     )
-    objects = blocks.ListBlock(blocks.PageChooserBlock())
+    objects = blocks.ListBlock(
+        blocks.PageChooserBlock(),
+        label="Objekte",
+    )
     class Meta:
         label = "Highlights"
         icon = "pick"

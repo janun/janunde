@@ -2,7 +2,9 @@
   <h2 id="{{ self.heading|slugify }}" class="block-box__heading">{{ self.heading }}</h2>
 {% endif %}
 
-{{ self.text }}
+<div class="block-box__text">
+  {{ self.text }}
+</div>
 
 <div class="block-box__buttons">
   {% for button in self.buttons %}
