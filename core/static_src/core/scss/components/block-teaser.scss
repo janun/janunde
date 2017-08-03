@@ -134,10 +134,11 @@ $teaser-angle: -5deg;
 
 }
 
-.block-teaser + .block-box {
+.block-teaser + .block-box, .block-teaser + .block-embed {
   @include above($medium) {
     position: relative;
     top: -200px;
+    margin-bottom: -150px;
     z-index: 100;
   }
 }
@@ -147,6 +148,7 @@ $teaser-angle: -5deg;
     position: relative;
     top: -200px;
     z-index: 100;
+    margin-bottom: -150px;
 
     .area-title, .bigcard__top-text {
       color: $white;

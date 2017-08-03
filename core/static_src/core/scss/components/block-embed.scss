@@ -1,3 +1,17 @@
 .block-embed {
   @extend .block-image;
 }
+
+.template-homepage .block-embed {
+  background-color: $white;
+  border-radius: 5px;
+  @include shadow(2);
+  padding: 40px;
+  max-width: 830px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .block-image__caption {
+    max-width: 100%;
+  }
+}

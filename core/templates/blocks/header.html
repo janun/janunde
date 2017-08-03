@@ -7,7 +7,7 @@
 {% if self.background %}
   {% image self.background original as background %}
   <img src="{{ background.url }}"
-    srcset="{{ self.background|srcset:'width-300 width-600 width-900 width-1200 width-1500 width-1700 original' }}"
+    srcset="{{ self.background|srcset:'width-300 width-600 width-900 width-1200 width-1500 width-1700 width-2000' }}"
     sizes="100vw"
     class="block-header__background"
     alt="{{ image.alt }}">

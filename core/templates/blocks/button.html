@@ -1,1 +1,1 @@
-<a class="button button--primary color-{{ value.color }}" href="{{ value.link }}">{{ value.text }}</a>
+<a class="button {% if value.aslink %}button--link{% else %}button--primary{% endif %} color-{{ value.color }}" href="{{ value.link }}">{{ value.text }}</a>

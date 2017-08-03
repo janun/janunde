@@ -144,6 +144,10 @@ class Button(blocks.StructBlock):
     color = blocks.ChoiceBlock(
         label="Farbe", choices=COLOR_CHOICES, default="green"
     )
+    aslink = blocks.BooleanBlock(
+        required=False,
+        label="ohne Hintergrund"
+    )
     class Meta:
         label = _("Button")
         icon = "link"
@@ -313,6 +317,7 @@ class GapBlock(blocks.StructBlock):
         icon = "placeholder"
         template = 'blocks/gap.html'
 
+
 class HomePageStreamBlock(blocks.StreamBlock):
     header = HeaderBlock()
     paragraph2 = ParagraphTwoBlock()
@@ -323,3 +328,4 @@ class HomePageStreamBlock(blocks.StreamBlock):
     box = BoxBlock()
     gap = GapBlock()
     events = EventsBlock()
+    embed = OurEmbedBlock()
