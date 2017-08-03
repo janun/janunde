@@ -204,11 +204,11 @@ class HeaderBlock(blocks.StructBlock):
 class ParagraphTwoBlock(blocks.StructBlock):
     big = blocks.BooleanBlock(
         label="Groß",
-        default=False
+        required=False,
     )
     center = blocks.BooleanBlock(
         label="zentriert",
-        default=False
+        required=False,
     )
     text = blocks.RichTextBlock()
     class Meta:
@@ -230,8 +230,8 @@ class TeaserBlock(blocks.StructBlock):
         required=False
     )
     class Meta:
-        label = "Teaser"
-        icon = "home"
+        label = "Zwischentitel"
+        icon = "title"
         template = 'blocks/teaser.html'
 
 
@@ -243,7 +243,7 @@ class HighlightsBlock(blocks.StructBlock):
     objects = blocks.ListBlock(blocks.PageChooserBlock())
     class Meta:
         label = "Highlights"
-        icon = "home"
+        icon = "pick"
         template = 'blocks/highlights.html'
 
 
@@ -262,9 +262,36 @@ class NewsletterSignupBlock(blocks.StructBlock):
     )
     class Meta:
         label = "Newsletter-Anmeldung"
-        icon = "home"
+        icon = "form"
         template = 'blocks/newsletter.html'
 
+
+class BoxBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(
+        label="Überschrift",
+        required=False
+    )
+    text = blocks.RichTextBlock(
+        label="Text",
+        required=False
+    )
+    buttons = blocks.ListBlock(Button())
+    class Meta:
+        label = "Box"
+        icon = "placeholder"
+        template = 'blocks/box.html'
+
+
+class GapBlock(blocks.StructBlock):
+    size = blocks.DecimalBlock(
+        required=False,
+        label="Größe",
+        help_text="Größe des vertikalen Abstands in Pixeln"
+    )
+    class Meta:
+        label = "Abstand"
+        icon = "placeholder"
+        template = 'blocks/gap.html'
 
 class HomePageStreamBlock(blocks.StreamBlock):
     header = HeaderBlock()
@@ -273,3 +300,5 @@ class HomePageStreamBlock(blocks.StreamBlock):
     teaser = TeaserBlock()
     highlights = HighlightsBlock()
     newsletter = NewsletterSignupBlock()
+    box = BoxBlock()
+    gap = GapBlock()

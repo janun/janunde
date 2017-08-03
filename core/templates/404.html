@@ -20,8 +20,8 @@
       <p>Offenbar suchst du nach »{{ request.path }}«.</p>
       <p>Probier doch Folgendes:</p>
 
-      <a class="button button--filled color-green" href="{% url 'search' %}?q={{ request.path|pathtosearch }}">Suche</a><br>
-      <a class="button color-green" href="/">Startseite</a><br>
+      <a class="button button--primary" href="{% url 'search' %}?q={{ request.path|pathtosearch }}">Suche</a><br>
+      <a class="button button--link" href="/">Startseite</a><br>
     </div>
 
 

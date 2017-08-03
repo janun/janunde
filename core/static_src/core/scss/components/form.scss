@@ -208,10 +208,11 @@ $form-breakpoint: rem-calc(670px);
   &__controls {
     padding-top: 30px;
     margin-top: 50px;
-    text-align: center;
-    @include above($form-breakpoint) {
-      text-align: left;
-    }
+    margin-left: -10px;
+    // text-align: center;
+    // @include above($form-breakpoint) {
+    //   text-align: left;
+    // }
   }
 
 }

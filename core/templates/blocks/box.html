@@ -1,0 +1,11 @@
+{% if self.heading %}
+  <h2 class="block-box__heading">{{ self.heading }}</h2>
+{% endif %}
+
+{{ self.text }}
+
+<div class="block-box__buttons">
+  {% for button in self.buttons %}
+    {{ button }}
+  {% endfor %}
+</div>

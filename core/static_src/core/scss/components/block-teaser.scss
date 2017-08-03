@@ -2,31 +2,35 @@ $teaser-angle: -5deg;
 
 .block-teaser {
   width: 100%;
+  margin-bottom: 40px;
   margin-bottom: 60px;
   overflow: hidden;
-  padding: 30px;
-
-  @include above($medium) {
+  @include above($xlarge) {
     margin-top: 60px;
+  }
+  @include above($medium) {
+    padding: 30px;
   }
 
   &__inner {
     backface-visibility: hidden;
     position: relative;
-    width: 120%;
-    left: -10%;
     overflow: hidden;
     min-height: 100px;
-    padding: 50px;
+    padding: 60px 0;
     @media (min-height: 600px) {
-      padding: 120px;
+      width: 120%;
+      left: -10%;
+      padding: 130px 20px;
     }
-    @media (min-height: 1200px) {
-      padding: 140px;
+    @media (min-height: 1000px) {
+      padding: 160px 0;
     }
-    transform: rotate($teaser-angle);
+    @include above($medium) {
+      transform: rotate($teaser-angle);
+    }
 
-    // green overlay
+    // overlay
     &:before {
       content: "";
       position: absolute;
@@ -36,7 +40,8 @@ $teaser-angle: -5deg;
       right: 0;
       width: 120%;
       height: 120%;
-      background: rgba(18, 117, 0, 0.75);
+      // background: rgba(18, 117, 0, 0.75);
+      background: rgba(darken($green, 10%), 0.75);
       z-index: 10;
     }
 
@@ -49,6 +54,7 @@ $teaser-angle: -5deg;
       right: 0;
       width: 110%;
       height: 100%;
+      min-width: 900px;
       background: url(static("core/images/rand2.svg")), url(static("core/images/rand2-top.svg"));
       background-repeat: no-repeat;
       background-size: 100%;
@@ -62,7 +68,10 @@ $teaser-angle: -5deg;
     position: absolute;
     top: 30%;
     left: 50%;
-    transform: translate(-50%, -30%) rotate(-$teaser-angle);
+    transform: translate(-50%, -30%);
+    @include above($medium) {
+      transform: translate(-50%, -30%) rotate(-$teaser-angle);
+    }
     min-width: 120%;
     min-height: 120%;
     filter: grayscale(100%);
@@ -78,13 +87,14 @@ $teaser-angle: -5deg;
     position: relative;
     z-index: 100;
     text-align: center;
-    transform: rotate(-$teaser-angle);
-
+    @include above($medium) {
+      transform: rotate(-$teaser-angle);
+    }
   }
 
   &__title {
     font-weight: bold;
-    font-size: 40px;
+    font-size: 45px;
     @include text-shadow(2);
     margin-bottom: 20px;
     // @include above($medium) {
@@ -93,14 +103,15 @@ $teaser-angle: -5deg;
     @media (min-height: 600px) {
       font-size: 70px;
     }
-    @media (min-height: 1200px) {
+    @media (min-height: 1000px) {
       font-size: 100px;
+      line-height: 1.0;
     }
   }
 
   &__subtitle {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
     @include text-shadow(2);
     margin-top: 0;
     // @include above($medium) {
@@ -109,9 +120,16 @@ $teaser-angle: -5deg;
     @media (min-height: 600px) {
       font-size: 35px;
     }
-    @media (min-height: 1200px) {
+    @media (min-height: 1000px) {
       font-size: 50px;
     }
   }
 
+}
+
+.block-teaser + .block-box {
+  @include above($medium) {
+    position: relative;
+    top: -200px;
+  }
 }

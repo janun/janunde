@@ -1,0 +1,39 @@
+.block-box {
+  // @include container(rem-calc(830px));
+  background-color: $white;
+  padding: 30px 10px;
+  width: 100%;
+  max-width: 100%;
+  @include shadow(2);
+
+  @include above(rem-calc(850px)) {
+    padding: 40px 50px;
+    max-width: rem-calc(830px);
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+  }
+
+
+  &__heading {
+    font-size: 30px;
+    color: $green;
+    margin-top: 0;
+    font-weight: bold;
+
+    @include above($medium) {
+      font-size: 40px;
+    }
+  }
+
+  &__buttons {
+    margin-top: 20px;
+    margin-left: -10px;
+
+    .button:last-of-type {
+      @include above($medium) {
+        float: right;
+      }
+    }
+  }
+}

@@ -94,13 +94,10 @@
   }
 
   &__button {
-    @extend .button;
-    @extend .color-green;
     margin-bottom: 0;
     margin-top: rem-calc(15px);
 
     @include above($medium) {
-      //@extend .button--filled;
       margin-left: auto;
       margin-top: 0;
     }

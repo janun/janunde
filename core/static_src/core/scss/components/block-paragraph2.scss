@@ -14,6 +14,19 @@
       line-height: 1.3;
     }
 
+    h2 {
+      font-size: 30px;
+      color: $green;
+      margin-top: 0;
+      font-weight: bold;
+      text-align: center;
+
+      @include above($medium) {
+        text-align: left;
+        font-size: 40px;
+      }
+    }
+
     @media (min-width: 680px) {
       width: 640px;
       margin-top: 20px;
@@ -26,6 +39,18 @@
 
     &--center {
       text-align: center;
+    }
+
+    &--inbox {
+      background-color: $white;
+      padding: 60px;
+      width: 830px;
+      max-width: 100%;
+      @include above($medium) {
+        padding: 40px 50px;
+      }
+      border-radius: 5px;
+      @include shadow(2);
     }
 
     &--big p {

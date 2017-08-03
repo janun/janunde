@@ -1,17 +1,15 @@
 .block-highlights {
-  @extend .container;
+  @include container;
   margin-top: 30px;
   margin-bottom: 10px;
 
   &__heading {
-    // font-size: 20px;
-    // font-family: $font-family-sans-serif;
-    // font-weight: normal;
+    font-size: 20px;
     text-align: center;
+    margin-bottom: 30px;
     @include above($large) {
       text-align: left;
     }
-    margin-bottom: 30px;
   }
 
   &__link {
@@ -37,13 +35,12 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: -20px;
-
     &-item {
       display: inline-block;
     }
 
-    @include above($medium) {
-      &-item:not(:last-child) {
+    @include above(670px) {
+      &-item:not(:last-of-type) {
         margin-right: 60px;
       }
     }

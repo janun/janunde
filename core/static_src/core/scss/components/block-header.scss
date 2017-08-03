@@ -26,6 +26,7 @@
     /*display: none;*/
   }
 
+  // overlay
   &:before {
     content: "";
     position: absolute;
@@ -35,18 +36,21 @@
     right: 0;
     width: 100%;
     height: 100%;
-    background: rgba(18, 117, 0, 0.75);
+    // background: rgba(18, 117, 0, 0.75);
+    background: rgba(darken($green, 10%), 0.75);
     z-index: 10;
   }
 
+  // fransig border
   &:after {
     content: "";
     position: absolute;
     bottom: -1px;
-    left: -2%;
+    left: -20px;
     right: 0;
     width: 104%;
     height: 100%;
+    min-width: 900px;
     background: url(static("core/images/rand2.svg"));
     background-repeat: no-repeat;
     background-size: 100%;
@@ -54,38 +58,57 @@
     z-index: 10;
   }
 
-  &__januntext {
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -30%);
-    display: block;
-    height: 80%;
-    width: 80%;
-    @media (min-width: 680px) {
-      height: 50%;
-      width: 50%;
+  &__januntext1 {
+    height: 45%;
+    margin-top: 10px;
+    @include above($medium) {
+      height: 40%;
     }
+    @include above($xlarge) {
+      height: 50%;
+    }
+  }
+
+  &__januntext2 {
+    height: 20%;
+    margin-top: -1%;
+    @include above($medium) {
+      height: 23%;
+      margin-top: -1%;
+    }
+    @include above($xlarge) {
+      margin-top: -5%;
+      height: 22%;
+    }
+  }
+
+  &__content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
     max-width: 1000px;
     z-index: 100;
+    text-align: center;
+    padding-top: 10px;
   }
 }
 
-.block-header ~ .block-button {
-  @media (min-height: 600px) {
-    position: relative;
-    top: -170px;
-    top: -19vh;
-    z-index: 100;
-    .button {
-      position: absolute;
-      @include shadow(4);
-      left: 50%;
-      transform: translate(-50%, 0);
-    }
+.block-header + .block-button {
+  position: relative;
+  height: 10px;
+  z-index: 100;
+  text-align: center;
+  .button {
+    @include shadow(4);
   }
-  @media (min-height: 1200px) {
-    top: -120px;
-    top: -12vh;
+  top: -50px;
+  // top: -18vh;
+
+  @media (min-height: 600px) and (min-width: 700px) {
+    height: 0;
+    top: -130px;
+    top: -18vh;
   }
 }
