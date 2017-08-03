@@ -134,7 +134,10 @@ $teaser-angle: -5deg;
 
 }
 
-.block-teaser + .block-box, .block-teaser + .block-embed {
+.block-teaser + .block-box,
+.block-teaser + .block-embed,
+.block-teaser + .block-newsletter
+ {
   @include above($medium) {
     position: relative;
     top: -200px;
