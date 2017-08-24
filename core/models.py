@@ -35,6 +35,11 @@ COLOR_CHOICES = [
     ('orange', 'Orange'),
 ]
 
+TEXT_DIRECTION_CHOICES = [
+    ('ltr', 'Links nach Rechts'),
+    ('rtl', 'Rechts nach Links'),
+]
+
 
 # TODO: How can we create a Thema conveniently?
 class Thema(models.Model):
@@ -273,6 +278,14 @@ class StandardPage(BasePage):
         help_text="Der Titel wird in dieser Farbe angezeigt."
     )
 
+    text_direction = models.CharField(
+        "Textrichtung",
+        choices=TEXT_DIRECTION_CHOICES,
+        max_length=255,
+        default='ltr',
+        help_text="Interessant für bestimmte Sprachen wie Arabisch."
+    )
+
     subtitle = models.CharField(
         "Untertitel",
         max_length=255,
@@ -324,6 +337,7 @@ class StandardPage(BasePage):
                          Sie wird dann für den angegeben Zeitraum
                          auf der Startseite angezeigt."""
         ),
+        FieldPanel('text_direction'),
     ] + BasePage.promote_panels
 
     class Meta:
