@@ -9,8 +9,8 @@ django-softhyphen==1.1.0
 django-form-utils==1.0.3
 
 # production
-django-storages==1.4
-boto==2.39.0
+django-storages==1.6.5
+boto3==1.4.7
 django-acme==0.2.1
 whitenoise==3.3
 brotlipy==0.3.0
