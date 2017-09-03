@@ -45,7 +45,7 @@ ALLOWED_HOSTS = ['*']
 
 # save media files in S3
 if 'AWS_ACCESS_KEY' in os.environ:
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3BotoStorage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
     AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_KEY']
     AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET']
