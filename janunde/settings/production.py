@@ -54,6 +54,9 @@ if 'AWS_ACCESS_KEY' in os.environ:
             'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
             'Cache-Control': 'max-age=94608000',
         }
+    if 'AWS_S3_HOST' in os.environ:
+        AWS_S3_HOST = os.environ['AWS_S3_HOST']
+        S3_USE_SIGV4 = True
 
 
 # Use the cached template loader
