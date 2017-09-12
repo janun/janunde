@@ -80,12 +80,12 @@
 
     </div>
 
-    {% if self.people.all %}
+    {% if self.people.live %}
       <div class="margin-top-3">
         <h2>Mitarbeiter_innen beim {{ self.title }}:</h2>
         <div class="center-container">
           <div class="card-grid">
-            {% for person in self.people.all %}
+            {% for person in self.people.live %}
               {% render_partial person %}
             {% endfor %}
           </div>

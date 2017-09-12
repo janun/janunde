@@ -37,10 +37,10 @@
     </div>
   {% endif %}
 
-  {% if people %}
+  {% if people.live %}
     <div class="center-container">
       <div class="card-grid">
-        {% for person in people %}
+        {% for person in people.live %}
           {% render_partial person %}
         {% endfor %}
       </div>
