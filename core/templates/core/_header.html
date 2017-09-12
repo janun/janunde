@@ -1,7 +1,7 @@
 {% load static from staticfiles %}
 {% load cache %}
 
-{% cache 36000 header %}
+{% cache 600 header %}
   <header class="site-header video-background">
 
     <video class="video-background__video hide@no-js js-mq-video-loader" autoplay muted playsinline loop poster="{% static 'core/images/header-poster/header-poster-1024.jpg' %}">

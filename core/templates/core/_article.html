@@ -1,6 +1,6 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff humanize cache %}
 
-{% cache 36000 article object.id object.latest_revision_created_at object.main_image.updated_at %}
+{% cache 600 article object.id object.latest_revision_created_at object.main_image.updated_at %}
   <div class="bigcard click-area"
        itemscope itemtype="http://schema.org/Article">
 

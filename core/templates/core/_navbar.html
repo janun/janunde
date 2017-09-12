@@ -1,7 +1,7 @@
 {% load wagtailcore_tags menu cache %}
 {% load static from staticfiles %}
 
-{% cache 36000 navbar request.path %}
+{% cache 600 navbar request.path %}
 
   {% get_site_root as site_root %}
   {% if site_root %}

@@ -1,6 +1,6 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff humanize cache %}
 
-{% cache 36000 page object.id object.latest_revision_created_at object.feed_image.updated_at %}
+{% cache 600 page object.id object.latest_revision_created_at object.feed_image.updated_at %}
   <div class="bigcard click-area hover-reveal">
 
     <div class="bigcard__inner">

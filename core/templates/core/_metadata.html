@@ -1,6 +1,6 @@
 {% load wagtailimages_tags cache %}
 
-{% cache 36000 metadata self.id self.latest_revision_created_at %}
+{% cache 600 metadata self.id self.latest_revision_created_at %}
   <meta name="description" content="{{ self.get_description|default:"" }}">
   <meta name="last-modified" content="{{ self.latest_revision_created_at|date:"c" }}">
   <meta name="date" content="{{ self.first_published_at|date:"c" }}">
