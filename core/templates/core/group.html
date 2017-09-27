@@ -119,11 +119,11 @@
 
     {% block after_content %}
 
-      {% if self.get_children %}
+      {% if self.get_children.live %}
         <div class="clear-after margin-top-2">
           <h2 class="area-title">Unterseiten von {{ self.title }}:</h2>
           <div class="card-grid">
-            {% for child in self.get_children %}
+            {% for child in self.get_children.live %}
               {% render_partial child.specific %}
             {% endfor %}
           </div>
@@ -141,11 +141,11 @@
         </div>
       {% endif %}
 
-      {% if self.articles.all %}
+      {% if self.articles.live %}
         <div class="clear-after margin-top-2">
           <h2 class="area-title">Artikel von {{ self.title }}:</h2>
           <div class="card-grid">
-            {% for event in self.articles.all %}
+            {% for event in self.articles.live %}
               {% render_partial event %}
             {% endfor %}
           </div>
