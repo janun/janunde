@@ -1,7 +1,7 @@
-Django==1.11.3
-wagtail==1.11.1
+Django==1.11.6
+wagtail==1.13
 html2text==2016.9.19
-Wand==0.4.3
+Wand==0.4.4
 python-dateutil==2.5.3
 icalendar==3.9.2
 django-phonenumber-field==1.1.0
@@ -13,8 +13,8 @@ django-storages==1.6.5
 boto3==1.4.7
 django-acme==0.2.1
 whitenoise==3.3
-brotlipy==0.3.0
-cffi==1.6.0
+brotlipy==0.7.0
+cffi==1.10.0
 django-toolbelt==0.0.1
 elasticsearch==1.9.0
 certifi==2016.2.28

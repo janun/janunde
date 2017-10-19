@@ -186,7 +186,9 @@ class ParagraphBlock(blocks.RichTextBlock):
 
 
 class StandardStreamBlock(blocks.StreamBlock):
-    paragraph = ParagraphBlock()
+    paragraph = ParagraphBlock(
+        features=['h2', 'h3', 'bold', 'italic', 'link', 'ol', 'ul', 'document-link']
+    )
     image = ImageBlock()
     several_images = ImagesBlock(ImageCarouselBlock)
     gallery = ImageGalleryBlock()
