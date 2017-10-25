@@ -3,7 +3,7 @@ Psst,
 
 {% if event %}
 Hier ist das Seminar auf der Website zu finden:
-https://www.janun.de/admin/pages/{{event.id}}/edit
+https://www.janun.de/admin/pages/{{event.id}}/edit/
 {% endif %}
 
 Hier sind die eingegebenen Daten:
