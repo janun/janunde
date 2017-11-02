@@ -1,7 +1,6 @@
-{% load wagtailcore_tags menu cache %}
+{% load wagtailcore_tags menu %}
 {% load static from staticfiles %}
 
-{% cache 600 navbar request.path %}
 
   {% get_site_root as site_root %}
   {% if site_root %}
@@ -73,4 +72,3 @@
     }
   </script>
   <!-- end of navbar -->
-{% endcache %}
