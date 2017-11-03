@@ -709,6 +709,7 @@ class FormPageForm(WagtailAdminPageForm):
 
 class FormPage(AbstractEmailForm):
     base_form_class = FormPageForm
+    partial_template_name = 'core/_partial.html'
 
     intro = RichTextField(
         blank=True,
