@@ -23,7 +23,11 @@
       {% endif %}
 
       <div class="bigcard__content">
-        <h2 class="bigcard__title" itemprop="name">{{ object.hyphenated_title|safe }}</h2>
+        {% if object.hyphenated_title %}
+          <h2 class="bigcard__title" itemprop="name">{{ object.hyphenated_title|safe }}</h2>
+        {% else %}
+          {{ object.title }}
+        {% endif %}
         {% if object.subtitle %}
           <p class="bigcard__subtitle">{{ object.subtitle }}</p>
         {% elif object.get_description %}
