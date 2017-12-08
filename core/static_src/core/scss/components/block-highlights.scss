@@ -9,12 +9,6 @@
     margin-bottom: 30px;
   }
 
-  &--left {
-    @include above($large) {
-      text-align: left !important;
-    }
-  }
-
   &__link {
     display: block;
     font-size: 20px;

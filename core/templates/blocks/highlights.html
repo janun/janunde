@@ -1,7 +1,7 @@
 {% load render_partial %}
 
 {% if self.heading %}
-  <h2 id="{{ self.heading|slugify }}" class="block-highlights__heading {% if self.objects|length > 2 %}block-highlights--left{% endif %}">{{ self.heading }}</h2>
+  <h2 id="{{ self.heading|slugify }}" class="block-highlights__heading">{{ self.heading }}</h2>
 {% endif %}
 
 <div class="block-highlights__grid">
@@ -12,5 +12,5 @@
   {% endfor %}
 </div>
 
-<a class="block-highlights__link {% if self.objects|length > 2 %}block-highlights--left{% endif %}" href="/veranstaltungen">Alle Veranstaltungen</a>
-<a class="block-highlights__link {% if self.objects|length > 2 %}block-highlights--left{% endif %}" href="/artikel">Alle Artikel</a>
+<a class="block-highlights__link" href="/veranstaltungen">Alle Veranstaltungen</a>
+<a class="block-highlights__link" href="/artikel">Alle Artikel</a>
