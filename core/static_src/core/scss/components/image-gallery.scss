@@ -104,11 +104,17 @@
 
   }
   &__next {
-    right: -30px;
+    right: -20px;
     padding-left: 20px;
+    @include above($medium) {
+      right: -25px;
+    }
   }
   &__prev {
-    left: -30px;
+    left: -20px;
     padding-right: 20px;
+    @include above($medium) {
+      left: -25px;
+    }
   }
 }
