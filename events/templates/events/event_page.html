@@ -49,11 +49,8 @@
           <meta itemprop="startDate" content="{{ self.start_datetime|date:"c" }}">
           <meta itemprop="endDate" content="{{ self.end_datetime|date:"c" }}">
           <div class="font-size-1 font-family-sans color-grey">
-            <span class="color-grey hover-color-green cursor-pointer" role="button" data-a11y-toggle="calendar-links">Im Kalender speichern…</span>
-            <div class="hide-aria-hidden margin-0" aria-hidden="true" id="calendar-links">
-              <a class="color-grey" target="_blank" href="{{ self.create_google_calendar_link }}">zu Google-Kalender hinzufügen</a>,<br>
-              <a class="color-grey" target="_blank" href="?format=ical">iCal-Datei runterladen</a>
-            </div>
+            <a class="color-grey" target="_blank" href="{{ self.create_google_calendar_link }}">Google-Kalender</a>,
+            <a class="color-grey" target="_blank" href="?format=ical">iCal-Datei</a>
           </div>
 
         </div>
