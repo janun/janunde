@@ -9,7 +9,7 @@ To get a development environment, you can use a python virtualenv
 and install the dependencies:
 
 ```bash
-virtualenv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 npm install

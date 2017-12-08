@@ -18,7 +18,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # but with a default (as opposed to production)
 SECRET_KEY = os.environ.get(
     'SECRET_KEY',
-    'adaeföaehraoehcröcahömthcartmhghfdsgjhdfguhrg5zut3zu52z43jkjcoi;a!yfe'
+    'adaefoeaehraoehcroecahaemthcartmhghfdsgjhdfguhrg5zut3zu52z43jkjcoi;a!yfe'
 )
 
 INSTALLED_APPS += [
