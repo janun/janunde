@@ -5,7 +5,7 @@
   background-color: #ddd;
   //padding-bottom is set inline
 
-  * {
+  img, video, iframe, object, embed, div {
     position: absolute;
     left: 0;
     top: 0;
