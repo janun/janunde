@@ -478,6 +478,11 @@ class Group(BasePage):
         # TODO: change this into a real location somehow
     )
 
+    list_on_group_index_page = models.BooleanField(
+        default="True",
+        verbose_name="Auf Netzwerk & Projekte auflisten?",
+    )
+
     objects = GroupManager()
 
     search_fields = BasePage.search_fields + [
@@ -492,8 +497,7 @@ class Group(BasePage):
     def get_parent_group(self):
         return Group.objects.parent_of(self).first()
 
-    edit_handler = TabbedInterface([
-        ObjectList([
+    content_panels = [
             FieldPanel('title', classname="full title"),
             FieldPanel('subtitle'),
             ImageChooserPanel('logo'),
@@ -508,11 +512,13 @@ class Group(BasePage):
                     widget=PhoneNumberInternationalFallbackWidget
                 ),
             ], heading="Kontakt"),
-
             StreamFieldPanel('body'),
+    ]
+    promote_panels = [
+        FieldPanel('list_on_group_index_page'),
+    ]
 
-        ], heading=_("Name und Logo"))
-    ])
+    settings_panels = None
 
     partial_template_name = "core/_group.html"
 
@@ -539,16 +545,16 @@ class GroupIndexPage(BasePage, HeaderMixin):
     def get_context(self, request):
         context = super().get_context(request)
 
-        context['groups'] = Group.objects.child_of(self).live()
+        context['groups'] = Group.objects.child_of(self).live().filter(list_on_group_index_page=True)
 
         country_group = Group.objects.filter(title="JANUN Landesbüro").first()
         if country_group:
-            context['countrywide_projects'] = Project.objects.descendant_of(country_group).live()
+            context['countrywide_projects'] = Project.objects.descendant_of(country_group).live().filter(list_on_group_index_page=True)
             context['groups'] = context['groups'].exclude(pk=country_group.pk)
         else:
             context['countrywide_projects'] = []
 
-        context['other_projects'] = Project.objects.descendant_of(self).live().exclude(
+        context['other_projects'] = Project.objects.descendant_of(self).live().filter(list_on_group_index_page=True).exclude(
             pk__in=[p.pk for p in context['countrywide_projects']]
         )
 
