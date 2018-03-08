@@ -140,8 +140,8 @@ $teaser-angle: -5deg;
 .block-teaser + .block-events
  {
    position: relative;
-   top: -50px;
-   margin-bottom: -30px;
+   top: -100px;
+   margin-bottom: -75px;
    z-index: 100;
 
   @include above($medium) {
