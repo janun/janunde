@@ -136,26 +136,18 @@ $teaser-angle: -5deg;
 
 .block-teaser + .block-box,
 .block-teaser + .block-embed,
-.block-teaser + .block-newsletter
+.block-teaser + .block-newsletter,
+.block-teaser + .block-events
  {
-  @include above($medium) {
-    position: relative;
-    top: -200px;
-    margin-bottom: -150px;
-    z-index: 100;
-  }
+  position: relative;
+  top: -200px;
+  margin-bottom: -150px;
+  z-index: 100;
 }
 
 .block-teaser + .block-events {
-  @include above($medium) {
-    position: relative;
-    top: -200px;
-    z-index: 100;
-    margin-bottom: -150px;
-
-    .area-title, .bigcard__top-text {
-      color: $white;
-      display: none;
-    }
+  .area-title, .bigcard__top-text {
+    color: $white;
+    display: none;
   }
 }
