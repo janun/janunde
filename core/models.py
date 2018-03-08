@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 
+import datetime
 from datetime import timedelta
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -141,6 +142,11 @@ class BasePage(Page, HyphenatedTitleMixin):
             if hasattr(self, attr) and getattr(self, attr):
                 return stream2image(getattr(self, attr))
         return None
+
+
+    def serve_preview(self, request, mode_name):
+        request.preview_timestamp = datetime.datetime.now()
+        return super(BasePage, self).serve_preview(request, mode_name)
 
 
 

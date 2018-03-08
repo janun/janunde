@@ -14,7 +14,7 @@
 
 {% block content %}
 
-{% cache 600 self.content %}
+{% cache 600 self.content self.latest_revision_created_at|date:"c" request.preview_timestamp %}
   {% include_block self.content %}
 {% endcache %}
 
