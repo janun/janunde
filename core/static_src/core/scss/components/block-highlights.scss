@@ -29,8 +29,10 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: -20px;
+
     &-item {
       display: inline-block;
+      max-width: 290px;
     }
 
     @include above(670px) {
