@@ -185,6 +185,34 @@ class ParagraphBlock(blocks.RichTextBlock):
         template = 'blocks/paragraph.html'
 
 
+class MapImage(blocks.StructBlock):
+    tile_url = blocks.URLBlock(
+        label="Kachel-URL",
+        required=True,
+        help_text="URL zu den Kacheln, aus denen das Bild besteht. Benutze {z}, {x}, {y} in der URL für die Koordinaten"
+    )
+    height = blocks.DecimalBlock(
+        required=True,
+        label="Höhe",
+        help_text="in speziellen Leaflet Einheiten"
+    )
+    width = blocks.DecimalBlock(
+        required=True,
+        label="Breite",
+        help_text="in speziellen Leaflet Einheiten"
+    )
+    attribution = blocks.CharBlock(
+        label="Urheber",
+        help_text="Wird unten rechts im Bild angezeigt.",
+        required=False
+    )
+    class Meta:
+        label = "Map-Bild"
+        icon = "media"
+        template = 'blocks/map_image.html'
+
+
+
 class StandardStreamBlock(blocks.StreamBlock):
     paragraph = ParagraphBlock(
         features=['h2', 'h3', 'bold', 'italic', 'link', 'ol', 'ul', 'document-link']
@@ -196,6 +224,7 @@ class StandardStreamBlock(blocks.StreamBlock):
     button = Button()
     attachment = Attachment()
     table = TableBlock()
+    map_image = MapImage()
 
 
 class HeaderBlock(blocks.StructBlock):
