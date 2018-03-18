@@ -8,6 +8,9 @@
    integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
    crossorigin=""></script>
 
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+
 <style>
 .map {
   width: 100%;
@@ -25,10 +28,15 @@
 
 @media (min-width: 1000px) {
   .userim .map {
-    width: 90vw;
-    height: 90vh;
-    left: calc( 50% - 45vw );
+    width: 1000px;
+    margin-left: -180px;
+    margin-right: -180px;
+    height: {% widthratio value.width value.height 1000 %}px;
   }
+}
+
+.leaflet-container {
+  background: #000;
 }
 
 .leaflet-control-attribution a:first-of-type {
@@ -38,12 +46,13 @@
 
 <script>
 var map = L.map('map', {
-  minZoom: 3,
+  minZoom: 2,
   maxZoom: 6,
   center:   [-80, 80],
   zoom: 3,
   crs: L.CRS.Simple,
-  maxBoundsViscosity: 0.9
+  maxBoundsViscosity: 0.9,
+  fullscreenControl: true,
 });
 
 var southWest = [0, {{ value.height }}];
