@@ -48,7 +48,7 @@
 var map = L.map('map', {
   minZoom: 2,
   maxZoom: 6,
-  center:   [-80, 80],
+  center:   [-{{ value.width }}, {{ value.height }}],
   zoom: 3,
   crs: L.CRS.Simple,
   maxBoundsViscosity: 0.9,
