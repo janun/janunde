@@ -32,8 +32,8 @@ class ContactIndex(BasePage, HeaderMixin):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['people'] = PersonPage.objects.child_of(self).live()
-        context['offices'] = OfficePage.objects.child_of(self).live()
+        context['people'] = PersonPage.objects.descendant_of(self).live()
+        context['offices'] = OfficePage.objects.descendant_of(self).live()
         return context
 
     content_panels = [
