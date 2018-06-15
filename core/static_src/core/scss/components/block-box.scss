@@ -84,10 +84,10 @@
     margin-top: 20px;
     margin-left: -10px;
 
-    .button:last-of-type:not(:only-of-type) {
-      @include above($medium) {
-        float: right;
-      }
-    }
+    // .button:last-of-type:not(:only-of-type) {
+    //   @include above($medium) {
+    //     float: right;
+    //   }
+    // }
   }
 }
