@@ -12,7 +12,7 @@ class SeminarForm(BetterForm):
 
     def __init__(self, *args, **kwargs):
         richtlinie = kwargs.pop('richtlinie', None)
-        datenschutz = kwargs.pop('richtlinie', None)
+        datenschutz = kwargs.pop('datenschutz', None)
         super().__init__(*args, **kwargs)
         if richtlinie:
             self.fields['read_richtlinie'].label = self.fields['read_richtlinie'].label.replace(
