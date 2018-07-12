@@ -12,11 +12,17 @@ class SeminarForm(BetterForm):
 
     def __init__(self, *args, **kwargs):
         richtlinie = kwargs.pop('richtlinie', None)
+        datenschutz = kwargs.pop('richtlinie', None)
         super().__init__(*args, **kwargs)
         if richtlinie:
             self.fields['read_richtlinie'].label = self.fields['read_richtlinie'].label.replace(
                 "Seminarabrechnungsrichtlinie",
                 "<a href=\"%s\">Seminarabrechnungsrichtlinie</a>" % richtlinie.url
+            )
+        if datenschutz:
+            self.fields['read_datenschutz'].label = self.fields['read_datenschutz'].label.replace(
+                "Datenschutzbedingungen",
+                "<a href=\"%s\">Datenschutzbedingungen</a>" % datenschutz.url
             )
 
     class Meta:
@@ -41,7 +47,7 @@ class SeminarForm(BetterForm):
             }),
             ('footer', {
                 'legend': '',
-                'fields': ['comments', 'read_richtlinie', 'really_antrag', 'read_deadlines'],
+                'fields': ['comments', 'read_richtlinie', 'read_datenschutz', 'really_antrag', 'read_deadlines'],
             }),
         ]
 
@@ -155,6 +161,9 @@ class SeminarForm(BetterForm):
     # TODO: Link to Richtlinie
     read_richtlinie = forms.BooleanField(
         label="Ich habe die Seminarabrechnungsrichtlinie gelesen und verstanden, unter welchen Bedingungen JANUN Seminare bezuschusst."
+    )
+    read_datenschutz = forms.BooleanField(
+        label="Ich habe die Datenschutzbedingungen gelesen und verstanden."
     )
     really_antrag = forms.BooleanField(
         label="Die maximale Bezuschussung <span id=\"checkPossibleFunding\"></span> möchte ich hiermit beantragen."

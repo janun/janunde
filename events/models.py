@@ -54,10 +54,21 @@ class SeminarFormPage(BasePage):
         help_text="Wird im Formular verlinkt"
     )
 
+    datenschutz = models.ForeignKey(
+        Document,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+',
+        verbose_name="Datenschutzbedingungen",
+        help_text="Wird im Formular verlinkt"
+    )
+
     content_panels = [
         FieldPanel('title'),
         StreamFieldPanel('description'),
         DocumentChooserPanel('richtlinie'),
+        DocumentChooserPanel('datenschutz'),
     ]
 
     class Meta:
@@ -97,7 +108,7 @@ class SeminarFormPage(BasePage):
         from events.forms import SeminarForm
 
         if request.method == 'POST':
-            form = SeminarForm(request.POST, request.FILES, richtlinie=self.richtlinie)
+            form = SeminarForm(request.POST, request.FILES, richtlinie=self.richtlinie, datenschutz=self.datenschutz)
             if form.is_valid():
                 from django.core.mail import send_mail, EmailMessage
                 from django.template.loader import render_to_string
@@ -135,7 +146,7 @@ class SeminarFormPage(BasePage):
                     'form': form
                 })
         else:
-            form = SeminarForm(richtlinie=self.richtlinie)
+            form = SeminarForm(richtlinie=self.richtlinie, datenschutz=self.datenschutz)
 
         return render(request, 'events/seminar_form_page/apply.html', {
             'self': self,
