@@ -48,7 +48,8 @@ urlpatterns = [
     url(r'^scp', RedirectView.as_view(url='/netzwerk-projekte/janun-landesbüro/silent-climate-parade/') ),
     url(r'^herbstspektakel', RedirectView.as_view(url='/netzwerk-projekte/janun-landesbüro/herbstspektakel/') ),
     url(r'^imagine', RedirectView.as_view(url='/veranstaltungen/herbstspektakel-2017/') ),
-    url(r'^stadttraum', RedirectView.as_view(url='/veranstaltungen/herbstspektakel-2018/') ),
+    url(r'^stadttraum', RedirectView.as_view(url='/veranstaltungen/stadttraum/') ),
+    url(r'^veranstaltungen/herbstspektakel-2018', RedirectView.as_view(url='/veranstaltungen/stadttraum/') ),
 ]
 
 
