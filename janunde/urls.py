@@ -45,6 +45,7 @@ urlpatterns = [
 
     url(r'^thema/(?P<tagname>\w+)/$', tags, name='tags'),
     url(r'^lueneburg/(?P<path>.*)', RedirectView.as_view(url='/netzwerk-projekte/janun-lüneburg/%(path)s') ),
+    url(r'^lueneburg/weltbewusst-lg', RedirectView.as_view(url='/netzwerk-projekte/janun-lüneburg/weltbewusst-lüneburg-neu/') ),
     url(r'^scp', RedirectView.as_view(url='/netzwerk-projekte/janun-landesbüro/silent-climate-parade/') ),
     url(r'^herbstspektakel', RedirectView.as_view(url='/netzwerk-projekte/janun-landesbüro/herbstspektakel/') ),
     url(r'^imagine', RedirectView.as_view(url='/veranstaltungen/herbstspektakel-2017/') ),
