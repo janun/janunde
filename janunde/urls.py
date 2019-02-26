@@ -51,6 +51,7 @@ urlpatterns = [
     url(r'^imagine', RedirectView.as_view(url='/veranstaltungen/herbstspektakel-2017/') ),
     url(r'^stadttraum', RedirectView.as_view(url='/veranstaltungen/stadttraum/') ),
     url(r'^veranstaltungen/herbstspektakel-2018', RedirectView.as_view(url='/veranstaltungen/stadttraum/') ),
+    url(r'^netzwerk-projekte/janun-landesbuero/(?P<path>.*)', RedirectView.as_view(url='/netzwerk-projekte/janun-landesbüro/%(path)s') ),
 ]
 
 
