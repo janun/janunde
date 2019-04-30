@@ -1,0 +1,30 @@
+<iframe
+  src="{{ value.url }}"
+  allowFullScreen="{{ value.allowFullScreen }}"
+  frameborder="0"
+></iframe>
+
+<style>
+    iframe {
+      width: 100%;
+      height: 1000px;
+      margin-bottom: 60px;
+      margin-top: 60px;
+    }
+
+    .userim iframe {
+      position: relative;
+      width: 100%;
+      height: 1000px;
+      height: 90vh;
+    }
+
+    @media (min-width: 1000px) {
+    .userim iframe {
+      width: 1000px;
+      margin-left: -180px;
+      margin-right: -180px;
+      height: {% widthratio value.height value.width 1000 %}px;
+    }
+  }
+</style>

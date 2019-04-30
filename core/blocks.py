@@ -212,6 +212,34 @@ class MapImage(blocks.StructBlock):
         template = 'blocks/map_image.html'
 
 
+class IframeBlock(blocks.StructBlock):
+    url = blocks.URLBlock(
+        label="URL",
+        required=True,
+        help_text="URL zu der Website, die mittels Iframe eingebunden werden soll."
+    )
+
+    allowFullScreen = blocks.BooleanBlock(
+        label="Vollbild erlauben?",
+        required=False,
+    )
+
+    height = blocks.DecimalBlock(
+        default="1000",
+        label="Höhe",
+        help_text="in px"
+    )
+    width = blocks.DecimalBlock(
+        default="1000",
+        label="Breite",
+        help_text="in px"
+    )
+
+    class Meta:
+        label = "Iframe"
+        icon = "media"
+        template = 'blocks/iframe.html'
+
 
 class StandardStreamBlock(blocks.StreamBlock):
     paragraph = ParagraphBlock(
@@ -225,6 +253,7 @@ class StandardStreamBlock(blocks.StreamBlock):
     attachment = Attachment()
     table = TableBlock()
     map_image = MapImage()
+    iframe = IframeBlock()
 
 
 class HeaderBlock(blocks.StructBlock):
