@@ -1,4 +1,4 @@
-Django==1.11.19
+Django==1.11
 wagtail==1.13.1
 html2text==2017.10.4
 Wand==0.4.4
