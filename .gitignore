@@ -7,3 +7,4 @@ static
 /styleguide/
 /janunde/static/bower_components/
 /db_backups/
+.vscode/settings.json

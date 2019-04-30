@@ -534,7 +534,7 @@ class Group(BasePage):
 
 
 class Project(Group):
-    subpage_types = []
+    subpage_types = ['StandardPage']
     parent_page_types = ['Group']
 
     objects = GroupManager()
