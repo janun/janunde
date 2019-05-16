@@ -230,7 +230,7 @@ class EventPage(Page, HyphenatedTitleMixin):
     """
     represents an event
     """
-    subpage_types = []
+    subpage_types = ['contact.PersonPage', 'core.StandardPage']
     parent_page_types = ['EventIndexPage']
     base_form_class = ShortTitleForm
     og_type = 'article'
