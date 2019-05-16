@@ -393,3 +393,4 @@ class HomePageStreamBlock(blocks.StreamBlock):
     gap = GapBlock()
     events = EventsBlock()
     embed = OurEmbedBlock()
+    iframe = IframeBlock()
