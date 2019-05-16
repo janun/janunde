@@ -1,5 +1,6 @@
 {% extends "core/__base.html" %}
 {% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
+{% load render_partial %}
 
 {% block body_class %}event-page{% endblock %}
 
@@ -158,8 +159,9 @@
   {% if self.get_children.live %}
   <div class="center-container margin-top-2">
     <div class="card-grid">
-      {% for child in self.get_children.live %} {% render_partial child.specific
-      %} {% endfor %}
+      {% for child in self.get_children.live %}
+        {% render_partial child.specific %} 
+      {% endfor %}
     </div>
   </div>
   {% endif %}
