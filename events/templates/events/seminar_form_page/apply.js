@@ -59,9 +59,9 @@ updatePublish();
 
 function getFundingAmount(attendees, days, hasGroup) {
   if (days === 1) {
-    return attendees * 7.5;
+    return attendees * 8.0;
   } else {
-    return attendees * days * (hasGroup ? 12.5 : 9.0);
+    return attendees * days * (hasGroup ? 13.5 : 10.0);
   }
 }
 
