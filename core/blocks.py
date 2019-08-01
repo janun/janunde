@@ -241,6 +241,30 @@ class IframeBlock(blocks.StructBlock):
         template = 'blocks/iframe.html'
 
 
+class VideoLink(blocks.StructBlock):
+    url = blocks.URLBlock(
+        label="URL",
+        required=True,
+        help_text="URL zu dem Video, auf das verlinkt wird"
+    )
+
+    image = ImageChooserBlock(
+        label="Bild (schwarz wenn nichts angegeben)",
+        required=False,
+    )
+
+    caption = blocks.CharBlock(
+        label="Bild-Unterschrift",
+        required=False
+    )
+
+    class Meta:
+        label = "Link zu Video"
+        icon = "media"
+        template = 'blocks/video_link.html'
+
+
+
 class StandardStreamBlock(blocks.StreamBlock):
     paragraph = ParagraphBlock(
         features=['h2', 'h3', 'bold', 'italic', 'link', 'ol', 'ul', 'document-link']
@@ -254,6 +278,7 @@ class StandardStreamBlock(blocks.StreamBlock):
     table = TableBlock()
     map_image = MapImage()
     iframe = IframeBlock()
+    video_link = VideoLink()
 
 
 class HeaderBlock(blocks.StructBlock):
@@ -394,3 +419,5 @@ class HomePageStreamBlock(blocks.StreamBlock):
     events = EventsBlock()
     embed = OurEmbedBlock()
     iframe = IframeBlock()
+    video_link = VideoLink()
+
