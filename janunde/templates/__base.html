@@ -17,20 +17,9 @@
   <body class="{% block body_class %}{% endblock %}"
         itemscope itemtype="http://schema.org/WebPage">
 
-    {% if BETABANNER %}
-      {% include "_betabanner.html" %}
-    {% endif %}
-
     {% block body_content %}{% endblock %}
 
     {% block js %}{% endblock %}
-
-    {% if FREESURVEYCREATOR_ID %}
-      {% include "_survey.html" %}
-    {% endif %}
-
-    {% include "analytics/_mouseflow.html" %}
-    {% include "analytics/_piwik.html" %}
 
     {% block extra_js %}{% endblock %}
   </body>

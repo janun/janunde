@@ -102,10 +102,6 @@ LOGGING = {
 }
 
 
-BETABANNER = os.environ.get("BETABANNER", "").lower() in ("yes", "true", "1")
-FREESURVEYCREATOR_ID = os.environ.get("FREESURVEYCREATOR_ID", "")
-PIWIK_URL = os.environ.get("PIWIK_URL", "")
-MOUSEFLOW_ID = os.environ.get("MOUSEFLOW_ID", "")
 GOOGLE_VERIFICATION_ID = os.environ.get("GOOGLE_VERIFICATION_ID", "")
 
 
