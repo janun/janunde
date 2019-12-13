@@ -25,7 +25,7 @@ from wagtail.search import index
 from core.blocks import StandardStreamBlock
 from core.fields import FacebookEventURLField, PrettyURLField
 from core.images import AttributedImage as Image
-from core.models import BasePage, Group, JanunTag, HeaderMixin
+from core.models import BasePage, Group, HeaderMixin
 from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
@@ -234,11 +234,6 @@ class EventPage(Page, HyphenatedTitleMixin):
     parent_page_types = ['EventIndexPage']
     base_form_class = ShortTitleForm
     og_type = 'article'
-
-    event_page_tags = ClusterTaggableManager("Tags",
-        through=JanunTag, blank=True,
-        help_text=""
-    )
 
     subtitle = models.CharField(
         verbose_name="Untertitel",
@@ -450,7 +445,6 @@ class EventPage(Page, HyphenatedTitleMixin):
         ObjectList([
             FieldPanel('title', classname="full title"),
             FieldPanel('subtitle', classname=""),
-            #FieldPanel('event_page_tags'),
             InlinePanel(
                 'highlight',
                 label="Highlight",

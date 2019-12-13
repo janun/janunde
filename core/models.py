@@ -42,32 +42,6 @@ TEXT_DIRECTION_CHOICES = [
 ]
 
 
-# TODO: How can we create a Thema conveniently?
-class Thema(models.Model):
-    title = models.CharField(
-        "Titel",
-        max_length=255,
-        null=True,
-        blank=True,
-    )  # TODO: default to tagname
-
-    body = StreamField(
-        StandardStreamBlock(),
-        blank=True,
-        verbose_name="Beschreibung",
-    )
-
-    tag = models.ForeignKey(
-        'taggit.Tag',
-        related_name='thema',
-        # TODO: one to one (there should not be several thema to one tag)
-    )
-
-
-class JanunTag(TaggedItemBase):
-    content_object = ParentalKey(Page, related_name='tagged_items')
-
-
 def _(str):
     """dummy trans
 
@@ -314,11 +288,6 @@ class StandardPage(BasePage):
         verbose_name=_("Inhalt"),
     )
 
-    tags = ClusterTaggableManager("Tags",
-        through=JanunTag, blank=True,
-        help_text=""
-    )
-
     search_fields = BasePage.search_fields + [
         index.SearchField('subtitle'),
         index.SearchField('body'),
@@ -332,7 +301,6 @@ class StandardPage(BasePage):
         FieldPanel('subtitle'),
         ImageChooserPanel('feed_image'),
         StreamFieldPanel('body'),
-        #FieldPanel('tags'),
     ]
 
     promote_panels = [
@@ -654,7 +622,6 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
         FieldPanel('author'),
         ImageChooserPanel('main_image'),
         StreamFieldPanel('body'),
-        #FieldPanel('tags'),
     ]
 
     promote_panels = [
