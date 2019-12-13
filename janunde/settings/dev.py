@@ -22,5 +22,5 @@ SECRET_KEY = os.environ.get(
 )
 
 INSTALLED_APPS += [
-    'wagtail.contrib.wagtailstyleguide',
+    'wagtail.contrib.styleguide',
 ]

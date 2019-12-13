@@ -1,15 +1,15 @@
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.blocks.field_block import FieldBlock
+from wagtail.core import blocks
+from wagtail.core.blocks.field_block import FieldBlock
 
-from wagtail.wagtailembeds.blocks import EmbedBlock
-from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtaildocs.blocks import DocumentChooserBlock
+from wagtail.embeds.blocks import EmbedBlock
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.documents.blocks import DocumentChooserBlock
 
 from wagtail.contrib.table_block.blocks import TableBlock
 
 from .fields import PrettyURLField
 from .images import AttributedImage as Image
-from wagtail.wagtailcore.models import Collection
+from wagtail.core.models import Collection
 #from .models import COLOR_CHOICES
 
 def _(str):

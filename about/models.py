@@ -1,15 +1,15 @@
 from django.db import models
 from django.utils.text import slugify
 
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
+from wagtail.core.fields import StreamField
+from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                                 ObjectList, PageChooserPanel,
                                                 StreamFieldPanel, FieldRowPanel,
                                                 TabbedInterface, MultiFieldPanel)
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsearch import index
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.search import index
+from wagtail.core.fields import RichTextField
+from wagtail.core.fields import StreamField
 
 
 from core.blocks import StandardStreamBlock

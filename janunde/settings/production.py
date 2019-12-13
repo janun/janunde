@@ -85,7 +85,7 @@ if SEARCHBOX_SSL_URL:
     import certifi
     WAGTAILSEARCH_BACKENDS = {
         'default': {
-            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch',
+            'BACKEND': 'wagtail.search.backends.elasticsearch',
             'URLS': [SEARCHBOX_SSL_URL ],
             'INDEX': 'wagtail',
             'TIMEOUT': 5,
@@ -97,7 +97,7 @@ elif BONSAI_URL:
     import certifi
     WAGTAILSEARCH_BACKENDS = {
         'default': {
-            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch2',
+            'BACKEND': 'wagtail.search.backends.elasticsearch2',
             'URLS': [BONSAI_URL ],
             'INDEX': 'wagtail',
             'TIMEOUT': 5,

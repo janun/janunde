@@ -5,18 +5,18 @@ from django.views.generic.base import RedirectView, TemplateView
 
 from django.contrib import admin
 
-from wagtail.wagtailadmin import urls as wagtailadmin_urls
-from wagtail.wagtailcore import urls as wagtail_urls
-from wagtail.wagtaildocs import urls as wagtaildocs_urls
-from wagtail.wagtailsearch.urls.frontend import search
-from wagtail.contrib.wagtailsitemaps.views import sitemap
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.core import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
+from wagtail.search.urls.frontend import search
+from wagtail.contrib.sitemaps.views import sitemap
 
 from acme_challenge import urls as acme_challenge_urls
 
 from core.views import tags
 from core.addmultiple import add
 
-from wagtail.wagtailimages.views.serve import ServeView
+from wagtail.images.views.serve import ServeView
 
 
 

@@ -1,5 +1,5 @@
 from django import template
-from wagtail.wagtailimages.shortcuts import get_rendition_or_not_found
+from wagtail.images.shortcuts import get_rendition_or_not_found
 
 register = template.Library()
 

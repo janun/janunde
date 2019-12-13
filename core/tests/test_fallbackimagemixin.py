@@ -1,9 +1,9 @@
 from django.test import TestCase
 from django.db import models
 
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailimages.models import Image
-from wagtail.wagtailimages.tests.utils import get_test_image_file
+from wagtail.core.models import Page
+from wagtail.images.models import Image
+from wagtail.images.tests.utils import get_test_image_file
 
 from core.models import FallbackImageMixin
 

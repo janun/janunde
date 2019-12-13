@@ -5,10 +5,10 @@ from __future__ import unicode_literals
 import django.db.models.deletion
 import modelcluster.fields
 import taggit.managers
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
-import wagtail.wagtailsearch.index
-import wagtail.wagtailimages.models
+import wagtail.core.blocks
+import wagtail.core.fields
+import wagtail.search.index
+import wagtail.images.models
 from django.conf import settings
 from django.db import migrations, models
 
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=255, verbose_name='title')),
-                ('file', models.ImageField(height_field='height', upload_to=wagtail.wagtailimages.models.get_upload_to, verbose_name='file', width_field='width')),
+                ('file', models.ImageField(height_field='height', upload_to=wagtail.images.models.get_upload_to, verbose_name='file', width_field='width')),
                 ('width', models.IntegerField(editable=False, verbose_name='width')),
                 ('height', models.IntegerField(editable=False, verbose_name='height')),
                 ('created_at', models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='created at')),
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
             },
-            bases=(models.Model, wagtail.wagtailsearch.index.Indexed),
+            bases=(models.Model, wagtail.search.index.Indexed),
         ),
         migrations.CreateModel(
             name='AttributedRendition',
@@ -124,7 +124,7 @@ class Migration(migrations.Migration):
             name='StandardPage',
             fields=[
                 ('basepage_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='core.BasePage')),
-                ('body', wagtail.wagtailcore.fields.StreamField((('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', core.blocks.ImageBlock()), ('pullquote', wagtail.wagtailcore.blocks.StructBlock((('quote', wagtail.wagtailcore.blocks.TextBlock(label='Zitat')), ('attribution', wagtail.wagtailcore.blocks.CharBlock(label='Zuschreibung'))))), ('embedded_video', core.blocks.EmbedBlock())), blank=True, verbose_name='Inhalt')),
+                ('body', wagtail.core.fields.StreamField((('paragraph', wagtail.core.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', core.blocks.ImageBlock()), ('pullquote', wagtail.core.blocks.StructBlock((('quote', wagtail.core.blocks.TextBlock(label='Zitat')), ('attribution', wagtail.core.blocks.CharBlock(label='Zuschreibung'))))), ('embedded_video', core.blocks.EmbedBlock())), blank=True, verbose_name='Inhalt')),
             ],
             options={
                 'verbose_name': 'Einfache Seite',

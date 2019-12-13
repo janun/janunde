@@ -1,5 +1,5 @@
-from wagtail.wagtailcore import hooks
-from wagtail.wagtailimages import image_operations
+from wagtail.core import hooks
+from wagtail.images import image_operations
 
 
 # add the operation to convert an image to jpg to the image tag

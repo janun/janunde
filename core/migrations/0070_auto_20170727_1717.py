@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='formpage',
             name='confirmation_mail_text',
-            field=wagtail.wagtailcore.fields.RichTextField(blank=True, help_text='Welcher Text soll in der Bestätigungsmail sein?', verbose_name='Text'),
+            field=wagtail.core.fields.RichTextField(blank=True, help_text='Welcher Text soll in der Bestätigungsmail sein?', verbose_name='Text'),
         ),
         migrations.AlterField(
             model_name='formpage',

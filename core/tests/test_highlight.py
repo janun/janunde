@@ -3,7 +3,7 @@ from datetime import timedelta
 from django.test import TestCase
 from django.utils import timezone
 
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 from core.models import StandardPage, Highlight
 
 class HighlightTestCase(TestCase):

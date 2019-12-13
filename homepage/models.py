@@ -1,6 +1,6 @@
 from django.db import models
 
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 
 
 class HomePage(Page):

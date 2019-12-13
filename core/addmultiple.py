@@ -8,16 +8,16 @@ from django.utils.encoding import force_text
 from django.views.decorators.http import require_POST
 from django.views.decorators.vary import vary_on_headers
 
-from wagtail.wagtailadmin.utils import PermissionPolicyChecker
-from wagtail.wagtailimages import get_image_model
-from wagtail.wagtailimages.fields import ALLOWED_EXTENSIONS
-from wagtail.wagtailimages.forms import get_image_form
-from wagtail.wagtailimages.permissions import permission_policy
-from wagtail.wagtailsearch.backends import get_search_backends
+from wagtail.admin.utils import PermissionPolicyChecker
+from wagtail.images import get_image_model
+from wagtail.images.fields import ALLOWED_EXTENSIONS
+from wagtail.images.forms import get_image_form
+from wagtail.images.permissions import permission_policy
+from wagtail.search.backends import get_search_backends
 
 permission_checker = PermissionPolicyChecker(permission_policy)
 
-from wagtail.wagtailimages.views.multiple import get_image_edit_form
+from wagtail.images.views.multiple import get_image_edit_form
 
 @permission_checker.require('add')
 @vary_on_headers('X-Requested-With')

@@ -5,8 +5,8 @@ from __future__ import unicode_literals
 import core.blocks
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='eventpage',
             name='content',
-            field=wagtail.wagtailcore.fields.StreamField((('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', core.blocks.ImageBlock()), ('embedded_video', core.blocks.EmbedBlock())), blank=True, verbose_name='Inhalt'),
+            field=wagtail.core.fields.StreamField((('paragraph', wagtail.core.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', core.blocks.ImageBlock()), ('embedded_video', core.blocks.EmbedBlock())), blank=True, verbose_name='Inhalt'),
         ),
         migrations.AddField(
             model_name='eventpage',

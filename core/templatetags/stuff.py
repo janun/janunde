@@ -4,8 +4,8 @@ from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 import urllib
 from django.template import Context
 
-from wagtail.wagtailembeds import embeds
-from wagtail.wagtailembeds.exceptions import EmbedException
+from wagtail.embeds import embeds
+from wagtail.embeds.exceptions import EmbedException
 
 
 

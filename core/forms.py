@@ -1,7 +1,7 @@
 from django import forms
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
-from wagtail.wagtailadmin.forms import WagtailAdminPageForm
-from wagtail.wagtailcore.models import Page
+from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.forms import WagtailAdminPageForm
+from wagtail.core.models import Page
 
 
 class ShortTitleForm(WagtailAdminPageForm):

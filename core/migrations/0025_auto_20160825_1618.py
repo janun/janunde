@@ -8,9 +8,9 @@ from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
 import modelcluster.fields
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
-import wagtail.wagtailimages.blocks
+import wagtail.core.blocks
+import wagtail.core.fields
+import wagtail.images.blocks
 
 
 class Migration(migrations.Migration):
@@ -76,11 +76,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='standardpage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField((('title', wagtail.wagtailcore.blocks.StructBlock((('title', wagtail.wagtailcore.blocks.CharBlock(classname='title', label='Titel')), ('color', wagtail.wagtailcore.blocks.ChoiceBlock(choices=[('brown', 'Braun'), ('green', 'Grün'), ('red', 'Rot'), ('blue', 'Blau'), ('orange', 'Orange')], classname='', default='brown', label='Farbe'))))), ('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', wagtail.wagtailcore.blocks.StructBlock((('image', wagtail.wagtailimages.blocks.ImageChooserBlock(label='Bild')), ('caption', wagtail.wagtailcore.blocks.CharBlock(label='Bildunterschrift', required=False))))), ('embedded_video', core.blocks.EmbedBlock())), blank=True, verbose_name='Inhalt'),
+            field=wagtail.core.fields.StreamField((('title', wagtail.core.blocks.StructBlock((('title', wagtail.core.blocks.CharBlock(classname='title', label='Titel')), ('color', wagtail.core.blocks.ChoiceBlock(choices=[('brown', 'Braun'), ('green', 'Grün'), ('red', 'Rot'), ('blue', 'Blau'), ('orange', 'Orange')], classname='', default='brown', label='Farbe'))))), ('paragraph', wagtail.core.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', wagtail.core.blocks.StructBlock((('image', wagtail.images.blocks.ImageChooserBlock(label='Bild')), ('caption', wagtail.core.blocks.CharBlock(label='Bildunterschrift', required=False))))), ('embedded_video', core.blocks.EmbedBlock())), blank=True, verbose_name='Inhalt'),
         ),
         migrations.AlterField(
             model_name='thema',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField((('title', wagtail.wagtailcore.blocks.StructBlock((('title', wagtail.wagtailcore.blocks.CharBlock(classname='title', label='Titel')), ('color', wagtail.wagtailcore.blocks.ChoiceBlock(choices=[('brown', 'Braun'), ('green', 'Grün'), ('red', 'Rot'), ('blue', 'Blau'), ('orange', 'Orange')], classname='', default='brown', label='Farbe'))))), ('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', wagtail.wagtailcore.blocks.StructBlock((('image', wagtail.wagtailimages.blocks.ImageChooserBlock(label='Bild')), ('caption', wagtail.wagtailcore.blocks.CharBlock(label='Bildunterschrift', required=False))))), ('embedded_video', core.blocks.EmbedBlock())), blank=True, verbose_name='Beschreibung'),
+            field=wagtail.core.fields.StreamField((('title', wagtail.core.blocks.StructBlock((('title', wagtail.core.blocks.CharBlock(classname='title', label='Titel')), ('color', wagtail.core.blocks.ChoiceBlock(choices=[('brown', 'Braun'), ('green', 'Grün'), ('red', 'Rot'), ('blue', 'Blau'), ('orange', 'Orange')], classname='', default='brown', label='Farbe'))))), ('paragraph', wagtail.core.blocks.RichTextBlock(icon='pilcrow', label='Absatz')), ('image', wagtail.core.blocks.StructBlock((('image', wagtail.images.blocks.ImageChooserBlock(label='Bild')), ('caption', wagtail.core.blocks.CharBlock(label='Bildunterschrift', required=False))))), ('embedded_video', core.blocks.EmbedBlock())), blank=True, verbose_name='Beschreibung'),
         ),
     ]

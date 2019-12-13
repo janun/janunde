@@ -9,16 +9,16 @@ from datetime import timedelta
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
+from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                                 ObjectList, PageChooserPanel,
                                                 StreamFieldPanel, FieldRowPanel,
                                                 TabbedInterface, MultiFieldPanel)
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Orderable, Page, PageManager
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsearch import index
-from wagtail.wagtailsnippets.models import register_snippet
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from wagtail.core.fields import StreamField
+from wagtail.core.models import Orderable, Page, PageManager
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.search import index
+from wagtail.snippets.models import register_snippet
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from core.fields import FacebookProfileURLField, PrettyURLField
 from phonenumber_field.modelfields import PhoneNumberField
@@ -674,12 +674,12 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
 
 
 
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
-from wagtail.wagtailforms.edit_handlers import FormSubmissionsPanel
-from wagtail.wagtailadmin.utils import send_mail
+from wagtail.core.fields import RichTextField
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
+from wagtail.contrib.forms.edit_handlers import FormSubmissionsPanel
+from wagtail.admin.utils import send_mail
 from django.core.exceptions import ValidationError
-from wagtail.wagtailforms.forms import WagtailAdminPageForm
+from wagtail.contrib.forms.forms import WagtailAdminPageForm
 from django.utils.text import slugify
 from django.utils.six import text_type
 from unidecode import unidecode

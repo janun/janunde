@@ -5,7 +5,7 @@ verify_ssl = true
 
 [packages]
 django = "~=1.11"
-wagtail = "==1.13.1"
+wagtail = "==2.0"
 html2text = "==2017.10.4"
 wand = "==0.4.4"
 python-dateutil = "==2.6.1"

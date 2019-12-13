@@ -3,7 +3,7 @@ from django.db.models.signals import pre_delete
 from django.dispatch import receiver
 from django.utils.html import format_html
 from django.utils import timezone
-from wagtail.wagtailimages.models import (AbstractImage, AbstractRendition,
+from wagtail.images.models import (AbstractImage, AbstractRendition,
                                           Image)
 
 

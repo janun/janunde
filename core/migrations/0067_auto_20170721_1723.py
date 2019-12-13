@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -30,11 +30,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='formpage',
             name='intro',
-            field=wagtail.wagtailcore.fields.RichTextField(blank=True, help_text='Wird über dem Formular angezeigt.', verbose_name='Einführung'),
+            field=wagtail.core.fields.RichTextField(blank=True, help_text='Wird über dem Formular angezeigt.', verbose_name='Einführung'),
         ),
         migrations.AlterField(
             model_name='formpage',
             name='thank_you_text',
-            field=wagtail.wagtailcore.fields.RichTextField(blank=True, help_text='Wird angezeigt, nachdem das Formular erfolgreich abgesendet wurde.', verbose_name='Danke-Text'),
+            field=wagtail.core.fields.RichTextField(blank=True, help_text='Wird angezeigt, nachdem das Formular erfolgreich abgesendet wurde.', verbose_name='Danke-Text'),
         ),
     ]

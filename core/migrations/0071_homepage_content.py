@@ -3,9 +3,9 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
-import wagtail.wagtailimages.blocks
+import wagtail.core.blocks
+import wagtail.core.fields
+import wagtail.images.blocks
 
 
 class Migration(migrations.Migration):
@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='homepage',
             name='content',
-            field=wagtail.wagtailcore.fields.StreamField((('header', wagtail.wagtailcore.blocks.StructBlock((('background', wagtail.wagtailimages.blocks.ImageChooserBlock(label='Hintergrundbild', required=False)),))), ('button', wagtail.wagtailcore.blocks.StructBlock((('text', wagtail.wagtailcore.blocks.CharBlock(label='Text')), ('link', wagtail.wagtailcore.blocks.URLBlock(label='Link')), ('color', wagtail.wagtailcore.blocks.ChoiceBlock(choices=[('green', 'Grün'), ('red', 'Rot'), ('blue', 'Blau'), ('orange', 'Orange')], label='Farbe')))))), blank=True, verbose_name='Inhalt'),
+            field=wagtail.core.fields.StreamField((('header', wagtail.core.blocks.StructBlock((('background', wagtail.images.blocks.ImageChooserBlock(label='Hintergrundbild', required=False)),))), ('button', wagtail.core.blocks.StructBlock((('text', wagtail.core.blocks.CharBlock(label='Text')), ('link', wagtail.core.blocks.URLBlock(label='Link')), ('color', wagtail.core.blocks.ChoiceBlock(choices=[('green', 'Grün'), ('red', 'Rot'), ('blue', 'Blau'), ('orange', 'Orange')], label='Farbe')))))), blank=True, verbose_name='Inhalt'),
         ),
     ]

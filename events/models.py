@@ -9,18 +9,18 @@ from django.db.models import Q
 from django.http import Http404, HttpResponse
 from django.utils import timezone
 from modelcluster.contrib.taggit import ClusterTaggableManager
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, MultiFieldPanel,
+from wagtail.admin.edit_handlers import (FieldPanel, MultiFieldPanel,
                                                 ObjectList, StreamFieldPanel,
                                                 TabbedInterface,
                                                 InlinePanel, FieldRowPanel)
-from wagtail.wagtailadmin.widgets import AdminDateTimeInput
-from wagtail.wagtailcore.fields import StreamField, RichTextField
-from wagtail.wagtailcore.models import Page, PageManager, PageQuerySet
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
-from wagtail.wagtaildocs.models import Document
+from wagtail.admin.widgets import AdminDateTimeInput
+from wagtail.core.fields import StreamField, RichTextField
+from wagtail.core.models import Page, PageManager, PageQuerySet
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.documents.edit_handlers import DocumentChooserPanel
+from wagtail.documents.models import Document
 
-from wagtail.wagtailsearch import index
+from wagtail.search import index
 
 from core.blocks import StandardStreamBlock
 from core.fields import FacebookEventURLField, PrettyURLField
@@ -29,7 +29,7 @@ from core.models import BasePage, Group, JanunTag, HeaderMixin
 from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
-from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from modelcluster.fields import ParentalKey
 from django.shortcuts import render
 
@@ -76,7 +76,7 @@ class SeminarFormPage(BasePage):
 
 
     def create_event(self, data, image=None):
-        from wagtail.wagtailcore.rich_text import RichText
+        from wagtail.core.rich_text import RichText
         index = EventIndexPage.objects.all()[0]
         event = EventPage(
             title=data['title'],

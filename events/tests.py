@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.utils import timezone
 
 from .models import EventPage
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 
 
 class EventPageTestCase(TestCase):

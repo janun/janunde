@@ -1,7 +1,7 @@
 # https://github.com/wagtail/wagtail/issues/2457
 
 from django.core.urlresolvers import reverse
-from wagtail.wagtailimages.views.serve import generate_signature
+from wagtail.images.views.serve import generate_signature
 from django import template
 
 def generate_image_url(image, filter_spec):
