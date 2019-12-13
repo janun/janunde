@@ -102,17 +102,6 @@ LOGGING = {
 }
 
 
-ROLLBAR_ACCESS_TOKEN = os.environ.get("ROLLBAR_ACCESS_TOKEN", "")
-ROLLBAR_ACCESS_TOKEN_JS = os.environ.get("ROLLBAR_ACCESS_TOKEN_JS", "")
-if ROLLBAR_ACCESS_TOKEN:
-    ROLLBAR = {
-        "access_token": ROLLBAR_ACCESS_TOKEN,
-        "environment": "development" if DEBUG else "production",
-        "branch": "production",
-        "root": "/",
-    }
-
-
 BETABANNER = os.environ.get("BETABANNER", "").lower() in ("yes", "true", "1")
 FREESURVEYCREATOR_ID = os.environ.get("FREESURVEYCREATOR_ID", "")
 PIWIK_URL = os.environ.get("PIWIK_URL", "")
