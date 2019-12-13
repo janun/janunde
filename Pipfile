@@ -27,6 +27,12 @@ phonenumberslite = "*"
 [dev-packages]
 django-debug-toolbar = "==1.9.1"
 django-debug-toolbar-template-profiler = "==1.0.2"
+pylint = "*"
+pylint-django = "*"
+pylint-quotes = "*"
+flake8 = "*"
+flake8-django = "*"
+black = "==19.10b0"
 
 [requires]
 python_version = "3.7"
