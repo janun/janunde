@@ -40,7 +40,7 @@ def search(
     page = request.GET.get("page", request.GET.get("p", 1))
 
     # Search
-    if query_string != "":
+    if query_string.strip() != "":
         pages = models.Page.objects.filter(
             path__startswith=(path or request.site.root_page.path)
         )
