@@ -71,13 +71,6 @@ gulp.task("scripts", function () {
 });
 
 
-// videos
-gulp.task("videos", function () {
-  return gulp.src("core/static_src/core/videos/**/*")
-    .pipe(gulp.dest("core/static/core/videos/"));
-});
-
-
 // fonts
 gulp.task("fonts", function () {
   return gulp.src("core/static_src/core/fonts/**/*")
@@ -104,7 +97,7 @@ gulp.task("svgmin", function () {
 });
 
 // build
-gulp.task("build", ["styles", "fonts", "videos", "scripts", "images"]);
+gulp.task("build", ["styles", "fonts", "scripts", "images"]);
 
 // watch
 gulp.task("watch", ["build"], function () {
@@ -112,7 +105,6 @@ gulp.task("watch", ["build"], function () {
   gulp.watch("core/static_src/core/js/**/*.js", ["scripts",]);
   gulp.watch("core/static_src/core/fonts/**/*", ["fonts"]);
   gulp.watch("core/static_src/core/images/**/*", ["images"]);
-  gulp.watch("core/static_src/core/videos/**/*", ["videos"]);
 });
 
 // default
