@@ -3,8 +3,6 @@
 {% load static from staticfiles %}
 {% load render_partial %}
 
-{% block body_class %}template-event-index-page-dis{% endblock %}
-
 {% block content %}
 
   {% include "core/_pageheader.html" %}
@@ -16,7 +14,7 @@
         Okay, wir haben {{ events|length }} Veranstaltungen für dich gefunden.
         {% regroup events by month as events_by_month %}
         {% for events in events_by_month %}
-          <h2 id="{{ month|date:"FY" }}" class="area-title onpagemenu-scrollmark">{{ events.grouper|date:"F Y" }}</h2>
+          <h2 id="{{ month|date:"FY" }}" class="area-title">{{ events.grouper|date:"F Y" }}</h2>
           <div class="card-grid">
             {% for event in events.list %}
               {% render_partial event %}
