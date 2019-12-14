@@ -11,14 +11,11 @@ from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.images.views.serve import ServeView
 
-from acme_challenge import urls as acme_challenge_urls
-
 from core.addmultiple import add
 from core.views import search
 
 
 urlpatterns = [
-    url(r"^", include(acme_challenge_urls)),
     url(r"^404/$", page_not_found, kwargs={"exception": Exception("Page not Found")}),
     url(r"^500/$", server_error),
     url(r"^admin/images/multiple/add/$", add, name="add_multiple"),

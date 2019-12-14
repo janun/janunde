@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d5b40afe7dcfcc5390c27fad4db8eeb25db390afdd855c0172cd763eb8266a6c"
+            "sha256": "50d8c0af48abb858f913c3e6099ad105a089a9a492daef0d27ae4516815b0c7c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -80,13 +80,6 @@
             ],
             "index": "pypi",
             "version": "==1.11.26"
-        },
-        "django-acme": {
-            "hashes": [
-                "sha256:c84b5568899d79063ca9643314976c5e14af3e109c8bfb1a3d45b7590dab35cf"
-            ],
-            "index": "pypi",
-            "version": "==0.2.4"
         },
         "django-form-utils": {
             "hashes": [
