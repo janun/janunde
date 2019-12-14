@@ -97,16 +97,6 @@ $event-index-background: rgb(240, 240, 240);
 
 
 
-
-
-  // needed by js-sticky.js
-  .sticky-wrapper {
-    @include above($medium) {
-      float: left;
-    }
-  }
-
-
   // needs position rel or abs on parent, I think
   // center image in div
   .center-vert {

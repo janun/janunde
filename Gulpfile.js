@@ -58,7 +58,6 @@ gulp.task("scripts", function () {
   scriptsBundle([
     "janunde/static/bower_components/jquery/dist/jquery.js",
     "janunde/static/bower_components/jQuery.dotdotdot/src/jquery.dotdotdot.js",
-    "janunde/static/bower_components/jquery-auto-grow-input/jquery.auto-grow-input.js",
     "core/static_src/core/js/*.js",
   ], "app.js");
 
