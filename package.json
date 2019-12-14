@@ -11,11 +11,13 @@
     "node_modules"
   ],
   "dependencies": {
-    "vue": "^2.6",
+    "dotdotdot-js": "^4.0.10",
+    "jquery": "^3.4",
     "pickadate": "^3.6",
     "simple-line-icons": "^2.4.1",
-    "jquery": "^3.4",
-    "dotdotdot-js": "^4.0.10"
+    "typeface-cabin": "0.0.72",
+    "typeface-crimson-text": "0.0.72",
+    "vue": "^2.6"
   },
   "devDependencies": {
     "autoprefixer": "^9.7",

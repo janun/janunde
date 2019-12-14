@@ -66,14 +66,6 @@ gulp.task("form.js", function () {
 
 gulp.task("scripts", gulp.parallel("start.js", "app.js", "form.js"));
 
-
-// fonts
-gulp.task("fonts", function () {
-  return gulp.src("core/static_src/core/fonts/**/*")
-    .pipe(gulp.dest("core/static/core/fonts/"));
-});
-
-
 // images
 gulp.task("images", function () {
   return gulp.src("core/static_src/core/images/**/*")
@@ -81,13 +73,12 @@ gulp.task("images", function () {
 });
 
 // build
-gulp.task("build", gulp.parallel("styles", "fonts", "scripts", "images"));
+gulp.task("build", gulp.parallel("styles", "scripts", "images"));
 
 // watch
 gulp.task("watch", function () {
   gulp.watch("core/static_src/core/scss/**/*.scss", gulp.series("styles"));
   gulp.watch("core/static_src/core/js/**/*.js", gulp.series("scripts"));
-  gulp.watch("core/static_src/core/fonts/**/*", gulp.series("fonts"));
   gulp.watch("core/static_src/core/images/**/*", gulp.series("images"));
 });
 

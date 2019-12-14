@@ -1,0 +1,103 @@
+/* cabin-400normal - latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src:
+    local('Cabin Regular '),
+    local('Cabin-Regular'),
+    url('/static/typeface-cabin/files/cabin-latin-400.woff2') format('woff2'),
+    url('/static/typeface-cabin/files/cabin-latin-400.woff') format('woff');
+}
+
+/* cabin-400italic - latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400;
+  src:
+    local('Cabin Regular italic'),
+    local('Cabin-Regularitalic'),
+    url('/static/typeface-cabin/files/cabin-latin-400italic.woff2') format('woff2'),
+    url('/static/typeface-cabin/files/cabin-latin-400italic.woff') format('woff');
+}
+
+/* cabin-500normal - latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src:
+    local('Cabin Medium '),
+    local('Cabin-Medium'),
+    url('/static/typeface-cabin/files/cabin-latin-500.woff2') format('woff2'),
+    url('/static/typeface-cabin/files/cabin-latin-500.woff') format('woff');
+}
+
+/* cabin-500italic - latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 500;
+  src:
+    local('Cabin Medium italic'),
+    local('Cabin-Mediumitalic'),
+    url('/static/typeface-cabin/files/cabin-latin-500italic.woff2') format('woff2'), 
+    url('/static/typeface-cabin/files/cabin-latin-500italic.woff') format('woff');
+}
+
+/* cabin-600normal - latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src:
+    local('Cabin SemiBold '),
+    local('Cabin-SemiBold'),
+    url('/static/typeface-cabin/files/cabin-latin-600.woff2') format('woff2'), 
+    url('/static/typeface-cabin/files/cabin-latin-600.woff') format('woff');
+}
+
+/* cabin-600italic - latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 600;
+  src:
+    local('Cabin SemiBold italic'),
+    local('Cabin-SemiBolditalic'),
+    url('/static/typeface-cabin/files/cabin-latin-600italic.woff2') format('woff2'), 
+    url('/static/typeface-cabin/files/cabin-latin-600italic.woff') format('woff');
+}
+
+/* cabin-700normal - latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src:
+    local('Cabin Bold '),
+    local('Cabin-Bold'),
+    url('/static/typeface-cabin/files/cabin-latin-700.woff2') format('woff2'), 
+    url('/static/typeface-cabin/files/cabin-latin-700.woff') format('woff');
+}
+
+/* cabin-700italic - latin */
+@font-face {
+  font-family: 'Cabin';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 700;
+  src:
+    local('Cabin Bold italic'),
+    local('Cabin-Bolditalic'),
+    url('/static/typeface-cabin/files/cabin-latin-700italic.woff2') format('woff2'), 
+    url('/static/typeface-cabin/files/cabin-latin-700italic.woff') format('woff');
+}

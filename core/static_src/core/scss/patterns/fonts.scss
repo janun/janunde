@@ -1,9 +1,0 @@
-// fonts
-// we include them locally instead of using google fonts,
-// so that google wouldn't track our users
-@include webfont('Cabin', 'Cabin-Regular', normal);
-@include webfont('Cabin', 'Cabin-Bold', bold);
-
-@include webfont('Crimson Text', 'CrimsonText-Roman', normal);
-@include webfont('Crimson Text', 'CrimsonText-Bold', bold);
-@include webfont('Crimson Text', 'CrimsonText-Italic', normal, italic);
