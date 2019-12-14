@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [packages]
-django = "~=1.11"
+django = "~=2.0"
 wagtail = "==2.0"
 html2text = "==2017.10.4"
 wand = "==0.4.4"

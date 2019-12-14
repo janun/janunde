@@ -3,8 +3,6 @@ from django.conf.urls import include, url
 from django.views.defaults import page_not_found, server_error
 from django.views.generic.base import RedirectView, TemplateView
 
-from django.contrib import admin
-
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
@@ -20,7 +18,6 @@ urlpatterns = [
     url(r"^500/$", server_error),
     url(r"^admin/images/multiple/add/$", add, name="add_multiple"),
     url(r"^admin/", include(wagtailadmin_urls)),
-    url(r"^django-admin/", include(admin.site.urls)),
     url(r"^documents/", include(wagtaildocs_urls)),
     url(
         r"^images/([^/]*)/(\d*)/([^/]*)/[^/]*$",

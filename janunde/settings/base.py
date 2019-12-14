@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
 import dj_database_url
+from whitenoise.storage import CompressedManifestStaticFilesStorage
+
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -58,21 +59,35 @@ INSTALLED_APPS = [
     "django.contrib.sitemaps",
 ]
 
-MIDDLEWARE_CLASSES = (
+# MIDDLEWARE_CLASSES = (
+#     "django.contrib.sessions.middleware.SessionMiddleware",
+#     "django.middleware.common.CommonMiddleware",
+#     "django.middleware.csrf.CsrfViewMiddleware",
+#     "django.contrib.auth.middleware.AuthenticationMiddleware",
+#     "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
+#     "django.contrib.messages.middleware.MessageMiddleware",
+#     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+#     "django.middleware.security.SecurityMiddleware",
+#     "whitenoise.middleware.WhiteNoiseMiddleware",
+#     "wagtail.core.middleware.SiteMiddleware",
+#     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+#     "django.middleware.gzip.GZipMiddleware",
+#     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+# )
+
+MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "wagtail.core.middleware.SiteMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "django.middleware.gzip.GZipMiddleware",
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
-)
+]
 
 ROOT_URLCONF = "janunde.urls"
 
@@ -148,8 +163,6 @@ STATIC_URL = "/static/"
 
 # save staticfiles using whitenoise
 
-from whitenoise.storage import CompressedManifestStaticFilesStorage
-
 
 class MyCompressedManifestStaticFilesStorage(CompressedManifestStaticFilesStorage):
     manifest_strict = False
@@ -199,4 +212,3 @@ DEBUG_TOOLBAR_PANELS = [
 ]
 
 LOGIN_REDIRECT_URL = "wagtailadmin_home"
-
