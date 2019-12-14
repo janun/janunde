@@ -30,7 +30,7 @@
 
         {% if object.phone %}
           <a href="{{ object.phone.as_rfc3966 }}">
-            <i class="icon-phone"></i> {{ object.phone|prettyphone }}
+            <i class="icon-phone"></i> {{ object.phone }}
           </a>
         {% endif %}
 

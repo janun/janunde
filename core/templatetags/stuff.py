@@ -1,12 +1,10 @@
-from django import template
-register = template.Library()
-from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 import urllib
-from django.template import Context
+from django import template
 
 from wagtail.embeds import embeds
 from wagtail.embeds.exceptions import EmbedException
 
+register = template.Library()
 
 
 @register.filter()
@@ -16,13 +14,7 @@ def prettyurl(value):
 
 @register.filter()
 def pathtosearch(value):
-    return value.split('/')[-2]
-
-
-@register.filter()
-def prettyphone(value):
-    widget = PhoneNumberInternationalFallbackWidget()
-    return widget._format_value(value)
+    return value.split("/")[-2]
 
 
 @register.filter
@@ -30,4 +22,4 @@ def get_embed(url, max_width=None):
     try:
         return embeds.get_embed(url, max_width=max_width)
     except EmbedException:
-        return ''
+        return ""

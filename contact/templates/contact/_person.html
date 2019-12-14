@@ -33,7 +33,7 @@
         <a class="person__mail" itemprop="mail" href="mailto:{{ object.mail }}">{{ object.mail }}</a>
       {% endif %}
       {% if object.phone %}
-        <a class="person__phone" itemprop="phone" href="{{ object.phone.as_rfc3966 }}">{{ object.phone|prettyphone }}</a>
+        <a class="person__phone" itemprop="phone" href="{{ object.phone.as_rfc3966 }}">{{ object.phone }}</a>
       {% endif %}
     </div>
 
