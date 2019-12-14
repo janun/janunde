@@ -1,5 +1,5 @@
-$simple-line-font-path: '../../bower_components/simple-line-icons/fonts/';
-@import 'bower_components/simple-line-icons/scss/simple-line-icons';
+$simple-line-font-path: '/static/simple-line-icons/fonts/';
+@import '../../../../../node_modules/simple-line-icons/scss/simple-line-icons';
 
 
 // ensures padding

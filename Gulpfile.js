@@ -14,26 +14,18 @@ var isProd = gutil.env.production;
 // styles
 gulp.task("styles", function () {
   var includePaths = ["janunde/static/"];
-  gulp.src("core/static_src/core/scss/all.scss")
+  return gulp.src("core/static_src/core/scss/all.scss")
     .pipe(isProd ? gutil.noop() : sourcemaps.init())
     .pipe(sass({
       includePaths: includePaths
     }).on("error", sass.logError))
     .pipe(autoprefixer({
-      browsers: ["> 5% in DE",],
       cascade: false
     }))
     .pipe(isProd ? csso() : gutil.noop())
     .pipe(isProd ? gutil.noop() : sourcemaps.write())
     .pipe(gulp.dest("./core/static/core/css/"))
     .on("error", gutil.log);
-});
-
-
-// fonts
-gulp.task("fonts", function () {
-  gulp.src("core/static_src/core/fonts/**/*")
-    .pipe(gulp.dest("core/static/core/fonts/"));
 });
 
 
@@ -48,25 +40,31 @@ function scriptsBundle(scripts, bundleName) {
     .on("error", gutil.log);
 }
 
-gulp.task("scripts", function () {
-  scriptsBundle([
-    "janunde/static/bower_components/vue/dist/vue.min.js",
+gulp.task("start.js", function () {
+  return scriptsBundle([
+    "node_modules/vue/dist/vue.min.js",
   ], "start.js");
+});
 
-  scriptsBundle([
-    "janunde/static/bower_components/jquery/dist/jquery.js",
-    "janunde/static/bower_components/jQuery.dotdotdot/src/jquery.dotdotdot.js",
+gulp.task("app.js", function () {
+  return scriptsBundle([
+    "node_modules/jquery/dist/jquery.js",
+    "node_modules/dotdotdot-js/dist/dotdotdot.js",
     "core/static_src/core/js/*.js",
   ], "app.js");
+});
 
-  scriptsBundle([
-    "janunde/static/bower_components/pickadate/lib/picker.js",
-    "janunde/static/bower_components/pickadate/lib/picker.date.js",
-    "janunde/static/bower_components/pickadate/lib/picker.time.js",
-    "janunde/static/bower_components/pickadate/lib/translations/de_DE.js",
+gulp.task("form.js", function () {
+  return scriptsBundle([
+    "node_modules/pickadate/lib/picker.js",
+    "node_modules/pickadate/lib/picker.date.js",
+    "node_modules/pickadate/lib/picker.time.js",
+    "node_modules/pickadate/lib/translations/de_DE.js",
     "core/static_src/core/js/form/*.js",
   ], "form.js");
 });
+
+gulp.task("scripts", gulp.parallel("start.js", "app.js", "form.js"));
 
 
 // fonts
@@ -83,19 +81,19 @@ gulp.task("images", function () {
 });
 
 // build
-gulp.task("build", ["styles", "fonts", "scripts", "images"]);
+gulp.task("build", gulp.parallel("styles", "fonts", "scripts", "images"));
 
 // watch
-gulp.task("watch", ["build"], function () {
-  gulp.watch("core/static_src/core/scss/**/*.scss", ["styles"]);
-  gulp.watch("core/static_src/core/js/**/*.js", ["scripts",]);
-  gulp.watch("core/static_src/core/fonts/**/*", ["fonts"]);
-  gulp.watch("core/static_src/core/images/**/*", ["images"]);
+gulp.task("watch", function () {
+  gulp.watch("core/static_src/core/scss/**/*.scss", gulp.series("styles"));
+  gulp.watch("core/static_src/core/js/**/*.js", gulp.series("scripts"));
+  gulp.watch("core/static_src/core/fonts/**/*", gulp.series("fonts"));
+  gulp.watch("core/static_src/core/images/**/*", gulp.series("images"));
 });
 
 // default
 if (isProd) {
-  gulp.task("default", ["build"]);
+  gulp.task("default", gulp.series("build"));
 } else {
-  gulp.task("default", ["watch"]);
+  gulp.task("default", gulp.series("watch"));
 }

@@ -1,6 +1,6 @@
-@import "bower_components/pickadate/lib/themes/default";
-@import "bower_components/pickadate/lib/themes/default.date";
-@import "bower_components/pickadate/lib/themes/default.time";
+@import "../../../../../node_modules/pickadate/lib/themes/default";
+@import "../../../../../node_modules/pickadate/lib/themes/default.date";
+@import "../../../../../node_modules/pickadate/lib/themes/default.time";
 
 .picker {
   font-family: $font-family-sans-serif;
