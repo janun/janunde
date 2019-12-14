@@ -8,8 +8,6 @@ var csso = require("gulp-csso");
 var concat = require("gulp-concat");
 var uglify = require("gulp-uglify");
 var sourcemaps = require("gulp-sourcemaps");
-var svgmin = require("gulp-svgmin");
-var fs = require("fs");
 var isProd = gutil.env.production;
 
 
@@ -82,18 +80,6 @@ gulp.task("fonts", function () {
 gulp.task("images", function () {
   return gulp.src("core/static_src/core/images/**/*")
     .pipe(gulp.dest("core/static/core/images/"));
-});
-
-
-gulp.task("svgmin", function () {
-  return gulp.src("core/templates/icons/*.svg")
-    .pipe(svgmin({
-      floatPrecision: 1,
-      plugins: [
-        { cleanupNumericValues: { floatPrecision: 1 } }
-      ]
-    }))
-    .pipe(gulp.dest("core/templates/icons/"));
 });
 
 // build
