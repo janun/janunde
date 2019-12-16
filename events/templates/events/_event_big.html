@@ -1,12 +1,7 @@
 {% load wagtailcore_tags nettes_datum srcset wagtailimages_tags stuff cache %}
 
 {% cache 600 event object.id object.latest_revision_created_at object.main_image.updated_at %}
-  <div class="bigcard click-area
-       {% if card_color %}
-         bigcard--color bigcard--color-{{ card_color }}
-       {% endif %}
-       "
-       itemscope itemtype="http://schema.org/Event">
+  <div class="bigcard click-area" itemscope itemtype="http://schema.org/Event">
     <div class="bigcard__inner">
 
       <a class="click-area__area-link" href="{% pageurl object %}"
@@ -23,7 +18,7 @@
         {% image object.main_image original as orig_image %}
         <link itemprop="image" href="{{ orig_image.url }}">
       {% else %}
-        <div class="bigcard__image-placeholder bigcard__image-placeholder--color-{{ object.color }}"></div>
+        <div class="bigcard__image-placeholder"></div>
       {% endif %}
 
       {% if object.related_group %}
