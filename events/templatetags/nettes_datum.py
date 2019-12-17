@@ -35,7 +35,7 @@ def maybe_year(value, today):
 @register.filter(expects_localtime=True)
 def nettes_datum(value, short=False):
     try:
-        tzinfo = getattr(value, 'tzinfo', None)
+        tzinfo = getattr(value, "tzinfo", None)
         value = datetime.date(value.year, value.month, value.day)
     except AttributeError:
         # Passed value wasn't a date object
@@ -50,19 +50,21 @@ def nettes_datum(value, short=False):
     if delta.days == 0:
         if short:
             return "heute"
-        return mark_safe( "heute" + grey_span( ", " + datum(value, today) ) )
+        return mark_safe("heute" + grey_span(", " + datum(value, today)))
     if delta.days == 1:
         if short:
             return "morgen"
-        return mark_safe( "morgen" + grey_span( ", " + datum(value, today) ) )
+        return mark_safe("morgen" + grey_span(", " + datum(value, today)))
     if delta.days == -1:
         if short:
             return "gestern"
-        return mark_safe( "gestern" + grey_span( ", " + datum(value, today) ) )
+        return mark_safe("gestern" + grey_span(", " + datum(value, today)))
     if 1 < delta.days < 7:
         if short:
             return date_filter(value, "l")
-        return mark_safe( date_filter(value, "l") + grey_span( ", " + datum(value, today) ) )
+        return mark_safe(
+            date_filter(value, "l") + grey_span(", " + datum(value, today))
+        )
     if short:
         return date_filter(value, "D") + ", " + datum(value, today)
     return date_filter(value, "l") + ", " + datum(value, today)
