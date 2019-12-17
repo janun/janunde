@@ -70,6 +70,7 @@
   }
 
   &__januntext2 {
+    display: inline-block;
     height: 20%;
     margin-top: -1%;
     @include above($medium) {

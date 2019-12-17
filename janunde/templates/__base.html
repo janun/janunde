@@ -1,7 +1,7 @@
 {% load static from staticfiles %}
 
 <!DOCTYPE html>
-<html class="no-js" lang="{% block lang %}de{% endblock %}">
+<html class="no-js h-full" lang="{% block lang %}de{% endblock %}">
   <head>
     <meta charset="utf-8">
     <meta name="theme-color" content="#3a9d00">
@@ -16,7 +16,7 @@
     {% endblock %}
   </head>
 
-  <body class="{% block body_class %}{% endblock %}"
+  <body class="relative min-h-full pb-24 {% block body_class %}{% endblock %}"
         itemscope itemtype="http://schema.org/WebPage">
 
     {% block body_content %}{% endblock %}

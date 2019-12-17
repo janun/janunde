@@ -21,6 +21,7 @@
     font-size: 30px;
     color: $green;
     margin-top: 0;
+    margin-bottom: rem-calc(16px);
     font-weight: bold;
 
     @include above($medium) {
