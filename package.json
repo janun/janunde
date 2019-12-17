@@ -5,7 +5,10 @@
     "node": "12.13.1"
   },
   "scripts": {
-    "build": "gulp --production"
+    "build:gulp": "gulp --production",
+    "build:postcss": "postcss core/static_src/styles/tailwind.css -o core/static/core/css/tailwind.css",
+    "build": "npm run build:gulp && npm run build:postcss",
+    "watch:postcss": "onchange -i 'core/**/*.*' tailwind.config.js -e 'core/static' -- npm run build:postcss"
   },
   "cacheDirectories": [
     "node_modules"
@@ -20,7 +23,10 @@
     "vue": "^2.6"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^1.3.0",
     "autoprefixer": "^9.7",
+    "cssnano": "^4.1.10",
+    "eslint": ">=4.18.2",
     "gulp": "^4.0",
     "gulp-autoprefixer": "^7.0",
     "gulp-concat": "^2.6",
@@ -29,6 +35,9 @@
     "gulp-sourcemaps": "^2.6",
     "gulp-uglify": "^3.0",
     "gulp-util": "^3.0",
-    "eslint": ">=4.18.2"
+    "onchange": "^6.1.0",
+    "postcss-cli": "^6.1.3",
+    "postcss-import": "^12.0.1",
+    "tailwindcss": "^1.1.4"
   }
 }

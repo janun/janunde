@@ -10,7 +10,10 @@
     {% include "_favicons.html" %}
     {% block meta %}{% endblock %}
     {% include "_google-verification.html" %}
-    {% block css %}<link rel="stylesheet" type="text/css" href="{% static "core/css/all.css" %}">{% endblock %}
+    {% block css %}
+      <link rel="stylesheet" type="text/css" href="{% static "core/css/tailwind.css" %}">
+      <link rel="stylesheet" type="text/css" href="{% static "core/css/all.css" %}">
+    {% endblock %}
   </head>
 
   <body class="{% block body_class %}{% endblock %}"
