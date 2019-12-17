@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.shortcuts import render
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.utils.text import Truncator
 
 from wagtail.admin.edit_handlers import (
     FieldPanel,
@@ -29,15 +30,17 @@ from wagtail.core.rich_text import RichText
 from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
-from events.forms import SeminarForm
+import html2text
 
+from events.forms import SeminarForm
 from core.blocks import StandardStreamBlock
 from core.fields import FacebookEventURLField, PrettyURLField
 from core.images import AttributedImage as Image
 from core.models import BasePage, Group, HeaderMixin
-
 from core.forms import ShortTitleForm
 from core.models import HyphenatedTitleMixin
+
+from .utils import export_event_to_ical, export_event_to_google_link
 
 
 class SeminarFormPage(BasePage):
@@ -341,9 +344,6 @@ class EventPage(Page, HyphenatedTitleMixin):
             return self.search_description
         if self.subtitle:
             return self.subtitle
-        from django.utils.text import Truncator
-        import html2text
-
         h = html2text.HTML2Text()
         h.ignore_links = True
         for block in self.content:
@@ -456,8 +456,6 @@ class EventPage(Page, HyphenatedTitleMixin):
         if "format" in request.GET:
             if request.GET["format"] == "ical":
                 # Export to ical format
-                from .utils import export_event_to_ical
-
                 response = HttpResponse(
                     export_event_to_ical(self), content_type="text/calendar",
                 )
@@ -474,8 +472,6 @@ class EventPage(Page, HyphenatedTitleMixin):
             return super(EventPage, self).serve(request)
 
     def create_google_calendar_link(self):
-        from .utils import export_event_to_google_link
-
         return export_event_to_google_link(self)
 
     class Meta:
