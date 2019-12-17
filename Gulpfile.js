@@ -40,10 +40,10 @@ function scriptsBundle(scripts, bundleName) {
     .on("error", gutil.log);
 }
 
-gulp.task("start.js", function () {
+gulp.task("vue.js", function () {
   return scriptsBundle([
     "node_modules/vue/dist/vue.min.js",
-  ], "start.js");
+  ], "vue.js");
 });
 
 gulp.task("app.js", function () {
@@ -64,7 +64,7 @@ gulp.task("form.js", function () {
   ], "form.js");
 });
 
-gulp.task("scripts", gulp.parallel("start.js", "app.js", "form.js"));
+gulp.task("scripts", gulp.parallel("vue.js", "app.js", "form.js"));
 
 // images
 gulp.task("images", function () {

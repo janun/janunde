@@ -1,4 +1,4 @@
-{% load imageurl wagtailimages_tags %}
+{% load imageurl wagtailimages_tags static %}
 
 <div class="image-gallery"
     v-on:touchstart="touchstart" v-on:touchend="touchend"
@@ -23,6 +23,8 @@
     </a>
   </div>
 </div>
+
+<script type="text/javascript" src="{% static "core/js/vue.js" %}"></script>
 
 <script>
 
