@@ -13,14 +13,14 @@
     {% regroup events by month as events_by_month %}
       
     <div class="flex items-start justify-between">
-      <aside class="hidden md:block sticky mr-4" style="top: 80px">
+      <aside class="hidden md:block sticky mr-5 text-gray-700" style="top: 80px">
         <ul class="flex mb-8 -mx-2">
           <li class="mx-2">
-            <a class="py-2 border-b-2 {% if past %}border-transparent{% else %}text-green-600 border-green-400{% endif %}"
+            <a class="py-2 border-b-2 text-gray-700 {% if past %}border-transparent{% else %}text-green-600 border-green-400{% endif %}"
                href="{% pageurl self %}">Kommendes</a>
           </li>
           <li class="mx-2">
-            <a class="py-2 border-b-2 {% if past %}text-green-600 border-green-400{% else %}border-transparent{% endif %}"
+            <a class="py-2 border-b-2 text-gray-700 {% if past %}text-green-600 border-green-400{% else %}border-transparent{% endif %}"
                href="{% pageurl self %}?past=1&year={% now "Y" %}&month={% now "m" %}">Vergangenes</a>
           </li>
         </ul>
@@ -75,10 +75,10 @@
               {% cache 600 event event.id event.latest_revision_created_at event.main_image.updated_at %}
 
                 <div class="relative mb-8 md:mb-12 h-32 md:h-36 -mx-4 sm:mx-0">
-                  <a class="block flex bg-white shadow-md hover:shadow-lg text-gray-700 sm:rounded-lg h-32 md:h-36" href="{% pageurl event %}">
+                  <a class="block overflow-hidden flex bg-white shadow-md hover:shadow-lg text-gray-700 sm:rounded-lg h-32 md:h-36" href="{% pageurl event %}">
                     {% image event.main_image max-600x400 class="object-cover sm:rounded-bl-lg sm:rounded-tl-lg w-32 md:w-56 border-r" %}
                     <div class="p-3 md:p-5">
-                      <div class="text-xs md:text-sm mb-3">
+                      <div class="text-xs md:text-sm mb-1 sm:mb-3 whitespace-no-wrap">
                         <time title="{{ event.start }}">{{ event.start|date:"D d.m." }}</time>
                         <span class="" title="{{ event.location }}">in {{ event.location|truncatechars:30 }}</span>
                       </div>
