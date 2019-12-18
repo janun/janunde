@@ -203,7 +203,7 @@ class EventIndexPage(BasePage, HeaderMixin):
                 .order_by("-start_datetime")
                 .search(q, order_by_relevance=False)
             )
-            paginator = Paginator(events, 25)
+            paginator = Paginator(events, 30)
             page = request.GET.get("page")
             try:
                 events = paginator.page(page)
