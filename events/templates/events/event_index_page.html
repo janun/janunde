@@ -113,7 +113,7 @@
 
       <main class="w-full max-w-3xl">
         {% if q %}
-          <div class="text-green-500 font-bold text-xl mb-6">Suchergebnisse für „{{ q }}“:</div>
+          <div class="text-green-500 font-bold text-xl mb-6">{{ search_count }} Suchergebnisse für „{{ q }}“:</div>
         {% endif %}
 
         {% for events in events_by_month %}
