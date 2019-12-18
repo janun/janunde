@@ -27,7 +27,7 @@
 
         {% if past %}
            <ul>
-            {% for m in months %}
+            {% for m in months reversed %}
               <li class="mb-2">
                 <a href="{% pageurl self %}?past=1&year={{ m|date:"Y" }}&month={{ m|date:"m" }}"
                    class="{% if m|date:"Y" == year and m|date:"m" == month %}text-green-500{% endif %}">
