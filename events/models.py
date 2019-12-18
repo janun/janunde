@@ -187,14 +187,20 @@ class EventIndexPage(BasePage, HeaderMixin):
         context = super().get_context(request)
         past = request.GET.get("past", None)
         year = request.GET.get("year", None)
+        month = request.GET.get("month", None)
         if past:
             events = EventPage.objects.expired().order_by("-start_datetime")
+            context["months"] = events.dates("start_datetime", "month")
         else:
             events = EventPage.objects.upcoming()
 
         if year:
             events = events.filter(start_datetime__year=year)
+        if month:
+            events = events.filter(start_datetime__month=month)
 
+        context["year"] = year
+        context["month"] = month
         context["events"] = events
         context["past"] = past
         return context

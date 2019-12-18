@@ -1,7 +1,7 @@
 {% extends "core/__base.html" %}
 {% load wagtailcore_tags wagtailimages_tags nettes_datum %}
 {% load static from staticfiles %}
-{% load render_partial %}
+{% load cache %}
 
 {% block content %}
   <div class="max-w-7xl mx-auto px-4">
@@ -16,21 +16,36 @@
       <aside class="hidden md:block sticky mr-4" style="top: 80px">
         <ul class="flex mb-8 -mx-2">
           <li class="mx-2">
-            <a class="py-2 border-b-2 {% if past %}border-transparent{% else %}text-green-600 border-green-400{% endif %}" href="{% pageurl self %}">Kommende</a>
+            <a class="py-2 border-b-2 {% if past %}border-transparent{% else %}text-green-600 border-green-400{% endif %}"
+               href="{% pageurl self %}">Kommendes</a>
           </li>
           <li class="mx-2">
-            <a class="py-2 border-b-2 {% if past %}text-green-600 border-green-400{% else %}border-transparent{% endif %}" href="{% pageurl self %}?past=1&year={% now "Y" %}">Vergangene</a>
+            <a class="py-2 border-b-2 {% if past %}text-green-600 border-green-400{% else %}border-transparent{% endif %}"
+               href="{% pageurl self %}?past=1&year={% now "Y" %}&month={% now "m" %}">Vergangenes</a>
           </li>
         </ul>
 
-        <ul>
-          {% for events in events_by_month %}
-            <li class="mb-2"><a href="#{{ events.grouper|date:"Y-m" }}">{{ events.grouper|format_month }}
-                <span class="text-gray-600 text-sm">({{ events.list|length }})</span>
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
+        {% if past %}
+           <ul>
+            {% for m in months %}
+              <li class="mb-2">
+                <a href="{% pageurl self %}?past=1&year={{ m|date:"Y" }}&month={{ m|date:"m" }}"
+                   class="{% if m|date:"Y" == year and m|date:"m" == month %}text-green-500{% endif %}">
+                  {{ m|format_month }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <ul>
+            {% for events in events_by_month %}
+              <li class="mb-2"><a href="#{{ events.grouper|date:"Y-m" }}">{{ events.grouper|format_month }}
+                  <span class="text-gray-600 text-sm">({{ events.list|length }})</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
       </aside>
 
       <main class="w-full max-w-3xl">
@@ -38,6 +53,7 @@
           <div class="mb-20">
             <h2 id="{{ events.grouper|date:"Y-m" }}" class="text-gray-600 text-base mb-5 mt-0">{{ events.grouper|format_month }}</h2>
               {% for event in events.list %}
+              {% cache 600 event event.id event.latest_revision_created_at event.main_image.updated_at %}
 
                 <div class="relative mb-8 md:mb-12 h-32 md:h-36 -mx-4 sm:mx-0">
                   <a class="block flex bg-white shadow-md hover:shadow-lg text-gray-700 sm:rounded-lg h-32 md:h-36" href="{% pageurl event %}">
@@ -64,6 +80,7 @@
                   {% endif %}
                 </div>
 
+              {% endcache %}
               {% endfor %}
             </div>
         {% endfor %}
