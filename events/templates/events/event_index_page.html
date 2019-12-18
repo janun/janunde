@@ -6,8 +6,15 @@
 {% block content %}
   <div class="max-w-6xl mx-auto px-4">
 
-    <div class="my-8 md:my-16">
+    <div class="flex flex-wrap items-center justify-between my-8 md:my-16">
       <h1 class="text-green-500 text-2xl md:text-3xl font-bold">{{ self.heading }}</h1>
+
+      <form class="flex items-center w-full max-w-sm" action="" method="GET">
+        <div class="flex items-center relative w-full">
+          <input autocomplete="off" type="text" name="q" value="{{ q }}" class="pl-10 w-full bg-white border border-gray-400 outline-none focus:shadow-outline rounded-md p-2" placeholder="Veranstaltungen durchsuchen">
+          <svg class="fill-current text-gray-600 absolute left-0 w-4 h-4 ml-3" viewBox="0 0 20 20"><path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
+        </div>
+      </form>
     </div>
     
     {% regroup events by month as events_by_month %}
@@ -16,13 +23,18 @@
       <aside class="hidden md:block sticky mr-5 text-gray-700" style="top: 80px">
         <ul class="flex mb-8 -mx-2">
           <li class="mx-2">
-            <a class="py-2 border-b-2 text-gray-700 {% if past %}border-transparent{% else %}text-green-600 border-green-400{% endif %}"
-               href="{% pageurl self %}">Kommendes</a>
+            <a class="py-2 border-b-2 text-gray-700 {% if past or q %}border-transparent{% else %}text-green-600 border-green-400{% endif %}"
+              href="{% pageurl self %}">Kommendes</a>
           </li>
           <li class="mx-2">
-            <a class="py-2 border-b-2 text-gray-700 {% if past %}text-green-600 border-green-400{% else %}border-transparent{% endif %}"
-               href="{% pageurl self %}?past=1&year={% now "Y" %}&month={% now "m" %}">Vergangenes</a>
+            <a class="py-2 border-b-2 text-gray-700 {% if past and not q %}text-green-600 border-green-400{% else %}border-transparent{% endif %}"
+              href="{% pageurl self %}?past=1&year={% now "Y" %}&month={% now "m" %}">Vergangenes</a>
           </li>
+          {% if q %}
+            <li class="mx-2">
+              <span class="py-2 border-b-2 text-green-600 border-green-400">Suche</span>
+            </li>
+          {% endif %}
         </ul>
 
         {% if past %}
@@ -31,19 +43,19 @@
             {% for y in months_by_year reversed %}
               <li class="mb-5">
                 {% if year == y.grouper %}
-                  <span class="text-green-500">{{ y.grouper }}</span>
+                  <div class="text-green-500 mb-2">{{ y.grouper }}</div>
                   <ul>
                     {% for m in y.list reversed %}
                       <li class="ml-2 mb-2">
                         <a href="{% pageurl self %}?past=1&year={{ m.year }}&month={{ m.month }}"
-                          class="{% if m.year == year and m.month == month %}text-green-500{% endif %}">
+                          class="{% if m.year == year and m.month == month %}text-green-500{% else %}text-gray-700 hover:text-green-500{% endif %}">
                           {{ m|date:"F" }}
                         </a>
                       </li>
                     {% endfor %}
                   </ul>
                 {% else %}
-                  <a href="{% pageurl self %}?past=1&year={{ y.grouper }}&month=12">{{ y.grouper }}</a>
+                  <a class="text-gray-700 hover:text-green-500" href="{% pageurl self %}?past=1&year={{ y.grouper }}&month=12">{{ y.grouper }}</a>
                 {% endif %}
               </li>
             {% endfor %}
@@ -53,11 +65,11 @@
           <ul>
             {% for year in events_by_year %}
               <li class="mb-5">
-                {{ year.grouper }}
+                <div class="mb-2">{{ year.grouper }}</div>
                 <ul>
                   {% for events in year.list %}
                     <li class="ml-2 mb-2">
-                      <a href="#{{ events.grouper|date:"Y-m" }}">{{ events.grouper|date:"F" }}</a>
+                      <a class="text-gray-700 hover:text-green-500" href="#{{ events.grouper|date:"Y-m" }}">{{ events.grouper|date:"F" }}</a>
                     </li>
                   {% endfor %}
                 </ul>
@@ -68,10 +80,14 @@
       </aside>
 
       <main class="w-full max-w-3xl">
+        {% if q %}
+          <div class="text-green-500 font-bold text-xl mb-6">Suchergebnisse für „{{ q }}“:</div>
+        {% endif %}
+
         {% for events in events_by_month %}
           <div class="mb-20">
-            <h2 id="{{ events.grouper|date:"Y-m" }}" class="text-gray-600 text-base mb-5 mt-0">
-              {% if past %}{{ events.grouper|date:"F Y" }}{% else %}{{ events.grouper|format_month }}{% endif %}
+            <h2 id="{{ events.grouper|date:"Y-m" }}" class="text-gray-700 text-base mb-5 mt-0">
+              {% if past or q %}{{ events.grouper|date:"F Y" }}{% else %}{{ events.grouper|format_month }}{% endif %}
             </h2>
               {% for event in events.list %}
               {% cache 600 event event.id event.latest_revision_created_at event.main_image.updated_at %}
