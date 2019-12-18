@@ -26,22 +26,38 @@
         </ul>
 
         {% if past %}
-           <ul>
-            {% for m in months reversed %}
+          {% regroup months by year as months_by_year %}
+          <ul>
+            {% for year in months_by_year reversed %}
               <li class="mb-2">
-                <a href="{% pageurl self %}?past=1&year={{ m|date:"Y" }}&month={{ m|date:"m" }}"
-                   class="{% if m|date:"Y" == year and m|date:"m" == month %}text-green-500{% endif %}">
-                  {{ m|format_month }}
-                </a>
-              </li>
+                {{ year.grouper }}
+                  <ul>
+                    {% for m in year.list reversed %}
+                      <li class="ml-2 mb-2">
+                        <a href="{% pageurl self %}?past=1&year={{ m|date:"Y" }}&month={{ m|date:"m" }}"
+                          class="{% if m|date:"Y" == year and m|date:"m" == month %}text-green-500{% endif %}">
+                          {{ m|format_month }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </li>
             {% endfor %}
           </ul>
         {% else %}
+          {% regroup events_by_month by grouper.year as events_by_year %}
           <ul>
-            {% for events in events_by_month %}
-              <li class="mb-2"><a href="#{{ events.grouper|date:"Y-m" }}">{{ events.grouper|format_month }}
-                  <span class="text-gray-600 text-sm">({{ events.list|length }})</span>
-                </a>
+            {% for year in events_by_year %}
+              <li class="mb-2">
+                {{ year.grouper }}
+                <ul>
+                  {% for events in year.list %}
+                    <li class="ml-2 mb-2"><a href="#{{ events.grouper|date:"Y-m" }}">{{ events.grouper|date:"F" }}
+                        <span class="text-gray-600 text-sm">({{ events.list|length }})</span>
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
               </li>
             {% endfor %}
           </ul>
