@@ -185,26 +185,18 @@ class EventIndexPage(BasePage, HeaderMixin):
 
     def get_context(self, request):
         context = super().get_context(request)
-
-        # search stuff
-        search_query = request.GET.get("query", None)
-        search = request.GET.get("search", 0)
-
-        # empty query= url param
-        if "query" in request.GET:
-            search = 1
-
-        # query= url param given
-        if search_query:
-            events = EventPage.objects.all().live().search(search_query)
-            context["search_query"] = search_query
-            search = 1
+        past = request.GET.get("past", None)
+        year = request.GET.get("year", None)
+        if past:
+            events = EventPage.objects.expired().order_by("-start_datetime")
         else:
             events = EventPage.objects.upcoming()
 
-        context["search"] = search
-        context["events"] = events
+        if year:
+            events = events.filter(start_datetime__year=year)
 
+        context["events"] = events
+        context["past"] = past
         return context
 
     def get_description(self):
