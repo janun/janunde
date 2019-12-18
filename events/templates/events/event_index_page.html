@@ -124,10 +124,10 @@
 
 
         {% if events.paginator.num_pages > 1 %}
-          <ul class="flex -mx-2">
+          <ul class="flex -mx-2 mb-10">
             {% if events.has_previous %}
               <li>
-                <a class="mx-2 p-1 px-2 border hover:bg-green-100"
+                <a class="mx-2 p-1 px-2 rounded border text-gray-700 hover:bg-green-100"
                    href="?q={{ q }}&page={{ events.previous_page_number }}">
                   <span>&laquo;</span>
                 </a>
@@ -136,7 +136,7 @@
 
             {% for page_num in events.paginator.page_range %}
               <li>
-                <a class="mx-2 p-1 px-2 border  hover:bg-green-100 {% if page_num == posts.number %} font-bold{% endif %}"
+                <a class="mx-2 p-1 px-2 rounded border text-gray-700 hover:bg-green-100 {% if page_num == events.number %}text-green-500 font-bold{% endif %}"
                    href="?q={{ q }}&page={{ page_num }}">
                   {{ page_num }}
                 </a>
@@ -145,7 +145,7 @@
 
             {% if events.has_next %}
               <li>
-                <a class="mx-2 p-1 px-2 border hover:bg-green-100"
+                <a class="mx-2 p-1 px-2 rounded border text-gray-700 hover:bg-green-100"
                    href="?q={{ q }}&page={{ events.next_page_number }}">
                   <span>&raquo;</span>
                 </a>
