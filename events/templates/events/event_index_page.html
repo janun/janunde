@@ -28,33 +28,36 @@
         {% if past %}
           {% regroup months by year as months_by_year %}
           <ul>
-            {% for year in months_by_year reversed %}
-              <li class="mb-2">
-                {{ year.grouper }}
+            {% for y in months_by_year reversed %}
+              <li class="mb-5">
+                {% if year == y.grouper %}
+                  <span class="text-green-500">{{ y.grouper }}</span>
                   <ul>
-                    {% for m in year.list reversed %}
+                    {% for m in y.list reversed %}
                       <li class="ml-2 mb-2">
-                        <a href="{% pageurl self %}?past=1&year={{ m|date:"Y" }}&month={{ m|date:"m" }}"
-                          class="{% if m|date:"Y" == year and m|date:"m" == month %}text-green-500{% endif %}">
-                          {{ m|format_month }}
+                        <a href="{% pageurl self %}?past=1&year={{ m.year }}&month={{ m.month }}"
+                          class="{% if m.year == year and m.month == month %}text-green-500{% endif %}">
+                          {{ m|date:"F" }}
                         </a>
                       </li>
                     {% endfor %}
                   </ul>
-                </li>
+                {% else %}
+                  <a href="{% pageurl self %}?past=1&year={{ y.grouper }}&month=12">{{ y.grouper }}</a>
+                {% endif %}
+              </li>
             {% endfor %}
           </ul>
         {% else %}
           {% regroup events_by_month by grouper.year as events_by_year %}
           <ul>
             {% for year in events_by_year %}
-              <li class="mb-2">
+              <li class="mb-5">
                 {{ year.grouper }}
                 <ul>
                   {% for events in year.list %}
-                    <li class="ml-2 mb-2"><a href="#{{ events.grouper|date:"Y-m" }}">{{ events.grouper|date:"F" }}
-                        <span class="text-gray-600 text-sm">({{ events.list|length }})</span>
-                      </a>
+                    <li class="ml-2 mb-2">
+                      <a href="#{{ events.grouper|date:"Y-m" }}">{{ events.grouper|date:"F" }}</a>
                     </li>
                   {% endfor %}
                 </ul>
