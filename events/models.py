@@ -395,7 +395,7 @@ class EventPage(Page, HyphenatedTitleMixin):
     search_fields = BasePage.search_fields + [
         # title is in here by default
         index.SearchField("subtitle"),
-        index.SearchField("content"),
+        # index.SearchField("content"),
         index.SearchField("location"),
         index.SearchField("organizer"),
         index.RelatedFields("related_group", [index.SearchField("title"),]),
