@@ -7,7 +7,7 @@
   <div class="max-w-6xl mx-auto px-4">
 
     <div class="flex flex-wrap items-center justify-between my-8 md:my-16">
-      <h1 class="text-green-500 text-2xl md:text-3xl font-bold">{{ self.heading }}</h1>
+      <h1 class="text-green-500 text-2xl md:text-3xl font-bold mb-6 sm:mb-0">{{ self.heading }}</h1>
 
       <form class="flex items-center w-full max-w-sm" action="{% pageurl self %}" method="GET">
         <div class="flex items-center relative w-full">
@@ -37,7 +37,7 @@
           {% endif %}
         </ul>
 
-        {% if past or q %}
+        {% if past %}
           {% regroup months by year as months_by_year %}
           <ul>
             {% for y in months_by_year reversed %}
@@ -153,6 +153,38 @@
               {% endfor %}
             </div>
         {% endfor %}
+
+        {% comment %} mobile pagination {% endcomment %}
+        {% if events.paginator.num_pages > 1 %}
+          <ul class="md:hidden flex -mx-2 mb-10">
+            {% if events.has_previous %}
+              <li>
+                <a class="mx-1 p-1 px-2 rounded border text-gray-700 hover:bg-green-100"
+                  href="?q={{ q }}&page={{ events.previous_page_number }}">
+                  <span>&laquo;</span>
+                </a>
+              </li>
+            {% endif %}
+
+            {% for page_num in events.paginator.page_range %}
+              <li>
+                <a class="mx-1 p-1 px-2 rounded border text-gray-700 hover:bg-green-100 {% if page_num == events.number %}text-green-500 font-bold{% endif %}"
+                  href="?q={{ q }}&page={{ page_num }}">
+                  {{ page_num }}
+                </a>
+              </li>
+            {% endfor %}
+
+            {% if events.has_next %}
+              <li>
+                <a class="mx-1 p-1 px-2 rounded border text-gray-700 hover:bg-green-100"
+                  href="?q={{ q }}&page={{ events.next_page_number }}">
+                  <span>&raquo;</span>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        {% endif %}
 
       </main>
     </div>
