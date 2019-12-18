@@ -31,7 +31,8 @@ module.exports = {
         "7xl": "80rem"
       },
       spacing: {
-        "1.5": "0.375rem"
+        "1.5": "0.375rem",
+        "36": "9rem"
       },
     }
   },
@@ -40,4 +41,7 @@ module.exports = {
     textColor: ["responsive", "hover", "focus", "group-hover", "focus-within"],
     borderColor: ["responsive", "hover", "focus"],
   },
+  corePlugins: {
+    container: false,
+  }
 };
