@@ -122,7 +122,7 @@
               {% if past or q %}{{ events.grouper|date:"F Y" }}{% else %}{{ events.grouper|format_month }}{% endif %}
             </h2>
               {% for event in events.list %}
-              {% cache 600 event event.id event.latest_revision_created_at event.main_image.updated_at %}
+              {% cache 600 newevent event.id event.latest_revision_created_at event.main_image.updated_at %}
 
                 <div class="relative mb-8 md:mb-12 h-32 md:h-36 -mx-4 sm:mx-0">
                   <a class="block group overflow-hidden flex bg-white shadow-md hover:shadow-lg text-gray-700 sm:rounded-lg h-32 md:h-36" href="{% pageurl event %}">
