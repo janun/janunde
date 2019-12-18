@@ -10,6 +10,7 @@ from django.shortcuts import render
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.text import Truncator
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from wagtail.admin.edit_handlers import (
     FieldPanel,
@@ -197,7 +198,19 @@ class EventIndexPage(BasePage, HeaderMixin):
             month = None
 
         if q:
-            events = EventPage.objects.all().order_by("-start_datetime").search(q)
+            events = (
+                EventPage.objects.live()
+                .order_by("-start_datetime")
+                .search(q, order_by_relevance=False)
+            )
+            paginator = Paginator(events, 20)
+            page = request.GET.get("page")
+            try:
+                events = paginator.page(page)
+            except PageNotAnInteger:
+                events = paginator.page(1)
+            except EmptyPage:
+                events = paginator.page(paginator.num_pages)
         elif past:
             events = EventPage.objects.expired().order_by("-start_datetime")
             context["months"] = events.dates("start_datetime", "month")
@@ -394,6 +407,7 @@ class EventPage(Page, HyphenatedTitleMixin):
 
     search_fields = BasePage.search_fields + [
         # title is in here by default
+        index.FilterField("start_datetime"),  # enables sorting
         index.SearchField("subtitle"),
         # index.SearchField("content"),
         index.SearchField("location"),
