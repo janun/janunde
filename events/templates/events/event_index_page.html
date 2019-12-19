@@ -127,7 +127,7 @@
               {% cache 600 newevent event.id event.latest_revision_created_at event.main_image.updated_at %}
 
                 <div class="relative mb-8 md:mb-12 h-32 md:h-36 -mx-4 sm:mx-0">
-                  <a class="block group overflow-hidden flex bg-white shadow-md hover:shadow-lg text-gray-700 sm:rounded-lg h-32 md:h-36" href="{% pageurl event %}">
+                  <a class="block group overflow-hidden flex bg-white shadow md:shadow-md hover:shadow-lg text-gray-700 sm:rounded-lg h-32 md:h-36" href="{% pageurl event %}">
                     
                     {% image event.main_image max-600x400 as main_image %}
                     <img src="{{ main_image.url }}" alt="{{ main_image.alt }}" class="object-cover sm:rounded-bl-lg sm:rounded-tl-lg w-32 md:w-56 border-r">
