@@ -128,7 +128,7 @@
 
         {% for events in events_by_month %}
           <div class="mb-10 md:mb-20">
-            <h2 id="{{ events.grouper|date:"Y-m" }}" class="text-gray-700 text-base mb-5 mt-0">
+            <h2 id="{{ events.grouper|date:"Y-m" }}" class="pt-20 -mt-20 text-gray-700 text-base mb-5">
               {% if past or q %}{{ events.grouper|date:"F Y" }}{% else %}{{ events.grouper|format_month }}{% endif %}
             </h2>
               {% for event in events.list %}
