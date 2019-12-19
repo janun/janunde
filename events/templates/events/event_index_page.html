@@ -13,7 +13,7 @@
 
       <form class="flex items-center w-full max-w-sm" action="{% pageurl self %}" method="GET">
         <div class="flex items-center relative w-full">
-          <input autocomplete="off" type="text" name="q" value="{{ q }}" class="pl-10 w-full bg-white border border-gray-400 outline-none focus:shadow-outline rounded-md p-2" placeholder="Veranstaltungen durchsuchen">
+          <input autocomplete="off" type="text" {% if q %}autofocus{% endif %} name="q" value="{{ q }}" class="pl-10 w-full bg-white border border-gray-400 outline-none focus:shadow-outline rounded-md p-2" placeholder="Veranstaltungen durchsuchen">
           <svg class="fill-current text-gray-600 absolute left-0 w-4 h-4 ml-3" viewBox="0 0 20 20"><path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
         </div>
       </form>
@@ -26,11 +26,11 @@
         <ul class="flex mb-12 md:mb-8 -mx-2">
           <li class="mx-2">
             <a class="py-2 border-b-2 text-gray-700 {% if past or q %}border-transparent{% else %}text-green-600 border-green-400{% endif %}"
-              href="{% pageurl self %}">Kommendes</a>
+              href="{% pageurl self %}">Aktuell</a>
           </li>
           <li class="mx-2">
             <a class="py-2 border-b-2 text-gray-700 {% if past and not q %}text-green-600 border-green-400{% else %}border-transparent{% endif %}"
-              href="{% pageurl self %}?past=1&year={% now "Y" %}&month={% now "m" %}">Vergangenes</a>
+              href="{% pageurl self %}?past=1&year={% now "Y" %}&month={% now "m" %}">Vergangenheit</a>
           </li>
           {% if q %}
             <li class="mx-2">
@@ -45,10 +45,10 @@
             {% for y in months_by_year reversed %}
               <li class="mb-5">
                 {% if year == y.grouper %}
-                  <div class="text-green-500 mb-2">{{ y.grouper }}</div>
+                  <div class="text-green-500 mb-2 text-xs">{{ y.grouper }}</div>
                   <ul>
                     {% for m in y.list reversed %}
-                      <li class="ml-4 mb-2">
+                      <li class="mb-2">
                         <a href="{% pageurl self %}?past=1&year={{ m.year }}&month={{ m.month }}"
                           class="{% if m.year == year and m.month == month %}text-green-500{% else %}text-gray-700 hover:text-green-500{% endif %}">
                           {{ m|date:"F" }}
@@ -57,7 +57,7 @@
                     {% endfor %}
                   </ul>
                 {% else %}
-                  <a class="text-gray-700 hover:text-green-500" href="{% pageurl self %}?past=1&year={{ y.grouper }}&month=12">{{ y.grouper }}</a>
+                  <a class="text-xs text-gray-700 hover:text-green-500" href="{% pageurl self %}?past=1&year={{ y.grouper }}&month=12">{{ y.grouper }}</a>
                 {% endif %}
               </li>
             {% endfor %}
@@ -67,10 +67,10 @@
           <ul class="hidden md:block">
             {% for year in events_by_year %}
               <li class="mb-5">
-                <div class="mb-2">{{ year.grouper }}</div>
+                <div class="mb-2 text-gray-600 text-xs">{{ year.grouper }}</div>
                 <ul>
                   {% for events in year.list %}
-                    <li class="ml-4 mb-2">
+                    <li class="mb-2">
                       <a class="text-gray-700 hover:text-green-500" href="#{{ events.grouper|date:"Y-m" }}">{{ events.grouper|date:"F" }}</a>
                     </li>
                   {% endfor %}
@@ -115,7 +115,15 @@
 
       <main class="w-full max-w-3xl">
         {% if q %}
-          <div class="text-green-500 font-bold text-xl mb-6">{{ search_count }} Suchergebnisse für „{{ q }}“:</div>
+          {% if events_by_month %}
+            <div class="text-green-500 font-bold text-xl mb-6">{{ search_count }} Suchergebnisse für „{{ q }}“:</div>
+          {% else %}
+            <div>
+              <svg class="fill-current text-red-500 h-16 w-16 mb-6" width="32" height="32" viewBox="0 0 32 32"><path d="M16 0C8.84 0 3 6.24 3 13.92v17.09a1 1 0 001.75.67l3.77-4.16 2.95 4.07a1 1 0 001.61 0l2.96-3.97 2.92 3.98a1 1 0 001.61 0l2.99-4.08 3.68 4.15A1 1 0 0029 31V13.92C29 6.24 23.16 0 16 0zm10.99 28.38l-2.76-3.1a1 1 0 00-1.55.07l-2.92 3.96-2.9-3.96a1 1 0 00-.8-.41h-.01a1 1 0 00-.8.4l-2.96 3.98-2.88-3.97a1 1 0 00-.75-.42H8.6a1 1 0 00-.74.33l-2.85 3.15V13.92C5 7.35 9.94 2 16 2s10.99 5.35 10.99 11.92v14.46zM21 11a2 2 0 100 4 2 2 0 000-4zm-10 0a2 2 0 100 4 2 2 0 000-4z"/></svg>
+              <div class="font-bold text-red-500 mb-4 text-lg text-xl md:text-2xl">Sorry, leider nichts gefunden für „{{ q }}“</div>            
+              <div class="text-gray-700">Versuche es mal mit einem anderen Suchbegriff.</div>
+            </div>
+          {% endif %}
         {% endif %}
 
         {% for events in events_by_month %}

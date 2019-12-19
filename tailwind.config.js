@@ -28,6 +28,7 @@ module.exports = {
         "white-75": "rgba(255, 255, 255, 0.75)",
         "brown": "#644327",
         "gray-50": "#fafafa",
+        "red-500": "#c41737",
       },
       maxWidth: {
         "7xl": "80rem"
