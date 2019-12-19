@@ -135,16 +135,16 @@
                     <div class="p-3 md:p-5 overflow-hidden">
                       <div class="text-xs md:text-sm mb-1 sm:mb-2 truncate">
                         {% if event.multipledays %}
-                          <time title="{{ event.start }}">{{ event.start|date:"D d.m." }}</time>
-                          <time title="{{ event.end }}"> bis {{ event.end|date:"D d.m." }}</time>
+                          <time title="{{ event.start }}">{{ event.start|date:"D j.n." }}</time>
+                          <time title="{{ event.end }}"> bis {{ event.end|date:"D j.n." }}</time>
                         {% else %}
                           <time title="{{ event.start }}">
-                            {{ event.start|date:"D d.m." }}
-                            {% if event.start|time:"H:i" %}
-                              {{ event.start|time:"H:i" }}
+                            {{ event.start|date:"D j.n." }}
+                            {% if event.start|time:"G:i" %}
+                              {{ event.start|time:"G:i" }}
                             {% endif %}
-                            {% if event.end|time:"H:i" %}
-                              bis {{ event.end|time:"H:i" }}
+                            {% if event.end|time:"G:i" %}
+                              bis {{ event.end|time:"G:i" }}
                             {% endif %}
                           </time>
                         {% endif %}
