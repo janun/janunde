@@ -224,6 +224,18 @@
           </ul>
         {% endif %}
 
+        {% comment %} pagination for past {% endcomment %}
+        {% if past %}
+          <div class="flex items-center justify-between">
+            {% if next_month %}
+              <a class="text-gray-700" href="{% pageurl self %}?past=1&year={{ next_month.year }}&month={{ next_month.month }}">← {{ next_month|date:"F Y" }}</a>
+            {% endif %}
+            {% if prev_month %}
+              <a class="ml-auto text-gray-700" href="{% pageurl self %}?past=1&year={{ prev_month.year }}&month={{ prev_month.month }}">{{ prev_month|date:"F Y" }} →</a>
+            {% endif %}
+          </div>
+        {% endif %}
+
       </main>
     </div>
 

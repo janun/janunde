@@ -220,8 +220,19 @@ class EventIndexPage(BasePage, HeaderMixin):
 
         if year:
             events = events.filter(start_datetime__year=year)
-        if month:
-            events = events.filter(start_datetime__month=month)
+            if month:
+                events = events.filter(start_datetime__month=month)
+                months = list(context["months"])
+                month_index = months.index(datetime.date(year, month, 1))
+                try:
+                    context["next_month"] = months[month_index + 1]
+                except IndexError:
+                    context["next_month"] = None
+                if month_index > 0:
+                    try:
+                        context["prev_month"] = months[month_index - 1]
+                    except IndexError:
+                        context["prev_month"] = None
 
         context["year"] = year
         context["month"] = month
