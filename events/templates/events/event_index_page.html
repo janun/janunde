@@ -21,7 +21,7 @@
     
     {% regroup events by month as events_by_month %}
       
-    <div class="md:flex items-start justify-between">
+    <div class="md:flex items-start justify-between js-scroll-spy">
       <aside class="md:sticky md:mr-5 text-gray-700" style="top: 80px">
         <ul class="flex mb-12 md:mb-8 -mx-2">
           <li class="mx-2">
@@ -64,7 +64,7 @@
           </ul>
         {% else %}
           {% regroup events_by_month by grouper.year as events_by_year %}
-          <ul class="hidden md:block">
+          <ul class="hidden md:block js-scroll-spy-menu" data-js-scroll-spy-class="text-green-500" data-offset="10">
             {% for year in events_by_year %}
               <li class="mb-5">
                 <div class="mb-2 text-gray-600 text-xs">{{ year.grouper }}</div>
@@ -128,7 +128,7 @@
 
         {% for events in events_by_month %}
           <div class="mb-10 md:mb-20">
-            <h2 id="{{ events.grouper|date:"Y-m" }}" class="pt-20 -mt-20 text-gray-700 text-base mb-5">
+            <h2 id="{{ events.grouper|date:"Y-m" }}" class="js-scroll-spy-section pt-20 -mt-20 text-gray-700 text-base mb-5">
               {% if past or q %}{{ events.grouper|date:"F Y" }}{% else %}{{ events.grouper|format_month }}{% endif %}
             </h2>
               {% for event in events.list %}
