@@ -137,8 +137,8 @@
                 <div class="relative mb-8 md:mb-12 h-32 md:h-36 -mx-4 sm:mx-0">
                   <a class="block group overflow-hidden flex bg-white shadow md:shadow-md hover:shadow-lg text-gray-700 sm:rounded-lg h-32 md:h-36" href="{% pageurl event %}">
                     
-                    {% image event.main_image max-600x400 as main_image %}
-                    <img src="{{ main_image.url }}" alt="{{ main_image.alt }}" class="object-cover sm:rounded-bl-lg sm:rounded-tl-lg w-32 md:w-56 border-r">
+                    {% image event.main_image fill-448x228 format-jpeg   as main_image %}
+                    <img {{ main_image.attrs }} loading="lazy" class="object-cover sm:rounded-bl-lg sm:rounded-tl-lg w-32 md:w-56 border-r">
                     
                     <div class="p-3 md:p-5 overflow-hidden">
                       <div class="text-xs md:text-sm mb-1 sm:mb-2 truncate">
@@ -174,7 +174,8 @@
                     <a href="{% pageurl event.related_group %}" title="{{ event.related_group.title }}"
                        class="absolute w-12 h-12 top-0 right-0 -mt-3 md:-mt-5 sm:-mr-2 md:-mr-4 sm:w-20 sm:h-20 overflow-hidden shadow-md hover:shadow-lg p-2 sm:p-3 bg-white flex items-center justify-center rounded-full"
                        >
-                      {% image event.related_group.logo max-400x400 class="w-full h-full object-contain" %}
+                      {% image event.related_group.logo min-112x112 as group_logo %}
+                      <img {{ group_logo.attrs }} loading="lazy" class="w-full h-full object-contain">
                     </a>
                   {% endif %}
                 </div>
