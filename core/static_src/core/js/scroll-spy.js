@@ -1,7 +1,10 @@
 document.querySelectorAll(".js-scroll-spy").forEach(function (container) {
   var sections = container.querySelectorAll(".js-scroll-spy-section");
+  if (!sections) return;
 
   var menu = container.querySelector(".js-scroll-spy-menu");
+  if (!menu) return;
+
   var menuItems = menu.querySelectorAll("a");
   var classlist = menu.getAttribute("data-js-scroll-spy-class").split(" ");
   var offset = menu.getAttribute("data-offset") || 0;
