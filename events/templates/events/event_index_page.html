@@ -173,7 +173,7 @@
                   </a>
                   {% if event.related_group %}
                     <a href="{% pageurl event.related_group %}" title="{{ event.related_group.title }}"
-                       class="absolute w-12 h-12 top-0 right-0 -mt-3 md:-mt-5 sm:-mr-2 md:-mr-4 sm:w-20 sm:h-20 overflow-hidden shadow-md hover:shadow-lg p-2 sm:p-3 bg-white flex items-center justify-center rounded-full"
+                       class="absolute w-14 h-14 top-0 right-0 -mt-3 md:-mt-5 sm:-mr-2 md:-mr-4 sm:w-20 sm:h-20 overflow-hidden shadow-md border hover:border-gray-500 hover:shadow-lg p-2 sm:p-3 bg-white flex items-center justify-center rounded-full"
                        >
                       {% image event.related_group.logo min-112x112 as group_logo %}
                       <img {{ group_logo.attrs }} loading="lazy" class="w-full h-full object-contain">
