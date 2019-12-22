@@ -18,7 +18,7 @@ document.querySelectorAll(".js-zoom-image").forEach(function (elem) {
   var img = document.createElement("img");
   img.setAttribute("src", src);
   container.insertAdjacentElement("beforeend", img);
-  img.className = "h-full rounded-lg object-contain";
+  img.className = "max-h-full max-w-full rounded-lg";
 
   var hash = "#zoom-image";
 
