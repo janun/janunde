@@ -20,16 +20,27 @@ document.querySelectorAll(".js-zoom-image").forEach(function (elem) {
   container.insertAdjacentElement("beforeend", img);
   img.className = "h-full rounded-lg object-contain";
 
+  var hash = "#zoom-image";
 
   function open() {
     container.classList.remove("hidden");
+    window.location.hash = hash;
     document.body.classList.add("overflow-y-hidden");
   }
 
-  function close() {
+  function close(noback) {
     container.classList.add("hidden");
+    if (!noback) history.back();
     document.body.classList.remove("overflow-y-hidden");
   }
+
+  // close on back
+  window.addEventListener("hashchange", function () {
+    if (!container.classList.contains("hidden") && window.location.hash !== hash) {
+      event.preventDefault();
+      close(true);
+    }
+  });
 
 
   // open on click
