@@ -2,6 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+.block-paragraph p {
+	@apply font-sans text-lg text-brown leading-relaxed;
+}
+
 
 
 html {
