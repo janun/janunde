@@ -3,7 +3,7 @@
 @import "tailwindcss/utilities";
 
 .block-paragraph p, .block-paragraph {
-	@apply font-sans text-lg text-brown leading-relaxed;
+	@apply font-sans text-base text-brown leading-relaxed;
 }
 
 
