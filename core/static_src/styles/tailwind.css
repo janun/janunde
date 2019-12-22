@@ -2,9 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.block-paragraph p {
+.block-paragraph p, .block-paragraph {
 	@apply font-sans text-lg text-brown leading-relaxed;
 }
+
 
 
 .cursor-zoom-in {
