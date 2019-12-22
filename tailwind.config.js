@@ -26,6 +26,7 @@ module.exports = {
           900: "#1a4614"
         },
         "white-75": "rgba(255, 255, 255, 0.75)",
+        "black-75": "rgba(0, 0, 0, 0.75)",
         "brown": "#644327",
         "gray-50": "#fafafa",
         "red-500": "#c41737",
@@ -34,7 +35,7 @@ module.exports = {
         "7xl": "80rem"
       },
       spacing: {
-        "1.5": "0.375rem",
+        "1_5": "0.375rem",
         "36": "9rem"
       },
     }

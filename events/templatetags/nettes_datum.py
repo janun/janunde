@@ -22,7 +22,7 @@ def grey_span(text, autoescape=True):
         esc = conditional_escape
     else:
         esc = lambda x: x
-    return mark_safe('<span class="color-grey">{}</span>'.format(esc(text)))
+    return mark_safe('<span class="text-gray-600">{}</span>'.format(esc(text)))
 
 
 def maybe_year(value, today):

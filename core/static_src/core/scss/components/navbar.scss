@@ -10,7 +10,7 @@ $navbar-height: rem-calc(65);
   top: 0;
   height: $navbar-height;
   width: 100%;
-  z-index: 1000;
+  z-index: 10;
   background: $white;
 
   ul {

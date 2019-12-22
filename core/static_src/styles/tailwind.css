@@ -7,6 +7,9 @@
 }
 
 
+.cursor-zoom-in {
+	cursor: zoom-in;
+}
 
 html {
 	scroll-behavior: smooth;
