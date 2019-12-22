@@ -18,6 +18,10 @@ p {
   @apply my-4;
 }
 
+.rich-text ul, .rich-text ul {
+  @apply my-4;
+}
+
 .rich-text ol {
   @apply list-decimal pl-4;
 }
