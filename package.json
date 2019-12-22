@@ -8,7 +8,7 @@
     "build:gulp": "gulp --production",
     "build:postcss": "postcss core/static_src/styles/tailwind.css -o core/static/core/css/tailwind.css",
     "build": "npm run build:gulp && npm run build:postcss",
-    "watch:postcss": "onchange -i '*/**/*.html' tailwind.config.js -e 'core/static' -- npm run build:postcss"
+    "watch:postcss": "onchange -i '*/**/*.html' 'core/static_src/**/*' postcss.config.js tailwind.config.js -e 'core/static' -- npm run build:postcss"
   },
   "cacheDirectories": [
     "node_modules"

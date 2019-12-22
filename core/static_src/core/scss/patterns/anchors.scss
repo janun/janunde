@@ -24,23 +24,23 @@ a, .anchor {
  * @markup
  *   <p class="block-paragraph"><a href="#">Link</a></p>
  */
-.block-paragraph a, p a {
-  color: $link-color;
-  text-decoration: none;
-  border-bottom: 1px solid $link-color;
-  border-bottom-color: currentColor;
+// .block-paragraph a, p a {
+//   color: $link-color;
+//   text-decoration: none;
+//   border-bottom: 1px solid $link-color;
+//   border-bottom-color: currentColor;
 
-  // &:visited {
-  //   color: $link-color-visited;
-  //   text-decoration: none;
-  //   border-bottom-color: $link-color-visited;
-  //   border-bottom-color: currentColor;
-  // }
+//   // &:visited {
+//   //   color: $link-color-visited;
+//   //   text-decoration: none;
+//   //   border-bottom-color: $link-color-visited;
+//   //   border-bottom-color: currentColor;
+//   // }
 
-  &:hover, &:active {
-    color: $link-color-hover;
-    text-decoration: none;
-    border-bottom-color: $link-color-hover;
-    border-bottom-color: currentColor;
-  }
-}
+//   &:hover, &:active {
+//     color: $link-color-hover;
+//     text-decoration: none;
+//     border-bottom-color: $link-color-hover;
+//     border-bottom-color: currentColor;
+//   }
+// }

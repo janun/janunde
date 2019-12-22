@@ -1,11 +1,9 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
+
+@import "./rich-text";
+
 @import "tailwindcss/utilities";
-
-.block-paragraph p, .block-paragraph {
-	@apply font-sans text-base text-brown leading-relaxed;
-}
-
 
 
 .cursor-zoom-in {

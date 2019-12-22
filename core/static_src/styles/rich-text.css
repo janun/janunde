@@ -1,0 +1,40 @@
+p {
+  @apply font-sans text-base text-brown leading-relaxed;
+}
+
+.rich-text {
+	@apply font-sans text-base text-brown leading-relaxed;
+}
+
+.rich-text a {
+  @apply text-brown border-b border-brown;
+}
+
+.rich-text a:hover {
+  @apply text-green-500 border-green-400;
+}
+
+.rich-text p {
+  @apply my-4;
+}
+
+.rich-text ol {
+  @apply list-decimal pl-4;
+}
+
+.rich-text ul li {
+  @apply ml-4;
+}
+
+.rich-text ul li:before {
+  content: "●";
+  @apply relative -ml-4 mr-2 text-green-500;
+}
+
+.rich-text h2 {
+  @apply text-2xl text-green-500 font-semibold mb-4 mt-8;
+}
+
+.rich-text h3 {
+  @apply text-xl text-green-500 font-semibold mb-4 mt-6;
+}

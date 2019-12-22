@@ -144,36 +144,36 @@ html {
 }
 
 
-/**
- * paragraph style
- * @mixin p
- */
-@mixin p() {
-  font-family: $font-family-serif;
-  font-size: rem-calc(18px);
-  line-height: 1.75;
-  font-weight: normal;
-  text-rendering: optimizeLegibility;
-  font-variant-ligatures: common-ligatures;
-  font-feature-settings: "kern";
-	font-kerning: normal;
+// /**
+//  * paragraph style
+//  * @mixin p
+//  */
+// @mixin p() {
+//   font-family: $font-family-serif;
+//   font-size: rem-calc(18px);
+//   line-height: 1.75;
+//   font-weight: normal;
+//   text-rendering: optimizeLegibility;
+//   font-variant-ligatures: common-ligatures;
+//   font-feature-settings: "kern";
+// 	font-kerning: normal;
 
-  @include above($medium) {
-    font-size: rem-calc(20px);
-    line-height: 1.6;
-  }
-}
+//   @include above($medium) {
+//     font-size: rem-calc(20px);
+//     line-height: 1.6;
+//   }
+// }
 
-/**
- * paragraph style
- *
- * @atom paragraph
- * @section Typography
- * @markup
- *   <p>@{lipsum:1:paragraph}</p>
- */
-p {
-  @include p;
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
+// /**
+//  * paragraph style
+//  *
+//  * @atom paragraph
+//  * @section Typography
+//  * @markup
+//  *   <p>@{lipsum:1:paragraph}</p>
+//  */
+// p {
+//   @include p;
+//   margin-top: 0;
+//   margin-bottom: 1rem;
+// }

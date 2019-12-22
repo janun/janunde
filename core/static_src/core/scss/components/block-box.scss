@@ -31,7 +31,7 @@
 
   &__text {
     ul, ol {
-      @include p;
+      // @include p;
       margin-left: rem-calc(-20px);
       list-style: none;
     }
