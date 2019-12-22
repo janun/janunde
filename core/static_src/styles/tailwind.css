@@ -5,6 +5,9 @@
 
 @import "tailwindcss/utilities";
 
+.transition-opacity {
+	transition: opacity 0.2s ease-in-out;
+}
 
 .cursor-zoom-in {
 	cursor: zoom-in;

@@ -3,7 +3,7 @@ document.querySelectorAll(".js-zoom-image").forEach(function (elem) {
 
   // black background
   var container = document.createElement("div");
-  container.className = "hidden fixed inset-0 bg-black-75 p-2 sm:p-10 hidden flex justify-center items-center w-screen h-screen z-50";
+  container.className = "hidden transition-opacity opacity-0 fixed inset-0 bg-black-75 p-2 sm:p-10 flex justify-center items-center w-screen h-screen z-50";
   document.body.insertAdjacentElement("beforeend", container);
 
   // close button
@@ -24,12 +24,20 @@ document.querySelectorAll(".js-zoom-image").forEach(function (elem) {
 
   function open() {
     container.classList.remove("hidden");
+    setTimeout(function () {
+      container.classList.remove("opacity-0");
+      container.classList.add("opacity-100");
+    }, 20);
     window.location.hash = hash;
     document.body.classList.add("overflow-y-hidden");
   }
 
   function close(noback) {
-    container.classList.add("hidden");
+    container.classList.add("opacity-0");
+    container.classList.remove("opacity-100");
+    container.addEventListener("transitionend", function () {
+      container.classList.add("hidden");
+    }, { once: true });
     if (!noback) history.back();
     document.body.classList.remove("overflow-y-hidden");
   }
