@@ -161,9 +161,9 @@
       {% comment %} the main column {% endcomment %}
       <main class="sm:w-2/3 mb-6">
         <header class="hidden sm:block mb-8">
-          <h1 class="leading-none text-green-500 text-4xl font-bold mt-0 mb-4">{{ self.hyphenated_title|safe }}</h1>
+          <h1 class="leading-snug tracking-tight text-green-500 text-4xl font-bold -mt-2 mb-1">{{ self.title }}</h1>
           {% if self.subtitle %}
-            <h2 class="leading-tight text-gray-700 text-xl my-0">{{ self.subtitle }}</h2>
+            <h2 class="leading-snug tracking-tight text-gray-700 text-xl my-0">{{ self.subtitle }}</h2>
           {% endif %}
         </header>
 
