@@ -196,12 +196,12 @@
           "image": "{{ main_image.url }}",
           "startDate": "{{ self.start|date:'c' }}",
           "endDate": "{{ self.end|date:'c' }}",
+          "organizer": "{{ self.organizer|default:event.related_group|default:"" }}"
           {% if self.location or self.address %}
-            "location": {
+            ,"location": {
               "@type": "Place",
               "name": "{{ self.location_name|default:self.location }}",
               "address": "{{ self.address|default:self.location }}"
-              }
             }
           {% endif %}
         }
