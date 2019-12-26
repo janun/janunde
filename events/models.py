@@ -6,6 +6,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.mail import EmailMessage
 from django.db import models
 from django.db.models import Q
+from django import forms
 from django.http import Http404, HttpResponse
 from django.utils import timezone
 from django.utils.text import Truncator
@@ -340,12 +341,8 @@ class EventPage(Page, HyphenatedTitleMixin):
         null=True,
         blank=True,
     )
-    location_address = models.CharField(
-        "Adresse",
-        help_text="Straße, Hausnummer etc.",
-        max_length=255,
-        null=True,
-        blank=True,
+    location_address = models.TextField(
+        "Adresse", help_text="Straße, Hausnummer etc.", null=True, blank=True,
     )
     location_postcode = models.CharField(
         "Postleitzahl", max_length=255, null=True, blank=True
@@ -520,7 +517,7 @@ class EventPage(Page, HyphenatedTitleMixin):
                         [
                             # FieldPanel("location"),
                             FieldPanel("location_name"),
-                            FieldPanel("location_address"),
+                            FieldPanel("location_address", widget=forms.Textarea(attrs={"rows": 2})),
                             FieldRowPanel(
                                 [
                                     FieldPanel("location_postcode"),
