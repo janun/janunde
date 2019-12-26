@@ -154,8 +154,12 @@
                           </time>
                         {% endif %}
 
-                        {% if event.location %}
-                          <span title="{{ event.location }}">in {{ event.location|truncatechars:50 }}</span>
+                        {% if event.location_city %}
+                          <span>in {{ event.location_city|truncatechars:25 }}</span>
+                        {% elif event.location %}
+                          <span title="{{ event.location }}">in {{ event.location|truncatechars:30 }}</span>
+                        {% elif event.location_name %}
+                          <span>in {{ event.location_name|truncatechars:30 }}</span>
                         {% endif %}
                       </div>
 
@@ -191,13 +195,14 @@
                   "image": "{{ main_image.url }}",
                   "startDate": "{{ event.start|date:'c' }}",
                   "endDate": "{{ event.end|date:'c' }}",
-                  {% if event.location %}
-                  "location": {
-                    "@type": "Place",
-                    "name": "{{ event.location }}",
-                    "address": "{{ event.location }}"
+                  "organizer": "{{ event.organizer|default:event.related_group|default:"" }}",
+                  {% if self.location or self.address %}
+                    "location": {
+                      "@type": "Place",
+                      "name": "{{ self.location_name|default:self.location }}",
+                      "address": "{{ self.address|default:self.location }}"
+                      }
                     }
-                  }
                   {% endif %}
                 }
                 </script>

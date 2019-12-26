@@ -2,15 +2,15 @@ import datetime
 
 from django.core.files.images import ImageFile
 from django.core.exceptions import ValidationError
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.core.mail import EmailMessage
 from django.db import models
 from django.db.models import Q
 from django.http import Http404, HttpResponse
 from django.utils import timezone
-from django.shortcuts import render
-from django.core.mail import EmailMessage
-from django.template.loader import render_to_string
 from django.utils.text import Truncator
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.shortcuts import render
+from django.template.loader import render_to_string
 
 from wagtail.admin.edit_handlers import (
     FieldPanel,
@@ -18,20 +18,23 @@ from wagtail.admin.edit_handlers import (
     ObjectList,
     StreamFieldPanel,
     TabbedInterface,
+    FieldRowPanel,
 )
 from wagtail.admin.widgets import AdminDateTimeInput
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page, PageManager
+from wagtail.core.rich_text import RichText
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.documents.edit_handlers import DocumentChooserPanel
 from wagtail.documents.models import Document
 from wagtail.search import index
-from wagtail.core.rich_text import RichText
 
 from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
 import html2text
+
+from urllib.parse import quote
 
 from events.forms import SeminarForm
 from core.blocks import StandardStreamBlock
@@ -268,6 +271,12 @@ class EventPageManager(PageManager):
         )
 
 
+class EventPageForm(ShortTitleForm):
+    class Media:
+        css = {"all": ("events/css/admin-location-form.css",)}
+        js = ("events/js/admin-location-form.js",)
+
+
 class EventPage(Page, HyphenatedTitleMixin):
     """
     represents an event
@@ -275,7 +284,7 @@ class EventPage(Page, HyphenatedTitleMixin):
 
     subpage_types = ["contact.PersonPage", "core.StandardPage"]
     parent_page_types = ["EventIndexPage"]
-    base_form_class = ShortTitleForm
+    base_form_class = EventPageForm
     og_type = "article"
 
     subtitle = models.CharField(
@@ -322,12 +331,28 @@ class EventPage(Page, HyphenatedTitleMixin):
     contact_phone = PhoneNumberField("Telefonnummer", null=True, blank=True,)
     content = StreamField(StandardStreamBlock(), blank=True, verbose_name="Inhalt",)
     location = models.CharField(
-        "Ort",
-        help_text="Ort, an dem die Veranstaltung stattfindet",
+        "Ort", help_text="Altes Ortsfeld", max_length=255, null=True, blank=True,
+    )
+    location_name = models.CharField(
+        "Name",
+        help_text="Name des Veranstaltungsortes",
         max_length=255,
         null=True,
         blank=True,
     )
+    location_address = models.CharField(
+        "Adresse",
+        help_text="Straße, Hausnummer etc.",
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    location_postcode = models.CharField(
+        "Postleitzahl", max_length=255, null=True, blank=True
+    )
+    location_city = models.CharField("Stadt", max_length=255, null=True, blank=True)
+    location_country = models.CharField("Land", max_length=255, null=True, blank=True)
+
     register_url = PrettyURLField(
         "Link zu Anmelde-Formular",
         help_text="z.B. auf der externen Seite oder bei einem Formularservice",
@@ -362,6 +387,39 @@ class EventPage(Page, HyphenatedTitleMixin):
             if self.start.date() != self.end.date():
                 return True
         return False
+
+    def get_address(self, with_name=True) -> str:
+        address_components = [
+            self.location_name if with_name else None,
+            self.location_address,
+            "%s %s" % (self.location_postcode or "", self.location_city or ""),
+            self.location_country,
+        ]
+        components = filter(bool, address_components)
+        address = (", ".join(components)).strip()
+        return address
+
+    address = property(get_address)
+
+    @property
+    def googlemaps(self) -> str:
+        if self.address:
+            return "https://www.google.de/maps/search/%s" % quote(self.address)
+        elif self.location:
+            return "https://www.google.de/maps/search/%s" % quote(self.location)
+        return None
+
+    @property
+    def openstreetmap(self) -> str:
+        if self.address:
+            return "https://www.openstreetmap.org/search?query=%s" % quote(
+                self.get_address(with_name=False)
+            )
+        elif self.location:
+            return "https://www.openstreetmap.org/search?query=%s" % quote(
+                self.location
+            )
+        return None
 
     @property
     def month(self):
@@ -421,8 +479,12 @@ class EventPage(Page, HyphenatedTitleMixin):
         # title is in here by default
         index.FilterField("start_datetime"),  # enables sorting
         index.SearchField("subtitle"),
-        # index.SearchField("content"),
+        index.SearchField("content"),
         index.SearchField("location"),
+        index.SearchField("location_name"),
+        index.SearchField("location_address"),
+        index.SearchField("location_city"),
+        index.SearchField("location_country"),
         index.SearchField("organizer"),
         index.RelatedFields("related_group", [index.SearchField("title"),]),
     ]
@@ -454,7 +516,22 @@ class EventPage(Page, HyphenatedTitleMixin):
                         classname="",
                         heading="Datum",
                     ),
-                    FieldPanel("location"),
+                    MultiFieldPanel(
+                        [
+                            # FieldPanel("location"),
+                            FieldPanel("location_name"),
+                            FieldPanel("location_address"),
+                            FieldRowPanel(
+                                [
+                                    FieldPanel("location_postcode"),
+                                    FieldPanel("location_city"),
+                                ]
+                            ),
+                            FieldPanel("location_country"),
+                        ],
+                        heading="Ort",
+                        classname="location-panel",
+                    ),
                     MultiFieldPanel(
                         [FieldPanel("website_url"), FieldPanel("facebook_event_url")],
                         heading="Links",

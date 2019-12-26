@@ -1,10 +1,11 @@
 *.pyc
 .env
 /venv/
-static
+/core/static/
+/static/
+/janunde/static/
 /media/
 /node_modules/
 /styleguide/
-/janunde/static/bower_components/
 /db_backups/
-.vscode/settings.json
+.vscode

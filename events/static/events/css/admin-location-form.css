@@ -1,0 +1,48 @@
+.mydropdown {
+  position: absolute;
+  left: 0; right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
+  display: none;
+  z-index: 100;
+}
+
+.mydropdown:empty {
+  border: none;
+}
+
+.mydropdown.open {
+  display: block;
+}
+
+.mydropdown.closed {
+  display: none;
+}
+
+.myitem {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: Open Sans,Arial,sans-serif;
+  color: #1a1a1a;
+  font-size: 1.2em;
+  font-weight: 300;
+  padding: 20px 20px;
+}
+
+button.myitem:hover, button.myitem:focus {
+  background: #eee;
+}
+
+/* fix indented row */
+.location-panel .field-row .field-col:first-child {
+  padding-left: 0;
+}
+
+.location-panel .field-row .field-col {
+  padding-right: 0;
+}
