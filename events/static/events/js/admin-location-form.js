@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   // location bias for Hanover
-  var api = "http://photon.komoot.de/api/?&lat=52.3892058&lon=9.7412133&lang=de&limit=5&q=";
+  var api = "https://photon.komoot.de/api/?&lat=52.3892058&lon=9.7412133&lang=de&limit=5&q=";
 
   var nameField = document.querySelector("#id_location_name");
   var addressField = document.querySelector("#id_location_address");
