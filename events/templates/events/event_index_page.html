@@ -155,7 +155,7 @@
 
                         {% if event.location_city %}
                           <span>in {{ event.location_city|truncatechars:25 }}</span>
-                          {% if event.location_country !== "Deutschland" %}
+                          {% if event.location_country != "Deutschland" %}
                             <span>{{ event.location_country|truncatechars:25 }}</span>
                           {% endif %}
                         {% elif event.location %}
