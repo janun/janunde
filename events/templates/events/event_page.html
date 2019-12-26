@@ -11,11 +11,11 @@
       ← {{ self.get_parent.title }}
     </a>
 
-    {% comment %} mobile header {% endcomment %}
+    {% comment %} mobile heading {% endcomment %}
     <header class="sm:hidden mb-8">
-      <h1 class="leading-none text-green-500 text-4xl font-bold mt-0 mb-4">{{ self.hyphenated_title|safe }}</h1>
+      <h1 class="leading-none text-green-500 text-3xl font-bold mt-0 mb-4">{{ self.hyphenated_title|safe }}</h1>
       {% if self.subtitle %}
-        <h2 class="leading-tight text-gray-700 text-xl my-0">{{ self.subtitle }}</h2>
+        <h2 class="leading-tight text-gray-700 text-lg my-0">{{ self.subtitle }}</h2>
       {% endif %}
     </header>
 
@@ -103,7 +103,7 @@
         {% comment %} links etc. {% endcomment %}
         {% if self.website_url %}
           <a itemprop="url" target="_blank" href="{{ self.website_url }}" class="flex mb-5 text-brown hover:text-green-500" title="zur externen Website">
-            <svg class="mr-4 mt-1 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M30.22 9.32l-5.6-6a1 1 0 00-.73-.32h-8.35L15.5.94c0-.52-.45-.94-1-.94s-.94.42-.94.94L13.54 3H2.52a1 1 0 00-1 1v12a1 1 0 001 1h11v14.06c0 .52.45.94 1 .94s1-.42 1-.94V17h8.37a1 1 0 00.73-.32l5.6-6a1 1 0 000-1.36zM23.45 15H3.52V5h19.93l4.67 5z"/></svg>
+            <svg class="mr-4 mt-1 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M28.18 29.67h-26v-20h8.05l2.03-1.95-.06-.05H2.18a2 2 0 00-2 2v20c0 1.1.9 2 2 2h26a2 2 0 002-2V14.02l-2 1.91v13.74zm-19.74-8h2.02c1.4-7.96 8.33-14 16.68-14h1.02l-3.66 3.67a1 1 0 001.41 1.41l5.9-6.06-5.9-6.07a1 1 0 10-1.41 1.42l3.63 3.63h-.95c-9.47 0-17.3 6.93-18.74 16z"/></svg>
             <div>{{ self.website_url|prettyurl }}</div>
           </a>
         {% endif %}
@@ -156,7 +156,7 @@
                   {{ self.related_group.abbr }}
                 {% endif %}
               </div>
-              <div class="">{{ self.related_group.title }}</div>
+              <div>{{ self.related_group.title }}</div>
             </a>
           </div>
         {% endif %}
@@ -172,10 +172,12 @@
 
       {% comment %} the main column {% endcomment %}
       <main class="sm:w-2/3 mb-6">
+
+        {% comment %} desktop heading {% endcomment %}
         <header class="hidden sm:block mb-8">
           <h1 class="leading-snug tracking-tight text-green-500 text-4xl font-bold -mt-2 mb-1">{{ self.title }}</h1>
           {% if self.subtitle %}
-            <h2 class="leading-snug tracking-tight text-gray-700 text-xl my-0">{{ self.subtitle }}</h2>
+            <h2 class="leading-snug tracking-tight text-gray-700 md:text-xl my-0">{{ self.subtitle }}</h2>
           {% endif %}
         </header>
 

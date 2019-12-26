@@ -4,7 +4,7 @@
 {% load cache %}
 
 {% block content %}
-  <div class="max-w-6xl mx-auto px-4">
+  <div class="max-w-5xl xl:max-w-6xl mx-auto px-4">
 
     <div class="lg:flex flex-wrap items-center justify-between my-8 md:my-16">
       <h1 class="text-green-500 text-2xl md:text-3xl font-bold mb-6 lg:mb-0 mt-0">
@@ -12,7 +12,7 @@
       </h1>
 
       {% comment %} search field {% endcomment %}
-      <form class="flex items-center flex-1 max-w-md lg:ml-4" action="{% pageurl self %}" method="GET">
+      <form class="flex items-center flex-1 max-w-md lg:ml-8" action="{% pageurl self %}" method="GET">
         <div class="flex items-center relative w-full">
           <input autocomplete="off" type="text" {% if q %}autofocus{% endif %} name="q" value="{{ q }}" class="pl-10 w-full bg-white border border-gray-400 outline-none focus:shadow-outline rounded-md p-2" placeholder="Veranstaltungen durchsuchen">
           <svg class="fill-current text-gray-600 absolute left-0 w-4 h-4 ml-3" viewBox="0 0 20 20"><path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
@@ -141,7 +141,7 @@
                     {% image event.main_image fill-448x228 format-jpeg   as main_image %}
                     <img {{ main_image.attrs }} loading="lazy" class="object-cover sm:rounded-bl-lg sm:rounded-tl-lg w-32 md:w-56 border-r">
                     
-                    <div class="p-3 md:p-5 overflow-hidden">
+                    <div class="p-3 pt-2 md:p-5 md:pt-4 overflow-hidden">
                       <div class="text-xs md:text-sm mb-1 sm:mb-2 truncate">
                         {% if event.multipledays %}
                           <time title="{{ event.start }}">{{ event.start|date:"D j.n." }}</time>
@@ -150,7 +150,6 @@
                           <time title="{{ event.start }}">
                             {{ event.start|date:"D j.n." }}
                             {% if event.start|time:"G:i" %}{{ event.start|time:"G:i" }}{% endif %}
-                            {% if event.end|time:"G:i" %} – {{ event.end|time:"G:i" }}{% endif %}
                           </time>
                         {% endif %}
 
