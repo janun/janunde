@@ -85,7 +85,7 @@
               <div class="leading-snug">
                 {% if self.address %}
                   <div class="text-brown">{{ self.location_name|default:"" }}</div>
-                  <div class="text-brown">{{ self.location_address|default:"" }}</div>
+                  <div class="text-brown">{{ self.location_address|default:""|linebreaks }}</div>
                   <div class="text-brown">{{ self.location_postcode|default:"" }} {{ self.location_city|default:"" }}</div>
                   {% if self.location_country != "Deutschland" %}<div class="text-brown">{{ self.location_country|default:"" }}</div>{% endif %}
                 {% else %}
