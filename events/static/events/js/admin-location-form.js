@@ -99,6 +99,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  function handlError() {
+    dropdown.innerHTML = "<div class=\"myitem\">Sorry, beim Suchen ist ein Fehler aufgetreten.</div>";
+  }
+
   // do the search
   var xhr = null;
   function search() {
@@ -107,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dropdown.innerHTML = "<div class=\"loading-mask loading myitem\">Suche …</div>";
     xhr = new XMLHttpRequest();
     xhr.addEventListener("load", handleResponse);
+    xhr.addEventListener("error", handlError);
     xhr.open("GET", url);
     xhr.send();
   }
