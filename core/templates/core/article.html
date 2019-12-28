@@ -52,7 +52,7 @@
 
   {% if self.main_image %}
     <div class="my-10 sm:my-16 -mx-4 sm:mx-0">
-      {% image self.main_image fill-448x228 format-jpeg as main_image %}
+      {% image self.main_image fill-1280x853 format-jpeg as main_image %}
       {% image self.main_image max-1280x1280 format-jpeg as big_image %}
       <a href="{{ big_image.url }}" class="cursor-zoom-in js-zoom-image" title="Vergrößern">
         <img {{ main_image.attrs }} class="sm:rounded-lg sm:shadow w-full">
