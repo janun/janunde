@@ -441,13 +441,20 @@ class ArticleIndexPage(BasePage):
     subpage_types = ["Article"]
     parent_page_types = ["HomePage"]
 
+    heading = models.CharField("Überschrift", max_length=255)
+
+    content_panels = [
+        FieldPanel("title"),
+        FieldPanel("heading"),
+    ]
+
     class Meta:
         verbose_name = "Sammlung von Artikeln"
 
     def get_context(self, request):
         context = super().get_context(request)
         articles = Article.objects.child_of(self).live()
-        paginator = Paginator(articles, 25)
+        paginator = Paginator(articles, 20)
         page = request.GET.get("page")
         try:
             articles = paginator.page(page)
@@ -487,6 +494,13 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
     def partial_template_name(self):
         return "core/_article.html"
 
+    @property
+    def month(self):
+        """The 1st of month of the month the article is written in"""
+        return datetime.date(
+            self.first_published_at.year, self.first_published_at.month, 1
+        )
+
     def get_text(self):
         for block in self.body:
             if block.block_type == "paragraph":
@@ -514,23 +528,18 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
 
     content_panels = [
         MultiFieldPanel(
-            [
-                FieldPanel("title", classname="title"),
-                FieldPanel("title_color", classname=""),
-            ],
+            [FieldPanel("title", classname="title"), FieldPanel("subtitle"),],
             heading="Titel",
         ),
-        FieldPanel("subtitle"),
         FieldPanel("author"),
+        FieldPanel("related_group", "core.Group"),
         ImageChooserPanel("main_image"),
         StreamFieldPanel("body"),
     ]
 
-    promote_panels = [
-        FieldPanel("related_group", "core.Group"),
-    ] + StandardPage.promote_panels
+    #promote_panels = [] + StandardPage.promote_panels
 
-    settings_panels = [] + StandardPage.settings_panels
+    #settings_panels = [] + StandardPage.settings_panels
 
     objects = ArticleManager()
 

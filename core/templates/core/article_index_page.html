@@ -5,27 +5,83 @@
 {% load static from staticfiles %}
 {% load srcset %}
 {% load stuff %}
-{% load render_partial %}
-{% load cache %}
+{% load cache nettes_datum %}
 
-
-{% block body_class %}template-article-index-page{% endblock %}
 
 {% block content %}
 
-  <div class="container">
-    {% if articles %}
-      <div class="card-grid margin-top-3 clear-after">
-        {% for article in articles %}
-          {% render_partial article %}
-        {% endfor %}
-      </div>
-    {% else %}
-      Schade, es wurden noch keine Artikel veröffentlicht…
-    {% endif %}
+<div class="max-w-3xl mx-auto px-4">
 
-    {% comment %} pagination {% endcomment %}
-    {% if articles.paginator.num_pages > 1 %}
+  <div class="lg:flex flex-wrap items-center justify-between my-8 md:my-16">
+    <h1 class="text-green-500 text-2xl md:text-3xl font-bold mb-6 lg:mb-0 mt-0">{{ self.heading }}</h1>
+  </div>
+
+  <main>
+    {% regroup articles by month as articles_by_month %}
+    {% for articles in articles_by_month %}
+      <div class="mb-10 md:mb-20">
+        <h2 id="{{ articles.grouper|date:"Y-m" }}" class="js-scroll-spy-section pt-20 -mt-20 text-gray-700 text-base mb-5">
+          {{ articles.grouper|date:"F Y" }}
+        </h2>
+
+        {% for article in articles.list %}
+          {% cache 600 newarticle article.id article.latest_revision_created_at article.main_image.updated_at %}
+
+            <div class="relative mb-8 md:mb-12 h-32 md:h-36 -mx-4 sm:mx-0">
+              <a class="block group overflow-hidden flex bg-white shadow md:shadow-md hover:shadow-lg text-gray-700 sm:rounded-lg h-32 md:h-36" href="{% pageurl article %}">
+                
+                {% image article.main_image fill-448x228 format-jpeg as main_image %}
+                <img {{ main_image.attrs }} loading="lazy" class="object-cover sm:rounded-bl-lg sm:rounded-tl-lg w-32 md:w-56 border-r">
+                
+                <div class="p-3 pt-2 md:p-5 md:pt-4 overflow-hidden">
+                  <div class="text-xs text-gray-700 mb-1">
+                    {{ article.first_published_at|date:"d.m.Y" }}
+                    {% if article.author %}<span>von {{ article.author.title }}</span>{% endif %}
+                  </div>
+
+                  <h3 class="text-brown text-lg md:text-xl mb-1 font-semibold group-hover:text-green-500">{{ article.title }}</h3>
+                  {% if article.subtitle %}
+                    <div class="hidden md:block text-xs md:text-sm" title="{{ article.subtitle }}">{{ article.subtitle|truncatechars:120 }}</div>
+                  {% endif %}
+                </div>
+
+              </a>
+              {% if article.related_group %}
+                <a href="{% pageurl article.related_group %}" title="{{ article.related_group.title }}"
+                    class="absolute w-14 h-14 top-0 right-0 -mt-5 sm:-mr-2 md:-mr-4 sm:w-18 sm:h-18 overflow-hidden shadow border hover:border-gray-500 hover:shadow-md p-2 sm:p-3 bg-white flex items-center justify-center rounded-full"
+                    >
+                  {% if article.related_group.logo %}
+                    {% image article.related_group.logo min-112x112 as group_logo %}
+                    <img {{ group_logo.attrs }} loading="lazy" class="w-full h-full object-contain">
+                  {% else %}
+                    <div class="text-center text-xs leading-tight">{{ article.related_group.title }}</div>
+                  {% endif %}
+                </a>
+              {% endif %}
+            </div>
+
+            <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "name": "{{ article.title }}",
+              "url": "{{ article.full_url }}",
+              "description": "{{ article.subtitle|default:'' }}",
+              "image": "{{ main_image.url }}"
+            }
+            </script>
+
+          {% endcache %}
+        {% endfor %}
+
+      </div>
+    
+    {% endfor %}
+  </main>
+
+  {% comment %} pagination {% endcomment %}
+  {% if articles.paginator.num_pages > 1 %}
+    <div class="flex justify-center">
       <ul class="flex -mx-2 my-10">
         {% if articles.has_previous %}
           <li>
@@ -38,7 +94,7 @@
 
         {% for page_num in articles.paginator.page_range %}
           <li>
-            <a class="mx-1 p-1 px-3 rounded text-gray-700 {% if page_num == articles.number %}bg-green-200{% endif %}"
+            <a class="mx-1 p-1 px-3 rounded border text-gray-700 {% if page_num == articles.number %}bg-green-200{% endif %}"
               href="?q={{ q }}&page={{ page_num }}">
               {{ page_num }}
             </a>
@@ -54,9 +110,8 @@
           </li>
         {% endif %}
       </ul>
-    {% endif %}
+    </div>
+  {% endif %}
 
-  </div>
-
-
+</div>
 {% endblock %}
