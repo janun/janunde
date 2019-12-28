@@ -196,14 +196,12 @@
           "image": "{{ main_image.url }}",
           "startDate": "{{ self.start|date:'c' }}",
           "endDate": "{{ self.end|date:'c' }}",
-          "organizer": "{{ self.organizer|default:self.related_group|default:"" }}"
-          {% if self.location or self.address %}
-            ,"location": {
-              "@type": "Place",
-              "name": "{{ self.location_name|default:self.location }}",
-              "address": "{{ self.address|default:self.location }}"
-            }
-          {% endif %}
+          "organizer": "{{ self.organizer|default:self.related_group|default:'' }}",
+          "location": {
+            "@type": "Place",
+            "name": "{{ self.location_name|default:self.location|default:'' }}",
+            "address": "{{ self.address|default:self.location|default:'kein Ort' }}"
+          }
         }
         </script>
 
