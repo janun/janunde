@@ -20,7 +20,7 @@
         <a href="{% pageurl self.related_group %}" title="{{ self.related_group.title }}" class="inline-flex items-center group my-2">
           <div class="w-12 h-12 {% if self.author %}-mr-2{% endif %} overflow-hidden shadow border group-hover:border-gray-500 p-2 bg-white flex items-center justify-center rounded-full">
             {% if self.related_group.logo %}
-              {% image self.related_group.logo min-112x112 as group_logo %}
+              {% image self.related_group.logo min-100x100 as group_logo %}
               <img {{ group_logo.attrs }} class="w-full h-full object-contain">
             {% else %}
               <div class="text-center text-xs leading-tight">{{ self.related_group.title }}</div>
@@ -31,7 +31,7 @@
 
       {% if self.author %}
         <a class="flex items-center text-gray-700 group hover:text-green-500" href="{% pageurl self.author %}" title="{{ self.author.title }}">
-          {% image self.author.photo min-112x112 as author_photo %}
+          {% image self.author.photo fill-100x100 as author_photo %}
           <img {{ author_photo.attrs }} class="w-12 h-12 mr-4 rounded-full object-contain">
           <span>von {{ self.author.title }}</span>
         </a>
