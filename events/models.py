@@ -1,4 +1,5 @@
 import datetime
+from urllib.parse import quote
 
 from django.core.files.images import ImageFile
 from django.core.exceptions import ValidationError
@@ -35,13 +36,11 @@ from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
 import html2text
 
-from urllib.parse import quote
-
 from events.forms import SeminarForm
 from core.blocks import StandardStreamBlock
 from core.fields import FacebookEventURLField, PrettyURLField
 from core.images import AttributedImage as Image
-from core.models import BasePage, Group, HeaderMixin
+from core.models import BasePage, Group
 from core.forms import ShortTitleForm
 from core.models import HyphenatedTitleMixin
 
@@ -171,7 +170,7 @@ class SeminarFormPage(BasePage):
         )
 
 
-class EventIndexPage(BasePage, HeaderMixin):
+class EventIndexPage(BasePage):
     """
     lists events
     """
@@ -179,9 +178,11 @@ class EventIndexPage(BasePage, HeaderMixin):
     subpage_types = ["EventPage", "SeminarFormPage"]
     parent_page_types = ["core.HomePage"]
 
+    heading = models.CharField("Überschrift", max_length=255)
+
     content_panels = [
         FieldPanel("title"),
-        MultiFieldPanel(HeaderMixin.panels, "Header"),
+        FieldPanel("heading"),
     ]
 
     class Meta:
@@ -517,7 +518,10 @@ class EventPage(Page, HyphenatedTitleMixin):
                         [
                             # FieldPanel("location"),
                             FieldPanel("location_name"),
-                            FieldPanel("location_address", widget=forms.Textarea(attrs={"rows": 2})),
+                            FieldPanel(
+                                "location_address",
+                                widget=forms.Textarea(attrs={"rows": 2}),
+                            ),
                             FieldRowPanel(
                                 [
                                     FieldPanel("location_postcode"),
