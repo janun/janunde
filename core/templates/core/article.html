@@ -4,30 +4,90 @@
 {% block body_class %}{% endblock %}
 
 {% block content %}
-<article class="container container--margin-top"
-         itemprop="mainEntity" itemscope itemtype="http://schema.org/Article">
+<main class="max-w-3xl mx-auto px-4">
+  <a class="inline-block mt-6 mb-4 sm:my-8 text-sm text-gray-600 hover:text-green-500" href="{% pageurl self.get_parent %}">
+    ← {{ self.get_parent.title }}
+  </a>
 
-  <div class="text-container userim">
+  <header class="mb-10">
+    <h1 class="leading-none md:leading-snug text-green-500 text-3xl md:text-4xl font-bold mt-0 mb-4">{{ self.hyphenated_title|safe }}</h1>
+    {% if self.subtitle %}
+      <h2 class="leading-tight md:leading-snug text-gray-700 text-lg md:text-xl my-0">{{ self.subtitle }}</h2>
+    {% endif %}
 
-    <div class="margin-bottom-2">
-      <h1 class="title title--color-{{self.title_color}}"
-          itemprop="headline">
-        {{ self.hyphenated_title|safe }}
-      </h1>
-      {% if self.subtitle %}
-        <p class="subtitle">{{ self.subtitle }}</p>
+    <div class="flex items-center justify-start my-2">
+      {% if self.related_group %}
+        <a href="{% pageurl self.related_group %}" title="{{ self.related_group.title }}" class="inline-flex items-center group my-2">
+          <div class="w-12 h-12 {% if self.author %}-mr-2{% endif %} overflow-hidden shadow border group-hover:border-gray-500 p-2 bg-white flex items-center justify-center rounded-full">
+            {% if self.related_group.logo %}
+              {% image self.related_group.logo min-112x112 as group_logo %}
+              <img {{ group_logo.attrs }} class="w-full h-full object-contain">
+            {% else %}
+              <div class="text-center text-xs leading-tight">{{ self.related_group.title }}</div>
+            {% endif %}
+          </div>
+        </a>
       {% endif %}
-      {% include "core/_byline.html" %}
-    </div>
 
-    <div itemprop="articleBody">
-      {% include_block self.body %}
-    </div>
+      {% if self.author %}
+        <a class="flex items-center text-gray-700 group hover:text-green-500" href="{% pageurl self.author %}" title="{{ self.author.title }}">
+          {% image self.author.photo min-112x112 as author_photo %}
+          <img {{ author_photo.attrs }} class="w-12 h-12 mr-4 rounded-full object-contain">
+          <span>von {{ self.author.title }}</span>
+        </a>
+      {% endif %}
 
-    {% image self.main_image original as image %}
-    <link itemprop="image" href="{{ image.url }}">
-    <link itemprop="publisher" href="#janunOrg"/>
+      {% if self.related_group %}
+        <a class="text-gray-700 ml-2 hover:text-green-500" href="{% pageurl self.related_group %}">{{ self.related_group.title }}</a>
+      {% endif %}
+
+      <div class="text-gray-700 text-sm ml-auto">
+        vom {{ self.first_published_at|date:"d.m.Y" }}
+        {% if self.first_published_at|date:"d.m.Y" != self.last_published_at|date:"d.m.Y" %}
+          <span class="ml-2">am {{ self.last_published_at|date:"d.m.Y" }} aktualisiert</span>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  {% if self.main_image %}
+    <div class="my-16">
+      {% image self.main_image fill-448x228 format-jpeg as main_image %}
+      {% image self.main_image max-1280x1280 format-jpeg as big_image %}
+      <a href="{{ big_image.url }}" class="cursor-zoom-in js-zoom-image" title="Vergrößern">
+        <img {{ main_image.attrs }} class="rounded-lg shadow w-full">
+      </a>
+      {% if self.main_image.attribution %}
+        <span class="text-gray-500 text-xs">{{ self.main_image.attribution }}</span>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="max-w-xl mx-auto userim">
+    {% include_block self.body %}
   </div>
 
-</article>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "{{ self.title }}",
+      "mainEntityOfPage": "{{ self.full_url }}",
+      "url": "{{ self.full_url }}",
+      "image": "{{ main_image.url }}",
+      "dateModified": "{{ self.last_published_at|date:'c' }}",
+      "datePublished": "{{ self.first_published_at|date:'c' }}",
+      "author": "{{ self.author|default:'JANUN' }}",
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ self.related_group.title|default:'JANUN' }}",
+        "logo":  {
+          "@type": "ImageObject",
+          "url": "{{ group_logo.url|default:'/static/core/images/favicons/favicon-194x194.png' }}"
+        }
+      }
+    }
+  </script>
+   
+</main>
 {% endblock %}

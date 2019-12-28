@@ -45,7 +45,7 @@ module.exports = {
   variants: {
     boxShadow: ["responsive", "hover", "focus", "focus-within"],
     textColor: ["responsive", "hover", "focus", "group-hover", "focus-within"],
-    borderColor: ["responsive", "hover", "focus"],
+    borderColor: ["responsive", "hover", "group-hover", "focus"],
   },
   corePlugins: {
     container: false,
