@@ -7,11 +7,12 @@ from bs4 import BeautifulSoup
 from softhyphen.html import hyphenate
 
 from django.db import models
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.six import text_type
-from django.template.loader import render_to_string
 from django.utils.text import Truncator
+from django.template.loader import render_to_string
 
 from modelcluster.fields import ParentalKey
 
@@ -445,7 +446,16 @@ class ArticleIndexPage(BasePage):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context["articles"] = Article.objects.child_of(self).live()
+        articles = Article.objects.child_of(self).live()
+        paginator = Paginator(articles, 25)
+        page = request.GET.get("page")
+        try:
+            articles = paginator.page(page)
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)
+        context["articles"] = articles
         return context
 
 

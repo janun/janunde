@@ -26,6 +26,38 @@
       {% endif %}
     {% endcache %}
 
+    {% comment %} pagination {% endcomment %}
+    {% if articles.paginator.num_pages > 1 %}
+      <ul class="md:hidden flex -mx-2 my-10">
+        {% if articles.has_previous %}
+          <li>
+            <a class="p-1 px-3 rounded text-gray-700"
+              href="?q={{ q }}&page={{ articles.previous_page_number }}">
+              <span>←</span>
+            </a>
+          </li>
+        {% endif %}
+
+        {% for page_num in articles.paginator.page_range %}
+          <li>
+            <a class="mx-1 p-1 px-3 rounded text-gray-700 {% if page_num == articles.number %}bg-green-200{% endif %}"
+              href="?q={{ q }}&page={{ page_num }}">
+              {{ page_num }}
+            </a>
+          </li>
+        {% endfor %}
+
+        {% if articles.has_next %}
+          <li>
+            <a class="p-1 px-3 rounded text-gray-700"
+              href="?q={{ q }}&page={{ articles.next_page_number }}">
+              <span>→</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
   </div>
 
 
