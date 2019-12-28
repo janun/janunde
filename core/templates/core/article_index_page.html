@@ -64,10 +64,21 @@
             {
               "@context": "https://schema.org",
               "@type": "Article",
-              "name": "{{ article.title }}",
+              "headline": "{{ article.title }}",
+              "mainEntityOfPage": "{{ article.full_url }}",
               "url": "{{ article.full_url }}",
-              "description": "{{ article.subtitle|default:'' }}",
-              "image": "{{ main_image.url }}"
+              "image": "{{ main_image.url }}",
+              "dateModified": "{{ article.last_published_at|date:'c' }}",
+              "datePublished": "{{ article.first_published_at|date:'c' }}",
+              "author": "{{ article.author|default:'JANUN' }}",
+              "publisher": {
+                "@type": "Organization",
+                "name": "{{ article.related_group.title|default:'JANUN' }}",
+                "logo":  {
+                  "@type": "ImageObject",
+                  "url": "{{ group_logo.url|default:'/static/core/images/favicons/favicon-194x194.png' }}"
+                }
+              }
             }
             </script>
 
