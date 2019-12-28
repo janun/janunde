@@ -7,9 +7,7 @@
   <div class="max-w-5xl xl:max-w-6xl mx-auto px-4">
 
     <div class="lg:flex flex-wrap items-center justify-between my-8 md:my-16">
-      <h1 class="text-green-500 text-2xl md:text-3xl font-bold mb-6 lg:mb-0 mt-0">
-        <a class="text-green-500" href="{% pageurl self %}">{{ self.heading }}</a>
-      </h1>
+      <h1 class="text-green-500 text-2xl md:text-3xl font-bold mb-6 lg:mb-0 mt-0">{{ self.heading }}</h1>
 
       {% comment %} search field {% endcomment %}
       <form class="flex items-center flex-1 max-w-md lg:ml-8" action="{% pageurl self %}" method="GET">
