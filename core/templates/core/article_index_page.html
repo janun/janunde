@@ -35,13 +35,13 @@
                 
                 <div class="p-3 pt-2 md:p-5 md:pt-4 overflow-hidden">
                   <div class="text-xs text-gray-700 mb-1">
-                    {{ article.first_published_at|date:"d.m.Y" }}
+                    {{ article.first_published_at|date:"d.m." }}
                     {% if article.author %}<span>von {{ article.author.title }}</span>{% endif %}
                   </div>
 
-                  <h3 class="text-brown text-lg md:text-xl mb-1 font-semibold group-hover:text-green-500">{{ article.title }}</h3>
+                  <h3 class="text-brown text-base md:text-xl leading-tight mb-1 font-semibold group-hover:text-green-500">{{ article.title }}</h3>
                   {% if article.subtitle %}
-                    <div class="hidden md:block text-xs md:text-sm" title="{{ article.subtitle }}">{{ article.subtitle|truncatechars:120 }}</div>
+                    <div class="text-xs md:text-sm leading-snug" title="{{ article.subtitle }}">{{ article.subtitle|truncatechars:120 }}</div>
                   {% endif %}
                 </div>
 
