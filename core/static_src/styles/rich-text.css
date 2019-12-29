@@ -36,7 +36,7 @@ p {
 }
 
 .rich-text h2 {
-  @apply text-2xl text-green-500 font-bold mb-4 mt-10 leading-snug tracking-tight;
+  @apply text-2xl text-green-500 font-bold mb-4 mt-10 leading-snug;
 }
 
 .rich-text h3 {
