@@ -51,6 +51,9 @@
     {% include_block self.body %}
   </div>
 
+  {% if self.main_image %}
+    {% image self.main_image min-500x500 as main_image %}
+  {% endif %}
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
