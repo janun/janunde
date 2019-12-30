@@ -142,25 +142,28 @@
                     <div class="p-3 pt-2 md:p-5 md:pt-4 overflow-hidden">
                       <div class="text-xs md:text-sm mb-1 sm:mb-2 truncate">
                         {% if event.multipledays %}
-                          <time title="{{ event.start }}">{{ event.start|date:"D j.n." }}</time>
-                          <time title="{{ event.end }}"> – {{ event.end|date:"D j.n." }}</time>
+                          <span title="{{ event.start|date:"D j.n.Y" }} – {{ event.end|date:"D j.n.Y" }}">
+                            {{ event.start|date:"D j.n." }} – {{ event.end|date:"D j.n." }}
+                          </span>
                         {% else %}
-                          <time title="{{ event.start }}">
+                          <span title="{{ event.start|date:"D j.n.Y G:i" }}">
                             {{ event.start|date:"D j.n." }}
                             {% if event.start|time:"G:i" %}{{ event.start|time:"G:i" }}{% endif %}
-                          </time>
+                          </span>
                         {% endif %}
 
-                        {% if event.location_city %}
-                          <span>in {{ event.location_city|truncatechars:25 }}</span>
-                          {% if event.location_country != "Deutschland" %}
-                            <span>{{ event.location_country|truncatechars:25 }}</span>
+                        <span title="{{ event.address }}">
+                          {% if event.location_city %}
+                            <span>in {{ event.location_city|truncatechars:25 }}</span>
+                            {% if event.location_country != "Deutschland" %}
+                              <span>{{ event.location_country|truncatechars:25 }}</span>
+                            {% endif %}
+                          {% elif event.location %}
+                            <span title="{{ event.location }}">in {{ event.location|truncatechars:30 }}</span>
+                          {% elif event.location_name %}
+                            <span>in {{ event.location_name|truncatechars:30 }}</span>
                           {% endif %}
-                        {% elif event.location %}
-                          <span title="{{ event.location }}">in {{ event.location|truncatechars:30 }}</span>
-                        {% elif event.location_name %}
-                          <span>in {{ event.location_name|truncatechars:30 }}</span>
-                        {% endif %}
+                        </span>
                       </div>
 
                       <h3 class="text-brown text-lg md:text-xl mb-1 font-semibold group-hover:text-green-500 hyphens-auto">{{ event.title }}</h3>
