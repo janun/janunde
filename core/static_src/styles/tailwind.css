@@ -13,6 +13,10 @@
 	cursor: zoom-in;
 }
 
+.hyphens-auto {
+	hyphens: auto;
+}
+
 html {
 	scroll-behavior: smooth;
 }

@@ -13,7 +13,7 @@
 
     {% comment %} mobile heading {% endcomment %}
     <header class="sm:hidden mb-8">
-      <h1 class="leading-none text-green-500 text-3xl font-bold mt-0 mb-4">{{ self.hyphenated_title|safe }}</h1>
+      <h1 class="leading-none text-green-500 text-3xl font-bold mt-0 mb-4">{{ self.title }}</h1>
       {% if self.subtitle %}
         <h2 class="leading-tight text-gray-700 text-lg my-0">{{ self.subtitle }}</h2>
       {% endif %}
