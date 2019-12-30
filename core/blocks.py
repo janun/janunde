@@ -21,18 +21,16 @@ class SizeChoiceBlock(blocks.ChoiceBlock):
     choices = [
         ("text-width", "Text-Breite"),
         ("over-text-width", "Über-Text-Breite"),
-        ("screen-width", "Bildchirm-Breite"),
     ]
 
     class Meta:
-        default = "over-text-width"
-        label = "Größe"
+        label = "Breite"
 
 
 class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock(label="Bild")
-    caption = blocks.CharBlock(label="opt. Beschrift.", required=False)
-    size = SizeChoiceBlock()
+    caption = blocks.CharBlock(label="Bildunterschrift", required=False)
+    size = SizeChoiceBlock(default="over-text-width")
 
     class Meta:
         label = "Bild"

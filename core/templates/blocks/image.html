@@ -1,1 +1,17 @@
-{% include "core/_image.html" with class='images__item' image=value.image caption=value.caption srcset='width-300 width-600 width-900' sizes='(min-width: 830px) 830px, 100vw' %}
+{% load wagtailimages_tags %}
+
+<div class="my-8 {% if value.size == "over-text-width" %}-userim-mx-20{% endif %}">
+  {% image value.image width-800 format-jpeg as block_image %}
+  {% image value.image max-1280x1280 format-jpeg as big_image %}
+  <a href="{{ big_image.url }}" class="block cursor-zoom-in js-zoom-image" title="Vergrößern">
+    <img {{ block_image.attrs }} loading="lazy" class="rounded-lg shadow w-full">
+  </a>
+  <div class="mt-3 flex flex-wrap items-baseline italic text-sm">
+    {% if value.caption %}
+      <span class="text-gray-700 mr-2">{{ value.caption }}</span>
+    {% endif %}
+    {% if value.image.attribution %}
+      <span class="text-gray-500 text-xs ml-auto">{{ value.image.attribution }}</span>
+    {% endif %}
+  </div>
+</div>

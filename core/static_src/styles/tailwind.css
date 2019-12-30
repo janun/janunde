@@ -25,3 +25,9 @@ html {
 		scroll-behavior: auto;
 	}
 }
+
+@screen lg {
+	.userim .-userim-mx-20 {
+		@apply -mx-20;
+	}
+}
