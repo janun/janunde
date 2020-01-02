@@ -202,6 +202,7 @@ class EventIndexPage(BasePage):
         except TypeError:
             month = None
 
+        # search /w pagination
         if q:
             events = (
                 EventPage.objects.live()
@@ -217,27 +218,34 @@ class EventIndexPage(BasePage):
                 events = paginator.page(1)
             except EmptyPage:
                 events = paginator.page(paginator.num_pages)
+        # past events
         elif past:
             events = EventPage.objects.expired().order_by("-start_datetime")
             context["months"] = events.dates("start_datetime", "month")
+            months = list(context["months"])
+            if not year or not month:
+                year = months[-1].year
+                month = months[-1].month
+            events = events.filter(
+                start_datetime__year=year, start_datetime__month=month
+            )
+        # upcoming events
         else:
             events = EventPage.objects.upcoming()
 
-        if year:
-            events = events.filter(start_datetime__year=year)
-            if month:
-                events = events.filter(start_datetime__month=month)
-                months = list(context["months"])
-                month_index = months.index(datetime.date(year, month, 1))
+        # get next/previous possible month
+        if year and month:
+            first_of_month = datetime.date(year, month, 1)
+            if first_of_month in months:
+                month_index = months.index(first_of_month)
                 try:
                     context["next_month"] = months[month_index + 1]
                 except IndexError:
                     context["next_month"] = None
-                if month_index > 0:
-                    try:
-                        context["prev_month"] = months[month_index - 1]
-                    except IndexError:
-                        context["prev_month"] = None
+                try:
+                    context["prev_month"] = months[month_index - 1]
+                except IndexError:
+                    context["prev_month"] = None
 
         context["year"] = year
         context["month"] = month

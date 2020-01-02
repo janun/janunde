@@ -29,7 +29,7 @@
           </li>
           <li class="mx-2">
             <a class="py-2 border-b-2 text-gray-700 {% if past and not q %}text-green-600 border-green-400{% else %}border-transparent{% endif %}"
-              href="{% pageurl self %}?past=1&year={% now "Y" %}&month={% now "m" %}">Vergangenheit</a>
+              href="{% pageurl self %}?past=1">Vergangenheit</a>
           </li>
           {% if q %}
             <li class="mx-2">
@@ -146,9 +146,9 @@
                             {{ event.start|date:"D j.n." }} – {{ event.end|date:"D j.n." }}
                           </span>
                         {% else %}
-                          <span title="{{ event.start|date:"D j.n.Y G:i" }}">
-                            {{ event.start|date:"D j.n." }}
-                            {% if event.start|time:"G:i" %}{{ event.start|time:"G:i" }}{% endif %}
+                          <span title="{{ event.start_datetime|date:"D j.n.Y G:i" }}">
+                            {{ event.start_datetime|date:"D j.n." }}
+                            {{ event.start_datetime|time:"G:i" }}
                           </span>
                         {% endif %}
 
