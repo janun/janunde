@@ -4,13 +4,13 @@
 {% load cache %}
 
 {% block content %}
-  <div class="max-w-5xl xl:max-w-6xl mx-auto px-4">
+  <div class="max-w-5xl mx-auto px-4">
 
-    <div class="lg:flex flex-wrap items-center justify-between my-8 md:my-16">
+    <div class="lg:flex flex-wrap items-center justify-between my-8 md:mt-12 md:mb-16">
       <h1 class="text-green-500 text-2xl md:text-3xl font-bold mb-6 lg:mb-0 mt-0">{{ self.heading }}</h1>
 
       {% comment %} search field {% endcomment %}
-      <form class="flex items-center flex-1 max-w-md lg:ml-8" action="{% pageurl self %}" method="GET">
+      <form class="flex items-center flex-1 max-w-xs lg:ml-8" action="{% pageurl self %}" method="GET">
         <div class="flex items-center relative w-full">
           <input autocomplete="off" type="text" {% if q %}autofocus{% endif %} name="q" value="{{ q }}" class="pl-10 w-full bg-white border border-gray-400 outline-none focus:shadow-outline rounded-md p-2" placeholder="Veranstaltungen durchsuchen">
           <svg class="fill-current text-gray-600 absolute left-0 w-4 h-4 ml-3" viewBox="0 0 20 20"><path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
@@ -112,7 +112,7 @@
         {% endif %}
       </aside>
 
-      <main class="w-full max-w-3xl">
+      <main class="w-full max-w-2xl">
         {% if q %}
           {% if events_by_month %}
             <div class="text-green-500 font-bold text-xl mb-6">{{ search_count }} Suchergebnisse für „{{ q }}“:</div>
