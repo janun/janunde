@@ -192,7 +192,7 @@ class EventIndexPage(BasePage):
     def get_context(self, request):
         context = super().get_context(request)
         past = request.GET.get("past", None)
-        q = request.GET.get("q", "")
+        q = request.GET.get("q", "").strip()
         try:
             year = int(request.GET.get("year", None))
         except TypeError:
