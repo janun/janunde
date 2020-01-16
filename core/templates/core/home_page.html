@@ -1,13 +1,17 @@
 {% extends "core/__base.html" %}
 {% load wagtailcore_tags %}
-{% load cache %}
+{% load cache stuff %}
 
 {% block body_class %}template-homepage{% endblock %}
 
 {% block title %}JANUN ist das Jugendumweltnetzwerk Niedersachsen{% endblock %}
 
+
 {% block content %}
+{% banners %}
+
 {% cache 600 self.content self.latest_revision_created_at|date:"c" request.preview_timestamp %}
-  {% include_block self.content %}
+{% include_block self.content %}
 {% endcache %}
+
 {% endblock %}

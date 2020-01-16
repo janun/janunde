@@ -31,3 +31,23 @@ html {
 		@apply -mx-20;
 	}
 }
+
+@screen md {
+	.group:hover .md\:group-hover\:animate-translate-x-4 {
+		animation-duration: 0.8s;
+		animation-name: translate-x-4;
+		animation-iteration-count: infinite;
+	}
+}
+
+@keyframes translate-x-4 {
+	0% {
+		transform: translateX(0);
+	}
+	50% {
+		transform: translateX(1rem);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}

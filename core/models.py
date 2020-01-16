@@ -32,6 +32,7 @@ from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.forms.edit_handlers import FormSubmissionsPanel
 from wagtail.admin.utils import send_mail  # pylint: disable=no-name-in-module
 from wagtail.contrib.forms.forms import WagtailAdminPageForm
+from wagtail.snippets.models import register_snippet
 
 from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
@@ -252,6 +253,24 @@ class StandardPage(BasePage):
     class Meta:
         verbose_name = "Einfache Seite"
         verbose_name_plural = "Einfache Seiten"
+
+
+@register_snippet
+class Banner(models.Model):
+    active = models.BooleanField("aktiviert", default=True)
+    text = models.CharField("Text", max_length=255)
+    button_text = models.CharField("Button-Text", max_length=255, null=True, blank=True)
+    button_link = models.URLField("Button-Link", max_length=255, null=True, blank=True)
+
+    panels = [
+        FieldPanel("active"),
+        FieldPanel("text"),
+        FieldPanel("button_text"),
+        FieldPanel("button_link"),
+    ]
+
+    def __str__(self):
+        return self.text
 
 
 class HomePage(BasePage):
