@@ -29,4 +29,4 @@ flake8-django = "*"
 black = "==19.10b0"
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"
