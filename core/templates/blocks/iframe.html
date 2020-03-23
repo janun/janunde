@@ -1,25 +1,20 @@
-<iframe
-  src="{{ value.url }}"
-  {% if value.allowFullScreen %}allowFullScreen{% endif %}
-  frameborder="0"
-></iframe>
+<div class="iframe-container">
+  <div class="w-full relative overflow-hidden h-0" style="padding-bottom: {% widthratio value.height value.width 100 %}%;">
+    <iframe
+      class="absolute w-full h-full inset-0 iframe"
+      src="{{ value.url }}"
+      {% if value.allowFullScreen %}allowFullScreen{% endif %}
+      frameborder="0"
+    ></iframe>
+  </div>
+</div>
 
 <style>
-  .block-iframe {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    height: 0;
-    padding-bottom: {% widthratio value.height value.width 100 %}%;
+  @media (min-width: 1000px) {
+  .userim .iframe-container {
+    width: 1000px !important;
+    margin-left: -180px;
+    margin-right: -180px;
   }
-
-  .block-iframe iframe {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
   }
 </style>
