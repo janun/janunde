@@ -19,7 +19,7 @@
     </div>
 
     {% comment %} type filter {% endcomment %}
-    <div class="mb-10 flex flex-wrap -mx-1 items-center">
+    <div class="mb-10 flex flex-wrap -mx-1 items-center relative">
       {% for type in types %}
         <a href="?{% query_transform request delete='typ' typ=type.name %}"
            title="Nur Veranstaltungen mit diesem Typ anzeigen"
