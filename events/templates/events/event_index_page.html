@@ -6,7 +6,7 @@
 {% block content %}
   <div class="max-w-5xl mx-auto px-4">
 
-    <div class="lg:flex flex-wrap items-center justify-between my-8 md:mt-12 md:mb-8">
+    <div class="lg:flex flex-wrap items-center justify-between my-6 md:mt-12 md:mb-8">
       <h1 class="text-green-500 text-2xl md:text-3xl font-bold mb-6 lg:mb-0 mt-0">{{ self.heading }}</h1>
 
       {% comment %} search field {% endcomment %}
@@ -19,11 +19,11 @@
     </div>
 
     {% comment %} type filter {% endcomment %}
-    <div class="mb-10 flex flex-wrap -mx-1 items-center relative">
+    <div class="mb-5 md:mb-10 flex flex-wrap -mx-1 items-center relative">
       {% for type in types %}
         <a href="?{% query_transform request delete='typ' typ=type.name %}"
            title="Nur Veranstaltungen mit diesem Typ anzeigen"
-           class="block rounded-full border px-3 m-1 bg-white hover:border-green-500
+           class="block text-sm md:text-base rounded-full border px-3 m-1 bg-white hover:border-green-500
                   {% if type.name == active_type %}bg-green-500 border-green-500 text-white hover:text-white{% endif %}">
            {{ type }}
         </a>
@@ -39,7 +39,7 @@
       
     <div class="md:flex items-start justify-between js-scroll-spy">
       <aside class="md:sticky md:mr-8 text-gray-700" style="top: 80px">
-        <ul class="flex mb-12 md:mb-8 -mx-2">
+        <ul class="flex mb-8 -mx-2">
           <li class="mx-2">
             <a class="py-2 border-b-2 text-gray-700 {% if past or q %}border-transparent{% else %}text-green-600 border-green-400{% endif %}"
               href="?">Aktuell</a>
