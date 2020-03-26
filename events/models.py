@@ -245,7 +245,7 @@ class EventIndexPage(BasePage):
                 events = events.filter(event_type__name=typ)
 
         # get next/previous possible month
-        if past and year and month:
+        if past and year and month and events:
             first_of_month = datetime.date(year, month, 1)
             if first_of_month in months:
                 month_index = months.index(first_of_month)

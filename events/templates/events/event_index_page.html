@@ -29,7 +29,7 @@
         </a>
       {% endfor %}
       {% if active_type %}
-        <a class="block ml-3 my-3" title="Filter für Typ zurücksetzen" href="?{% query_transform request delete='typ' %}">
+        <a class="block ml-3 md:my-3" title="Filter für Typ zurücksetzen" href="?{% query_transform request delete='typ' %}">
           <svg class="text-gray-600 hover:text-gray-800 h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>
         </a>
       {% endif %}
@@ -73,7 +73,7 @@
                     {% endfor %}
                   </ul>
                 {% else %}
-                  <a class="text-xs text-gray-700 hover:text-green-500" href="{% query_transform request year=y.grouper month=12">{{ y.grouper }}</a>
+                  <a class="text-xs text-gray-700 hover:text-green-500" href="{% query_transform request year=y.grouper month=12 %}">{{ y.grouper }}</a>
                 {% endif %}
               </li>
             {% endfor %}
