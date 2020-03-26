@@ -34,3 +34,17 @@ def banners(context):
         "banners": Banner.objects.all(),
         "request": context["request"],
     }
+
+
+@register.simple_tag
+def query_transform(request, delete=None, **kwargs):
+    """Template tag to edit querystrings
+
+    Preserve anything already in the query string and just update the keys that you specify.
+
+    Example: <a href="{% url 'view_name' %}?{% query_transform request a=5 b=6 %}">"""
+    updated = request.GET.copy()
+    if delete and delete in updated:
+        updated.pop(delete)
+    updated.update(kwargs)
+    return updated.urlencode()

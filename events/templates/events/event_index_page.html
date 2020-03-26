@@ -1,12 +1,12 @@
 {% extends "core/__base.html" %}
 {% load wagtailcore_tags wagtailimages_tags nettes_datum %}
 {% load static from staticfiles %}
-{% load cache %}
+{% load cache stuff %}
 
 {% block content %}
   <div class="max-w-5xl mx-auto px-4">
 
-    <div class="lg:flex flex-wrap items-center justify-between my-8 md:mt-12 md:mb-16">
+    <div class="lg:flex flex-wrap items-center justify-between my-8 md:mt-12 md:mb-8">
       <h1 class="text-green-500 text-2xl md:text-3xl font-bold mb-6 lg:mb-0 mt-0">{{ self.heading }}</h1>
 
       {% comment %} search field {% endcomment %}
@@ -17,6 +17,23 @@
         </div>
       </form>
     </div>
+
+    {% comment %} type filter {% endcomment %}
+    <div class="mb-10 flex flex-wrap -mx-1 items-center">
+      {% for type in types %}
+        <a href="?{% query_transform request delete='typ' typ=type.name %}"
+           title="Nur Veranstaltungen mit diesem Typ anzeigen"
+           class="block rounded-full border px-3 m-1 bg-white hover:border-green-500
+                  {% if type.name == active_type %}bg-green-500 border-green-500 text-white hover:text-white{% endif %}">
+           {{ type }}
+        </a>
+      {% endfor %}
+      {% if active_type %}
+        <a class="block ml-3" title="Filter für Typ zurücksetzen" href="?{% query_transform request delete='typ' %}">
+          <svg class="text-gray-600 h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>
+        </a>
+      {% endif %}
+    </div>
     
     {% regroup events by month as events_by_month %}
       
@@ -25,11 +42,11 @@
         <ul class="flex mb-12 md:mb-8 -mx-2">
           <li class="mx-2">
             <a class="py-2 border-b-2 text-gray-700 {% if past or q %}border-transparent{% else %}text-green-600 border-green-400{% endif %}"
-              href="{% pageurl self %}">Aktuell</a>
+              href="?">Aktuell</a>
           </li>
           <li class="mx-2">
             <a class="py-2 border-b-2 text-gray-700 {% if past and not q %}text-green-600 border-green-400{% else %}border-transparent{% endif %}"
-              href="{% pageurl self %}?past=1">Vergangenheit</a>
+              href="?past=1">Vergangenheit</a>
           </li>
           {% if q %}
             <li class="mx-2">
@@ -48,7 +65,7 @@
                   <ul>
                     {% for m in y.list reversed %}
                       <li class="mb-2">
-                        <a href="{% pageurl self %}?past=1&year={{ m.year }}&month={{ m.month }}"
+                        <a href="?{% query_transform request year=m.year month=m.month %}"
                           class="{% if m.year == year and m.month == month %}text-green-500{% else %}text-gray-700 hover:text-green-500{% endif %}">
                           {{ m|date:"F" }}
                         </a>
@@ -56,7 +73,7 @@
                     {% endfor %}
                   </ul>
                 {% else %}
-                  <a class="text-xs text-gray-700 hover:text-green-500" href="{% pageurl self %}?past=1&year={{ y.grouper }}&month=12">{{ y.grouper }}</a>
+                  <a class="text-xs text-gray-700 hover:text-green-500" href="{% query_transform request year=y.grouper month=12">{{ y.grouper }}</a>
                 {% endif %}
               </li>
             {% endfor %}
@@ -118,11 +135,17 @@
             <div class="text-green-500 font-bold text-xl mb-6">{{ search_count }} Suchergebnisse für „{{ q }}“:</div>
           {% else %}
             <div>
-              <svg class="fill-current text-red-500 h-16 w-16 mb-6" width="32" height="32" viewBox="0 0 32 32"><path d="M16 0C8.84 0 3 6.24 3 13.92v17.09a1 1 0 001.75.67l3.77-4.16 2.95 4.07a1 1 0 001.61 0l2.96-3.97 2.92 3.98a1 1 0 001.61 0l2.99-4.08 3.68 4.15A1 1 0 0029 31V13.92C29 6.24 23.16 0 16 0zm10.99 28.38l-2.76-3.1a1 1 0 00-1.55.07l-2.92 3.96-2.9-3.96a1 1 0 00-.8-.41h-.01a1 1 0 00-.8.4l-2.96 3.98-2.88-3.97a1 1 0 00-.75-.42H8.6a1 1 0 00-.74.33l-2.85 3.15V13.92C5 7.35 9.94 2 16 2s10.99 5.35 10.99 11.92v14.46zM21 11a2 2 0 100 4 2 2 0 000-4zm-10 0a2 2 0 100 4 2 2 0 000-4z"/></svg>
               <div class="font-bold text-red-500 mb-4 text-lg text-xl md:text-2xl">Sorry, leider nichts gefunden für „{{ q }}“</div>            
               <div class="text-gray-700">Versuche es mal mit einem anderen Suchbegriff.</div>
             </div>
           {% endif %}
+        {% endif %}
+
+        {% if not q and not events_by_month %}
+          <div>
+            <div class="font-bold text-red-500 mb-4 text-lg text-xl md:text-2xl">Sorry, Nichts gefunden.</div>            
+            <div class="text-gray-700">Versuch mal <a href="?" class="underline">die Filter zurückzusetzen</a></div>
+          </div>
         {% endif %}
 
         {% for events in events_by_month %}
@@ -139,7 +162,7 @@
                     {% image event.main_image fill-448x228 format-jpeg as main_image %}
                     <img {{ main_image.attrs }} loading="lazy" class="object-cover sm:rounded-bl-lg sm:rounded-tl-lg w-32 md:w-56 border-r">
                     
-                    <div class="p-3 pt-2 md:p-5 md:pt-4 overflow-hidden">
+                    <div class="p-3 pt-2 md:p-5 md:pt-4 overflow-hidden flex flex-col">
                       <div class="text-xs md:text-sm mb-1 sm:mb-2 truncate">
                         {% if event.multipledays %}
                           <span title="{{ event.start|date:"D j.n.Y" }} – {{ event.end|date:"D j.n.Y" }}">
@@ -171,8 +194,14 @@
                         <div class="hidden md:block text-xs md:text-sm hyphens-auto" title="{{ event.subtitle }}">{{ event.subtitle|truncatechars:120 }}</div>
                         <div class="md:hidden text-xs md:text-sm hyphens-auto" title="{{ event.subtitle }}">{{ event.subtitle|truncatechars:60 }}</div>
                       {% endif %}
-                    </div>
 
+                      <div class="flex mt-auto -mx-1 items-center">
+                        {% for type in event.event_type.all %}
+                          <span class="text-xs inline-block rounded-full border px-2 mx-1 bg-white">{{ type }}</span>
+                        {% endfor %}
+                      </div>
+
+                    </div>
                   </a>
                   {% if event.related_group %}
                     <a href="{% pageurl event.related_group %}" title="{{ event.related_group.title }}"
@@ -186,6 +215,7 @@
                       {% endif %}
                     </a>
                   {% endif %}
+
                 </div>
 
                 <script type="application/ld+json">
@@ -248,11 +278,11 @@
         {% if past %}
           <div class="flex items-center justify-between my-12">
             {% if prev_month %}
-              <a class="text-gray-700 hover:text-green-500" href="{% pageurl self %}?past=1&year={{ prev_month.year }}&month={{ prev_month.month }}">← {{ prev_month|date:"F Y" }}</a>
+              <a class="text-gray-700 hover:text-green-500" href="?{% query_transform request year=prev_month.year month=prev_month.month %}">← {{ prev_month|date:"F Y" }}</a>
             {% endif %}
 
             {% if next_month %}
-              <a class="ml-auto text-gray-700 hover:text-green-500" href="{% pageurl self %}?past=1&year={{ next_month.year }}&month={{ next_month.month }}">{{ next_month|date:"F Y" }} →</a>
+              <a class="ml-auto text-gray-700 hover:text-green-500" href="?{% query_transform request year=next_month.year month=next_month.month %}">{{ next_month|date:"F Y" }} →</a>
             {% endif %}
           </div>
         {% endif %}

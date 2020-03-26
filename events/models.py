@@ -30,6 +30,9 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.documents.edit_handlers import DocumentChooserPanel
 from wagtail.documents.models import Document
 from wagtail.search import index
+from wagtail.snippets.models import register_snippet
+
+from modelcluster.fields import ParentalManyToManyField
 
 from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
@@ -192,6 +195,7 @@ class EventIndexPage(BasePage):
     def get_context(self, request):
         context = super().get_context(request)
         past = request.GET.get("past", None)
+        typ = request.GET.get("typ", None)
         q = request.GET.get("q", "").strip()
         try:
             year = int(request.GET.get("year", None))
@@ -204,11 +208,11 @@ class EventIndexPage(BasePage):
 
         # search /w pagination
         if q:
-            events = (
-                EventPage.objects.live()
-                .order_by("-start_datetime")
-                .search(q, order_by_relevance=False)
-            )
+            events = EventPage.objects.live().order_by("-start_datetime")
+            if typ:
+                events = events.filter(event_type__name=typ)
+            events = events.search(q, order_by_relevance=False)
+
             context["search_count"] = len(events)
             paginator = Paginator(events, 25)
             page = request.GET.get("page")
@@ -218,23 +222,30 @@ class EventIndexPage(BasePage):
                 events = paginator.page(1)
             except EmptyPage:
                 events = paginator.page(paginator.num_pages)
+
         # past events
         elif past:
             events = EventPage.objects.expired().order_by("-start_datetime")
-            context["months"] = events.dates("start_datetime", "month")
-            months = list(context["months"])
-            if not year or not month:
-                year = months[-1].year
-                month = months[-1].month
-            events = events.filter(
-                start_datetime__year=year, start_datetime__month=month
-            )
+            if typ:
+                events = events.filter(event_type__name=typ)
+            if events:
+                context["months"] = events.dates("start_datetime", "month")
+                months = list(context["months"])
+                if not year or not month:
+                    year = months[-1].year
+                    month = months[-1].month
+                events = events.filter(
+                    start_datetime__year=year, start_datetime__month=month
+                )
+
         # upcoming events
         else:
             events = EventPage.objects.upcoming()
+            if typ:
+                events = events.filter(event_type__name=typ)
 
         # get next/previous possible month
-        if year and month:
+        if past and year and month:
             first_of_month = datetime.date(year, month, 1)
             if first_of_month in months:
                 month_index = months.index(first_of_month)
@@ -252,6 +263,9 @@ class EventIndexPage(BasePage):
         context["events"] = events
         context["past"] = past
         context["q"] = q
+
+        context["types"] = EventType.objects.filter(seminars__isnull=False).distinct()
+        context["active_type"] = typ
         return context
 
     def get_description(self):
@@ -285,6 +299,22 @@ class EventPageForm(ShortTitleForm):
     class Media:
         css = {"all": ("events/css/admin-location-form.css",)}
         js = ("events/js/admin-location-form.js",)
+
+
+@register_snippet
+class EventType(models.Model):
+    name = models.CharField("Name", max_length=255)
+
+    panels = [
+        FieldPanel("name"),
+    ]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Veranstaltungsart"
+        verbose_name_plural = "Veranstaltungsarten"
 
 
 class EventPage(Page, HyphenatedTitleMixin):
@@ -328,6 +358,12 @@ class EventPage(Page, HyphenatedTitleMixin):
         blank=True,
         help_text="externer Veranstalter, falls externe Veranstaltung",
         max_length=255,
+    )
+    event_type = ParentalManyToManyField(
+        EventType,
+        blank=True,
+        related_name="seminars",
+        verbose_name="Art der Veranstaltung",
     )
     facebook_event_url = FacebookEventURLField("Facebook-Event", null=True, blank=True,)
     website_url = PrettyURLField(
@@ -484,6 +520,7 @@ class EventPage(Page, HyphenatedTitleMixin):
     search_fields = BasePage.search_fields + [
         # title is in here by default
         index.FilterField("start_datetime"),  # enables sorting
+        index.FilterField("name"),
         index.SearchField("subtitle"),
         index.SearchField("content"),
         index.SearchField("location"),
@@ -493,6 +530,7 @@ class EventPage(Page, HyphenatedTitleMixin):
         index.SearchField("location_country"),
         index.SearchField("organizer"),
         index.RelatedFields("related_group", [index.SearchField("title"),]),
+        index.RelatedFields("event_type", [index.SearchField("name"),]),
     ]
 
     edit_handler = TabbedInterface(
@@ -501,6 +539,7 @@ class EventPage(Page, HyphenatedTitleMixin):
                 [
                     FieldPanel("title", classname="full title"),
                     FieldPanel("subtitle", classname=""),
+                    FieldPanel("event_type", widget=forms.CheckboxSelectMultiple),
                     StreamFieldPanel("content"),
                 ],
                 heading="Titel und Inhalt",

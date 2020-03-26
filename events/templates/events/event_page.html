@@ -39,6 +39,16 @@
           </div>
         {% endif %}
 
+        {% comment %}type{% endcomment %}
+        {% if self.event_type.all %}
+          <div class="flex mb-5">
+            <svg class="mr-4 mt-1 h-4 w-4 fill-current text-brown flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M31.999 13.008V2.434A2.437 2.437 0 0029.566 0H18.773c-.677 0-1.703 0-2.372.67L.591 16.481c-.38.38-.59.884-.59 1.421 0 .538.209 1.043.589 1.423L12.678 31.41c.379.381.883.59 1.421.59s1.042-.209 1.421-.589l15.811-15.812c.678-.677.674-1.65.67-2.591zm-2.084 1.178L14.089 29.997 2.003 17.896 17.797 2.099C17.956 2 18.529 2 18.765 2l.45.002L29.565 2c.239 0 .433.195.433.434v10.582c.002.38.004 1.017-.084 1.169zM24 4a4 4 0 100 8 4 4 0 000-8zm0 6a2 2 0 110-4 2 2 0 010 4z"/></svg>
+            <div class="text-brown">
+              {{ self.event_type.all|join:", " }}
+            </div>
+          </div>
+        {% endif %}
+
         {% comment %} time {% endcomment %}
         <div class="flex mb-5">
           <svg class="mr-4 mt-1 h-4 w-4 fill-current text-brown flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M16 0a16 16 0 100 32 16 16 0 000-32zm0 30.03A14.02 14.02 0 0116 2a14.02 14.02 0 010 28.03zm1-14.44V6a1 1 0 00-2 0v10a1 1 0 00.3.72l.06.06 4.95 4.95a1 1 0 001.4-1.42z"/></svg>
