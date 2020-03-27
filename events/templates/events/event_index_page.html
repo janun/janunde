@@ -163,7 +163,7 @@
                     <img {{ main_image.attrs }} loading="lazy" class="object-cover sm:rounded-bl-lg sm:rounded-tl-lg w-32 md:w-56 border-r">
                     
                     <div class="p-3 pt-2 md:p-5 md:pt-4 overflow-hidden flex flex-col">
-                      <div class="text-xs md:text-sm mb-1 sm:mb-2 truncate">
+                      <div class="text-xs md:text-sm mb-1">
                         {% if event.multipledays %}
                           <span title="{{ event.start|date:"D j.n.Y" }} – {{ event.end|date:"D j.n.Y" }}">
                             {{ event.start|date:"D j.n." }} – {{ event.end|date:"D j.n." }}
