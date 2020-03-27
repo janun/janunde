@@ -264,7 +264,9 @@ class EventIndexPage(BasePage):
         context["past"] = past
         context["q"] = q
 
-        context["types"] = EventType.objects.filter(seminars__isnull=False).distinct()
+        context["types"] = (
+            EventType.objects.filter(seminars__isnull=False).order_by("name").distinct()
+        )
         context["active_type"] = typ
         return context
 
