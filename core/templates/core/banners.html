@@ -1,10 +1,11 @@
 {% for banner in banners %}
 {% if banner.active %}
-<div class="text-xs sm:text-base bg-white shadow fixed bottom-0 border-t border-gray-400 w-full z-50">
+<div class="mt-18"></div>
+<div class="text-xs sm:text-base bg-white shadow sticky bottom-0 z-50 border-t border-gray-400 w-full">
   <div class="container flex items-center justify-between h-18">
     <p class="text-xs sm:text-base font-bold">{{ banner.text }}</p>
 
-    <a class="whitespace-no-wrap block text-white bg-green-500 rounded-full hover:shadow-md hover:bg-green-600 h-6 sm:h-10 px-1 sm:px-4 flex items-center group"
+    <a class="ml-1 whitespace-no-wrap block text-white bg-green-500 rounded-full hover:shadow-md hover:bg-green-600 h-6 sm:h-10 px-1 sm:px-4 flex items-center group"
       href="{{ banner.button_link }}">
       <span class="ml-2 sm:ml-4 sm:mr-2 font-bold">{{ banner.button_text }}</span>
       <svg class="fill-current h-5 w-5 md:group-hover:animate-translate-x-4" viewBox="0 0 20 20">
