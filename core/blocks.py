@@ -232,7 +232,17 @@ class VideoLink(blocks.StructBlock):
 
 class StandardStreamBlock(blocks.StreamBlock):
     paragraph = ParagraphBlock(
-        features=["h2", "h3", "bold", "italic", "link", "ol", "ul", "document-link"]
+        features=[
+            "h2",
+            "h3",
+            "bold",
+            "italic",
+            "link",
+            "ol",
+            "ul",
+            "document-link",
+            "anchor-identifier",
+        ]
     )
     image = ImageBlock()
     several_images = ImagesBlock(ImageCarouselBlock)

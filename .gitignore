@@ -1,9 +1,13 @@
 *.pyc
 .env
 /venv/
-/core/static/
+
+/core/static/core/**
+!/core/static/core/scripts/
+!/core/static/core/scripts/*
 /static/
 /janunde/static/
+
 /media/
 /node_modules/
 /styleguide/
