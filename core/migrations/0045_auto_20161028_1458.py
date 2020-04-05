@@ -13,7 +13,9 @@ class Migration(migrations.Migration):
         ('core', '0044_auto_20161028_1457'),
     ]
 
-    forward, reverse = get_fill_filter_spec_migrations('core', 'AttributedRendition')
-    operations = [
-        migrations.RunPython(forward, reverse),
-    ]
+    # get_fill_filter_spec_migrations errors out
+    # https://github.com/wagtail/wagtail/issues/5067
+    # forward, reverse = get_fill_filter_spec_migrations('core', 'AttributedRendition')
+    # operations = [
+    #     migrations.RunPython(forward, reverse),
+    # ]

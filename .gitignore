@@ -13,3 +13,4 @@
 /styleguide/
 /db_backups/
 .vscode
+db.sqlite3

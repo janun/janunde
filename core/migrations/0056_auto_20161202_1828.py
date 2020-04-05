@@ -13,6 +13,12 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        # TODO: reactivate somehow
+        # migrations.AddField(
+        #     model_name='article',
+        #     name='author',
+        #     field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='pages', to='contact.PersonPage', verbose_name='Autor_in'),
+        # ),
         migrations.AddField(
             model_name='groupindexpage',
             name='header_image',
