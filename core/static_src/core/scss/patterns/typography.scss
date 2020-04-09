@@ -1,7 +1,7 @@
 // Typography
 
 // font stack
-$font-family-sans-serif: "Cabin", Helvetica, Roboto, Arial, sans-serif;
+$font-family-sans-serif: "Myniad", Helvetica, Roboto, Arial, sans-serif;
 $font-family-serif: "Crimson Text", "Times New Roman", Times, serif;
 
 // colors
@@ -12,8 +12,8 @@ $text-color-standard: $brown;
  * @atom font-family
  * @section Helpers > Fonts
  * @markup
- *   <span class="font-family-sans">Cabin</span>
- *   <span class="font-family-serif">Crimson</span>
+ *   <span class="font-family-sans">sans</span>
+ *   <span class="font-family-serif">serif</span>
  */
 .font-family {
   &-sans {

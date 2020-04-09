@@ -2,7 +2,7 @@ module.exports = {
   important: true,
   theme: {
     fontFamily: {
-      sans: ["Cabin", "sans-serif"],
+      sans: ["Myniad", "sans-serif"],
       serif: ["Crimson Text", "serif"]
     },
     extend: {
@@ -13,6 +13,7 @@ module.exports = {
         "outline-error": "0 0 0 3px rgba(194, 48, 48, 0.5);"
       },
       colors: {
+        "purple": "#7F006B",
         green: {
           50: "#fcfefb",
           100: "#f6fff1",
@@ -40,6 +41,9 @@ module.exports = {
         "36": "9rem",
         "14": "3.5rem",
         "18": "4.5rem",
+        "1000": "1000px",
+        "500": "500px",
+        "400": "400px",
       },
     }
   },

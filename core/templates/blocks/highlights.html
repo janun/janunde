@@ -1,16 +1,29 @@
-{% load render_partial %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-{% if self.heading %}
-  <h2 id="{{ self.heading|slugify }}" class="block-highlights__heading">{{ self.heading }}</h2>
-{% endif %}
 
-<div class="block-highlights__grid">
-  {% for object in self.objects %}
-    <div class="block-highlights__grid-item">
-      {% render_partial object.specific %}
+<div class="bg-white py-10">
+
+  <div class="max-w-screen-lg mx-auto px-4">
+    {% if self.heading %}
+      <h2 id="{{ self.heading|slugify }}" class="mb-10 font-bold text-center">{{ self.heading }}</h2>
+    {% endif %}
+
+    <div class="flex flex-wrap justify-center md:justify-around lg:justify-between -mx-4">
+      {% for object in self.objects %}
+        <a href="{% pageurl object %}" class="block w-full sm:w-64 mx-4">
+
+          {% if object.get_image %}
+            {% image object.get_image original as image %}
+            <img src="{{ image.url }}" class="w-full h-40 object-cover" alt="{{ image.alt }}">
+          {% else %}
+            <div class="w-full h-40 bg-gray-200"></div>
+          {% endif %}
+
+          <h3 class="text-xl my-5 font-bold">{{ object.title }}</h3>
+          <p>{{ object.get_description }}</p>
+        </a>
+      {% endfor %}
     </div>
-  {% endfor %}
-</div>
+  </div>  
 
-<a class="block-highlights__link" href="/veranstaltungen">Alle Veranstaltungen</a>
-<a class="block-highlights__link" href="/artikel">Alle Artikel</a>
+</div>

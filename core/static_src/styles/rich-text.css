@@ -1,9 +1,9 @@
 p {
-  @apply font-sans text-base text-brown leading-relaxed;
+  @apply font-sans text-brown leading-relaxed;
 }
 
 .rich-text {
-	@apply font-sans text-base text-brown leading-relaxed;
+	@apply font-sans text-brown leading-relaxed;
 }
 
 .rich-text a {

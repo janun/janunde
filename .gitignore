@@ -5,6 +5,8 @@
 /core/static/core/**
 !/core/static/core/scripts/
 !/core/static/core/scripts/*
+!/core/static/core/fonts/
+!/core/static/core/fonts/*
 /static/
 /janunde/static/
 

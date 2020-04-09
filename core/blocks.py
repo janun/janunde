@@ -256,8 +256,22 @@ class StandardStreamBlock(blocks.StreamBlock):
     video_link = VideoLink()
 
 
+class HeaderButton(blocks.StructBlock):
+    text = blocks.CharBlock(label="Text")
+    link = blocks.CharBlock(label="Link")
+    primary = blocks.BooleanBlock(label="Primär", required=False)
+
+    class Meta:
+        label = "Button"
+        icon = "link"
+
+
 class HeaderBlock(blocks.StructBlock):
-    background = ImageChooserBlock(label="Hintergrundbild", required=False,)
+    background = ImageChooserBlock(label="Hintergrundbild", required=False)
+    heading = blocks.CharBlock(label="Überschrift", required=False)
+    text = blocks.RichTextBlock(label="Text", required=False)
+    text_mobile = blocks.RichTextBlock(label="Text (mobil)", required=False)
+    buttons = blocks.ListBlock(HeaderButton())
 
     class Meta:
         label = "Header"
