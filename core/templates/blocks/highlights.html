@@ -8,20 +8,24 @@
       <h2 id="{{ self.heading|slugify }}" class="mb-10 font-bold text-center">{{ self.heading }}</h2>
     {% endif %}
 
-    <div class="flex flex-wrap justify-center md:justify-around lg:justify-between -mx-4">
+    <div class="flex flex-wrap sm:justify-center lg:justify-around xl:justify-between xl:-mx-4">
       {% for object in self.objects %}
-        <a href="{% pageurl object %}" class="block w-full sm:w-64 mx-4">
+        {% with object=object.specific %}
+          <a href="{% pageurl object %}" class="-ml-5 mb-8 md:mx-4 flex md:block group block w-full sm:w-64">
 
-          {% if object.get_image %}
-            {% image object.get_image original as image %}
-            <img src="{{ image.url }}" class="w-full h-40 object-cover" alt="{{ image.alt }}">
-          {% else %}
-            <div class="w-full h-40 bg-gray-200"></div>
-          {% endif %}
+            <div class="flex-shrink-0 overflow-hidden h-32 w-40 md:h-40 md:w-full bg-gray-200 mr-5">
+              {% if object.get_image %}
+                {% image object.get_image fill-512x320 as image %}
+                <img src="{{ image.url }}" class="h-full w-full object-cover md:transition-transform md:duration-200 md:transform md:group-hover:scale-105" alt="{{ image.alt }}">
+              {% endif %}
+            </div>
 
-          <h3 class="text-xl my-5 font-bold">{{ object.title }}</h3>
-          <p>{{ object.get_description }}</p>
-        </a>
+            <div>
+              <h3 class="inline-block text-xl md:mt-5 mb-2 font-bold text-brown group-hover:text-green-600">{{ object.title }}</h3>
+              <p class="text-sm leading-tight">{{ object.get_description|truncatechars:100 }}</p>
+            </div>
+          </a>
+        {% endwith %}
       {% endfor %}
     </div>
   </div>  
