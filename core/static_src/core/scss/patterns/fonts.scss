@@ -4,6 +4,7 @@
   font-display: swap;
   font-weight: 600;
   src:
+    url('/static/core/fonts/Myniad-Semibo.woff2') format('woff2'),
     url('/static/core/fonts/Myniad-Semibo.woff') format('woff');
 }
 
@@ -14,5 +15,18 @@
   font-display: swap;
   font-weight: 400;
   src:
+    url('/static/core/fonts/Myniad-Regular.woff2') format('woff2'),
     url('/static/core/fonts/Myniad-Regular.woff') format('woff');
+}
+
+
+
+@font-face {
+  font-family: 'Myniad';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300;
+  src:
+    url('/static/core/fonts/Myniad-Light.woff2') format('woff2'),
+    url('/static/core/fonts/Myniad-Light.woff') format('woff');
 }
