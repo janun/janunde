@@ -50,8 +50,8 @@
         <div class="text-center lg:text-left my-5">
           {% for button in self.buttons %}
             <a class="text-sm lg:text-base inline-flex items-center h-8 lg:h-10 pt-px pl-6 pr-4 mb-4 rounded-full
-              {% if button.primary %}bg-green-500 text-white font-bold hover:bg-green-600
-              {% else %}bg-white text-green-500 border border-green-500 hover:bg-green-100 hover:text-green-700{% endif %}"
+              {% if button.primary %}shadow bg-green-600 text-white font-bold hover:bg-green-500
+              {% else %}bg-white text-green-600 border border-green-600 hover:text-green-500 hover:border-green-500{% endif %}"
               href="{{ button.link }}">
               {{ button.text }}
               <svg class="inline-block ml-3 fill-current h-5 w-5" viewBox="0 0 20 20">
@@ -63,7 +63,7 @@
         <div class="flex items-center justify-center lg:justify-start my-5 lg:mt-10 -mx-2">
           {% for social_media in settings.core.SocialMediaSettings.social_medias.all %}
             {% image social_media.icon_color original as icon %}
-            <a class="mx-2" href="{{ social_media.link }}" title="{{ social_media.tooltip }}"><img class="w-8" src="{{ icon.url }}"></a>
+            <a class="mx-2 md:transition-transform md:duration-200 md:transform md:hover:scale-105" href="{{ social_media.link }}" title="{{ social_media.tooltip }}"><img class="w-8" src="{{ icon.url }}"></a>
           {% endfor %}
         </div>
 
