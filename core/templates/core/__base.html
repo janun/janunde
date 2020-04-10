@@ -14,8 +14,7 @@
     {% include "core/_navbar.html" with navbar_class="navbar--white" %}
   {% endblock %}
 
-  <div class="{% block content_class %}content{% endblock %}"
-       itemprop="mainContentOfPage">
+  <div class="{% block content_class %}pt-16 content{% endblock %}">
     {% wagtailuserbar %}
     {% block content %}{% endblock %}
   </div>

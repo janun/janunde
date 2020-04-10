@@ -6,6 +6,9 @@ module.exports = {
       serif: ["Crimson Text", "serif"]
     },
     extend: {
+      borderWidth: {
+        '5': '5px',
+      },
       borderRadius: {
         md: "6px"
       },
