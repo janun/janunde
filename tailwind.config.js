@@ -3,11 +3,10 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ["Myniad", "sans-serif"],
-      serif: ["Crimson Text", "serif"]
     },
     extend: {
       borderWidth: {
-        '5': '5px',
+        "5": "5px",
       },
       borderRadius: {
         md: "6px"
@@ -54,7 +53,7 @@ module.exports = {
     boxShadow: ["responsive", "hover", "focus", "focus-within", "group-hover"],
     textColor: ["responsive", "hover", "focus", "group-hover", "focus-within"],
     borderColor: ["responsive", "hover", "group-hover", "focus"],
-    scale: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+    scale: ["responsive", "hover", "focus", "active", "group-hover"],
   },
   corePlugins: {
     container: false,
