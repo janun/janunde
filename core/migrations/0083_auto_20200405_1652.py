@@ -24,7 +24,7 @@ def author_id_exists():
 
 def add_article_author(apps, schema_editor):
     """Add author_id only if non-existent"""
-    if not author_id_exists:
+    if not author_id_exists():
         migrations.AddField(
             model_name="article",
             name="author",
