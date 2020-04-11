@@ -8,7 +8,7 @@
       <h2 id="{{ self.heading|slugify }}" class="mb-10 font-bold text-center">{{ self.heading }}</h2>
     {% endif %}
 
-    <div class="flex flex-wrap justify-center xl:-mx-4">
+    <div class="md:flex flex-wrap justify-center xl:-mx-4">
       {% for object in self.objects %}
         {% with object=object.specific %}
           <a href="{% pageurl object %}" class="-ml-5 mb-8 md:mx-4 lg:mx-10 flex md:block group block w-full sm:w-64">
