@@ -364,6 +364,16 @@ class GapBlock(blocks.StructBlock):
         template = "blocks/gap.html"
 
 
+class HomepageImageBlock(blocks.StructBlock):
+    image = ImageChooserBlock(label="Bild")
+    caption = blocks.CharBlock(label="Bildunterschrift", required=False)
+
+    class Meta:
+        label = "Bild"
+        template = "blocks/homepage_image.html"
+        icon = "image"
+
+
 class HomePageStreamBlock(blocks.StreamBlock):
     header = HeaderBlock()
     paragraph2 = ParagraphTwoBlock()
@@ -377,3 +387,4 @@ class HomePageStreamBlock(blocks.StreamBlock):
     embed = OurEmbedBlock()
     iframe = IframeBlock()
     video_link = VideoLink()
+    image = HomepageImageBlock()
