@@ -379,6 +379,28 @@ class HomepageImageBlock(blocks.StructBlock):
         icon = "image"
 
 
+class HomepageGroupsBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(label="Überschrift", required=False)
+    highlight_in_heading = blocks.CharBlock(
+        label="Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        required=False,
+    )
+
+    def get_context(self, value, parent_context=None):
+        # to prevent circular import
+        from core.models import Group  # pylint: disable=import-outside-toplevel
+
+        context = super().get_context(value, parent_context=parent_context)
+        context["groups"] = Group.objects.all()
+        return context
+
+    class Meta:
+        label = "JANUN-Gruppen"
+        template = "blocks/homepage_groups.html"
+        icon = "image"
+
+
 class HomePageStreamBlock(blocks.StreamBlock):
     header = HeaderBlock()
     paragraph2 = ParagraphTwoBlock()
@@ -393,3 +415,4 @@ class HomePageStreamBlock(blocks.StreamBlock):
     iframe = IframeBlock()
     video_link = VideoLink()
     image = HomepageImageBlock()
+    groups = HomepageGroupsBlock()
