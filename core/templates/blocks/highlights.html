@@ -15,8 +15,12 @@
 
             <div class="flex-shrink-0 overflow-hidden h-32 w-40 md:h-40 md:w-full bg-gray-200 mr-5">
               {% if object.get_image %}
-                {% image object.get_image fill-512x320 as image %}
-                <img src="{{ image.url }}" class="h-full w-full object-cover md:transition-transform md:duration-200 md:transform md:group-hover:scale-105" alt="{{ image.alt }}">
+                <picture>
+                  {% image object.get_image fill-512x320 format-webp as image_webp %}
+                  {% image object.get_image fill-512x320 as image %}
+                  <source srcset="{{ image_webp.url }}" type="image/webp">
+                  <img {{ image.attrs }} class="h-full w-full object-cover md:transition-transform md:duration-200 md:transform md:group-hover:scale-105">
+                </picture>
               {% endif %}
             </div>
 
