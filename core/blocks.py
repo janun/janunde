@@ -269,6 +269,11 @@ class HeaderButton(blocks.StructBlock):
 class HeaderBlock(blocks.StructBlock):
     background = ImageChooserBlock(label="Hintergrundbild", required=False)
     heading = blocks.CharBlock(label="Überschrift", required=False)
+    highlight_in_heading = blocks.CharBlock(
+        label="Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        required=False,
+    )
     text = blocks.RichTextBlock(label="Text", required=False)
     text_mobile = blocks.RichTextBlock(label="Text (mobil)", required=False)
     buttons = blocks.ListBlock(HeaderButton())

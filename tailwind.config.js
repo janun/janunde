@@ -5,6 +5,9 @@ module.exports = {
       sans: ["Myniad", "sans-serif"],
     },
     extend: {
+      screens: {
+        'xxl': '1440px',
+      },
       borderWidth: {
         "5": "5px",
       },
