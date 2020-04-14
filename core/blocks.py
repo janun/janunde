@@ -414,5 +414,5 @@ class HomePageStreamBlock(blocks.StreamBlock):
     embed = OurEmbedBlock()
     iframe = IframeBlock()
     video_link = VideoLink()
-    image = HomepageImageBlock()
+    homepage_image = HomepageImageBlock()
     groups = HomepageGroupsBlock()
