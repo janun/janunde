@@ -16,7 +16,7 @@
               {% image group.logo max-512x512 format-webp as logo_webp %}
               {% image group.logo max-512x512 as logo %}
               <source srcset="{{ logo_webp.url }}" type="image/webp">
-              <img class="h-full w-full object-contain p-3 " src="{{ logo.url }}">
+              <img class="h-full w-full object-contain p-3" loading="lazy" src="{{ logo.url }}">
             </picture>
           </div>
 
