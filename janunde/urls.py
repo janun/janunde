@@ -73,6 +73,10 @@ urlpatterns = [
         r"^netzwerk-projekte/janun-landesbuero/(?P<path>.*)",
         RedirectView.as_view(url="/netzwerk-projekte/janun-landesbüro/%(path)s"),
     ),
+    url(
+        r"^netzwerk-projekte/janun-landesb%FCro/(?P<path>.*)",
+        RedirectView.as_view(url="/netzwerk-projekte/janun-landesbüro/%(path)s"),
+    ),
     url(r"^festival", RedirectView.as_view(url="/veranstaltungen/janun-festival/")),
     url(r"^webinare", RedirectView.as_view(url="/veranstaltungen/?typ=Online")),
 ]
