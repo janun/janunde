@@ -58,6 +58,7 @@ module.exports = {
     borderColor: ["responsive", "hover", "group-hover", "focus"],
     scale: ["responsive", "hover", "focus", "active", "group-hover"],
     opacity: ['responsive', 'hover', 'focus', "group-hover"],
+    width: ["responsive", "hover", "focus", "focus-within", "group-hover"],
   },
   corePlugins: {
     container: false,
