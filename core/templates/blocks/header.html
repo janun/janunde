@@ -63,7 +63,9 @@
           <div class="flex items-center justify-center lg:justify-start my-8 lg:mt-10 -mx-2">
             {% for social_media in settings.core.SocialMediaSettings.social_medias.all %}
               {% image social_media.icon_color original as icon %}
-              <a class="mx-2 md:transition-transform md:duration-200 md:transform md:hover:scale-110" href="{{ social_media.link }}" title="{{ social_media.tooltip }}"><img class="w-8" src="{{ icon.url }}"></a>
+              <a class="mx-2 md:transition-transform md:duration-200 md:transform md:hover:scale-105" href="{{ social_media.link }}" title="{{ social_media.tooltip }}">
+                <img class="w-8" loading="lazy" src="{{ icon.url }}">
+              </a>
             {% endfor %}
           </div>
         {% endif %}
