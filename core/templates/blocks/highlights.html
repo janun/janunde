@@ -11,7 +11,7 @@
     <div class="md:flex flex-wrap justify-center xl:-mx-4">
       {% for object in self.objects %}
         {% with object=object.specific %}
-          <a href="{% pageurl object %}" class="-ml-5 mb-8 md:mx-4 lg:mx-10 flex md:block group block w-full sm:w-64">
+          <a href="{% pageurl object %}" class="-ml-5 mb-8 md:mx-4 lg:mx-10 flex md:block group block w-full sm:w-64 js-fade-in">
 
             <div class="flex-shrink-0 overflow-hidden h-32 w-40 md:h-40 md:w-full bg-gray-200 mr-5">
               {% if object.get_image %}
