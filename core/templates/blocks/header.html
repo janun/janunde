@@ -8,7 +8,7 @@
 
       {% if self.background %}
       <div class="flex justify-center mt-5 lg:mt-0">
-        <picture id="headerBackground" class="lg:absolute lg:top-0 lg:left-0 lg:-mt-20 -ml-20 lg:ml-0 opacity-0">
+        <picture id="headerBackground" class="lg:absolute lg:top-0 lg:left-0 lg:-mt-20 -ml-20 lg:ml-0 js-fade-in">
           {% image self.background format-webp as background_webp %}
           <source srcset="{{ background_webp.url }}" media="(min-width: 600px)" type="image/webp">
           {% image self.background format-webp height-800 as background_webp_mobile %}
@@ -112,10 +112,4 @@ function updateNavbarIsTop() {
 
 document.addEventListener('scroll', updateNavbarIsTop)
 updateNavbarIsTop()
-
-// animate image on load
-window.onload = function (event) {
-  headerBackground.classList.add('fade-in')
-  headerBackground.classList.remove('opacity-0')
-}
 </script>
