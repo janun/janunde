@@ -8,7 +8,7 @@
 
       {% if self.background %}
       <div class="flex justify-center mt-5 lg:mt-0">
-        <picture id="headerBackground" class="lg:absolute lg:top-0 lg:left-0 lg:-mt-20 -ml-20 lg:ml-0">
+        <picture id="headerBackground" class="lg:absolute lg:top-0 lg:left-0 lg:-mt-20 -ml-20 lg:ml-0 opacity-0">
           {% image self.background format-webp as background_webp %}
           <source srcset="{{ background_webp.url }}" media="(min-width: 600px)" type="image/webp">
           {% image self.background format-webp height-800 as background_webp_mobile %}
@@ -91,6 +91,13 @@
   box-shadow: none !important;
 }
 
+@keyframes fade-in {
+    from {opacity: 0; transform: scale(.7,.7)}
+    to {opacity: 1;}
+}
+.fade-in {
+  animation: fade-in 1.4s;
+}
 </style>
 
 <script>
@@ -106,14 +113,9 @@ function updateNavbarIsTop() {
 document.addEventListener('scroll', updateNavbarIsTop)
 updateNavbarIsTop()
 
-// slight move on hover
-headerBackground.addEventListener('mousemove', function (event) {
-  var sensitivityMultiplier = -0.002
-  var centerY = 500
-  var centerX = 800
-  var relX = ( event.pageX - centerX ) * sensitivityMultiplier
-  var relY = ( event.pageY - centerY ) * sensitivityMultiplier
-  headerBackground.style.transform = `translateX(${relX}px) translateY(${relY}px)`
-})
-
+// animate image on load
+window.onload = function (event) {
+  headerBackground.classList.add('fade-in')
+  headerBackground.classList.remove('opacity-0')
+}
 </script>
