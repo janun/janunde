@@ -25,24 +25,28 @@
       {% endif %}
 
       <div class="relative pt-4 -mt-24 bg-gray-100 lg:bg-transparent lg:absolute lg:left-0 lg:mt-32 px-4">
+        {% comment %} heading {% endcomment %}
         {% if self.heading %}
           <h1 class="mx-auto max-w-xs max-w-xl text-green-500 text-center lg:text-left text-4xl md:text-5xl xl:text-6xl font-bold lg:leading-none lg:tracking-tight">
             {% highlight self.heading self.highlight_in_heading "text-purple" %}
           </h1>
         {% endif %}
 
+        {% comment %} text desktop {% endcomment %}
         {% if self.text %}
           <div class="hidden lg:block my-10 max-w-md pr-2 text-xl">
             {{ self.text|richtext }}
           </div>
         {% endif %}
 
+        {% comment %} text mobile {% endcomment %}
         {% if self.text_mobile %}
           <div class="lg:hidden mx-auto max-w-xs text-center">
             {{ self.text_mobile|richtext }}
           </div>
         {% endif %}
 
+        {% comment %} call to action buttons {% endcomment %}
         {% if self.buttons %}
           <div class="text-center lg:text-left my-5">
             {% for button in self.buttons %}
@@ -59,11 +63,12 @@
           </div>
         {% endif %}
 
+        {% comment %} social media {% endcomment %}
         {% if settings.core.SocialMediaSettings.social_medias.all %}
-          <div class="flex items-center justify-center lg:justify-start my-8 lg:mt-10 -mx-2">
+          <div class="flex items-center justify-center lg:justify-start my-8 lg:mt-10 -mx-3">
             {% for social_media in settings.core.SocialMediaSettings.social_medias.all %}
               {% image social_media.icon_color original as icon %}
-              <a class="mx-2 md:transition-transform md:duration-200 md:transform md:hover:scale-105" href="{{ social_media.link }}" title="{{ social_media.tooltip }}">
+              <a class="mx-3 md:transition-transform md:duration-200 md:transform md:hover:scale-125" href="{{ social_media.link }}" target="_blank" title="{{ social_media.tooltip }}">
                 <img class="w-8" loading="lazy" src="{{ icon.url }}">
               </a>
             {% endfor %}
