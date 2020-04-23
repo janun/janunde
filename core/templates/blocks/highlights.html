@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 
-<div class="bg-white py-10">
+<div class="{% if self.white_background %}bg-white{% endif %} py-10">
 
   <div class="max-w-screen-lg mx-auto px-4">
     {% if self.heading %}

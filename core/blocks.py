@@ -278,6 +278,8 @@ class HeaderBlock(blocks.StructBlock):
     text_mobile = blocks.RichTextBlock(label="Text (mobil)", required=False)
     buttons = blocks.ListBlock(HeaderButton())
 
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+
     class Meta:
         label = "Header"
         icon = "home"
@@ -309,7 +311,9 @@ class TeaserBlock(blocks.StructBlock):
 
 class HighlightsBlock(blocks.StructBlock):
     heading = blocks.CharBlock(label="Überschrift", required=False)
-    objects = blocks.ListBlock(blocks.PageChooserBlock(), label="Objekte",)
+    objects = blocks.ListBlock(blocks.PageChooserBlock(), label="Objekte")
+
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
 
     class Meta:
         label = "Highlights"
@@ -373,6 +377,8 @@ class HomepageImageBlock(blocks.StructBlock):
     image = ImageChooserBlock(label="Bild")
     caption = blocks.CharBlock(label="Bildunterschrift", required=False)
 
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+
     class Meta:
         label = "Bild"
         template = "blocks/homepage_image.html"
@@ -386,6 +392,8 @@ class HomepageGroupsBlock(blocks.StructBlock):
         help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
         required=False,
     )
+
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
 
     def get_context(self, value, parent_context=None):
         # to prevent circular import

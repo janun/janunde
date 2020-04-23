@@ -2,7 +2,7 @@
 {% load wagtailsettings_tags %}
 {% get_settings %}
 
-<div class="overflow-hidden lg:h-1000 lg:-mb-32">
+<div class="overflow-hidden lg:h-1000 lg:-mb-32 {% if self.white_background %}bg-white{% endif %}">
   <div class="max-w-screen-lg xl:max-w-screen-xl mx-auto">
     <div class="relative">
 
