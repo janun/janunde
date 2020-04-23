@@ -256,6 +256,9 @@ class StandardStreamBlock(blocks.StreamBlock):
     video_link = VideoLink()
 
 
+####### Homepage Blocks
+
+
 class HeaderButton(blocks.StructBlock):
     text = blocks.CharBlock(label="Text")
     link = blocks.CharBlock(label="Link")
@@ -338,15 +341,39 @@ class EventsBlock(blocks.StructBlock):
         template = "blocks/events.html"
 
 
-class NewsletterSignupBlock(blocks.StructBlock):
+class LinkSignupBlock(blocks.StructBlock):
     heading = blocks.CharBlock(label="Überschrift", required=False)
     text = blocks.RichTextBlock(label="Text", required=False)
-    example_url = blocks.URLBlock(label="Link zu Beispiel-E-Mail", required=False)
+
+    url = blocks.URLBlock(label="Button-URL")
+    button_text = blocks.CharBlock(label="Button Text")
+    button_color = blocks.CharBlock(
+        label="Button Farbe", required=False, default="#3a9d00"
+    )
+    button_icon = ImageChooserBlock(label="Icon", required=False)
+    button_hint = blocks.CharBlock(label="Button Hinweistext", required=False)
 
     class Meta:
-        label = "Newsletter-Anmeldung"
+        label = "Link-Anmeldung"
         icon = "form"
-        template = "blocks/newsletter.html"
+        template = "blocks/link_signup.html"
+
+
+class SignupBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(label="Überschrift", required=False)
+    highlight_in_heading = blocks.CharBlock(
+        label="Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        required=False,
+    )
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+
+    blocks = blocks.StreamBlock([("link", LinkSignupBlock())])
+
+    class Meta:
+        label = "Anmeldung"
+        icon = "form"
+        template = "blocks/homepage_signup.html"
 
 
 class BoxBlock(blocks.StructBlock):
@@ -415,7 +442,7 @@ class HomePageStreamBlock(blocks.StreamBlock):
     button = Button()
     teaser = TeaserBlock()
     highlights = HighlightsBlock()
-    newsletter = NewsletterSignupBlock()
+    signup = SignupBlock()
     box = BoxBlock()
     gap = GapBlock()
     events = EventsBlock()

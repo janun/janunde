@@ -1,0 +1,40 @@
+{% load wagtailcore_tags wagtailimages_tags stuff %}
+
+<a href="{{ self.url }}" class="group flex flex-col bg-white shadow rounded-md p-6 mx-6 w-320 h-full hover:shadow-md">
+
+  <h3 class="text-lg md:text-xl text-gray-900 font-bold mb-5">{{ self.heading }}</h3>
+
+  {% if self.text %}
+    {{ self.text|richtext }}
+  {% endif %}
+
+  <div class="mt-auto">
+    {% comment %} pseudo button {% endcomment %}
+    <div class="text-sm lg:text-base inline-flex items-center h-8 lg:h-10 mt-5 px-4 mb-4 rounded-full
+                  shadow bg-green-600 text-white font-bold
+                  md:transition-transform md:duration-200 md:transform md:group-hover:scale-105"
+            {% if self.button_color %}style="background-color: {{ self.button_color }} !important"{% endif %}
+      >
+
+      {% if self.button_icon %}
+        {% image self.button_icon original as icon %}
+        <img class="w-8 mr-2" loading="lazy" src="{{ icon.url }}">
+      {% endif %}
+
+      <span class="pt-px text-sm">
+        {{ self.button_text }}
+      </span>
+    </div>
+
+    {% if self.button_hint %}
+      <div class="text-italic text-xs text-gray-500">{{ self.button_hint }}</div>
+    {% endif %}
+
+  </div>
+</a>
+
+<style>
+.block-link {
+  margin-bottom: 30px;
+}
+</style>
