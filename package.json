@@ -28,13 +28,13 @@
     "gulp-autoprefixer": "^7.0",
     "gulp-concat": "^2.6",
     "gulp-csso": "^4.0",
-    "gulp-sass": "^4.0",
+    "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6",
     "gulp-uglify": "^3.0",
     "gulp-util": "^3.0",
-    "onchange": "^6.1.0",
+    "onchange": "^6.1.1",
     "postcss-cli": "^7.1.0",
     "postcss-import": "^12.0.1",
-    "tailwindcss": "^1.2.0"
+    "tailwindcss": "^1.3.5"
   }
 }
