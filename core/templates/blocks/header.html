@@ -2,13 +2,13 @@
 {% load wagtailsettings_tags %}
 {% get_settings %}
 
-<div class="overflow-hidden lg:h-1000 lg:-mb-32 {% if self.white_background %}bg-white{% endif %}">
+<div class="overflow-hidden lg:h-1000 xl:h-1100 xxl:h-1200 lg:-mb-32 xl:-mb-40 xxl:-mb-48 {% if self.white_background %}bg-white{% endif %}">
   <div class="max-w-screen-lg xl:max-w-screen-xl mx-auto">
     <div class="relative">
 
       {% if self.background %}
       <div class="flex justify-center mt-5 lg:mt-0">
-        <picture id="headerBackground" class="lg:absolute lg:top-0 lg:left-0 lg:-mt-20 -ml-20 lg:ml-0 js-fade-in">
+        <picture id="headerBackground" class="lg:absolute lg:top-0 lg:left-0 lg:-mt-20 xl:-mt-32 -ml-20 lg:ml-0 xxl:-ml-32 js-fade-in">
           {% image self.background format-webp as background_webp %}
           <source srcset="{{ background_webp.url }}" media="(min-width: 600px)" type="image/webp">
           {% image self.background format-webp height-800 as background_webp_mobile %}
@@ -19,7 +19,7 @@
           {% image self.background height-600 format-jpeg as background_jpg_mobile %}
           <source srcset="{{ background_jpg_mobile.url }}" type="image/jpg">
 
-          <img src="{{ background_png.url }}" class="max-w-none h-400 md:h-500 lg:h-1000">
+          <img src="{{ background_png.url }}" class="max-w-none h-400 md:h-500 lg:h-1000 xl:h-1100 xxl:h-1200">
         </picture>
       </div>
       {% endif %}

@@ -6,7 +6,7 @@ module.exports = {
     },
     extend: {
       screens: {
-        'xxl': '1440px',
+        "xxl": "1440px",
       },
       borderWidth: {
         "5": "5px",
@@ -47,6 +47,8 @@ module.exports = {
         "14": "3.5rem",
         "18": "4.5rem",
         "1000": "1000px",
+        "1100": "1100px",
+        "1200": "1200px",
         "500": "500px",
         "400": "400px",
         "320": "320px",
@@ -58,7 +60,7 @@ module.exports = {
     textColor: ["responsive", "hover", "focus", "group-hover", "focus-within"],
     borderColor: ["responsive", "hover", "group-hover", "focus"],
     scale: ["responsive", "hover", "focus", "active", "group-hover"],
-    opacity: ['responsive', 'hover', 'focus', "group-hover"],
+    opacity: ["responsive", "hover", "focus", "group-hover"],
     width: ["responsive", "hover", "focus", "focus-within", "group-hover"],
   },
   corePlugins: {
