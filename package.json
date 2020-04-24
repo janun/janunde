@@ -35,6 +35,7 @@
     "onchange": "^6.1.1",
     "postcss-cli": "^7.1.0",
     "postcss-import": "^12.0.1",
-    "tailwindcss": "^1.3.5"
+    "tailwindcss": "^1.3.5",
+    "tailwindcss-animations": "^2.0.0"
   }
 }

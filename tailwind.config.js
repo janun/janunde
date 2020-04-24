@@ -4,6 +4,28 @@ module.exports = {
     fontFamily: {
       sans: ["Myniad", "sans-serif"],
     },
+    animations: {
+      'fade-in': {
+        from: {
+          opacity: 0,
+          transform: 'scale(.7,.7)'
+        },
+        to: {
+          opacity: 1,
+        },
+      },
+      'translate-x-4': {
+        '0%': {
+          transform: 'translateX(0)'
+        },
+        '50%': {
+          transform: 'translateX(1rem)'
+        },
+        '100%': {
+          transform: 'translateX(0)'
+        }
+      }
+    },
     extend: {
       screens: {
         "xxl": "1440px",
@@ -65,8 +87,12 @@ module.exports = {
     scale: ["responsive", "hover", "focus", "active", "group-hover"],
     opacity: ["responsive", "hover", "focus", "group-hover"],
     width: ["responsive", "hover", "focus", "focus-within", "group-hover"],
+    animations: ['responsive', 'group-hover', 'hover'],
   },
   corePlugins: {
     container: false,
-  }
+  },
+  plugins: [
+    require('tailwindcss-animations'),
+  ]
 };
