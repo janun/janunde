@@ -34,7 +34,7 @@
 
         {% comment %} text desktop {% endcomment %}
         {% if self.text %}
-          <div class="hidden lg:block my-10 max-w-md pr-2 text-xl">
+          <div class="hidden lg:block my-10 xxl:my-14 max-w-md pr-2 text-xl">
             {{ self.text|richtext }}
           </div>
         {% endif %}
@@ -48,7 +48,7 @@
 
         {% comment %} call to action buttons {% endcomment %}
         {% if self.buttons %}
-          <div class="text-center lg:text-left my-5">
+          <div class="text-center lg:text-left my-5 xxl:my-16">
             {% for button in self.buttons %}
               <a class="text-sm lg:text-base inline-flex items-center h-8 lg:h-10 pt-px pl-6 pr-4 mb-4 rounded-full
                 {% if button.primary %}shadow bg-green-600 text-white font-bold hover:bg-green-500
@@ -65,7 +65,7 @@
 
         {% comment %} social media {% endcomment %}
         {% if settings.core.SocialMediaSettings.social_medias.all %}
-          <div class="flex items-center justify-center lg:justify-start my-8 lg:mt-10 -mx-3">
+          <div class="flex items-center justify-center lg:justify-start my-8 lg:mt-10 xxl:mt-16 -mx-3">
             {% for social_media in settings.core.SocialMediaSettings.social_medias.all %}
               {% image social_media.icon_color original as icon %}
               <a class="mx-3 md:transition-transform md:duration-200 md:transform md:hover:scale-125" href="{{ social_media.link }}" target="_blank" title="{{ social_media.tooltip }}">
@@ -91,13 +91,6 @@
   box-shadow: none !important;
 }
 
-@keyframes fade-in {
-    from {opacity: 0; transform: scale(.7,.7)}
-    to {opacity: 1;}
-}
-.fade-in {
-  animation: fade-in 1.4s;
-}
 </style>
 
 <script>
