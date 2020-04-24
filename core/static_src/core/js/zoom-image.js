@@ -3,7 +3,7 @@ document.querySelectorAll(".js-zoom-image").forEach(function (elem) {
 
   // black background
   var container = document.createElement("div");
-  container.className = "hidden transition-opacity opacity-0 fixed inset-0 bg-black-90 p-2 sm:p-10 flex justify-center items-center w-screen h-screen z-50";
+  container.className = "hidden transition-opacity duration-200 opacity-0 fixed inset-0 bg-black-90 p-2 sm:p-10 flex justify-center items-center w-screen h-screen z-50";
   document.body.insertAdjacentElement("beforeend", container);
 
   // close button

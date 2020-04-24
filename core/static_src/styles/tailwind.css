@@ -2,17 +2,12 @@
 @import "tailwindcss/components";
 
 @import "./rich-text";
+@import "./animations";
 
 @import "tailwindcss/utilities";
 
-.transition-opacity {
-	transition: opacity 0.2s ease-in-out;
-}
 
-.cursor-zoom-in {
-	cursor: zoom-in;
-}
-
+/* works only on firefox */
 .hyphens-auto {
 	hyphens: auto;
 }
@@ -29,25 +24,5 @@ html {
 @screen lg {
 	.userim .-userim-mx-20 {
 		@apply -mx-20;
-	}
-}
-
-@screen md {
-	.group:hover .md\:group-hover\:animate-translate-x-4 {
-		animation-duration: 0.8s;
-		animation-name: translate-x-4;
-		animation-iteration-count: infinite;
-	}
-}
-
-@keyframes translate-x-4 {
-	0% {
-		transform: translateX(0);
-	}
-	50% {
-		transform: translateX(1rem);
-	}
-	100% {
-		transform: translateX(0);
 	}
 }

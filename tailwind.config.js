@@ -53,6 +53,9 @@ module.exports = {
         "400": "400px",
         "320": "320px",
       },
+      cursor: {
+        "zoom-in": "zoom-in",
+      }
     }
   },
   variants: {
