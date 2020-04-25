@@ -289,29 +289,6 @@ class HeaderBlock(blocks.StructBlock):
         template = "blocks/header.html"
 
 
-class ParagraphTwoBlock(blocks.StructBlock):
-    big = blocks.BooleanBlock(label="Groß", required=False,)
-    center = blocks.BooleanBlock(label="zentriert", required=False,)
-    text = blocks.RichTextBlock()
-
-    class Meta:
-        label = "Absatz"
-        icon = "pilcrow"
-        template = "blocks/paragraph2.html"
-
-
-class TeaserBlock(blocks.StructBlock):
-    background = ImageChooserBlock(label="Hintergrundbild", required=False,)
-    title = blocks.CharBlock(label="Titel", required=False)
-    subtitle = blocks.CharBlock(label="Untertitel", required=False)
-    rotate = blocks.BooleanBlock(label="gedreht", required=False)
-
-    class Meta:
-        label = "Zwischentitel"
-        icon = "title"
-        template = "blocks/teaser.html"
-
-
 class HighlightsBlock(blocks.StructBlock):
     heading = blocks.CharBlock(label="Überschrift", required=False)
     objects = blocks.ListBlock(blocks.PageChooserBlock(), label="Objekte")
@@ -322,23 +299,6 @@ class HighlightsBlock(blocks.StructBlock):
         label = "Highlights"
         icon = "pick"
         template = "blocks/highlights.html"
-
-
-class EventsBlock(blocks.StructBlock):
-    heading = blocks.CharBlock(label="Überschrift", required=False)
-
-    def get_context(self, value, parent_context=None):
-        # to prevent circular import
-        from events.models import EventPage  # pylint: disable=import-outside-toplevel
-
-        context = super().get_context(value, parent_context=parent_context)
-        context["upcoming"] = EventPage.objects.upcoming()[:3]
-        return context
-
-    class Meta:
-        label = "Veranstaltungen"
-        icon = "date"
-        template = "blocks/events.html"
 
 
 class LinkSignupBlock(blocks.StructBlock):
@@ -374,30 +334,6 @@ class SignupBlock(blocks.StructBlock):
         label = "Anmeldung"
         icon = "form"
         template = "blocks/homepage_signup.html"
-
-
-class BoxBlock(blocks.StructBlock):
-    heading = blocks.CharBlock(label="Überschrift", required=False)
-    text = blocks.RichTextBlock(label="Text", required=False)
-    buttons = blocks.ListBlock(Button())
-
-    class Meta:
-        label = "Box"
-        icon = "placeholder"
-        template = "blocks/box.html"
-
-
-class GapBlock(blocks.StructBlock):
-    size = blocks.DecimalBlock(
-        required=False,
-        label="Größe",
-        help_text="Größe des vertikalen Abstands in Pixeln",
-    )
-
-    class Meta:
-        label = "Abstand"
-        icon = "placeholder"
-        template = "blocks/gap.html"
 
 
 class HomepageImageBlock(blocks.StructBlock):
@@ -438,16 +374,7 @@ class HomepageGroupsBlock(blocks.StructBlock):
 
 class HomePageStreamBlock(blocks.StreamBlock):
     header = HeaderBlock()
-    paragraph2 = ParagraphTwoBlock()
-    button = Button()
-    teaser = TeaserBlock()
     highlights = HighlightsBlock()
     signup = SignupBlock()
-    box = BoxBlock()
-    gap = GapBlock()
-    events = EventsBlock()
-    embed = OurEmbedBlock()
-    iframe = IframeBlock()
-    video_link = VideoLink()
     homepage_image = HomepageImageBlock()
     groups = HomepageGroupsBlock()
