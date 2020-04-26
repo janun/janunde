@@ -19,7 +19,7 @@
         {% if menuitems %}
           {% for menuitem in menuitems %}
             <a class="group flex px-2 xl:mx-1 hover:text-brown {% if menuitem.is_active %}hover:text-brown{%endif%}" href="{% pageurl menuitem %}">
-              <div class="flex items-center border-b-4 pt-1 border-transparent {% if menuitem.is_active %}border-green-500{% else %}group-hover:border-gray-400{% endif %}">{{ menuitem.title }}</div>
+              <div class="flex items-center border-b-4 pt-1 border-transparent {% if menuitem.is_active %}border-green-500{% else %}group-hover:border-green-500{% endif %}">{{ menuitem.title }}</div>
             </a>
           {% endfor %}
         {% endif %}
