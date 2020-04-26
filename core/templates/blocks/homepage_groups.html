@@ -3,7 +3,7 @@
 
   <div class="relative max-w-screen-lg mx-auto px-4 my-16 z-10">
     {% if self.heading %}
-      <h2 id="{{ self.heading|slugify }}" class="text-2xl md:text-4xl max-w-2xl mx-auto mb-10 text-green-500 font-bold text-center js-animate-in" data-animation="bounceInLeft">
+      <h2 id="{{ self.heading|slugify }}" class="text-2xl md:text-4xl max-w-2xl mx-auto mb-10 text-green-500 font-bold text-center js-animate-in" data-animation="zoomIn">
         {% highlight self.heading self.highlight_in_heading "text-purple" %}
       </h2>
     {% endif %}
