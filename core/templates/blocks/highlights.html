@@ -19,7 +19,7 @@
                   {% image object.get_image fill-512x320 format-webp as image_webp %}
                   {% image object.get_image fill-512x320 as image %}
                   <source srcset="{{ image_webp.url }}" type="image/webp">
-                  <img {{ image.attrs }} class="h-full w-full object-cover md:transition-transform md:duration-200 md:transform md:group-hover:scale-105">
+                  <img {{ image.attrs }} loading="lazy" class="h-full w-full object-cover md:transition-transform md:duration-200 md:transform md:group-hover:scale-105">
                 </picture>
               {% endif %}
             </div>
