@@ -5,13 +5,13 @@
 
   <div class="max-w-screen-lg mx-auto px-4">
     {% if self.heading %}
-      <h2 id="{{ self.heading|slugify }}" class="text-xl mb-10 font-bold text-center">{{ self.heading }}</h2>
+      <h2 id="{{ self.heading|slugify }}" class="text-xl mb-10 font-bold text-center js-animate-in" data-animation="bounceInLeft">{{ self.heading }}</h2>
     {% endif %}
 
     <div class="md:flex flex-wrap justify-center xl:-mx-4">
       {% for object in self.objects %}
         {% with object=object.specific %}
-          <a href="{% pageurl object %}" class="-ml-5 mb-8 md:mx-4 lg:mx-10 flex md:block group block w-full sm:w-64 js-fade-in">
+          <a href="{% pageurl object %}" class="-ml-5 mb-8 md:mx-4 lg:mx-10 flex md:block group block w-full sm:w-64 js-animate-in" data-animation="zoomIn">
 
             <div class="flex-shrink-0 overflow-hidden h-32 w-40 md:h-40 md:w-full bg-gray-200 mr-5">
               {% if object.get_image %}

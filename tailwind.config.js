@@ -5,15 +5,6 @@ module.exports = {
       sans: ["Myniad", "sans-serif"],
     },
     animations: {
-      'fade-in': {
-        from: {
-          opacity: 0,
-          transform: 'scale(.7,.7)'
-        },
-        to: {
-          opacity: 1,
-        },
-      },
       'translate-x-4': {
         '0%': {
           transform: 'translateX(0)'
@@ -94,5 +85,8 @@ module.exports = {
   },
   plugins: [
     require('tailwindcss-animations'),
+    require('tailwindcss-animatecss')({
+      classes: []
+    }),
   ]
 };
