@@ -49,6 +49,7 @@ module.exports = {
         "black-90": "rgba(0, 0, 0, 0.9)",
         "brown": "#644327",
         "gray-50": "#fafafa",
+        "gray-150": "#f7f7f7",
         "red-500": "#c41737",
       },
       maxWidth: {
