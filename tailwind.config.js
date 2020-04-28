@@ -5,15 +5,15 @@ module.exports = {
       sans: ["Myniad", "sans-serif"],
     },
     animations: {
-      'translate-x-4': {
-        '0%': {
-          transform: 'translateX(0)'
+      "translate-x-3": {
+        "0%": {
+          transform: "translateX(0)"
         },
-        '50%': {
-          transform: 'translateX(1rem)'
+        "50%": {
+          transform: "translateX(0.75rem)"
         },
-        '100%': {
-          transform: 'translateX(0)'
+        "100%": {
+          transform: "translateX(0)"
         }
       }
     },
@@ -56,6 +56,8 @@ module.exports = {
       },
       spacing: {
         "1_5": "0.375rem",
+        "7": "1.75rem",
+        "9": "2.25rem",
         "36": "9rem",
         "14": "3.5rem",
         "18": "4.5rem",
@@ -78,14 +80,14 @@ module.exports = {
     scale: ["responsive", "hover", "focus", "active", "group-hover"],
     opacity: ["responsive", "hover", "focus", "group-hover"],
     width: ["responsive", "hover", "focus", "focus-within", "group-hover"],
-    animations: ['responsive', 'group-hover', 'hover'],
+    animations: ["responsive", "group-hover", "hover"],
   },
   corePlugins: {
     container: false,
   },
   plugins: [
-    require('tailwindcss-animations'),
-    require('tailwindcss-animatecss')({
+    require("tailwindcss-animations"),
+    require("tailwindcss-animatecss")({
       classes: []
     }),
   ]
