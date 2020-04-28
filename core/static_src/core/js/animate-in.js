@@ -10,6 +10,6 @@ document.querySelectorAll(".js-animate-in").forEach(function (elem) {
       elem.classList.add(klass)
       elem.classList.remove("opacity-0")
     }
-  }, { threshold: [0.5] })
+  })
   observer.observe(elem)
 });
