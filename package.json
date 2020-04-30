@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "dotdotdot-js": "^4.0.10",
-    "jquery": "^3.4",
+    "jquery": "^3.5",
     "pickadate": "^3.6",
     "simple-line-icons": "^2.4.1",
     "typeface-cabin": "0.0.72",
