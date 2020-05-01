@@ -339,7 +339,6 @@ class SignupBlock(blocks.StructBlock):
 class HomepageImageBlock(blocks.StructBlock):
     image = ImageChooserBlock(label="Bild")
     caption = blocks.CharBlock(label="Bildunterschrift", required=False)
-
     white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
 
     class Meta:
@@ -355,7 +354,6 @@ class HomepageGroupsBlock(blocks.StructBlock):
         help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
         required=False,
     )
-
     white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
 
     def get_context(self, value, parent_context=None):
@@ -372,9 +370,27 @@ class HomepageGroupsBlock(blocks.StructBlock):
         icon = "image"
 
 
+class CardBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(label="Überschrift", required=False)
+    highlight_in_heading = blocks.CharBlock(
+        label="Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        required=False,
+    )
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+
+    cards = blocks = blocks.StreamBlock([("link", LinkSignupBlock())])
+
+    class Meta:
+        label = "Karten-Block"
+        template = "blocks/homepage_cards.html"
+        icon = "image"
+
+
 class HomePageStreamBlock(blocks.StreamBlock):
     header = HeaderBlock()
     highlights = HighlightsBlock()
     signup = SignupBlock()
     homepage_image = HomepageImageBlock()
     groups = HomepageGroupsBlock()
+    cards = CardBlock()
