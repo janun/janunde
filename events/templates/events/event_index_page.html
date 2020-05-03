@@ -73,7 +73,7 @@
                     {% endfor %}
                   </ul>
                 {% else %}
-                  <a class="text-xs text-gray-700 hover:text-green-500" href="{% query_transform request year=y.grouper month=12 %}">{{ y.grouper }}</a>
+                  <a class="text-xs text-gray-700 hover:text-green-500" href="?{% query_transform request year=y.grouper month=12 %}">{{ y.grouper }}</a>
                 {% endif %}
               </li>
             {% endfor %}
