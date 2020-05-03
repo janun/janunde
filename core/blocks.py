@@ -387,6 +387,29 @@ class CardBlock(blocks.StructBlock):
         icon = "image"
 
 
+class MovieBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(label="Überschrift", required=False)
+    highlight_in_heading = blocks.CharBlock(
+        label="Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        required=False,
+    )
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+
+    url = blocks.URLBlock(
+        label="URL", required=True, help_text="URL zu dem Video, auf das verlinkt wird"
+    )
+    image = ImageChooserBlock(
+        label="Bild (schwarz wenn nichts angegeben)", required=False,
+    )
+    caption = blocks.CharBlock(label="Bildunterschrift", required=False)
+
+    class Meta:
+        label = "Film-Block"
+        template = "blocks/homepage_movie.html"
+        icon = "media"
+
+
 class HomePageStreamBlock(blocks.StreamBlock):
     header = HeaderBlock()
     highlights = HighlightsBlock()
@@ -394,3 +417,4 @@ class HomePageStreamBlock(blocks.StreamBlock):
     homepage_image = HomepageImageBlock()
     groups = HomepageGroupsBlock()
     cards = CardBlock()
+    movie = MovieBlock()
