@@ -371,6 +371,14 @@ class HomepageGroupsBlock(blocks.StructBlock):
 
 
 class CardBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(label="Überschrift")
+    image = ImageChooserBlock(label="Bild")
+    text = blocks.CharBlock(label="Text", required=False)
+    url = blocks.CharBlock(label="URL", required=False)
+    button_text = blocks.CharBlock(label="Button-Text", required=False)
+
+
+class CardsBlock(blocks.StructBlock):
     heading = blocks.CharBlock(label="Überschrift", required=False)
     highlight_in_heading = blocks.CharBlock(
         label="Hervorhebungen in der Überschrift",
@@ -379,7 +387,7 @@ class CardBlock(blocks.StructBlock):
     )
     white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
 
-    cards = blocks = blocks.StreamBlock([("link", LinkSignupBlock())])
+    cards = blocks.ListBlock(CardBlock())
 
     class Meta:
         label = "Karten-Block"
@@ -416,5 +424,5 @@ class HomePageStreamBlock(blocks.StreamBlock):
     signup = SignupBlock()
     homepage_image = HomepageImageBlock()
     groups = HomepageGroupsBlock()
-    cards = CardBlock()
+    cards = CardsBlock()
     movie = MovieBlock()
