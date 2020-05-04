@@ -10,7 +10,7 @@
 
 
     <div class="flex">
-      <a class="block relative group mx-auto" target="_blank" href="{{ value.url }}">
+      <a class="block relative group mx-auto js-animate-in" data-animation="zoomIn" target="_blank" href="{{ value.url }}">
         {% if value.image %}
           
           {% image value.image fill-1000x600 format-webp as image_webp %}
