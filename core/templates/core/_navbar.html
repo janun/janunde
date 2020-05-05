@@ -19,7 +19,7 @@
       <div class="hidden md:flex xl:ml-10 h-full">
         {% if menuitems %}
           {% for menuitem in menuitems %}
-            <a class="group flex px-2 xl:mx-1 text-gray-700 hover:text-brown {% if menuitem.is_active %}text-brown hover:text-brown{%endif%}" href="{% pageurl menuitem %}">
+            <a class="group flex px-2 xl:mx-1 text-gray-700 hover:text-gray-900 {% if menuitem.is_active %}text-gray-900 hover:text-gray-900{%endif%}" href="{% pageurl menuitem %}">
               <div class="flex items-center border-b-4 pt-1 border-transparent {% if menuitem.is_active %}border-green-500{% endif %}">
                 {{ menuitem.title }}
               </div>

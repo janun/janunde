@@ -25,3 +25,8 @@ html {
 		@apply -mx-20;
 	}
 }
+
+.rich-text-gray-900 .rich-text,
+.rich-text-gray-900 .rich-text p {
+	@apply text-gray-900;
+}
