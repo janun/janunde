@@ -405,7 +405,7 @@ class Group(BasePage):
 
 
 class Project(Group):
-    subpage_types = ["StandardPage"]
+    subpage_types = ["StandardPage", "FormPage"]
     parent_page_types = ["Group"]
 
     objects = GroupManager()
@@ -556,9 +556,9 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
         StreamFieldPanel("body"),
     ]
 
-    #promote_panels = [] + StandardPage.promote_panels
+    # promote_panels = [] + StandardPage.promote_panels
 
-    #settings_panels = [] + StandardPage.settings_panels
+    # settings_panels = [] + StandardPage.settings_panels
 
     objects = ArticleManager()
 
