@@ -8,7 +8,7 @@
 
       {% if self.background %}
       <div class="flex justify-center mt-5 lg:mt-0">
-        <picture id="headerBackground" class="lg:absolute lg:top-0 lg:left-0 lg:-mt-20 xl:-mt-32 -ml-20 lg:ml-0 xxl:-ml-32 js-animate-in" data-animation="fadeInRight">
+        <picture id="headerBackground" class="lg:absolute lg:top-0 lg:left-0 lg:-mt-20 xl:-mt-32 -ml-20 lg:ml-0 xxl:-ml-24 js-animate-in" data-animation="fadeInRight">
           {% image self.background format-webp as background_webp %}
           <source srcset="{{ background_webp.url }}" media="(min-width: 600px)" type="image/webp">
           {% image self.background format-webp height-800 as background_webp_mobile %}
@@ -27,14 +27,14 @@
       <div class="relative pt-4 -mt-32 bg-gray-100 lg:bg-transparent lg:absolute lg:left-0 lg:mt-32 xl:mt-40 xxl:mt-48 px-4 js-animate-in" data-animation="fadeInLeft">
         {% comment %} heading {% endcomment %}
         {% if self.heading %}
-          <h1 class="mx-auto lg:mx-none max-w-xs lg:max-w-md text-green-500 text-center lg:text-left text-4xl xl:text-5xl font-bold">
+          <h1 class="mx-auto lg:mx-none max-w-xs lg:max-w-xl text-green-500 text-center lg:text-left text-4xl lg:text-5xl xxl:text-6xl lg:leading-none font-bold">
             {% highlight self.heading self.highlight_in_heading "text-purple" %}
           </h1>
         {% endif %}
 
         {% comment %} text desktop {% endcomment %}
         {% if self.text %}
-          <div class="hidden lg:block my-10 max-w-md pr-2">
+          <div class="hidden xxl:text-lg lg:block my-10 max-w-md pr-2">
             {{ self.text|richtext }}
           </div>
         {% endif %}
@@ -50,7 +50,7 @@
         {% if self.buttons %}
           <div class="text-center lg:text-left my-6 xxl:my-14">
             {% for button in self.buttons %}
-              <a class="group text-sm inline-flex items-center h-9 pt-px pl-5 pr-3 mb-4 rounded-full
+              <a class="group text-sm inline-flex items-center h-9 xl:text-base xl:h-10 pt-px pl-5 pr-3 mb-4 rounded-full
                 {% if button.primary %}shadow bg-green-500 font-bold text-white hover:bg-green-600
                 md:transition-transform md:duration-200 md:transform md:hover:scale-105
                 {% else %}bg-white text-green-600 border border-green-600 hover:text-green-500 hover:border-green-500{% endif %}"
