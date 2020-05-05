@@ -1,4 +1,4 @@
-{% load wagtailcore_tags menu %}
+{% load wagtailcore_tags menu wagtailimages_tags %}
 {% load static from staticfiles %}
 
 
@@ -15,6 +15,7 @@
     </a>
 
     <div class="flex items-center w-full h-full">
+      {% comment %} menu items {% endcomment %}
       <div class="hidden md:flex xl:ml-10 h-full">
         {% if menuitems %}
           {% for menuitem in menuitems %}
@@ -27,6 +28,7 @@
         {% endif %}
       </div>
 
+      {% comment %} search form {% endcomment %}
       <form class="hidden md:flex relative ml-auto items-center" action="{% url 'search' %}" method="GET">
         <div class="inline-flex items-center relative w-full text-gray-500 focus-within:text-green-500 hover:text-gray-700">
           <input autocomplete="off" type="text" name="q" class="pt-px border outline-none border-current text-current focus:text-gray-700 rounded-full pl-10 bg-white h-10 w-32 transition-all duration-100 focus:w-64 focus:border-green-500 placeholder-current" placeholder="Suche">
@@ -35,6 +37,18 @@
           </div>
         </div>
       </form>
+
+      {% comment %} social media (desktop only) {% endcomment %}
+      {% if settings.core.SocialMediaSettings.social_medias.all|slice:3 %}
+        <div class="hidden md:flex items-center justify-center lg:justify-start ml-2">
+          {% for social_media in settings.core.SocialMediaSettings.social_medias.all %}
+            {% image social_media.icon_color original as icon %}
+            <a class="mx-3 md:transition-transform md:duration-200 md:transform md:hover:scale-125" href="{{ social_media.link }}" target="_blank" title="{{ social_media.tooltip }}">
+              <img class="w-7" loading="lazy" src="{{ icon.url }}">
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
 
       <button id="menuButton" class="ml-auto md:hidden px-2 h-full outline-none">
         <svg id="menuButtonOpen" class="h-4 w-4 fill-current" viewBox="0 0 32 32"><path d="M.84 6.05C.6 5.8.46 5.47.46 5.08s.13-.72.38-.98.58-.38.98-.38h28.5c.4 0 .73.12 1 .38s.37.58.37.98-.14.7-.4.97-.57.38-.97.38H1.83c-.4 0-.73-.12-1-.38zm30.47 8.9c.26.27.4.6.4 1s-.14.7-.4.96-.57.4-.97.4H1.83c-.4 0-.73-.13-1-.4s-.37-.57-.37-.96.13-.72.38-.98.58-.38.98-.38h28.5c.4 0 .73.13 1 .38zm0 10.87c.26.25.4.58.4.97s-.14.7-.4.97-.57.38-.97.38H1.83c-.4 0-.73-.12-1-.38s-.37-.58-.37-.98.13-.73.38-.98.58-.38.98-.38h28.5c.4 0 .73.13 1 .38z" fill="#644327"/></svg>
@@ -45,6 +59,7 @@
 
   </nav>
 
+  {% comment %} mobile menu items {% endcomment %}
   <div id="mobileMenu" class="hidden md:hidden bg-white py-4 border-b-2 shadow-md border-green-500">
     {% for menuitem in menuitems %}
       <a class="block pl-12 py-3 {% if menuitem.is_active %}font-bold text-green-500{%endif%}" href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
