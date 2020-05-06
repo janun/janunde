@@ -110,7 +110,7 @@ class BasePage(Page, HyphenatedTitleMixin):
 
     def get_image(self):
         """image for SEO"""
-        for attr in ("main_image", "logo", "photo", "header_image"):
+        for attr in ("main_image", "feed_image", "logo", "photo", "header_image"):
             if hasattr(self, attr) and getattr(self, attr):
                 return getattr(self, attr)
         for attr in ("body", "content", "text"):
