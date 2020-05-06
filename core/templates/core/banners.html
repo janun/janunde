@@ -5,12 +5,14 @@
   <div class="container flex items-center justify-between h-18">
     <p class="text-xs sm:text-base font-bold">{{ banner.text }}</p>
 
-    <a class="ml-1 whitespace-no-wrap block text-white bg-green-500 rounded-full hover:shadow-md hover:bg-green-600 h-6 sm:h-10 px-1 sm:px-4 flex items-center group"
-      href="{{ banner.button_link }}">
-      <span class="ml-2 sm:ml-4 sm:mr-2 font-bold">{{ banner.button_text }}</span>
-      <svg class="fill-current h-5 w-5 md:group-hover:animate-translate-x-4" viewBox="0 0 20 20">
-        <path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z" /></svg>
-    </a>
+    {% if banner.button_text %}
+      <a class="ml-1 whitespace-no-wrap block text-white bg-green-500 rounded-full hover:shadow-md hover:bg-green-600 h-6 sm:h-10 px-1 sm:px-4 flex items-center group"
+        href="{{ banner.button_link }}">
+        <span class="ml-2 sm:ml-4 sm:mr-2 font-bold">{{ banner.button_text }}</span>
+        <svg class="fill-current h-5 w-5 md:group-hover:animate-translate-x-4" viewBox="0 0 20 20">
+          <path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z" /></svg>
+      </a>
+    {% endif %}
   </div>
 </div>
 {% endif %}
