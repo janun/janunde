@@ -16,7 +16,7 @@
 
     <div class="flex items-center w-full h-full">
       {% comment %} menu items {% endcomment %}
-      <div class="hidden md:flex xl:ml-8 h-full">
+      <div class="hidden lg:flex xl:ml-8 h-full">
         {% if menuitems %}
           {% for menuitem in menuitems %}
             <a class="group flex px-2 xl:mx-1 text-gray-700 hover:text-gray-900 {% if menuitem.is_active %}text-gray-900 hover:text-gray-900{%endif%}" href="{% pageurl menuitem %}">
@@ -29,9 +29,9 @@
       </div>
 
       {% comment %} search form {% endcomment %}
-      <form class="hidden md:flex ml-auto relative items-center" action="{% url 'search' %}" method="GET">
+      <form class="hidden lg:flex ml-auto relative items-center" action="{% url 'search' %}" method="GET">
         <div class="inline-flex items-center relative w-full text-gray-500 focus-within:text-green-500 hover:text-gray-700">
-          <input autocomplete="off" type="text" name="q" class="pt-px border outline-none border-current text-current focus:text-gray-700 rounded-full pl-10 bg-white h-10 w-32 xl:w-40 transition-all duration-100 focus:w-64 focus:border-green-500 placeholder-current" placeholder="Suche">
+          <input autocomplete="off" type="text" name="q" class="pt-px border outline-none border-current text-current focus:text-gray-700 rounded-full pl-9 xl:pl-10 bg-white h-10 w-24 lg:w-32 transition-all duration-100 xl:focus:w-48 focus:border-green-500 placeholder-current" placeholder="Suche">
           <div class="absolute left-0 inset-y-0 flex items-center">
             <svg class="transition-all duration-100 fill-current w-4 h-4 ml-4" viewBox="0 0 20 20"><path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
           </div>
@@ -40,17 +40,18 @@
 
       {% comment %} social media (desktop only) {% endcomment %}
       {% if settings.core.SocialMediaSettings.social_medias.all %}
-        <div class="hidden md:flex items-center justify-center lg:justify-start ml-4 xl:ml-12">
+        <div class="hidden lg:flex items-center justify-center justify-start ml-4 xl:ml-12">
           {% for social_media in settings.core.SocialMediaSettings.social_medias.all|slice:3 %}
             {% image social_media.icon_color original as icon %}
-            <a class="mx-2 md:transition-transform md:duration-200 md:transform md:hover:scale-125" href="{{ social_media.link }}" target="_blank" title="{{ social_media.tooltip }}">
-              <img class="w-7" loading="lazy" src="{{ icon.url }}">
+            <a class="mx-2 flex-shrink-0 transition-transform duration-200 transform hover:scale-125" href="{{ social_media.link }}" target="_blank" title="{{ social_media.tooltip }}">
+              <img class="w-6 xl:w-7" loading="lazy" src="{{ icon.url }}">
             </a>
           {% endfor %}
         </div>
       {% endif %}
 
-      <button id="menuButton" class="ml-auto md:hidden px-2 h-full outline-none">
+      {% comment %} mobile menu button {% endcomment %}
+      <button id="menuButton" class="ml-auto lg:hidden px-2 h-full outline-none">
         <svg id="menuButtonOpen" class="h-4 w-4 fill-current" viewBox="0 0 32 32"><path d="M.84 6.05C.6 5.8.46 5.47.46 5.08s.13-.72.38-.98.58-.38.98-.38h28.5c.4 0 .73.12 1 .38s.37.58.37.98-.14.7-.4.97-.57.38-.97.38H1.83c-.4 0-.73-.12-1-.38zm30.47 8.9c.26.27.4.6.4 1s-.14.7-.4.96-.57.4-.97.4H1.83c-.4 0-.73-.13-1-.4s-.37-.57-.37-.96.13-.72.38-.98.58-.38.98-.38h28.5c.4 0 .73.13 1 .38zm0 10.87c.26.25.4.58.4.97s-.14.7-.4.97-.57.38-.97.38H1.83c-.4 0-.73-.12-1-.38s-.37-.58-.37-.98.13-.73.38-.98.58-.38.98-.38h28.5c.4 0 .73.13 1 .38z" fill="#644327"/></svg>
         <svg id="menuButtonClose" class="hidden h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>
       </button>
@@ -60,7 +61,7 @@
   </nav>
 
   {% comment %} mobile menu items {% endcomment %}
-  <div id="mobileMenu" class="hidden md:hidden bg-white py-4 border-b-2 shadow-md border-green-500">
+  <div id="mobileMenu" class="hidden lg:hidden bg-white py-4 border-b-2 shadow-md border-green-500">
     {% for menuitem in menuitems %}
       <a class="block pl-12 py-3 {% if menuitem.is_active %}font-bold text-green-500{%endif%}" href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
     {% endfor %}
