@@ -13,7 +13,7 @@
         {% with object=object.specific %}
           <a href="{% pageurl object %}" class="-ml-5 mb-8 md:mx-4 lg:mx-10 flex md:block group block w-full sm:w-64 js-animate-in" data-animation="zoomIn">
 
-            <div class="flex-shrink-0 overflow-hidden h-32 w-40 md:h-40 md:w-full bg-gray-200 mr-5">
+            <div class="flex-shrink-0 overflow-hidden h-32 w-32 md:w-40 md:h-40 md:w-full bg-gray-200 mr-5">
               {% if object.get_image %}
                 <picture>
                   {% image object.get_image fill-512x320 format-webp as image_webp %}
@@ -24,7 +24,7 @@
               {% endif %}
             </div>
 
-            <div>
+            <div class="mr-3 md:mr-0">
               <h3 class="inline-block text-base md:text-xl md:mt-5 mb-2 font-bold text-gray-900 group-hover:text-green-600">{{ object.title }}</h3>
               <p class="text-gray-900 text-sm font-light leading-snug md:leading-normal">{{ object.get_description|truncatechars:100 }}</p>
             </div>

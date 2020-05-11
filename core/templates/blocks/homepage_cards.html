@@ -11,8 +11,8 @@
     <div class="flex flex-wrap items-stretch justify-center xl:-mx-6">
       {% for card in self.cards %}
         
-        <a href="{{ card.url }}" class="group mb-8 md:mx-4 lg:mx-10 flex md:flex-col w-full sm:w-64 js-animate-in" data-animation="zoomIn">
-          <div class="flex-shrink-0 overflow-hidden h-32 w-40 md:h-40 md:w-full bg-gray-200 mr-5">
+        <a href="{{ card.url }}" class="group mb-8 md:mx-4 lg:mx-10 flex md:flex-col w-full md:w-64 js-animate-in" data-animation="zoomIn">
+          <div class="flex-shrink-0 overflow-hidden h-32 w-32 md:w-40 md:h-40 md:w-full bg-gray-200 mr-4">
             <picture>
               {% image card.image fill-512x320 format-webp as image_webp %}
               {% image card.image fill-512x320 as image %}
@@ -21,17 +21,21 @@
             </picture>
           </div>
 
-          <div>
+          <div class="mr-4 md:mr-0">
             <h3 class="inline-block text-base md:text-xl md:mt-5 mb-2 font-bold text-gray-900 group-hover:text-green-600">{{ card.heading }}</h3>
-            <p class="text-gray-900 text-sm font-light leading-snug md:leading-normal my-3">{{ card.text|truncatechars:100 }}</p>
+            <p class="text-gray-900 text-sm font-light leading-snug md:leading-normal my-3">
+              {{ card.text|truncatechars:100 }}
+            </p>
             {% if card.button_text %}
-              <div class="md:hidden my-3 text-sm inline-flex items-center h-9 pt-px px-5 rounded-full bg-white text-green-600 border border-green-600 group-hover:bg-green-500 group-hover:text-white group-hover:font-bold">
+              {% comment %} button mobile {% endcomment %}
+              <div class="md:hidden my-3 text-xs inline-flex items-center h-8 pt-px px-3 rounded-full bg-white text-green-600 border border-green-600 group-hover:bg-green-500 group-hover:border-green-500 group-hover:text-white group-hover:font-bold">
                 {{ card.button_text }}
               </div>
             {% endif %}
           </div>
 
           {% if card.button_text %}
+            {% comment %} button desktop {% endcomment %}
             <div class="hidden md:block md:mt-auto">
               <div class="my-3 text-sm inline-flex items-center h-9 pt-px px-5 rounded-full text-green-600 border border-green-600 group-hover:bg-green-500 group-hover:border-green-500 group-hover:text-white group-hover:font-bold">
                 {{ card.button_text }}
