@@ -2,8 +2,8 @@
 {% if banner.active %}
 <div class="mt-18"></div>
 <div class="text-xs sm:text-base bg-white shadow sticky bottom-0 z-50 border-t border-gray-400 w-full">
-  <div class="container flex items-center justify-between h-18">
-    <p class="text-xs sm:text-base font-bold">{{ banner.text }}</p>
+  <div class="container flex items-center justify-between py-2 sm:py-4">
+    <p class="text-xs sm:text-base sm:font-bold">{{ banner.text }}</p>
 
     <a class="ml-1 whitespace-no-wrap block text-white bg-green-500 rounded-full hover:shadow-md hover:bg-green-600 h-6 sm:h-10 px-1 sm:px-4 flex items-center group"
       href="{{ banner.button_link }}">
