@@ -15,14 +15,14 @@ $text-color-standard: $brown;
  *   <span class="font-family-sans">sans</span>
  *   <span class="font-family-serif">serif</span>
  */
-.font-family {
-  &-sans {
-    font-family: $font-family-sans-serif;
-  }
-  &-serif {
-    font-family: $font-family-serif;
-  }
-}
+// .font-family {
+//   &-sans {
+//     font-family: $font-family-sans-serif;
+//   }
+//   &-serif {
+//     font-family: $font-family-serif;
+//   }
+// }
 
 
 /**
@@ -135,13 +135,13 @@ $text-color-standard: $brown;
 
 
 /// default font size
-html {
-  font-size: 100%;
-  font-family: $font-family-sans-serif;
-  color: $text-color-standard;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+// html {
+//   font-size: 100%;
+//   font-family: $font-family-sans-serif;
+//   color: $text-color-standard;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+// }
 
 
 // /**

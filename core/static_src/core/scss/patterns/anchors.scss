@@ -8,14 +8,14 @@ $link-color-visited: darken($link-color-hover, 18%);
  * @markup
  *   <a href="#">anchor</a>
  */
-a, .anchor {
-  text-decoration: none;
-  color: $link-color;
+// a, .anchor {
+//   text-decoration: none;
+//   color: $link-color;
 
-  &:hover {
-    color: $link-color-hover;
-  }
-}
+//   &:hover {
+//     color: $link-color-hover;
+//   }
+// }
 
 // TODO: according to atomic design, this should be moved to a paragraph molecule?
 /**

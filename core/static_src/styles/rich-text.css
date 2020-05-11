@@ -1,13 +1,5 @@
-p {
-  @apply font-sans text-brown leading-relaxed;
-}
-
-.rich-text {
-	@apply font-sans text-brown leading-relaxed;
-}
-
 .rich-text a {
-  @apply text-brown border-b border-brown;
+  @apply text-current border-b border-current;
 }
 
 .rich-text a:hover {
