@@ -418,6 +418,29 @@ class MovieBlock(blocks.StructBlock):
         icon = "media"
 
 
+class StatementBlock(blocks.StructBlock):
+    image = ImageChooserBlock(label="Bild")
+    text = blocks.RichTextBlock(label="Text")
+    author = blocks.TextBlock(label="Autor", required=False)
+
+
+class StatementsBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(label="Überschrift", required=False)
+    highlight_in_heading = blocks.CharBlock(
+        label="Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        required=False,
+    )
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+
+    statements = blocks.ListBlock(StatementBlock)
+
+    class Meta:
+        label = "Statements-Block"
+        template = "blocks/homepage_statements.html"
+        icon = "quote"
+
+
 class HomePageStreamBlock(blocks.StreamBlock):
     header = HeaderBlock()
     highlights = HighlightsBlock()
@@ -426,3 +449,4 @@ class HomePageStreamBlock(blocks.StreamBlock):
     groups = HomepageGroupsBlock()
     cards = CardsBlock()
     movie = MovieBlock()
+    statements = StatementsBlock()
