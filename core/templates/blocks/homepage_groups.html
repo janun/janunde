@@ -10,7 +10,7 @@
 
     <div class="flex flex-wrap items-start justify-center xl:-mx-6">
       {% for group in groups %}
-        <a class="relative mx-2 xl:mx-8 my-3 xl:my-6 flex flex-col items-center group w-24 md:w-32 js-animate-in" data-animation="zoomIn" href="{% pageurl group %}">
+        <a style="z-index: {{ forloop.revcounter }}" class="relative mx-2 xl:mx-8 my-3 xl:mb-6 flex flex-col items-center group w-24 md:w-32 js-animate-in" data-animation="zoomIn" href="{% pageurl group %}">
           <div class="rounded-full border border-transparent group-hover:border-gray-400 overflow-hidden bg-white shadow h-16 w-16 md:h-24 md:w-24 md:group-hover:shadow-md md:transition-shadow md:duration-200">
             <picture>
               {% image group.logo max-512x512 format-webp as logo_webp %}
@@ -25,7 +25,7 @@
           </div>
 
           {% if group.subtitle %}
-            <div style="top: 100%" class="absolute hidden z-20 lg:block opacity-0 lg:group-hover:opacity-100 rounded bg-white shadow-md px-3 py-2 mt-2 text-center text-gray-900 text-xs">
+            <div style="top: 100%" class="hidden absolute lg:block opacity-0 lg:group-hover:opacity-100 rounded bg-white shadow-md px-3 py-2 mt-2 text-center text-gray-900 text-xs">
               {{ group.subtitle }}
             </div>
           {% endif %}
