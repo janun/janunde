@@ -327,6 +327,7 @@ class SignupBlock(blocks.StructBlock):
         required=False,
     )
     white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+    background = ImageChooserBlock(label="Hintergrund-Bild", required=False)
 
     blocks = blocks.StreamBlock([("link", LinkSignupBlock())])
 
@@ -355,6 +356,7 @@ class HomepageGroupsBlock(blocks.StructBlock):
         required=False,
     )
     white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+    background = ImageChooserBlock(label="Hintergrund-Bild", required=False)
 
     def get_context(self, value, parent_context=None):
         # to prevent circular import

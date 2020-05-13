@@ -1,6 +1,12 @@
 {% load wagtailcore_tags wagtailimages_tags stuff %}
 
-<div class="{% if self.white_background %}bg-white{% endif %}">
+<div class="relative {% if self.white_background %}bg-white{% endif %}">
+
+  {% if self.background %}
+    {% image self.background max-1024x1024 as background %}
+    <img class="hidden xl:block inset-x-0 h-full absolute object-contain" loading="lazy" src="{{ background.url }}">
+  {% endif %}
+
   <div class="max-w-screen-lg mx-auto px-4 py-20 z-10">
 
     {% if self.heading %}
