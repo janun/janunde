@@ -13,12 +13,12 @@
         
         <a href="{{ card.url }}" class="bg-white md:bg-transparent group shadow md:shadow-none mb-8 md:mx-4 lg:mx-10 flex md:flex-col w-full md:w-64 js-animate-in" data-animation="zoomIn">
 
-          <div class="flex-shrink-0 overflow-hidden border-r md:border h-full w-32 md:w-40 md:h-40 md:w-full bg-gray-200 mr-3" style="min-height: 128px">
+          <div class="flex-shrink-0 overflow-hidden border-r md:border h-full w-32 md:w-40 md:h-40 md:w-full mr-3" style="min-height: 128px">
             <picture>
               {% image card.image fill-512x320 format-webp as image_webp %}
               {% image card.image fill-512x320 as image %}
               <source srcset="{{ image_webp.url }}" type="image/webp">
-              <img {{ image.attrs }} loading="lazy" class="h-full w-full object-cover md:transition-transform md:duration-200 md:transform md:group-hover:scale-105">
+              <img {{ image.attrs }} loading="lazy" class="h-full w-full {% if card.fit_image %}object-cover{% else %}object-contain{% endif %} md:transition-transform md:duration-200 md:transform md:group-hover:scale-105">
             </picture>
           </div>
 

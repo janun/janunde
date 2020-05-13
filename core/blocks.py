@@ -376,6 +376,9 @@ class CardBlock(blocks.StructBlock):
     text = blocks.CharBlock(label="Text", required=False)
     url = blocks.CharBlock(label="URL", required=False)
     button_text = blocks.CharBlock(label="Button-Text", required=False)
+    fit_image = blocks.BooleanBlock(
+        label="Bild an Rahmen anpassen", default=True, required=False
+    )
 
 
 class CardsBlock(blocks.StructBlock):
