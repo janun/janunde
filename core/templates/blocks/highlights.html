@@ -11,9 +11,9 @@
     <div class="flex flex-wrap items-stretch justify-center xl:-mx-4">
       {% for object in self.objects %}
         {% with object=object.specific %}
-          <a href="{% pageurl object %}" class="bg-white md:bg-transparent group mb-8 md:mx-4 lg:mx-10 flex md:flex-col w-full md:w-64 js-animate-in" data-animation="zoomIn">
+          <a href="{% pageurl object %}" class="bg-white md:bg-transparent shadow md:shadow-none group mb-8 md:mx-4 lg:mx-10 flex md:flex-col w-full md:w-64 js-animate-in" data-animation="zoomIn">
 
-            <div class="flex-shrink-0 overflow-hidden h-full w-32 md:w-40 md:h-40 md:w-full bg-gray-200 mr-3" style="min-height: 128px">
+            <div class="flex-shrink-0 overflow-hidden h-full w-32 md:w-40 border-r md:border md:h-40 md:w-full bg-gray-200 mr-3" style="min-height: 128px">
               {% if object.get_image %}
                 <picture>
                   {% image object.get_image fill-512x320 format-webp as image_webp %}
