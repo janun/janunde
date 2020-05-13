@@ -87,6 +87,7 @@ module.exports = {
     animations: ["responsive", "group-hover", "hover"],
     placeholderColor: ["responsive", "focus", "hover", "active"],
     fontWeight: ["responsive", "hover", "focus", "active", "group-hover"],
+    translate: ["responsive", "hover", "focus", "active", "group-hover"],
   },
   corePlugins: {
     container: false,
