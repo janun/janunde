@@ -69,6 +69,7 @@ module.exports = {
         "500": "500px",
         "400": "400px",
         "320": "320px",
+        "1/2-screen": "50vh",
       },
       cursor: {
         "zoom-in": "zoom-in",
@@ -85,7 +86,7 @@ module.exports = {
     width: ["responsive", "hover", "focus", "focus-within", "group-hover"],
     animations: ["responsive", "group-hover", "hover"],
     placeholderColor: ["responsive", "focus", "hover", "active"],
-    fontWeight: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+    fontWeight: ["responsive", "hover", "focus", "active", "group-hover"],
   },
   corePlugins: {
     container: false,
