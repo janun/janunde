@@ -360,10 +360,23 @@ class HomepageGroupsBlock(blocks.StructBlock):
 
     def get_context(self, value, parent_context=None):
         # to prevent circular import
-        from core.models import Group  # pylint: disable=import-outside-toplevel
+        from core.models import (  # pylint: disable=import-outside-toplevel
+            Group,
+            GroupIndexPage,
+        )
 
         context = super().get_context(value, parent_context=parent_context)
-        context["groups"] = Group.objects.live().filter(list_on_group_index_page=True)
+
+        try:
+            group_index_page = GroupIndexPage.objects.get()
+        except Exception:
+            return context
+
+        context["groups"] = (
+            Group.objects.child_of(group_index_page)
+            .live()
+            .filter(list_on_group_index_page=True)
+        )
         return context
 
     class Meta:
