@@ -1,16 +1,37 @@
-{% load render_partial %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-{% if self.heading %}
-  <h2 id="{{ self.heading|slugify }}" class="block-highlights__heading">{{ self.heading }}</h2>
-{% endif %}
 
-<div class="block-highlights__grid">
-  {% for object in self.objects %}
-    <div class="block-highlights__grid-item">
-      {% render_partial object.specific %}
+<div class="{% if self.white_background %}bg-white{% endif %} py-10">
+
+  <div class="max-w-screen-lg md:mx-auto md:px-4">
+    {% if self.heading %}
+      <h2 id="{{ self.heading|slugify }}" class="text-lg sm:text-xl mb-10 font-bold text-center js-animate-in" data-animation="zoomIn">{{ self.heading }}</h2>
+    {% endif %}
+
+    <div class="flex flex-wrap items-stretch justify-center xl:-mx-4">
+      {% for object in self.objects %}
+        {% with object=object.specific %}
+          <a href="{% pageurl object %}" class="bg-white md:bg-transparent shadow md:shadow-none group mb-8 md:mx-4 lg:mx-10 flex md:flex-col w-full md:w-64 js-animate-in" data-animation="zoomIn">
+
+            <div class="flex-shrink-0 overflow-hidden h-full w-32 md:w-40 border-r md:border md:h-40 md:w-full bg-gray-200 mr-3" style="min-height: 128px">
+              {% if object.get_image %}
+                <picture>
+                  {% image object.get_image fill-512x320 format-webp as image_webp %}
+                  {% image object.get_image fill-512x320 as image %}
+                  <source srcset="{{ image_webp.url }}" type="image/webp">
+                  <img {{ image.attrs }} loading="lazy" class="h-full w-full object-cover md:transition-transform md:duration-200 md:transform md:group-hover:scale-105">
+                </picture>
+              {% endif %}
+            </div>
+
+            <div class="mr-3 pt-2 md:pt-0 md:mr-0">
+              <h3 class="inline-block text-base md:text-xl md:mt-3 mb-1 font-bold text-gray-900 group-hover:text-green-600">{{ object.title }}</h3>
+              <p class="text-gray-900 text-sm font-light leading-snug md:leading-normal">{{ object.get_description|truncatechars:100 }}</p>
+            </div>
+          </a>
+        {% endwith %}
+      {% endfor %}
     </div>
-  {% endfor %}
-</div>
+  </div>  
 
-<a class="block-highlights__link" href="/veranstaltungen">Alle Veranstaltungen</a>
-<a class="block-highlights__link" href="/artikel">Alle Artikel</a>
+</div>

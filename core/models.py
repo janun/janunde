@@ -15,6 +15,7 @@ from django.utils.text import Truncator
 from django.template.loader import render_to_string
 
 from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
 
 from wagtail.admin.edit_handlers import (
     FieldPanel,
@@ -24,7 +25,7 @@ from wagtail.admin.edit_handlers import (
     MultiFieldPanel,
 )
 from wagtail.core.fields import StreamField
-from wagtail.core.models import Page, PageManager
+from wagtail.core.models import Page, PageManager, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.core.fields import RichTextField
@@ -33,6 +34,7 @@ from wagtail.contrib.forms.edit_handlers import FormSubmissionsPanel
 from wagtail.admin.utils import send_mail  # pylint: disable=no-name-in-module
 from wagtail.contrib.forms.forms import WagtailAdminPageForm
 from wagtail.snippets.models import register_snippet
+from wagtail.contrib.settings.models import BaseSetting, register_setting
 
 from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
@@ -701,3 +703,52 @@ class FormPage(AbstractEmailForm):
     class Meta:
         verbose_name = "Formular"
         verbose_name_plural = "Formulare"
+
+
+class SocialMediaEntry(ClusterableModel):
+    link = models.URLField()
+    icon_color = models.ForeignKey(
+        Image,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+        verbose_name="Buntes Icon",
+    )
+    icon_gray = models.ForeignKey(
+        Image,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+        verbose_name="Graues Icon",
+    )
+    tooltip = models.CharField(max_length=255, blank=True)
+
+    panels = [
+        FieldPanel("link"),
+        FieldPanel("tooltip"),
+        ImageChooserPanel("icon_color"),
+        ImageChooserPanel("icon_gray"),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class SocialMediaSettingsSocialMediaEntry(Orderable, SocialMediaEntry):
+    setting = ParentalKey(
+        "core.SocialMediaSettings",
+        on_delete=models.CASCADE,
+        related_name="social_medias",
+    )
+
+
+@register_setting
+class SocialMediaSettings(BaseSetting, ClusterableModel):
+
+    panels = [InlinePanel("social_medias")]
+
+    class Meta:
+        verbose_name = "Soziale Medien"
+        verbose_name_plural = "Soziale Medien"

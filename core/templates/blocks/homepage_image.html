@@ -1,0 +1,23 @@
+{% load wagtailimages_tags %}
+
+<div class="py-10 md:py-16 {% if self.white_background %}bg-white{% endif %}">
+  {% image value.image width-2560 format-webp as image_webp %}
+  {% image value.image fill-1000x1000 format-webp as image_webp_mobile %}
+  {% image value.image width-2560 format-jpeg as image_jpeg %}
+  {% image value.image fill-1000x1000 format-jpeg as image_jpeg_mobile %}
+  <picture>
+    <source srcset="{{ image_webp.url }}" media="(min-width: 600px)" type="image/webp">
+    <source srcset="{{ image_webp_mobile.url }}" type="image/webp">
+    <source srcset="{{ image_jpeg_mobile.url }}" type="image/jpg">
+    <img {{ image_jpeg.attrs }} loading="lazy" class="w-full object-cover h-64 sm:h-1/2-screen">
+  </picture>
+
+  <div class="text-sm md:text-base px-2 mt-1 md:mt-3 md:text-center items-baseline">
+    {% if value.caption %}
+      <span class="text-gray-900 mr-2">{{ value.caption }}</span>
+    {% endif %}
+    {% if value.image.attribution %}
+      <span class="text-gray-600 text-xs">{{ value.image.attribution }}</span>
+    {% endif %}
+  </div>
+</div>

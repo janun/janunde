@@ -1,5 +1,8 @@
 import urllib
+
 from django import template
+from django.utils.html import conditional_escape
+from django.utils.safestring import mark_safe
 from django.http import HttpRequest
 
 from wagtail.embeds import embeds
@@ -65,3 +68,15 @@ def query_transform(request: HttpRequest, delete="", replace=True, **kwargs):
         updated.update(kwargs)
 
     return updated.urlencode()
+
+
+@register.simple_tag
+def highlight(value, search, klass="font-bold"):
+    """Highlight search in value"""
+    if not search:
+        return value
+    esc = conditional_escape
+    result = esc(value).replace(
+        search, f"""<span class="{esc(klass)}">{esc(search)}</span>"""
+    )
+    return mark_safe(result)

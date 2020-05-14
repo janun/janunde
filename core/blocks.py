@@ -256,8 +256,32 @@ class StandardStreamBlock(blocks.StreamBlock):
     video_link = VideoLink()
 
 
+####### Homepage Blocks
+
+
+class HeaderButton(blocks.StructBlock):
+    text = blocks.CharBlock(label="Text")
+    link = blocks.CharBlock(label="Link")
+    primary = blocks.BooleanBlock(label="Primär", required=False)
+
+    class Meta:
+        label = "Button"
+        icon = "link"
+
+
 class HeaderBlock(blocks.StructBlock):
-    background = ImageChooserBlock(label="Hintergrundbild", required=False,)
+    background = ImageChooserBlock(label="Hintergrundbild", required=False)
+    heading = blocks.CharBlock(label="Überschrift", required=False)
+    highlight_in_heading = blocks.CharBlock(
+        label="Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        required=False,
+    )
+    text = blocks.RichTextBlock(label="Text", required=False)
+    text_mobile = blocks.RichTextBlock(label="Text (mobil)", required=False)
+    buttons = blocks.ListBlock(HeaderButton())
+
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
 
     class Meta:
         label = "Header"
@@ -265,32 +289,11 @@ class HeaderBlock(blocks.StructBlock):
         template = "blocks/header.html"
 
 
-class ParagraphTwoBlock(blocks.StructBlock):
-    big = blocks.BooleanBlock(label="Groß", required=False,)
-    center = blocks.BooleanBlock(label="zentriert", required=False,)
-    text = blocks.RichTextBlock()
-
-    class Meta:
-        label = "Absatz"
-        icon = "pilcrow"
-        template = "blocks/paragraph2.html"
-
-
-class TeaserBlock(blocks.StructBlock):
-    background = ImageChooserBlock(label="Hintergrundbild", required=False,)
-    title = blocks.CharBlock(label="Titel", required=False)
-    subtitle = blocks.CharBlock(label="Untertitel", required=False)
-    rotate = blocks.BooleanBlock(label="gedreht", required=False)
-
-    class Meta:
-        label = "Zwischentitel"
-        icon = "title"
-        template = "blocks/teaser.html"
-
-
 class HighlightsBlock(blocks.StructBlock):
     heading = blocks.CharBlock(label="Überschrift", required=False)
-    objects = blocks.ListBlock(blocks.PageChooserBlock(), label="Objekte",)
+    objects = blocks.ListBlock(blocks.PageChooserBlock(), label="Objekte")
+
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
 
     class Meta:
         label = "Highlights"
@@ -298,68 +301,158 @@ class HighlightsBlock(blocks.StructBlock):
         template = "blocks/highlights.html"
 
 
-class EventsBlock(blocks.StructBlock):
+class LinkSignupBlock(blocks.StructBlock):
     heading = blocks.CharBlock(label="Überschrift", required=False)
+    text = blocks.RichTextBlock(label="Text", required=False)
+
+    url = blocks.URLBlock(label="Button-URL")
+    button_text = blocks.CharBlock(label="Button Text")
+    button_color = blocks.CharBlock(
+        label="Button Farbe", required=False, default="#3a9d00"
+    )
+    button_icon = ImageChooserBlock(label="Icon", required=False)
+    button_hint = blocks.CharBlock(label="Button Hinweistext", required=False)
+
+    class Meta:
+        label = "Link-Anmeldung"
+        icon = "form"
+        template = "blocks/link_signup.html"
+
+
+class SignupBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(label="Überschrift", required=False)
+    highlight_in_heading = blocks.CharBlock(
+        label="Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        required=False,
+    )
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+    background = ImageChooserBlock(label="Hintergrund-Bild", required=False)
+
+    blocks = blocks.StreamBlock([("link", LinkSignupBlock())])
+
+    class Meta:
+        label = "Anmeldung"
+        icon = "form"
+        template = "blocks/homepage_signup.html"
+
+
+class HomepageImageBlock(blocks.StructBlock):
+    image = ImageChooserBlock(label="Bild")
+    caption = blocks.CharBlock(label="Bildunterschrift", required=False)
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+
+    class Meta:
+        label = "Bild"
+        template = "blocks/homepage_image.html"
+        icon = "image"
+
+
+class HomepageGroupsBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(label="Überschrift", required=False)
+    highlight_in_heading = blocks.CharBlock(
+        label="Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        required=False,
+    )
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+    background = ImageChooserBlock(label="Hintergrund-Bild", required=False)
 
     def get_context(self, value, parent_context=None):
         # to prevent circular import
-        from events.models import EventPage  # pylint: disable=import-outside-toplevel
+        from core.models import Group  # pylint: disable=import-outside-toplevel
 
         context = super().get_context(value, parent_context=parent_context)
-        context["upcoming"] = EventPage.objects.upcoming()[:3]
+        context["groups"] = Group.objects.all()
         return context
 
     class Meta:
-        label = "Veranstaltungen"
-        icon = "date"
-        template = "blocks/events.html"
+        label = "JANUN-Gruppen"
+        template = "blocks/homepage_groups.html"
+        icon = "image"
 
 
-class NewsletterSignupBlock(blocks.StructBlock):
-    heading = blocks.CharBlock(label="Überschrift", required=False)
-    text = blocks.RichTextBlock(label="Text", required=False)
-    example_url = blocks.URLBlock(label="Link zu Beispiel-E-Mail", required=False)
-
-    class Meta:
-        label = "Newsletter-Anmeldung"
-        icon = "form"
-        template = "blocks/newsletter.html"
-
-
-class BoxBlock(blocks.StructBlock):
-    heading = blocks.CharBlock(label="Überschrift", required=False)
-    text = blocks.RichTextBlock(label="Text", required=False)
-    buttons = blocks.ListBlock(Button())
-
-    class Meta:
-        label = "Box"
-        icon = "placeholder"
-        template = "blocks/box.html"
-
-
-class GapBlock(blocks.StructBlock):
-    size = blocks.DecimalBlock(
-        required=False,
-        label="Größe",
-        help_text="Größe des vertikalen Abstands in Pixeln",
+class CardBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(label="Überschrift")
+    image = ImageChooserBlock(label="Bild")
+    text = blocks.CharBlock(label="Text", required=False)
+    url = blocks.CharBlock(label="URL", required=False)
+    button_text = blocks.CharBlock(label="Button-Text", required=False)
+    fit_image = blocks.BooleanBlock(
+        label="Bild an Rahmen anpassen", default=True, required=False
     )
 
+
+class CardsBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(label="Überschrift", required=False)
+    highlight_in_heading = blocks.CharBlock(
+        label="Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        required=False,
+    )
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+
+    cards = blocks.ListBlock(CardBlock())
+
     class Meta:
-        label = "Abstand"
-        icon = "placeholder"
-        template = "blocks/gap.html"
+        label = "Karten-Block"
+        template = "blocks/homepage_cards.html"
+        icon = "image"
+
+
+class MovieBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(label="Überschrift", required=False)
+    highlight_in_heading = blocks.CharBlock(
+        label="Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        required=False,
+    )
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+    background = ImageChooserBlock(label="Hintergrund-Bild", required=False)
+
+    url = blocks.URLBlock(
+        label="URL", required=True, help_text="URL zu dem Video, auf das verlinkt wird"
+    )
+    image = ImageChooserBlock(
+        label="Bild (schwarz wenn nichts angegeben)", required=False,
+    )
+    caption = blocks.CharBlock(label="Bildunterschrift", required=False)
+
+    class Meta:
+        label = "Film-Block"
+        template = "blocks/homepage_movie.html"
+        icon = "media"
+
+
+class StatementBlock(blocks.StructBlock):
+    image = ImageChooserBlock(label="Bild")
+    text = blocks.RichTextBlock(label="Text")
+    author = blocks.TextBlock(label="Autor", required=False)
+
+
+class StatementsBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(label="Überschrift", required=False)
+    highlight_in_heading = blocks.CharBlock(
+        label="Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        required=False,
+    )
+    white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+
+    statements = blocks.ListBlock(StatementBlock)
+
+    class Meta:
+        label = "Statements-Block"
+        template = "blocks/homepage_statements.html"
+        icon = "quote"
 
 
 class HomePageStreamBlock(blocks.StreamBlock):
     header = HeaderBlock()
-    paragraph2 = ParagraphTwoBlock()
-    button = Button()
-    teaser = TeaserBlock()
     highlights = HighlightsBlock()
-    newsletter = NewsletterSignupBlock()
-    box = BoxBlock()
-    gap = GapBlock()
-    events = EventsBlock()
-    embed = OurEmbedBlock()
-    iframe = IframeBlock()
-    video_link = VideoLink()
+    signup = SignupBlock()
+    homepage_image = HomepageImageBlock()
+    groups = HomepageGroupsBlock()
+    cards = CardsBlock()
+    movie = MovieBlock()
+    statements = StatementsBlock()

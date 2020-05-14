@@ -1,0 +1,60 @@
+{% load wagtailcore_tags wagtailimages_tags stuff %}
+<div class="{% if self.white_background %}bg-white{% endif %} relative w-full overflow-hidden">
+
+  {% if self.background %}
+    {% image self.background max-1024x1024 as background %}
+    <img class="hidden xl:block inset-x-0 h-full absolute object-contain" loading="lazy" src="{{ background.url }}">
+  {% endif %}
+
+  <div class="relative max-w-screen-lg mx-auto md:px-4 my-20 z-10">
+    {% if self.heading %}
+      <h2 id="{{ self.heading|slugify }}" class="text-xl sm:text-2xl md:text-3xl max-w-2xl mx-auto mb-10 lg:my-24 text-green-500 font-bold text-center js-animate-in" data-animation="zoomIn">
+        {% highlight self.heading self.highlight_in_heading "text-purple" %}
+      </h2>
+    {% endif %}
+
+
+    <div class="flex">
+      <a class="block relative group mx-auto js-animate-in" data-animation="zoomIn" target="_blank" href="{{ value.url }}">
+        {% if value.image %}
+          
+          {% image value.image fill-1000x600 format-webp as image_webp %}
+          {% image value.image fill-500x300 format-webp as image_webp_mobile %}
+          {% image value.image fill-1000x600 format-jpeg as image_jpeg %}
+          {% image value.image fill-500x300 format-jpeg as image_jpeg_mobile %}
+          <picture>
+            <source srcset="{{ image_webp.url }}" media="(min-width: 600px)" type="image/webp">
+            <source srcset="{{ image_webp_mobile.url }}" type="image/webp">
+            <source srcset="{{ image_jpeg_mobile.url }}" type="image/jpg">
+            <img {{ image_jpeg.attrs }} loading="lazy" class="w-full xl:w-700 object-cover md:rounded-md">
+          </picture>
+
+        {% else %}
+          <div class="bg-black w-full xl:w-700 md:rounded-md"></div>
+        {% endif %}
+
+        {% comment %} caption {% endcomment %}
+        <div class="text-sm md:text-base px-2 mt-1 md:mt-3 md:text-center items-baseline">
+          {% if value.caption %}
+            <span class="text-gray-900 mr-2">{{ value.caption }}</span>
+          {% endif %}
+          {% if value.image.attribution %}
+            <span class="text-gray-600 text-xs">{{ value.image.attribution }}</span>
+          {% endif %}
+        </div>
+
+        {% comment %} play button {% endcomment %}
+        <div class="absolute inset-0 flex justify-center items-center">
+          <svg class="w-20 xl:w-24" viewBox="0 0 114.29 114.29">
+            <circle class="opacity-75 fill-current text-black group-hover:text-red-700 transition-all duration-500" cx="57.14" cy="57.14" r="57.14"/>
+            <path class="fill-current text-white" d="M48.24 39.68a2 2 0 0 0-2 2l-.03 27.91a2 2 0 0 0 3.05 1.7L72.3 57.33a2 2 0 0 0 0-3.4l-23-13.95a2 2 0 0 0-1.05-.3z"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+
+    
+
+    
+  </div>
+</div>

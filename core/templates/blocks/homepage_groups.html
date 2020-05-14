@@ -1,0 +1,41 @@
+{% load wagtailcore_tags wagtailimages_tags stuff %}
+<div class="{% if self.white_background %}bg-white{% endif %} relative w-full overflow-hidden">
+
+  {% if self.background %}
+    {% image self.background max-1024x1024 as background %}
+    <img class="hidden xl:block inset-x-0 h-full absolute object-contain" loading="lazy" src="{{ background.url }}">
+  {% endif %}
+
+  <div class="relative max-w-screen-lg mx-auto px-4 my-16 z-10">
+    {% if self.heading %}
+      <h2 id="{{ self.heading|slugify }}" class="text-xl sm:text-2xl md:text-3xl max-w-2xl mx-auto mb-10 lg:my-24 text-green-500 font-bold text-center js-animate-in" data-animation="zoomIn">
+        {% highlight self.heading self.highlight_in_heading "text-purple" %}
+      </h2>
+    {% endif %}
+
+    <div class="flex flex-wrap items-start justify-center xl:-mx-6">
+      {% for group in groups %}
+        <a style="z-index: {{ forloop.revcounter }}" class="relative mx-1 xm:mx-2 xl:mx-8 my-3 xl:mb-6 flex flex-col items-center group w-20 sm:w-24 md:w-32 js-animate-in" data-animation="zoomIn" href="{% pageurl group %}">
+          <div class="rounded-full border border-transparent group-hover:border-gray-400 overflow-hidden bg-white shadow h-16 w-16 md:h-24 md:w-24 md:group-hover:shadow-md md:transition-all md:duration-200 md:duration-200 md:transform md:group-hover:scale-125">
+            <picture>
+              {% image group.logo max-512x512 format-webp as logo_webp %}
+              {% image group.logo max-512x512 as logo %}
+              <source srcset="{{ logo_webp.url }}" type="image/webp">
+              <img class="h-full w-full object-contain p-3" loading="lazy" src="{{ logo.url }}">
+            </picture>
+          </div>
+
+          <div class="text-gray-900 mt-3 text-center text-xs md:text-sm md:text-base">
+            {{ group.title }}
+          </div>
+
+          {% if group.subtitle %}
+            <div style="top: 100%" class="hidden absolute lg:block opacity-0 lg:group-hover:opacity-100 rounded bg-white shadow-md px-3 py-2 mt-2 text-center text-gray-900 text-xs">
+              {{ group.subtitle }}
+            </div>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>

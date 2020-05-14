@@ -49,7 +49,6 @@ gulp.task("vue.js", function () {
 gulp.task("app.js", function () {
   return scriptsBundle([
     "node_modules/jquery/dist/jquery.js",
-    "node_modules/dotdotdot-js/dist/dotdotdot.js",
     "core/static_src/core/js/*.js",
   ], "app.js");
 });

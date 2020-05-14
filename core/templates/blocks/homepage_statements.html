@@ -1,0 +1,27 @@
+{% load wagtailcore_tags wagtailimages_tags stuff %}
+
+<div class="{% if self.white_background %}bg-white{% endif %}">
+  <div class="max-w-screen-lg xxl:max-w-screen-xl mx-auto px-4 py-20 z-10">
+
+    {% if self.heading %}
+      <h2 id="{{ self.heading|slugify }}" class="text-xl sm:text-2xl md:text-3xl max-w-2xl mx-auto mb-12 lg:my-24 text-green-500 font-bold text-center js-animate-in" data-animation="zoomIn">
+        {% highlight self.heading self.highlight_in_heading "text-purple" %}
+      </h2>
+    {% endif %}
+
+
+    <div class="flex flex-wrap md:flex-no-wrap justify-around items-stretch md:-mx-4 lg:-mx-10">
+      {% for statement in self.statements %}
+        <div class="flex md:mx-4 lg:mx-10 mb-12 js-animate-in" data-animation="zoomIn">
+          {% image statement.image width-512 format-jpeg as image_jpeg %}
+          <img {{ image_jpeg.attrs }} loading="lazy" class="w-24 h-24 xl:w-32 xl:h-32 rounded-full object-cover">
+          <div class="ml-4 lg:ml-8 rich-text-gray-800 text-sm md:text-base -mt-4">
+            {{ statement.text|richtext }}
+            <div class="text-gray-600 text-xs md:text-sm">{{ statement.author }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
