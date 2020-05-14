@@ -363,7 +363,7 @@ class HomepageGroupsBlock(blocks.StructBlock):
         from core.models import Group  # pylint: disable=import-outside-toplevel
 
         context = super().get_context(value, parent_context=parent_context)
-        context["groups"] = Group.objects.all()
+        context["groups"] = Group.objects.live().filter(list_on_group_index_page=True)
         return context
 
     class Meta:
