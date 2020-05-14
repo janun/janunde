@@ -408,6 +408,7 @@ class MovieBlock(blocks.StructBlock):
         required=False,
     )
     white_background = blocks.BooleanBlock(label="weißer Hintergrund", required=False)
+    background = ImageChooserBlock(label="Hintergrund-Bild", required=False)
 
     url = blocks.URLBlock(
         label="URL", required=True, help_text="URL zu dem Video, auf das verlinkt wird"
