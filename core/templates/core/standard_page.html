@@ -1,19 +1,27 @@
 {% extends "core/__base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags stuff %}
 
 {% block body_class %}{% endblock %}
 
 {% block content %}
-<main class="max-w-2xl mx-auto px-4">
+<main class="max-w-4xl mx-auto px-4 mt-10">
 
-  <header class="my-10">
+  <div class="my-5 text-sm text-gray-600">
+    {% for page in self.get_ancestors|slice:"1:" %}
+      <a class="hover:text-green-600" href="{% pageurl page %}">
+        ← {{ page.title }}
+      </a>
+    {% endfor %}
+  </div>
+
+  <header class="mb-10">
     <h1 class="leading-tighter text-green-500 text-3xl md:text-4xl font-bold mt-0 mb-2">{{ self.title }}</h1>
     {% if self.subtitle %}
       <h2 class="leading-tight md:leading-snug text-gray-700 text-lg md:text-xl my-0">{{ self.subtitle }}</h2>
     {% endif %}
   </header>
 
-  <div class="max-w-2xl mx-auto userim">
+  <div class="max-w-3xl mx-auto userim">
     {% include_block self.body %}
   </div>
    
