@@ -31,7 +31,7 @@ from wagtail.search import index
 from wagtail.core.fields import RichTextField
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.forms.edit_handlers import FormSubmissionsPanel
-from wagtail.admin.utils import send_mail  # pylint: disable=no-name-in-module
+from wagtail.admin.mail import send_mail  # pylint: disable=no-name-in-module
 from wagtail.contrib.forms.forms import WagtailAdminPageForm
 from wagtail.snippets.models import register_snippet
 from wagtail.contrib.settings.models import BaseSetting, register_setting

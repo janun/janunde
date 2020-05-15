@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_text
 from django.views.decorators.vary import vary_on_headers
 
-from wagtail.admin.utils import PermissionPolicyChecker
+from wagtail.admin.auth import PermissionPolicyChecker
 from wagtail.images import get_image_model
 from wagtail.images.fields import ALLOWED_EXTENSIONS
 from wagtail.images.forms import get_image_form
