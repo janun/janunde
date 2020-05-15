@@ -1,82 +1,94 @@
 {% extends "core/__base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 {% load static from staticfiles %}
 
-
-{% block body_class %}template-search{% endblock %}
 
 {% block title_suffix %}Suche{% endblock %}
 {% block meta %}{% endblock %}
 
 {% block content %}
-  <div class="pageheader">
-    <div class="container">
-      <form class="big-search" action="{% url 'search' %}" method="get">
-        <input id="searchinput"
-               class="big-search__input js-search-focus js-swap-placeholder"
-               data-placeholder-small="Suche" autofocus type="search"
-               placeholder="Was interessiert dich?" autocomplete="off"
-               name="q"{% if query_string %} value="{{ query_string }}"{% endif %}>
-      </form>
-    </div>
-  </div>
 
+<main class="max-w-5xl mx-auto px-4 mt-10 md:mt-16">
 
-  <div class="center-container">
-    <div id="spinner" class="hide">
-      <div class="big-font blinking-dots">Laden<span>.</span><span>.</span><span>.</span></div>
-      <div class="card-grid margin-top-1">
-        {% for i in "123" %}
-          <div class="bigcard">
-            <div class="bigcard__inner">
-              <div class="bigcard__image-placeholder"></div>
-              <div class="bigcard__content"></div>
-            </div>
-          </div>
-        {% endfor %}
+  {% comment %} form {% endcomment %}
+  <form method="GET" class="flex" action="{% url 'search' %}">
+    <div class="relative max-w-md w-full">
+      <input type="text" name="q" value="{{ search_query }}"
+          class="pr-8 border focus:border-gray-500 outline-none focus:shadow rounded-md px-4 py-2 w-full"
+          autofocus autocomplete="off" placeholder="Suchbegriff">
+      <div class="absolute right-0 inset-y-0 flex items-center border-l">
+        <button type="submit" class="h-full px-4 text-green-500 hover:text-green-600">
+          <svg class="transition-all duration-100 fill-current w-4 h-4" viewBox="0 0 20 20"><path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
+        </button>
       </div>
     </div>
+  </form>
 
-    <div id="searchresults">
-      {% include "search/_search_results.html" %}
+  {% comment %} results {% endcomment %}
+  <div class="my-8 mb-12 md:my-12">
+    {% if search_results %}
+      <div class="text-sm">{{ search_results.paginator.count }} Ergebnisse gefunden</div>
+    {% endif %}
+
+    {% for res in search_results %}
+      {% with result=res.specific %}
+        <a href="{% pageurl result %}" class="group flex my-10">
+          <div class="mr-3 flex-shrink-0">
+            {% image result.get_image fill-256x256 as result_image %}
+            <img {{ result_image.attrs }} loading="lazy" class="w-16 h-16 md:w-20 md:h-20 object-cover">
+          </div>
+          <div>
+            <div class="text-xs font-light">
+              {% pageurl result %}
+            </div>
+            <h3 class="md:text-lg font-bold group-hover:underline">{{ result.title }}</h3>
+            <div class="font-light">{{ result.get_description }}</div>
+            <div class="font-light text-sm text-gray-600">{{ result.last_published_at|date:"d.m.Y" }}</div>
+          </div>
+        </a>
+      {% endwith %}
+    {% empty %}
+      {% if search_query %}
+        Keine Ergebnisse gefunden.
+      {% else %}
+        Schreib deinen Suchbegriff in das Suchfeld.
+      {% endif %}
+    {% endfor %}
+
+    {% comment %} pagination {% endcomment %}
+  {% if search_results.paginator.num_pages > 1 %}
+    <div class="flex justify-start">
+      <ul class="flex -mx-2 my-10">
+        {% if search_results.has_previous %}
+          <li>
+            <a class="p-1 px-3 rounded text-gray-700"
+              href="?q={{ search_query }}&page={{ search_results.previous_page_number }}">
+              <span>←</span>
+            </a>
+          </li>
+        {% endif %}
+
+        {% for page_num in search_results.paginator.page_range %}
+          <li>
+            <a class="mx-1 p-1 px-3 rounded {% if page_num == search_results.number %}bg-green-500 text-white font-bold{% else %}border text-gray-700{% endif %}"
+              href="?q={{ search_query }}&page={{ page_num }}">
+              {{ page_num }}
+            </a>
+          </li>
+        {% endfor %}
+
+        {% if search_results.has_next %}
+          <li>
+            <a class="p-1 px-3 rounded text-gray-700"
+              href="?q={{ search_query }}&page={{ search_results.next_page_number }}">
+              <span>→</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
     </div>
+  {% endif %}
   </div>
-{% endblock %}
 
-{% block js %}
-  {{ block.super }}
-  <script>
-    $( document ).ready( function() {
-      function resetTimer(timer) {
-        if (timer) clearTimeout(timer);
-      }
-      function ajaxCall() {
-        if ($(this).val() != previousValue) {
-          resetTimer(this.timer);
-          this.timer = setTimeout(function() {
-            var q = $('#searchinput').val();
-            $('#searchresults').html('&nbsp;')
-              .load('{% url "search" %}?q=' + encodeURIComponent(q), function () {
-                window.history.pushState({}, "Suche", '{% url "search" %}?q=' + encodeURIComponent(q));
-              });
-          }, 300);
-          previousValue = $(this).val();
-        }
-      }
-      var previousValue = "{{ query_string }}";
-      $('#searchinput').on('keyup click input', ajaxCall);
-      $('#searchinput').keydown(function (e) {
-        if (e.which == 13) {
-          event.preventDefault();
-          ajaxCall();
-        }
-      });
-    });
-
-    $(document).ajaxStart( function() {
-      $('#spinner').removeClass('hide');
-    }).ajaxStop( function() {
-      $('#spinner').addClass('hide');
-    });
-  </script>
+</main>
 {% endblock %}

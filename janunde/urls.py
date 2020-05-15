@@ -29,16 +29,7 @@ urlpatterns = [
         r"^robots\.txt$",
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
     ),
-    url(
-        r"^search/",
-        search,
-        {
-            "results_per_page": 9,
-            "template": "search/search_results.html",
-            "template_ajax": "search/_search_results.html",
-        },
-        name="search",
-    ),
+    url(r"^search/", search, name="search",),
     url(
         r"^lueneburg/(?P<path>.*)",
         RedirectView.as_view(url="/netzwerk-projekte/janun-lüneburg/%(path)s"),
