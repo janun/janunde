@@ -1,20 +1,18 @@
-<a href="{{ value.file.url }}" target="_blank" 
-   class="inline-flex flex-wrap items-center group bg-white shadow hover:shadow-md hover:border px-3 md:px-5 py-2 md:py-3 my-5 rounded">
+<a title="Download" href="{{ value.file.url }}" target="_blank" class="flex items-center group my-10 leading-tight hover:text-green-600">
+  <svg class="h-5 w-5 md:h-6 md:w-6 mr-3 md:mr-5 fill-current text-gray-700
+              flex-shrink-0 group-hover:text-green-500 transition-transform duration-100 transform group-hover:rotate-45" viewBox="0 0 32 32"><path d="M5.4 31.49a5.2 5.2 0 01-3.7-1.6 5.94 5.94 0 010-8.37L19.65 2.46c2.8-2.8 7.08-2.55 10.21.58a7.73 7.73 0 012.16 5.56 8.01 8.01 0 01-2.26 5.53L16.2 28.57c-.38.4-1 .42-1.41.04s-.42-1.01-.04-1.41l13.58-14.46c1.06-1.07 1.67-2.58 1.7-4.17s-.56-3.09-1.58-4.11c-1.92-1.93-5.05-2.93-7.37-.6L3.14 22.9a3.93 3.93 0 00-.02 5.56 3.16 3.16 0 002.46 1 4.1 4.1 0 002.58-1.28L22.44 13c.52-.52 1.56-1.79.5-2.85-.6-.6-1.02-.56-1.16-.55-.4.03-.85.3-1.33.79L9.7 21.81a1 1 0 01-1.46-1.37L19.01 8.98a4.24 4.24 0 012.6-1.39c.68-.06 1.7.09 2.75 1.13 1.54 1.56 1.35 3.83-.48 5.67L9.6 29.59a6.1 6.1 0 01-4.2 1.9z"/></svg>
   <div>
-    <div class="text-sm">{{ value.title }}</div>
-  </div>
-  <div class="md:ml-4 mt-4">
-    <div class="md:ml-6 bg-green-500 text-white text-xs group-hover:bg-green-600 rounded-full px-3 py-1">Download</div>
-     <div class="text-xs mt-1 text-gray-600">
+    <div class="text-xs text-gray-600 group-hover:text-green-500">
       {{ value.file_extension|upper }}-Datei,
       {{ value.file.size|filesizeformat }}
     </div>
+    <div class="text-sm text-base break-all">{{ value.title }}</div>
   </div>
 </a>
 
 
 <style>
 .block-attachment + .block-attachment {
-  margin-top: -25px;
+  margin-top: -20px;
 }
 </style>
