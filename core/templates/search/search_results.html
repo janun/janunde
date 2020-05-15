@@ -59,38 +59,38 @@
     {% endfor %}
 
     {% comment %} pagination {% endcomment %}
-  {% if search_results.paginator.num_pages > 1 %}
-    <div class="flex flex-wrap justify-start">
-      <ul class="flex -mx-2 my-10">
-        {% if search_results.has_previous %}
-          <li>
-            <a class="p-1 px-3 rounded text-gray-700"
-              href="?q={{ search_query }}&page={{ search_results.previous_page_number }}">
-              <span>←</span>
-            </a>
-          </li>
-        {% endif %}
+    {% if search_results.paginator.num_pages > 1 %}
+      <div class="flex flex-wrap justify-start">
+        <ul class="flex flex-wrap -mx-2 my-10">
+          {% if search_results.has_previous %}
+            <li>
+              <a class="p-1 px-3 rounded text-gray-700"
+                href="?q={{ search_query }}&page={{ search_results.previous_page_number }}">
+                <span>←</span>
+              </a>
+            </li>
+          {% endif %}
 
-        {% for page_num in search_results.paginator.page_range %}
-          <li>
-            <a class="mx-1 p-1 px-3 rounded {% if page_num == search_results.number %}bg-green-500 text-white font-bold{% else %}border text-gray-700{% endif %}"
-              href="?q={{ search_query }}&page={{ page_num }}">
-              {{ page_num }}
-            </a>
-          </li>
-        {% endfor %}
+          {% for page_num in search_results.paginator.page_range %}
+            <li>
+              <a class="mx-1 p-1 px-3 rounded {% if page_num == search_results.number %}bg-green-500 text-white font-bold{% else %}border text-gray-700{% endif %}"
+                href="?q={{ search_query }}&page={{ page_num }}">
+                {{ page_num }}
+              </a>
+            </li>
+          {% endfor %}
 
-        {% if search_results.has_next %}
-          <li>
-            <a class="p-1 px-3 rounded text-gray-700"
-              href="?q={{ search_query }}&page={{ search_results.next_page_number }}">
-              <span>→</span>
-            </a>
-          </li>
-        {% endif %}
-      </ul>
-    </div>
-  {% endif %}
+          {% if search_results.has_next %}
+            <li>
+              <a class="p-1 px-3 rounded text-gray-700"
+                href="?q={{ search_query }}&page={{ search_results.next_page_number }}">
+                <span>→</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    {% endif %}
   </div>
 
 </main>
