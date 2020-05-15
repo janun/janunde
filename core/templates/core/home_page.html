@@ -7,6 +7,22 @@
 {% block title %}JANUN ist das Jugendumweltnetzwerk Niedersachsen{% endblock %}
 
 
+{% block meta %}
+{% comment %} inform google of site search {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "{{ self.get_site.root_url }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{{ self.get_site.root_url }}{% url 'search' %}?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
 
 {% cache 600 self.content self.latest_revision_created_at|date:"c" request.preview_timestamp %}
