@@ -14,7 +14,7 @@
   {% comment %} form {% endcomment %}
   <form method="GET" class="flex" action="{% url 'search' %}">
     <div class="relative max-w-md w-full">
-      <input type="text" name="q" value="{{ search_query }}"
+      <input type="text" name="q" value="{{ search_query|default:'' }}"
           class="pr-8 border focus:border-gray-500 outline-none focus:shadow rounded-md px-4 py-2 w-full"
           autofocus autocomplete="off" placeholder="Suchbegriff">
       <div class="absolute right-0 inset-y-0 flex items-center border-l">
