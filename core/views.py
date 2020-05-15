@@ -10,7 +10,7 @@ def search(request):
     page = request.GET.get("page")
 
     if search_query:
-        search_results = Page.objects.live().search(search_query)
+        search_results = Page.objects.live().specific().search(search_query)
 
         # Log the query so Wagtail can suggest promoted results
         Query.get(search_query).add_hit()
@@ -18,7 +18,7 @@ def search(request):
         search_results = Page.objects.none()
 
     # pagination
-    paginator = Paginator(search_results, 15)
+    paginator = Paginator(search_results, 10)
     try:
         results = paginator.page(page)
     except PageNotAnInteger:
