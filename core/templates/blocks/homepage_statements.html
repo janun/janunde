@@ -10,9 +10,9 @@
     {% endif %}
 
 
-    <div class="flex flex-wrap md:flex-no-wrap justify-around items-stretch md:-mx-4 lg:-mx-10">
+    <div class="flex flex-wrap md:flex-no-wrap justify-around items-stretch -mx-4 lg:-mx-10">
       {% for statement in self.statements %}
-        <div class="flex md:mx-4 lg:mx-10 mb-12 js-animate-in" data-animation="zoomIn">
+        <div class="flex mx-4 lg:mx-10 my-6 js-animate-in" data-animation="zoomIn">
           {% image statement.image width-512 format-jpeg as image_jpeg %}
           <img {{ image_jpeg.attrs }} loading="lazy" class="w-24 h-24 xl:w-32 xl:h-32 rounded-full object-cover">
           <div class="ml-4 lg:ml-8 rich-text-gray-800 text-sm md:text-base -mt-4">
