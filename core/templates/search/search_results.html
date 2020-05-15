@@ -60,7 +60,7 @@
 
     {% comment %} pagination {% endcomment %}
   {% if search_results.paginator.num_pages > 1 %}
-    <div class="flex justify-start">
+    <div class="flex flex-wrap justify-start">
       <ul class="flex -mx-2 my-10">
         {% if search_results.has_previous %}
           <li>
