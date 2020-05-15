@@ -72,7 +72,11 @@ def query_transform(request: HttpRequest, delete="", replace=True, **kwargs):
 
 @register.simple_tag
 def highlight(value, search, klass="font-bold"):
-    """Highlight search in value"""
+    """Highlight search in value
+
+    Example:
+        {% highlight "This is a test" "test" %}
+        'This is a <span class="font-bold">test</span>'"""
     if not search:
         return value
     esc = conditional_escape
@@ -80,3 +84,15 @@ def highlight(value, search, klass="font-bold"):
         search, f"""<span class="{esc(klass)}">{esc(search)}</span>"""
     )
     return mark_safe(result)
+
+
+@register.filter
+def unquote_url(value):
+    """unquote url filter
+
+    Example:
+        '/test%C3%B6%C3%BCl/'|unquote_url
+        '/testöül/'"""
+    if not value:
+        return ""
+    return urllib.parse.unquote(value)
