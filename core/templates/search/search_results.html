@@ -33,20 +33,22 @@
 
     {% for res in search_results %}
       {% with result=res.specific %}
-        <a href="{% pageurl result %}" class="group flex -ml-4 md:ml-0 my-10">
-          <div class="mr-3 flex-shrink-0">
-            {% image result.get_image fill-256x256 as result_image %}
-            <img {{ result_image.attrs }} loading="lazy" class="w-16 h-16 md:w-20 md:h-20 object-cover border">
-          </div>
-          <div>
-            <div class="text-xs font-light">
-              {% get_verbose_name result %}
+        <div>
+          <a href="{% pageurl result %}" class="group inline-flex -ml-4 md:ml-0 my-10">
+            <div class="mr-3 flex-shrink-0">
+              {% image result.get_image fill-256x256 as result_image %}
+              <img {{ result_image.attrs }} loading="lazy" class="w-16 h-16 md:w-20 md:h-20 object-cover border">
             </div>
-            <h3 class="md:text-lg font-bold group-hover:underline mb-1">{{ result.title }}</h3>
-            <div class="font-light text-sm">{{ result.get_description }}</div>
-            <div class="font-light text-sm text-gray-600">{{ result.last_published_at|date:"d.m.Y" }}</div>
-          </div>
-        </a>
+            <div>
+              <div class="text-xs font-light">
+                {{ result|ancestors|join:" → " }}
+              </div>
+              <h3 class="md:text-lg font-bold group-hover:underline mb-1">{{ result.title }}</h3>
+              <div class="font-light text-sm">{{ result.get_description }}</div>
+              <div class="font-light text-sm text-gray-600">{{ result.last_published_at|date:"d.m.Y" }}</div>
+            </div>
+          </a>
+        </div>
       {% endwith %}
     {% empty %}
       {% if search_query %}

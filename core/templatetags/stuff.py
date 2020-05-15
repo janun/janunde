@@ -87,22 +87,6 @@ def highlight(value, search, klass="font-bold"):
 
 
 @register.filter
-def unquote_url(value):
-    """unquote url filter
-
-    Example:
-        '/test%C3%B6%C3%BCl/'|unquote_url
-        '/testöül/'"""
-    if not value:
-        return ""
-    return urllib.parse.unquote(value)
-
-
-@register.simple_tag
-def get_verbose_name(obj) -> str:
-    """Get class verbose_name of an object
-
-    Example:
-        {% get_verbose_name object %}
-        'Simple Object'"""
-    return obj._meta.verbose_name
+def ancestors(obj):
+    """Get the ancestors of obj excluding Root and Homepage"""
+    return obj.get_ancestors()[2:]
