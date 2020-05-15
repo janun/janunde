@@ -43,7 +43,7 @@
               <div class="text-xs font-light">
                 {{ result|ancestors|join:" → " }}
               </div>
-              <h3 class="md:text-lg font-bold group-hover:underline mb-1">{{ result.title }}</h3>
+              <h3 class="text-base md:text-lg font-bold group-hover:underline mb-1">{{ result.title }}</h3>
               <div class="font-light text-sm">{{ result.get_description }}</div>
               <div class="font-light text-sm text-gray-600">{{ result.last_published_at|date:"d.m.Y" }}</div>
             </div>
