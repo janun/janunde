@@ -96,3 +96,13 @@ def unquote_url(value):
     if not value:
         return ""
     return urllib.parse.unquote(value)
+
+
+@register.simple_tag
+def get_verbose_name(obj) -> str:
+    """Get class verbose_name of an object
+
+    Example:
+        {% get_verbose_name object %}
+        'Simple Object'"""
+    return obj._meta.verbose_name

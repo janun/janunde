@@ -40,7 +40,7 @@
           </div>
           <div>
             <div class="text-xs font-light">
-              {{ result.get_url|unquote_url }}
+              {% get_verbose_name result %}
             </div>
             <h3 class="md:text-lg font-bold group-hover:underline mb-1">{{ result.title }}</h3>
             <div class="font-light text-sm">{{ result.get_description }}</div>

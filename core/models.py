@@ -412,6 +412,10 @@ class Project(Group):
 
     objects = GroupManager()
 
+    class Meta:
+        verbose_name = "Projekt"
+        verbose_name_plural = "Projekte"
+
 
 class GroupIndexPage(BasePage, HeaderMixin):
     # title is auto added
