@@ -130,12 +130,13 @@ class ImageGalleryBlock(blocks.StructBlock):
 
 class Button(blocks.StructBlock):
     text = blocks.CharBlock(label="Text")
-    link = blocks.URLBlock(label="Link", required=False)
-    mail = blocks.EmailBlock(
-        label="E-Mail", help_text="wird anstelle von link benutzt", required=False
+    link = blocks.CharBlock(
+        label="Link",
+        required=False,
+        help_text="""Schreibe https://example.com für einen externen Link, /unterseite"""
+        """ für einen internen, #sektion für einen Anchor-Link, mailto:max@muster.de"""
+        """ für eine E-Mail-Adresse, tel:+49123121 für eine Telefonnummer etc.""",
     )
-    color = blocks.ChoiceBlock(label="Farbe", choices=COLOR_CHOICES, default="green")
-    aslink = blocks.BooleanBlock(required=False, label="ohne Hintergrund")
 
     class Meta:
         label = "Button"

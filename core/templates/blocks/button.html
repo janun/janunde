@@ -1,5 +1,9 @@
-<a class="button
-  {% if value.aslink %}button--link{% else %}button--primary{% endif %} color-{{ value.color }}"
-  href="{% if value.mail %}mailto:{{ value.mail }}{% else %}{{ value.link }}{% endif %}">
+<a href="{{ value.link }}"
+   class="inline-block bg-green-500 hover:bg-green-600 hover:shadow text-white rounded-full py-2 px-5">
   {{ value.text }}
 </a>
+
+<style>
+.block-button {display: inline-block; margin: 0.75rem 0;}
+.block-button + .block-button { margin-top: 0.25rem;}
+</style>
