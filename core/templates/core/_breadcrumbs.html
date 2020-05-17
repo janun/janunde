@@ -6,7 +6,7 @@
       <li class="inline"><a class="hover:underline" href="{% pageurl page %}">{{ page.title }}</a> / </li>
     {% endfor %}
     <li class="inline font-bold" aria-current="page">
-      {{ self.title }}
+      <a class="hover:underline" href="{% pageurl self %}">{{ self.title }}</a>
     </li>
   </ol>
 </nav>
