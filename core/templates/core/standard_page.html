@@ -6,13 +6,7 @@
 {% block content %}
 <main class="max-w-3xl mx-auto px-4 mt-10">
 
-  <div class="my-5 text-sm text-gray-600">
-    {% for page in self.get_ancestors|slice:"1:" %}
-      <a class="hover:text-green-600" href="{% pageurl page %}">
-        ← {{ page.title }}
-      </a>
-    {% endfor %}
-  </div>
+  {% include "core/_breadcrumbs.html" %}
 
   <header class="mb-10">
     <h1 class="leading-tighter text-green-500 text-3xl md:text-4xl font-bold mt-0 mb-2">{{ self.title }}</h1>

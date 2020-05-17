@@ -1,0 +1,12 @@
+{% load wagtailcore_tags stuff %}
+
+<nav aria-label="Breadcrumb" class="my-5 text-sm text-gray-600">
+  <ol>
+    {% for page in self.get_ancestors|slice:"1:" %}
+      <li class="inline"><a class="hover:underline" href="{% pageurl page %}">{{ page.title }}</a> / </li>
+    {% endfor %}
+    <li class="inline font-bold" aria-current="page">
+      {{ self.title }}
+    </li>
+  </ol>
+</nav>
