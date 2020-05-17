@@ -6,63 +6,69 @@
 {% block body_class %}template-formpage{% endblock %}
 
 {% block content %}
+<main class="max-w-3xl mx-auto px-4 mt-10">
 
-  <div class="container container--margin-top">
-    <div class="text-container userim">
-      <h1 class="title title--color-green">{{ page.title }}</h1>
-      {{ page.intro|richtext }}
-    </div>
+  {% include "core/_breadcrumbs.html" %}
+
+   <header class="mb-10">
+    <h1 class="leading-tighter text-green-500 text-3xl md:text-4xl font-bold mt-0 mb-2">{{ self.title }}</h1>
+  </header>
+
+  <div class="max-w-3xl mx-auto userim">
+    {{ page.intro|richtext }}
   </div>
 
-    <form action="{% pageurl page %}" method="POST" class="form">
-      {% csrf_token %}
-      {{ form.non_field_errors }}
-      {% if form.errors %}<div class="color-red">Bitte überprüfe die Felder noch einmal. Felder mit Problemen sind rot gekennzeichnet.</div><br>{% endif %}
 
-      {% for field in form %}
-        {% if field.is_hidden %}{{ field }}{% else %}
+  <form action="{% pageurl page %}" method="POST" class="form text-base bg-white p-5 shadow rounded-md max-w-3xl">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% if form.errors %}<div class="color-red">Bitte überprüfe die Felder noch einmal. Felder mit Problemen sind rot gekennzeichnet.</div><br>{% endif %}
 
-        <div id="wrapper-{{field.id_for_label}}"
-             class="form__fieldwrapper
-             {% if field.errors %}form__fieldwrapper--has-error{% endif %}">
+    {% for field in form %}
+      {% if field.is_hidden %}{{ field }}{% else %}
 
-             {% if field|is_checkbox %}
-               <div class="form__textwrapper grid-12">
-                 <div class="grid-12__col-1">
-                   {{ field }}
-                </div>
-                <div class="grid-12__col-11" style="vertical-align:baseline">
-                  <label for="{{ field.id_for_label }}">
-                    {{ field.label|safe }}
-                    {% if field.field.required == False %} (optional){% endif %}
-                  </label>
-                  {% if field.help_text %}
-                    <p class="form__helptext">{{ field.help_text|safe }}</p>
-                    {% endif %}
-                </div>
+      <div id="wrapper-{{field.id_for_label}}"
+            class="form__fieldwrapper
+            {% if field.errors %}form__fieldwrapper--has-error{% endif %}">
+
+            {% if field|is_checkbox %}
+              <div class="form__textwrapper grid-12">
+                <div class="grid-12__col-1">
+                  {{ field }}
               </div>
-            {% else %}
-              <div class="form__textwrapper">
-                <label for="{{ field.id_for_label }}">
+              <div class="grid-12__col-11" style="vertical-align:baseline">
+                <label class="text-base" for="{{ field.id_for_label }}">
                   {{ field.label|safe }}
                   {% if field.field.required == False %} (optional){% endif %}
                 </label>
                 {% if field.help_text %}
                   <p class="form__helptext">{{ field.help_text|safe }}</p>
-                {% endif %}
+                  {% endif %}
               </div>
-            {{ field }}
-          {% endif %}
-          {{ field.errors }}
-        </div>
+            </div>
+          {% else %}
+            <div class="form__textwrapper">
+              <label class="text-base" for="{{ field.id_for_label }}">
+                {{ field.label|safe }}
+                {% if field.field.required == False %} (optional){% endif %}
+              </label>
+              {% if field.help_text %}
+                <p class="form__helptext">{{ field.help_text|safe }}</p>
+              {% endif %}
+            </div>
+          {{ field }}
         {% endif %}
-      {% endfor %}
-
-      <div class="form__controls">
-        <input class="button button--primary" type="submit" value="Abschicken" />
-        <a href="/" class="button button--link float-right@medium">Zurück zur Startseite</a>
+        {{ field.errors }}
       </div>
-    </form>
+      {% endif %}
+    {% endfor %}
+
+    <div class="flex items-center justify-end">
+      <input class="bg-green-500 hover:bg-green-600 hover:shadow font-bold text-white rounded-full py-2 px-6" type="submit" value="Abschicken" />
+    </div>
+  </form>
+
+</main>
 {% endblock %}
 
 {% block extra_js %}

@@ -5,16 +5,13 @@
 {% block body_class %}template-formpage-landing{% endblock %}
 
 {% block content %}
+<main class="max-w-3xl mx-auto px-4 mt-10">
 
+  {% include "core/_breadcrumbs.html" %}
 
-<div class="center-container">
-<div class="text-container padding-top-5 padding-bottom-5">
-  <i class="icon-check color-green" style="font-size: 7rem" aria-hidden="true"></i>
-  <div class="margin-bottom-3 margin-top-2 big-font">
-    <div>{{ page.thank_you_text|richtext }}</div>
-  </div>
-</div>
-</div>
+  <svg class="h-10 w-10 fill-current text-green-500" viewBox="0 0 32 32"><path d="M16 0a16 16 0 100 32 16 16 0 000-32zm0 30.03A14.02 14.02 0 0116 2a14.02 14.02 0 010 28.03zm6.39-19.88l-9.4 9.44-4.22-4.23a1 1 0 00-1.42 1.42l4.96 4.95a1 1 0 001.53-.15l9.96-10.02a1 1 0 00-1.41-1.42z"/></svg>
 
+  <div>{{ page.thank_you_text|richtext }}</div>
 
+</main>
 {% endblock %}
