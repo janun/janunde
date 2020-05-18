@@ -1,57 +1,39 @@
 {% extends "core/__base.html" %}
-{% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
+{% load wagtailcore_tags wagtailimages_tags srcset humanize stuff render_partial %}
 {% load static from staticfiles %}
-{% load render_partial %}
-
-
-{% block body_class %}person-index-page{% endblock %}
 
 {% block content %}
+<main class="max-w-screen-lg mx-auto mt-10">
+  <div class="mx-4">
 
-  {% include "core/_pageheader.html" %}
+    <h1 class="leading-tighter text-green-500 text-2xl xl:text-4xl font-bold mt-0 mb-5 lg:mb-10">{{ self.title }}</h1>
 
-  {% if countrywide_projects %}
-    <div class="center-container">
-      <h2 id="projekte-des-landesbueros" class="area-title area-title--centered">Projekte des Landesbüros</h2>
-      <div class="card-grid">
-        {% for project in countrywide_projects %}
-          {% render_partial project %}
+    {% if countrywide_projects %}
+      <h2 id="projekte-des-landesbueros" class="text-base md:text-xl my-2 md:my-5 text-gray-700">Projekte des Landesbüros</h2>
+      <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8">
+        {% for group in countrywide_projects %}
+          {% include "core/_group.html" with counter=forloop.revcounter %}
         {% endfor %}
       </div>
-    </div>
-  {% endif %}
+    {% endif %}
 
-  {% if groups %}
-    <div class="center-container">
-      <h2 id="mitglieder-und-projektgruppen" class="area-title area-title--centered">Mitglieder und Projektgruppen</h2>
-      <div class="card-grid">
+    {% if groups %}
+      <h2 id="mitglieder-und-projektgruppen" class="text-base md:text-xl my-2 md:my-5 text-gray-700">Mitglieder und Projektgruppen</h2>
+      <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8">
         {% for group in groups %}
-          {% render_partial group %}
+          {% include "core/_group.html" with counter=forloop.revcounter  %}
         {% endfor %}
       </div>
-    </div>
-  {% endif %}
+    {% endif %}
 
-  {% if other_projects %}
-    <div class="center-container">
-      <h2 id="projekte-von-janun-mitgliedsgruppen" class="area-title area-title--centered">Projekte von JANUN-Mitgliedsgruppen</h2>
-      <div class="card-grid">
-        {% for project in other_projects %}
-          {% render_partial project %}
+    {% if other_projects %}
+      <h2 id="projekte-von-janun-mitgliedsgruppen" class="text-base md:text-xl my-2 md:my-5 text-gray-700">Projekte von JANUN-Mitgliedsgruppen</h2>
+      <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8">
+        {% for group in other_projects %}
+          {% include "core/_group.html" with counter=forloop.revcounter  %}
         {% endfor %}
       </div>
-    </div>
-  {% endif %}
-
-  {% if not groups and not other_projects and not countrywide_projects %}
-    <div class="container padding-top-6 padding-bottom-5">
-      <i class="icon-present color-green" style="font-size: 7rem" aria-hidden="true"></i>
-      <div class="margin-bottom-3 margin-top-4 big-font">
-      <div class="color-green">Ein Geschenk für Dich.</div>
-        <div>Gruppen und Projekte, die wir zeigen könnten, gibt es aber leider keine.</div>
-      </div>
-      <span><a class="color-green" href="/admin/">Du kannst das ändern.</a></span>
-    </div>
-  {% endif %}
-
+    {% endif %}
+  </div>
+</main>
 {% endblock %}
