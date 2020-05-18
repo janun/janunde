@@ -15,7 +15,7 @@
     </h1>
 
     {% if countrywide_projects %}
-      <h2 id="projekte-des-landesbueros" class="text-base md:text-xl mb-2 mt-5 md:mb-5 md:mt-10 text-gray-700">Projekte des Landesbüros</h2>
+      <h2 id="projekte-des-landesbueros" class="text-base md:text-xl mb-2 mt-5 md:mb-5 md:mt-16 text-gray-700">Projekte des Landesbüros</h2>
       <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8">
         {% for group in countrywide_projects %}
           {% include "core/_group.html" with counter=forloop.revcounter %}
@@ -24,7 +24,7 @@
     {% endif %}
 
     {% if groups %}
-      <h2 id="mitglieder-und-projektgruppen" class="text-base md:text-xl mb-2 mt-5 md:mb-5 md:mt-10 text-gray-700">Mitglieder und Projektgruppen</h2>
+      <h2 id="mitglieder-und-projektgruppen" class="text-base md:text-xl mb-2 mt-5 md:mb-5 md:mt-16 text-gray-700">Mitglieder und Projektgruppen</h2>
       <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8">
         {% for group in groups %}
           {% include "core/_group.html" with counter=forloop.revcounter  %}
@@ -33,7 +33,7 @@
     {% endif %}
 
     {% if other_projects %}
-      <h2 id="projekte-von-janun-mitgliedsgruppen" class="text-base md:text-xl mb-2 mt-5 md:mb-5 md:mt-10 text-gray-700">Projekte von JANUN-Mitgliedsgruppen</h2>
+      <h2 id="projekte-von-janun-mitgliedsgruppen" class="text-base md:text-xl mb-2 mt-5 md:mb-5 md:mt-16 text-gray-700">Projekte von JANUN-Mitgliedsgruppen</h2>
       <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8">
         {% for group in other_projects %}
           {% include "core/_group.html" with counter=forloop.revcounter  %}
