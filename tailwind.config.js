@@ -90,6 +90,7 @@ module.exports = {
     translate: ["responsive", "hover", "focus", "active", "group-hover"],
     rotate: ["responsive", "hover", "focus", "active", "group-hover"],
     textDecoration: ["responsive", "hover", "focus", "active", "group-hover"],
+    display: ["responsive", "hover", "focus", "active", "group-hover"],
   },
   corePlugins: {
     container: false,
