@@ -1,25 +1,22 @@
-{% load wagtailcore_tags wagtailimages_tags srcset humanize stuff cache %}
-{% load static from staticfiles %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-{% cache 600 group object.id object.latest_revision_created_at object.logo.updated_at %}
-  <a style="z-index: {{ counter }}" class="relative mx-1 md:mx-2 xl:mx-8 my-3 xl:mb-6 flex flex-col items-center group w-20 sm:w-24 md:w-32 {% if animation %}js-animate-in{% endif %}" data-animation="zoomIn" href="{% pageurl group %}">
-    <div class="rounded-full border border-transparent group-hover:border-gray-400 overflow-hidden bg-white shadow h-16 w-16 md:h-24 md:w-24 md:group-hover:shadow-md md:transition-all md:duration-200 md:duration-200 md:transform md:group-hover:scale-125">
-      <picture>
-        {% image group.logo max-512x512 format-webp as logo_webp %}
-        {% image group.logo max-512x512 as logo %}
-        <source srcset="{{ logo_webp.url }}" type="image/webp">
-        <img class="h-full w-full object-contain p-3" loading="lazy" src="{{ logo.url }}">
-      </picture>
+<a style="z-index: {{ counter }}" class="relative mx-1 md:mx-2 xl:mx-8 my-3 xl:mb-6 flex flex-col items-center group w-20 sm:w-24 md:w-32 {% if animation %}js-animate-in{% endif %}" data-animation="zoomIn" href="{% pageurl group %}">
+  <div class="rounded-full border border-transparent group-hover:border-gray-400 overflow-hidden bg-white shadow h-16 w-16 md:h-24 md:w-24 md:group-hover:shadow-md md:transition-all md:duration-200 md:duration-200 md:transform md:group-hover:scale-125">
+    <picture>
+      {% image group.logo max-512x512 format-webp as logo_webp %}
+      {% image group.logo max-512x512 as logo %}
+      <source srcset="{{ logo_webp.url }}" type="image/webp">
+      <img class="h-full w-full object-contain p-3" loading="lazy" src="{{ logo.url }}">
+    </picture>
+  </div>
+
+  <div class="text-gray-900 mt-3 text-center text-xs md:text-sm md:text-base">
+    {{ group.title }}
+  </div>
+
+  {% if group.subtitle %}
+    <div style="top: 100%" class="hidden absolute lg:block opacity-0 lg:group-hover:opacity-100 rounded bg-white shadow-md px-3 py-2 mt-2 text-center text-gray-900 text-xs">
+      {{ group.subtitle }}
     </div>
-
-    <div class="text-gray-900 mt-3 text-center text-xs md:text-sm md:text-base">
-      {{ group.title }}
-    </div>
-
-    {% if group.subtitle %}
-      <div style="top: 100%" class="hidden absolute lg:block opacity-0 lg:group-hover:opacity-100 rounded bg-white shadow-md px-3 py-2 mt-2 text-center text-gray-900 text-xs">
-        {{ group.subtitle }}
-      </div>
-    {% endif %}
-  </a>
-{% endcache %}
+  {% endif %}
+</a>
