@@ -40,8 +40,8 @@
         {% comment %}type{% endcomment %}
         {% if self.event_type.all %}
           <div class="flex mb-5">
-            <svg class="mr-4 mt-1 h-4 w-4 fill-current text-brown flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M31.999 13.008V2.434A2.437 2.437 0 0029.566 0H18.773c-.677 0-1.703 0-2.372.67L.591 16.481c-.38.38-.59.884-.59 1.421 0 .538.209 1.043.589 1.423L12.678 31.41c.379.381.883.59 1.421.59s1.042-.209 1.421-.589l15.811-15.812c.678-.677.674-1.65.67-2.591zm-2.084 1.178L14.089 29.997 2.003 17.896 17.797 2.099C17.956 2 18.529 2 18.765 2l.45.002L29.565 2c.239 0 .433.195.433.434v10.582c.002.38.004 1.017-.084 1.169zM24 4a4 4 0 100 8 4 4 0 000-8zm0 6a2 2 0 110-4 2 2 0 010 4z"/></svg>
-            <div class="text-brown">
+            <svg class="mr-4 mt-1 h-4 w-4 fill-current  flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M31.999 13.008V2.434A2.437 2.437 0 0029.566 0H18.773c-.677 0-1.703 0-2.372.67L.591 16.481c-.38.38-.59.884-.59 1.421 0 .538.209 1.043.589 1.423L12.678 31.41c.379.381.883.59 1.421.59s1.042-.209 1.421-.589l15.811-15.812c.678-.677.674-1.65.67-2.591zm-2.084 1.178L14.089 29.997 2.003 17.896 17.797 2.099C17.956 2 18.529 2 18.765 2l.45.002L29.565 2c.239 0 .433.195.433.434v10.582c.002.38.004 1.017-.084 1.169zM24 4a4 4 0 100 8 4 4 0 000-8zm0 6a2 2 0 110-4 2 2 0 010 4z"/></svg>
+            <div class="">
               {{ self.event_type.all|join:", " }}
             </div>
           </div>
@@ -49,8 +49,8 @@
 
         {% comment %} time {% endcomment %}
         <div class="flex mb-5">
-          <svg class="mr-4 mt-1 h-4 w-4 fill-current text-brown flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M16 0a16 16 0 100 32 16 16 0 000-32zm0 30.03A14.02 14.02 0 0116 2a14.02 14.02 0 010 28.03zm1-14.44V6a1 1 0 00-2 0v10a1 1 0 00.3.72l.06.06 4.95 4.95a1 1 0 001.4-1.42z"/></svg>
-          <div class="text-brown">
+          <svg class="mr-4 mt-1 h-4 w-4 fill-current  flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M16 0a16 16 0 100 32 16 16 0 000-32zm0 30.03A14.02 14.02 0 0116 2a14.02 14.02 0 010 28.03zm1-14.44V6a1 1 0 00-2 0v10a1 1 0 00.3.72l.06.06 4.95 4.95a1 1 0 001.4-1.42z"/></svg>
+          <div class="">
             {# no end #}
             {% if not self.end or not self.all_day and self.end.date == self.start.date %}
               <div title="{{ self.start|date:'d.m.Y' }} {{ self.start|time:'H:i' }}">
@@ -88,16 +88,16 @@
         {% comment %} location {% endcomment %}
         {% if self.address or self.location %}
           <div class="flex mb-5">
-            <svg class="mr-4 mt-1 h-4 w-4 fill-current text-brown flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M16.11-.01A12.33 12.33 0 004 12.19c0 6.93 6.44 14.02 10.77 19 .02.02.72.8 1.58.8h.07c.87 0 1.56-.78 1.58-.8 4.06-4.67 10-12.38 10-19C28 5.58 23.67 0 16.11 0zm.4 29.86l-.13.1-.13-.1-.52-.6C11.63 24.54 6 18.09 6 12.19A10.3 10.3 0 0116.1 2c6.83 0 9.89 5.12 9.89 10.2 0 4.48-3.2 10.42-9.49 17.66zm-.48-23.8a6 6 0 100 12 6 6 0 000-12zm0 10C13.84 16.04 12 14.2 12 12a4 4 0 018 0 4 4 0 01-3.95 4.04z"/></svg>
+            <svg class="mr-4 mt-1 h-4 w-4 fill-current  flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M16.11-.01A12.33 12.33 0 004 12.19c0 6.93 6.44 14.02 10.77 19 .02.02.72.8 1.58.8h.07c.87 0 1.56-.78 1.58-.8 4.06-4.67 10-12.38 10-19C28 5.58 23.67 0 16.11 0zm.4 29.86l-.13.1-.13-.1-.52-.6C11.63 24.54 6 18.09 6 12.19A10.3 10.3 0 0116.1 2c6.83 0 9.89 5.12 9.89 10.2 0 4.48-3.2 10.42-9.49 17.66zm-.48-23.8a6 6 0 100 12 6 6 0 000-12zm0 10C13.84 16.04 12 14.2 12 12a4 4 0 018 0 4 4 0 01-3.95 4.04z"/></svg>
             <div>
               <div class="leading-snug">
                 {% if self.address %}
-                  <div class="text-brown">{{ self.location_name|default:"" }}</div>
-                  <div class="text-brown">{{ self.location_address|default:""|linebreaks }}</div>
-                  <div class="text-brown">{{ self.location_postcode|default:"" }} {{ self.location_city|default:"" }}</div>
-                  {% if self.location_country != "Deutschland" %}<div class="text-brown">{{ self.location_country|default:"" }}</div>{% endif %}
+                  <div class="">{{ self.location_name|default:"" }}</div>
+                  <div class="">{{ self.location_address|default:""|linebreaks }}</div>
+                  <div class="">{{ self.location_postcode|default:"" }} {{ self.location_city|default:"" }}</div>
+                  {% if self.location_country != "Deutschland" %}<div class="">{{ self.location_country|default:"" }}</div>{% endif %}
                 {% else %}
-                  <div class="text-brown">{{ self.location }}</div>
+                  <div class="">{{ self.location }}</div>
                 {% endif %}
               </div>
               <div class="text-sm text-gray-600">
@@ -110,14 +110,14 @@
 
         {% comment %} links etc. {% endcomment %}
         {% if self.website_url %}
-          <a itemprop="url" target="_blank" href="{{ self.website_url }}" class="flex mb-5 text-brown hover:text-green-500" title="zur externen Website">
+          <a itemprop="url" target="_blank" href="{{ self.website_url }}" class="flex mb-5  hover:text-green-500" title="zur externen Website">
             <svg class="mr-4 mt-1 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M28.18 29.67h-26v-20h8.05l2.03-1.95-.06-.05H2.18a2 2 0 00-2 2v20c0 1.1.9 2 2 2h26a2 2 0 002-2V14.02l-2 1.91v13.74zm-19.74-8h2.02c1.4-7.96 8.33-14 16.68-14h1.02l-3.66 3.67a1 1 0 001.41 1.41l5.9-6.06-5.9-6.07a1 1 0 10-1.41 1.42l3.63 3.63h-.95c-9.47 0-17.3 6.93-18.74 16z"/></svg>
             <div>{{ self.website_url|prettyurl }}</div>
           </a>
         {% endif %}
 
         {% if self.facebook_event_url %}
-          <a target="_blank" href="{{ self.facebook_event_url }}" class="flex mb-5 text-brown hover:text-green-500" title="zur Facebook-Veranstaltung">
+          <a target="_blank" href="{{ self.facebook_event_url }}" class="flex mb-5  hover:text-green-500" title="zur Facebook-Veranstaltung">
             <svg class="mr-4 mt-1 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M18.18 2.52h2.79v3h-2.6c-1.43 0-1.4 1.22-1.4 1.22v4.75h5.06l-.7 3h-4.37v15h-3v-15H9.98l-.01-3h3.99V6.84c0-4.06 3.38-4.31 4.22-4.31zm2.8 0zm-2.8-2c-.72 0-2.12.11-3.46.92-1.26.75-2.76 2.3-2.76 5.4v2.65H9.97a2 2 0 00-2 2.01l.01 3c0 1.1.9 1.99 2 1.99h1.98v13c0 1.1.9 2 2 2h3a2 2 0 002-2v-13h2.36a2 2 0 001.92-1.44l.7-3a2 2 0 00-1.91-2.56h-3.05V7.52h1.99a2 2 0 002-2l.01-2.89v-.11a2 2 0 00-2-2h-2.8z"/></svg>
             <div>Facebook-Veranstaltung</div>
           </a>
@@ -136,14 +136,14 @@
             <div class="ml-8 mb-2 text-gray-700">Kontakt: {% if self.contact_name %}{{ self.contact_name }}{% endif %}</div>
 
             {% if self.contact_mail %}
-              <a target="_blank" href="mailto:{{ self.contact_mail }}" class="flex mb-3 text-brown hover:text-green-500" title="E-Mail schreiben">
+              <a target="_blank" href="mailto:{{ self.contact_mail }}" class="flex mb-3  hover:text-green-500" title="E-Mail schreiben">
                 <svg class="mr-4 mt-1 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M31.98 7.25c.03-.2 0-.39-.07-.57C31.65 5.58 30.85 5 29.5 5h-26C2.31 5 1.03 5.44.4 6.3l-.16.14a1 1 0 00-.22.81L0 7.5v16C0 25.16 1.84 27 3.5 27h26c1.66 0 2.5-1.84 2.5-3.5v-16l-.02-.25zM3.5 7h26.01L16 17.77 2.54 7.04C2.84 7 3.22 7 3.5 7zm26 18h-26c-.55 0-1.5-.95-1.5-1.5V9.17l13.35 10.68a1 1 0 001.3 0L30 9.17V23.5c0 .55.05 1.5-.5 1.5z"/></svg>
                 <div>{{ self.contact_mail }}</div>
               </a>
             {% endif %}
 
             {% if self.contact_phone %}
-            <a target="_blank" href="{{ self.contact_phone.as_rfc3966 }}" class="flex mb-3 text-brown hover:text-green-500" title="Anrufen">
+            <a target="_blank" href="{{ self.contact_phone.as_rfc3966 }}" class="flex mb-3  hover:text-green-500" title="Anrufen">
               <svg class="mr-4 mt-1 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M8.2 1.16c1.16 1.6 2.56 3.69 4.17 6.23.4.7.34 1.52-.18 2.48-.2.41-.7 1.33-1.51 2.8.88 1.24 2.23 2.78 4.05 4.6s3.33 3.16 4.54 4.05a65.76 65.76 0 012.79-1.58 3.22 3.22 0 011.51-.42c.36 0 .69.08.97.24a114 114 0 016.3 4.18c.44.32.69.76.75 1.33.06.57-.11 1.17-.51 1.82-.2.28-.53.69-.97 1.24-.45.54-1.11 1.23-2 2.06s-1.61 1.24-2.18 1.24h-.07c-4.26-.17-9.53-3.37-15.76-9.6C3.87 15.59.66 10.33.5 6.06c0-.56.41-1.3 1.25-2.21.82-.9 1.5-1.56 2.02-1.97.53-.4.97-.73 1.33-.97A2.5 2.5 0 016.62.43c.69 0 1.2.24 1.58.72zm-2 1.26c-.86.61-1.65 1.3-2.4 2.04a5.56 5.56 0 00-1.3 1.66c.16 3.75 3.16 8.54 8.99 14.35s10.62 8.82 14.37 9.02c.33-.12.86-.57 1.6-1.33s1.43-1.58 2.03-2.42c.12-.17.17-.3.12-.43-2.42-1.7-4.43-3.04-6.05-4.05-.17 0-.37.06-.6.18l-2.73 1.5-1.04.62-1.03-.67a36.37 36.37 0 01-4.84-4.3c-1.9-1.9-3.3-3.52-4.24-4.85l-.72-.97.6-1.08 1.51-2.73c.12-.24.19-.44.19-.6-1.44-2.3-2.77-4.32-3.99-6.06h-.06c-.15 0-.3.05-.42.12z"/></svg>
               <div>{{ self.contact_phone.as_national }}</div>
             </a>
@@ -156,7 +156,7 @@
         {% if self.related_group %}
           <div class="mb-5">
             <div class="text-gray-700 mb-2 ml-8">organisiert von</div>
-            <a href="{% pageurl self.related_group %}" class="-ml-1 flex items-center text-brown hover:text-green-500">
+            <a href="{% pageurl self.related_group %}" class="-ml-1 flex items-center  hover:text-green-500">
               <div class="border mr-1 h-8 w-8 p-1 overflow-hidden rounded-full bg-white">
                 {% if self.related_group.logo %}
                   {% image self.related_group.logo min-64x64 class="w-full h-full object-contain" %}
