@@ -2,7 +2,10 @@
 
 <nav aria-label="Breadcrumb" class="my-8 text-sm text-gray-600">
   <ol>
-    {% for page in self.get_ancestors|slice:"1:" %}
+    <li class="inline" aria-current="page">
+      <a class="hover:underline" href="/">janun.de</a> /
+    </li>
+    {% for page in self.get_ancestors|slice:"2:" %}
       <li class="inline"><a class="hover:underline" href="{% pageurl page %}">{{ page.title }}</a> / </li>
     {% endfor %}
     <li class="inline font-bold" aria-current="page">
