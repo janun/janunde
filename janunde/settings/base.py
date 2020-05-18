@@ -200,3 +200,7 @@ DEBUG_TOOLBAR_PANELS = [
 ]
 
 LOGIN_REDIRECT_URL = "wagtailadmin_home"
+
+
+PASSWORD_REQUIRED_TEMPLATE = "password_required.html"
+
