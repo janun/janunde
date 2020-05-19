@@ -3,7 +3,7 @@
 
 
 {% block content %}
-<main class="max-w-5xl mx-auto px-4">
+<main class="max-w-6xl mx-auto px-4">
       
   {% include "core/_breadcrumbs.html" %}
 
@@ -71,9 +71,9 @@
         </a>
       {% endif %}
       {% if self.facebook_url %}
-        <a target="_blank" href="{{ self.facebook_url }}" class="flex mb-5  hover:text-green-500" title="zur Facebook-Veranstaltung">
+        <a target="_blank" href="{{ self.facebook_url }}" class="flex mb-5  hover:text-green-500" title="Facebook-Profil">
           <svg class="mr-4 mt-1 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M18.18 2.52h2.79v3h-2.6c-1.43 0-1.4 1.22-1.4 1.22v4.75h5.06l-.7 3h-4.37v15h-3v-15H9.98l-.01-3h3.99V6.84c0-4.06 3.38-4.31 4.22-4.31zm2.8 0zm-2.8-2c-.72 0-2.12.11-3.46.92-1.26.75-2.76 2.3-2.76 5.4v2.65H9.97a2 2 0 00-2 2.01l.01 3c0 1.1.9 1.99 2 1.99h1.98v13c0 1.1.9 2 2 2h3a2 2 0 002-2v-13h2.36a2 2 0 001.92-1.44l.7-3a2 2 0 00-1.91-2.56h-3.05V7.52h1.99a2 2 0 002-2l.01-2.89v-.11a2 2 0 00-2-2h-2.8z"/></svg>
-          <div>Facebook-Veranstaltung</div>
+          <div>Facebook-Profil</div>
         </a>
       {% endif %}
 
@@ -99,8 +99,8 @@
       {% comment %} child projects {% endcomment %}
       {% if self.projects %}
         <div class="my-10 xl:my-20">
-          <h3 class="font-bold md:text-xl text-green-500 mb-2">Projekte</h3>
-          <div class="flex justify-start xl:-mx-8">
+          <h3 class="font-bold md:text-xl text-green-500 mb-2">Projekte & Untergruppen</h3>
+          <div class="flex flex-wrap justify-start xl:-mx-8">
             {% for group in self.projects %}
               {% include "core/_group.html" %}
             {% endfor %}
@@ -114,10 +114,12 @@
           <h3 class="font-bold md:text-xl text-green-500 mb-4">Unterseiten</h3>
           <div class="flex flex-wrap md:-mx-5">
             {% for subpage in self.subpages %}
-              <a class="group lg:w-1/3 block my-2 md:mx-5" href="{% pageurl subpage %}">
-                <div class="text-gray-800 font-bold group-hover:text-green-500 mb-1">{{ subpage.title }}</div>
-                <div class="text-gray-700 text-sm">{{ subpage.specific.subtitle }}</div>
-              </a>
+              <div class="lg:w-1/3">
+                <a class="group block my-2 md:mx-5" href="{% pageurl subpage %}">
+                  <div class="text-gray-800 font-bold group-hover:text-green-500 mb-1">{{ subpage.title }}</div>
+                  <div class="text-gray-700 text-sm">{{ subpage.specific.subtitle }}</div>
+                </a>
+              </div>
             {% endfor %}
           </div>
         </div>
@@ -127,28 +129,29 @@
       {% if self.upcoming_events %}
         <div class="my-10 xl:my-20">
           <h3 class="font-bold md:text-xl text-green-500 mb-4">Kommende Veranstaltungen</h3>
-           <div class="flex flex-wrap md:-mx-4 lg:-mx-10">
+           <div class="flex flex-wrap md:-mx-4">
             {% for object in self.upcoming_events|slice:"3" %}
-              <a href="{% pageurl object %}" class="group mb-8 md:mx-4
-                lg:mx-10 flex flex-col w-full max-w-xs sm:w-1/3">
-                <div class="flex-shrink-0 overflow-hidden border-r md:border w-full h-32">
-                  <picture>
-                    {% image object.main_image fill-512x320 format-webp as image_webp %}
-                    {% image object.main_image fill-512x320 as image %}
-                    <source srcset="{{ image_webp.url }}" type="image/webp">
-                    <img {{ image.attrs }} loading="lazy" class="h-full w-full object-cover">
-                  </picture>
-                </div>
-                <div class="mr-4 pt-3 md:pt-0 md:mr-0">
-                  <div class="text-gray-700 text-sm md:mt-2">{{ object.start_datetime }}</div>
-                  <h3 class="inline-block text-base md:mt-1 mb-1 group-hover:text-green-500 group-hover:font-bold">{{ object.title }}</h3>
-                  <div class="text-gray-700 text-sm">{{ object.subtitle }}</div>
-                </div>
-              </a>
+              <div class="w-full max-w-xs sm:w-1/3">
+                <a href="{% pageurl object %}" class="group mb-8 md:mx-4 flex flex-col ">
+                  <div class="flex-shrink-0 overflow-hidden border-r md:border w-full h-32">
+                    <picture>
+                      {% image object.main_image fill-512x320 format-webp as image_webp %}
+                      {% image object.main_image fill-512x320 as image %}
+                      <source srcset="{{ image_webp.url }}" type="image/webp">
+                      <img {{ image.attrs }} loading="lazy" class="h-full w-full object-cover">
+                    </picture>
+                  </div>
+                  <div class="mr-4 pt-3 md:pt-0 md:mr-0">
+                    <div class="text-gray-700 text-sm md:mt-2">{{ object.start_datetime }}</div>
+                    <h3 class="inline-block text-base md:mt-1 mb-1 group-hover:text-green-500 font-bold">{{ object.title }}</h3>
+                    <div class="text-gray-700 text-sm">{{ object.subtitle }}</div>
+                  </div>
+                </a>
+              </div>
             {% endfor %}
           </div>
           {% if self.upcoming_events.count > 3 %}
-            <a href="{% slugurl 'veranstaltungen' %}">Alle Veranstaltungen</a>
+            <a class="text-right hover:text-green-500" href="{% slugurl 'veranstaltungen' %}">Alle Veranstaltungen</a>
           {% endif %}
         </div>
       {% endif %}
@@ -156,28 +159,29 @@
       {% comment %} articles {% endcomment %}
       {% if self.articles.all.live %}
         <div class="my-10 md:my-20">
-          <h3 class="font-bold md:text-xl text-green-500 mb-4">Artikel</h3>
-          <div class="flex flex-wrap md:-mx-4 lg:-mx-10">
+          <h3 class="font-bold md:text-xl text-green-500 mb-4">Letzte Artikel</h3>
+          <div class="flex flex-wrap md:-mx-4">
             {% for object in self.articles.all.live|slice:"3" %}
-              <a href="{% pageurl object %}" class="group mb-8 md:mx-4
-                lg:mx-10 flex flex-col w-full max-w-xs sm:w-1/3">
-                <div class="flex-shrink-0 overflow-hidden border-r md:border w-full h-32">
-                  <picture>
-                    {% image object.get_image fill-512x320 format-webp as image_webp %}
-                    {% image object.get_image fill-512x320 as image %}
-                    <source srcset="{{ image_webp.url }}" type="image/webp">
-                    <img {{ image.attrs }} loading="lazy" class="h-full w-full object-cover">
-                  </picture>
-                </div>
-                <div class="mr-4 pt-3 md:pt-0 md:mr-0">
-                  <h3 class="inline-block text-base md:mt-3 mb-1 group-hover:text-green-500 group-hover:font-bold">{{ object.title }}</h3>
-                  <div class="text-gray-700 text-sm">{{ object.subtitle }}</div>
-                </div>
-              </a>
+              <div class="w-full max-w-xs sm:w-1/3">
+                <a href="{% pageurl object %}" class="group mb-8 md:mx-4 flex flex-col">
+                  <div class="flex-shrink-0 overflow-hidden border-r md:border w-full h-32">
+                    <picture>
+                      {% image object.get_image fill-512x320 format-webp as image_webp %}
+                      {% image object.get_image fill-512x320 as image %}
+                      <source srcset="{{ image_webp.url }}" type="image/webp">
+                      <img {{ image.attrs }} loading="lazy" class="h-full w-full object-cover">
+                    </picture>
+                  </div>
+                  <div class="mr-4 pt-3 md:pt-0 md:mr-0">
+                    <h3 class="inline-block text-base md:mt-3 mb-1 group-hover:text-green-500 font-bold">{{ object.title }}</h3>
+                    <div class="text-gray-700 text-sm">{{ object.subtitle }}</div>
+                  </div>
+                </a>
+              </div>
             {% endfor %}
           </div>
           {% if self.articles.count > 3 %}
-            <a href="{% slugurl 'artikel' %}">Alle Artikel</a>
+            <a class="text-right hover:text-green-500" href="{% slugurl 'artikel' %}">Alle Artikel</a>
           {% endif %}
         </div>
       {% endif %}

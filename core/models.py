@@ -377,7 +377,7 @@ class Group(BasePage):
 
     @property
     def projects(self):
-        return Project.objects.live().child_of(self)
+        return Group.objects.live().child_of(self)
 
     @property
     def subpages(self):
