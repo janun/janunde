@@ -371,21 +371,21 @@ class Group(BasePage):
         index.SearchField("website"),
     ]
 
-    @property
-    def parent_group(self):
-        return Group.objects.parent_of(self).first()
-
-    @property
-    def projects(self):
-        return Group.objects.live().child_of(self)
-
-    @property
-    def subpages(self):
-        return Page.objects.live().child_of(self).exclude(pk__in=self.projects)
-
-    @property
-    def upcoming_events(self):
-        return self.event_pages.upcoming().all()
+    def get_context(self, request):
+        context = super().get_context(request)
+        context["parent_group"] = Group.objects.parent_of(self).first()
+        context["projects"] = Group.objects.live().child_of(self)
+        context["subpages"] = (
+            Page.objects.live()
+            .child_of(self)
+            .exclude(pk__in=context["projects"])
+            .specific()
+        )
+        context[
+            "upcoming_events"
+        ] = self.event_pages.upcoming().all()  # pylint: disable=no-member
+        context["articles"] = self.articles.all().live()
+        return context
 
     content_panels = [
         FieldPanel("title", classname="full title"),

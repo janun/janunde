@@ -97,27 +97,37 @@
  
   
       {% comment %} child projects {% endcomment %}
-      {% if self.projects %}
+      {% if projects %}
         <div class="my-10 xl:my-20">
-          <h3 class="font-bold md:text-xl text-green-500 mb-2">Projekte & Untergruppen</h3>
+          <h3 id="projekte" class="font-bold md:text-xl text-green-500 mb-2">Projekte & Untergruppen</h3>
           <div class="flex flex-wrap justify-start xl:-mx-8">
-            {% for group in self.projects %}
-              {% include "core/_group.html" %}
+            {% for group in projects %}
+              {% include "core/_group.html" with counter=forloop.revcounter %}
             {% endfor %}
           </div>
         </div>
       {% endif %}
 
       {% comment %} child pages {% endcomment %}
-      {% if self.subpages %}
+      {% if subpages %}
         <div class="my-10 xl:my-20">
-          <h3 class="font-bold md:text-xl text-green-500 mb-4">Unterseiten</h3>
-          <div class="flex flex-wrap md:-mx-5">
-            {% for subpage in self.subpages %}
-              <div class="lg:w-1/3">
-                <a class="group block my-2 md:mx-5" href="{% pageurl subpage %}">
-                  <div class="text-gray-800 font-bold group-hover:text-green-500 mb-1">{{ subpage.title }}</div>
-                  <div class="text-gray-700 text-sm">{{ subpage.specific.subtitle }}</div>
+          <h3 id="unterseiten" class="font-bold md:text-xl text-green-500 mb-4">Unterseiten</h3>
+          <div class="flex flex-wrap md:-mx-4">
+            {% for page in subpages %}
+              <div class="w-full max-w-xs sm:w-1/3">
+                <a href="{% pageurl page %}" class="group mb-8 md:mx-4 flex flex-col ">
+                  <div class="flex-shrink-0 overflow-hidden border-r md:border w-full h-32">
+                    <picture>
+                      {% image page.get_image fill-512x320 format-webp as image_webp %}
+                      {% image page.get_image fill-512x320 as image %}
+                      <source srcset="{{ image_webp.url }}" type="image/webp">
+                      <img {{ image.attrs }} loading="lazy" class="h-full w-full object-cover">
+                    </picture>
+                  </div>
+                  <div class="mr-4 pt-3 md:pt-0 md:mr-0">
+                    <h3 class="inline-block text-base md:mt-1 mb-1 group-hover:text-green-500 font-bold">{{ page.title }}</h3>
+                    <div class="text-gray-700 text-sm">{{ page.subtitle }}</div>
+                  </div>
                 </a>
               </div>
             {% endfor %}
@@ -126,11 +136,11 @@
       {% endif %}
 
       {% comment %} upcoming events {% endcomment %}
-      {% if self.upcoming_events %}
+      {% if upcoming_events %}
         <div class="my-10 xl:my-20">
-          <h3 class="font-bold md:text-xl text-green-500 mb-4">Kommende Veranstaltungen</h3>
-           <div class="flex flex-wrap md:-mx-4">
-            {% for object in self.upcoming_events|slice:"3" %}
+          <h3 id="veranstaltungen" class="font-bold md:text-xl text-green-500 mb-4">Kommende Veranstaltungen</h3>
+          <div class="flex flex-wrap md:-mx-4">
+            {% for object in upcoming_events|slice:"3" %}
               <div class="w-full max-w-xs sm:w-1/3">
                 <a href="{% pageurl object %}" class="group mb-8 md:mx-4 flex flex-col ">
                   <div class="flex-shrink-0 overflow-hidden border-r md:border w-full h-32">
@@ -150,18 +160,20 @@
               </div>
             {% endfor %}
           </div>
-          {% if self.upcoming_events.count > 3 %}
-            <a class="text-right hover:text-green-500" href="{% slugurl 'veranstaltungen' %}">Alle Veranstaltungen</a>
+          {% if upcoming_events.count > 3 %}
+            <div class="flex justify-end">
+              <a class="text-right hover:text-green-500" href="{% slugurl 'veranstaltungen' %}">Alle Veranstaltungen</a>
+            </div>
           {% endif %}
         </div>
       {% endif %}
 
       {% comment %} articles {% endcomment %}
-      {% if self.articles.all.live %}
+      {% if articles %}
         <div class="my-10 md:my-20">
-          <h3 class="font-bold md:text-xl text-green-500 mb-4">Letzte Artikel</h3>
+          <h3 id="artikel" class="font-bold md:text-xl text-green-500 mb-4">Letzte Artikel</h3>
           <div class="flex flex-wrap md:-mx-4">
-            {% for object in self.articles.all.live|slice:"3" %}
+            {% for object in articles|slice:"3" %}
               <div class="w-full max-w-xs sm:w-1/3">
                 <a href="{% pageurl object %}" class="group mb-8 md:mx-4 flex flex-col">
                   <div class="flex-shrink-0 overflow-hidden border-r md:border w-full h-32">
@@ -180,8 +192,10 @@
               </div>
             {% endfor %}
           </div>
-          {% if self.articles.count > 3 %}
-            <a class="text-right hover:text-green-500" href="{% slugurl 'artikel' %}">Alle Artikel</a>
+          {% if articles.count > 3 %}
+            <div class="flex justify-end">
+              <a class="text-right hover:text-green-500" href="{% slugurl 'artikel' %}">Alle Artikel</a>
+            </div>
           {% endif %}
         </div>
       {% endif %}
