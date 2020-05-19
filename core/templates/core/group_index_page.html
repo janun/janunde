@@ -4,8 +4,8 @@
 {% block content %}
 <main class="max-w-screen-lg mx-auto mt-8 md:mt-10 px-4">
 
-  <header class="mb-5 lg:my-16 max-w-2xl mx-auto text-center">
-    <h1 class="md:leading-tighter text-green-500 text-2xl xl:text-3xl font-bold mt-0 mb-2 lg:mb-4">
+  <header class="my-8 md:my-16 max-w-2xl mx-auto text-center">
+    <h1 class="md:leading-tighter text-green-500 text-2xl md:text-3xl font-bold mt-0 mb-2 lg:mb-4">
       {% if self.heading %}
         {% highlight self.heading self.highlight_in_heading "text-purple" %}
       {% else %}
@@ -21,7 +21,7 @@
 
   {% if countrywide_projects %}
     <h2 id="projekte-des-landesbueros" class="text-base mb-2 text-gray-700">Projekte des Landesbüros</h2>
-    <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8 mb-4 md:mb-16">
+    <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8 mb-8 md:mb-16 xl:mb-24">
       {% for group in countrywide_projects %}
         {% include "core/_group.html" with counter=forloop.revcounter %}
       {% endfor %}
@@ -30,7 +30,7 @@
 
   {% if groups %}
     <h2 id="mitglieder-und-projektgruppen" class="text-base mb-2 text-gray-700">Mitglieder und Projektgruppen</h2>
-    <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8 mb-4 md:mb-16">
+    <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8 mb-8 md:mb-16 xl:mb-24">
       {% for group in groups %}
         {% include "core/_group.html" with counter=forloop.revcounter  %}
       {% endfor %}
@@ -39,7 +39,7 @@
 
   {% if other_projects %}
     <h2 id="projekte-von-janun-mitgliedsgruppen" class="text-base mb-2 text-gray-700">Projekte von JANUN-Mitgliedsgruppen</h2>
-    <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8 mb-4 md:mb-16">
+    <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8 mb-8 md:mb-16 xl:mb-24">
       {% for group in other_projects %}
         {% include "core/_group.html" with counter=forloop.revcounter  %}
       {% endfor %}
