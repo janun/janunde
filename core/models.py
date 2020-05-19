@@ -430,10 +430,19 @@ class Project(Group):
         verbose_name_plural = "Projekte"
 
 
-class GroupIndexPage(BasePage, HeaderMixin):
+class GroupIndexPage(BasePage):
     # title is auto added
     subpage_types = ["Group", "Project"]
     parent_page_types = ["HomePage"]
+
+    heading = models.CharField("Überschrift", max_length=255, blank=True)
+    highlight_in_heading = models.CharField(
+        "Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        blank=True,
+        max_length=255,
+    )
+    subtitle = models.CharField("Untertitel", max_length=255, blank=True)
 
     class Meta:
         verbose_name = "Auflistung von Gruppen"
@@ -467,7 +476,14 @@ class GroupIndexPage(BasePage, HeaderMixin):
 
     content_panels = [
         FieldPanel("title"),
-        MultiFieldPanel(HeaderMixin.panels, "Header"),
+        MultiFieldPanel(
+            [
+                FieldPanel("heading"),
+                FieldPanel("highlight_in_heading"),
+                FieldPanel("subtitle"),
+            ],
+            "Header",
+        ),
     ]
 
 
@@ -540,7 +556,7 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
         )
 
     def get_text(self):
-        for block in self.body:
+        for block in self.body:  # pylint: disable=not-an-iterable
             if block.block_type == "paragraph":
                 text = BeautifulSoup(block.value.source, "html5lib").get_text()
                 return Truncator(text).words(25)
