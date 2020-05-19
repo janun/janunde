@@ -371,8 +371,21 @@ class Group(BasePage):
         index.SearchField("website"),
     ]
 
-    def get_parent_group(self):
+    @property
+    def parent_group(self):
         return Group.objects.parent_of(self).first()
+
+    @property
+    def projects(self):
+        return Project.objects.live().child_of(self)
+
+    @property
+    def subpages(self):
+        return Page.objects.live().child_of(self).exclude(pk__in=self.projects)
+
+    @property
+    def upcoming_events(self):
+        return self.event_pages.upcoming().all()
 
     content_panels = [
         FieldPanel("title", classname="full title"),

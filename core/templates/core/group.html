@@ -1,160 +1,191 @@
 {% extends "core/__base.html" %}
-{% load wagtailcore_tags wagtailimages_tags srcset humanize stuff %}
-{% load static from staticfiles %}
-{% load render_partial %}
-
-{% block body_class %}group-page{% endblock %}
+{% load wagtailcore_tags wagtailimages_tags stuff %}
 
 
 {% block content %}
-  <div class="container"
-       itemscope itemtype="http://schema.org/Organization">
+<main class="max-w-5xl mx-auto px-4">
       
-    {% include "core/_breadcrumbs.html" %}
-
-     <!-- title -->
-     <div class="float-right@medium grid-12__col-7@medium margin-bottom-2">
-       <h1 class="title margin-top-0 padding-top-0" itemprop="name">{{ self.hyphenated_title|safe }}</h1>
-       {% if self.subtitle %}
-        <p class="subtitle margin-top-0 padding-top-0" itemprop="name">{{ self.subtitle }}</p>
-       {% endif %}
-    </div>
+  {% include "core/_breadcrumbs.html" %}
 
 
-    <div class="grid-12 margin-top-2">
-      <!-- the side column -->
-      <div class="grid-12__col-4@medium float-left">
+  <div class="md:flex justify-between">
 
-        <!-- image -->
-        <div class="bigcircle__image-wrapper">
-          {% if self.logo %}
-            {% image self.logo max-170x170 as fallback_image %}
-              <img src="{{ fallback_image.url }}"
-                srcset="{{ self.logo|srcset:'max-170x170 max-340x340 max-510x510 max-680x680' }}"
-                sizes="10.625em"
-                alt="{{ original_image.alt }}"
-                class="bigcircle__image">
-            <link itemprop="logo" href="{{ fallback_image.url }}">
-          {% else %}
-            <span class="bigcircle__image-placeholder"></span>
-          {% endif %}
-        </div>
+    <div class="md:w-1/3 md:mr-16 mb-10">
 
-        {% if self.get_parent_group %}
-          <span class="with-icon with-icon--home">
-            <a href="{% pageurl self.get_parent_group %}">{{ self.get_parent_group.title }}</a>
-          </span>
+      {% comment %} logo {% endcomment %}
+      <div class="rounded-full overflow-hidden bg-white shadow h-48 w-48 md:h-64 md:w-64 -mt-2 mx-auto md:mx-0">
+        <picture>
+          {% image self.logo max-640x640 format-webp as logo_webp %}
+          {% image self.logo max-640x640 as logo %}
+          <source srcset="{{ logo_webp.url }}" type="image/webp">
+          <img class="h-full w-full object-contain p-5 md:p-8" loading="lazy" src="{{ logo.url }}">
+        </picture>
+      </div>
+
+      {% comment %} heading mobile {% endcomment %}
+      <header class="md:hidden mt-5 mb-8 text-center md:text-left">
+        <h1 class="leading-none text-green-500 text-xl font-bold mt-0 mb-2">{{ self.title }}</h1>
+        {% if self.subtitle %}
+          <h2 class="leading-tight text-gray-700 text-base my-0">{{ self.subtitle }}</h2>
         {% endif %}
+      </header>
 
-
-        <!-- address -->
-        {% if self.address %}
-        <div class="grid-12 margin-top-2 margin-bottom-2 font-family-extra">
-          <i class="grid-12__col-1 icon-location-pin" aria-hidden="true"></i>
-          <span class="grid-12__col-11 font-size-2"
-                itemprop="location" itemscope itemtype="http://schema.org/Place">
-            {{ self.address }}<br>
-            <meta itemprop="name" content="{{ self.address }}">
-            <meta itemprop="address" content="{{ self.address }}">
-            <a class="font-size-1 font-family-sans color-grey" target="_blank" href="https://www.google.de/maps/search/{{ self.address|urlencode }}">Auf Google Maps anzeigen</a>
-          </span>
+      {% comment %} {% if self.parent_group %}
+        <div class="my-5">
+          <a class="text-gray-700 hover:text-gray-800" href="{% pageurl self.parent_group %}">{{ self.parent_group.title }}</a>
         </div>
-        {% endif %}
+      {% endif %} {% endcomment %}
 
-        {% if self.contact_mail or self.contact_phone %}
-        <div class="margin-top-2 margin-bottom-1">
-          <span class="grid-12__offset-1 color-grey">Kontakt: {% if self.contact_name %}{{ self.contact_name }}{% endif %}</span>
+      {% comment %} location {% endcomment %}
+      {% if self.address %}
+        <div class="flex my-5">
+          <svg class="mr-2 h-4 w-4 fill-current  flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M16.11-.01A12.33 12.33 0 004 12.19c0 6.93 6.44 14.02 10.77 19 .02.02.72.8 1.58.8h.07c.87 0 1.56-.78 1.58-.8 4.06-4.67 10-12.38 10-19C28 5.58 23.67 0 16.11 0zm.4 29.86l-.13.1-.13-.1-.52-.6C11.63 24.54 6 18.09 6 12.19A10.3 10.3 0 0116.1 2c6.83 0 9.89 5.12 9.89 10.2 0 4.48-3.2 10.42-9.49 17.66zm-.48-23.8a6 6 0 100 12 6 6 0 000-12zm0 10C13.84 16.04 12 14.2 12 12a4 4 0 018 0 4 4 0 01-3.95 4.04z"/></svg>
+          <div class="leading-snug">{{ self.address }}</div>
+        </div>
+      {% endif %}
 
+      {% comment %} contact information {% endcomment %}
+      {% if self.contact_mail or self.contact_phone %}
+        <div class="my-6">
+          <div class="mb-3 text-gray-700">Kontakt: {% if self.contact_name %}{{ self.contact_name }}{% endif %}</div>
           {% if self.contact_mail %}
-          <a target="_blank" href="mailto:{{ self.contact_mail }}"
-             class="grid-12 margin-top-1 margin-bottom-1 display-block"
-             title="E-Mail schreiben">
-            <i class="grid-12__col-1 icon-envelope" aria-hidden="true"></i>
-            <span class="grid-12__col-11">{{ self.contact_mail }}</span>
-          </a>
+            <a target="_blank" href="mailto:{{ self.contact_mail }}" class="flex mb-2 hover:text-green-500" title="E-Mail schreiben">
+              <svg class="mr-2 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M31.98 7.25c.03-.2 0-.39-.07-.57C31.65 5.58 30.85 5 29.5 5h-26C2.31 5 1.03 5.44.4 6.3l-.16.14a1 1 0 00-.22.81L0 7.5v16C0 25.16 1.84 27 3.5 27h26c1.66 0 2.5-1.84 2.5-3.5v-16l-.02-.25zM3.5 7h26.01L16 17.77 2.54 7.04C2.84 7 3.22 7 3.5 7zm26 18h-26c-.55 0-1.5-.95-1.5-1.5V9.17l13.35 10.68a1 1 0 001.3 0L30 9.17V23.5c0 .55.05 1.5-.5 1.5z"/></svg>
+              <div>{{ self.contact_mail }}</div>
+            </a>
           {% endif %}
-
           {% if self.contact_phone %}
-          <a target="_blank" href="{{ self.contact_phone.as_rfc3966 }}"
-             class="grid-12 margin-top-1 margin-bottom-1 display-block"
-             title="Anrufen">
-            <i class="grid-12__col-1 icon-phone" aria-hidden="true"></i>
-            <span class="grid-12__col-11">{{ self.contact_phone }}</span>
+          <a target="_blank" href="{{ self.contact_phone.as_rfc3966 }}" class="flex mb-2 hover:text-green-500" title="Anrufen">
+            <svg class="mr-2 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M8.2 1.16c1.16 1.6 2.56 3.69 4.17 6.23.4.7.34 1.52-.18 2.48-.2.41-.7 1.33-1.51 2.8.88 1.24 2.23 2.78 4.05 4.6s3.33 3.16 4.54 4.05a65.76 65.76 0 012.79-1.58 3.22 3.22 0 011.51-.42c.36 0 .69.08.97.24a114 114 0 016.3 4.18c.44.32.69.76.75 1.33.06.57-.11 1.17-.51 1.82-.2.28-.53.69-.97 1.24-.45.54-1.11 1.23-2 2.06s-1.61 1.24-2.18 1.24h-.07c-4.26-.17-9.53-3.37-15.76-9.6C3.87 15.59.66 10.33.5 6.06c0-.56.41-1.3 1.25-2.21.82-.9 1.5-1.56 2.02-1.97.53-.4.97-.73 1.33-.97A2.5 2.5 0 016.62.43c.69 0 1.2.24 1.58.72zm-2 1.26c-.86.61-1.65 1.3-2.4 2.04a5.56 5.56 0 00-1.3 1.66c.16 3.75 3.16 8.54 8.99 14.35s10.62 8.82 14.37 9.02c.33-.12.86-.57 1.6-1.33s1.43-1.58 2.03-2.42c.12-.17.17-.3.12-.43-2.42-1.7-4.43-3.04-6.05-4.05-.17 0-.37.06-.6.18l-2.73 1.5-1.04.62-1.03-.67a36.37 36.37 0 01-4.84-4.3c-1.9-1.9-3.3-3.52-4.24-4.85l-.72-.97.6-1.08 1.51-2.73c.12-.24.19-.44.19-.6-1.44-2.3-2.77-4.32-3.99-6.06h-.06c-.15 0-.3.05-.42.12z"/></svg>
+            <div>{{ self.contact_phone.as_national }}</div>
           </a>
           {% endif %}
-
         </div>
-        {% endif %}
+      {% endif %}
 
-        {% if self.facebook_url %}
-        <a target="_blank" href="{{ self.facebook_url }}"
-           class="grid-12 margin-top-1 margin-bottom-1 display-block"
-           title="zum Facebook-Profil">
-          <i class="grid-12__col-1 icon-social-facebook" aria-hidden="true"></i>
-          <span class="grid-12__col-11">Facebook-Profil</span>
+      {% comment %} links etc. {% endcomment %}
+      {% if self.website %}
+        <a itemprop="url" target="_blank" href="{{ self.website }}" class="flex mb-5  hover:text-green-500" title="zur externen Website">
+          <svg class="mr-4 mt-1 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M28.18 29.67h-26v-20h8.05l2.03-1.95-.06-.05H2.18a2 2 0 00-2 2v20c0 1.1.9 2 2 2h26a2 2 0 002-2V14.02l-2 1.91v13.74zm-19.74-8h2.02c1.4-7.96 8.33-14 16.68-14h1.02l-3.66 3.67a1 1 0 001.41 1.41l5.9-6.06-5.9-6.07a1 1 0 10-1.41 1.42l3.63 3.63h-.95c-9.47 0-17.3 6.93-18.74 16z"/></svg>
+          <div>{{ self.website|prettyurl }}</div>
         </a>
-        {% endif %}
-
-        <!-- links etc. -->
-        {% if self.website %}
-          <a itemprop="url" target="_blank" href="{{ self.website }}"
-             class="grid-12 margin-top-1 margin-bottom-1 display-block"
-             title="zur externen Website">
-            <i class="grid-12__col-1 icon-direction" aria-hidden="true"></i>
-            <span class="grid-12__col-11">{{ self.website|prettyurl }}</span>
-          </a>
-        {% endif %}
-
-      </div>
-
-
-
-      <!-- the main column -->
-      <div class="grid-12__col-7@medium float-right margin-top-2@until-medium">
-        <!-- the content -->
-        <div itemprop="description">
-          {{ self.body }}
-        </div>
-      </div>
+      {% endif %}
+      {% if self.facebook_url %}
+        <a target="_blank" href="{{ self.facebook_url }}" class="flex mb-5  hover:text-green-500" title="zur Facebook-Veranstaltung">
+          <svg class="mr-4 mt-1 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M18.18 2.52h2.79v3h-2.6c-1.43 0-1.4 1.22-1.4 1.22v4.75h5.06l-.7 3h-4.37v15h-3v-15H9.98l-.01-3h3.99V6.84c0-4.06 3.38-4.31 4.22-4.31zm2.8 0zm-2.8-2c-.72 0-2.12.11-3.46.92-1.26.75-2.76 2.3-2.76 5.4v2.65H9.97a2 2 0 00-2 2.01l.01 3c0 1.1.9 1.99 2 1.99h1.98v13c0 1.1.9 2 2 2h3a2 2 0 002-2v-13h2.36a2 2 0 001.92-1.44l.7-3a2 2 0 00-1.91-2.56h-3.05V7.52h1.99a2 2 0 002-2l.01-2.89v-.11a2 2 0 00-2-2h-2.8z"/></svg>
+          <div>Facebook-Veranstaltung</div>
+        </a>
+      {% endif %}
 
     </div>
 
-    {% block after_content %}
 
-      {% if self.get_children.live %}
-        <div class="clear-after margin-top-2">
-          <h2 class="area-title">Unterseiten von {{ self.title }}:</h2>
-          <div class="card-grid">
-            {% for child in self.get_children.live %}
-              {% render_partial child.specific %}
+    <div class="md:w-2/3">
+      {% comment %} heading desktop {% endcomment %}
+      <header class="hidden md:block mb-8 text-center md:text-left">
+        <h1 class="leading-none text-green-500 text-2xl xl:text-4xl font-bold mt-0 mb-2">{{ self.title }}</h1>
+        {% if self.subtitle %}
+          <h2 class="leading-tight text-gray-700 text-lg my-0">{{ self.subtitle }}</h2>
+        {% endif %}
+      </header>
+
+
+      {% comment %} body text {% endcomment %}
+      <div class="mb-16 md:mb-24 xl:mb-32">
+        {{ self.body }}
+      </div>
+ 
+  
+      {% comment %} child projects {% endcomment %}
+      {% if self.projects %}
+        <div class="my-10 xl:my-20">
+          <h3 class="font-bold md:text-xl text-green-500 mb-2">Projekte</h3>
+          <div class="flex justify-start xl:-mx-8">
+            {% for group in self.projects %}
+              {% include "core/_group.html" %}
             {% endfor %}
           </div>
         </div>
       {% endif %}
 
-      {% if self.event_pages.upcoming %}
-        <div class="clear-after margin-top-2">
-          <h2 class="area-title">Kommende Veranstaltungen von {{ self.title }}:</h2>
-          <div class="card-grid">
-            {% for event in self.event_pages.upcoming %}
-              {% render_partial event %}
+      {% comment %} child pages {% endcomment %}
+      {% if self.subpages %}
+        <div class="my-10 xl:my-20">
+          <h3 class="font-bold md:text-xl text-green-500 mb-4">Unterseiten</h3>
+          <div class="flex flex-wrap md:-mx-5">
+            {% for subpage in self.subpages %}
+              <a class="group lg:w-1/3 block my-2 md:mx-5" href="{% pageurl subpage %}">
+                <div class="text-gray-800 font-bold group-hover:text-green-500 mb-1">{{ subpage.title }}</div>
+                <div class="text-gray-700 text-sm">{{ subpage.specific.subtitle }}</div>
+              </a>
             {% endfor %}
           </div>
         </div>
       {% endif %}
 
-      {% if self.articles.live %}
-        <div class="clear-after margin-top-2">
-          <h2 class="area-title">Artikel von {{ self.title }}:</h2>
-          <div class="card-grid">
-            {% for event in self.articles.live %}
-              {% render_partial event %}
+      {% comment %} upcoming events {% endcomment %}
+      {% if self.upcoming_events %}
+        <div class="my-10 xl:my-20">
+          <h3 class="font-bold md:text-xl text-green-500 mb-4">Kommende Veranstaltungen</h3>
+           <div class="flex flex-wrap md:-mx-4 lg:-mx-10">
+            {% for object in self.upcoming_events|slice:"3" %}
+              <a href="{% pageurl object %}" class="group mb-8 md:mx-4
+                lg:mx-10 flex flex-col w-full max-w-xs sm:w-1/3">
+                <div class="flex-shrink-0 overflow-hidden border-r md:border w-full h-32">
+                  <picture>
+                    {% image object.main_image fill-512x320 format-webp as image_webp %}
+                    {% image object.main_image fill-512x320 as image %}
+                    <source srcset="{{ image_webp.url }}" type="image/webp">
+                    <img {{ image.attrs }} loading="lazy" class="h-full w-full object-cover">
+                  </picture>
+                </div>
+                <div class="mr-4 pt-3 md:pt-0 md:mr-0">
+                  <div class="text-gray-700 text-sm md:mt-2">{{ object.start_datetime }}</div>
+                  <h3 class="inline-block text-base md:mt-1 mb-1 group-hover:text-green-500 group-hover:font-bold">{{ object.title }}</h3>
+                  <div class="text-gray-700 text-sm">{{ object.subtitle }}</div>
+                </div>
+              </a>
             {% endfor %}
           </div>
+          {% if self.upcoming_events.count > 3 %}
+            <a href="{% slugurl 'veranstaltungen' %}">Alle Veranstaltungen</a>
+          {% endif %}
         </div>
       {% endif %}
 
-    {% endblock %}
+      {% comment %} articles {% endcomment %}
+      {% if self.articles.all.live %}
+        <div class="my-10 md:my-20">
+          <h3 class="font-bold md:text-xl text-green-500 mb-4">Artikel</h3>
+          <div class="flex flex-wrap md:-mx-4 lg:-mx-10">
+            {% for object in self.articles.all.live|slice:"3" %}
+              <a href="{% pageurl object %}" class="group mb-8 md:mx-4
+                lg:mx-10 flex flex-col w-full max-w-xs sm:w-1/3">
+                <div class="flex-shrink-0 overflow-hidden border-r md:border w-full h-32">
+                  <picture>
+                    {% image object.get_image fill-512x320 format-webp as image_webp %}
+                    {% image object.get_image fill-512x320 as image %}
+                    <source srcset="{{ image_webp.url }}" type="image/webp">
+                    <img {{ image.attrs }} loading="lazy" class="h-full w-full object-cover">
+                  </picture>
+                </div>
+                <div class="mr-4 pt-3 md:pt-0 md:mr-0">
+                  <h3 class="inline-block text-base md:mt-3 mb-1 group-hover:text-green-500 group-hover:font-bold">{{ object.title }}</h3>
+                  <div class="text-gray-700 text-sm">{{ object.subtitle }}</div>
+                </div>
+              </a>
+            {% endfor %}
+          </div>
+          {% if self.articles.count > 3 %}
+            <a href="{% slugurl 'artikel' %}">Alle Artikel</a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+
+    </div>
 
   </div>
+
+</main>
 {% endblock %}
