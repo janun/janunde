@@ -21,4 +21,5 @@ SECRET_KEY = os.environ.get(
     "adaefoeaehraoehcroecahaemthcartmhghfdsgjhdfguhrg5zut3zu52z43jkjcoi;a!yfe",
 )
 
-INSTALLED_APPS += ["wagtail.contrib.styleguide", "django_extensions"]
+if DEBUG:
+    INSTALLED_APPS += ["wagtail.contrib.styleguide", "django_extensions"]
