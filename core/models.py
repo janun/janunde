@@ -98,6 +98,14 @@ class BasePage(Page, HyphenatedTitleMixin):
     partial_template_name = "core/_partial.html"
     is_creatable = False
 
+    megamenu_category = models.CharField(
+        verbose_name="Kategorie in Menu",
+        blank=True,
+        null=True,
+        max_length=100,
+        help_text="Wird bei Untermenüs benutzt, um Unterseiten weiter zu gruppieren.",
+    )
+
     def get_description(self):
         """Short description text for SEO"""
         for attr in ("search_description", "subtitle", "role"):
@@ -250,7 +258,11 @@ class StandardPage(BasePage):
         StreamFieldPanel("body"),
     ]
 
-    promote_panels = [FieldPanel("text_direction"),] + BasePage.promote_panels
+    promote_panels = (
+        [FieldPanel("text_direction"),]
+        + BasePage.promote_panels
+        + [FieldPanel("megamenu_category")]
+    )
 
     class Meta:
         verbose_name = "Einfache Seite"

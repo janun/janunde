@@ -5,22 +5,20 @@ try:
 except ImportError:
     pass
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 DEBUG = True
 
 for template_engine in TEMPLATES:
-    template_engine['OPTIONS']['debug'] = True
+    template_engine["OPTIONS"]["debug"] = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Get secret key from environment variable
 # but with a default (as opposed to production)
 SECRET_KEY = os.environ.get(
-    'SECRET_KEY',
-    'adaefoeaehraoehcroecahaemthcartmhghfdsgjhdfguhrg5zut3zu52z43jkjcoi;a!yfe'
+    "SECRET_KEY",
+    "adaefoeaehraoehcroecahaemthcartmhghfdsgjhdfguhrg5zut3zu52z43jkjcoi;a!yfe",
 )
 
-INSTALLED_APPS += [
-    'wagtail.contrib.styleguide',
-]
+INSTALLED_APPS += ["wagtail.contrib.styleguide", "django_extensions"]
