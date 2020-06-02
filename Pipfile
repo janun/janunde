@@ -27,7 +27,6 @@ pylint-quotes = "*"
 flake8 = "*"
 flake8-django = "*"
 black = "==19.10b0"
-django-extensions = "*"
 
 [requires]
 python_version = "3.8"
