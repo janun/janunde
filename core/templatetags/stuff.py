@@ -1,4 +1,5 @@
 import urllib
+from urllib.parse import unquote_plus
 
 from django import template
 from django.utils.html import conditional_escape
@@ -7,6 +8,7 @@ from django.http import HttpRequest
 
 from wagtail.embeds import embeds
 from wagtail.embeds.exceptions import EmbedException
+from wagtail.core.models import Page
 
 from core.models import Banner
 
@@ -90,3 +92,12 @@ def highlight(value, search, klass="font-bold"):
 def ancestors(obj):
     """Get the ancestors of obj excluding Root and Homepage"""
     return obj.get_ancestors()[2:]
+
+
+@register.simple_tag(takes_context=True)
+def search_results_404(context, max_results=5):
+    """Get search results for 404 error page"""
+    url_path = context["request"].path_info
+    search_query = unquote_plus(url_path).replace("/", " ")
+    search_results = Page.objects.live().public().search(search_query)[0:max_results]
+    return search_results
