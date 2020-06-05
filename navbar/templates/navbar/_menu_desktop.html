@@ -10,7 +10,7 @@
       <li class="group flex px-2 xl:mx-1 text-gray-700 hover:text-gray-900">
         <a role="menuitem" href="{% pageurl item.value.page %}"
           class="flex items-center border-b-4 pt-1 border-transparent
-          {% if item.value.page.url|startswith:self.url %}border-green-500{% else %}hover:border-gray-500{% endif %}">
+          {% if self.url|startswith:item.value.page.url %}border-green-500{% else %}hover:border-gray-500{% endif %}">
           {{ item.value.title|default:item.value.page.title }}
         </a>
       </li>

@@ -6,7 +6,7 @@
   {% for item in menu %}
     {% if item.block_type == "internal_page" %}
       <li>
-        <a role="menuitem" class="block pl-8 py-3 {% if item.value.page.url|startswith:self.url %}font-bold text-green-500{% endif %}"
+        <a role="menuitem" class="block pl-8 py-3 {% if self.url|startswith:item.value.page.url %}font-bold text-green-500{% endif %}"
           href="{% pageurl item.value.page %}">{{ item.value.title|default:item.value.page.title }}</a>
       </li>
     {% else %}
