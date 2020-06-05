@@ -1,0 +1,54 @@
+{% load wagtailcore_tags wagtailimages_tags navbar %}
+
+
+{% comment %} menu items (desktop) {% endcomment %}
+{% with menu=settings.navbar.NavbarSettings.menu  %}
+<ul class="hidden lg:flex xl:ml-8 h-full" role="menu">
+  {% for item in menu %}
+    
+    {% if item.block_type == "internal_page" %}
+      <li class="group flex px-2 xl:mx-1 text-gray-700 hover:text-gray-900">
+        <a role="menuitem" href="{% pageurl item.value.page %}"
+          class="flex items-center border-b-4 pt-1 border-transparent
+          {% if item.value.page.url|startswith:self.url %}border-green-500{% else %}hover:border-gray-500{% endif %}">
+          {{ item.value.title|default:item.value.page.title }}
+        </a>
+      </li>
+
+    {% elif item.block_type == "submenu" %}
+      <li class="group flex px-2 xl:mx-1 text-gray-700 hover:text-gray-900">
+        <button type="button" aria-expanded="false" aria-haspopup="true"
+          {% submenu_active item.value.submenu self as submenu_active %}
+          class="js-toggle-menu flex items-center border-b-4 pt-1 border-transparent
+          {% if submenu_active %}border-green-500{% else %}group-hover:border-gray-500{% endif %}"">
+          {{ item.value.title }}
+          <svg class="fill-current h-4 w-4 ml-1" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+        </button>
+        <ul role="menu"
+          class="hidden flex justify-between mx-4 px-4 py-8 rounded-lg border-t absolute top-0 inset-x-0
+                  bg-white shadow-lg mt-16 lg:mt-18">
+          {% for item in item.value.submenu %}
+            <li class="mx-8">
+              <h5 class="ml-2 text-xs text-gray-600 mb-3">{{ item.value.title|default:"&nbsp;" }}</h5>
+              <ul role="menu">
+                {% for item in item.value.submenu %}
+                  <li class="block mb-4 max-w-xs">
+                    <a role="menuitem" href="{% pageurl item.value.page %}"
+                      class="inline-block text-gray-800 px-2 py-2 hover:bg-gray-150 rounded-lg {% if item.value.page.url == self.url %}bg-gray-150 text-green-700{% endif %}">
+                      <div class="text-sm font-bold">{{ item.value.title|default:item.value.page.title }}</div>
+                      <div class="text-xs text-gray-700">{{ item.value.subtitle|default:item.value.page.specific.subtitle }}</div>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endfor %}
+
+        </ul>
+      </li>
+    {% endif %}
+
+  {% endfor %}
+</ul>
+{% endwith %}

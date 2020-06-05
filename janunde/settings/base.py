@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "events",
     "contact",
     "about",
+    "navbar",
     # 'debug_toolbar',
     # 'template_profiler_panel',
     "form_utils",
@@ -203,4 +204,3 @@ LOGIN_REDIRECT_URL = "wagtailadmin_home"
 
 
 PASSWORD_REQUIRED_TEMPLATE = "password_required.html"
-

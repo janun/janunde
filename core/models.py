@@ -98,14 +98,6 @@ class BasePage(Page, HyphenatedTitleMixin):
     partial_template_name = "core/_partial.html"
     is_creatable = False
 
-    megamenu_category = models.CharField(
-        verbose_name="Kategorie in Menu",
-        blank=True,
-        null=True,
-        max_length=100,
-        help_text="Wird bei Untermenüs benutzt, um Unterseiten weiter zu gruppieren.",
-    )
-
     def get_description(self):
         """Short description text for SEO"""
         for attr in ("search_description", "subtitle", "role"):
@@ -210,14 +202,6 @@ class StandardPage(BasePage):
     simple "just a page"
     """
 
-    title_color = models.CharField(
-        "Titelfarbe",
-        choices=COLOR_CHOICES,
-        max_length=255,
-        default="green",
-        help_text="Der Titel wird in dieser Farbe angezeigt.",
-    )
-
     text_direction = models.CharField(
         "Textrichtung",
         choices=TEXT_DIRECTION_CHOICES,
@@ -246,23 +230,13 @@ class StandardPage(BasePage):
     ]
 
     content_panels = [
-        MultiFieldPanel(
-            [
-                FieldPanel("title", classname="title"),
-                FieldPanel("title_color", classname=""),
-            ],
-            heading="Titel",
-        ),
+        FieldPanel("title"),
         FieldPanel("subtitle"),
         ImageChooserPanel("feed_image"),
         StreamFieldPanel("body"),
     ]
 
-    promote_panels = (
-        [FieldPanel("text_direction"),]
-        + BasePage.promote_panels
-        + [FieldPanel("megamenu_category")]
-    )
+    promote_panels = [FieldPanel("text_direction"),] + BasePage.promote_panels
 
     class Meta:
         verbose_name = "Einfache Seite"
