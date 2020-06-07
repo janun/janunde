@@ -11,7 +11,7 @@
         <a role="menuitem" href="{% pageurl item.value.page %}"
           class="flex items-center border-b-4 pt-1 border-transparent
           {% if self.url|startswith:item.value.page.url %}border-green-500 text-gray-900{% else %}hover:border-gray-500 text-gray-700 hover:text-gray-900{% endif %}">
-          {{ item.value.title|default:item.value.page.title }}
+          {{ item.value.get_title }}
         </a>
       </li>
 
@@ -36,8 +36,8 @@
                   <li class="block mb-4 max-w-xs">
                     <a role="menuitem" href="{% pageurl item.value.page %}"
                       class="inline-block text-gray-900 px-2 py-2 hover:bg-gray-150 rounded-lg {% if item.value.page.url == self.url %}bg-gray-150 text-green-700{% endif %}">
-                      <div class="text-sm font-bold">{{ item.value.title|default:item.value.page.title }}</div>
-                      <div class="text-xs text-gray-700">{{ item.value.subtitle|default:item.value.page.specific.subtitle }}</div>
+                      <div class="text-sm font-bold">{{ item.value.get_title }}</div>
+                      <div class="text-xs text-gray-700">{{ item.value.get_subtitle }}</div>
                     </a>
                   </li>
                 {% endfor %}
@@ -93,7 +93,6 @@ document.querySelectorAll('.js-toggle-menu').forEach(function (button) {
       return
     }
     if (!menu.classList.contains('invisible')) {
-      //event.preventDefault()
       hide()
     }
   })
@@ -105,19 +104,6 @@ document.querySelectorAll('.js-toggle-menu').forEach(function (button) {
       hide()
     }
   })
-
-  // var timer
-
-  // open on mouseover
-  //button.parentElement.addEventListener('mouseover', function (event) {
-  //  show()
-  //  if (timer) clearTimeout(timer);
-  //})
-
-  // close after delay on mouseout
-  //button.parentElement.addEventListener('mouseout', function (event) {
-  //  timer = setTimeout( function(event) { hide() }, 500);
-  //})
 
 })
 </script>

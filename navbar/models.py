@@ -4,6 +4,17 @@ from wagtail.admin.edit_handlers import StreamFieldPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 
 
+class SubMenuInternalPageValue(blocks.StructValue):
+    def get_title(self):
+        return self.get("title") or self.get("page").title
+
+    def get_subtitle(self):
+        try:
+            return self.get("subtitle") or self.get("page").specific.subtitle
+        except AttributeError:
+            return ""
+
+
 class InternalPageBlock(blocks.StructBlock):
     """Link to internal page (top level item)"""
 
@@ -15,6 +26,7 @@ class InternalPageBlock(blocks.StructBlock):
     class Meta:
         label = "Interne Seite"
         icon = "link"
+        value_class = SubMenuInternalPageValue
 
 
 class SubMenuInternalPageBlock(blocks.StructBlock):
@@ -33,6 +45,7 @@ class SubMenuInternalPageBlock(blocks.StructBlock):
     class Meta:
         label = "Interne Seite"
         icon = "link"
+        value_class = SubMenuInternalPageValue
 
 
 class SubMenuCategoryBlock(blocks.StructBlock):

@@ -3,8 +3,8 @@ from django import template
 register = template.Library()
 
 
-@register.simple_tag(takes_context=True)
-def submenu_active(context, submenu, current_page):
+@register.simple_tag()
+def submenu_active(submenu, current_page):
     """If any of the submenu items are active"""
     for category in submenu:
         for item in category.value["submenu"]:

@@ -2,29 +2,29 @@
 
 {% with menu=settings.navbar.NavbarSettings.menu  %}
 
-<ul role="menu" id="mobileMenu" style="max-height: 90vh" class="overflow-auto hidden lg:hidden bg-white pb-4 border-b-2 shadow-md border-green-500 z-50">
+<ul role="menu" id="mobileMenu" style="max-height: 90vh" class="divide-y divide-gray-400 overflow-auto hidden lg:hidden bg-white pb-4 shadow-md z-50">
   {% for item in menu %}
     {% if item.block_type == "internal_page" %}
       <li>
-        <a role="menuitem" class="block pl-8 py-3 {% if self.url|startswith:item.value.page.url %}font-bold text-green-500{% endif %}"
-          href="{% pageurl item.value.page %}">{{ item.value.title|default:item.value.page.title }}</a>
+        <a role="menuitem" class="block pl-8 py-5 {% if self.url|startswith:item.value.page.url %}font-bold text-green-500{% endif %}"
+          href="{% pageurl item.value.page %}">{{ item.value.get_title }}</a>
       </li>
-    {% else %}
+    {% elif item.block_type == "submenu" %}
       <li>
-        <button type="button" role="menuitem" aria-expanded="false" aria-haspopup="true"
-                class="js-toggle-mobile-menu w-full pl-8 pr-4 py-3 flex items-center">
+        <a href="#" type="button" role="menuitem" aria-expanded="false" aria-haspopup="true"
+                class="js-toggle-mobile-menu w-full pl-8 pr-4 py-5 flex items-center">
           {{ item.value.title }}
-          <svg class="ml-4 h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
-        </button>
+          <svg class="ml-4 h-4 w-4 fill-current transition-transform duration-300 transform" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+        </a>
 
-        <ul role="menu" class="hidden ml-8 pl-4 border-l-2 border-green-400">
+        <ul role="menu" class="overflow-hidden max-h-0 ml-8 pl-5 transition-all duration-300">
           {% for item in item.value.submenu %}
             {% for item in item.value.submenu %}
               <li class="block mb-2 max-w-xs">
                 <a role="menuitem" href="{% pageurl item.value.page %}"
-                  class="p-1 -ml-1 inline-block text-gray-800 hover:text-gray-900
+                  class="p-2 -ml-1 inline-block text-gray-800 hover:text-gray-900
                     {% if item.value.page.url == self.url %}font-bold text-green-500{% endif %}">
-                  <div class="text-sm">{{ item.value.title|default:item.value.page.title }}</div>
+                  <div class="text-sm">{{ item.value.get_title }}</div>
                 </a>
               </li>
             {% endfor %}
@@ -43,15 +43,17 @@
 // toggle mobile megamenu
 document.querySelectorAll('.js-toggle-mobile-menu').forEach(function (button) {
   var menu = button.parentElement.querySelector('[role="menu"]')
+  var arrow = button.querySelector('svg')
 
   function toggle() {
-    menu.classList.toggle('hidden')
-    button.classList.toggle('bg-green-400')
+    menu.classList.toggle('max-h-1000')
+    arrow.classList.toggle('rotate-180')
     button.setAttribute('aria-expanded', menu.classList.contains('hidden') ? 'false' : 'true')
   }
   
   // toggle on click
   button.addEventListener('click', function (event) {
+    event.preventDefault()
     toggle()
   })
 
