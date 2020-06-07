@@ -8,8 +8,11 @@ def submenu_active(context, submenu, current_page):
     """If any of the submenu items are active"""
     for category in submenu:
         for item in category.value["submenu"]:
-            if item.value["page"].url == current_page.url:
-                return True
+            try:
+                if item.value["page"].url == current_page.url:
+                    return True
+            except AttributeError:
+                pass
     return False
 
 
