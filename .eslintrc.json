@@ -1,24 +1,35 @@
 {
+    "plugins": [
+        "es"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:es/no-2015",
+        "plugin:compat/recommended"
+    ],
     "env": {
         "browser": true
     },
-    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
     "rules": {
-        "indent": [
-            "error",
-            2
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
-    }
+        "es/no-modules": "off"
+    },
+    "overrides": [
+        {
+            "files": [
+                "rollup.config.js",
+                "tailwind.config.js"
+            ],
+            "parserOptions": {
+                "ecmaVersion": 6
+            },
+            "env": {
+                "node": true,
+                "browser": false
+            }
+        }
+    ]
 }
