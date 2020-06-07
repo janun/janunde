@@ -18,7 +18,7 @@
     {% elif item.block_type == "submenu" %}
       {% submenu_active item.value.submenu self as submenu_active %}
       <li class="group flex px-2 xl:mx-1">
-        <a href="#" type="button" aria-expanded="false" aria-haspopup="true"
+        <a href="#" aria-expanded="false" aria-haspopup="true"
           class="js-toggle-menu flex items-center border-b-4 pt-1 border-transparent
           {% if submenu_active %}border-green-500 text-gray-900{% else %}group-hover:border-gray-500 text-gray-700 hover:text-gray-900{% endif %}"">
           {{ item.value.title }}
