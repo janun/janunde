@@ -17,17 +17,22 @@
           <svg class="ml-4 h-4 w-4 fill-current transition-transform duration-300 transform" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
         </a>
 
-        <ul role="menu" class="overflow-hidden max-h-0 ml-8 pl-5 transition-all duration-300">
+        <ul role="menu" class="overflow-hidden max-h-0 ml-8 transition-all duration-300">
           {% for item in item.value.submenu %}
-            {% for item in item.value.submenu %}
-              <li class="block mb-2 max-w-xs">
-                <a role="menuitem" href="{% pageurl item.value.page %}"
-                  class="p-2 -ml-1 inline-block text-gray-800 hover:text-gray-900
-                    {% if item.value.page.url == self.url %}font-bold text-green-500{% endif %}">
-                  <div class="text-sm">{{ item.value.get_title }}</div>
-                </a>
-              </li>
-            {% endfor %}
+            <li>
+              <h5 class="text-xs text-gray-600 mb-4">{{ item.value.title|default:"&nbsp;" }}</h5>
+              <ul role="menu" class="mb-4">
+                {% for item in item.value.submenu %}
+                  <li class="block pl-4 mb-2 max-w-xs">
+                    <a role="menuitem" href="{% pageurl item.value.page %}"
+                      class="p-2 -ml-1 inline-block text-gray-800 hover:text-gray-900
+                        {% if item.value.page.url == self.url %}font-bold text-green-500{% endif %}">
+                      <div class="text-sm">{{ item.value.get_title }}</div>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
           {% endfor %}
 
         </ul>
