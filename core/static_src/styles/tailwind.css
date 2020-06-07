@@ -25,3 +25,11 @@ html {
 		@apply -mx-20;
 	}
 }
+
+
+@screen md {
+	.md\:animated {
+			animation-duration: 1s;
+			animation-fill-mode: both;
+	}
+}
