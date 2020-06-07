@@ -37,3 +37,23 @@
 </ul>
 
 {% endwith %}
+
+
+<script>
+// toggle mobile megamenu
+document.querySelectorAll('.js-toggle-mobile-menu').forEach(function (button) {
+  var menu = button.parentElement.querySelector('[role="menu"]')
+
+  function toggle() {
+    menu.classList.toggle('hidden')
+    button.classList.toggle('bg-green-400')
+    button.setAttribute('aria-expanded', menu.classList.contains('hidden') ? 'false' : 'true')
+  }
+  
+  // toggle on click
+  button.addEventListener('click', function (event) {
+    toggle()
+  })
+
+})
+</script>

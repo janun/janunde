@@ -7,20 +7,20 @@
   {% for item in menu %}
     
     {% if item.block_type == "internal_page" %}
-      <li class="group flex px-2 xl:mx-1 text-gray-700 hover:text-gray-900">
+      <li class="group flex px-2 xl:mx-1">
         <a role="menuitem" href="{% pageurl item.value.page %}"
           class="flex items-center border-b-4 pt-1 border-transparent
-          {% if self.url|startswith:item.value.page.url %}border-green-500{% else %}hover:border-gray-500{% endif %}">
+          {% if self.url|startswith:item.value.page.url %}border-green-500 text-gray-900{% else %}hover:border-gray-500 text-gray-700 hover:text-gray-900{% endif %}">
           {{ item.value.title|default:item.value.page.title }}
         </a>
       </li>
 
     {% elif item.block_type == "submenu" %}
-      <li class="group flex px-2 xl:mx-1 text-gray-700 hover:text-gray-900">
+      {% submenu_active item.value.submenu self as submenu_active %}
+      <li class="group flex px-2 xl:mx-1">
         <button type="button" aria-expanded="false" aria-haspopup="true"
-          {% submenu_active item.value.submenu self as submenu_active %}
           class="js-toggle-menu flex items-center border-b-4 pt-1 border-transparent
-          {% if submenu_active %}border-green-500{% else %}group-hover:border-gray-500{% endif %}"">
+          {% if submenu_active %}border-green-500 text-gray-900{% else %}group-hover:border-gray-500 text-gray-700 hover:text-gray-900{% endif %}"">
           {{ item.value.title }}
           <svg class="fill-current h-4 w-4 ml-1" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
@@ -35,7 +35,7 @@
                 {% for item in item.value.submenu %}
                   <li class="block mb-4 max-w-xs">
                     <a role="menuitem" href="{% pageurl item.value.page %}"
-                      class="inline-block text-gray-800 px-2 py-2 hover:bg-gray-150 rounded-lg {% if item.value.page.url == self.url %}bg-gray-150 text-green-700{% endif %}">
+                      class="inline-block text-gray-900 px-2 py-2 hover:bg-gray-150 rounded-lg {% if item.value.page.url == self.url %}bg-gray-150 text-green-700{% endif %}">
                       <div class="text-sm font-bold">{{ item.value.title|default:item.value.page.title }}</div>
                       <div class="text-xs text-gray-700">{{ item.value.subtitle|default:item.value.page.specific.subtitle }}</div>
                     </a>
@@ -52,3 +52,58 @@
   {% endfor %}
 </ul>
 {% endwith %}
+
+
+<script>
+// toggle megamenu
+document.querySelectorAll('.js-toggle-menu').forEach(function (button) {
+  var menu = button.parentElement.querySelector('[role="menu"]')
+
+  function hide() {
+    menu.classList.add('hidden')
+    button.setAttribute('aria-expanded', 'false')
+  }
+  function show() {
+    menu.classList.remove('hidden')
+    button.setAttribute('aria-expanded', 'true')
+  }
+  
+  // show on click
+  button.addEventListener('click', function (event) {
+    show()
+  })
+
+  // close on click outside
+  document.addEventListener('click', function (event) {
+    if (event.target === menu || menu.contains(event.target) || event.target === button || button.contains(event.target)) {
+      return
+    }
+    if (!menu.classList.contains('hidden')) {
+      //event.preventDefault()
+      hide()
+    }
+  })
+
+  // close on ESC
+  document.addEventListener('keydown', function (event) {
+    if (event.which == 27 && !menu.classList.contains('hidden')) {
+      event.preventDefault()
+      hide()
+    }
+  })
+
+  var timer
+
+  // open on mouseover
+  button.parentElement.addEventListener('mouseover', function (event) {
+    show()
+    if (timer) clearTimeout(timer);
+  })
+
+  // close after delay on mouseout
+  button.parentElement.addEventListener('mouseout', function (event) {
+    timer = setTimeout( function(event) { hide() }, 500);
+  })
+
+})
+</script>
