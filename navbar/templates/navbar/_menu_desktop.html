@@ -18,15 +18,15 @@
     {% elif item.block_type == "submenu" %}
       {% submenu_active item.value.submenu self as submenu_active %}
       <li class="group flex px-2 xl:mx-1">
-        <button type="button" aria-expanded="false" aria-haspopup="true"
+        <a href="#" type="button" aria-expanded="false" aria-haspopup="true"
           class="js-toggle-menu flex items-center border-b-4 pt-1 border-transparent
           {% if submenu_active %}border-green-500 text-gray-900{% else %}group-hover:border-gray-500 text-gray-700 hover:text-gray-900{% endif %}"">
           {{ item.value.title }}
-          <svg class="fill-current h-4 w-4 ml-1" viewBox="0 0 20 20">
+          <svg class="fill-current h-4 w-4 ml-1 transition-transform duration-300 transform" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
-        </button>
+        </a>
         <ul role="menu"
-          class="hidden flex justify-between mx-4 px-4 py-8 rounded-lg border-t absolute top-0 inset-x-0
+          class="invisible opacity-0 transition-opacity duration-300 flex justify-between mx-4 px-4 py-8 rounded-lg border-t absolute top-0 inset-x-0
                   bg-white shadow-lg mt-16 lg:mt-18">
           {% for item in item.value.submenu %}
             <li class="mx-8">
@@ -58,19 +58,33 @@
 // toggle megamenu
 document.querySelectorAll('.js-toggle-menu').forEach(function (button) {
   var menu = button.parentElement.querySelector('[role="menu"]')
+  var arrow = button.querySelector("svg")
 
+  menu.addEventListener('transitionend', function () {
+    if (menu.classList.contains('opacity-0')) {
+      menu.classList.add('invisible')
+    }
+  })
   function hide() {
-    menu.classList.add('hidden')
+    menu.classList.add('opacity-0')
+    arrow.classList.remove('rotate-180')
     button.setAttribute('aria-expanded', 'false')
   }
   function show() {
-    menu.classList.remove('hidden')
+    menu.classList.remove('invisible')
+    menu.classList.remove('opacity-0')
     button.setAttribute('aria-expanded', 'true')
+    arrow.classList.add('rotate-180')
   }
   
-  // show on click
+  // toggle on click
   button.addEventListener('click', function (event) {
-    show()
+    event.preventDefault()
+    if (menu.classList.contains('invisible')) {
+      show()
+    } else {
+      hide()
+    }
   })
 
   // close on click outside
@@ -78,7 +92,7 @@ document.querySelectorAll('.js-toggle-menu').forEach(function (button) {
     if (event.target === menu || menu.contains(event.target) || event.target === button || button.contains(event.target)) {
       return
     }
-    if (!menu.classList.contains('hidden')) {
+    if (!menu.classList.contains('invisible')) {
       //event.preventDefault()
       hide()
     }
@@ -86,24 +100,24 @@ document.querySelectorAll('.js-toggle-menu').forEach(function (button) {
 
   // close on ESC
   document.addEventListener('keydown', function (event) {
-    if (event.which == 27 && !menu.classList.contains('hidden')) {
+    if (event.which == 27 && !menu.classList.contains('invisible')) {
       event.preventDefault()
       hide()
     }
   })
 
-  var timer
+  // var timer
 
   // open on mouseover
-  button.parentElement.addEventListener('mouseover', function (event) {
-    show()
-    if (timer) clearTimeout(timer);
-  })
+  //button.parentElement.addEventListener('mouseover', function (event) {
+  //  show()
+  //  if (timer) clearTimeout(timer);
+  //})
 
   // close after delay on mouseout
-  button.parentElement.addEventListener('mouseout', function (event) {
-    timer = setTimeout( function(event) { hide() }, 500);
-  })
+  //button.parentElement.addEventListener('mouseout', function (event) {
+  //  timer = setTimeout( function(event) { hide() }, 500);
+  //})
 
 })
 </script>
