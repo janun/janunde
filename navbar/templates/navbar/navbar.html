@@ -52,26 +52,46 @@
 </div>
 
 <script>
-  // toggle mobile menu
+// toggle mobile menu
 
-  // close on click outside
-  document.addEventListener('click', function (event) {
-    if (event.target === mobileMenu || mobileMenu.contains(event.target) || event.target === menuButton || menuButton.contains(event.target)) {
-      return
-    }
-    if (!mobileMenu.classList.contains('hidden')) {
-      event.preventDefault()
-      document.querySelector('.navbar').classList.remove('menuOpen')
-      menuButtonOpen.classList.remove('hidden')
-      mobileMenu.classList.add('max-h-0')
-      menuButtonClose.classList.add('hidden')
-    }
-  })
+function openMobileMenu() {
+  document.querySelector('.navbar').classList.add('menuOpen')
+  menuButtonOpen.classList.add('hidden')
+  menuButtonClose.classList.remove('hidden')
+  mobileMenu.classList.remove('max-h-0')
+  mobileMenu.classList.remove('invisible')
+}
 
-  menuButton.addEventListener('click', function () {
-    mobileMenu.classList.toggle('max-h-0')
-    document.querySelector('.navbar').classList.toggle('menuOpen')
-    menuButtonOpen.classList.toggle('hidden')
-    menuButtonClose.classList.toggle('hidden')
-  })
+function closeMobileMenu() {
+  document.querySelector('.navbar').classList.remove('menuOpen')
+  menuButtonOpen.classList.remove('hidden')
+  menuButtonClose.classList.add('hidden')
+  mobileMenu.classList.add('max-h-0')
+}
+
+// close on click outside
+document.addEventListener('click', function (event) {
+  if (event.target === mobileMenu || mobileMenu.contains(event.target) || event.target === menuButton || menuButton.contains(event.target)) {
+    return
+  }
+  if (!mobileMenu.classList.contains('hidden')) {
+    event.preventDefault()
+    closeMobileMenu()
+  }
+})
+
+mobileMenu.addEventListener('transitionend', function () {
+  if (mobileMenu.classList.contains('max-h-0')) {
+    mobileMenu.classList.add('invisible')
+  }
+})
+
+// toggle on click on menuButton
+menuButton.addEventListener('click', function () {
+  if (mobileMenu.classList.contains('invisible')) {
+    openMobileMenu()
+  } else {
+    closeMobileMenu()
+  }
+})
 </script>
