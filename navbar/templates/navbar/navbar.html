@@ -74,7 +74,7 @@ document.addEventListener('click', function (event) {
   if (event.target === mobileMenu || mobileMenu.contains(event.target) || event.target === menuButton || menuButton.contains(event.target)) {
     return
   }
-  if (!mobileMenu.classList.contains('hidden')) {
+  if (!mobileMenu.classList.contains('invisible')) {
     event.preventDefault()
     closeMobileMenu()
   }
