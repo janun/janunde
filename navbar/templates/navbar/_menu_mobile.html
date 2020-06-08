@@ -1,8 +1,8 @@
 {% load wagtailcore_tags wagtailimages_tags navbar %}
 
 {% with menu=settings.navbar.NavbarSettings.menu  %}
-<div id="mobileMenu" style="max-height: calc(100vh - 64px)" class="invisible overflow-auto max-h-0 transition-all duration-300 lg:hidden bg-white shadow-md z-50">
-<ul role="menu" class="divide-y divide-gray-400">
+<div id="mobileMenu" style="max-height: calc(100vh - 128px)" class="invisible overflow-auto max-h-0 transition-all duration-300 lg:hidden bg-white shadow-md z-40">
+<ul role="menu" class="divide-y divide-gray-300 border-t border-gray-300">
   {% for item in menu %}
     {% if item.block_type == "internal_page" %}
       <li>
@@ -17,15 +17,15 @@
           <svg class="ml-4 h-4 w-4 fill-current transition-transform duration-300 transform" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
         </a>
 
-        <ul role="menu" class="overflow-hidden max-h-0 ml-8 transition-all duration-300">
+        <ul role="menu" class="overflow-hidden px-8 bg-gray-200 max-h-0 transition-all duration-300">
           {% for item in item.value.submenu %}
             <li>
-              <h5 class="text-xs text-gray-600 mb-4">{{ item.value.title|default:"&nbsp;" }}</h5>
-              <ul role="menu" class="mb-4">
+              <h5 class="text-xs text-gray-600 pt-6 mb-4">{{ item.value.title|default:"&nbsp;" }}</h5>
+              <ul role="menu">
                 {% for item in item.value.submenu %}
-                  <li class="block pl-4 mb-2 max-w-xs">
+                  <li class="block mb-2 max-w-xs">
                     <a role="menuitem" href="{% pageurl item.value.page %}"
-                      class="p-2 -ml-1 block text-gray-800 hover:text-gray-900
+                      class="py-2 pl-4 block text-gray-800 hover:text-gray-900
                         {% if item.value.page.url == self.url %}font-bold text-green-500{% endif %}">
                       <div class="text-sm">{{ item.value.get_title }}</div>
                     </a>
@@ -52,13 +52,27 @@ function openMobileMenu() {
   menuButtonClose.classList.remove('hidden')
   mobileMenu.classList.remove('max-h-0')
   mobileMenu.classList.remove('invisible')
+  document.body.classList.add('overflow-hidden')
 }
 
 function closeMobileMenu() {
-  document.querySelector('.navbar').classList.remove('menuOpen')
   menuButtonOpen.classList.remove('hidden')
   menuButtonClose.classList.add('hidden')
   mobileMenu.classList.add('max-h-0')
+  document.body.classList.remove('overflow-hidden')
+
+  // close sub menus
+  document.querySelectorAll('.js-toggle-mobile-menu').forEach(function (button) {
+    var menu = button.parentElement.querySelector('[role="menu"]')
+    var arrow = button.querySelector('svg')
+
+    function close() {
+      menu.classList.remove('max-h-1000')
+      arrow.classList.remove('rotate-180')
+      button.setAttribute('aria-expanded', 'false')
+    }
+    close()
+  })
 }
 
 // close on click outside
@@ -75,6 +89,7 @@ document.addEventListener('click', function (event) {
 mobileMenu.addEventListener('transitionend', function () {
   if (mobileMenu.classList.contains('max-h-0')) {
     mobileMenu.classList.add('invisible')
+    document.querySelector('.navbar').classList.remove('menuOpen')
   }
 })
 
@@ -96,7 +111,7 @@ document.querySelectorAll('.js-toggle-mobile-menu').forEach(function (button) {
   function toggle() {
     menu.classList.toggle('max-h-1000')
     arrow.classList.toggle('rotate-180')
-    button.setAttribute('aria-expanded', menu.classList.contains('hidden') ? 'false' : 'true')
+    button.setAttribute('aria-expanded', menu.classList.contains('max-h-1000') ? 'false' : 'true')
   }
   
   // toggle on click
