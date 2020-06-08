@@ -61,15 +61,15 @@
     }
     if (!mobileMenu.classList.contains('hidden')) {
       event.preventDefault()
-      mobileMenu.classList.add('hidden')
       document.querySelector('.navbar').classList.remove('menuOpen')
       menuButtonOpen.classList.remove('hidden')
+      mobileMenu.classList.add('max-h-0')
       menuButtonClose.classList.add('hidden')
     }
   })
 
   menuButton.addEventListener('click', function () {
-    mobileMenu.classList.toggle('hidden')
+    mobileMenu.classList.toggle('max-h-0')
     document.querySelector('.navbar').classList.toggle('menuOpen')
     menuButtonOpen.classList.toggle('hidden')
     menuButtonClose.classList.toggle('hidden')
