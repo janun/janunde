@@ -45,6 +45,49 @@
 
 
 <script>
+// toggle mobile menu
+function openMobileMenu() {
+  document.querySelector('.navbar').classList.add('menuOpen')
+  menuButtonOpen.classList.add('hidden')
+  menuButtonClose.classList.remove('hidden')
+  mobileMenu.classList.remove('max-h-0')
+  mobileMenu.classList.remove('invisible')
+}
+
+function closeMobileMenu() {
+  document.querySelector('.navbar').classList.remove('menuOpen')
+  menuButtonOpen.classList.remove('hidden')
+  menuButtonClose.classList.add('hidden')
+  mobileMenu.classList.add('max-h-0')
+}
+
+// close on click outside
+document.addEventListener('click', function (event) {
+  if (event.target === mobileMenu || mobileMenu.contains(event.target) || event.target === menuButton || menuButton.contains(event.target)) {
+    return
+  }
+  if (!mobileMenu.classList.contains('invisible')) {
+    event.preventDefault()
+    closeMobileMenu()
+  }
+})
+
+mobileMenu.addEventListener('transitionend', function () {
+  if (mobileMenu.classList.contains('max-h-0')) {
+    mobileMenu.classList.add('invisible')
+  }
+})
+
+// toggle on click on menuButton
+menuButton.addEventListener('click', function () {
+  if (mobileMenu.classList.contains('invisible')) {
+    openMobileMenu()
+  } else {
+    closeMobileMenu()
+  }
+})
+
+
 // toggle mobile megamenu
 document.querySelectorAll('.js-toggle-mobile-menu').forEach(function (button) {
   var menu = button.parentElement.querySelector('[role="menu"]')
