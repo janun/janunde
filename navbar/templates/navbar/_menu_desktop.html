@@ -29,13 +29,13 @@
           class="invisible opacity-0 transition-opacity duration-300 flex justify-between mx-4 px-4 py-8 rounded-lg border-t absolute top-0 inset-x-0
                   bg-white shadow-lg mt-16 lg:mt-18">
           {% for item in item.value.submenu %}
-            <li class="mx-8">
-              <h5 class="ml-2 text-xs text-gray-600 mb-3">{{ item.value.title|default:"&nbsp;" }}</h5>
+            <li class="mx-4 xl:mx-8">
+              <h5 class="text-xs text-gray-600 mb-3">{{ item.value.title|default:"&nbsp;" }}</h5>
               <ul role="menu">
                 {% for item in item.value.submenu %}
                   <li class="block mb-4 max-w-xs">
                     <a role="menuitem" href="{% pageurl item.value.page %}"
-                      class="inline-block text-gray-900 px-2 py-2 hover:bg-gray-150 rounded-lg {% if item.value.page.url == self.url %}bg-gray-150 text-green-700{% endif %}">
+                      class="inline-block text-gray-900 py-2 hover:bg-gray-150 rounded-lg {% if item.value.page.url == self.url %}bg-gray-150 text-green-700{% endif %}">
                       <div class="text-sm font-bold">{{ item.value.get_title }}</div>
                       <div class="text-xs text-gray-700">{{ item.value.get_subtitle }}</div>
                     </a>
