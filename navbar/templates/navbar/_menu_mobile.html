@@ -25,7 +25,7 @@
                 {% for item in item.value.submenu %}
                   <li class="block pl-4 mb-2 max-w-xs">
                     <a role="menuitem" href="{% pageurl item.value.page %}"
-                      class="p-2 -ml-1 inline-block text-gray-800 hover:text-gray-900
+                      class="p-2 -ml-1 block text-gray-800 hover:text-gray-900
                         {% if item.value.page.url == self.url %}font-bold text-green-500{% endif %}">
                       <div class="text-sm">{{ item.value.get_title }}</div>
                     </a>
