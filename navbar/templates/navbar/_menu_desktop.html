@@ -8,7 +8,7 @@
     
     {% if item.block_type == "internal_page" %}
       <li class="group flex px-2 xl:mx-1">
-        <a role="menuitem" href="{% pageurl item.value.page %}"
+        <a role="menuitem" href="{% if item.value.page %}{% pageurl item.value.page %}{% endif %}"
           class="text-sm xxl:text-base flex items-center border-b-4 pt-1 border-transparent
           {% if self.url|startswith:item.value.page.url %}border-green-500 text-gray-900{% else %}hover:border-gray-500 text-gray-700 hover:text-gray-900{% endif %}">
           {{ item.value.get_title }}
@@ -34,7 +34,7 @@
               <ul role="menu">
                 {% for item in item.value.submenu %}
                   <li class="block mb-4 max-w-xs">
-                    <a role="menuitem" href="{% pageurl item.value.page %}"
+                    <a role="menuitem" href="{% if item.value.page %}{% pageurl item.value.page %}{% endif %}"
                       class="inline-block text-gray-900 px-2 -mx-2 py-2 hover:bg-gray-150 rounded-lg {% if item.value.page.url == self.url %}bg-gray-200{% endif %}">
                       <div class="text-sm font-bold">{{ item.value.get_title }}</div>
                       <div class="text-xs text-gray-700">{{ item.value.get_subtitle }}</div>

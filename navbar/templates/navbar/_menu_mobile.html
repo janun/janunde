@@ -7,7 +7,7 @@
     {% if item.block_type == "internal_page" %}
       <li>
         <a role="menuitem" class="block pl-8 py-5 {% if self.url|startswith:item.value.page.url %}font-bold text-green-500{% endif %}"
-          href="{% pageurl item.value.page %}">{{ item.value.get_title }}</a>
+          href="{% if item.value.page %}{% pageurl item.value.page %}{% endif %}">{{ item.value.get_title }}</a>
       </li>
     {% elif item.block_type == "submenu" %}
       <li>
@@ -24,7 +24,7 @@
               <ul role="menu">
                 {% for item in item.value.submenu %}
                   <li class="block mb-2 max-w-xs">
-                    <a role="menuitem" href="{% pageurl item.value.page %}"
+                    <a role="menuitem" href="{% if item.value.page %}{% pageurl item.value.page %}{% endif %}"
                       class="py-2 pl-4 block text-gray-800 hover:text-gray-900
                         {% if item.value.page.url == self.url %}font-bold text-green-500{% endif %}">
                       <div class="text-sm">{{ item.value.get_title }}</div>

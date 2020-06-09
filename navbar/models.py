@@ -6,7 +6,10 @@ from wagtail.contrib.settings.models import BaseSetting, register_setting
 
 class SubMenuInternalPageValue(blocks.StructValue):
     def get_title(self):
-        return self.get("title") or self.get("page").title
+        try:
+            return self.get("title") or self.get("page").title
+        except AttributeError:
+            return ""
 
     def get_subtitle(self):
         try:
