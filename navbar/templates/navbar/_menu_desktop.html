@@ -35,7 +35,7 @@
                 {% for item in item.value.submenu %}
                   <li class="block mb-4 max-w-xs">
                     <a role="menuitem" href="{% pageurl item.value.page %}"
-                      class="inline-block text-gray-900 px-2 -mx-2 py-2 hover:bg-gray-150 rounded-lg {% if item.value.page.url == self.url %}bg-gray-150{% endif %}">
+                      class="inline-block text-gray-900 px-2 -mx-2 py-2 hover:bg-gray-150 rounded-lg {% if item.value.page.url == self.url %}bg-gray-200{% endif %}">
                       <div class="text-sm font-bold">{{ item.value.get_title }}</div>
                       <div class="text-xs text-gray-700">{{ item.value.get_subtitle }}</div>
                     </a>
