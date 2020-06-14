@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "contact",
     "about",
     "navbar",
+    "jobs",
     # 'debug_toolbar',
     # 'template_profiler_panel',
     "form_utils",
