@@ -10,6 +10,11 @@
 .hyphens-auto {
 	hyphens: auto;
 }
+@supports not (hyphens: auto) {
+	.hyphens-auto {
+		@apply break-all;
+	}
+}
 
 html {
 	scroll-behavior: smooth;
