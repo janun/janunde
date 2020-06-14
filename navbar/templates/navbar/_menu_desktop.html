@@ -3,7 +3,7 @@
 
 {% comment %} menu items (desktop) {% endcomment %}
 {% with menu=settings.navbar.NavbarSettings.menu  %}
-<ul class="hidden lg:flex xl:ml-8 h-full" role="menu">
+<ul class="hidden lg:flex xl:ml-8 h-full z-50" role="menu">
   {% for item in menu %}
     
     {% if item.block_type == "internal_page" %}
@@ -26,7 +26,7 @@
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
         </a>
         <ul role="menu"
-          class="invisible opacity-0 transition-opacity duration-300 flex justify-between mx-4 px-4 py-8 rounded-lg border-t absolute top-0 inset-x-0
+          class="invisible transition-transform transform -translate-y-full duration-300 flex justify-between mx-4 px-4 py-8 rounded-lg border-t absolute top-0 inset-x-0
                   bg-white shadow-lg mt-16 lg:mt-18">
           {% for item in item.value.submenu %}
             <li class="mx-4 xl:mx-8">
@@ -61,18 +61,18 @@ document.querySelectorAll('.js-toggle-menu').forEach(function (button) {
   var arrow = button.querySelector("svg")
 
   menu.addEventListener('transitionend', function () {
-    if (menu.classList.contains('opacity-0')) {
+    if (menu.classList.contains('-translate-y-full')) {
       menu.classList.add('invisible')
     }
   })
   function hide() {
-    menu.classList.add('opacity-0')
+    menu.classList.add('-translate-y-full')
     arrow.classList.remove('rotate-180')
     button.setAttribute('aria-expanded', 'false')
   }
   function show() {
     menu.classList.remove('invisible')
-    menu.classList.remove('opacity-0')
+    menu.classList.remove('-translate-y-full')
     button.setAttribute('aria-expanded', 'true')
     arrow.classList.add('rotate-180')
   }
