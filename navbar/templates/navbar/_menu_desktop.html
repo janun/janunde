@@ -9,7 +9,7 @@
     {% if item.block_type == "internal_page" %}
       <li class="group flex px-2 xl:mx-1">
         <a role="menuitem" href="{% if item.value.page %}{% pageurl item.value.page %}{% endif %}"
-          class="text-sm xxl:text-base flex items-center border-b-4 pt-1 border-transparent
+          class="text-sm xl:text-base flex items-center border-b-4 pt-1 border-transparent
           {% if self.url|startswith:item.value.page.url %}border-green-500 text-gray-900{% else %}hover:border-gray-500 text-gray-700 hover:text-gray-900{% endif %}">
           {{ item.value.get_title }}
         </a>
