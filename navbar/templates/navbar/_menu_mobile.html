@@ -3,25 +3,26 @@
 {% with menu=settings.navbar.NavbarSettings.menu  %}
 <div id="mobileMenuBg" class="invisible transition-opacity duration-300 opacity-0 fixed inset-0 bg-black-75"></div>
 <div id="mobileMenu" class="invisible fixed inset-y-0 right-0 overflow-auto transition-transform transform translate-x-full duration-300 lg:hidden bg-gray-150 shadow-lg z-40">
-  <div class="h-16 flex justify-end items-stretch shadow-md">
-    <button onclick="closeMobileMenu();" class="text-gray-700 mx-4 px-2 outline-none">
+
+  <div class="h-16 flex justify-end items-center shadow-md">
+    <button onclick="closeMobileMenu();" class="text-gray-700 mx-3 px-3 h-full outline-none">
       <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
         <path
           d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
       </svg>
     </button>
   </div>
-<ul role="menu" class="divide-y- mt-6 divide-gray-300 border-t- border-gray-300">
+<ul role="menu" class="mt-4 text-sm">
   {% for item in menu %}
     {% if item.block_type == "internal_page" %}
       <li>
-        <a role="menuitem" class="block pl-8 py-6 {% if self.url|startswith:item.value.page.url %}font-bold text-green-500{% endif %}"
+        <a role="menuitem" class="block pl-8 py-5 {% if self.url|startswith:item.value.page.url %}font-bold text-green-500{% endif %}"
           href="{% if item.value.page %}{% pageurl item.value.page %}{% endif %}">{{ item.value.get_title }}</a>
       </li>
     {% elif item.block_type == "submenu" %}
       <li>
         <a href="#" role="menuitem" aria-expanded="false" aria-haspopup="true"
-                class="js-toggle-mobile-menu w-full pl-8 pr-4 py-6 flex items-center">
+                class="js-toggle-mobile-menu w-full pl-8 pr-4 py-5 flex items-center">
           {{ item.value.title }}
           <svg class="ml-4 h-4 w-4 fill-current transition-transform duration-300 transform" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
         </a>
@@ -49,6 +50,7 @@
     {% endif %}
   {% endfor %}
 </ul>
+
 </div>
 {% endwith %}
 

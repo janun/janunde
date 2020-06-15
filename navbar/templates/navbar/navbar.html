@@ -19,16 +19,16 @@
 
       {% include "./_social_media.html" %}
 
-      <div class="flex items-center h-full lg:hidden ml-auto -mx-1">
+      <div class="flex items-center h-full lg:hidden ml-auto -mx-2">
         {% comment %} search button (mobile) {% endcomment %}
-        <a class="flex items-center justify-center mx-1 px-2 h-full" href="{% url 'search' %}">
+        <a class="flex items-center justify-center mx-2 px-2 h-full" href="{% url 'search' %}">
           <svg class="text-gray-700 fill-current w-4 h-4" viewBox="0 0 20 20">
             <path
               d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
           </svg>
         </a>
         {% comment %} mobile menu button {% endcomment %}
-        <button id="menuButton" class="text-gray-700 mx-1 px-2 h-full outline-none">
+        <button id="menuButton" class="text-gray-700 mx-2 px-2 h-full outline-none">
           <svg id="menuButtonOpen" class="h-4 w-4 fill-current" viewBox="0 0 32 32">
             <path
               d="M.84 6.05C.6 5.8.46 5.47.46 5.08s.13-.72.38-.98.58-.38.98-.38h28.5c.4 0 .73.12 1 .38s.37.58.37.98-.14.7-.4.97-.57.38-.97.38H1.83c-.4 0-.73-.12-1-.38zm30.47 8.9c.26.27.4.6.4 1s-.14.7-.4.96-.57.4-.97.4H1.83c-.4 0-.73-.13-1-.4s-.37-.57-.37-.96.13-.72.38-.98.58-.38.98-.38h28.5c.4 0 .73.13 1 .38zm0 10.87c.26.25.4.58.4.97s-.14.7-.4.97-.57.38-.97.38H1.83c-.4 0-.73-.12-1-.38s-.37-.58-.37-.98.13-.73.38-.98.58-.38.98-.38h28.5c.4 0 .73.13 1 .38z" />
