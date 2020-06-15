@@ -12,7 +12,7 @@
 }
 @supports not (hyphens: auto) {
 	.hyphens-auto {
-		@apply break-all;
+		@apply break-words;
 	}
 }
 
