@@ -542,7 +542,6 @@ class EventPage(Page, HyphenatedTitleMixin):
     search_fields = BasePage.search_fields + [
         # title is in here by default
         index.FilterField("start_datetime"),  # enables sorting
-        index.FilterField("name"),
         index.SearchField("subtitle"),
         index.SearchField("content"),
         index.SearchField("location"),
