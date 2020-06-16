@@ -13,7 +13,7 @@
     <div class="flex flex-wrap md:flex-no-wrap justify-around items-stretch -mx-4 lg:-mx-10">
       {% for statement in self.statements %}
         <div class="flex mx-4 lg:mx-10 my-6 js-animate-in" data-animation="zoomIn">
-          <picture>
+          <picture class="flex-shrink-0">
             {% image statement.image width-512 format-webp as image_webp %}
             <source srcset="{{ image_webp.url }}" type="image/webp">
             {% image statement.image width-512 format-jpeg as image_jpeg %}
