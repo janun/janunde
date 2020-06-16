@@ -46,9 +46,14 @@ gulp.task("vue.js", function () {
   ], "vue.js");
 });
 
-gulp.task("app.js", function () {
+gulp.task("jquery.js", function () {
   return scriptsBundle([
     "node_modules/jquery/dist/jquery.js",
+  ], "jquery.js");
+});
+
+gulp.task("app.js", function () {
+  return scriptsBundle([
     "core/static_src/core/js/*.js",
   ], "app.js");
 });
@@ -63,7 +68,7 @@ gulp.task("form.js", function () {
   ], "form.js");
 });
 
-gulp.task("scripts", gulp.parallel("vue.js", "app.js", "form.js"));
+gulp.task("scripts", gulp.parallel("vue.js", "app.js", "jquery.js", "form.js"));
 
 // images
 gulp.task("images", function () {

@@ -76,6 +76,7 @@
 {% endblock %}
 
 {% block extra_js %}
+  <script type="text/javascript" src="{% static 'core/js/jquery.js' %}"></script>
   <script type="text/javascript" src="{% static 'core/js/form.js' %}"></script>
   <script>{% include "events/seminar_form_page/apply.js" %}</script>
 {% endblock %}
