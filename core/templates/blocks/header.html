@@ -67,9 +67,13 @@
         {% if settings.core.SocialMediaSettings.social_medias.all %}
           <div class="md:hidden flex items-center justify-center lg:justify-start my-8 lg:mt-10 -mx-3">
             {% for social_media in settings.core.SocialMediaSettings.social_medias.all %}
-              {% image social_media.icon_color original as icon %}
               <a class="mx-3 md:transition-transform md:duration-200 md:transform md:hover:scale-125" href="{{ social_media.link }}" target="_blank" title="{{ social_media.tooltip }}">
-                <img class="w-7" loading="lazy" src="{{ icon.url }}">
+                <picture>
+                  {% image social_media.icon_color original format-webp as icon_webp %}
+                  <source srcset="{{ icon_webp.url }}" type="image/webp">
+                  {% image social_media.icon_color original as icon %}
+                  <img class="w-7" loading="lazy" src="{{ icon.url }}">
+                </picture>
               </a>
             {% endfor %}
           </div>

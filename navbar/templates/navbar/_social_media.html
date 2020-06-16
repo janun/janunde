@@ -3,10 +3,14 @@
 {% with social_medias=settings.core.SocialMediaSettings.social_medias.all  %}
   <div class="hidden lg:flex items-center justify-center justify-start ml-4 xl:ml-12">
     {% for social_media in social_medias|slice:3 %}
-    {% image social_media.icon_color original as icon %}
     <a class="mx-2 flex-shrink-0 transition-transform duration-200 transform hover:scale-125"
       href="{{ social_media.link }}" target="_blank" title="{{ social_media.tooltip }}">
-      <img class="w-6 xl:w-7" loading="lazy" src="{{ icon.url }}">
+      <picture>
+        {% image social_media.icon_color original format-webp as icon_webp %}
+        <source srcset="{{ icon_webp.url }}" type="image/webp">
+        {% image social_media.icon_color original as icon %}
+        <img class="w-6 xl:w-7" loading="lazy" src="{{ icon.url }}">
+      </picture>
     </a>
     {% endfor %}
   </div>
