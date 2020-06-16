@@ -270,6 +270,26 @@ class EventIndexPage(BasePage):
         context["active_type"] = typ
         return context
 
+    @property
+    def last_change(self) -> datetime.datetime:
+        try:
+            last_child = EventPage.objects.live().latest("last_published_at")
+        except EventPage.DoesNotExist:
+            last_child = None
+        if last_child and last_child.last_published_at > self.last_published_at:
+            return last_child.last_published_at
+        return self.last_published_at
+
+    def get_sitemap_urls(self, request=None) -> list:
+        """https://docs.wagtail.io/en/v2.9/reference/contrib/sitemaps.html"""
+        return [
+            {
+                "location": self.get_full_url(request),
+                "lastmod": self.last_change,
+                "changefreq": "daily",
+            }
+        ]
+
     def get_description(self):
         if self.search_description:
             return self.search_description
