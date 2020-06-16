@@ -13,8 +13,12 @@
     <div class="flex flex-wrap md:flex-no-wrap justify-around items-stretch -mx-4 lg:-mx-10">
       {% for statement in self.statements %}
         <div class="flex mx-4 lg:mx-10 my-6 js-animate-in" data-animation="zoomIn">
-          {% image statement.image width-512 format-jpeg as image_jpeg %}
-          <img {{ image_jpeg.attrs }} loading="lazy" class="w-24 h-24 xl:w-32 xl:h-32 rounded-full object-cover">
+          <picture>
+            {% image statement.image width-512 format-webp as image_webp %}
+            <source srcset="{{ image_webp.url }}" type="image/webp">
+            {% image statement.image width-512 format-jpeg as image_jpeg %}
+            <img {{ image_jpeg.attrs }} loading="lazy" class="w-24 h-24 xl:w-32 xl:h-32 rounded-full object-cover">
+          </picture>
           <div class="ml-4 lg:ml-8 rich-text-gray-800 text-sm md:text-base -mt-4">
             {{ statement.text|richtext }}
             <div class="text-gray-600 text-xs md:text-sm">{{ statement.author }}</div>
