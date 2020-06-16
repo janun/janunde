@@ -77,16 +77,29 @@ CACHES = {
 }
 
 
-INSTALLED_APPS += [
-    "wagtail.contrib.postgres_search",
-]
-
-WAGTAILSEARCH_BACKENDS = {
-    "default": {
-        "BACKEND": "wagtail.contrib.postgres_search.backend",
-        "SEARCH_CONFIG": "german",
-    },
-}
+if os.getenv("SEARCHBOX_URL"):
+    WAGTAILSEARCH_BACKENDS = {
+        "default": {
+            "BACKEND": "wagtail.search.backends.elasticsearch7",
+            "URLS": [os.getenv("SEARCHBOX_URL")],
+            "INDEX": "wagtail",
+            "TIMEOUT": 5,
+            "OPTIONS": {},
+            "INDEX_SETTINGS": {
+                "settings": {"analysis": {"analyzer": {"default": {"type": "german"}}}}
+            },
+        },
+    }
+else:
+    INSTALLED_APPS += [
+        "wagtail.contrib.postgres_search",
+    ]
+    WAGTAILSEARCH_BACKENDS = {
+        "default": {
+            "BACKEND": "wagtail.contrib.postgres_search.backend",
+            "SEARCH_CONFIG": "german",
+        },
+    }
 
 
 LOGGING = {
