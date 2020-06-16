@@ -17,6 +17,7 @@ boto3 = "*"
 whitenoise = "*"
 django-toolbelt = "*"
 phonenumberslite = "*"
+elasticsearch = ">=7.0.0,<8.0.0"
 
 [dev-packages]
 django-debug-toolbar = "*"
@@ -32,4 +33,4 @@ black = "==19.10b0"
 python_version = "3.8"
 
 [pipenv]
-allow_prereleases = true
+allow_prereleases = false
