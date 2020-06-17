@@ -1,5 +1,5 @@
 {% extends "core/__base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 {% load cache stuff %}
 
 {% block body_class %}template-homepage{% endblock %}
@@ -7,10 +7,16 @@
 {% block title %}JANUN e.V.{% endblock %}
 
 
-{% block meta %}
-{{ block.super }}
+{% block content %}
+  {% cache 600 self.content self.latest_revision_created_at|date:"c" request.preview_timestamp %}
+    {% include_block self.content %}
+  {% endcache %}
+  {% banners %}
+{% endblock %}
 
-{% comment %} inform google of site search {% endcomment %}
+
+{% block extra_js %}
+{% comment %} site search schema {% endcomment %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -24,14 +30,30 @@
   }
 }
 </script>
-{% endblock %}
 
-{% block content %}
-
-{% cache 600 self.content self.latest_revision_created_at|date:"c" request.preview_timestamp %}
-{% include_block self.content %}
-{% endcache %}
-
-{% banners %}
-
+{% comment %} Organization schema {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "JANUN e.V.",
+  "alternateName": "Jugendumweltnetzwerk Niedersachsen",
+  "url": "https://www.janun.de/",
+  {% image self.search_image original as logo %}
+  "logo": "{{ self.get_site.root_url }}{{ logo.url }}",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+495113940415",
+    "areaServed": "DE",
+    "availableLanguage": "German"
+  },
+  {% if settings.core.SocialMediaSettings.social_medias.all %}
+    "sameAs": [
+      {% for social_media in settings.core.SocialMediaSettings.social_medias.all %}
+        "{{ social_media.link }}" {% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ]
+  {% endif %}
+}
+</script>
 {% endblock %}
