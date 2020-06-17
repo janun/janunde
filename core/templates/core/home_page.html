@@ -4,15 +4,18 @@
 
 {% block body_class %}template-homepage{% endblock %}
 
-{% block title %}JANUN ist das Jugendumweltnetzwerk Niedersachsen{% endblock %}
+{% block title %}JANUN e.V.{% endblock %}
 
 
 {% block meta %}
+{{ block.super }}
+
 {% comment %} inform google of site search {% endcomment %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "name": "JANUN e.V.",
   "url": "{{ self.get_site.root_url }}",
   "potentialAction": {
     "@type": "SearchAction",
