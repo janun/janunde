@@ -1,15 +1,26 @@
 {% load wagtailcore_tags stuff %}
 
-<nav aria-label="Breadcrumb" class="my-8 text-xs sm:text-sm text-gray-600">
-  <ol>
-    <li class="inline" aria-current="page">
-      <a class="hover:underline" href="/">janun.de</a> /
+<nav aria-label="Breadcrumbs" class="my-8 text-xs sm:text-sm text-gray-600">
+  {% comment %} desktop {% endcomment %}
+  <ol class="hidden md:inline">
+    <li class="inline-flex items-center" aria-current="page">
+      <a class="hover:underline" href="/">Startseite</a>
+      <svg class="h-3 w-3 mb-1 mx-1 fill-current"  viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>
     </li>
     {% for page in self.get_ancestors|slice:"2:" %}
-      <li class="inline"><a class="hover:underline" href="{% pageurl page %}">{{ page.title }}</a> / </li>
+      <li class="inline-flex items-center">
+        <a class="hover:underline" href="{% pageurl page %}">{{ page.title }}</a>
+        <svg class="h-3 w-3 mb-1 mx-1 fill-current"  viewBox="0 0 20 20"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>
+      </li>
     {% endfor %}
-    <li class="inline font-bold" aria-current="page">
-      <a class="hover:underline" href="{% pageurl self %}">{{ self.title }}</a>
+    <li class="inline-flex items-center font-bold" aria-current="page">
+      <span>{{ self.title }}</span>
     </li>
   </ol>
+
+  {% comment %} mobile {% endcomment %}
+  <a class="md:hidden inline-flex items-center" href="{% pageurl page.get_parent %}">
+    <svg class="h-3 w-3 mr-2 fill-current" viewBox="0 0 20 20"><polygon points="3.828 9 9.899 2.929 8.485 1.515 0 10 .707 10.707 8.485 18.485 9.899 17.071 3.828 11 20 11 20 9 3.828 9"/></svg>
+    <span>{{ page.get_parent.title }}</span>
+  </a>
 </nav>
