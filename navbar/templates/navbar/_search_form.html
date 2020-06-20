@@ -1,0 +1,19 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% comment %} search form {% endcomment %}
+<form class="hidden lg:flex ml-auto relative items-center" action="{% url 'search' %}" method="GET">
+  <div
+    class="inline-flex items-center relative w-full text-gray-500 focus-within:text-green-500 hover:text-gray-700">
+    <input autocomplete="off" type="text" name="q"
+      class="pt-px border outline-none border-current text-current focus:text-gray-700 rounded-full pl-5 pr-9 xl:pr-10 bg-white h-10 w-24 lg:w-32 transition-all duration-100 xl:focus:w-48 focus:border-green-500 placeholder-current"
+      placeholder="Suche">
+    <div class="absolute right-0 inset-y-0 flex items-center">
+      <button type="submit" class="h-full pr-4 pl-2">
+        <svg class="transition-all duration-100 fill-current w-4 h-4" viewBox="0 0 20 20">
+          <path
+            d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</form>

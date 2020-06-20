@@ -202,14 +202,6 @@ class StandardPage(BasePage):
     simple "just a page"
     """
 
-    title_color = models.CharField(
-        "Titelfarbe",
-        choices=COLOR_CHOICES,
-        max_length=255,
-        default="green",
-        help_text="Der Titel wird in dieser Farbe angezeigt.",
-    )
-
     text_direction = models.CharField(
         "Textrichtung",
         choices=TEXT_DIRECTION_CHOICES,
@@ -238,13 +230,7 @@ class StandardPage(BasePage):
     ]
 
     content_panels = [
-        MultiFieldPanel(
-            [
-                FieldPanel("title", classname="title"),
-                FieldPanel("title_color", classname=""),
-            ],
-            heading="Titel",
-        ),
+        FieldPanel("title"),
         FieldPanel("subtitle"),
         ImageChooserPanel("feed_image"),
         StreamFieldPanel("body"),

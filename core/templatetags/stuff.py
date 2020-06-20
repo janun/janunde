@@ -1,10 +1,12 @@
 import urllib
 from urllib.parse import unquote_plus
+import json
 
 from django import template
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 from django.http import HttpRequest
+from django.core.serializers.json import DjangoJSONEncoder
 
 from wagtail.embeds import embeds
 from wagtail.embeds.exceptions import EmbedException
@@ -17,6 +19,7 @@ register = template.Library()
 
 @register.filter()
 def prettyurl(value):
+    """return only the domain part of an url"""
     return urllib.parse.urlparse(value).netloc
 
 
@@ -33,9 +36,9 @@ def get_embed(url, max_width=None):
         return ""
 
 
-# Banner snippets
 @register.inclusion_tag("core/banners.html", takes_context=True)
 def banners(context):
+    """Render banners"""
     return {
         "banners": Banner.objects.all(),
         "request": context["request"],
@@ -101,3 +104,13 @@ def search_results_404(context, max_results=5):
     search_query = unquote_plus(url_path).replace("/", " ")
     search_results = Page.objects.live().public().search(search_query)[0:max_results]
     return search_results
+
+
+def render_json_ld(context, structured_data: dict) -> str:
+    """Render JSON-LD from dict"""
+    structured_data["@context"] = "https://schema.org"
+    dumped = json.dumps(
+        structured_data, cls=DjangoJSONEncoder, ensure_ascii=False, sort_keys=True
+    )
+    text = f"""<script type="application/ld+json">{dumped}</script>"""
+    return mark_safe(text)

@@ -19,12 +19,12 @@
 }
 
 .rich-text ul li {
-  @apply ml-4;
+  @apply ml-4 my-1;
 }
 
 .rich-text ul li:before {
-  content: "●";
-  @apply relative -ml-4 mr-2 text-green-500;
+  content: "";
+  @apply inline-block -ml-4 mr-2 rounded-full h-2 w-2 bg-green-500;
 }
 
 .rich-text h2 {

@@ -12,9 +12,14 @@
       {% if settings.core.SocialMediaSettings.social_medias.all %}
         <div class="flex items-center justify-center lg:justify-start my-8 -mx-2">
           {% for social_media in settings.core.SocialMediaSettings.social_medias.all %}
-            {% image social_media.icon_gray original as icon %}
             <a class="mx-2" href="{{ social_media.link }}" title="{{ social_media.tooltip }}">
-              <img class="w-5" src="{{ icon.url }}"></a>
+              <picture>
+                {% image social_media.icon_gray original format-webp as icon_webp %}
+                <source srcset="{{ icon_webp.url }}" type="image/webp">
+                {% image social_media.icon_gray original as icon %}
+                <img class="w-5" src="{{ icon.url }}">
+              </picture>
+            </a>
           {% endfor %}
         </div>
       {% endif %}

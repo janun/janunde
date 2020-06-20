@@ -1,0 +1,41 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags stuff %}
+
+{% block body_class %}{% endblock %}
+
+{% block content %}
+<main class="max-w-3xl mx-auto px-4">
+
+  {% include "core/_breadcrumbs.html" %}
+
+  <header class="mb-10 md:mb-16">
+    <h1 class="leading-tighter text-green-500 hyphens-auto text-3xl md:text-4xl font-bold mt-0 mb-2">
+      {% if self.heading %}
+        {% highlight self.heading self.highlight_in_heading "text-purple" %}
+      {% else %}
+        {{ self.title }}
+      {% endif %}
+    </h1>
+    {% if self.subtitle %}
+      <h2 class="leading-tight md:leading-snug text-gray-700 text-lg md:text-xl my-0">{{ self.subtitle }}</h2>
+    {% endif %}
+  </header>
+
+  <div class="max-w-3xl mx-auto userim">
+    {% if jobs %}
+      {% include_block self.before_jobs %}
+      <div>
+        {% for job in jobs %}
+          {% include "./_job.html" %}
+        {% endfor %}
+      </div>
+      {% include_block self.after_jobs %}
+    {% else %}
+      {% include_block self.empty %}
+    {% endif %}
+
+
+  </div>
+   
+</main>
+{% endblock %}

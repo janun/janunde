@@ -10,6 +10,11 @@
 .hyphens-auto {
 	hyphens: auto;
 }
+@supports not (hyphens: auto) {
+	.hyphens-auto {
+		@apply break-words;
+	}
+}
 
 html {
 	scroll-behavior: smooth;
@@ -23,5 +28,13 @@ html {
 @screen lg {
 	.userim .-userim-mx-20 {
 		@apply -mx-20;
+	}
+}
+
+
+@screen md {
+	.md\:animated {
+			animation-duration: 1s;
+			animation-fill-mode: both;
 	}
 }

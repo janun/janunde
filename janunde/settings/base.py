@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     "events",
     "contact",
     "about",
+    "navbar",
+    "jobs",
     # 'debug_toolbar',
     # 'template_profiler_panel',
     "form_utils",
@@ -34,6 +36,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.settings",
     "wagtail.contrib.search_promotions",
+    "wagtail.contrib.postgres_search",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -204,3 +207,10 @@ LOGIN_REDIRECT_URL = "wagtailadmin_home"
 
 PASSWORD_REQUIRED_TEMPLATE = "password_required.html"
 
+
+WAGTAILSEARCH_BACKENDS = {
+    "default": {
+        "BACKEND": "wagtail.contrib.postgres_search.backend",
+        "SEARCH_CONFIG": "german",
+    },
+}

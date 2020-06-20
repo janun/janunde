@@ -55,6 +55,10 @@ module.exports = {
       maxWidth: {
         "7xl": "80rem"
       },
+      maxHeight: {
+        "0": "0",
+        "1000": "1000px"
+      },
       spacing: {
         "1_5": "0.375rem",
         "7": "1.75rem",
@@ -90,7 +94,7 @@ module.exports = {
     translate: ["responsive", "hover", "focus", "active", "group-hover"],
     rotate: ["responsive", "hover", "focus", "active", "group-hover"],
     textDecoration: ["responsive", "hover", "focus", "active", "group-hover"],
-    display: ["responsive", "hover", "focus", "active", "group-hover"],
+    display: ["responsive", "hover", "focus", "active", "group-hover", "group-focus"],
   },
   corePlugins: {
     container: false,

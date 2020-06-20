@@ -8,7 +8,7 @@
 
       {% if self.background %}
       <div class="flex justify-center mt-5 lg:mt-0">
-        <picture id="headerBackground" class="lg:absolute lg:top-0 lg:left-0 lg:-mt-20 xl:-mt-24 -ml-20 lg:ml-0 xxl:-ml-8 js-animate-in" data-animation="fadeInRight">
+        <picture id="headerBackground" class="lg:absolute lg:top-0 lg:left-0 lg:-mt-20 xl:-mt-24 -ml-20 lg:ml-0 xxl:-ml-8 js-animate-in md:opacity-0" data-animation="fadeInRight">
           {% image self.background format-webp as background_webp %}
           <source srcset="{{ background_webp.url }}" media="(min-width: 600px)" type="image/webp">
           {% image self.background format-webp height-800 as background_webp_mobile %}
@@ -24,7 +24,7 @@
       </div>
       {% endif %}
 
-      <div class="relative pt-4 -mt-32 bg-gray-100 lg:bg-transparent lg:absolute lg:left-0 lg:mt-32 xl:mt-40 xxl:mt-48 px-4 js-animate-in" data-animation="fadeInLeft">
+      <div class="relative pt-4 -mt-32 bg-gray-100 lg:bg-transparent lg:absolute lg:left-0 lg:mt-32 xl:mt-40 xxl:mt-48 px-4 js-animate-in md:opacity-0" data-animation="fadeInLeft">
         {% comment %} heading {% endcomment %}
         {% if self.heading %}
           <h1 class="mx-auto lg:mx-none max-w-xs lg:max-w-xl text-green-500 text-center lg:text-left text-4xl lg:text-5xl xxl:text-6xl lg:leading-none font-bold">
@@ -67,9 +67,13 @@
         {% if settings.core.SocialMediaSettings.social_medias.all %}
           <div class="md:hidden flex items-center justify-center lg:justify-start my-8 lg:mt-10 -mx-3">
             {% for social_media in settings.core.SocialMediaSettings.social_medias.all %}
-              {% image social_media.icon_color original as icon %}
               <a class="mx-3 md:transition-transform md:duration-200 md:transform md:hover:scale-125" href="{{ social_media.link }}" target="_blank" title="{{ social_media.tooltip }}">
-                <img class="w-7" loading="lazy" src="{{ icon.url }}">
+                <picture>
+                  {% image social_media.icon_color original format-webp as icon_webp %}
+                  <source srcset="{{ icon_webp.url }}" type="image/webp">
+                  {% image social_media.icon_color original as icon %}
+                  <img class="w-7" loading="lazy" src="{{ icon.url }}">
+                </picture>
               </a>
             {% endfor %}
           </div>
