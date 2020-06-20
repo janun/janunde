@@ -90,16 +90,6 @@ if os.getenv("SEARCHBOX_URL"):
             },
         },
     }
-else:
-    INSTALLED_APPS += [
-        "wagtail.contrib.postgres_search",
-    ]
-    WAGTAILSEARCH_BACKENDS = {
-        "default": {
-            "BACKEND": "wagtail.contrib.postgres_search.backend",
-            "SEARCH_CONFIG": "german",
-        },
-    }
 
 
 LOGGING = {
