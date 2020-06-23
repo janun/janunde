@@ -1,0 +1,100 @@
+{% extends "wagtailadmin/reports/base_report.html" %}
+{% load wagtailadmin_tags i18n %}
+
+
+
+{% block results %}
+<div class="panel summary">
+  <section>
+    <h2 style="margin-left: 20px">Aufrufe</h2>
+    <ul class="stats">
+      <li>
+        <span>{{ hits_today }}</span> heute
+      </li>
+      <li>
+        <span>{{ hits_this_week }}</span> diese Woche
+      </li>
+      <li>
+        <span>{{ hits_this_month }}</span> diesen Monat
+      </li>
+    </ul>
+  </section>
+</div>
+
+
+<div class="panel">
+  <section>
+    <h2>Top Seiten</h2>
+    <p>Welche Seiten haben am meisten Aufrufe?</p>
+    <table class="listing">
+      <thead>
+        <td>Seite</td>
+        <td>Aufrufe</td>
+      </thead>
+      <tbody>
+        {% for path in top_paths %}
+          <tr>
+            <td>{{ path.path }}</td>
+            <td>{{ path.path__count }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+
+
+<div class="panel">
+  <section>
+    <h2>Top Fehler:</h2>
+    <p>Auf welchen Seiten mit Fehler passieren die meisten Aufrufe?</p>
+    <table class="listing">
+      <thead>
+        <td>Seite</td>
+        <td>Aufrufe</td>
+        <td>Fehler</td>
+      </thead>
+      <tbody>
+        {% for path in top_error_paths %}
+          <tr>
+            <td>{{ path.path }}</td>
+            <td>{{ path.path__count }}</td>
+            <td>{{ path.response }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+
+
+<div class="panel">
+  <section>
+    <h2>Top Herkünfte:</h2>
+    <p>Auf welchen Seiten haben Besucher einen Link geklickt?</p>
+    <table class="listing">
+      <thead>
+        <td>Herkunft</td>
+        <td>Aufrufe</td>
+      </thead>
+      <tbody>
+        {% for path in top_referers %}
+          <tr>
+            <td>{{ path.referer }}</td>
+            <td>{{ path.referer__count }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+
+{% endblock %}
+
+
+
+{% block extra_css %}
+  {{ block.super }}
+
+  <link rel="stylesheet" href="{% versioned_static 'wagtailadmin/css/layouts/home.css' %}" type="text/css" />
+{% endblock %}

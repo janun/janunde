@@ -28,8 +28,10 @@ INSTALLED_APPS = [
     "about",
     "navbar",
     "jobs",
+    "statistic",
     # 'debug_toolbar',
     # 'template_profiler_panel',
+    "request",
     "form_utils",
     "softhyphen",
     "wagtail.contrib.table_block",
@@ -68,6 +70,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "request.middleware.RequestMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "wagtail.core.middleware.SiteMiddleware",
@@ -205,3 +208,16 @@ LOGIN_REDIRECT_URL = "wagtailadmin_home"
 
 
 PASSWORD_REQUIRED_TEMPLATE = "password_required.html"
+
+
+# https://django-request.readthedocs.io/en/latest/settings.html
+REQUEST_IGNORE_PATHS = (r"^admin/",)
+
+REQUEST_IGNORE_USER_AGENTS = (
+    r"^$",
+    r"bot",
+    r"spider",
+    r"facebookexternalhit",
+)
+
+REQUEST_VALID_METHOD_NAMES = ("get", "post")
