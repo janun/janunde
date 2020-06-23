@@ -20,6 +20,7 @@ phonenumberslite = "*"
 elasticsearch = ">=7.0.0,<8.0.0"
 django-request = "*"
 django-filter = "*"
+altair = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"

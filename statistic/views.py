@@ -1,7 +1,10 @@
 from django.db.models import Count
 from django.views.generic import TemplateView
+from django.http import HttpResponse
 
 import django_filters
+import pandas
+import altair
 from django_filters.views import FilterView
 
 from request.models import Request
@@ -56,3 +59,32 @@ class BrowseRequestsView(FilterView):
     context_object_name = "requests"
     paginate_by = 200
     filterset_class = RequestFilter
+
+
+def plot(request):
+    data = Request.objects.all()
+    df = pandas.DataFrame.from_records(data.values("time"))
+    chart = (
+        altair.Chart(df)
+        .mark_area(
+            line={"color": "darkgreen"},
+            color=altair.Gradient(
+                gradient="linear",
+                stops=[
+                    altair.GradientStop(color="white", offset=0),
+                    altair.GradientStop(color="darkgreen", offset=1),
+                ],
+                x1=1,
+                x2=1,
+                y1=1,
+                y2=0,
+            ),
+        )
+        .encode(
+            altair.X("hours(time)", title="Zeitpunkt"),
+            y=altair.Y("count()", title="Aufrufe"),
+        )
+        .properties(width=1000)
+    )
+    return HttpResponse(chart.to_json(), content_type="application/json")
+
