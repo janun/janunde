@@ -18,6 +18,8 @@ whitenoise = "*"
 django-toolbelt = "*"
 phonenumberslite = "*"
 elasticsearch = ">=7.0.0,<8.0.0"
+django-request = "*"
+django-filter = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"

@@ -1,0 +1,51 @@
+{% extends "wagtailadmin/reports/base_report.html" %}
+
+
+{% block results %}
+<section>
+  {{ hits_today }} Zugriffe heute
+</section>
+
+
+
+<table class="listing">
+  <thead>
+    <td>Zeitpunkt</td>
+    <td>Seite</td>
+    <td>Status</td>
+    <td>Referer</td>
+    <td>Browser</td>
+    <td>Keywords</td>
+  </thead>
+  <tbody>
+    {% for request in requests %}
+      <tr>
+        <td>{{ request.time }}</td>
+        <td>{{ request.path }}</td>
+        <td>{{ request.response }} {{ request.get_response_display }}</td>
+        <td>{{ request.referer|default:"-" }}</td>
+        <td>{{ request.browser|default:"-" }}</td>
+        <td>{{ request.keywords|default:"-" }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<nav class="pagination" aria-label="Seitennummerierung">
+  <p>
+    Seite {{ page_obj.number }} von {{ page_obj.paginator.num_pages }}
+  </p>
+  <ul>
+    {% if requests.has_previous %}
+      <li class="prev">  
+        <a href="?page={{ requests.previous_page_number }}" class="icon icon-arrow-left ">Vorherige</a>
+      </li>
+    {% endif %}
+    {% if requests.has_next %}
+    <li class="next">       
+      <a href="?page={{ requests.next_page_number }}" class="icon icon-arrow-right-after ">Nächste</a>   
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endblock %}
