@@ -1,0 +1,53 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n wagtailadmin_tags %}
+
+{% block titletag %}Statistik{% endblock %}
+
+{% block content %}
+    <header role="banner" class=" merged">
+        <div class="row nice-padding">
+            <div class="left">
+                <div class="col header-title">
+                    <h1 class="icon icon-table">Statistik</h1>
+                </div>
+            </div>
+            <div class="right report__actions">
+                {% block actions %}
+                {% endblock %}
+            </div>
+        </div>
+        <div class="row nice-padding">
+            {% block tabs %}{% endblock %}
+        </div>
+    </header>
+
+    <div class="nice-padding">
+        <div class="">
+            {% block results %}
+            {% endblock %}
+        </div>
+        {% if filters %}
+            <div class="report__filters">
+                <h2>{% trans 'Filter' %}</h2>
+                <form method="get">
+                    {% for filter in filters.form %}
+                        {{ filter.label_tag }}
+                        {{ filter }}
+                        {{ filter.errors }}
+                    {% endfor %}
+                    <button class="button button-longrunning" type="submit">{% trans 'Apply filters' %}</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% versioned_static 'wagtailadmin/css/layouts/home.css' %}" type="text/css" />
+
+    {{ filters.form.media.css }}
+{% endblock %}
+
+{% block extra_js %}
+    {{ filters.form.media.js }}
+{% endblock %}

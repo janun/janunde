@@ -1,21 +1,28 @@
-{% extends "wagtailadmin/reports/base_report.html" %}
-
+{% extends "statistic/base.html" %}
+{% block tabs %}
+  <ul style="padding: 0; display:flex; list-style:none ">
+    <li style="margin:5px"><a href="{% url 'statistic' %}">Übersicht</a></li>
+    <li style="margin:5px; font-weight:bold"><a href="{% url 'statistic_browse' %}">Durchsuchen</a></li>
+  </ul>
+{% endblock %}
 
 {% block results %}
-<section>
-  {{ hits_today }} Zugriffe heute
-</section>
 
-
+<div class="panel">
+    <form style="display: flex; align-items:baseline; justify-content:space-between" method="get">
+        {{ filter.form.as_p }}
+        <a href="{% url 'statistic_browse' %}" class="button text-replace icon icon-cross">Reset</a>
+        <button type="submit" class="button">Filter</button>
+    </form>
+</div>
 
 <table class="listing">
   <thead>
     <td>Zeitpunkt</td>
     <td>Seite</td>
     <td>Status</td>
-    <td>Referer</td>
+    <td>Herkunft</td>
     <td>Browser</td>
-    <td>Keywords</td>
   </thead>
   <tbody>
     {% for request in requests %}
@@ -25,7 +32,6 @@
         <td>{{ request.response }} {{ request.get_response_display }}</td>
         <td>{{ request.referer|default:"-" }}</td>
         <td>{{ request.browser|default:"-" }}</td>
-        <td>{{ request.keywords|default:"-" }}</td>
       </tr>
     {% endfor %}
   </tbody>
