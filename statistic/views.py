@@ -56,7 +56,7 @@ class BrowseRequestsView(FilterView):
     template_name = "statistic/browse_requests.html"
     title = "Statistik"
     header_icon = "table"
-    queryset = Request.objects.today()
+    queryset = Request.objects.all()
     context_object_name = "requests"
     paginate_by = 200
     filterset_class = RequestFilter
