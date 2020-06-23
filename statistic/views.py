@@ -36,7 +36,7 @@ class StatisticView(TemplateView):
             .order_by("-path__count")[:10]
         )
         context["top_referers"] = (
-            Request.objects.unique_visits()
+            Request.objects.exclude(referer__startswith=self.request.site.root_url)
             .exclude(referer="")
             .values("referer")
             .annotate(Count("referer"))
