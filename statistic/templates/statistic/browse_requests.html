@@ -16,6 +16,10 @@
     </form>
 </div>
 
+<div class="panel">
+    <span style="font-weight:bold">{{ requests.count }} Aufrufe</span> für die Filterkriterien gefunden.
+</div>
+
 <table class="listing">
   <thead>
     <td>Zeitpunkt</td>
@@ -23,6 +27,7 @@
     <td>Status</td>
     <td>Herkunft</td>
     <td>Browser</td>
+    <td>Eingeloggt</td>
   </thead>
   <tbody>
     {% for request in requests %}
@@ -32,6 +37,7 @@
         <td>{{ request.response }} {{ request.get_response_display }}</td>
         <td>{{ request.referer|default:"-" }}</td>
         <td>{{ request.browser|default:"-" }}</td>
+        <td>{{ request.user|default:"-" }}</td>
       </tr>
     {% endfor %}
   </tbody>
