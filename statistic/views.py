@@ -1,6 +1,7 @@
-from django.db.models import Count
+from django.db.models import Count, Sum
 from django.views.generic import TemplateView
 from django.http import HttpResponse
+from django.db.models.functions import TruncHour
 
 import django_filters
 import pandas
@@ -62,8 +63,14 @@ class BrowseRequestsView(FilterView):
 
 
 def plot(request):
-    data = Request.objects.all()
-    df = pandas.DataFrame.from_records(data.values("time"))
+    data = (
+        Request.objects.annotate(hour=TruncHour("time"))
+        .values("hour")
+        .annotate(count=Count("id"))
+        .order_by()
+    )
+    df = pandas.DataFrame.from_records(data)
+
     chart = (
         altair.Chart(df)
         .mark_area(
@@ -81,10 +88,9 @@ def plot(request):
             ),
         )
         .encode(
-            altair.X("hours(time)", title="Zeitpunkt"),
-            y=altair.Y("count()", title="Aufrufe"),
+            x=altair.X("hour:T", title="Zeitpunkt"),
+            y=altair.Y("count:Q", title="Aufrufe"),
         )
         .properties(width=1000)
     )
     return HttpResponse(chart.to_json(), content_type="application/json")
-
