@@ -4,8 +4,6 @@ from django.views.generic import TemplateView
 import django_filters
 from django_filters.views import FilterView
 
-from wagtail.admin.views.reports import ReportView
-
 from request.models import Request
 
 
@@ -16,9 +14,13 @@ class StatisticView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["hits_today"] = Request.objects.today().count()
-        context["hits_this_week"] = Request.objects.this_week().count()
-        context["hits_this_month"] = Request.objects.this_month().count()
+        unique_visits = Request.objects.exclude(
+            referer__startswith=self.request.site.root_url
+        )
+
+        context["visits_today"] = unique_visits.today().count()
+        context["visits_this_week"] = unique_visits.this_week().count()
+        context["visits_this_month"] = unique_visits.this_month().count()
         context["top_paths"] = (
             Request.objects.filter(response__lt=400)
             .values("path")
@@ -32,8 +34,7 @@ class StatisticView(TemplateView):
             .order_by("-path__count")[:10]
         )
         context["top_referers"] = (
-            Request.objects.exclude(referer__startswith=self.request.site.root_url)
-            .exclude(referer="")
+            unique_visits.exclude(referer="")
             .values("referer")
             .annotate(Count("referer"))
             .order_by("-referer__count")[:10]

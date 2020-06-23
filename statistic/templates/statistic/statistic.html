@@ -11,16 +11,16 @@
 {% block results %}
 <div class="panel summary">
   <section>
-    <h2 style="margin-left: 20px">Aufrufe</h2>
+    <h2 style="margin-left: 20px">Besuche</h2>
     <ul class="stats">
       <li>
-        <span>{{ hits_today }}</span> heute
+        <span>{{ visits_today }}</span> heute
       </li>
       <li>
-        <span>{{ hits_this_week }}</span> diese Woche
+        <span>{{ visits_this_week }}</span> diese Woche
       </li>
       <li>
-        <span>{{ hits_this_month }}</span> diesen Monat
+        <span>{{ visits_this_month }}</span> diesen Monat
       </li>
     </ul>
   </section>
@@ -49,6 +49,29 @@
 </div>
 
 
+
+<div class="panel">
+  <section>
+    <h2>Top externe Herkünfte:</h2>
+    <p>Auf welchen Seiten haben Besucher einen Link geklickt?</p>
+    <table class="listing">
+      <thead>
+        <td>Herkunft</td>
+        <td>Aufrufe</td>
+      </thead>
+      <tbody>
+        {% for path in top_referers %}
+          <tr>
+            <td><a href="{% url 'statistic_browse' %}?referer={{ path.referer }}">{{ path.referer }}</a></td>
+            <td>{{ path.referer__count }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+
+
 <div class="panel">
   <section>
     <h2>Top Fehler:</h2>
@@ -65,28 +88,6 @@
             <td><a href="{% url 'statistic_browse' %}?path={{ path.path }}">{{ path.path }}</a></td>
             <td>{{ path.path__count }}</td>
             <td>{{ path.response }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </section>
-</div>
-
-
-<div class="panel">
-  <section>
-    <h2>Top externe Herkünfte:</h2>
-    <p>Auf welchen Seiten haben Besucher einen Link geklickt?</p>
-    <table class="listing">
-      <thead>
-        <td>Herkunft</td>
-        <td>Aufrufe</td>
-      </thead>
-      <tbody>
-        {% for path in top_referers %}
-          <tr>
-            <td><a href="{% url 'statistic_browse' %}?referer={{ path.referer }}">{{ path.referer }}</a></td>
-            <td>{{ path.referer__count }}</td>
           </tr>
         {% endfor %}
       </tbody>
