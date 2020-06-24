@@ -34,10 +34,10 @@
       {% for request in requests %}
         <tr>
           <td>{{ request.time }}</td>
-          <td><span title="{{ request.path }}">{{ request.path|truncatechars:100 }}</span></td>
+          <td><a title="Seite öffnen" href="{{ request.path }}">{{ request.path|truncatechars:50 }}</a> <a href="{% url 'statistic_browse' %}?path={{ request.path }}" title="Nach Seite filtern" class="icon icon-search"></a></td>
           <td>{{ request.response }} {{ request.get_response_display }}</td>
-          <td><span title="{{ request.referer }}">{{ request.referer|truncatechars:100|default:"-" }}</span></td>
-          <td>{{ request.browser|default:"-" }}</td>
+          <td><a title="Referer öffnen" href="{{ request.referer }}">{{ request.referer|truncatechars:50|default:"-" }}</a> {% if request.referer %}<a href="{% url 'statistic_browse' %}?referer={{ request.referer }}" title="Nach Referer filtern" class="icon icon-search"></a>{% endif %}</td>
+          <td><span title="{{ request.user_agent }}">{{ request.browser|default:"-" }}</span></td>
           <td>{{ request.user|default:"-" }}</td>
         </tr>
       {% endfor %}

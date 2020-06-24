@@ -80,7 +80,7 @@
       <tbody>
         {% for path in top_referers %}
           <tr>
-            <td><a href="{% url 'statistic_browse' %}?referer={{ path.referer }}">{{ path.referer }}</a></td>
+            <td><a href="{% url 'statistic_browse' %}?referer={{ path.referer }}">{{ path.referer|truncatechars:50 }}</a></td>
             <td>{{ path.referer__count }}</td>
           </tr>
         {% endfor %}
