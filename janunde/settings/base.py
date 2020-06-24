@@ -216,9 +216,18 @@ REQUEST_IGNORE_PATHS = (r"^admin/",)
 
 REQUEST_IGNORE_USER_AGENTS = (
     r"^$",
-    r"bot",
-    r"spider",
-    r"facebookexternalhit",
+    r"(?i)bot",
+    r"(?i)spider",
+    r"(?i)spyder",
+    r"(?i)buck",
+    r"(?i)facebookexternalhit",
+    r"(?i)whatsapp",
+    r"(?i)parser",
+    r"(?i)http.*client",
+    r"(?i)python",
+    r"(?i)cortex",
+    r"(?i)adreview",
+    r"(?i)wordpress",
 )
 
 REQUEST_VALID_METHOD_NAMES = ("get", "post")
