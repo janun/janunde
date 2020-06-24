@@ -17,6 +17,25 @@
 </div>
 
 <div class="panel">
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.9.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.2.1"></script>
+  <script type="application/javascript">
+      vegaEmbed('#plot', '{% url 'statistic_plot' %}?{{ request.GET.urlencode }}');
+  </script>
+
+  <div style="width: 100%" id="plot"></div>
+
+  <style>
+  #plot canvas {
+    max-width: 100%!important;
+    height: auto!important;
+  }
+  </style>
+</div>
+
+
+<div class="panel">
     <span style="font-weight:bold">{{ paginator.count }} Aufrufe</span> für die Filterkriterien gefunden.
 </div>
 

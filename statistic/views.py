@@ -67,8 +67,9 @@ class BrowseRequestsView(FilterView):
 
 
 def plot(request):
+    filtered = RequestFilter(request.GET, queryset=Request.objects.all())
     data = (
-        Request.objects.annotate(hour=TruncHour("time"))
+        filtered.qs.annotate(hour=TruncHour("time"))
         .values("hour")
         .annotate(count=Count("id"))
         .order_by()
@@ -93,7 +94,7 @@ def plot(request):
         )
         .encode(
             x=altair.X("hour:T", title="Zeitpunkt"),
-            y=altair.Y("count:Q", title="Aufrufe"),
+            y=altair.Y("count:Q", title="Aufrufe pro Stunde"),
         )
         .properties(width=1000)
     )
