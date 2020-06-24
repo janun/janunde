@@ -20,28 +20,30 @@
     <span style="font-weight:bold">{{ paginator.count }} Aufrufe</span> für die Filterkriterien gefunden.
 </div>
 
-<table class="listing">
-  <thead>
-    <td>Zeitpunkt</td>
-    <td>Seite</td>
-    <td>Status</td>
-    <td>Herkunft</td>
-    <td>Browser</td>
-    <td>Eingeloggt</td>
-  </thead>
-  <tbody>
-    {% for request in requests %}
-      <tr>
-        <td>{{ request.time }}</td>
-        <td>{{ request.path }}</td>
-        <td>{{ request.response }} {{ request.get_response_display }}</td>
-        <td>{{ request.referer|default:"-" }}</td>
-        <td>{{ request.browser|default:"-" }}</td>
-        <td>{{ request.user|default:"-" }}</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div style="overflow:auto">
+  <table class="listing">
+    <thead>
+      <td>Zeitpunkt</td>
+      <td>Seite</td>
+      <td>Status</td>
+      <td>Herkunft</td>
+      <td>Browser</td>
+      <td>Eingeloggt</td>
+    </thead>
+    <tbody>
+      {% for request in requests %}
+        <tr>
+          <td>{{ request.time }}</td>
+          <td><span title="{{ request.path }}">{{ request.path|truncatechars:100 }}</span></td>
+          <td>{{ request.response }} {{ request.get_response_display }}</td>
+          <td><span title="{{ request.referer }}">{{ request.referer|truncatechars:100|default:"-" }}</span></td>
+          <td>{{ request.browser|default:"-" }}</td>
+          <td>{{ request.user|default:"-" }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 <nav class="pagination" aria-label="Seitennummerierung">
   <p>
