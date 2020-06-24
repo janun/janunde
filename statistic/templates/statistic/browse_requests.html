@@ -17,7 +17,7 @@
 </div>
 
 <div class="panel">
-    <span style="font-weight:bold">{{ requests.count }} Aufrufe</span> für die Filterkriterien gefunden.
+    <span style="font-weight:bold">{{ paginator.count }} Aufrufe</span> für die Filterkriterien gefunden.
 </div>
 
 <table class="listing">
@@ -48,14 +48,14 @@
     Seite {{ page_obj.number }} von {{ page_obj.paginator.num_pages }}
   </p>
   <ul>
-    {% if requests.has_previous %}
+    {% if page_obj.has_previous %}
       <li class="prev">  
-        <a href="?page={{ requests.previous_page_number }}" class="icon icon-arrow-left ">Vorherige</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="icon icon-arrow-left ">Vorherige</a>
       </li>
     {% endif %}
-    {% if requests.has_next %}
+    {% if page_obj.has_next %}
     <li class="next">       
-      <a href="?page={{ requests.next_page_number }}" class="icon icon-arrow-right-after ">Nächste</a>   
+      <a href="?page={{ page_obj.next_page_number }}" class="icon icon-arrow-right-after ">Nächste</a>   
     </li>
     {% endif %}
   </ul>

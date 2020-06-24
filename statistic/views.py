@@ -58,7 +58,7 @@ class BrowseRequestsView(FilterView):
     header_icon = "table"
     queryset = Request.objects.all()
     context_object_name = "requests"
-    paginate_by = 200
+    paginate_by = 100
     filterset_class = RequestFilter
 
 
