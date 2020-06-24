@@ -1,4 +1,4 @@
-from django.db.models import Count, Sum
+from django.db.models import Count
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.db.models.functions import TruncHour
@@ -20,6 +20,8 @@ class StatisticView(TemplateView):
         context = super().get_context_data(**kwargs)
         unique_visits = Request.objects.exclude(
             referer__startswith=self.request.site.root_url
+        ).exclude(
+            referer__startswith=self.request.site.root_url.replace("https", "http")
         )
 
         context["visits_today"] = unique_visits.today().count()
