@@ -18,10 +18,12 @@ class StatisticView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        unique_visits = Request.objects.exclude(
-            referer__startswith=self.request.site.root_url
-        ).exclude(
-            referer__startswith=self.request.site.root_url.replace("https", "http")
+        unique_visits = (
+            Request.objects.exclude(referer__startswith=self.request.site.root_url)
+            .exclude(
+                referer__startswith=self.request.site.root_url.replace("https", "http")
+            )
+            .exclude(referer__startswith=self.request.site.root_url.replace("www", ""))
         )
 
         context["visits_today"] = unique_visits.today().count()
