@@ -96,7 +96,7 @@ def plot(request):
             x=altair.X("hour:T", title="Zeitpunkt"),
             y=altair.Y("count:Q", title="Aufrufe pro Stunde"),
             tooltip=[
-                altair.Tooltip("hour", format="%d.%m. %H:", title="Zeitpunkt"),
+                altair.Tooltip("hour", format="%d.%m. %H Uhr", title="Zeitpunkt"),
                 altair.Tooltip("count", title="Aufrufe"),
             ],
         )
