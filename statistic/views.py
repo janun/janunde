@@ -78,20 +78,7 @@ def plot(request):
 
     chart = (
         altair.Chart(df)
-        .mark_area(
-            line={"color": "darkgreen"},
-            color=altair.Gradient(
-                gradient="linear",
-                stops=[
-                    altair.GradientStop(color="white", offset=0),
-                    altair.GradientStop(color="darkgreen", offset=1),
-                ],
-                x1=1,
-                x2=1,
-                y1=1,
-                y2=0,
-            ),
-        )
+        .mark_bar(color="green")
         .encode(
             x=altair.X("hour:T", title="Zeitpunkt"),
             y=altair.Y("count:Q", title="Aufrufe pro Stunde"),
