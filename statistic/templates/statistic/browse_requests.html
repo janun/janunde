@@ -1,4 +1,6 @@
 {% extends "statistic/base.html" %}
+{% load stuff %}
+
 {% block tabs %}
   <ul style="padding: 0; display:flex; list-style:none ">
     <li style="margin:5px"><a href="{% url 'statistic' %}">Übersicht</a></li>
@@ -71,12 +73,12 @@
   <ul>
     {% if page_obj.has_previous %}
       <li class="prev">  
-        <a href="?page={{ page_obj.previous_page_number }}" class="icon icon-arrow-left ">Vorherige</a>
+        <a href="?{% query_transform request page=page_obj.previous_page_number %}" class="icon icon-arrow-left ">Vorherige</a>
       </li>
     {% endif %}
     {% if page_obj.has_next %}
     <li class="next">       
-      <a href="?page={{ page_obj.next_page_number }}" class="icon icon-arrow-right-after ">Nächste</a>   
+      <a href="?{% query_transform request page=page_obj.next_page_number %}" class="icon icon-arrow-right-after ">Nächste</a>   
     </li>
     {% endif %}
   </ul>
