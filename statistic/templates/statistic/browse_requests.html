@@ -2,11 +2,17 @@
 {% load stuff %}
 
 {% block tabs %}
-  <ul style="padding: 0; display:flex; list-style:none ">
+  <ul style="padding: 0; display:flex; list-style:none">
     <li style="margin:5px"><a href="{% url 'statistic' %}">Übersicht</a></li>
     <li style="margin:5px; font-weight:bold"><a href="{% url 'statistic_browse' %}">Durchsuchen</a></li>
   </ul>
 {% endblock %}
+
+
+{% block actions %}
+  <a href="?{% query_transform request export='csv' %}" class="button bicolor icon icon-download">Download CSV</a>
+{% endblock %}
+
 
 {% block results %}
 

@@ -3,6 +3,8 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.db.models.functions import TruncHour
 
+from wagtail.admin.views.reports import SpreadsheetExportMixin
+
 import django_filters
 import pandas
 import altair
@@ -56,7 +58,7 @@ class RequestFilter(django_filters.FilterSet):
         fields = ("path", "response", "referer")
 
 
-class BrowseRequestsView(FilterView):
+class BrowseRequestsView(FilterView, SpreadsheetExportMixin):
     template_name = "statistic/browse_requests.html"
     title = "Statistik"
     header_icon = "table"
@@ -64,6 +66,36 @@ class BrowseRequestsView(FilterView):
     context_object_name = "requests"
     paginate_by = 100
     filterset_class = RequestFilter
+
+    list_export = [
+        "time",
+        "method",
+        "path",
+        "referer",
+        "response",
+        "user_agent",
+        "browser",
+        "user",
+        "language",
+        "ip",
+    ]
+
+    def filter_queryset(self, queryset):
+        # used for exports
+        filters = self.filterset_class(self.request.GET, queryset=queryset)
+        queryset = filters.qs
+        return filters, queryset
+
+    def dispatch(self, request, *args, **kwargs):
+        # used for exports
+        self.is_export = self.request.GET.get("export") in self.FORMATS
+        if self.is_export:
+            self.paginate_by = None
+            return self.as_spreadsheet(
+                self.filter_queryset(self.get_queryset())[1],
+                self.request.GET.get("export"),
+            )
+        return super().dispatch(request, *args, **kwargs)
 
 
 def plot(request):
