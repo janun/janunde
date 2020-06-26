@@ -8,5 +8,5 @@ class LatestChangesView(PageReportView):
     header_icon = "date"
 
     def get_queryset(self):
-        self.queryset = Page.objects.order_by("-last_published_at")
+        self.queryset = Page.objects.order_by("-latest_revision_created_at")
         return super().get_queryset()
