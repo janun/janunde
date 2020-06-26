@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "navbar",
     "jobs",
     "statistic",
+    "latest_changes",
     # 'debug_toolbar',
     # 'template_profiler_panel',
     "request",
