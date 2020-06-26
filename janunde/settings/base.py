@@ -213,7 +213,13 @@ PASSWORD_REQUIRED_TEMPLATE = "password_required.html"
 
 
 # https://django-request.readthedocs.io/en/latest/settings.html
-REQUEST_IGNORE_PATHS = (r"^admin/",)
+REQUEST_IGNORE_PATHS = (
+    r"^admin/",
+    r"wp-admin",
+    r"ads\.txt",
+    r"\.env",
+    r"\.php$",
+)
 
 REQUEST_IGNORE_USER_AGENTS = (
     r"^$",
