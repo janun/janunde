@@ -238,7 +238,7 @@ REQUEST_IGNORE_USER_AGENTS = (
     r"(?i)cortex",
     r"(?i)adreview",
     r"(?i)wordpress",
-    "Opera/9.80 (Windows NT 6.2; Win64; x64) Presto/2.12.388 Version/12.16",
+    r"Opera\/9.80 \(Windows NT 6.2; Win64; x64\) Presto\/2.12.388 Version\/12.16",
 )
 
 REQUEST_VALID_METHOD_NAMES = ("get", "post")
