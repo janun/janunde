@@ -106,6 +106,7 @@ def search_results_404(context, max_results=5):
     return search_results
 
 
+@register.simple_tag(takes_context=True)
 def render_json_ld(context, structured_data: dict) -> str:
     """Render JSON-LD from dict"""
     structured_data["@context"] = "https://schema.org"
