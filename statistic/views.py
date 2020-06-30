@@ -1,7 +1,10 @@
+import datetime
+
 from django.db.models import Count
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.db.models.functions import TruncHour
+from django.urls import reverse
 
 from wagtail.admin.views.reports import SpreadsheetExportMixin
 
@@ -58,6 +61,8 @@ class StatisticView(TemplateView):
 
 
 class FilterSetWithInitials:
+    """Mixin enabling a FilterSets filters to have initial values"""
+
     def __init__(self, data=None, *args, **kwargs):
         if data is None:
             data = {}
@@ -79,10 +84,11 @@ class RequestFilter(FilterSetWithInitials, django_filters.FilterSet):
     )
     path = django_filters.Filter(label="Seite")
     referer = django_filters.Filter(label="Herkunft")
+    time = django_filters.DateTimeFromToRangeFilter()
 
     class Meta:
         model = Request
-        fields = ("path", "referer", "logged_in")
+        fields = ("path", "time", "referer", "logged_in")
 
 
 class BrowseRequestsView(FilterView, SpreadsheetExportMixin):
@@ -126,6 +132,7 @@ class BrowseRequestsView(FilterView, SpreadsheetExportMixin):
 
 
 def plot(request):
+    """Create json data for plot using Vega/Altair"""
     filtered = RequestFilter(request.GET, queryset=Request.objects.all())
     data = (
         filtered.qs.annotate(hour=TruncHour("time"))
@@ -135,18 +142,28 @@ def plot(request):
     )
     df = pandas.DataFrame.from_records(data)
 
+    def get_url(hour: pandas.Timestamp):
+        """generate url to browse page"""
+        nexthour = hour + datetime.timedelta(hours=1)
+        return (
+            reverse("statistic_browse")
+            + f"?time_after={hour.strftime('%d.%m.%Y %H:%M')}&time_before={nexthour.strftime('%d.%m.%Y %H:%M')}"
+        )
+
+    df["url"] = df["hour"].apply(get_url)
+
     chart = (
         altair.Chart(df)
         .mark_bar(color="green")
         .encode(
             x=altair.X("hour:T", title="Zeitpunkt"),
             y=altair.Y("count:Q", title="Aufrufe pro Stunde"),
+            href="url:N",
             tooltip=[
                 altair.Tooltip("hour", format="%d.%m. %H Uhr", title="Zeitpunkt"),
                 altair.Tooltip("count", title="Aufrufe"),
             ],
         )
         .properties(width=1000)
-        .interactive()
     )
     return HttpResponse(chart.to_json(), content_type="application/json")
