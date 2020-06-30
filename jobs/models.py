@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator
 from django import forms
-from django.contrib.postgres.fields import ArrayField
 
 from wagtail.admin.edit_handlers import (
     FieldPanel,
@@ -35,14 +34,14 @@ class JobOfferIndexPage(BasePage):
     before_jobs = StreamField(
         StandardStreamBlock,
         blank=True,
-        verbose_name="Vor den Jobs",
+        verbose_name="Intro-Text (wenn Jobs vorhanden)",
         help_text="Wird als Text vor der Liste der Stellenanzeigen angezeigt. Aber nur wenn es auch Stellenanzeigen gibt.",
     )
 
     after_jobs = StreamField(
         StandardStreamBlock,
         blank=True,
-        verbose_name="Nach den Jobs",
+        verbose_name="Outro-Text (wenn Jobs vorhanden)",
         help_text="Wird als Text nach der Liste der Stellenanzeigen angezeigt. Aber nur wenn es auch Stellenanzeigen gibt.",
     )
 
@@ -67,11 +66,20 @@ class JobOfferIndexPage(BasePage):
     ]
 
     content_panels = [
-        FieldPanel("title"),
-        FieldPanel("heading"),
-        FieldPanel("highlight_in_heading"),
-        FieldPanel("subtitle"),
+        MultiFieldPanel(
+            [
+                FieldPanel("title"),
+                FieldPanel("heading"),
+                FieldPanel("highlight_in_heading"),
+                FieldPanel("subtitle"),
+            ],
+            "Kopf",
+        ),
         StreamFieldPanel("before_jobs"),
+        HelpPanel(
+            template="jobs/admin_add_job_button.html",
+            heading="Stellenauschreibung erstellen",
+        ),
         StreamFieldPanel("after_jobs"),
         StreamFieldPanel("empty"),
     ]

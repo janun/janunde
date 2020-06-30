@@ -1,0 +1,12 @@
+
+<fieldset>
+    {% if self.heading %}
+        <legend>{{ self.heading }}</legend>
+    {% endif %}
+    <div class="{{ self.classname }}">
+        <p>Stellenauschreibungen müssen als Unterseiten dieser Seite erstellt werden.</p>
+        {% if self.instance.pk %}
+            <a href="{% url 'wagtailadmin_pages:add_subpage' self.instance.pk %}" class="button bicolor icon icon-plus">Stellenauschreibung erstellen</a>
+        {% endif %}
+    </div>
+</fieldset>
