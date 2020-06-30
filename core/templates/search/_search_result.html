@@ -2,9 +2,11 @@
 
 <div class="my-10">
   <a href="{% pageurl result %}" class="group inline-flex -ml-4 md:ml-0">
-    <div class="mr-3 flex-shrink-0">
-      {% image result.get_image fill-256x256 as result_image %}
-      <img {{ result_image.attrs }} loading="lazy" class="w-16 h-16 md:w-20 md:h-20 object-cover border">
+    <div class="mr-3 flex-shrink-0 w-16 h-16 md:w-20 md:h-20 bg-gray-300">
+      {% if result.get_image %}
+        {% image result.get_image fill-256x256 as result_image %}
+        <img {{ result_image.attrs }} loading="lazy" class="w-16 h-16 md:w-20 md:h-20 object-cover">
+      {% endif %}
     </div>
     <div>
       <div class="text-xs font-light">
