@@ -17,9 +17,9 @@
 {% block results %}
 
 <div class="panel">
-    <form style="display: flex; align-items:baseline; justify-content:space-between" method="get">
+    <form class="filterform" method="get">
         {{ filter.form.as_p }}
-        <a href="{% url 'statistic_browse' %}" class="button text-replace icon icon-cross">Reset</a>
+        <a href="{% url 'statistic_browse' %}" class="button text-replace icon icon-cross" title="Filter löschen">Reset</a>
         <button type="submit" class="button">Filter</button>
     </form>
 </div>
@@ -89,4 +89,19 @@
     {% endif %}
   </ul>
 </nav>
+
+
+<style>
+.filterform {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.filterform > * {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+</style>
 {% endblock %}
+
+

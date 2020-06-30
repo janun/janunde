@@ -20,8 +20,10 @@ class StatisticView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        queryset = Request.objects.exclude(user__isnull=False)  # exclude logged in
+
         unique_visits = (
-            Request.objects.exclude(referer__startswith=self.request.site.root_url)
+            queryset.exclude(referer__startswith=self.request.site.root_url)
             .exclude(
                 referer__startswith=self.request.site.root_url.replace("https", "http")
             )
@@ -31,31 +33,56 @@ class StatisticView(TemplateView):
         context["visits_today"] = unique_visits.today().count()
         context["visits_this_week"] = unique_visits.this_week().count()
         context["visits_this_month"] = unique_visits.this_month().count()
+
         context["top_paths"] = (
-            Request.objects.filter(response__lt=400)
+            queryset.filter(response__lt=400)
             .values("path")
             .annotate(Count("path"))
             .order_by("-path__count")[:10]
         )
-        context["top_error_paths"] = (
-            Request.objects.filter(response__gte=400)
-            .values("path", "response")
-            .annotate(Count("path"))
-            .order_by("-path__count")[:10]
-        )
+
         context["top_referers"] = (
             unique_visits.exclude(referer="")
             .values("referer")
             .annotate(Count("referer"))
             .order_by("-referer__count")[:10]
         )
+
+        context["top_error_paths"] = (
+            queryset.filter(response__gte=400)
+            .values("path", "response")
+            .annotate(Count("path"))
+            .order_by("-path__count")[:10]
+        )
         return context
 
 
-class RequestFilter(django_filters.FilterSet):
+class FilterSetWithInitials:
+    def __init__(self, data=None, *args, **kwargs):
+        if data is None:
+            data = {}
+        data = data.copy()
+        for name, f in self.base_filters.items():
+            initial = f.extra.get("initial")
+            if not data.get(name) and initial is not None:
+                data[name] = initial
+        super().__init__(data, *args, **kwargs)
+
+
+class RequestFilter(FilterSetWithInitials, django_filters.FilterSet):
+    logged_in = django_filters.BooleanFilter(
+        field_name="user",
+        lookup_expr="isnull",
+        label="Eingeloggt",
+        exclude=True,
+        initial=False,
+    )
+    path = django_filters.Filter(label="Seite")
+    referer = django_filters.Filter(label="Herkunft")
+
     class Meta:
         model = Request
-        fields = ("path", "response", "referer")
+        fields = ("path", "referer", "logged_in")
 
 
 class BrowseRequestsView(FilterView, SpreadsheetExportMixin):
