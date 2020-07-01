@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "jobs",
     "statistic",
     "latest_changes",
+    "wagtail_ping_google",
     # 'debug_toolbar',
     # 'template_profiler_panel',
     "request",
