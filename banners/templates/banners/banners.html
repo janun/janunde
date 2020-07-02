@@ -1,0 +1,41 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+<div class="fixed bottom-0 inset-x-0 px-2 sm:px-0 pb-4">
+  {% for banner in banners %}
+    <div class="banner h-28 mb-2">
+      <div class="max-w-7xl mx-auto px-2 md:px-6">
+        <div class="flex items-center justify-between flex-wrap py-1 pl-4 pr-2 md:pl-6 md:pr-3 rounded-lg shadow-lg {{ banner.bg_color }} {{ banner.text_color }}"> 
+          <div class="flex items-center">
+            {% if banner.image %}
+              {% image banner.image fill-80x80 as banner_image %}
+              <img {{ banner_image.attrs }} class="rounded mr-4 h-10 w-auto" />
+            {% endif %}
+            <div class="text-xs sm:text-base">
+              {{ banner.text|richtext }}
+            </div>
+          </div>
+          {% if banner.button_text and banner.button_link %}
+            <div class="flex-shrink-0">
+              <a href="{{ banner.button_link }}" class="group font-bold mb-4 md:mb-0 border flex items-center justify-center px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm leading-5 rounded
+                                                        {% if banner.color == "white" %}font-bold text-green-500 border-green-500 {% else %}text-gray-900 bg-white{% endif %} ">
+                {{ banner.button_text }}
+
+                <svg class="fill-current h-3 w-3 md:h-4 md:w-4 ml-4 transition duration-200 transform md:group-hover:animation-translate-x-3"viewBox="0 0 20 20"><path d="M16.172 9l-6.071-6.071 1.414-1.414L20 10l-.707.707-7.778 7.778-1.414-1.414L16.172 11H0V9z"/></svg>
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+
+
+<style>
+banner .rich-text p{
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+</style>

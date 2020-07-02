@@ -12,7 +12,6 @@ from wagtail.embeds import embeds
 from wagtail.embeds.exceptions import EmbedException
 from wagtail.core.models import Page
 
-from core.models import Banner
 
 register = template.Library()
 
@@ -34,15 +33,6 @@ def get_embed(url, max_width=None):
         return embeds.get_embed(url, max_width=max_width)
     except EmbedException:
         return ""
-
-
-@register.inclusion_tag("core/banners.html", takes_context=True)
-def banners(context):
-    """Render banners"""
-    return {
-        "banners": Banner.objects.all(),
-        "request": context["request"],
-    }
 
 
 @register.simple_tag
