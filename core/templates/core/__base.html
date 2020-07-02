@@ -3,6 +3,8 @@
 {% load wagtailuserbar %}
 {% load wagtailimages_tags srcset %}
 {% load static from staticfiles %}
+{% load banner_tags %}
+
 
 {% block meta %}
   {% include "core/_metadata.html" %}
@@ -17,6 +19,7 @@
   <div class="{% block content_class %}pt-16 content{% endblock %}">
     {% wagtailuserbar %}
     {% block content %}{% endblock %}
+    {% banners %}
   </div>
 
   {% block footer %}
