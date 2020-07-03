@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 
-<div class="sticky bottom-0 py-2 my-16 inset-x-0 px-2 sm:px-0 z-50">
+<div class="sticky bottom-0 py-2 my-16 inset-x-0 px-2 sm:px-0 z-40">
   {% for banner in banners %}
     <div class="banner h-28 mb-2">
       <div class="max-w-7xl mx-auto px-2 md:px-6 {% if banner.button_text and banner.button_link %}block{% else %}flex{% endif %}">
