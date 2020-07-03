@@ -135,7 +135,7 @@
             <div class="text-green-500 font-bold text-xl mb-6">{{ search_count }} Suchergebnisse für „{{ q }}“:</div>
           {% else %}
             <div>
-              <div class="font-bold text-red-500 mb-4 text-lg text-xl md:text-2xl">Sorry, leider nichts gefunden für „{{ q }}“</div>            
+              <div class="font-bold text-red-500 mb-4 text-xl md:text-2xl">Sorry, leider nichts gefunden für „{{ q }}“</div>            
               <div class="text-gray-700">Versuche es mal mit einem anderen Suchbegriff.</div>
             </div>
           {% endif %}
@@ -143,7 +143,7 @@
 
         {% if not q and not events_by_month %}
           <div>
-            <div class="font-bold text-red-500 mb-4 text-lg text-xl md:text-2xl">Sorry, Nichts gefunden.</div>            
+            <div class="font-bold text-red-500 mb-4 text-xl md:text-2xl">Sorry, Nichts gefunden.</div>            
             <div class="text-gray-700">Versuch mal <a href="?" class="underline">die Filter zurückzusetzen</a></div>
           </div>
         {% endif %}
@@ -157,7 +157,7 @@
               {% cache 600 newevent event.id event.latest_revision_created_at event.main_image.updated_at %}
 
                 <div class="relative mb-8 md:mb-12 h-32 md:h-36 -mx-4 sm:mx-0">
-                  <a class="block group overflow-hidden flex bg-white shadow md:shadow-md hover:shadow-lg text-gray-700 sm:rounded-lg h-32 md:h-36" href="{% pageurl event %}">
+                  <a class="group overflow-hidden flex bg-white shadow md:shadow-md hover:shadow-lg text-gray-700 sm:rounded-lg h-32 md:h-36" href="{% pageurl event %}">
                     
                     {% image event.main_image fill-448x228 format-jpeg as main_image %}
                     <img {{ main_image.attrs }} loading="lazy" class="object-cover sm:rounded-bl-lg sm:rounded-tl-lg w-32 md:w-56 border-r">
@@ -189,7 +189,7 @@
                         </span>
                       </div>
 
-                      <h3 class="text-brown text-lg mb-1 font-semibold group-hover:text-green-500 hyphens-auto">{{ event.title }}</h3>
+                      <h3 class="text-gray-900 text-lg mb-1 font-semibold group-hover:text-green-500 hyphens-auto">{{ event.title }}</h3>
                       {% if event.subtitle %}
                         <div class="hidden md:block text-xs md:text-sm hyphens-auto" title="{{ event.subtitle }}">{{ event.subtitle|truncatechars:120 }}</div>
                         <div class="md:hidden text-xs md:text-sm hyphens-auto" title="{{ event.subtitle }}">{{ event.subtitle|truncatechars:60 }}</div>
