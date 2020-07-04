@@ -1,11 +1,11 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 
-<div class="sticky bottom-0 py-2 my-16 inset-x-0 px-2 sm:px-0 z-40">
+<div class="fixed bottom-0 sm::py-2 inset-x-0 sm:px-2 sm:px-0 z-40">
   {% for banner in banners %}
     <div class="banner h-28 mb-2">
       <div class="max-w-7xl mx-auto px-2 md:px-6 {% if banner.button_text and banner.button_link %}block{% else %}flex{% endif %}">
-        <div class="flex justify-between mx-auto items-center flex-wrap md:flex-no-wrap py-1 px-4 md:px-5 rounded-lg shadow-lg border border-gray-200 {{ banner.bg_color }} {{ banner.text_color }}"> 
+        <div class="flex justify-between mx-auto md:items-center md:flex-no-wrap md:py-2 px-4 md:px-5 rounded-lg shadow-lg {% if banner.color == "white" %}border border-gray-200{% endif %} {{ banner.bg_color }} {{ banner.text_color }}"> 
           <div class="flex items-center">
             {% if banner.image %}
               {% image banner.image fill-80x80 as banner_image %}
@@ -16,12 +16,12 @@
             </div>
           </div>
           {% if banner.button_text and banner.button_link %}
-            <div class="flex-shrink-0 ml-auto">
-              <a href="{{ banner.button_link }}" class="md:ml-4 lg:ml-8 group font-bold mb-4 md:mb-0 border flex items-center justify-center px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm leading-5 rounded
-                                                        {% if banner.color == "white" %}font-bold text-green-500 border-green-500 {% else %}text-gray-900 bg-white{% endif %} ">
-                {{ banner.button_text }}
+            <div class="flex-shrink-0 ml-auto mt-3 md:mt-0">
+              <a href="{{ banner.button_link }}" class="md:ml-4 lg:ml-8 group font-bold mb-4 md:mb-0 {% if banner.color == "white" %}border border-gray-800{% endif %} flex items-center justify-center px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm leading-5 rounded
+                                                        text-gray-900 bg-white">
+                <span class="pt-px hidden sm:inline">{{ banner.button_text }}</span>
 
-                <svg class="fill-current h-3 w-3 md:h-4 md:w-4 ml-4 transition duration-200 transform md:group-hover:animation-translate-x-3"viewBox="0 0 20 20"><path d="M16.172 9l-6.071-6.071 1.414-1.414L20 10l-.707.707-7.778 7.778-1.414-1.414L16.172 11H0V9z"/></svg>
+                <svg class="fill-current h-3 w-3 md:h-4 md:w-4 sm:ml-4 transition duration-200 transform md:group-hover:animation-translate-x-3"viewBox="0 0 20 20"><path d="M16.172 9l-6.071-6.071 1.414-1.414L20 10l-.707.707-7.778 7.778-1.414-1.414L16.172 11H0V9z"/></svg>
               </a>
             </div>
           {% endif %}
@@ -34,7 +34,7 @@
 
 
 <style>
-banner .rich-text p{
+.banner .rich-text p{
   margin-top: 0.5rem !important;
   margin-bottom: 0.5rem !important;
 }

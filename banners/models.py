@@ -7,7 +7,6 @@ from wagtail.admin.edit_handlers import (
     FieldPanel,
     InlinePanel,
     RichTextField,
-    PageChooserPanel,
     FieldRowPanel,
 )
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -19,7 +18,6 @@ class Banner(ClusterableModel):
     """Website Banner
 
     TODO:
-     * Field on which page it is shown (homepage vs. everywhere)
      * Field where is shown (top vs bottom)
     """
 
@@ -33,7 +31,7 @@ class Banner(ClusterableModel):
         on_delete=models.SET_NULL,
         related_name="+",
         verbose_name="Bild",
-        help_text="Kleines Bild, das links angezeigt wird. Am besten Icons o.ä.",
+        help_text="Kleines Bild, das links angezeigt werden kann. Icons o.ä.",
     )
 
     color = models.CharField(
@@ -51,7 +49,13 @@ class Banner(ClusterableModel):
         help_text="Hintergrundfarbe des Banners",
     )
 
-    button_text = models.CharField("Button-Text", max_length=255, null=True, blank=True)
+    button_text = models.CharField(
+        "Button-Text",
+        max_length=255,
+        null=True,
+        blank=True,
+        help_text="Wird auf mobil nicht angezeigt",
+    )
     button_link = models.URLField("Button-Link", max_length=255, null=True, blank=True)
 
     where = models.CharField(
