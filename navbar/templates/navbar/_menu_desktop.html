@@ -69,11 +69,13 @@ document.querySelectorAll('.js-toggle-menu').forEach(function (button) {
     menu.classList.add('-translate-y-full')
     arrow.classList.remove('rotate-180')
     button.setAttribute('aria-expanded', 'false')
+    button.classList.remove('border-gray-500')
   }
   function show() {
     menu.classList.remove('invisible')
     menu.classList.remove('-translate-y-full')
     button.setAttribute('aria-expanded', 'true')
+    button.classList.add('border-gray-500')
     arrow.classList.add('rotate-180')
   }
   
