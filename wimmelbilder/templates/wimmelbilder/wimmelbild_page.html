@@ -53,7 +53,7 @@
 <script type="text/javascript" src="{% static 'wimmelbilder/wimmelbild.js' %}"></script>
 
 <script>
-fetch("{% pageurl self %}?json").then(function(response) {
+fetch("?json").then(function(response) {
   response.json().then(function (data) {
     renderWimmelbild('map', data)
   })
