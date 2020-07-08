@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "latest_changes",
     "wagtail_ping_google",
     "banners",
+    "wimmelbilder",
     # 'debug_toolbar',
     # 'template_profiler_panel',
     "request",

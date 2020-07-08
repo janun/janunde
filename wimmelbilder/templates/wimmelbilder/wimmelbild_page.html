@@ -1,0 +1,62 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags stuff static %}
+
+{% block body_class %}{% endblock %}
+
+{% block content %}
+<main>
+
+  <div class="px-4 max-w-3xl mx-auto">
+    {% include "core/_breadcrumbs.html" %}
+    <header class="mb-10">
+      <h1 class="leading-tighter text-green-500 text-3xl md:text-4xl font-bold mt-0 mb-2">{{ self.title }}</h1>
+      {% if self.subtitle %}
+        <h2 class="leading-tight md:leading-snug text-gray-700 text-lg md:text-xl my-0">{{ self.subtitle }}</h2>
+      {% endif %}
+    </header>
+  </div>
+
+  <div class="px-4 max-w-3xl mx-auto userim">
+    {% include_block self.before %}
+  </div>
+
+  {% if self.tile_url %}
+    <div class="px-4 max-w-7xl mx-auto">
+      <div id="map" class="map w-full my-10 z-10" style="padding-bottom: {% widthratio self.height self.width 100 %}%"></div>
+    </div>
+  {% endif %}
+
+  <div class="px-4 max-w-3xl mx-auto userim">
+    {% include_block self.after %}
+  </div>   
+</main>
+
+<style>
+.navbar {
+  position: absolute !important;
+}
+</style>
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'leaflet/dist/leaflet.js' %}"></script>
+<link href="{% static 'leaflet/dist/leaflet.css' %}" rel="stylesheet" />
+
+<script type="text/javascript" src="{% static 'leaflet.fullscreen/Control.FullScreen.js' %}"></script>
+<link href="{% static 'leaflet.fullscreen/Control.FullScreen.css' %}" rel="stylesheet" />
+
+<script type="text/javascript" src="{% static 'leaflet-modal/dist/L.Modal.min.js' %}"></script>
+<link href="{% static 'leaflet-modal/dist/leaflet.modal.min.css' %}" rel="stylesheet" />
+
+<script type="text/javascript" src="{% static 'wimmelbilder/wimmelbild.js' %}"></script>
+
+<script>
+fetch("{% pageurl self %}?json").then(function(response) {
+  response.json().then(function (data) {
+    renderWimmelbild('map', data)
+  })
+})
+</script>
+{% endblock %}
