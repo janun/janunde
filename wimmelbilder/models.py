@@ -27,13 +27,6 @@ from core.models import BasePage
 from .blocks import WimmelbildStreamBlock
 
 
-class SimpleWagtailSerializer(DjangoJSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, StreamValue):
-            return obj.stream_block.render_basic(obj, {})
-        return super().default(obj)
-
-
 class WimmelbildPoint(ClusterableModel):
     """InfoPoint in a Wimmelbild"""
 
@@ -41,6 +34,15 @@ class WimmelbildPoint(ClusterableModel):
     lng = models.IntegerField("X-Position")
     tooltip = models.CharField(
         "Tooltip", max_length=255, blank=True, help_text="Wird bei Hover angezeigt."
+    )
+    icon = models.ForeignKey(
+        Image,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+        verbose_name="Icon",
+        help_text="Am besten kleines (30x30px) transparentes PNG. Fragezeichen wenn leer",
     )
     content = StreamField(
         WimmelbildStreamBlock(required=False),
@@ -51,9 +53,26 @@ class WimmelbildPoint(ClusterableModel):
 
     panels = [
         FieldRowPanel([FieldPanel("lng"), FieldPanel("lat")]),
+        ImageChooserPanel("icon"),
         FieldPanel("tooltip"),
         StreamFieldPanel("content"),
     ]
+
+    @property
+    def json_dict(self):
+        jd = {
+            "lat": self.lat,
+            "lng": self.lng,
+            "tooltip": self.tooltip,
+            "content": self.content.stream_block.render_basic(self.content, {}),
+        }
+        if self.icon:
+            jd["icon"] = {
+                "url": self.icon.file.url,
+                "width": self.icon.width,
+                "height": self.icon.height,
+            }
+        return jd
 
 
 class WimmelbildPointWimmelbildPage(WimmelbildPoint):
@@ -146,7 +165,7 @@ class WimmelbildPage(BasePage):
     def serve(self, request):
         """get json representation"""
         if "json" in request.GET:
-            points = list(self.points.all().values())
+            points = [p.json_dict for p in self.points.all()]
             return JsonResponse(
                 {
                     "tileUrl": self.tile_url,
@@ -154,7 +173,6 @@ class WimmelbildPage(BasePage):
                     "height": self.height,
                     "points": points,
                 },
-                encoder=SimpleWagtailSerializer,
                 safe=False,
             )
         else:

@@ -27,10 +27,21 @@ function renderWimmelbild(mapContainerId, data) {
     map.setMaxBounds(bounds)
     map.fitBounds(bounds)
 
+    var questionIcon = L.icon({
+        iconUrl: "/static/wimmelbilder/question-icon.png",
+        iconSize: [30, 30]
+    });
+
     // markers
     data.points.forEach(function (point) {
         var latlnt = map.unproject([point.lat, point.lng], tileZoom)
-        var marker = L.marker(latlnt, { title: point.tooltip }).addTo(map)
+        var marker = L.marker(latlnt, { title: point.tooltip, icon: questionIcon }).addTo(map)
+        if (point.icon) {
+            marker.setIcon(L.icon({
+                iconUrl: point.icon.url,
+                iconSize: [point.icon.width, point.icon.height]
+            }))
+        }
         if (point.content) {
             marker.on("click", function () {
                 map.openModal({ content: point.content })
