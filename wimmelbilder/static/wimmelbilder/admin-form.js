@@ -61,7 +61,6 @@ function openLatLngModal(input) {
 function setUpWimmelbildEditHandler() {
     document.querySelectorAll(".latlng input").forEach(function (input) {
         var exists = input.parentNode.querySelectorAll("a.button")
-        console.log(exists)
         if (exists.length) return
 
         var button = document.createElement("a")

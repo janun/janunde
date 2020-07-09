@@ -1,12 +1,10 @@
-import json
-
 from django.db import models
-from django.core.serializers.json import DjangoJSONEncoder
 from django.core.exceptions import ValidationError
 
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 
+from wagtail.core.models import Orderable
 from wagtail.admin.edit_handlers import (
     FieldPanel,
     StreamFieldPanel,
@@ -28,13 +26,10 @@ from core.models import BasePage
 from .blocks import WimmelbildStreamBlock
 
 
-class WimmelbildPoint(ClusterableModel):
-    """InfoPoint in a Wimmelbild"""
+class PointGroup(ClusterableModel):
+    """Group of Points in a Wimmelbild"""
 
-    latlng = models.CharField("Position", max_length=255)
-    tooltip = models.CharField(
-        "Tooltip", max_length=255, blank=True, help_text="Wird bei Hover angezeigt."
-    )
+    name = models.CharField("Name", max_length=255)
     icon = models.ForeignKey(
         Image,
         on_delete=models.SET_NULL,
@@ -42,7 +37,52 @@ class WimmelbildPoint(ClusterableModel):
         blank=True,
         related_name="+",
         verbose_name="Icon",
-        help_text="Am besten kleines (30x30px) transparentes PNG. Fragezeichen wenn leer",
+        help_text="Am besten kleines (30x30px) freigestelltes PNG mit Umrandung. Größer ist Größer. Fragezeichen wenn leer.",
+    )
+
+    panels = [
+        FieldPanel("name"),
+        ImageChooserPanel("icon"),
+    ]
+
+    @property
+    def json_dict(self):
+        jd = {"name": self.name}
+        if self.icon:
+            jd["icon"] = {
+                "url": self.icon.file.url,
+                "width": self.icon.width,
+                "height": self.icon.height,
+            }
+        points = [p.json_dict for p in self.points.all()]
+        jd["points"] = points
+        return jd
+
+    def __str__(self):
+        return self.name
+
+
+class PointGroupWimmelbildPage(Orderable, PointGroup):
+    setting = ParentalKey(
+        "wimmelbilder.WimmelbildPage", on_delete=models.CASCADE, related_name="groups",
+    )
+
+
+class WimmelbildPoint(ClusterableModel):
+    """InfoPoint in a Wimmelbild"""
+
+    group = models.ForeignKey(
+        PointGroup,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="points",
+        verbose_name="Gruppe",
+        help_text="Wird ohne Gruppe nicht angezeigt. Auswählen geht bei neuen Gruppen erst nach Speichern",
+    )
+    latlng = models.CharField("Position", max_length=255)
+    tooltip = models.CharField(
+        "Tooltip", max_length=255, blank=True, help_text="Wird bei Hover angezeigt."
     )
     content = StreamField(
         WimmelbildStreamBlock(required=False),
@@ -53,7 +93,7 @@ class WimmelbildPoint(ClusterableModel):
 
     panels = [
         FieldPanel("latlng", classname="latlng"),
-        ImageChooserPanel("icon"),
+        FieldPanel("group"),
         FieldPanel("tooltip"),
         StreamFieldPanel("content"),
     ]
@@ -65,16 +105,10 @@ class WimmelbildPoint(ClusterableModel):
             "tooltip": self.tooltip,
             "content": self.content.stream_block.render_basic(self.content, {}),
         }
-        if self.icon:
-            jd["icon"] = {
-                "url": self.icon.file.url,
-                "width": self.icon.width,
-                "height": self.icon.height,
-            }
         return jd
 
 
-class WimmelbildPointWimmelbildPage(WimmelbildPoint):
+class WimmelbildPointWimmelbildPage(Orderable, WimmelbildPoint):
     setting = ParentalKey(
         "wimmelbilder.WimmelbildPage", on_delete=models.CASCADE, related_name="points",
     )
@@ -154,9 +188,10 @@ class WimmelbildPage(BasePage):
                 FieldPanel("width"),
                 FieldPanel("height"),
             ],
-            heading="Technisches",
+            heading="Allgemeines",
         ),
         # HelpPanel(template="wimmelbilder/map_edit.html", heading="Übersicht über Info-Punkte"), # TODO
+        InlinePanel("groups", heading="Gruppen von Info-Punkten"),
         InlinePanel("points", heading="Info-Punkte"),
     ]
 
@@ -173,12 +208,12 @@ class WimmelbildPage(BasePage):
 
     @property
     def json_dict(self):
-        points = [p.json_dict for p in self.points.all()]
+        groups = [g.json_dict for g in self.groups.all()]
         jd = {
             "tileUrl": self.tile_url,
             "width": self.width,
             "height": self.height,
-            "points": points,
+            "groups": groups,
         }
         return jd
 

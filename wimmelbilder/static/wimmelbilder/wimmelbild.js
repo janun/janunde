@@ -12,7 +12,7 @@ function renderWimmelbild(mapContainerId, data) {
 
     // tiles
     var tileZoom = 6;
-    L.tileLayer(data.tileUrl, {
+    var tileLayer = L.tileLayer(data.tileUrl, {
         tms: true,
         detectRetina: true,
         maxZoom: tileZoom
@@ -26,26 +26,43 @@ function renderWimmelbild(mapContainerId, data) {
     var bounds = new L.LatLngBounds(southWest, northEast)
     map.setMaxBounds(bounds)
     map.fitBounds(bounds)
+    map.setMinZoom(map.getZoom())
 
+    // default icon
+    var questionIconUrl = "/static/wimmelbilder/question-icon.png"
     var questionIcon = L.icon({
-        iconUrl: "/static/wimmelbilder/question-icon.png",
+        iconUrl: questionIconUrl,
         iconSize: [30, 30]
     });
 
     // markers
-    data.points.forEach(function (point) {
-        var latlnt = map.unproject(point.latlng.split(","), tileZoom)
-        var marker = L.marker(latlnt, { title: point.tooltip, icon: questionIcon }).addTo(map)
-        if (point.icon) {
-            marker.setIcon(L.icon({
-                iconUrl: point.icon.url,
-                iconSize: [point.icon.width, point.icon.height]
-            }))
-        }
-        if (point.content) {
-            marker.on("click", function () {
-                map.openModal({ content: point.content })
-            });
-        }
+    var layers = {}
+    data.groups.forEach(function (group) {
+        var groupMarkers = []
+        group.points.forEach(function (point) {
+            var latlnt = map.unproject(point.latlng.split(","), tileZoom)
+            var marker = L.marker(latlnt, { title: point.tooltip, icon: questionIcon }).addTo(map)
+            if (group.icon) {
+                marker.setIcon(L.icon({
+                    iconUrl: group.icon.url,
+                    iconSize: [group.icon.width, group.icon.height]
+                }))
+            }
+            if (point.content) {
+                marker.on("click", function () {
+                    map.openModal({ content: point.content })
+                });
+            }
+            groupMarkers.push(marker)
+        })
+
+        // display for layer control
+        var iconURl = group.icon ? group.icon.url : questionIconUrl
+        var layerDisplay = `<div style="display:inline-flex; align-items: center"><img style="margin-right: 5px; height: 20px" src="${iconURl}"> ${group.name}</div>`
+        layers[layerDisplay] = L.layerGroup(groupMarkers).addTo(map)
     })
+
+    // layer control to toggle marker groups
+    L.control.layers({}, layers, { collapsed: false }).addTo(map);
+
 }
