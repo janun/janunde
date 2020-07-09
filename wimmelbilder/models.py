@@ -1,6 +1,5 @@
 from django.db import models
 from django.http import JsonResponse
-from django.core.serializers.json import DjangoJSONEncoder
 from django.core.exceptions import ValidationError
 
 from modelcluster.fields import ParentalKey
@@ -13,12 +12,12 @@ from wagtail.admin.edit_handlers import (
     TabbedInterface,
     HelpPanel,
     InlinePanel,
-    FieldRowPanel,
     MultiFieldPanel,
 )
-from wagtail.core.fields import StreamField, StreamValue
+from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+from wagtail.admin.forms import WagtailAdminPageForm
 
 from core.images import AttributedImage as Image
 from core.blocks import StandardStreamBlock
@@ -30,8 +29,7 @@ from .blocks import WimmelbildStreamBlock
 class WimmelbildPoint(ClusterableModel):
     """InfoPoint in a Wimmelbild"""
 
-    lat = models.IntegerField("Y-Position")
-    lng = models.IntegerField("X-Position")
+    latlng = models.CharField("Position", max_length=255)
     tooltip = models.CharField(
         "Tooltip", max_length=255, blank=True, help_text="Wird bei Hover angezeigt."
     )
@@ -52,7 +50,7 @@ class WimmelbildPoint(ClusterableModel):
     )
 
     panels = [
-        FieldRowPanel([FieldPanel("lng"), FieldPanel("lat")]),
+        FieldPanel("latlng", classname="latlng"),
         ImageChooserPanel("icon"),
         FieldPanel("tooltip"),
         StreamFieldPanel("content"),
@@ -61,8 +59,7 @@ class WimmelbildPoint(ClusterableModel):
     @property
     def json_dict(self):
         jd = {
-            "lat": self.lat,
-            "lng": self.lng,
+            "latlng": self.latlng,
             "tooltip": self.tooltip,
             "content": self.content.stream_block.render_basic(self.content, {}),
         }
@@ -81,7 +78,17 @@ class WimmelbildPointWimmelbildPage(WimmelbildPoint):
     )
 
 
+class WimmelbildPageForm(WagtailAdminPageForm):
+    class Media:
+        css = {"all": ("leaflet/dist/leaflet.css",)}
+        js = (
+            "leaflet/dist/leaflet.js",
+            "wimmelbilder/admin-form.js",
+        )
+
+
 class WimmelbildPage(BasePage):
+    base_form_class = WimmelbildPageForm
 
     subtitle = models.CharField("Untertitel", max_length=255, blank=True)
 

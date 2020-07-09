@@ -34,7 +34,7 @@ function renderWimmelbild(mapContainerId, data) {
 
     // markers
     data.points.forEach(function (point) {
-        var latlnt = map.unproject([point.lat, point.lng], tileZoom)
+        var latlnt = map.unproject(point.latlng.split(","), tileZoom)
         var marker = L.marker(latlnt, { title: point.tooltip, icon: questionIcon }).addTo(map)
         if (point.icon) {
             marker.setIcon(L.icon({
