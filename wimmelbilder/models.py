@@ -1,5 +1,7 @@
+import json
+
 from django.db import models
-from django.http import JsonResponse
+from django.core.serializers.json import DjangoJSONEncoder
 from django.core.exceptions import ValidationError
 
 from modelcluster.fields import ParentalKey
@@ -169,21 +171,16 @@ class WimmelbildPage(BasePage):
         ]
     )
 
-    def serve(self, request):
-        """get json representation"""
-        if "json" in request.GET:
-            points = [p.json_dict for p in self.points.all()]
-            return JsonResponse(
-                {
-                    "tileUrl": self.tile_url,
-                    "width": self.width,
-                    "height": self.height,
-                    "points": points,
-                },
-                safe=False,
-            )
-        else:
-            return super().serve(request)
+    @property
+    def json_dict(self):
+        points = [p.json_dict for p in self.points.all()]
+        jd = {
+            "tileUrl": self.tile_url,
+            "width": self.width,
+            "height": self.height,
+            "points": points,
+        }
+        return jd
 
     def clean(self):
         super().clean()

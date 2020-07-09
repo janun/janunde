@@ -52,11 +52,10 @@
 
 <script type="text/javascript" src="{% static 'wimmelbilder/wimmelbild.js' %}"></script>
 
+{{ self.json_dict|json_script:"wimmelbild-json" }}
+
 <script>
-fetch("?json").then(function(response) {
-  response.json().then(function (data) {
-    renderWimmelbild('map', data)
-  })
-})
+  var data = JSON.parse(document.getElementById('wimmelbild-json').textContent);
+  renderWimmelbild('map', data)
 </script>
 {% endblock %}
