@@ -52,16 +52,16 @@
           <svg class="mr-4 mt-1 h-4 w-4 fill-current  flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M16 0a16 16 0 100 32 16 16 0 000-32zm0 30.03A14.02 14.02 0 0116 2a14.02 14.02 0 010 28.03zm1-14.44V6a1 1 0 00-2 0v10a1 1 0 00.3.72l.06.06 4.95 4.95a1 1 0 001.4-1.42z"/></svg>
           <div class="">
             {# no end #}
-            {% if not self.end or not self.all_day and self.end.date == self.start.date %}
+            {% if not self.end or self.all_day and self.end.date == self.start.date %}
               <div title="{{ self.start|date:'d.m.Y' }} {{ self.start|time:'H:i' }}">
                 {{ self.start|nettes_datum }}
-                {% if not self.all_day %}<br>{{ self.start_datetime|time:"" }}&#x202F;Uhr{% endif %}
+                {% if not self.all_day %}<br>{{ self.start_datetime|time:"" }}&#x202F;Uhr{% else%}(ganzer Tag){% endif %}
               </div>
             {# starts and ends on same day #}
             {% elif self.end_datetime.date == self.start_datetime.date %}
               <div title="{{ self.start_datetime|date:'d.m.Y H:i' }}–{{ self.end_datetime|time:'H:i' }}">
                 {{ self.start_datetime|nettes_datum }}
-                <br>{{ self.start_datetime|time:"" }}</time>&#x202F;–&#x202F;<time datetime="{{ self.end_datetime|date:'c' }}">{{ self.end_datetime|time:"" }}&#x202F;Uhr</time>
+                <br>{{ self.start_datetime|time:"H:i" }}&#x202F;–&#x202F;{{ self.end_datetime|time:"H:i" }}&#x202F;Uhr
               </div>
             {# starts and ends on different days #}
             {% else %}
