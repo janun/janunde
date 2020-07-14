@@ -18,6 +18,19 @@ function renderWimmelbild(mapContainerId, data) {
         maxZoom: tileZoom
     }).addTo(map)
 
+    // workaround for white borders around tiles
+    // https://github.com/Leaflet/Leaflet/issues/3575
+    function fixTileBorder() {
+        document.querySelectorAll(".leaflet-tile").forEach(function (tile) {
+            if (tile.style.height.replace('px', '') % 1 === 0) {
+                tile.style.height = (tile.clientHeight + 0.5) + 'px'
+                tile.style.width = (tile.clientWidth + 0.5) + 'px'
+            }
+        })
+    }
+    map.on('load zoomend drag', fixTileBorder)
+    tileLayer.on('load', fixTileBorder)
+
     // bounds
     var width = data.width
     var height = data.height
