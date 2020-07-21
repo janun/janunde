@@ -78,4 +78,15 @@ function renderWimmelbild(mapContainerId, data) {
     // layer control to toggle marker groups
     L.control.layers({}, layers, { collapsed: false }).addTo(map);
 
+
+    // handler for internal links
+    var mapContainer = document.querySelector('#' + mapContainerId)
+    mapContainer.addEventListener("click", function (event) {
+        if (!event.target.hash) return
+        var hash = decodeURIComponent(event.target.hash.replace(/#/, ''))
+        var marker = mapContainer.querySelector(`[title="${hash}"]`)
+        if (!marker) return
+        map.closeModal()
+        marker.click()
+    })
 }
