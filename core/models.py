@@ -387,7 +387,7 @@ class Group(BasePage):
 
 
 class Project(Group):
-    subpage_types = ["StandardPage", "FormPage"]
+    subpage_types = ["StandardPage", "FormPage", "wimmelbilder.WimmelbildPage"]
     parent_page_types = ["Group"]
 
     objects = GroupManager()
