@@ -41,21 +41,23 @@
 
 
 {% block extra_js %}
-<script type="text/javascript" src="{% static 'leaflet/dist/leaflet.js' %}"></script>
-<link href="{% static 'leaflet/dist/leaflet.css' %}" rel="stylesheet" />
+{% if self.tile_url %}
+  <script type="text/javascript" src="{% static 'leaflet/dist/leaflet.js' %}"></script>
+  <link href="{% static 'leaflet/dist/leaflet.css' %}" rel="stylesheet" />
 
-<script type="text/javascript" src="{% static 'leaflet.fullscreen/Control.FullScreen.js' %}"></script>
-<link href="{% static 'leaflet.fullscreen/Control.FullScreen.css' %}" rel="stylesheet" />
+  <script type="text/javascript" src="{% static 'leaflet.fullscreen/Control.FullScreen.js' %}"></script>
+  <link href="{% static 'leaflet.fullscreen/Control.FullScreen.css' %}" rel="stylesheet" />
 
-<script type="text/javascript" src="{% static 'leaflet-modal/dist/L.Modal.min.js' %}"></script>
-<link href="{% static 'leaflet-modal/dist/leaflet.modal.min.css' %}" rel="stylesheet" />
+  <script type="text/javascript" src="{% static 'leaflet-modal/dist/L.Modal.min.js' %}"></script>
+  <link href="{% static 'leaflet-modal/dist/leaflet.modal.min.css' %}" rel="stylesheet" />
 
-<script type="text/javascript" src="{% static 'wimmelbilder/wimmelbild.js' %}"></script>
+  <script type="text/javascript" src="{% static 'wimmelbilder/wimmelbild.js' %}"></script>
 
-{{ self.json_dict|json_script:"wimmelbild-json" }}
+  {{ self.json_dict|json_script:"wimmelbild-json" }}
 
-<script>
-  var data = JSON.parse(document.getElementById('wimmelbild-json').textContent);
-  renderWimmelbild('map', data)
-</script>
+  <script>
+    var data = JSON.parse(document.getElementById('wimmelbild-json').textContent);
+    renderWimmelbild('map', data)
+  </script>
+{% endif %}
 {% endblock %}
