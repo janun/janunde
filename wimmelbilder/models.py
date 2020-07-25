@@ -46,6 +46,10 @@ class PointGroup(ClusterableModel):
     ]
 
     @property
+    def points(self):
+        return WimmelbildPoint.objects.filter(group=self.name)
+
+    @property
     def json_dict(self):
         jd = {"name": self.name}
         if self.icon:
@@ -54,7 +58,7 @@ class PointGroup(ClusterableModel):
                 "width": self.icon.width,
                 "height": self.icon.height,
             }
-        points = [p.json_dict for p in self.points.all()]
+        points = [p.json_dict for p in self.points]
         jd["points"] = points
         return jd
 
@@ -63,7 +67,7 @@ class PointGroup(ClusterableModel):
 
 
 class PointGroupWimmelbildPage(Orderable, PointGroup):
-    setting = ParentalKey(
+    page = ParentalKey(
         "wimmelbilder.WimmelbildPage", on_delete=models.CASCADE, related_name="groups",
     )
 
@@ -71,14 +75,12 @@ class PointGroupWimmelbildPage(Orderable, PointGroup):
 class WimmelbildPoint(ClusterableModel):
     """InfoPoint in a Wimmelbild"""
 
-    group = models.ForeignKey(
-        PointGroup,
-        on_delete=models.SET_NULL,
-        null=True,
+    group = models.CharField(
+        "Gruppe",
+        max_length=255,
+        help_text="Exakter Name der Gruppe",
         blank=True,
-        related_name="points",
-        verbose_name="Gruppe",
-        help_text="Wird ohne Gruppe nicht angezeigt. Auswählen geht bei neuen Gruppen erst nach Speichern",
+        null=True,
     )
     latlng = models.CharField("Position", max_length=255)
     tooltip = models.CharField(
@@ -109,7 +111,7 @@ class WimmelbildPoint(ClusterableModel):
 
 
 class WimmelbildPointWimmelbildPage(Orderable, WimmelbildPoint):
-    setting = ParentalKey(
+    page = ParentalKey(
         "wimmelbilder.WimmelbildPage", on_delete=models.CASCADE, related_name="points",
     )
 
