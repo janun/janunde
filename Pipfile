@@ -21,6 +21,7 @@ elasticsearch = ">=7.0.0,<8.0.0"
 django-request = "*"
 django-filter = "*"
 altair = "*"
+django-node-assets = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
