@@ -13,13 +13,18 @@
         {% with object=object.specific %}
           <a href="{% pageurl object %}" class="bg-white md:bg-transparent shadow md:shadow-none group mb-8 md:mx-4 lg:mx-10 flex md:flex-col w-full md:w-64 js-animate-in" data-animation="zoomIn">
 
-            <div class="flex-shrink-0 overflow-hidden h-full w-32 md:w-40 border-r md:border md:h-40 md:w-full bg-gray-200 mr-3" style="min-height: 128px">
+            <div class="flex-shrink-0 overflow-hidden h-full w-32 border-r md:border md:h-40 md:w-full bg-white mr-3" style="min-height: 128px">
               {% if object.get_image %}
                 <picture>
-                  {% image object.get_image fill-512x320 format-webp as image_webp %}
-                  {% image object.get_image fill-512x320 as image %}
+                  {% if object.logo %}
+                    {% image object.get_image width-320 format-webp as image_webp %}
+                    {% image object.get_image width-320 as image %}
+                  {% else %}
+                    {% image object.get_image fill-512x320 format-webp as image_webp %}
+                    {% image object.get_image fill-512x320 as image %}
+                  {% endif %}
                   <source srcset="{{ image_webp.url }}" type="image/webp">
-                  <img {{ image.attrs }} loading="lazy" class="h-full w-full object-cover md:transition-transform md:duration-200 md:transform md:group-hover:scale-105">
+                  <img {{ image.attrs }} loading="lazy" class="h-full w-full {% if object.logo %}object-contain{% else %}object-cover{% endif %} md:transition-transform md:duration-200 md:transform md:group-hover:scale-105">
                 </picture>
               {% endif %}
             </div>
