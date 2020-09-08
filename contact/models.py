@@ -14,6 +14,8 @@ from core.blocks import StandardStreamBlock
 from core.models import BasePage, HeaderMixin
 from core.images import AttributedImage as Image
 
+from .blocks import ContactBlocks
+
 
 class ContactIndex(BasePage, HeaderMixin):
     subpage_types = ["PersonPage", "OfficePage"]
@@ -122,3 +124,20 @@ class PersonPage(BasePage):
     class Meta:
         verbose_name = "Person"
         verbose_name_plural = "Personen"
+
+
+class ContactPage(BasePage):
+    parent_page_types = ["core.HomePage"]
+
+    content = StreamField(
+        ContactBlocks(required=False), blank=True, null=True, verbose_name="Inhalt",
+    )
+
+    class Meta:
+        verbose_name = "Kontaktseite"
+        verbose_name_plural = "Kontaktseiten"
+
+    content_panels = [
+        FieldPanel("title"),
+        StreamFieldPanel("content"),
+    ]
