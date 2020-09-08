@@ -1,5 +1,6 @@
 module.exports = {
   important: true,
+  purge: ["./*/templates/**/*.html", "./core/**/*.js", "./**/*.py"],
   theme: {
     fontFamily: {
       sans: ["Myniad", "sans-serif"],
