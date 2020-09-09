@@ -1,0 +1,78 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+
+<main class="max-w-5xl mx-auto px-4">
+      
+  {% include "core/_breadcrumbs.html" %}
+
+
+  <div class="md:flex justify-between">
+
+    <div class="md:w-1/3 md:mr-16 mb-10">
+
+      {% comment %} photo {% endcomment %}
+      <div class="rounded-full overflow-hidden bg-white shadow h-48 w-48 md:h-64 md:w-64 -mt-2 mx-auto md:mx-0">
+        <picture>
+          {% image self.photo fill-640x640 format-webp as photo_webp %}
+          {% image self.photo fill-640x640 as photo %}
+          <source srcset="{{ photo_webp.url }}" type="image/webp">
+          <img class="h-full w-full object-fill" loading="lazy" src="{{ photo.url }}">
+        </picture>
+      </div>
+
+      {% comment %} heading mobile {% endcomment %}
+      <header class="md:hidden mt-5 mb-8 text-center md:text-left">
+        <h1 class="leading-none text-green-500 text-xl font-bold mt-0 mb-2">{{ self.title }}</h1>
+        {% if self.role %}
+          <h2 class="leading-tight text-gray-700 text-base my-0">{{ self.role }}</h2>
+        {% endif %}
+      </header>
+
+      <div class="my-10">
+        {% if self.mail %}
+          <div class="my-6">
+            <a target="_blank" href="mailto:{{ self.mail }}" class="inline-flex text-gray-900 text-lg hover:text-green-600" title="E-Mail schreiben">
+              <svg class="mr-4 mt-1 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M31.98 7.25c.03-.2 0-.39-.07-.57C31.65 5.58 30.85 5 29.5 5h-26C2.31 5 1.03 5.44.4 6.3l-.16.14a1 1 0 00-.22.81L0 7.5v16C0 25.16 1.84 27 3.5 27h26c1.66 0 2.5-1.84 2.5-3.5v-16l-.02-.25zM3.5 7h26.01L16 17.77 2.54 7.04C2.84 7 3.22 7 3.5 7zm26 18h-26c-.55 0-1.5-.95-1.5-1.5V9.17l13.35 10.68a1 1 0 001.3 0L30 9.17V23.5c0 .55.05 1.5-.5 1.5z"/></svg>
+              <div>{{ self.mail }}</div>
+            </a>
+          </div>
+        {% endif %}
+
+        {% if self.phone  %}
+          <div class="my-6">
+            <a target="_blank" href="{{ self.phone.as_rfc3966 }}" class="inline-flex text-gray-900 text-lg hover:text-green-600" title="Anrufen">
+              <svg class="mr-4 mt-1 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M8.2 1.16c1.16 1.6 2.56 3.69 4.17 6.23.4.7.34 1.52-.18 2.48-.2.41-.7 1.33-1.51 2.8.88 1.24 2.23 2.78 4.05 4.6s3.33 3.16 4.54 4.05a65.76 65.76 0 012.79-1.58 3.22 3.22 0 011.51-.42c.36 0 .69.08.97.24a114 114 0 016.3 4.18c.44.32.69.76.75 1.33.06.57-.11 1.17-.51 1.82-.2.28-.53.69-.97 1.24-.45.54-1.11 1.23-2 2.06s-1.61 1.24-2.18 1.24h-.07c-4.26-.17-9.53-3.37-15.76-9.6C3.87 15.59.66 10.33.5 6.06c0-.56.41-1.3 1.25-2.21.82-.9 1.5-1.56 2.02-1.97.53-.4.97-.73 1.33-.97A2.5 2.5 0 016.62.43c.69 0 1.2.24 1.58.72zm-2 1.26c-.86.61-1.65 1.3-2.4 2.04a5.56 5.56 0 00-1.3 1.66c.16 3.75 3.16 8.54 8.99 14.35s10.62 8.82 14.37 9.02c.33-.12.86-.57 1.6-1.33s1.43-1.58 2.03-2.42c.12-.17.17-.3.12-.43-2.42-1.7-4.43-3.04-6.05-4.05-.17 0-.37.06-.6.18l-2.73 1.5-1.04.62-1.03-.67a36.37 36.37 0 01-4.84-4.3c-1.9-1.9-3.3-3.52-4.24-4.85l-.72-.97.6-1.08 1.51-2.73c.12-.24.19-.44.19-.6-1.44-2.3-2.77-4.32-3.99-6.06h-.06c-.15 0-.3.05-.42.12z"/></svg>
+              <div>
+                <div>{{ self.phone.as_national }}</div>
+                <div class="text-sm text-gray-700">{{ self.phone_hours }}</div>
+              </div>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="md:w-2/3">
+      {% comment %} heading desktop {% endcomment %}
+      <header class="hidden md:block mb-8 text-center md:text-left">
+        <h1 class="leading-none text-green-500 text-2xl xl:text-4xl font-bold mt-0 mb-2">{{ self.title }}</h1>
+        {% if self.role %}
+          <h2 class="leading-tight text-gray-700 text-lg my-0">{{ self.role }}</h2>
+        {% endif %}
+      </header>
+
+
+      {% comment %} body text {% endcomment %}
+      <div class="mb-16 md:mb-24 xl:mb-32">
+        {{ self.text }}
+      </div>
+    
+    </div>
+
+  </div>
+
+</main>
+
+
+{% endblock content %}

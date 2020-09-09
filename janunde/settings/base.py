@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "about",
     "navbar",
     "jobs",
+    "staff",
     "statistic",
     "latest_changes",
     "wagtail_ping_google",

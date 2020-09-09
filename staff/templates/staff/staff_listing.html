@@ -1,0 +1,67 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+
+<main class="px-4 max-w-4xl mx-auto">
+  {% include "core/_breadcrumbs.html" %}
+
+  <h1 class="leading-tighter text-green-500 text-3xl md:text-4xl font-bold mt-0 mb-2">{{ self.heading|default:self.title }}</h1>
+  
+  <div class="mb-16">
+    {% if self.intro %}
+      <div class="my-10">
+        {{ self.intro|richtext }}
+      </div>
+    {% endif %}
+
+    {% if self.image %}
+      {% image self.image fill-1024x512 format-jpeg as image %}
+      {% image self.image max-1920x1080 format-jpeg as big_image %}
+      <a href="{{ big_image.url }}" class="block cursor-zoom-in js-zoom-image" title="Vergrößern">
+        <img {{ image.attrs }} class="rounded shadow">
+      </a>
+      {% if self.image.attribution %}
+        <span class="text-gray-500 text-xs">{{ self.image.attribution }}</span>
+      {% endif %}
+    {% endif %}
+  </div>
+
+
+  <div class="my-24">
+    {% for department_people in people %}
+      <h2 class="mb-6 text-base font-bold">{{ department_people.department }}</h2>
+      <div class="flex flex-wrap mb-10 -mx-8 -mt-4">
+        {% for person in department_people.people %}
+          <a class="flex flex-col items-center group w-32 mx-8 my-4" href="{% pageurl person %}">
+            <div class="rounded-full overflow-hidden bg-gray-300 h-32 w-32">
+              <picture>
+                {% image person.photo fill-512x512 format-webp as image_webp %}
+                {% image person.photo fill-512x512 as image %}
+                <source srcset="{{ image_webp.url }}" type="image/webp">
+                <img class="h-full w-full transition-transform duration-200 transform group-hover:scale-105" loading="lazy" src="{{ image.url }}">
+              </picture>
+            </div>
+
+            <div class="text-gray-800 group-hover:text-gray-900 mt-2 text-center">
+              {{ person.title }}
+            </div>
+
+            <div class="text-center text-gray-600 group-hover:text-gray-800 text-xs">
+              {{ person.role }}
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if self.intro %}
+    <div class="my-10">
+      {{ self.outro|richtext }}
+    </div>
+  {% endif %}
+
+</main>
+
+
+{% endblock content %}
