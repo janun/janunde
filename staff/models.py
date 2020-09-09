@@ -22,7 +22,9 @@ from core.blocks import StandardStreamBlock
 class Employee(BasePage):
     parent_page_types = ["StaffListing"]
 
-    text = StreamField(StandardStreamBlock(), blank=True, verbose_name="Text",)
+    text = StreamField(
+        StandardStreamBlock(required=False), null=True, blank=True, verbose_name="Text",
+    )
     role = models.CharField("Rolle", max_length=255, blank=True)
     mail = models.EmailField("E-Mail", blank=True)
     phone = PhoneNumberField("Telefonnummer", blank=True)
