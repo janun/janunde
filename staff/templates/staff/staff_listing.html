@@ -17,8 +17,8 @@
     {% if self.image %}
       {% image self.image fill-1024x512 format-jpeg as image %}
       {% image self.image max-1920x1080 format-jpeg as big_image %}
-      <a href="{{ big_image.url }}" class="block cursor-zoom-in js-zoom-image" title="Vergrößern">
-        <img {{ image.attrs }} class="rounded shadow">
+      <a href="{{ big_image.url }}" class="-mx-4 md:mx-0 block cursor-zoom-in js-zoom-image" title="Vergrößern">
+        <img {{ image.attrs }} class="md:rounded md:shadow">
       </a>
       {% if self.image.attribution %}
         <span class="text-gray-500 text-xs">{{ self.image.attribution }}</span>
@@ -30,9 +30,9 @@
   <div class="my-24">
     {% for department_people in people %}
       <h2 class="mb-6 text-base font-bold">{{ department_people.department }}</h2>
-      <div class="flex flex-wrap justify-between mb-16 -mx-8 -mt-4">
+      <div class="flex flex-wrap md:justify-between mb-16 -ml-6 md:-mx-8 -mt-2">
         {% for person in department_people.people %}
-          <a class="flex flex-col items-center group w-32 mx-8 my-4" href="{% pageurl person %}">
+          <a class="flex flex-col items-center group w-32 mx-6 md:mx-8 my-2" href="{% pageurl person %}">
             <div class="rounded-full overflow-hidden bg-gray-300 h-32 w-32">
               <picture>
                 {% image person.photo fill-512x512 format-webp as image_webp %}
