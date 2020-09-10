@@ -77,7 +77,6 @@ class Employee(BasePage):
 
 class StaffListing(BasePage):
     subpage_types = ["Employee"]
-    parent_page_types = ["core.HomePage"]
 
     heading = models.CharField(
         "Überschrift", max_length=50, default="Mitarbeiter*innen"
