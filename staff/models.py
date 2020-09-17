@@ -112,7 +112,7 @@ class StaffListing(BasePage):
         context = super().get_context(request)
         context["people"] = []
         for department_db, department in Employee.DEPARTMENT_CHOICES:
-            people = Employee.objects.filter(department=department_db)
+            people = Employee.objects.filter(department=department_db).order_by("title")
             if people:
                 context["people"].append({"department": department, "people": people})
         return context
