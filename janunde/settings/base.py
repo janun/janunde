@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "wagtail_ping_google",
     "banners",
     "wimmelbilder",
+    "gridcal",
     # 'debug_toolbar',
     # 'template_profiler_panel',
     "request",

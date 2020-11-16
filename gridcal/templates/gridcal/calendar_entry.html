@@ -1,0 +1,78 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags humanize wagtailimages_tags srcset stuff %}
+
+{% block body_class %}{% endblock %}
+
+{% block content %}
+
+<main class="max-w-2xl mx-auto px-4">
+  {% include "core/_breadcrumbs.html" %}
+
+  <header class="mb-10">
+    <h1 class="leading-tighter text-green-500 text-3xl md:text-4xl font-bold mt-0 mb-2">{{ self.title }}</h1>
+    {% if self.subtitle %}
+      <h2 class="leading-tight md:leading-snug text-gray-700 text-lg md:text-xl my-0">{{ self.subtitle }}</h2>
+    {% endif %}
+
+    <div class="flex flex-wrap items-center my-6 text-sm md:-ml-10">
+      <div class="flex items-center">
+        {% if self.related_group and self.related_group.logo %}
+          <a href="{% pageurl self.related_group %}" title="{{ self.related_group.title }}" class="inline-flex items-center group my-2">
+            <div class="w-12 h-12 {% if self.author %}-mr-2{% endif %} bg-white overflow-hidden shadow border group-hover:border-gray-500 p-2 bg-white flex items-center justify-center rounded-full">
+              {% image self.related_group.logo min-100x100 as group_logo %}
+              <img {{ group_logo.attrs }} class="w-full h-full object-contain">
+            </div>
+          </a>
+        {% endif %}
+        {% if self.author %}
+          <a class="flex items-center text-gray-700 group hover:text-green-500" href="{% pageurl self.author %}" title="{{ self.author.title }}">
+            {% image self.author.photo fill-100x100 as author_photo %}
+            <img {{ author_photo.attrs }} class="w-12 h-12 mr-4 rounded-full object-contain">
+          </a>
+        {% endif %}
+      </div>
+      <div class="flex flex-col sm:flex-row flex-grow text-xs sm:text-sm ml-2">
+        {% if self.author %}
+          <a class="text-gray-700 hover:text-green-500" href="{% pageurl self.author %}">von {{ self.author.title }}</a>
+        {% endif %}
+        {% if self.related_group %}
+          <a class="hidden sm:block text-gray-700 sm:ml-2 hover:text-green-500" href="{% pageurl self.related_group %}">{{ self.related_group.title }}</a>
+        {% endif %}
+        <div class="text-gray-700 md:ml-auto">
+          vom {{ self.first_published_at|date:"d.m.Y" }}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-2xl mx-auto userim">
+    {% include_block self.body %}
+  </div>
+
+  {% if self.main_image %}
+    {% image self.main_image min-500x500 as main_image %}
+  {% endif %}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "{{ self.title }}",
+      "mainEntityOfPage": "{{ self.full_url }}",
+      "url": "{{ self.full_url }}",
+      "image": "{{ main_image.url }}",
+      "dateModified": "{{ self.last_published_at|date:'c' }}",
+      "datePublished": "{{ self.first_published_at|date:'c' }}",
+      "author": "{{ self.author|default:'JANUN' }}",
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ self.related_group.title|default:'JANUN' }}",
+        "logo":  {
+          "@type": "ImageObject",
+          "url": "{{ group_logo.url|default:'/static/core/images/favicons/favicon-194x194.png' }}"
+        }
+      }
+    }
+  </script>
+   
+</main>
+{% endblock %}

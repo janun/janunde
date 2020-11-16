@@ -1,0 +1,50 @@
+{% extends "core/__base.html" %}
+
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load stuff %}
+
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto px-4">
+
+<div class="my-8 md:my-16 xl:my-20">
+  <h1 class="text-center text-green-500 text-2xl md:text-3xl font-bold my-8 xl:my-12 py-0">
+    {% highlight self.heading self.highlight_in_heading "text-purple" %}
+  </h1>
+
+  {% if self.intro %}
+    <div class="flex flex-col items-center justify-items my-8">
+      <div class="max-w-3xl">
+        {{ self.intro | richtext }}
+      </div>
+    </div>
+  {% endif %}
+
+</div>
+
+<main>
+  <div class="md:grid grid-flow-col-dense md:grid-cols-4 gap-4">
+    {% for entry in entries %}
+      <a class="block w-56 mb-16" {% if entry.live %}href="{% pageurl entry %}"{% endif %}>
+        {% if entry.live %}
+          {% image entry.main_image fill-400x300 format-jpeg as main_image %}
+          <img {{ main_image.attrs }} loading="lazy" class="object-cover w-56">
+          <h3 class="my-4 text-sm">{{ entry.title }}</h3>
+        {% else %}
+          <div class="bg-gray-400 w-56" style="height: 168px"></div>
+          {% if entry.go_live_at %}
+            <h3 class="my-4 text-sm">verfügbar ab {{ entry.go_live_at|date:"d.m.Y H:i" }}</h3>
+          {% else %}
+            <h3 class="my-4 text-sm">nicht veröffentlicht</h3>
+          {% endif %}
+        {% endif %}
+      </a>
+    {% endfor %}
+  </div>
+</main>
+
+
+</div>
+{% endblock %}
