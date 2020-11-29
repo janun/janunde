@@ -6,7 +6,9 @@
 {% endblock %}
 
 {% block content %}
-  {{ confirmation_mail_text|richtext }}
+  <div class="rich-text">
+    {{ confirmation_mail_text|richtext }}
+  </div>
 {% endblock %}
 
 {% block footer_content %}

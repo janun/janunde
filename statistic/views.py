@@ -7,6 +7,7 @@ from django.db.models.functions import TruncHour
 from django.urls import reverse
 
 from wagtail.admin.views.reports import SpreadsheetExportMixin
+from wagtail.core.models import Site
 
 import django_filters
 import pandas
@@ -25,12 +26,14 @@ class StatisticView(TemplateView):
         context = super().get_context_data(**kwargs)
         queryset = Request.objects.exclude(user__isnull=False)  # exclude logged in
 
+        site = Site.find_for_request(self.request)
+
         unique_visits = (
-            queryset.exclude(referer__startswith=self.request.site.root_url)
+            queryset.exclude(referer__startswith=site.root_url)
             .exclude(
-                referer__startswith=self.request.site.root_url.replace("https", "http")
+                referer__startswith=site.root_url.replace("https", "http")
             )
-            .exclude(referer__startswith=self.request.site.root_url.replace("www", ""))
+            .exclude(referer__startswith=site.root_url.replace("www", ""))
         )
 
         context["visits_today"] = unique_visits.today().count()

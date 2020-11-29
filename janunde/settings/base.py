@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     "jobs",
     "staff",
     "statistic",
-    "latest_changes",
+    #"latest_changes",
     "wagtail_ping_google",
     "banners",
     "wimmelbilder",
@@ -80,7 +80,6 @@ MIDDLEWARE = [
     "statistic.middleware.StatisticMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "wagtail.core.middleware.SiteMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "django.middleware.gzip.GZipMiddleware",
 ]
