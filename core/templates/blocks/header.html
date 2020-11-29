@@ -19,7 +19,7 @@
           {% image self.background height-600 format-jpeg as background_jpg_mobile %}
           <source srcset="{{ background_jpg_mobile.url }}" type="image/jpg">
 
-          <img src="{{ background_png.url }}" class="max-w-none h-400 md:h-500 lg:h-1000 xl:h-1100 xxl:h-1200">
+          <img alt="" src="{{ background_png.url }}" class="max-w-none h-400 md:h-500 lg:h-1000 xl:h-1100 xxl:h-1200">
         </picture>
       </div>
       {% endif %}

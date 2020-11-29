@@ -9,7 +9,7 @@
         {% image social_media.icon_color original format-webp as icon_webp %}
         <source srcset="{{ icon_webp.url }}" type="image/webp">
         {% image social_media.icon_color original as icon %}
-        <img class="w-6 xl:w-7" loading="lazy" src="{{ icon.url }}">
+        <img alt="" class="w-6 xl:w-7" loading="lazy" src="{{ icon.url }}">
       </picture>
     </a>
     {% endfor %}
