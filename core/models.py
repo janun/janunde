@@ -529,17 +529,17 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
                 return Truncator(text).words(25)
 
     related_group = models.ForeignKey(
-        Group,
+        "core.Group",
+        verbose_name="Zugehörige Gruppe",
         null=True,
         blank=True,
         related_name="articles",
         on_delete=models.SET_NULL,
-        verbose_name="Zugehörige Gruppe",
         help_text="Eine JANUN-Gruppe, die diesem Artikel zugeordnet ist",
     )
 
     author = models.ForeignKey(
-        "contact.PersonPage",
+        "staff.Employee",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -553,7 +553,7 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
             heading="Titel",
         ),
         FieldPanel("author"),
-        FieldPanel("related_group", "core.Group"),
+        FieldPanel("related_group"),
         ImageChooserPanel("main_image"),
         StreamFieldPanel("body"),
     ]
