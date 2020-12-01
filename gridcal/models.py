@@ -19,6 +19,16 @@ class GridCalendar(BasePage):
     subpage_types = ["CalendarEntry"]
     parent_page_types = ["core.HomePage"]
 
+    main_image = models.ForeignKey(
+        Image,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+        verbose_name="Bild für Übersichten",
+        help_text="Bild, das den Artikel repräsentiert. Wird in Übersichten verwendet.",
+    )
+
     heading = models.CharField("Überschrift", max_length=255)
     highlight_in_heading = models.CharField(
         "Hervorhebungen in der Überschrift",
@@ -35,6 +45,9 @@ class GridCalendar(BasePage):
         help_text="Normalerweise werden unveröffentlichte Einträge gar nicht angezeigt",
     )
 
+    def get_description(self):
+        return self.heading
+
     content_panels = [
         MultiFieldPanel(
             [
@@ -44,6 +57,7 @@ class GridCalendar(BasePage):
             ],
             heading="Titel",
         ),
+        ImageChooserPanel("main_image"),
         FieldPanel("intro"),
         FieldPanel("show_placeholder_for_unpublished"),
     ]
