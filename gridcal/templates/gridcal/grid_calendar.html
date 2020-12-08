@@ -25,15 +25,19 @@
 </div>
 
 <main>
-  <div class="md:grid grid-flow-col-dense md:grid-cols-4 gap-4">
+  <div class="sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
     {% for entry in entries %}
-      <a class="block w-56 mb-16" {% if entry.live %}href="{% pageurl entry %}"{% endif %}>
+      <a class="block w-full sm:w-56 mb-12" {% if entry.live %}href="{% pageurl entry %}"{% endif %}>
         {% if entry.live %}
-          {% image entry.main_image fill-400x300 format-jpeg as main_image %}
-          <img {{ main_image.attrs }} loading="lazy" class="object-cover w-56">
+          {% if entry.main_image %}
+            {% image entry.main_image fill-400x300 format-jpeg as main_image %}
+            <img {{ main_image.attrs }} loading="lazy" class="object-cover w-full sm:w-56">
+          {% else %}
+            <div class="w-full sm:w-56 h-40 bg-gray-400"></div>
+          {% endif %}
           <h3 class="my-4 text-sm">{{ entry.title }}</h3>
         {% else %}
-          <div class="bg-gray-400 w-56" style="height: 168px"></div>
+          <div class="bg-gray-400 w-full sm:w-56" style="height: 168px"></div>
           {% if entry.go_live_at %}
             <h3 class="my-4 text-sm">verfügbar ab {{ entry.go_live_at|date:"d.m.Y H:i" }}</h3>
           {% else %}
