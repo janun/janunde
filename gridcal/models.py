@@ -6,7 +6,6 @@ from wagtail.admin.edit_handlers import (
     StreamFieldPanel,
     MultiFieldPanel,
 )
-from wagtail.core.models import PageManager
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 

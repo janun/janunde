@@ -27,8 +27,9 @@
 <main>
   <div class="sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
     {% for entry in entries %}
-      <a class="block w-full sm:w-56 mb-12" {% if entry.live %}href="{% pageurl entry %}"{% endif %}>
-        {% if entry.live %}
+
+      {% if entry.live %}
+        <a class="block w-full sm:w-56 mb-12" href="{% pageurl entry %}">
           {% if entry.main_image %}
             {% image entry.main_image fill-400x300 format-jpeg as main_image %}
             <img {{ main_image.attrs }} loading="lazy" class="object-cover w-full sm:w-56">
@@ -36,15 +37,15 @@
             <div class="w-full sm:w-56 h-40 bg-gray-400"></div>
           {% endif %}
           <h3 class="my-4 text-sm">{{ entry.title }}</h3>
-        {% else %}
-          <div class="bg-gray-400 w-full sm:w-56" style="height: 168px"></div>
-          {% if entry.go_live_at %}
-            <h3 class="my-4 text-sm">verfügbar ab {{ entry.go_live_at|date:"d.m.Y H:i" }}</h3>
-          {% else %}
-            <h3 class="my-4 text-sm">nicht veröffentlicht</h3>
-          {% endif %}
-        {% endif %}
-      </a>
+        </a>
+
+      {% elif entry.approved_schedule %}
+        <div class="block w-full sm:w-56 mb-12">
+          <div class="w-full sm:w-56 h-40 bg-gray-400"></div>
+          <h3 class="my-4 text-sm">verfügbar ab {{ entry.go_live_at|date:"d.m.Y H:i" }}</h3>
+        </div>
+      {% endif %}
+
     {% endfor %}
   </div>
 </main>
