@@ -373,11 +373,9 @@ class Group(BasePage):
         ),
         StreamFieldPanel("body"),
     ]
-    promote_panels = [
+    promote_panels = BasePage.promote_panels + [
         FieldPanel("list_on_group_index_page"),
     ]
-
-    settings_panels = None
 
     partial_template_name = "core/_group.html"
 
