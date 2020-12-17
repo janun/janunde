@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     "jobs",
     "staff",
     "statistic",
-    #"latest_changes",
+    # "latest_changes",
     "wagtail_ping_google",
     "banners",
     "wimmelbilder",
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django_filters",
     "form_utils",
     "softhyphen",
+    "wagtailmedia",
     "wagtail.contrib.table_block",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.settings",
@@ -252,3 +253,6 @@ REQUEST_IGNORE_USER_AGENTS = (
 REQUEST_VALID_METHOD_NAMES = ("get", "post")
 
 REQUEST_ANONYMOUS_IP = True
+
+
+WAGTAILMEDIA_MEDIA_FORM_BASE = "core.forms.BaseMediaForm"

@@ -5,6 +5,8 @@ from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.core.models import Collection
 
+from wagtailmedia.blocks import AbstractMediaChooserBlock
+
 from .images import AttributedImage as Image
 
 
@@ -160,7 +162,7 @@ class OurEmbedBlock(blocks.StructBlock):
     size = SizeChoiceBlock(default="text-width")
 
     class Meta:
-        label = "externe Medien"
+        label = "externe Medien (alt)"
         icon = "media"
         template = "blocks/embed.html"
 
@@ -209,7 +211,7 @@ class IframeBlock(blocks.StructBlock):
     width = blocks.DecimalBlock(default="1000", label="Breite", help_text="in px")
 
     class Meta:
-        label = "Iframe"
+        label = "Iframe (alt)"
         icon = "media"
         template = "blocks/iframe.html"
 
@@ -229,6 +231,13 @@ class VideoLink(blocks.StructBlock):
         label = "Link zu Video"
         icon = "media"
         template = "blocks/video_link.html"
+
+
+class MediaUploadBlock(AbstractMediaChooserBlock):
+    class Meta:
+        label = "Video/Audio-Upload"
+        icon = "media"
+        template = "blocks/media_upload.html"
 
 
 class StandardStreamBlock(blocks.StreamBlock):
@@ -255,6 +264,7 @@ class StandardStreamBlock(blocks.StreamBlock):
     map_image = MapImage()
     iframe = IframeBlock()
     video_link = VideoLink()
+    media = MediaUploadBlock()
 
 
 ####### Homepage Blocks

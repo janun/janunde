@@ -1,0 +1,22 @@
+<div class="w-full my-16">
+
+  {% if value.type == "video" %}
+    <video width="320" height="240" controls class="w-full" {% if value.thumbnail %}poster="{{ value.thumbnail.url }}"{% endif %}>
+      {% for source in value.sources %}
+        <source src="{{ source.src }}" type="{{ source.type }}">
+      {% endfor %}
+        Your browser does not support the video tag.
+    </video>
+
+  {% elif value.type == "audio" %}
+    <audio controls class="w-full">
+      {% for source in value.sources %}
+        <source src="{{ source.src }}" type="{{ source.type }}" {% if value.thumbnail %}poster="{{ value.thumbnail.url }}"{% endif %}>
+      {% endfor %}
+        Your browser does not support the audio tag.
+    </audio>
+  {% endif %}
+
+  <p class="mt-2">{{ value.title }}</p>
+
+</div>
