@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     # 'debug_toolbar',
     # 'template_profiler_panel',
     "request",
+    "wagtailinventory",
     "django_filters",
     "form_utils",
     "softhyphen",

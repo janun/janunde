@@ -23,6 +23,7 @@ django-filter = "*"
 altair = "*"
 django-node-assets = "*"
 wagtailmedia = "*"
+wagtail-inventory = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
