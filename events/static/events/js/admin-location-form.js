@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   // location bias for Hanover
-  var api = "https://photon.komoot.de/api/?&lat=52.3892058&lon=9.7412133&lang=de&limit=5&q=";
+  var api = "https://nominatim.openstreetmap.org/search/?format=json&limit=5&namedetails=1&addressdetails=1&q=";
 
   var nameField = document.querySelector("#id_location_name");
   var addressField = document.querySelector("#id_location_address");
@@ -66,8 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // response
   function handleResponse() {
-    var data = JSON.parse(this.responseText);
-    var results = data.features;
+    var results = JSON.parse(this.responseText);
     dropdown.innerHTML = "";
     dropdown.classList.add("open");
 
@@ -81,18 +80,17 @@ document.addEventListener("DOMContentLoaded", function () {
     results.forEach(function (result) {
       var item = document.createElement("button");
       item.setAttribute("type", "button");
-      var props = result.properties;
       item.className = "myitem";
-      item.innerHTML = formatResult(props);
+      item.innerHTML = result.display_name
       dropdown.appendChild(item);
 
       // on item click
       item.addEventListener("click", function () {
-        nameField.value = props.name || "";
-        addressField.value = (props.street || "") + " " + (props.housenumber || "");
-        postalcodeField.value = props.postcode || "";
-        cityField.value = props.city || "";
-        countryField.value = props.country || "";
+        nameField.value = result.namedetails.name || "";
+        addressField.value = (result.address.road || "") + " " + (result.address.house_number || "");
+        postalcodeField.value = result.address.postcode || "";
+        cityField.value = result.address.city || "";
+        countryField.value = result.address.country || "";
         dropdown.classList.add("close");
         dropdown.classList.remove("open");
       });
