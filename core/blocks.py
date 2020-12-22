@@ -1,5 +1,5 @@
 from wagtail.core import blocks
-from wagtail.embeds.blocks import EmbedBlock
+from wagtail.embeds.blocks import EmbedBlock  #  needed for old migration
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.contrib.table_block.blocks import TableBlock
@@ -8,15 +8,6 @@ from wagtail.core.models import Collection
 from wagtailmedia.blocks import AbstractMediaChooserBlock
 
 from .images import AttributedImage as Image
-
-
-COLOR_CHOICES = [
-    ("green", "Grün"),
-    ("red", "Rot"),
-    ("blue", "Blau"),
-    ("orange", "Orange"),
-    ("purple", "Lila"),
-]
 
 
 class SizeChoiceBlock(blocks.ChoiceBlock):
@@ -42,7 +33,7 @@ class ImageBlock(blocks.StructBlock):
 
 class ImageCarouselBlock(blocks.StructBlock):
     image = ImageChooserBlock(label="Bild")
-    caption = blocks.CharBlock(label="opt. Beschrift.", required=False)
+    caption = blocks.CharBlock(label="Bildunterschrift", required=False)
 
     class Meta:
         icon = "image"
@@ -153,49 +144,11 @@ class Attachment(DocumentChooserBlock):
         template = "blocks/attachment.html"
 
 
-class OurEmbedBlock(blocks.StructBlock):
-    embed = EmbedBlock(
-        label="URL",
-        help_text="von z.B. einem Youtube-Video, Facebook-Post, Instagram-Bild, …",
-    )
-    caption = blocks.CharBlock(label="opt. Beschrift.", required=False)
-    size = SizeChoiceBlock(default="text-width")
-
-    class Meta:
-        label = "externe Medien (alt)"
-        icon = "media"
-        template = "blocks/embed.html"
-
-
 class ParagraphBlock(blocks.RichTextBlock):
     class Meta:
         label = "Absatz"
         icon = "pilcrow"
         template = "blocks/paragraph.html"
-
-
-class MapImage(blocks.StructBlock):
-    tile_url = blocks.URLBlock(
-        label="Kachel-URL",
-        required=True,
-        help_text="URL zu den Kacheln, aus denen das Bild besteht. Benutze {z}, {x}, {y} in der URL für die Koordinaten",
-    )
-    height = blocks.DecimalBlock(
-        required=True, label="Höhe", help_text="in speziellen Leaflet Einheiten"
-    )
-    width = blocks.DecimalBlock(
-        required=True, label="Breite", help_text="in speziellen Leaflet Einheiten"
-    )
-    attribution = blocks.CharBlock(
-        label="Urheber",
-        help_text="Wird unten rechts im Bild angezeigt.",
-        required=False,
-    )
-
-    class Meta:
-        label = "Map-Bild"
-        icon = "media"
-        template = "blocks/map_image.html"
 
 
 class IframeBlock(blocks.StructBlock):
@@ -205,13 +158,13 @@ class IframeBlock(blocks.StructBlock):
         help_text="URL zu der Website, die mittels Iframe eingebunden werden soll.",
     )
 
-    allowFullScreen = blocks.BooleanBlock(label="Vollbild erlauben?", required=False,)
+    allowFullScreen = blocks.BooleanBlock(label="Vollbild erlauben?", required=False)
 
     height = blocks.DecimalBlock(default="1000", label="Höhe", help_text="in px")
     width = blocks.DecimalBlock(default="1000", label="Breite", help_text="in px")
 
     class Meta:
-        label = "Iframe (alt)"
+        label = "Iframe"
         icon = "media"
         template = "blocks/iframe.html"
 
@@ -257,11 +210,9 @@ class StandardStreamBlock(blocks.StreamBlock):
     image = ImageBlock()
     several_images = ImagesBlock(ImageCarouselBlock)
     gallery = ImageGalleryBlock()
-    embed = OurEmbedBlock()
     button = Button()
     attachment = Attachment()
-    table = TableBlock()
-    map_image = MapImage()
+    table = TableBlock(label="Tabelle")
     iframe = IframeBlock()
     video_link = VideoLink()
     media = MediaUploadBlock()
