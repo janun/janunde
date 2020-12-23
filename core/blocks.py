@@ -33,10 +33,18 @@ class ImageBlock(blocks.StructBlock):
 
 class ImageCarouselBlock(blocks.StructBlock):
     image = ImageChooserBlock(label="Bild")
-    caption = blocks.CharBlock(label="Bildunterschrift", required=False)
+    caption = blocks.CharBlock(
+        label="Bildunterschrift",
+        required=False,
+        features=["bold", "italic", "link"],
+        css_class="col-6",
+    )
+    link = blocks.URLBlock(required=False,)
+    crop = blocks.BooleanBlock(label="zuschneiden", default=True, required=False,)
 
     class Meta:
         icon = "image"
+        form_template = "blocks/image_form.html"
         label = "Bild"
 
 
@@ -46,29 +54,25 @@ class ImagesBlock(blocks.ListBlock):
             value, parent_context=parent_context
         )
         count = len(context["self"])
-        context["aspect"] = 66.66
-        context["srcset"] = "fill-300x200 fill-600x400 fill-900x600 fill-1200x800"
-        if count == 1:
-            context["srcset"] = "width-320 width-640 width-960 width-1280"
-            context["sizes"] = "(min-width: 830px) 830px, 100vw"
-            context["multiple"] = 1
-            context["aspect"] = context["self"][0].get("image").aspect
-        elif count % 4 == 0:
-            context["sizes"] = "(min-width: 830px) 208px, 100vw"
-            context["multiple"] = 4
-        elif count % 3 == 0 or count in (5, 7, 10):
-            context["sizes"] = "(min-width: 830px) 267px, 100vw"
+        context["count"] = count
+
+        if count < 5:
+            context["multiple"] = count
+            return context
+
+        if count == 5:
             context["multiple"] = 3
-        elif count % 2 == 0:
-            context["sizes"] = "(min-width: 830px) 405px, 100vw"
-            context["multiple"] = 2
-        else:
-            context["sizes"] = "(min-width: 830px) 405px, 50vw"
-            context["multiple"] = 2
+            return context
+
+        if count % 3 == 0 and count < 10:
+            context["multiple"] = 3
+            return context
+
+        context["multiple"] = 4
         return context
 
     class Meta:
-        template = ("blocks/several_images.html",)
+        template = "blocks/several_images.html"
         label = "Bilder"
         icon = "image"
 

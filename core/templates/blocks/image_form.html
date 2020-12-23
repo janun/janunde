@@ -1,0 +1,37 @@
+<div class="{{ classname }}">
+  {% if help_text %}
+    <div class="object-help help">{{ help_text }}</div>
+  {% endif %}
+
+  <div class="row">
+    <div class="col6">
+      {% for child in children.values %}
+        {% if forloop.counter == 1 %}
+          <div{% if child.block.required %} class="required"{% endif %}>
+            {% if child.block.label %}
+              <label{% if child.id_for_label %} for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}:</label>
+            {% endif %}
+            {{ child.render_form }}
+          </div>
+        {% endif %}
+      {% endfor %} 
+    </div>
+
+    <div class="col6">
+      {% for child in children.values %}
+        {% if forloop.counter != 1 %}
+          <div{% if child.block.required %} class="required"{% endif %}>
+            {% if child.block.label %}
+              <label{% if child.id_for_label %} for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}:</label>
+            {% endif %}
+            {{ child.render_form }}
+          </div>
+        {% endif %}
+      {% endfor %} 
+    </div>
+  </div>
+
+    
+    
+
+</div>

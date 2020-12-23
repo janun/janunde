@@ -1,5 +1,235 @@
-<div class="images images--{{ multiple }}">
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="js-zoom-images grid {% if multiple > 1 %}grid-cols-2{% endif %} sm:grid-cols-{{multiple}} gap-4 my-10 -userim-mx-20">
   {% for item in self %}
-    {% include "core/_image.html" with class='images__item' image=item.image caption=item.caption srcset=srcset sizes=sizes aspect=aspect%}
+    <div class="">
+      {% if item.crop %}
+        {% if count < 3 %}
+          {% image item.image fill-1000x750 format-jpeg as block_image %}
+        {% else %}
+          {% image item.image fill-500x375 format-jpeg as block_image %}
+        {% endif %}
+      {% else %}
+        {% image item.image width-500 as block_image %}
+      {% endif %}
+      <a {% if item.link %}href="{{item.link}}"{% else %}href="#" data-number="{{forloop.counter}}" class="block js-zoom-images-image cursor-zoom-in" title="Vergrößern"{% endif %}>
+        <img {{ block_image.attrs }} loading="lazy" class="rounded shadow-sm w-full">
+      </a>
+      <div class="mt-2 flex flex-wrap items-baseline text-sm">
+        {% if item.caption %}
+          <span class="rich-text -my-4 text-gray-700 mr-2">{{ item.caption|richtext }}</span>
+        {% endif %}
+        {% if item.image.attribution %}
+          <span class="text-gray-500 text-xs">{{ item.image.attribution }}</span>
+        {% endif %}
+      </div>
+    </div>
   {% endfor %}
+
+  <div class="js-zoom-images-container hidden transition-opacity duration-200 opacity-0 fixed inset-0 bg-black-90 p-2 sm:p-10 flex justify-center items-center w-screen h-screen z-50">
+    <button class="js-zoom-images-close absolute top-0 right-0 m-2 sm:m-6 p-2 outline-none rounded-full text-white hover:text-gray-500">
+      <svg type="button" title="Schließen" class="fill-current h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"></svg>
+    </button>
+
+    {% for item in self %}
+      <div class="js-zoom-images-bigimage hidden" data-number="{{forloop.counter}}">
+        {% image item.image max-1280x1080 format-jpeg as big_image %}
+        <img loading="lazy" class="rounded-lg max-w-full" style="max-height: 90vh" src="{{ big_image.url }}">
+        <div class="hidden mt-2 md:flex flex-wrap items-baseline max-w-4xl">
+          {% if item.caption %}
+            <span class="rich-text text-white mr-2">{{ item.caption|richtext }}</span>
+          {% endif %}
+          {% if item.image.attribution %}
+            <span class="text-gray-500 text-xs">{{ item.image.attribution }}</span>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+
+    <button class="{% if count == 1 %}hidden{% endif %} js-zoom-images-prev text-white md:hover:text-gray-500 absolute left-0 py-16 px-4 outline-none">
+      <svg class="h-8 w-8 xl:h-14 xl:w-14" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+    <button class="{% if count == 1 %}hidden{% endif %} js-zoom-images-next text-white md:hover:text-gray-500 absolute right-0 py-16 px-4 outline-none">
+      <svg class="h-8 w-8 xl:h-14 xl:w-14" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+
+    <div class="{% if count == 1 %}hidden{% endif %} absolute bottom-0 inset-x flex items-center mb-20 md:mb-4">
+      <div class="flex">
+        {% for item in self %}
+          <button loading="lazy" class="block outline-none js-zoom-images-button " data-number="{{forloop.counter}}">
+            <div class="rounded-full border-2 border-white opacity-75 h-2 w-2 md:h-3 md:w-3 m-1"></div>
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
 </div>
+
+
+<script>
+document.querySelectorAll(".js-zoom-images").forEach(block => {
+
+  let images = block.querySelectorAll(".js-zoom-images-image")
+  let bigImages = block.querySelectorAll(".js-zoom-images-bigimage")
+  let container = block.querySelector(".js-zoom-images-container")
+  let closeButton = block.querySelector(".js-zoom-images-close")
+  let buttons = block.querySelectorAll(".js-zoom-images-button")
+  let prevButton = block.querySelector(".js-zoom-images-prev")
+  let nextButton = block.querySelector(".js-zoom-images-next")
+  let hash = "#zoom-image"
+  let activeImage = 0
+
+  function open() {
+    container.classList.remove("hidden");
+    setTimeout(function () {
+      container.classList.remove("opacity-0");
+      container.classList.add("opacity-100");
+    }, 20);
+    window.location.hash = hash;
+    document.body.classList.add("overflow-y-hidden");
+  }
+
+  function close(noback) {
+    container.classList.add("opacity-0");
+    container.classList.remove("opacity-100");
+    container.addEventListener("transitionend", function () {
+      container.classList.add("hidden");
+    }, { once: true });
+    if (!noback) history.back();
+    document.body.classList.remove("overflow-y-hidden");
+  }
+
+  function showImage(n) {
+    activeImage = parseInt(n)
+    bigImages.forEach((image) => {
+      if (image.dataset.number == n) {
+        image.classList.remove("hidden")
+      } else {
+        image.classList.add("hidden")
+      }
+    })
+
+    buttons.forEach((button) => {
+      if (button.dataset.number == n) {
+        button.children[0].classList.add("bg-white")
+      } else {
+        button.children[0].classList.remove("bg-white")
+      }
+    })
+  }
+
+  function next() {
+    if (activeImage < images.length) {
+      showImage(activeImage + 1)
+    }
+  }
+
+  function prev() {
+    if (activeImage != 1) {
+      showImage(activeImage - 1)
+    }
+  }
+
+  // open on click
+  images.forEach((img) => {
+    img.addEventListener("click", (event) => {
+      event.preventDefault()
+      open()
+      showImage(img.dataset.number)
+    })
+  })
+
+  // close on back
+  window.addEventListener("hashchange", (event) => {
+    if (!container.classList.contains("hidden") && window.location.hash !== hash) {
+      event.preventDefault()
+      close(true)
+    }
+  })
+
+  // close on closeButton
+  closeButton.addEventListener("click", close)
+
+  // close on click on background
+  container.addEventListener("click", (event) => {
+    if (event.target.classList.contains("js-zoom-images-container")) {
+      event.preventDefault()
+      close()
+    }
+  })
+
+  // close on Escape
+  document.addEventListener("keydown", (event) => {
+    if ((event.key === "Escape" || event.key === "Esc") && !container.classList.contains("hidden")) {
+      event.preventDefault()
+      close()
+    }
+  })
+
+  // next on right
+  document.addEventListener("keydown", (event) => {
+    if ((event.key === "ArrowRight" || event.key === "Right") && !container.classList.contains("hidden")) {
+      event.preventDefault()
+      next()
+    }
+  })
+
+  nextButton.addEventListener("click", (event) => {
+    event.preventDefault()
+    next()
+  })
+
+  // prev on left
+  document.addEventListener("keydown", (event) => {
+    if ((event.key === "ArrowLeft" || event.key === "Left") && !container.classList.contains("hidden")) {
+      event.preventDefault()
+      prev()
+    }
+  })
+
+  prevButton.addEventListener("click", (event) => {
+    event.preventDefault()
+    prev()
+  })
+
+  // jump to image
+  buttons.forEach(button => button.addEventListener("click", event => {
+    event.preventDefault()
+    showImage(button.dataset.number)
+  }))
+
+  // swipe
+  let dist;
+  let startX;
+  let startY;
+  let startTime;
+  container.addEventListener("touchstart", event => {
+    let touchobj = event.changedTouches[0]
+    dist = 0
+    startX = touchobj.pageX
+    startY = touchobj.pageY
+    startTime = new Date().getTime()
+  }, false)
+
+  container.addEventListener("touchend", event => {
+    let touchobj = event.changedTouches[0]
+    dist = touchobj.pageX - startX
+    elapsedTime = new Date().getTime() - startTime
+    // check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
+    if (elapsedTime <= 250 && Math.abs(dist) >= 100 && Math.abs(touchobj.pageY - startY) <= 100) {
+      if (dist > 0) {
+        prev()
+      } else {
+        next()
+      }
+      event.preventDefault()
+    }
+  }, false)
+
+})
+</script>
