@@ -17,7 +17,7 @@
       </a>
       <div class="mt-2 flex flex-wrap items-baseline text-sm">
         {% if item.caption %}
-          <span class="rich-text -my-4 text-gray-700 mr-2">{{ item.caption|richtext }}</span>
+          <span class="rich-text text-gray-700 mr-2">{{ item.caption }}</span>
         {% endif %}
         {% if item.image.attribution %}
           <span class="text-gray-500 text-xs">{{ item.image.attribution }}</span>
@@ -37,7 +37,7 @@
         <img loading="lazy" class="rounded-lg max-w-full" style="max-height: 90vh" src="{{ big_image.url }}">
         <div class="hidden mt-2 md:flex flex-wrap items-baseline max-w-4xl">
           {% if item.caption %}
-            <span class="rich-text text-white mr-2">{{ item.caption|richtext }}</span>
+            <span class="rich-text text-white mr-2">{{ item.caption }}</span>
           {% endif %}
           {% if item.image.attribution %}
             <span class="text-gray-500 text-xs">{{ item.image.attribution }}</span>
