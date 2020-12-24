@@ -1,5 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
+<!-- md:grid-cols-3 md:grid-cols-4 -->
 <div class="js-zoom-images grid {% if multiple > 1 %}grid-cols-2{% endif %} md:grid-cols-{{multiple}} gap-4 my-10 -userim-mx-20">
   {% for item in self %}
     <div class="">
