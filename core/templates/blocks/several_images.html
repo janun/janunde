@@ -95,13 +95,13 @@ document.querySelectorAll(".js-zoom-images").forEach(block => {
   }
 
   function close(noback) {
-    container.classList.add("opacity-0");
-    container.classList.remove("opacity-100");
+    container.classList.add("opacity-0")
+    container.classList.remove("opacity-100")
     container.addEventListener("transitionend", function () {
-      container.classList.add("hidden");
-    }, { once: true });
-    if (!noback) history.back();
-    document.body.classList.remove("overflow-y-hidden");
+      container.classList.add("hidden")
+    }, { once: true })
+    if (!noback) window.location.hash = ""
+    document.body.classList.remove("overflow-y-hidden")
   }
 
   function showImage(n) {
@@ -153,12 +153,15 @@ document.querySelectorAll(".js-zoom-images").forEach(block => {
   })
 
   // close on closeButton
-  closeButton.addEventListener("click", close)
+  closeButton.addEventListener("click", () => {
+    if (!container.classList.contains("hidden")) {
+      close()
+    }
+  })
 
   // close on click on background
   container.addEventListener("click", (event) => {
-    if (event.target.classList.contains("js-zoom-images-container")) {
-      event.preventDefault()
+    if (!container.classList.contains("hidden") && event.target === container) {
       close()
     }
   })
