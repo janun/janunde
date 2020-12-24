@@ -94,13 +94,12 @@ document.querySelectorAll(".js-zoom-images").forEach(block => {
     document.body.classList.add("overflow-y-hidden");
   }
 
-  function close(noback) {
+  function close() {
     container.classList.add("opacity-0")
     container.classList.remove("opacity-100")
     container.addEventListener("transitionend", function () {
       container.classList.add("hidden")
     }, { once: true })
-    if (!noback) window.location.hash = ""
     document.body.classList.remove("overflow-y-hidden")
   }
 
@@ -148,7 +147,7 @@ document.querySelectorAll(".js-zoom-images").forEach(block => {
   window.addEventListener("hashchange", (event) => {
     if (!container.classList.contains("hidden") && window.location.hash !== hash) {
       event.preventDefault()
-      close(true)
+      close()
     }
   })
 
