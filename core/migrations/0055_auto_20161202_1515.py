@@ -9,13 +9,10 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contact', '0009_auto_20161201_2007'),
-        ('core', '0054_project'),
+        # ('contact', '0009_auto_20161201_2007'),
+        ("core", "0054_project"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='standardpage',
-            name='author',
-        ),
+        migrations.RemoveField(model_name="standardpage", name="author",),
     ]

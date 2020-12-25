@@ -7,14 +7,21 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contact', '0022_auto_20200519_1126'),
-        ('core', '0091_auto_20200605_2037'),
+        # ('contact', '0022_auto_20200519_1126'),
+        ("core", "0091_auto_20200605_2037"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='article',
-            name='author',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='pages', to='contact.PersonPage', verbose_name='Autor_in'),
+            model_name="article",
+            name="author",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="pages",
+                to="contact.PersonPage",
+                verbose_name="Autor_in",
+            ),
         ),
     ]
