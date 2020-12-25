@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     "jobs",
     "staff",
     "statistic",
-    # "latest_changes",
     "wagtail_ping_google",
     "banners",
     "wimmelbilder",
