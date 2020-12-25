@@ -344,7 +344,7 @@ class EventPage(Page, HyphenatedTitleMixin):
     represents an event
     """
 
-    subpage_types = ["contact.PersonPage", "core.StandardPage", "core.FormPage"]
+    subpage_types = ["core.StandardPage", "core.FormPage"]
     parent_page_types = ["EventIndexPage"]
     base_form_class = EventPageForm
     og_type = "article"

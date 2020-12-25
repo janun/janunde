@@ -9,14 +9,21 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contact', '0006_auto_20160913_1709'),
-        ('core', '0039_remove_standardpage_author'),
+        # ('contact', '0006_auto_20160913_1709'),
+        ("core", "0039_remove_standardpage_author"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='standardpage',
-            name='author',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='pages', to='contact.PersonPage', verbose_name='Autor_in'),
+            model_name="standardpage",
+            name="author",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="pages",
+                to="contact.PersonPage",
+                verbose_name="Autor_in",
+            ),
         ),
     ]

@@ -13,7 +13,7 @@ import wagtail.images.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("contact", "0022_auto_20200519_1126"),
+        # ("contact", "0022_auto_20200519_1126"),
         ("core", "0088_auto_20200409_1859"),
     ]
 
