@@ -9,7 +9,7 @@
   {% for block in self.content %}
     <div class="md:flex mb-24">
       <div class="md:w-1/2">
-        <h2 class="mt-0 text-xl md:text-3xl text-green-500 font-bold">{{ block.value.heading }}</h2>
+        <h2 class="mt-0 mb-3 text-xl md:text-3xl text-green-500 font-bold">{{ block.value.heading }}</h2>
 
         <div class="text-gray-700">
           {{ block.value.text }}
@@ -40,7 +40,7 @@
           <div class="my-6 flex">
             <svg class="mr-4 mt-1 h-4 w-4 fill-current flex-shrink-0" width="32" height="32" viewBox="0 0 32 32"><path d="M16.11-.01A12.33 12.33 0 004 12.19c0 6.93 6.44 14.02 10.77 19 .02.02.72.8 1.58.8h.07c.87 0 1.56-.78 1.58-.8 4.06-4.67 10-12.38 10-19C28 5.58 23.67 0 16.11 0zm.4 29.86l-.13.1-.13-.1-.52-.6C11.63 24.54 6 18.09 6 12.19A10.3 10.3 0 0116.1 2c6.83 0 9.89 5.12 9.89 10.2 0 4.48-3.2 10.42-9.49 17.66zm-.48-23.8a6 6 0 100 12 6 6 0 000-12zm0 10C13.84 16.04 12 14.2 12 12a4 4 0 018 0 4 4 0 01-3.95 4.04z"/></svg>
             <div>
-              <div class="text-gray-900 text-lg -mt-4 -mb-2">{{ block.value.address|richtext }}</div>
+              <div class="text-gray-900 text-lg leading-tight">{{ block.value.address|richtext }}</div>
               <div class="flex space-x-4 text-sm text-gray-700">
                 {% if block.value.address_google %}
                   <a href="{{ block.value.address_google }}" class="hover:text-gray-900" title="Auf Google Maps anzeigen">Google Maps</a>
