@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        # ('contact', '0006_auto_20160913_1709'),
+        ('contact', '0006_auto_20160913_1709'),
         ("core", "0039_remove_standardpage_author"),
     ]
 

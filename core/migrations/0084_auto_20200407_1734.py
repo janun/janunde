@@ -40,7 +40,7 @@ def add_article_author(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        # ("contact", "0021_auto_20200405_1652"),
+        ("contact", "0021_auto_20200405_1652"),
         ("wagtailcore", "0045_assign_unlock_grouppagepermission"),
         ("core", "0083_auto_20200405_1652"),
     ]

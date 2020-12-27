@@ -8,6 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('core', '0093_delete_banner'),
+        ('staff', '0007_auto_20200909_2315'),
     ]
 
     operations = [
