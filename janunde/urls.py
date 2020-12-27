@@ -9,14 +9,12 @@ from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.images.views.serve import ServeView
 
-from core.addmultiple import add
 from core.views import search
 
 
 urlpatterns = [
     url(r"^404/$", page_not_found, kwargs={"exception": Exception("Page not Found")}),
     url(r"^500/$", server_error),
-    url(r"^admin/images/multiple/add/$", add, name="add_multiple"),
     url(r"^admin/", include(wagtailadmin_urls)),
     url(r"^documents/", include(wagtaildocs_urls)),
     url(
