@@ -3,7 +3,7 @@
 <!-- md:grid-cols-3 md:grid-cols-4 -->
 <div class="js-zoom-images grid {% if multiple > 1 %}grid-cols-2{% endif %} md:grid-cols-{{multiple}} gap-4 my-10 -userim-mx-20">
   {% for item in self %}
-    <div class="">
+    <div>
       {% if item.crop %}
         {% if count < 3 %}
           {% image item.image fill-1000x750 format-jpeg as block_image %}
@@ -11,11 +11,17 @@
           {% image item.image fill-500x375 format-jpeg as block_image %}
         {% endif %}
       {% else %}
-        {% image item.image width-500 as block_image %}
+        {% if count < 3 %}
+          {% image item.image width-1000 format-jpeg as block_image %}
+        {% else %}
+          {% image item.image width-500 format-jpeg as block_image %}
+        {% endif %}
       {% endif %}
+
       <a {% if item.link %}href="{{item.link}}"{% else %}href="#" data-number="{{forloop.counter}}" class="block js-zoom-images-image cursor-zoom-in" title="Vergrößern"{% endif %}>
         <img {{ block_image.attrs }} loading="lazy" class="rounded shadow-sm w-full">
       </a>
+
       <div class="mt-2 flex flex-wrap items-baseline text-sm">
         {% if item.caption %}
           <span class="rich-text text-gray-700 mr-2">{{ item.caption }}</span>
@@ -27,6 +33,7 @@
     </div>
   {% endfor %}
 
+  {% comment %} lightbox {% endcomment %}
   <div class="js-zoom-images-container hidden transition-opacity duration-200 opacity-0 fixed inset-0 bg-black-90 p-2 sm:p-10 flex justify-center items-center w-screen h-screen z-50">
     <button class="js-zoom-images-close absolute top-0 right-0 m-2 sm:m-6 p-2 outline-none rounded-full text-white hover:text-gray-500">
       <svg type="button" title="Schließen" class="fill-current h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"></svg>
