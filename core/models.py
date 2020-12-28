@@ -94,7 +94,6 @@ class BasePage(Page, HyphenatedTitleMixin):
     """basic functionality for all our pages"""
 
     og_type = "article"
-    partial_template_name = "core/_partial.html"
     is_creatable = False
 
     def get_description(self):
@@ -377,8 +376,6 @@ class Group(BasePage):
         FieldPanel("list_on_group_index_page"),
     ]
 
-    partial_template_name = "core/_group.html"
-
     class Meta:
         verbose_name = "Gruppe"
         verbose_name_plural = "Gruppen"
@@ -512,10 +509,6 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
     )
 
     @property
-    def partial_template_name(self):
-        return "core/_article.html"
-
-    @property
     def month(self):
         """The 1st of month of the month the article is written in"""
         return datetime.date(
@@ -616,7 +609,6 @@ class FormPageForm(WagtailAdminPageForm):
 
 class FormPage(AbstractEmailForm):
     base_form_class = FormPageForm
-    partial_template_name = "core/_partial.html"
 
     intro = RichTextField(
         blank=True,

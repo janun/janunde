@@ -377,8 +377,6 @@ class EventPage(Page, HyphenatedTitleMixin):
                 text = h.handle(block.value.source)
                 return Truncator(text).words(25)
 
-    partial_template_name = "events/_event_big.html"
-
     def clean(self):
         # append number to slug if already in use
         i = 2
