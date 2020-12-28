@@ -25,7 +25,6 @@ INSTALLED_APPS = [
     "core",
     "events",
     "contact",
-    "about",
     "navbar",
     "jobs",
     "staff",
