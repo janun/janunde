@@ -215,17 +215,5 @@
 
     </div>
 
-  {% comment %} show chilren below the event {% endcomment %}
-  {% if self.get_children.live %}
-  <div class="center-container margin-top-2">
-    <div class="card-grid">
-      {% for child in self.get_children.live %}
-        {% render_partial child.specific %} 
-      {% endfor %}
-    </div>
-  </div>
-  {% endif %}
-
-
 </div>
 {% endblock %}
