@@ -1,18 +1,14 @@
 import datetime
 from urllib.parse import quote
 
-from django.core.files.images import ImageFile
 from django.core.exceptions import ValidationError
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.core.mail import EmailMessage
 from django.db import models
 from django.db.models import Q
 from django import forms
 from django.http import Http404, HttpResponse
 from django.utils import timezone
 from django.utils.text import Truncator
-from django.shortcuts import render
-from django.template.loader import render_to_string
 
 from wagtail.admin.edit_handlers import (
     FieldPanel,
@@ -25,10 +21,7 @@ from wagtail.admin.edit_handlers import (
 from wagtail.admin.widgets import AdminDateTimeInput
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Page, PageManager
-from wagtail.core.rich_text import RichText
 from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.documents.edit_handlers import DocumentChooserPanel
-from wagtail.documents.models import Document
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
@@ -39,7 +32,6 @@ from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
 import html2text
 
-from events.forms import SeminarForm
 from core.blocks import StandardStreamBlock
 from core.fields import FacebookEventURLField, PrettyURLField
 from core.images import AttributedImage as Image
@@ -50,135 +42,12 @@ from core.models import HyphenatedTitleMixin
 from .utils import export_event_to_ical, export_event_to_google_link
 
 
-class SeminarFormPage(BasePage):
-    subpage_types = []
-    parent_page_types = ["events.EventIndexPage"]
-
-    description = StreamField(
-        StandardStreamBlock(), blank=True, verbose_name="Erklärung",
-    )
-
-    richtlinie = models.ForeignKey(
-        Document,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="+",
-        verbose_name="Seminarabrechnungsrichtlinie",
-        help_text="Wird im Formular verlinkt",
-    )
-
-    datenschutz = models.ForeignKey(
-        Document,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="+",
-        verbose_name="Datenschutzbedingungen",
-        help_text="Wird im Formular verlinkt",
-    )
-
-    content_panels = [
-        FieldPanel("title"),
-        StreamFieldPanel("description"),
-        DocumentChooserPanel("richtlinie"),
-        DocumentChooserPanel("datenschutz"),
-    ]
-
-    class Meta:
-        verbose_name = "Formular zur Seminaranmeldung"
-
-    def create_event(self, data, image=None):
-        event_index = EventIndexPage.objects.all()[0]
-        event = EventPage(
-            title=data["title"],
-            subtitle=data["subtitle"],
-            start_datetime=data["begin"],
-            end_datetime=data["end"],
-            location=data["location"],
-            contact_name=data["website_contact_name"],
-            contact_mail=data["website_contact_mail"],
-            contact_phone=data["website_contact_phone"],
-            related_group=data["group"],
-            content=[("paragraph", RichText(data["description"]))],
-        )
-        if image:
-            image_object = Image(
-                title="Bild für " + data["title"],
-                file=ImageFile(image),
-                attribution=data["image_copyright"],
-            )
-            image_object.save()
-            event.main_image = image_object
-        event_index.add_child(instance=event)
-        event.unpublish()
-        event.save_revision(submitted_for_moderation=True)
-        return event
-
-    def serve(self, request):
-        if request.method == "POST":
-            form = SeminarForm(
-                request.POST,
-                request.FILES,
-                richtlinie=self.richtlinie,
-                datenschutz=self.datenschutz,
-            )
-            if form.is_valid():
-                attachments = []
-                image = None
-                event = None
-                if request.FILES:
-                    image = request.FILES["image"]
-                    attachments = [(image.name, image.read(), image.content_type)]
-
-                if form.cleaned_data["publish"]:
-                    event = self.create_event(form.cleaned_data, image)
-                    form.cleaned_data["event"] = event
-
-                EmailMessage(
-                    subject="Antrag auf Förderung für %s" % form.cleaned_data["title"],
-                    body=render_to_string(
-                        "events/seminar_form_page/thankyou_mail.txt", form.cleaned_data
-                    ),
-                    from_email="website@janun.de",
-                    to=[form.cleaned_data["contact_mail"]],
-                    reply_to=["seminare@janun.de"],
-                    attachments=attachments,
-                ).send(fail_silently=True)
-
-                EmailMessage(
-                    subject="Antrag auf Förderung für %s" % form.cleaned_data["title"],
-                    body=render_to_string(
-                        "events/seminar_form_page/new_seminar_mail.txt",
-                        form.cleaned_data,
-                    ),
-                    from_email="website@janun.de",
-                    to=["seminare@janun.de"],
-                    reply_to=[form.cleaned_data["contact_mail"]],
-                    attachments=attachments,
-                ).send(fail_silently=True)
-
-                return render(
-                    request,
-                    "events/seminar_form_page/thankyou.html",
-                    {"self": self, "form": form},
-                )
-        else:
-            form = SeminarForm(richtlinie=self.richtlinie, datenschutz=self.datenschutz)
-
-        return render(
-            request,
-            "events/seminar_form_page/apply.html",
-            {"self": self, "form": form,},
-        )
-
-
 class EventIndexPage(BasePage):
     """
     lists events
     """
 
-    subpage_types = ["EventPage", "SeminarFormPage"]
+    subpage_types = ["EventPage"]
     parent_page_types = ["core.HomePage"]
 
     heading = models.CharField("Überschrift", max_length=255)
