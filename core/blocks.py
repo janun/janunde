@@ -57,18 +57,16 @@ class ImagesBlock(blocks.ListBlock):
         context["count"] = count
 
         if count < 5:
-            context["multiple"] = count
+            multiple = count
+        elif count == 5:
+            multiple = 3
             return context
+        elif count % 3 == 0 and count < 10:
+            multiple = 3
+        else:
+            multiple = 4
 
-        if count == 5:
-            context["multiple"] = 3
-            return context
-
-        if count % 3 == 0 and count < 10:
-            context["multiple"] = 3
-            return context
-
-        context["multiple"] = 4
+        context["multiple"] = multiple
         return context
 
     class Meta:
