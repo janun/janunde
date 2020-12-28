@@ -1,25 +1,4 @@
-@import 'buttons';
-@import 'panels';
-@import 'area-title';
-@import 'image';
-@import 'responsive-object';
-@import 'hover-reveal';
-@import 'image-placeholder';
-@import 'click-area';
-@import 'title';
-@import 'block-image';
-@import 'block-embed';
-@import 'subtitle';
-@import 'person';
-@import 'block-table';
-@import 'icon-link';
-@import 'bigcard';
-@import 'pageheader';
-@import 'bigcircle';
-@import 'byline';
-@import 'big-search';
-@import 'blinking-dots';
-@import 'pagination';
-@import "form";
-@import "datetimepicker";
-@import "image-gallery";
+@import 'block-table'; // used in table block
+@import "form"; // used in fpormpage
+@import "datetimepicker"; // used in date time picker
+@import "image-gallery"; // used in image gallery
