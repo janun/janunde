@@ -399,6 +399,7 @@ class GroupIndexPage(BasePage):
     # title is auto added
     subpage_types = ["Group", "Project"]
     parent_page_types = ["HomePage"]
+    max_count = 1
 
     heading = models.CharField("Überschrift", max_length=255, blank=True)
     highlight_in_heading = models.CharField(
@@ -459,6 +460,7 @@ class ArticleIndexPage(BasePage):
 
     subpage_types = ["Article"]
     parent_page_types = ["HomePage"]
+    max_count = 1
 
     heading = models.CharField("Überschrift", max_length=255)
 

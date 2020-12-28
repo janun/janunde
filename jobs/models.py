@@ -21,6 +21,7 @@ from .fields import ChoiceArrayField
 
 class JobOfferIndexPage(BasePage):
     subpage_types = ["JobOfferPage"]
+    max_count = 1
 
     heading = models.CharField("Überschrift", max_length=255, blank=True)
     highlight_in_heading = models.CharField(
