@@ -147,7 +147,7 @@ class Attachment(DocumentChooserBlock):
 
 class ParagraphBlock(blocks.RichTextBlock):
     class Meta:
-        label = "Absatz"
+        label = "Text"
         icon = "pilcrow"
         template = "blocks/paragraph.html"
 
