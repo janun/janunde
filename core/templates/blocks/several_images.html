@@ -6,9 +6,9 @@
     <div>
       {% if item.crop %}
         {% if count < 3 %}
-          {% image item.image fill-1000x750 format-jpeg as block_image %}
+          {% image item.image fill-1000x666 format-jpeg as block_image %}
         {% else %}
-          {% image item.image fill-500x375 format-jpeg as block_image %}
+          {% image item.image fill-500x333 format-jpeg as block_image %}
         {% endif %}
       {% else %}
         {% if count < 3 %}
