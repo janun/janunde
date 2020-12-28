@@ -2,7 +2,6 @@ from wagtail.core import blocks
 from wagtail.embeds.blocks import EmbedBlock  #  needed for old migration
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
-from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.core.models import Collection
 
 from wagtailmedia.blocks import AbstractMediaChooserBlock
@@ -214,7 +213,6 @@ class StandardStreamBlock(blocks.StreamBlock):
     gallery = ImageGalleryBlock()
     button = Button()
     attachment = Attachment()
-    table = TableBlock(label="Tabelle")
     iframe = IframeBlock()
     video_link = VideoLink()
     media = MediaUploadBlock()
