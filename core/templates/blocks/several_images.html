@@ -41,7 +41,7 @@
 
     {% for item in self %}
       <div class="js-zoom-images-bigimage hidden" data-number="{{forloop.counter}}">
-        <img loading="lazy" class="rounded-lg max-w-full" style="max-height: 90vh" src="{{ item.image|imageurl:'width-1200' }}">
+        <img class="rounded-lg max-w-full" style="max-height: 90vh" src="{{ item.image|imageurl:'width-1200' }}">
         <div class="hidden mt-2 md:flex flex-wrap items-baseline max-w-4xl">
           {% if item.caption %}
             <span class="rich-text text-white mr-2">{{ item.caption }}</span>
