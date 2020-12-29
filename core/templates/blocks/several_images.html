@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 <!-- md:grid-cols-3 md:grid-cols-4 -->
-<div class="js-zoom-images grid {% if multiple > 1 %}grid-cols-2{% endif %} md:grid-cols-{{multiple}} gap-4 my-10 -userim-mx-20">
+<div class="js-zoom-images grid {% if count > 12 %}grid-cols-4{% elif multiple > 1 %}grid-cols-2{% endif %} md:grid-cols-{{multiple}} gap-4 my-10 -userim-mx-20">
   {% for item in self %}
     <div>
       {% if item.crop %}
@@ -19,7 +19,7 @@
       {% endif %}
 
       <a {% if item.link %}href="{{item.link}}"{% else %}href="#" data-number="{{forloop.counter}}" class="block js-zoom-images-image cursor-zoom-in" title="Vergrößern"{% endif %}>
-        <img {{ block_image.attrs }} loading="lazy" class="rounded shadow-sm w-full">
+        <img {{ block_image.attrs }} loading="lazy" class="shadow-sm w-full">
       </a>
 
       <div class="mt-2 flex flex-wrap items-baseline text-sm">
@@ -66,7 +66,7 @@
     </button>
 
     <div class="{% if count == 1 %}hidden{% endif %} absolute bottom-0 inset-x flex items-center mb-20 md:mb-4">
-      <div class="flex">
+      <div class="flex flex-wrap">
         {% for item in self %}
           <button loading="lazy" class="block outline-none js-zoom-images-button " data-number="{{forloop.counter}}">
             <div class="rounded-full border-2 border-white opacity-75 h-2 w-2 md:h-3 md:w-3 m-1"></div>

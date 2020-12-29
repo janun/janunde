@@ -59,7 +59,6 @@ class ImagesBlock(blocks.ListBlock):
             multiple = count
         elif count == 5:
             multiple = 3
-            return context
         elif count % 3 == 0 and count < 10:
             multiple = 3
         else:
@@ -96,7 +95,7 @@ class ImageGalleryBlock(blocks.StructBlock):
         help_text="Das Bild, das als erstes angezeigt wird.",
     )
 
-    def get_gallery_images(self, collection, tags=None):
+    def get_gallery_images(self, collection):
         images = None
         try:
             images = Image.objects.filter(collection__id=collection).order_by(
@@ -104,19 +103,36 @@ class ImageGalleryBlock(blocks.StructBlock):
             )
         except Exception:
             pass
-        if images and tags:
-            images = images.filter(tags__name__in=tags).distinct()
         return images
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context=parent_context)
-        context["images"] = list(self.get_gallery_images(value["collection"]))
+        images = list(self.get_gallery_images(value["collection"]))
+
         if value.get("start_image", None):
-            context["images"].insert(0, value["start_image"])
+            images.insert(0, value["start_image"])
+
+        context["self"] = [{"image": image, "crop": True} for image in images]
+
+        count = len(images)
+        context["count"] = count
+
+        if count < 5:
+            multiple = count
+        elif count == 5:
+            multiple = 3
+        elif count % 3 == 0 and count < 10:
+            multiple = 3
+        elif count > 12:
+            multiple = 6
+        else:
+            multiple = 4
+
+        context["multiple"] = multiple
         return context
 
     class Meta:
-        template = ("blocks/gallery.html",)
+        template = "blocks/several_images.html"
         form_template = "blocks/gallery_form.html"
         label = "Gallerie"
         icon = "image"
