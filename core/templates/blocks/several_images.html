@@ -1,37 +1,49 @@
 {% load wagtailcore_tags wagtailimages_tags imageurl %}
 
 <!-- md:grid-cols-3 md:grid-cols-4 md:grid-cols-6 -->
-<div class="js-zoom-images grid {% if count > 12 %}grid-cols-4{% elif multiple > 1 %}grid-cols-2{% endif %} md:grid-cols-{{multiple}} gap-4 my-10 -userim-mx-20">
-  {% for item in self %}
-    <div>
-      <a {% if item.link %}href="{{item.link}}"{% else %}href="#" data-number="{{forloop.counter}}" class="block js-zoom-images-image cursor-zoom-in" title="Vergrößern"{% endif %}>
-        <img alt="{{ item.image.alt }}"
-          {% if item.crop %}
-            {% if multiple > 2 %}
-              src="{{ item.image|imageurl:"fill-500x333" }}"
+<div class="js-zoom-images my-10 -userim-mx-20">
+  <div class="grid {% if count > 12 %}grid-cols-4{% elif multiple > 1 %}grid-cols-2{% endif %} md:grid-cols-{{multiple}} gap-4">
+    {% for item in self %}
+      <div class="{% if forloop.counter > 24 %}hidden js-zoom-images-initially-hidden{% endif %}">
+        <a {% if item.link %}href="{{item.link}}"{% else %}href="#" data-number="{{forloop.counter}}" class="block js-zoom-images-image cursor-zoom-in" title="Vergrößern"{% endif %}>
+          <img alt="{{ item.image.alt }}"
+            {% if item.crop %}
+              {% if multiple > 2 %}
+                src="{{ item.image|imageurl:"fill-500x333" }}"
+              {% else %}
+                src="{{ item.image|imageurl:"fill-1000x666" }}"
+              {% endif %}
             {% else %}
-              src="{{ item.image|imageurl:"fill-1000x666" }}"
+              {% if multiple > 2 %}
+                src="{{ item.image|imageurl:"width-500" }}"
+              {% else %}
+                src="{{ item.image|imageurl:"width-1000" }}"
+              {% endif %}
             {% endif %}
-          {% else %}
-            {% if multiple > 2 %}
-              src="{{ item.image|imageurl:"width-500" }}"
-            {% else %}
-              src="{{ item.image|imageurl:"width-1000" }}"
-            {% endif %}
-          {% endif %}
-          loading="lazy" class="shadow-sm w-full {% if count < 4 %}rounded{% endif %}">
-      </a>
+            loading="lazy" class="shadow-sm w-full {% if count < 4 %}rounded{% endif %}">
+        </a>
 
-      <div class="mt-2 flex flex-wrap items-baseline text-sm">
-        {% if item.caption %}
-          <span class="rich-text text-gray-700 mr-2">{{ item.caption }}</span>
-        {% endif %}
-        {% if item.image.attribution %}
-          <span class="text-gray-500 text-xs">{{ item.image.attribution }}</span>
-        {% endif %}
+        <div class="mt-2 flex flex-wrap items-baseline text-sm">
+          {% if item.caption %}
+            <span class="rich-text text-gray-700 mr-2">{{ item.caption }}</span>
+          {% endif %}
+          {% if item.image.attribution %}
+            <span class="text-gray-500 text-xs">{{ item.image.attribution }}</span>
+          {% endif %}
+        </div>
       </div>
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
+
+  {% if count > 24 %}
+    <div class="flex my-3 justify-center">
+      <button class="js-zoom-images-load-more flex items-center group hover:text-gray-900 py-1 px-4">
+        <svg class="h-4 w-4 mr-2 text-gray-600 group-hover:text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" />
+        </svg>
+        Alle {{ count }} Bilder anzeigen</div>
+    </button>
+  {% endif %}
 
   {% comment %} lightbox {% endcomment %}
   <div class="js-zoom-images-container hidden transition-opacity duration-200 opacity-0 fixed inset-0 bg-black-90 p-2 sm:p-10 flex justify-center items-center w-screen h-screen z-50">
@@ -41,7 +53,7 @@
 
     {% for item in self %}
       <div class="js-zoom-images-bigimage hidden" data-number="{{forloop.counter}}">
-        <img class="rounded-lg max-w-full" style="max-height: 90vh" src="{{ item.image|imageurl:'width-1200' }}">
+        <img loading="lazy" class="rounded-lg max-w-full" style="max-height: 90vh" src="{{ item.image|imageurl:'width-1200' }}">
         <div class="hidden mt-2 md:flex flex-wrap items-baseline max-w-4xl">
           {% if item.caption %}
             <span class="rich-text text-white mr-2">{{ item.caption }}</span>
@@ -74,9 +86,7 @@
       </div>
     </div>
   </div>
-
 </div>
-
 
 <script>
 document.querySelectorAll(".js-zoom-images").forEach(block => {
@@ -88,6 +98,8 @@ document.querySelectorAll(".js-zoom-images").forEach(block => {
   let buttons = block.querySelectorAll(".js-zoom-images-button")
   let prevButton = block.querySelector(".js-zoom-images-prev")
   let nextButton = block.querySelector(".js-zoom-images-next")
+  let loadMoreButton = block.querySelector(".js-zoom-images-load-more")
+  let initiallyHidden = block.querySelectorAll(".js-zoom-images-initially-hidden")
   let hash = "#zoom-image"
   let activeImage = 0
 
@@ -117,6 +129,9 @@ document.querySelectorAll(".js-zoom-images").forEach(block => {
         image.classList.remove("hidden")
       } else {
         image.classList.add("hidden")
+      }
+      if (image.dataset.number == parseInt(n) + 1) {
+        image.querySelector("img").setAttribute("loading", "eager")
       }
     })
 
@@ -205,6 +220,14 @@ document.querySelectorAll(".js-zoom-images").forEach(block => {
     event.preventDefault()
     prev()
   })
+
+  // load more
+  loadMoreButton.addEventListener("click", (event) => {
+    event.preventDefault()
+    initiallyHidden.forEach(elem => elem.classList.remove("hidden"))
+    loadMoreButton.classList.add("hidden")
+  })
+  
 
   // jump to image
   buttons.forEach(button => button.addEventListener("click", event => {
