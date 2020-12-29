@@ -1,15 +1,23 @@
 {% load wagtailcore_tags wagtailimages_tags imageurl %}
 
-<!-- md:grid-cols-3 md:grid-cols-4 -->
+<!-- md:grid-cols-3 md:grid-cols-4 md:grid-cols-6 -->
 <div class="js-zoom-images grid {% if count > 12 %}grid-cols-4{% elif multiple > 1 %}grid-cols-2{% endif %} md:grid-cols-{{multiple}} gap-4 my-10 -userim-mx-20">
   {% for item in self %}
     <div>
       <a {% if item.link %}href="{{item.link}}"{% else %}href="#" data-number="{{forloop.counter}}" class="block js-zoom-images-image cursor-zoom-in" title="Vergrößern"{% endif %}>
         <img alt="{{ item.image.alt }}"
           {% if item.crop %}
-            src="{{ item.image|imageurl:"fill-1000x666" }}"
+            {% if multiple > 2 %}
+              src="{{ item.image|imageurl:"fill-500x333" }}"
+            {% else %}
+              src="{{ item.image|imageurl:"fill-1000x666" }}"
+            {% endif %}
           {% else %}
-            src="{{ item.image|imageurl:"fill-1000x666" }}"
+            {% if multiple > 2 %}
+              src="{{ item.image|imageurl:"width-500" }}"
+            {% else %}
+              src="{{ item.image|imageurl:"width-1000" }}"
+            {% endif %}
           {% endif %}
           loading="lazy" class="shadow-sm w-full {% if count < 4 %}rounded{% endif %}">
       </a>
