@@ -1,25 +1,17 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags imageurl %}
 
 <!-- md:grid-cols-3 md:grid-cols-4 -->
 <div class="js-zoom-images grid {% if count > 12 %}grid-cols-4{% elif multiple > 1 %}grid-cols-2{% endif %} md:grid-cols-{{multiple}} gap-4 my-10 -userim-mx-20">
   {% for item in self %}
     <div>
-      {% if item.crop %}
-        {% if count < 3 %}
-          {% image item.image fill-1000x666 format-jpeg as block_image %}
-        {% else %}
-          {% image item.image fill-500x333 format-jpeg as block_image %}
-        {% endif %}
-      {% else %}
-        {% if count < 3 %}
-          {% image item.image width-1000 format-jpeg as block_image %}
-        {% else %}
-          {% image item.image width-500 format-jpeg as block_image %}
-        {% endif %}
-      {% endif %}
-
       <a {% if item.link %}href="{{item.link}}"{% else %}href="#" data-number="{{forloop.counter}}" class="block js-zoom-images-image cursor-zoom-in" title="Vergrößern"{% endif %}>
-        <img {{ block_image.attrs }} loading="lazy" class="shadow-sm w-full">
+        <img alt="{{ item.image.alt }}"
+          {% if item.crop %}
+            src="{{ item.image|imageurl:"fill-1000x666" }}"
+          {% else %}
+            src="{{ item.image|imageurl:"fill-1000x666" }}"
+          {% endif %}
+          loading="lazy" class="shadow-sm w-full {% if count < 4 %}rounded{% endif %}">
       </a>
 
       <div class="mt-2 flex flex-wrap items-baseline text-sm">
@@ -41,8 +33,7 @@
 
     {% for item in self %}
       <div class="js-zoom-images-bigimage hidden" data-number="{{forloop.counter}}">
-        {% image item.image max-1280x1080 format-jpeg as big_image %}
-        <img loading="lazy" class="rounded-lg max-w-full" style="max-height: 90vh" src="{{ big_image.url }}">
+        <img loading="lazy" class="rounded-lg max-w-full" style="max-height: 90vh" src="{{ item.image|imageurl:'width-1200' }}">
         <div class="hidden mt-2 md:flex flex-wrap items-baseline max-w-4xl">
           {% if item.caption %}
             <span class="rich-text text-white mr-2">{{ item.caption }}</span>
