@@ -40,12 +40,6 @@ function scriptsBundle(scripts, bundleName) {
     .on("error", gutil.log);
 }
 
-gulp.task("vue.js", function () {
-  return scriptsBundle([
-    "node_modules/vue/dist/vue.min.js",
-  ], "vue.js");
-});
-
 gulp.task("jquery.js", function () {
   return scriptsBundle([
     "node_modules/jquery/dist/jquery.js",
@@ -68,7 +62,7 @@ gulp.task("form.js", function () {
   ], "form.js");
 });
 
-gulp.task("scripts", gulp.parallel("vue.js", "app.js", "jquery.js", "form.js"));
+gulp.task("scripts", gulp.parallel("app.js", "jquery.js", "form.js"));
 
 // images
 gulp.task("images", function () {
