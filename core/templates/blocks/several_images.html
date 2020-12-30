@@ -55,7 +55,7 @@
 
     {% for item in self %}
       <div class="js-zoom-images-bigimage hidden" data-number="{{forloop.counter}}">
-        <img loading="lazy" class="rounded-lg max-w-full bg-gray-900"
+        <img loading="lazy" class="rounded-lg max-w-full w-full bg-gray-900"
               width="{{item.image.width}}" height="{{ item.image.height }}"
               style="max-height: 90vh" src="{{ item.image|imageurl:'width-1200' }}">
         <div class="hidden mt-2 md:flex flex-wrap items-baseline max-w-4xl">
