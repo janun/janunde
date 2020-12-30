@@ -2,7 +2,7 @@
   "name": "janunde",
   "version": "0.0.1",
   "engines": {
-    "node": "12.13.1"
+    "node": "12.x"
   },
   "scripts": {
     "build:gulp": "gulp --production",
@@ -14,11 +14,9 @@
     "node_modules"
   ],
   "dependencies": {
-    "jquery": "^3.5.1",
     "leaflet": "^1.6.0",
     "leaflet-modal": "^0.2.0",
     "leaflet.fullscreen": "^1.6.0",
-    "pickadate": "^3.6",
     "simple-line-icons": "^2.4.1",
     "tailwindcss-animatecss": "^0.3.3"
   },

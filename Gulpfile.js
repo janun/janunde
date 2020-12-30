@@ -40,29 +40,11 @@ function scriptsBundle(scripts, bundleName) {
     .on("error", gutil.log);
 }
 
-gulp.task("jquery.js", function () {
-  return scriptsBundle([
-    "node_modules/jquery/dist/jquery.js",
-  ], "jquery.js");
-});
-
-gulp.task("app.js", function () {
+gulp.task("scripts", function () {
   return scriptsBundle([
     "core/static_src/core/js/*.js",
   ], "app.js");
 });
-
-gulp.task("form.js", function () {
-  return scriptsBundle([
-    "node_modules/pickadate/lib/picker.js",
-    "node_modules/pickadate/lib/picker.date.js",
-    "node_modules/pickadate/lib/picker.time.js",
-    "node_modules/pickadate/lib/translations/de_DE.js",
-    "core/static_src/core/js/form/*.js",
-  ], "form.js");
-});
-
-gulp.task("scripts", gulp.parallel("app.js", "jquery.js", "form.js"));
 
 // images
 gulp.task("images", function () {
