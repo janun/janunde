@@ -28,7 +28,7 @@
             <span class="rich-text text-gray-700 mr-2">{{ item.caption }}</span>
           {% endif %}
           {% if item.image.attribution %}
-            <span class="text-gray-500 text-xs">{{ item.image.attribution }}</span>
+            <span class="text-gray-500 leading-snug text-xs">{{ item.image.attribution }}</span>
           {% endif %}
         </div>
       </div>
@@ -222,11 +222,13 @@ document.querySelectorAll(".js-zoom-images").forEach(block => {
   })
 
   // load more
-  loadMoreButton.addEventListener("click", (event) => {
-    event.preventDefault()
-    initiallyHidden.forEach(elem => elem.classList.remove("hidden"))
-    loadMoreButton.classList.add("hidden")
-  })
+  if (loadMoreButton) {
+    loadMoreButton.addEventListener("click", (event) => {
+      event.preventDefault()
+      initiallyHidden.forEach(elem => elem.classList.remove("hidden"))
+      loadMoreButton.classList.add("hidden")
+    })
+  }
   
 
   // jump to image
