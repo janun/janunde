@@ -21,7 +21,6 @@
     "pickadate": "^3.6",
     "simple-line-icons": "^2.4.1",
     "tailwindcss-animatecss": "^0.3.3",
-    "vue": "^2.6"
   },
   "devDependencies": {
     "autoprefixer": "^9.8.5",
