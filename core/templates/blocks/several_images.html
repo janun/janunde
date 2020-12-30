@@ -2,10 +2,10 @@
 
 <!-- md:grid-cols-3 md:grid-cols-4 md:grid-cols-6 -->
 <div class="js-zoom-images my-10 -userim-mx-20">
-  <div class="grid {% if count > 12 %}grid-cols-4{% elif multiple > 1 %}grid-cols-2{% endif %} md:grid-cols-{{multiple}} gap-4">
+  <div class="grid {% if count > 12 %}grid-cols-4{% elif multiple > 1 %}grid-cols-2{% endif %} md:grid-cols-{{multiple}} gap-2 md:gap-4">
     {% for item in self %}
       <div class="{% if forloop.counter > 24 %}hidden js-zoom-images-initially-hidden{% endif %}">
-        <a {% if item.link %}href="{{item.link}}"{% else %}href="#" data-number="{{forloop.counter}}" class="block js-zoom-images-image cursor-zoom-in" title="Vergrößern"{% endif %}>
+        <a {% if item.link %}href="{{item.link}}"{% else %}href="#" data-number="{{ forloop.counter }}" class="block js-zoom-images-image cursor-zoom-in" title="Vergrößern"{% endif %}>
           <img alt="{{ item.image.alt }}"
             {% if item.crop %}
                width="1000" height="666"
@@ -30,7 +30,7 @@
             <span class="rich-text text-gray-700 mr-2">{{ item.caption }}</span>
           {% endif %}
           {% if item.image.attribution %}
-            <span class="text-gray-500 leading-snug text-xs">{{ item.image.attribution }}</span>
+            <span class="text-gray-500 leading-none text-xs {% if count > 12 %}hidden{% endif %} md:inline">{{ item.image.attribution }}</span>
           {% endif %}
         </div>
       </div>
@@ -48,14 +48,14 @@
   {% endif %}
 
   {% comment %} lightbox {% endcomment %}
-  <div class="js-zoom-images-container hidden transition-opacity duration-200 opacity-0 fixed inset-0 bg-black-90 p-2 sm:p-10 flex justify-center items-center w-screen h-screen z-50">
+  <div class="js-zoom-images-container hidden transition-opacity duration-200 opacity-0 fixed inset-0 bg-black-90 sm:p-10 flex justify-center items-center w-screen h-screen z-50">
     <button class="js-zoom-images-close absolute top-0 right-0 m-2 sm:m-6 p-2 outline-none rounded-full text-white hover:text-gray-500">
       <svg type="button" title="Schließen" class="fill-current h-5 w-5 sm:h-6 sm:w-6" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"></svg>
     </button>
 
     {% for item in self %}
       <div class="js-zoom-images-bigimage hidden" data-number="{{forloop.counter}}">
-        <img loading="lazy" class="rounded-lg max-w-full w-full bg-gray-900"
+        <img loading="lazy" class="md:rounded-lg max-w-full w-full bg-gray-900"
               width="{{item.image.width}}" height="{{ item.image.height }}"
               style="max-height: 90vh" src="{{ item.image|imageurl:'width-1200' }}">
         <div class="hidden mt-2 md:flex flex-wrap items-baseline max-w-4xl">
