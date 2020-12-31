@@ -16,6 +16,11 @@ from wagtail.core.models import Page
 register = template.Library()
 
 
+@register.filter("klass")
+def klass(obj):
+    return obj.__class__.__name__
+
+
 @register.filter()
 def prettyurl(value):
     """return only the domain part of an url"""

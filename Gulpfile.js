@@ -2,32 +2,10 @@
 
 var gulp = require("gulp");
 var gutil = require("gulp-util");
-var sass = require("gulp-sass");
-var autoprefixer = require("gulp-autoprefixer");
-var csso = require("gulp-csso");
 var concat = require("gulp-concat");
 var uglify = require("gulp-uglify");
 var sourcemaps = require("gulp-sourcemaps");
 var isProd = gutil.env.production;
-
-
-// styles
-gulp.task("styles", function () {
-  var includePaths = ["janunde/static/"];
-  return gulp.src("core/static_src/core/scss/all.scss")
-    .pipe(isProd ? gutil.noop() : sourcemaps.init())
-    .pipe(sass({
-      includePaths: includePaths
-    }).on("error", sass.logError))
-    .pipe(autoprefixer({
-      cascade: false
-    }))
-    .pipe(isProd ? csso() : gutil.noop())
-    .pipe(isProd ? gutil.noop() : sourcemaps.write())
-    .pipe(gulp.dest("./core/static/core/css/"))
-    .on("error", gutil.log);
-});
-
 
 // scripts
 function scriptsBundle(scripts, bundleName) {
@@ -53,11 +31,10 @@ gulp.task("images", function () {
 });
 
 // build
-gulp.task("build", gulp.parallel("styles", "scripts", "images"));
+gulp.task("build", gulp.parallel("scripts", "images"));
 
 // watch
 gulp.task("watch", function () {
-  gulp.watch("core/static_src/core/scss/**/*.scss", gulp.series("styles"));
   gulp.watch("core/static_src/core/js/**/*.js", gulp.series("scripts"));
   gulp.watch("core/static_src/core/images/**/*", gulp.series("images"));
 });

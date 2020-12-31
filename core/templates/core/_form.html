@@ -1,0 +1,61 @@
+{% load wagtailcore_tags widget_tweaks stuff %}
+
+<form action="{% pageurl page %}" method="POST" class="form text-base -mx-4 sm:mx-0 bg-white p-4 md:p-6 sm:shadow sm:rounded-md max-w-3xl">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  {% if form.errors %}
+    <div class="text-red-700 font-bold">Bitte überprüfe die Felder noch einmal. Felder mit Problemen sind rot gekennzeichnet.</div><br>
+  {% endif %}
+
+  {% for hidden in form.hidden_fields %}
+    {{ hidden }}
+  {% endfor %}
+
+  <div class="grid grid-cols-1 gap-6">
+    {% for field in form.visible_fields %}
+      <div class="{% if field.errors %}text-red-700{% endif %}">
+
+        {% if field.field.widget|klass == "RadioSelect" %}
+          <label class="inline-block">
+            <span class="block">{{ field.label|safe }} {% if field.field.required == False %}(optional){% endif %}</span>
+            {% render_field field class="inline-block border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %}
+          </label>
+
+        {% elif field.field.widget|klass == "CheckboxSelectMultiple" %}
+          <label class="inline-block">
+            <span class="block">{{ field.label|safe }} {% if field.field.required == False %}(optional){% endif %}</span>
+            {% render_field field class="inline-block rounded border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %}
+          </label>
+
+        {% elif field.field.widget.input_type == "checkbox" %}
+          <label class="inline-flex items-center">
+            {% render_field field class="inline-block rounded border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %}
+            <span class="ml-2">{{ field.label|safe }} {% if field.field.required == False %}(optional){% endif %}</span>
+          </label>
+
+        {% else %}
+          <label class="block">
+            <span class="">{{ field.label|safe }} {% if field.field.required == False %}(optional){% endif %}</span>
+            {% render_field field class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %}
+          </label>
+        {% endif %}
+
+        {% if field.help_text %}
+          <p class="mt-1 text-sm text-gray-600">{{ field.help_text|safe }}</p>
+        {% endif %}
+
+        {% if field.errors %}
+          <div class="text-red-700 font-bold">
+            {{ field.errors }}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="flex items-center justify-end mt-8">
+    <button class="bg-green-500 hover:bg-green-600 hover:shadow font-bold text-white rounded-full py-2 px-6" type="submit">
+      Abschicken
+    </button>
+  </div>
+</form>

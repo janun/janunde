@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<a class="mb-8 md:mb-12 md:h-36 block group overflow-hidden flex bg-white shadow md:shadow-md transition-shadow duration-200 hover:shadow-lg text-gray-700 rounded-md md:h-36" href="{% pageurl job %}">  
+<a class="mb-8 md:mb-12 md:h-36 group overflow-hidden flex bg-white shadow md:shadow-md transition-shadow duration-200 hover:shadow-lg text-gray-700 rounded-md" href="{% pageurl job %}">  
   <div class="p-4 md:p-5 overflow-hidden flex flex-col">
 
     <h3 class="text-gray-900 text-base md:text-lg xl:text-xl mb-1 font-semibold group-hover:text-green-500 hyphens-auto">{{ job.title }}</h3>
@@ -9,11 +9,11 @@
     {% endif %}
 
     <div class="mt-4 text-xs md:text-sm -mx-1">
-      {% comment %} {% if job.hiring_organization_name %}<span class="mx-1 whitespace-no-wrap">Bei {{ job.hiring_organization_name }}</span>{% endif %}
-      {% if job.job_location %}<span class="mx-1 whitespace-no-wrap">in {{ job.job_location }}</span>{% endif %}
-      <span class="mx-1 whitespace-no-wrap">{{ job.get_employment_type_display|join:", " }}</span>
-      {% if job.base_salary_amount %}<span class="mx-1 whitespace-no-wrap">{{ job.base_salary_amount }} {{ job.get_base_salary_unit_display }}</span>{% endif %} {% endcomment %}
-      {% if job.valid_through %}<div class="mx-1 mt-1 whitespace-no-wrap">Bewerbungsfrist: {{ job.valid_through }}</div>{% endif %}
+      {% comment %} {% if job.hiring_organization_name %}<span class="mx-1 whitespace-nowrap">Bei {{ job.hiring_organization_name }}</span>{% endif %}
+      {% if job.job_location %}<span class="mx-1 whitespace-nowrap">in {{ job.job_location }}</span>{% endif %}
+      <span class="mx-1 whitespace-nowrap">{{ job.get_employment_type_display|join:", " }}</span>
+      {% if job.base_salary_amount %}<span class="mx-1 whitespace-nowrap">{{ job.base_salary_amount }} {{ job.get_base_salary_unit_display }}</span>{% endif %} {% endcomment %}
+      {% if job.valid_through %}<div class="mx-1 mt-1 whitespace-nowrap">Bewerbungsfrist: {{ job.valid_through }}</div>{% endif %}
     </div>
 
   </div>

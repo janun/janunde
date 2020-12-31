@@ -5,10 +5,10 @@
     "node": "12.x"
   },
   "scripts": {
-    "build:gulp": "gulp --production",
     "build:postcss": "postcss core/static_src/styles/tailwind.css -o core/static/core/css/tailwind.css",
-    "build": "npm run build:gulp && npm run build:postcss",
-    "watch:postcss": "onchange -i '*/**/*.html' 'core/static_src/**/*' postcss.config.js tailwind.config.js -e 'core/static' -- npm run build:postcss"
+    "build:js": "cat core/static_src/core/js/*.js > core/static/core/js/app.js",
+    "build:images": "cp -r core/static_src/core/images/* core/static/core/images",
+    "build": "npm run build:js && npm run build:images && npm run build:postcss"
   },
   "cacheDirectories": [
     "node_modules"
@@ -16,26 +16,17 @@
   "dependencies": {
     "leaflet": "^1.6.0",
     "leaflet-modal": "^0.2.0",
-    "leaflet.fullscreen": "^1.6.0",
-    "simple-line-icons": "^2.4.1",
-    "tailwindcss-animatecss": "^0.3.3"
+    "leaflet.fullscreen": "^1.6.0"
   },
   "devDependencies": {
-    "autoprefixer": "^9.8.5",
-    "cssnano": "^4.1.10",
+    "autoprefixer": "^10.1.0",
     "eslint": "^6.8.0",
-    "gulp": "^4.0",
-    "gulp-autoprefixer": "^7.0",
-    "gulp-concat": "^2.6",
-    "gulp-csso": "^4.0",
-    "gulp-sass": "^4.1.0",
-    "gulp-sourcemaps": "^2.6",
-    "gulp-uglify": "^3.0",
-    "gulp-util": "^3.0",
-    "onchange": "^6.1.1",
-    "postcss-cli": "^7.1.1",
-    "postcss-import": "^12.0.1",
-    "tailwindcss": "^1.8.5",
-    "tailwindcss-animations": "^2.0.0"
+    "postcss": "^8.2.2",
+    "postcss-cli": "^8.3.1",
+    "postcss-import": "^14.0.0",
+    "tailwindcss": "^2.0.2",
+    "tailwindcss-animatecss": "^0.3.3",
+    "tailwindcss-animations": "^2.0.0",
+    "@tailwindcss/forms": "^0.2.1"
   }
 }

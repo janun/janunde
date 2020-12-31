@@ -85,7 +85,7 @@ class Banner(ClusterableModel):
             "white": "bg-white",
             "green": "bg-green-600",
             "blue": "bg-blue-500",
-            "red": "bg-red-500",
+            "red": "bg-red-600",
             "purple": "bg-purple",
             "black": "bg-gray-900",
         }

@@ -22,15 +22,6 @@ module.exports = {
       screens: {
         "xxl": "1440px",
       },
-      borderWidth: {
-        "5": "5px",
-      },
-      borderRadius: {
-        md: "6px"
-      },
-      boxShadow: {
-        "outline-error": "0 0 0 3px rgba(194, 48, 48, 0.5);"
-      },
       colors: {
         "purple": "#7F006B",
         green: {
@@ -45,13 +36,10 @@ module.exports = {
           800: "#236707",
           900: "#1a4614"
         },
-        "white-75": "rgba(255, 255, 255, 0.75)",
         "black-75": "rgba(0, 0, 0, 0.75)",
         "black-90": "rgba(0, 0, 0, 0.9)",
-        "brown": "#644327",
         "gray-50": "#fafafa",
         "gray-150": "#f7f7f7",
-        "red-500": "#c41737",
       },
       maxWidth: {
         "7xl": "80rem"
@@ -101,6 +89,7 @@ module.exports = {
     container: false,
   },
   plugins: [
+    require('@tailwindcss/forms'),
     require("tailwindcss-animations"),
     require("tailwindcss-animatecss")({
       classes: []
