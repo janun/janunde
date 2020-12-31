@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     "gridcal",
     # 'debug_toolbar',
     # 'template_profiler_panel',
-    "collectfast",
     "request",
     "widget_tweaks",
     "wagtailinventory",
@@ -256,6 +255,3 @@ REQUEST_ANONYMOUS_IP = True
 
 
 WAGTAILMEDIA_MEDIA_FORM_BASE = "core.forms.BaseMediaForm"
-
-COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
-COLLECTFAST_THREADS = 20
