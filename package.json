@@ -6,8 +6,8 @@
   },
   "scripts": {
     "build:postcss": "postcss core/static_src/styles/tailwind.css -o core/static/core/css/tailwind.css",
-    "build:js": "cat core/static_src/core/js/*.js > core/static/core/js/app.js",
-    "build:images": "cp -r core/static_src/core/images/* core/static/core/images",
+    "build:js": "mkdir -p core/static/core/js/ && cat core/static_src/core/js/*.js > core/static/core/js/app.js",
+    "build:images": "mkdir -p core/static/core/images && cp -r core/static_src/core/images/* core/static/core/images",
     "build": "npm run build:js && npm run build:images && npm run build:postcss"
   },
   "cacheDirectories": [
