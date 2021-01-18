@@ -38,6 +38,8 @@ class Employee(BasePage):
     DEPARTMENT_CHOICES = [
         ("ljb", "Landesbüro Hannover"),
         ("lgb", "Landesbüro Lüneburg"),
+        ("goe", "Landesbüro Göttingen"),
+        ("old", "Landesbüro Oldenburg"),
         ("brueter", "Vorstand (Brüter)"),
     ]
     department = models.CharField(
