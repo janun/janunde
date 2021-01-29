@@ -41,6 +41,15 @@ function renderWimmelbild(mapContainerId, data) {
     map.fitBounds(bounds)
     map.setMinZoom(map.getZoom())
 
+    // workaround for too tight maxbounds on fullscreen
+    map.on('enterFullscreen', function () {
+        map.setMaxBounds(null)
+    })
+    map.on('exitFullscreen', function () {
+        map.setMaxBounds(bounds)
+    })
+
+
     // default icon
     var questionIconUrl = "/static/wimmelbilder/question-icon.png"
     var questionIcon = L.icon({
