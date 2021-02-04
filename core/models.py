@@ -312,6 +312,7 @@ class Group(BasePage):
     contact_name = models.CharField("Name", max_length=255, null=True, blank=True,)
     contact_phone = PhoneNumberField("Telefonnummer", null=True, blank=True,)
     facebook_url = FacebookProfileURLField("Facebook-Profil", null=True, blank=True,)
+    instagram_url = models.URLField("Instagram-Profil", null=True, blank=True,)
     website = PrettyURLField("externe Website", null=True, blank=True,)
 
     address = models.CharField(
@@ -358,6 +359,7 @@ class Group(BasePage):
         FieldPanel("subtitle"),
         ImageChooserPanel("logo"),
         FieldPanel("facebook_url"),
+        FieldPanel("instagram_url"),
         FieldPanel("website"),
         FieldPanel("address"),
         MultiFieldPanel(
