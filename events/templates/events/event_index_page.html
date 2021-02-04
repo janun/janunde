@@ -215,6 +215,9 @@
                       {% endif %}
                     </a>
                   {% endif %}
+                  {% if event.organizer %}
+                    <div class="absolute top-0 right-0 -mt-6 mr-2 md:mr-0 text-xs">{{ event.organizer }}</div>
+                  {% endif %}
 
                 </div>
 
