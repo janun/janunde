@@ -160,7 +160,7 @@
               <a href="{% pageurl related_group.group %}" class="-ml-1 flex items-center  hover:text-green-500">
                 <div class="border mr-1 h-8 w-8 p-1 overflow-hidden rounded-full bg-white">
                   {% if related_group.group.logo %}
-                    {% image related_group.logo min-64x64 class="w-full h-full object-contain" %}
+                    {% image related_group.group.logo min-64x64 class="w-full h-full object-contain" %}
                   {% else %}
                     {{ related_group.group.abbr }}
                   {% endif %}
