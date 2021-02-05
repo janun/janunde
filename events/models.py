@@ -17,6 +17,8 @@ from wagtail.admin.edit_handlers import (
     StreamFieldPanel,
     TabbedInterface,
     FieldRowPanel,
+    PageChooserPanel,
+    InlinePanel,
 )
 from wagtail.admin.widgets import AdminDateTimeInput
 from wagtail.core.fields import StreamField
@@ -25,7 +27,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
-from modelcluster.fields import ParentalManyToManyField
+from modelcluster.fields import ParentalManyToManyField, ParentalKey
 
 from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
@@ -209,6 +211,24 @@ class EventType(models.Model):
         verbose_name_plural = "Veranstaltungsarten"
 
 
+class EventPageGroup(models.Model):
+    """model that saves the relation from EventPages to Groups, showing a PageChooserPanel"""
+
+    eventpage = ParentalKey(
+        "events.EventPage", on_delete=models.CASCADE, related_name="related_groups"
+    )
+    group = models.ForeignKey(
+        "core.Group", on_delete=models.CASCADE, related_name="event_pages"
+    )
+
+    panels = [
+        PageChooserPanel("group"),
+    ]
+
+    class Meta:
+        unique_together = ("eventpage", "group")
+
+
 class EventPage(Page, HyphenatedTitleMixin):
     """
     represents an event
@@ -239,16 +259,16 @@ class EventPage(Page, HyphenatedTitleMixin):
         Group,
         null=True,
         blank=True,
-        related_name="event_pages",
+        related_name="+",
         on_delete=models.SET_NULL,
         verbose_name="JANUN-Gruppe",
-        help_text="JANUN-Gruppe, falls Veranstaltung vom JANUN-Netzwerk",
+        help_text="(alt)",
     )
     organizer = models.CharField(
         "Veranstalter",
         null=True,
         blank=True,
-        help_text="externer Veranstalter, falls externe Veranstaltung",
+        help_text="Name des externen Veranstalters, falls externe Veranstaltung",
         max_length=255,
     )
     event_type = ParentalManyToManyField(
@@ -293,6 +313,12 @@ class EventPage(Page, HyphenatedTitleMixin):
         null=True,
         blank=True,
     )
+
+    @property
+    def related_group_names(self):
+        return ", ".join(
+            [pagegroup.group.title for pagegroup in self.related_groups.all()]
+        )
 
     @property
     def start(self):
@@ -418,7 +444,7 @@ class EventPage(Page, HyphenatedTitleMixin):
         index.SearchField("location_city"),
         index.SearchField("location_country"),
         index.SearchField("organizer"),
-        index.RelatedFields("related_group", [index.SearchField("title"),]),
+        # index.RelatedFields("related_groups", [index.SearchField("title"),]),
         index.RelatedFields("event_type", [index.SearchField("name"),]),
     ]
 
@@ -480,7 +506,10 @@ class EventPage(Page, HyphenatedTitleMixin):
             ObjectList(
                 [
                     MultiFieldPanel(
-                        [FieldPanel("organizer"), FieldPanel("related_group"),],
+                        [
+                            FieldPanel("organizer"),
+                            InlinePanel("related_groups", label="JANUN-Gruppe"),
+                        ],
                         heading="Veranstalter",
                     ),
                     MultiFieldPanel(

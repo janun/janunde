@@ -203,20 +203,22 @@
 
                     </div>
                   </a>
-                  {% if event.related_group %}
-                    <a href="{% pageurl event.related_group %}" title="{{ event.related_group.title }}"
-                       class="absolute w-14 h-14 top-0 right-0 -mt-5 sm:-mr-2 md:-mr-4 sm:w-18 sm:h-18 overflow-hidden shadow border hover:border-gray-500 hover:shadow-md p-2 sm:p-3 bg-white flex items-center justify-center rounded-full"
-                       >
-                      {% if event.related_group.logo %}
-                        {% image event.related_group.logo min-112x112 as group_logo %}
-                        <img {{ group_logo.attrs }} loading="lazy" class="w-full h-full object-contain">
-                      {% else %}
-                        <div class="text-center text-xs leading-tight">{{ event.related_group.title }}</div>
-                      {% endif %}
-                    </a>
-                  {% endif %}
+                  <div class="absolute top-0 right-0 -mt-5 sm:-mr-2 md:-mr-4 flex items-center -space-x-6">
+                    {% for related_group in event.related_groups.all %}
+                      <a href="{% pageurl related_group.group %}" title="{{ related_group.group.title }}"
+                        class="w-14 h-14 sm:w-18 sm:h-18 overflow-hidden shadow border hover:border-gray-500 hover:shadow-md p-2 sm:p-3 bg-white flex items-center justify-center rounded-full"
+                        >
+                        {% if related_group.group.logo %}
+                          {% image related_group.group.logo min-112x112 as group_logo %}
+                          <img {{ group_logo.attrs }} loading="lazy" class="w-full h-full object-contain">
+                        {% else %}
+                          <div class="text-center text-xs leading-tight">{{ related_group.group.title }}</div>
+                        {% endif %}
+                      </a>
+                    {% endfor %}
+                  </div>
                   {% if event.organizer %}
-                    <div class="absolute top-0 right-0 -mt-6 mr-2 md:mr-0 text-xs">{{ event.organizer }}</div>
+                    <div class="absolute top-0 right-0 -mt-5 mr-2 md:mr-0 text-xs">{{ event.organizer }}</div>
                   {% endif %}
 
                 </div>
@@ -231,7 +233,7 @@
                   "image": "{{ main_image.url }}",
                   "startDate": "{{ event.start|date:'c' }}",
                   "endDate": "{{ event.end|date:'c' }}",
-                  "organizer": "{{ event.organizer|default:event.related_group|default:'' }}",
+                  "organizer": "{{ event.organizer|default:event.related_group_names|default:'' }}",
                   "location": {
                     "@type": "Place",
                     "name": "{{ event.location_name|default:event.location|default:'' }}",

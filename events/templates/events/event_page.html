@@ -153,19 +153,21 @@
         {% endif %}
 
         {% comment %} related group {% endcomment %}
-        {% if self.related_group %}
+        {% if self.related_groups.all %}
           <div class="mb-5">
             <div class="text-gray-700 mb-2 ml-8">organisiert von</div>
-            <a href="{% pageurl self.related_group %}" class="-ml-1 flex items-center  hover:text-green-500">
-              <div class="border mr-1 h-8 w-8 p-1 overflow-hidden rounded-full bg-white">
-                {% if self.related_group.logo %}
-                  {% image self.related_group.logo min-64x64 class="w-full h-full object-contain" %}
-                {% else %}
-                  {{ self.related_group.abbr }}
-                {% endif %}
-              </div>
-              <div>{{ self.related_group.title }}</div>
-            </a>
+            {% for related_group in self.related_groups.all %}
+              <a href="{% pageurl related_group.group %}" class="-ml-1 flex items-center  hover:text-green-500">
+                <div class="border mr-1 h-8 w-8 p-1 overflow-hidden rounded-full bg-white">
+                  {% if related_group.group.logo %}
+                    {% image related_group.logo min-64x64 class="w-full h-full object-contain" %}
+                  {% else %}
+                    {{ related_group.group.abbr }}
+                  {% endif %}
+                </div>
+                <div>{{ related_group.group.title }}</div>
+              </a>
+            {% endfor %}
           </div>
         {% endif %}
 
@@ -204,7 +206,7 @@
           "image": "{{ main_image.url }}",
           "startDate": "{{ self.start|date:'c' }}",
           "endDate": "{{ self.end|date:'c' }}",
-          "organizer": "{{ self.organizer|default:self.related_group|default:'' }}",
+          "organizer": "{{ self.organizer|default:self.related_group_names|default:'' }}",
           "location": {
             "@type": "Place",
             "name": "{{ self.location_name|default:self.location|default:'' }}",

@@ -13,6 +13,7 @@ from django.utils.text import slugify
 from django.utils.six import text_type
 from django.utils.text import Truncator
 from django.template.loader import render_to_string
+from django.db.models import Q
 
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
@@ -348,11 +349,20 @@ class Group(BasePage):
             .exclude(pk__in=context["projects"])
             .specific()
         )
-        context[
-            "upcoming_events"
-        ] = self.event_pages.upcoming().all()  # pylint: disable=no-member
+        context["upcoming_events"] = self.get_related_upcoming_events()
         context["articles"] = self.articles.all().live()
         return context
+
+    def get_related_upcoming_events(self):
+        from events.models import EventPage
+
+        now = timezone.now()
+
+        return (
+            EventPage.objects.filter(related_groups__group=self)
+            .live()
+            .filter(Q(start_datetime__date__gte=now) | Q(end_datetime__date__gte=now))
+        )
 
     content_panels = [
         FieldPanel("title", classname="full title"),
