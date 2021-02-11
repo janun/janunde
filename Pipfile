@@ -24,6 +24,7 @@ django-node-assets = "*"
 wagtailmedia = "*"
 wagtail-inventory = "*"
 django-widget-tweaks = "*"
+wagtail-draftail-anchors = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
