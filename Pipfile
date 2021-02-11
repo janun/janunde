@@ -25,6 +25,7 @@ wagtailmedia = "*"
 wagtail-inventory = "*"
 django-widget-tweaks = "*"
 wagtail-draftail-anchors = "*"
+cython = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
