@@ -80,12 +80,14 @@ function renderWimmelbild(mapContainerId, data) {
 
         // display for layer control
         var iconURl = group.icon ? group.icon.url : questionIconUrl
-        var layerDisplay = `<div style="display:inline-flex; align-items: center"><img style="margin-right: 5px; height: 20px" src="${iconURl}"> ${group.name}</div>`
+        var layerDisplay = `${group.name} <img style="margin-left: 5px; height: 20px" src="${iconURl}">`
         layers[layerDisplay] = L.layerGroup(groupMarkers).addTo(map)
     })
 
     // layer control to toggle marker groups
-    L.control.layers({}, layers, { collapsed: false }).addTo(map);
+    if (data.groups.length > 0) {
+        L.control.layers({}, layers, { collapsed: false }).addTo(map);
+    }
 
 
     // handler for internal links
