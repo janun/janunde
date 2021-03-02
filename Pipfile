@@ -26,6 +26,7 @@ wagtail-inventory = "*"
 django-widget-tweaks = "*"
 wagtail-draftail-anchors = "*"
 cython = "*"
+unidecode = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
