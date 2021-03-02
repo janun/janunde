@@ -63,7 +63,7 @@ function renderWimmelbild(mapContainerId, data) {
         var groupMarkers = []
         group.points.forEach(function (point) {
             var latlnt = map.unproject(point.latlng.split(","), tileZoom)
-            var marker = L.marker(latlnt, { title: point.tooltip, icon: questionIcon }).addTo(map)
+            var marker = L.marker(latlnt, { title: point.tooltip, icon: questionIcon })
             if (group.icon) {
                 marker.setIcon(L.icon({
                     iconUrl: group.icon.url,
@@ -81,7 +81,11 @@ function renderWimmelbild(mapContainerId, data) {
         // display for layer control
         var iconURl = group.icon ? group.icon.url : questionIconUrl
         var layerDisplay = `${group.name} <img style="margin-left: 5px; height: 20px" src="${iconURl}">`
-        layers[layerDisplay] = L.layerGroup(groupMarkers).addTo(map)
+        layers[layerDisplay] = L.layerGroup(groupMarkers)
+
+        if (group.default_active) {
+            layers[layerDisplay].addTo(map)
+        }
     })
 
     // layer control to toggle marker groups

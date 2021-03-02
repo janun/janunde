@@ -39,10 +39,12 @@ class PointGroup(ClusterableModel):
         verbose_name="Icon",
         help_text="Am besten kleines (30x30px) freigestelltes PNG mit Umrandung. Größer ist Größer. Fragezeichen wenn leer.",
     )
+    default_active = models.BooleanField("standardmäßig sichtbar", default=True, help_text="Punkte dieser Gruppe sind standardmäßig sichtbar.")
 
     panels = [
         FieldPanel("name"),
         ImageChooserPanel("icon"),
+        FieldPanel("default_active"),
     ]
 
     @property
@@ -51,7 +53,7 @@ class PointGroup(ClusterableModel):
 
     @property
     def json_dict(self):
-        jd = {"name": self.name}
+        jd = {"name": self.name, "default_active": self.default_active}
         if self.icon:
             jd["icon"] = {
                 "url": self.icon.file.url,
