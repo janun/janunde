@@ -12,16 +12,17 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name="article",
-            name="author",
-            field=models.ForeignKey(
-                blank=True,
-                null=True,
-                on_delete=django.db.models.deletion.SET_NULL,
-                related_name="pages",
-                to="contact.PersonPage",
-                verbose_name="Autor_in",
-            ),
-        ),
+        ## contact.PersonPage does not exist anymore
+        # migrations.AddField(
+        #     model_name="article",
+        #     name="author",
+        #     field=models.ForeignKey(
+        #         blank=True,
+        #         null=True,
+        #         on_delete=django.db.models.deletion.SET_NULL,
+        #         related_name="pages",
+        #         to="contact.PersonPage",
+        #         verbose_name="Autor_in",
+        #     ),
+        # ),
     ]
