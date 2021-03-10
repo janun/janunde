@@ -248,7 +248,7 @@ class HomePage(BasePage):
     (gets created by a migration)
     """
 
-    is_creatable = False
+    # is_creatable = False
     og_type = "website"
 
     search_image = models.ForeignKey(
