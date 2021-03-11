@@ -54,10 +54,16 @@ class EventIndexPage(BasePage):
     max_count_per_parent = 1
 
     heading = models.CharField("Überschrift", max_length=255)
+    show_all_sites = models.BooleanField(
+        "Alle Seiten anzeigen",
+        default=False,
+        help_text="Sollen die Veranstaltungen aller Websites auf diesem Server angezeigt werden oder nur, die die Kinder von dieser Seite sind?",
+    )
 
     content_panels = [
         FieldPanel("title"),
         FieldPanel("heading"),
+        FieldPanel("show_all_sites"),
     ]
 
     class Meta:
@@ -78,7 +84,10 @@ class EventIndexPage(BasePage):
         except TypeError:
             month = None
 
-        qs = EventPage.objects.descendant_of(self)
+        if self.show_all_sites:
+            qs = EventPage.objects.all()
+        else:
+            qs = EventPage.objects.descendant_of(self)
 
         # search /w pagination
         if q:
