@@ -156,7 +156,7 @@ class EventIndexPage(BasePage):
     @property
     def last_change(self) -> datetime.datetime:
         try:
-            last_child = qs.live().latest("last_published_at")
+            last_child = EventPage.objects.live().latest("last_published_at")
         except EventPage.DoesNotExist:
             last_child = None
         if last_child and last_child.last_published_at > self.last_published_at:
