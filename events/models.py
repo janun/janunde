@@ -22,7 +22,7 @@ from wagtail.admin.edit_handlers import (
 )
 from wagtail.admin.widgets import AdminDateTimeInput
 from wagtail.core.fields import StreamField
-from wagtail.core.models import Page, PageManager
+from wagtail.core.models import Page, PageManager, PageQuerySet
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
@@ -78,9 +78,11 @@ class EventIndexPage(BasePage):
         except TypeError:
             month = None
 
+        qs = EventPage.objects.descendant_of(self)
+
         # search /w pagination
         if q:
-            events = EventPage.objects.live().order_by("-start_datetime")
+            events = qs.live().order_by("-start_datetime")
             if typ:
                 events = events.filter(event_type__name=typ)
             events = events.search(q, order_by_relevance=False)
@@ -97,7 +99,7 @@ class EventIndexPage(BasePage):
 
         # past events
         elif past:
-            events = EventPage.objects.expired().order_by("-start_datetime")
+            events = qs.expired().order_by("-start_datetime")
             if typ:
                 events = events.filter(event_type__name=typ)
             if events:
@@ -112,7 +114,7 @@ class EventIndexPage(BasePage):
 
         # upcoming events
         else:
-            events = EventPage.objects.upcoming()
+            events = qs.upcoming().order_by("start_datetime")
             if typ:
                 events = events.filter(event_type__name=typ)
 
@@ -145,7 +147,7 @@ class EventIndexPage(BasePage):
     @property
     def last_change(self) -> datetime.datetime:
         try:
-            last_child = EventPage.objects.live().latest("last_published_at")
+            last_child = qs.live().latest("last_published_at")
         except EventPage.DoesNotExist:
             last_child = None
         if last_child and last_child.last_published_at > self.last_published_at:
@@ -168,25 +170,21 @@ class EventIndexPage(BasePage):
         return "Veranstaltungen bei JANUN"
 
 
-class EventPageManager(PageManager):
-    def get_queryset(self):
-        return super().get_queryset().order_by("start_datetime")
-
+class EventPageQuerySet(PageQuerySet):
     def upcoming(self):
-        now = timezone.now()
-        return (
-            self.get_queryset()
-            .live()
-            .filter(Q(start_datetime__date__gte=now) | Q(end_datetime__date__gte=now))
+        today = timezone.localtime(timezone.now()).date()
+        return self.live().filter(
+            Q(start_datetime__date__gte=today) | Q(end_datetime__date__gte=today)
         )
 
     def expired(self):
-        now = timezone.now()
-        return (
-            self.get_queryset()
-            .live()
-            .filter(Q(start_datetime__date__lt=now) | Q(end_datetime__date__lt=now))
+        today = timezone.localtime(timezone.now()).date()
+        return self.live().filter(
+            Q(start_datetime__date__lt=today) | Q(end_datetime__date__lt=today)
         )
+
+
+EventPageManager = PageManager.from_queryset(EventPageQuerySet)
 
 
 class EventPageForm(ShortTitleForm):
