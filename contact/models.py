@@ -8,7 +8,7 @@ from .blocks import ContactBlocks
 
 class ContactPage(BasePage):
     parent_page_types = ["core.HomePage"]
-    max_count = 1
+    max_count_per_parent = 1
 
     content = StreamField(
         ContactBlocks(required=False), blank=True, null=True, verbose_name="Inhalt",

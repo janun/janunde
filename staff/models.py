@@ -79,7 +79,7 @@ class Employee(BasePage):
 
 class StaffListing(BasePage):
     subpage_types = ["Employee"]
-    max_count = 1
+    max_count_per_parent = 1
 
     heading = models.CharField(
         "Überschrift", max_length=50, default="Mitarbeiter*innen"

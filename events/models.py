@@ -51,7 +51,7 @@ class EventIndexPage(BasePage):
 
     subpage_types = ["EventPage"]
     parent_page_types = ["core.HomePage"]
-    max_count = 1
+    max_count_per_parent = 1
 
     heading = models.CharField("Überschrift", max_length=255)
 
