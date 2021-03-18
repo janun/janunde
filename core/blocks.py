@@ -234,6 +234,17 @@ class StandardStreamBlock(blocks.StreamBlock):
     media = MediaUploadBlock()
 
 
+class CoopBlock(blocks.StructBlock):
+    logo = ImageChooserBlock(label="Logo")
+    title = blocks.CharBlock(label="Untertitel", required=False)
+    url = blocks.URLBlock(label="Link", required=False)
+
+    class Meta:
+        label = "Kooperation"
+        icon = "box"
+        # template = "blocks/coop.html"
+
+
 ####### Homepage Blocks
 
 

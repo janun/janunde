@@ -1,0 +1,54 @@
+{% extends "core/__base.html" %}
+{% load wagtailcore_tags wagtailimages_tags stuff %}
+
+{% block content %}
+<main class="max-w-screen-lg mx-auto mt-8 md:mt-10 px-4">
+
+    <header class="my-8 md:my-16 max-w-2xl mx-auto text-center">
+        <h1 class="md:leading-tighter text-green-500 text-2xl md:text-3xl font-bold mt-0 mb-2 lg:mb-4">
+            {% if self.heading %}
+            {% highlight self.heading self.highlight_in_heading "text-purple" %}
+            {% else %}
+            {{ self.title }}
+            {% endif %}
+        </h1>
+        {% if self.subtitle %}
+        <h2 class="text-base text-gray-700 md:text-xl">{{ self.subtitle }}</h2>
+        {% endif %}
+    </header>
+
+    {% if groups %}
+    <h2 id="gruppen" class="text-base mb-2 text-gray-700">Gruppen</h2>
+    <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8 mb-8 md:mb-16 xl:mb-24">
+        {% for group in groups %}
+        {% include "core/_group.html" with counter=forloop.revcounter %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if projects %}
+    <h2 id="projekte" class="text-base mb-2 text-gray-700">Projekte</h2>
+    <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8 mb-8 md:mb-16 xl:mb-24">
+        {% for group in projects %}
+        {% include "core/_group.html" with counter=forloop.revcounter %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if self.coops %}
+    <h2 id="projekte" class="text-base mb-4 text-gray-700">Kooperationen</h2>
+    <div class="flex flex-wrap items-center justify-start mb-8 md:mb-16 xl:mb-24 -mx-2">
+        {% for coop in self.coops %}
+        <a class="flex flex-col items-center m-2" {% if coop.value.url %}href="{{ coop.value.url }}" {% endif %}
+            target="_blank">
+            {% image coop.value.logo max-512x512 as logo %}
+            <img class="w-24 md:w-32 object-contain" loading="lazy" src="{{ logo.url }}">
+
+            <div class="text-xs text-gray-700 mt-4">{{ coop.value.title }}</div>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</main>
+{% endblock %}

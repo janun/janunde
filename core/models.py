@@ -40,7 +40,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 
 from core.fields import FacebookProfileURLField, PrettyURLField
-from .blocks import StandardStreamBlock, HomePageStreamBlock
+from .blocks import StandardStreamBlock, HomePageStreamBlock, CoopBlock
 from .images import AttributedImage as Image
 from .forms import ShortTitleForm
 
@@ -285,7 +285,7 @@ class GroupManager(PageManager):
 
 
 class Group(BasePage):
-    parent_page_types = ["GroupIndexPage", "Group"]
+    parent_page_types = ["GroupIndexPage", "SimpleGroupIndexPage", "Group"]
     subpage_types = ["Project", "StandardPage", "Group"]
     # title is auto added
 
@@ -395,7 +395,7 @@ class Group(BasePage):
 
 class Project(Group):
     subpage_types = ["StandardPage", "FormPage", "wimmelbilder.WimmelbildPage"]
-    parent_page_types = ["Group"]
+    parent_page_types = ["Group", "SimpleGroupIndexPage"]
 
     objects = GroupManager()
 
@@ -459,6 +459,57 @@ class GroupIndexPage(BasePage):
             ],
             "Header",
         ),
+    ]
+
+
+class SimpleGroupIndexPage(BasePage):
+    """GroupIndexPage für Lüneburg"""
+
+    # title is auto added
+    subpage_types = ["Group", "Project"]
+    parent_page_types = ["HomePage"]
+    max_count_per_parent = 1
+
+    heading = models.CharField("Überschrift", max_length=255, blank=True)
+    highlight_in_heading = models.CharField(
+        "Hervorhebungen in der Überschrift",
+        help_text="Wiederhole Text aus der Überschrift der farblich hervorgehoben werden soll",
+        blank=True,
+        max_length=255,
+    )
+    subtitle = models.CharField("Untertitel", max_length=255, blank=True)
+
+    coops = StreamField(
+        [("coop", CoopBlock())], blank=True, verbose_name="Kooperationen"
+    )
+
+    class Meta:
+        verbose_name = "Auflistung von Gruppen (Lüneburg)"
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context["projects"] = (
+            Project.objects.child_of(self).live().filter(list_on_group_index_page=True)
+        )
+        context["groups"] = (
+            Group.objects.child_of(self)
+            .live()
+            .filter(list_on_group_index_page=True)
+            .exclude(pk__in=[p.pk for p in context["projects"]])
+        )
+        return context
+
+    content_panels = [
+        FieldPanel("title"),
+        MultiFieldPanel(
+            [
+                FieldPanel("heading"),
+                FieldPanel("highlight_in_heading"),
+                FieldPanel("subtitle"),
+            ],
+            "Header",
+        ),
+        StreamFieldPanel("coops"),
     ]
 
 
