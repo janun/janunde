@@ -505,7 +505,9 @@ class SimpleGroupIndexPage(BasePage):
     def get_context(self, request):
         context = super().get_context(request)
         context["projects"] = (
-            Project.objects.child_of(self).live().filter(list_on_group_index_page=True)
+            Project.objects.descendant_of(self)
+            .live()
+            .filter(list_on_group_index_page=True)
         )
         context["groups"] = (
             Group.objects.child_of(self)
