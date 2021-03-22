@@ -479,6 +479,22 @@ class SimpleGroupIndexPage(BasePage):
     )
     subtitle = models.CharField("Untertitel", max_length=255, blank=True)
 
+    groups_text = RichTextField(
+        blank=True,
+        verbose_name="Gruppen-Text",
+        help_text="Wird bei den Gruppen angezeigt.",
+    )
+    projects_text = RichTextField(
+        blank=True,
+        verbose_name="Projekte-Text",
+        help_text="Wird bei den Projekten angezeigt.",
+    )
+    coops_text = RichTextField(
+        blank=True,
+        verbose_name="Kooperationen-Text",
+        help_text="Wird bei den Kooperationen angezeigt.",
+    )
+
     coops = StreamField(
         [("coop", CoopBlock())], blank=True, verbose_name="Kooperationen"
     )
@@ -509,6 +525,9 @@ class SimpleGroupIndexPage(BasePage):
             ],
             "Header",
         ),
+        FieldPanel("groups_text"),
+        FieldPanel("projects_text"),
+        FieldPanel("coops_text"),
         StreamFieldPanel("coops"),
     ]
 

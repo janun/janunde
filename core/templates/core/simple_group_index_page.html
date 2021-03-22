@@ -19,6 +19,9 @@
 
     {% if groups %}
     <h2 id="gruppen" class="text-base mb-2 text-gray-700">Gruppen</h2>
+    <div>
+        {{ self.groups_text|richtext }}
+    </div>
     <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8 mb-8 md:mb-16 xl:mb-24">
         {% for group in groups %}
         {% include "core/_group.html" with counter=forloop.revcounter %}
@@ -28,6 +31,9 @@
 
     {% if projects %}
     <h2 id="projekte" class="text-base mb-2 text-gray-700">Projekte</h2>
+    <div>
+        {{ self.projects_text|richtext }}
+    </div>
     <div class="flex flex-wrap items-start justify-start -mx-1 xl:-mx-8 mb-8 md:mb-16 xl:mb-24">
         {% for group in projects %}
         {% include "core/_group.html" with counter=forloop.revcounter %}
@@ -37,6 +43,9 @@
 
     {% if self.coops %}
     <h2 id="projekte" class="text-base mb-4 text-gray-700">Kooperationen</h2>
+    <div>
+        {{ self.coops_text|richtext }}
+    </div>
     <div class="flex flex-wrap items-center justify-start mb-8 md:mb-16 xl:mb-24 -mx-2">
         {% for coop in self.coops %}
         <a class="flex flex-col items-center m-2" {% if coop.value.url %}href="{{ coop.value.url }}" {% endif %}
