@@ -81,7 +81,11 @@ def stream2image(stream):
 class HyphenatedTitleMixin(models.Model):
     """provides hyphenated_title with shy tags"""
 
-    hyphenated_title = models.CharField(max_length=255, null=True, blank=True,)
+    hyphenated_title = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
 
     def save(self, *args, **kwargs):
         self.hyphenated_title = hyphenate(self.title, language="de-de")
@@ -178,7 +182,11 @@ class HeaderMixin(models.Model):
     templates of subclasses should include core/_pageheader.html
     """
 
-    heading = models.CharField("Überschrift", max_length=255, blank=True,)
+    heading = models.CharField(
+        "Überschrift",
+        max_length=255,
+        blank=True,
+    )
     header_image = models.ForeignKey(
         Image,
         on_delete=models.SET_NULL,
@@ -221,7 +229,11 @@ class StandardPage(BasePage):
         help_text="Wird in Übersichten verwendet.",
     )
 
-    body = StreamField(StandardStreamBlock(), blank=True, verbose_name="Inhalt",)
+    body = StreamField(
+        StandardStreamBlock(),
+        blank=True,
+        verbose_name="Inhalt",
+    )
 
     search_fields = BasePage.search_fields + [
         index.SearchField("subtitle"),
@@ -235,7 +247,9 @@ class StandardPage(BasePage):
         StreamFieldPanel("body"),
     ]
 
-    promote_panels = [FieldPanel("text_direction"),] + BasePage.promote_panels
+    promote_panels = [
+        FieldPanel("text_direction"),
+    ] + BasePage.promote_panels
 
     class Meta:
         verbose_name = "Einfache Seite"
@@ -261,7 +275,11 @@ class HomePage(BasePage):
         help_text="Wird z.B. angezeigt, wenn jmd. www.janun.de bei Facebook postet",
     )
 
-    content = StreamField(HomePageStreamBlock(), blank=True, verbose_name="Inhalt",)
+    content = StreamField(
+        HomePageStreamBlock(),
+        blank=True,
+        verbose_name="Inhalt",
+    )
 
     content_panels = BasePage.content_panels + [StreamFieldPanel("content")]
 
@@ -297,7 +315,11 @@ class Group(BasePage):
         help_text="Z.B. eine sehr kurze Beschreibung",
     )
 
-    body = StreamField(StandardStreamBlock(), blank=True, verbose_name="Inhalt",)
+    body = StreamField(
+        StandardStreamBlock(),
+        blank=True,
+        verbose_name="Inhalt",
+    )
 
     logo = models.ForeignKey(
         Image,
@@ -309,12 +331,37 @@ class Group(BasePage):
         # help_text=""
     )
 
-    contact_mail = models.EmailField("E-Mail", null=True, blank=True,)
-    contact_name = models.CharField("Name", max_length=255, null=True, blank=True,)
-    contact_phone = PhoneNumberField("Telefonnummer", null=True, blank=True,)
-    facebook_url = FacebookProfileURLField("Facebook-Profil", null=True, blank=True,)
-    instagram_url = models.URLField("Instagram-Profil", null=True, blank=True,)
-    website = PrettyURLField("externe Website", null=True, blank=True,)
+    contact_mail = models.EmailField(
+        "E-Mail",
+        null=True,
+        blank=True,
+    )
+    contact_name = models.CharField(
+        "Name",
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    contact_phone = PhoneNumberField(
+        "Telefonnummer",
+        null=True,
+        blank=True,
+    )
+    facebook_url = FacebookProfileURLField(
+        "Facebook-Profil",
+        null=True,
+        blank=True,
+    )
+    instagram_url = models.URLField(
+        "Instagram-Profil",
+        null=True,
+        blank=True,
+    )
+    website = PrettyURLField(
+        "externe Website",
+        null=True,
+        blank=True,
+    )
 
     address = models.CharField(
         "Adresse",
@@ -325,7 +372,8 @@ class Group(BasePage):
     )
 
     list_on_group_index_page = models.BooleanField(
-        default="True", verbose_name="Auf Netzwerk & Projekte auflisten?",
+        default="True",
+        verbose_name="Auf Netzwerk & Projekte auflisten?",
     )
 
     objects = GroupManager()
@@ -626,7 +674,10 @@ class Article(FallbackImageMixin, PublishedAtFromGoLiveAtMixin, StandardPage):
 
     content_panels = [
         MultiFieldPanel(
-            [FieldPanel("title", classname="title"), FieldPanel("subtitle"),],
+            [
+                FieldPanel("title", classname="title"),
+                FieldPanel("subtitle"),
+            ],
             heading="Titel",
         ),
         FieldPanel("author"),
