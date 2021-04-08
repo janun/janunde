@@ -806,9 +806,10 @@ class FormPage(AbstractEmailForm):
     def process_form_submission(self, form):
         submission = super().process_form_submission(form)
         if self.send_confirmation_mail:
-            clean_mail_field = str(
-                slugify(text_type(unidecode(self.confirmation_mail_field)))
-            )
+            # find mail field
+            mail_field = self.form_fields.get(label=self.confirmation_mail_field)
+            clean_mail_field = mail_field.clean_name
+
             address = form[clean_mail_field].value()
             html_content = render_to_string(
                 "core/mails/form_confirmation.html",
