@@ -27,6 +27,7 @@ django-widget-tweaks = "*"
 wagtail-draftail-anchors = "*"
 cython = "*"
 unidecode = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
