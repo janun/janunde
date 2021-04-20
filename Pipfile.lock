@@ -26,10 +26,10 @@
         },
         "anyascii": {
             "hashes": [
-                "sha256:d0eb076933a9eaf1138cb365a5e2e35360ffbbf3200bf33419aaa17d5f8599f5",
-                "sha256:f100a4f716867bcf0a3b05d8a183dd122fc1d55304a10127bee256e602452d61"
+                "sha256:18a77d22da66f2b5e6951f7f365b543656f16c5d7c68f7c70055f030767df403",
+                "sha256:7036c5fdefa40fe9d73a6552ac4f2821916a2a29c1368925f0b7846e536bd2ac"
             ],
-            "version": "==0.1.7"
+            "version": "==0.2.0"
         },
         "attrs": {
             "hashes": [
@@ -56,10 +56,10 @@
         },
         "botocore": {
             "hashes": [
-                "sha256:d5e70d17b91c9b5867be7d6de0caa7dde9ed789bed62f03ea9b60718dc9350bf",
-                "sha256:e303500c4e80f6a706602da53daa6f751cfa8f491665c99a24ee732ab6321573"
+                "sha256:20a864fc6570ba11d52532c72c3ccabab5c71a9b4a9418601a313d56f1d2ce5b",
+                "sha256:37ec76ea2df8609540ba6cb0fe360ae1c589d2e1ee91eb642fd767823f3fcedd"
             ],
-            "version": "==1.20.53"
+            "version": "==1.20.54"
         },
         "certifi": {
             "hashes": [
@@ -193,10 +193,10 @@
         },
         "django-taggit": {
             "hashes": [
-                "sha256:4a833bf71f4c2deddd9745924eee53be1c075d7f0020a06f12e29fa3d752732d",
-                "sha256:609b0223d8a652f3fae088b7fd29f294fdadaca2d7931d45c27d6c59b02fdf31"
+                "sha256:9f947b7fe330875ac7f05f9616f42ef90df9253b639ca102a9449dd34cec0cab",
+                "sha256:b9ed6e94bad0bed3bf062a6be7ee3db117fda02c6419c680d614197364ea018b"
             ],
-            "version": "==1.3.0"
+            "version": "==1.4.0"
         },
         "django-toolbelt": {
             "hashes": [
@@ -601,6 +601,10 @@
             "version": "==0.7.0"
         },
         "tablib": {
+            "extras": [
+                "xls",
+                "xlsx"
+            ],
             "hashes": [
                 "sha256:41aa40981cddd7ec4d1fabeae7c38d271601b306386bd05b5c3bcae13e5aeb20",
                 "sha256:f83cac08454f225a34a305daa20e2110d5e6335135d505f93bc66583a5f9c10d"
@@ -638,11 +642,11 @@
         },
         "wagtail": {
             "hashes": [
-                "sha256:15bdca888410fae0586767eedddf0205ee676653171da2d45792a739814d3587",
-                "sha256:28a7f8d1363891c3bbf16726f1dc1ef0fa2487153e6a4b71e8eb9bc31b0f355c"
+                "sha256:22487db9b721598eb5ffab17efd66ed4e82a283b86423e2e0db2ec4b5a498e58",
+                "sha256:ca4c56efcd0833c38c75be05274f442f40dd88e15bf0136a4fe15663162a6c5d"
             ],
             "index": "pypi",
-            "version": "==2.12.3"
+            "version": "==2.12.4"
         },
         "wagtail-draftail-anchors": {
             "hashes": [
